@@ -257,11 +257,11 @@ const CETracker = () => {
     
     try {
       // Check if API key is set
-      if (GOOGLE_VISION_API_KEY === 'YOUR_API_KEY_HERE') {
-        alert('Please add your Google Vision API key to the code before using OCR.\n\nEdit the GOOGLE_VISION_API_KEY variable at the top of the file.');
-        setIsParsing(false);
-        return null;
-      }
+      if (!GOOGLE_VISION_API_KEY || GOOGLE_VISION_API_KEY === 'YOUR_API_KEY_HERE') {
+  alert('Google Vision API key is not configured. Please check your environment variables.');
+  setIsParsing(false);
+  return null;
+}
 
       // Convert file to base64
       const reader = new FileReader();
@@ -1008,25 +1008,6 @@ const CETracker = () => {
             </div>
           </div>
         </div>
-
-        {/* API Key Warning */}
-        {GOOGLE_VISION_API_KEY === 'YOUR_API_KEY_HERE' && (
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-            <div className="flex items-start">
-              <AlertCircle className="w-5 h-5 text-yellow-600 mr-2 mt-0.5" />
-              <div className="text-yellow-800">
-                <div className="font-semibold">OCR Not Configured</div>
-                <div className="text-sm">
-                  To enable automatic certificate scanning, add your Google Vision API key to the code.
-                  Get your key from{' '}
-                  <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener noreferrer" className="underline">
-                    Google Cloud Console
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* First Renewal Notice */}
         {user.isFirstRenewal && (
