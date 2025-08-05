@@ -252,16 +252,226 @@ const CETracker = () => {
   };
 
   // Parse certificate using Google Vision API
-  const parseCertificate = async (file) => {
-    setIsParsing(true);
+  // Update your parseCertificate function with improved title parsing:
+
+const parseCertificate = async (file) => {
+  setIsParsing(true);
+  
+  try {
+    // ... [keep existing API key check and base64 conversion] ...
+
+    // Call Google Vision API
+    const response = await fetch(
+      `https://vision.googleapis.com/v1/images:annotate?key=${apiKey}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          requests: [{
+            image: {
+              content: base64
+            },
+            features: [{
+              type: 'TEXT_DETECTION',
+              maxResults: 1
+            }]
+          }]
+        })
+      }
+    );
+
+    // ... [keep existing error handling] ...
+
+    const result = await response.json();
+    const extractedText = result.responses?.[0]?.fullTextAnnotation?.text || '';
+
+    if (!extractedText) {
+      throw new Error('No text found in image. Please ensure the certificate is clear and try again.');
+    }
+
+    // DEBUG: Log the extracted text to see what OCR found
+    console.log('=== EXTRACTED TEXT ===');
+    console.log(extractedText);
+    console.log('=== END EXTRACTED TEXT ===');
+
+    // Parse the extracted text
+    const parsedData = {
+      title: '',
+      provider: '',
+      date: '',
+      hours: '',
+      category: 'general'
+    };
+
+    // IMPROVED TITLE EXTRACTION
+    // Split text into lines for better parsing
+    const lines = extractedText.split('\n').map(line => line.trim()).filter(line => line);
     
-    try {
-      // Check if API key is set
-      if (!GOOGLE_VISION_API_KEY || GOOGLE_VISION_API_KEY === 'YOUR_API_KEY_HERE') {
-  alert('Google Vision API key is not configured. Please check your environment variables.');
-  setIsParsing(false);
-  return null;
-}
+    // Debug: Show all lines
+    console.log('Lines found:', lines);
+
+    // Strategy 1: Look for course title after keywords
+    const titleKeywords = [
+      'has successfully completed',
+      'has completed',
+      'completed the course',
+      'completed the program',
+      'completion of',
+      'attendance at',
+      'participation in',
+      'for completing',
+      'has attended'
+    ];
+
+    for (const keyword of titleKeywords) {
+      const keywordIndex = extractedText.toLowerCase().indexOf(keyword);
+      if (keywordIndex !== -1) {
+        // Get text after the keyword
+        const afterKeyword = extractedText.substring(keywordIndex + keyword.length);
+        // Get the next 1-2 lines as potential title
+        const potentialTitle = afterKeyword.split('\n')
+          .slice(0, 2)
+          .join(' ')
+          .trim()
+          .replace(/[^\w\s-]/g, ' ') // Remove special chars except hyphens
+          .replace(/\s+/g, ' '); // Normalize spaces
+        
+        if (potentialTitle && potentialTitle.length > 5) {
+          parsedData.title = potentialTitle.substring(0, 100); // Limit length
+          console.log('Found title after keyword:', parsedData.title);
+          break;
+        }
+      }
+    }
+
+    // Strategy 2: If no title found, look for quoted text
+    if (!parsedData.title) {
+      const quotedMatch = extractedText.match(/"([^"]+)"/);
+      if (quotedMatch) {
+        parsedData.title = quotedMatch[1];
+        console.log('Found quoted title:', parsedData.title);
+      }
+    }
+
+    // Strategy 3: Look for title in larger text between name and provider
+    if (!parsedData.title) {
+      // Find lines that might be titles (not too short, not too long, capitalized)
+      const potentialTitles = lines.filter(line => 
+        line.length > 10 && 
+        line.length < 100 &&
+        /[A-Z]/.test(line[0]) && // Starts with capital
+        !line.match(/\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}/) && // Not a date
+        !line.match(/\d+\s*(hours?|ceus?|credits?)/i) && // Not hours
+        !line.toLowerCase().includes('certificate') &&
+        !line.toLowerCase().includes('completion') &&
+        !line.toLowerCase().includes('this is to certify')
+      );
+
+      if (potentialTitles.length > 0) {
+        // Take the longest potential title
+        parsedData.title = potentialTitles.reduce((a, b) => a.length > b.length ? a : b);
+        console.log('Found potential title from lines:', parsedData.title);
+      }
+    }
+
+    // Extract provider (keep existing logic but improved)
+    const providerPatterns = [
+      /(?:provided by|sponsored by|offered by|presented by|issued by|organized by)\s*:?\s*([^\n,]+)/i,
+      /(?:Provider|Organization|Institution|Company|Presented by)\s*:?\s*([^\n,]+)/i,
+      // Look for organization names (often at top or bottom of certificate)
+      /^([A-Z][A-Za-z\s&]+(?:Institute|University|College|Association|Society|Academy|Center|Training|Education|Healthcare|Medical|Therapy))/m
+    ];
+    
+    for (const pattern of providerPatterns) {
+      const match = extractedText.match(pattern);
+      if (match) {
+        parsedData.provider = match[1].trim();
+        break;
+      }
+    }
+
+    // Extract hours (keep existing logic)
+    const hoursPatterns = [
+      /(\d+\.?\d*)\s*(?:contact\s*)?(?:hours?|ceus?|ce\s*hours?|continuing\s*education\s*units?)/i,
+      /(?:hours?|ceus?)\s*:?\s*(\d+\.?\d*)/i,
+      /(\d+\.?\d*)\s*(?:hours?\s*)?(?:of\s*continuing\s*education)/i
+    ];
+    
+    for (const pattern of hoursPatterns) {
+      const match = extractedText.match(pattern);
+      if (match) {
+        parsedData.hours = match[1];
+        break;
+      }
+    }
+
+    // Extract date (keep existing logic)
+    const datePatterns = [
+      /(?:Date|Completed|Completion|Issued|Award(?:ed)?)\s*:?\s*(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2,4})/i,
+      /(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2,4})/,
+      /(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),?\s+(\d{4})/i,
+      /(\d{1,2})\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})/i
+    ];
+    
+    for (const pattern of datePatterns) {
+      const match = extractedText.match(pattern);
+      if (match) {
+        if (pattern.source.includes('January')) {
+          // Month name format
+          const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                            'July', 'August', 'September', 'October', 'November', 'December'];
+          let monthNum, day, year;
+          
+          if (match[1].match(/\d+/)) {
+            // Day Month Year format
+            day = match[1];
+            monthNum = monthNames.indexOf(match[2]) + 1;
+            year = match[3];
+          } else {
+            // Month Day Year format
+            monthNum = monthNames.indexOf(match[1]) + 1;
+            day = match[2];
+            year = match[3];
+          }
+          
+          parsedData.date = `${year}-${monthNum.toString().padStart(2, '0')}-${day.padStart(2, '0')}`;
+        } else {
+          // Numeric format
+          const month = match[1].padStart(2, '0');
+          const day = match[2].padStart(2, '0');
+          const year = match[3].length === 2 ? '20' + match[3] : match[3];
+          parsedData.date = `${year}-${month}-${day}`;
+        }
+        break;
+      }
+    }
+
+    // Detect category (keep existing logic)
+    const textLower = extractedText.toLowerCase();
+    if (/ethics|ethical\s*practice|professional\s*ethics/i.test(textLower)) {
+      parsedData.category = 'ethics';
+    } else if (/sexual\s*harassment|harassment\s*prevention/i.test(textLower)) {
+      parsedData.category = 'sexualHarassment';
+    } else if (/cultural\s*competenc|cultural\s*awareness|diversity|cultural\s*sensitivity/i.test(textLower)) {
+      parsedData.category = 'culturalCompetency';
+    } else if (/implicit\s*bias|unconscious\s*bias/i.test(textLower)) {
+      parsedData.category = 'implicitBias';
+    } else if (/dementia|alzheimer|cognitive\s*impairment/i.test(textLower)) {
+      parsedData.category = 'dementia';
+    }
+
+    setIsParsing(false);
+    return parsedData;
+    
+  } catch (error) {
+    console.error('Error parsing certificate:', error);
+    setIsParsing(false);
+    alert(`Error scanning certificate: ${error.message}`);
+    return null;
+  }
+};
 
       // Convert file to base64
       const reader = new FileReader();
