@@ -476,7 +476,7 @@ const parseCertificate = async (file) => {
       // Convert file to base64
       const reader = new FileReader();
       const base64 = await new Promise((resolve) => {
-        reader.onloadend = () => {
+        reader.onloadend = async () => {
           // Remove data URL prefix to get pure base64
           const base64String = reader.result.split(',')[1];
           resolve(base64String);
