@@ -761,8 +761,8 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     setCourseToDelete(course);
   };
 
-  // Generate report (same as before)
-  const generateReport = async () => {
+  // Generate report or certificates
+  const generateReport = async (certificatesOnly = false) => {
     try {
       const reportDate = new Date().toLocaleDateString();
       const reportContent = `
@@ -1030,7 +1030,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
             <th>Provider</th>
             <th>Category</th>
             <th>Hours</th>
-            <th>Certificate</th>
+            <th>Documentation</th>
           </tr>
         </thead>
         <tbody>
@@ -1087,43 +1087,68 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
 </html>
       `;
 
-      // Prepare files for ZIP
-      const files = [
-        {
-          name: `CE_Report_${user.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.html`,
-          content: reportContent
-        }
-      ];
+      const fileName = `CE_Report_${user.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.html`;
 
-      // Add certificates to ZIP
-      courses.forEach((course, index) => {
-        if (course.certificate) {
-          const base64Data = course.certificate.data.split(',')[1];
-          const binaryData = atob(base64Data);
-          const bytes = new Uint8Array(binaryData.length);
-          for (let i = 0; i < binaryData.length; i++) {
-            bytes[i] = binaryData.charCodeAt(i);
+      if (!certificatesOnly) {
+        // Download HTML report directly
+        const blob = new Blob([reportContent], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = fileName;
+        link.click();
+        URL.revokeObjectURL(url);
+        return;
+      }
+
+      // Create ZIP with certificates only
+      try {
+        const files = [];
+        let certificateCount = 0;
+        
+        // Add certificates to ZIP
+        courses.forEach((course, index) => {
+          if (course.certificate) {
+            certificateCount++;
+            const base64Data = course.certificate.data.split(',')[1];
+            const binaryData = atob(base64Data);
+            const bytes = new Uint8Array(binaryData.length);
+            for (let i = 0; i < binaryData.length; i++) {
+              bytes[i] = binaryData.charCodeAt(i);
+            }
+            
+            const extension = course.certificate.name.split('.').pop();
+            const courseTitle = course.title.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
+            const courseDate = new Date(course.date).toISOString().split('T')[0];
+            files.push({
+              name: `${courseDate}_${courseTitle}.${extension}`,
+              content: bytes
+            });
           }
-          
-          const extension = course.certificate.name.split('.').pop();
-          files.push({
-            name: `certificates/${index + 1}_${course.title.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30)}.${extension}`,
-            content: bytes
-          });
-        }
-      });
+        });
 
-      // Create ZIP file
-      const zipData = await createZip(files);
-      
-      // Download ZIP file
-      const blob = new Blob([zipData], { type: 'application/zip' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `CE_Report_${user.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.zip`;
-      link.click();
-      URL.revokeObjectURL(url);
+        if (certificateCount === 0) {
+          alert('No certificates or documentation found to export.');
+          return;
+        }
+
+        // Create ZIP file
+        const zipData = await createZip(files);
+        
+        // Download ZIP file
+        const blob = new Blob([zipData], { type: 'application/zip' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `CE_Certificates_${user.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.zip`;
+        link.click();
+        URL.revokeObjectURL(url);
+        
+        alert(`Successfully exported ${certificateCount} certificate(s)/document(s)`);
+      } catch (error) {
+        console.error('Error creating certificates ZIP:', error);
+        alert('Error creating certificates ZIP. Please try downloading individual certificates from the course list.');
+      }
       
     } catch (error) {
       console.error('Error generating report:', error);
@@ -1462,14 +1487,24 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-semibold text-gray-800">CE Courses</h2>
-            <button
-              onClick={generateReport}
-              className="text-blue-600 hover:text-blue-700 flex items-center"
-              title="Download report and certificates as ZIP"
-            >
-              <Download className="w-4 h-4 mr-1" />
-              Export Report + Certificates
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={() => generateReport(false)}
+                className="text-blue-600 hover:text-blue-700 flex items-center text-sm"
+                title="Download HTML report"
+              >
+                <Download className="w-4 h-4 mr-1" />
+                HTML Report
+              </button>
+              <button
+                onClick={() => generateReport(true)}
+                className="text-blue-600 hover:text-blue-700 flex items-center text-sm"
+                title="Download all certificates/documentation as ZIP"
+              >
+                <Download className="w-4 h-4 mr-1" />
+                Certificates (ZIP)
+              </button>
+            </div>
           </div>
           
           {courses.length === 0 ? (
