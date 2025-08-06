@@ -1265,7 +1265,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                 <input
                   type="text"
                   value={newCourse.title}
-                  onChange={(e) => setNewCourse({...newCourse, title: e.target.value})}
+                  onChange={(e) => setNewCourse(prev => ({...prev, title: e.target.value}))}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
                   required
                 />
@@ -1278,7 +1278,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                 <input
                   type="text"
                   value={newCourse.provider}
-                  onChange={(e) => setNewCourse({...newCourse, provider: e.target.value})}
+                  onChange={(e) => setNewCourse(prev => ({...prev, provider: e.target.value}))}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
                   required
                 />
@@ -1291,7 +1291,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                 <input
                   type="date"
                   value={newCourse.date}
-                  onChange={(e) => setNewCourse({...newCourse, date: e.target.value})}
+                  onChange={(e) => setNewCourse(prev => ({...prev, date: e.target.value}))}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
                   required
                 />
@@ -1306,7 +1306,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                   step="0.5"
                   min="0.5"
                   value={newCourse.hours}
-                  onChange={(e) => setNewCourse({...newCourse, hours: e.target.value})}
+                  onChange={(e) => setNewCourse(prev => ({...prev, hours: e.target.value}))}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
                   required
                 />
@@ -1318,7 +1318,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                 </label>
                 <select
                   value={newCourse.category}
-                  onChange={(e) => setNewCourse({...newCourse, category: e.target.value})}
+                  onChange={(e) => setNewCourse(prev => ({...prev, category: e.target.value}))}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
                 >
                   <option value="general">General CE</option>
@@ -1336,7 +1336,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                 </label>
                 <select
                   value={newCourse.format}
-                  onChange={(e) => setNewCourse({...newCourse, format: e.target.value})}
+                  onChange={(e) => setNewCourse(prev => ({...prev, format: e.target.value}))}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
                 >
                   <option value="live">Live/In-Person</option>
@@ -1356,7 +1356,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                     <input
                       type="checkbox"
                       checked={newCourse.hasTest}
-                      onChange={(e) => setNewCourse({...newCourse, hasTest: e.target.checked})}
+                      onChange={(e) => setNewCourse(prev => ({...prev, hasTest: e.target.checked}))}
                       className="mr-2"
                     />
                     <span className="text-sm">Course included a test (required for self-study)</span>
