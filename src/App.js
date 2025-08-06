@@ -605,12 +605,6 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
         return;
       }
       
-      if (file.type === 'application/pdf') {
-        alert('PDF scanning requires converting to image first. Please upload an image instead.');
-        e.target.value = ''; // Reset the input
-        return;
-      }
-      
       const reader = new FileReader();
       reader.onloadend = async () => {
         setNewCourse(prev => ({
@@ -622,17 +616,20 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
           }
         }));
 
-        if (window.confirm('Would you like to scan this certificate to auto-fill the form fields?')) {
-          const parsedData = await parseCertificate(file);
-          if (parsedData) {
-            setNewCourse(prev => ({
-              ...prev,
-              title: parsedData.title || prev.title,
-              provider: parsedData.provider || prev.provider,
-              date: parsedData.date || prev.date,
-              hours: parsedData.hours || prev.hours,
-              category: parsedData.category || prev.category
-            }));
+        // Only offer OCR scanning for images when adding a new course (not editing)
+        if (!editingCourse && file.type !== 'application/pdf') {
+          if (window.confirm('Would you like to scan this certificate to auto-fill the form fields?')) {
+            const parsedData = await parseCertificate(file);
+            if (parsedData) {
+              setNewCourse(prev => ({
+                ...prev,
+                title: parsedData.title || prev.title,
+                provider: parsedData.provider || prev.provider,
+                date: parsedData.date || prev.date,
+                hours: parsedData.hours || prev.hours,
+                category: parsedData.category || prev.category
+              }));
+            }
           }
         }
       };
@@ -766,7 +763,372 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
 
   // Generate report (same as before)
   const generateReport = async () => {
-    // ... (same ZIP generation code as before)
+    try {
+      const reportDate = new Date().toLocaleDateString();
+      const reportContent = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CE Hours Report - ${user.name}</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .header {
+      border-bottom: 3px solid #2563eb;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+    h1 { 
+      color: #1e40af;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: #f8fafc;
+      border-radius: 8px;
+    }
+    .info-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .info-label {
+      font-size: 12px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .info-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+    .progress-section {
+      margin-bottom: 30px;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 30px;
+      background: #e5e7eb;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      margin: 10px 0;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #2563eb);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      min-width: fit-content;
+      padding: 0 15px;
+    }
+    .requirements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .requirement-item {
+      padding: 15px;
+      background: #f8fafc;
+      border-radius: 8px;
+      border-left: 4px solid #3b82f6;
+    }
+    .requirement-complete {
+      border-left-color: #10b981;
+      background: #f0fdf4;
+    }
+    .requirement-incomplete {
+      border-left-color: #ef4444;
+      background: #fef2f2;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th {
+      background: #f1f5f9;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      color: #475569;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    tr:hover {
+      background: #f8fafc;
+    }
+    .certificate-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #10b981;
+      color: white;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    .footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #e2e8f0;
+      text-align: center;
+      color: #64748b;
+      font-size: 14px;
+    }
+    .alert {
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .alert-info {
+      background: #dbeafe;
+      border-left: 4px solid #3b82f6;
+      color: #1e40af;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .stat-card {
+      text-align: center;
+      padding: 20px;
+      background: #f8fafc;
+      border-radius: 8px;
+    }
+    .stat-value {
+      font-size: 32px;
+      font-weight: bold;
+      color: #2563eb;
+    }
+    .stat-label {
+      font-size: 14px;
+      color: #64748b;
+      margin-top: 5px;
+    }
+    @media print {
+      body { background: white; padding: 0; }
+      .container { box-shadow: none; padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Illinois ${user.licenseType} Continuing Education Report</h1>
+      <p style="color: #64748b;">Generated on ${reportDate}</p>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <span class="info-label">Name</span>
+        <span class="info-value">${user.name}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">License Type</span>
+        <span class="info-value">${user.licenseType === 'PT' ? 'Physical Therapist' : 'Occupational Therapist'}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">License Number</span>
+        <span class="info-value">${user.licenseNumber}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Renewal Date</span>
+        <span class="info-value">${new Date(user.renewalDate).toLocaleDateString()}</span>
+      </div>
+    </div>
+
+    ${user.isFirstRenewal ? `
+    <div class="alert alert-info">
+      <strong>First Renewal - CE Exempt</strong><br>
+      No continuing education requirements needed for your first renewal.
+    </div>
+    ` : ''}
+
+    <div class="progress-section">
+      <h2 style="color: #1e293b; margin-bottom: 20px;">Overall Progress</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">${hours.total}</div>
+          <div class="stat-label">Hours Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${requirements?.total || 0}</div>
+          <div class="stat-label">Hours Required</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${Math.max(0, (requirements?.total || 0) - hours.total)}</div>
+          <div class="stat-label">Hours Remaining</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${daysUntilRenewal || 'N/A'}</div>
+          <div class="stat-label">Days Until Renewal</div>
+        </div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: ${Math.min((hours.total / (requirements?.total || 1)) * 100, 100)}%">
+          ${Math.round((hours.total / (requirements?.total || 1)) * 100)}% Complete
+        </div>
+      </div>
+    </div>
+
+    <div class="requirements-section">
+      <h2 style="color: #1e293b; margin-bottom: 20px;">Mandatory Requirements</h2>
+      <div class="requirements-grid">
+        ${Object.entries(requirements?.mandatory || {}).map(([key, required]) => {
+          if (required === 0) return '';
+          const completed = hours[key] || 0;
+          const isComplete = completed >= required;
+          return `
+            <div class="requirement-item ${isComplete ? 'requirement-complete' : 'requirement-incomplete'}">
+              <strong>${key.replace(/([A-Z])/g, ' $1').trim()}</strong><br>
+              <span style="font-size: 20px; font-weight: bold;">${completed}/${required}</span> hours
+              ${key === 'culturalCompetency' ? '<br><small>(NEW 2025)</small>' : ''}
+            </div>
+          `;
+        }).join('')}
+      </div>
+    </div>
+
+    <div class="courses-section">
+      <h2 style="color: #1e293b; margin-bottom: 20px;">Completed Courses</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Course Title</th>
+            <th>Provider</th>
+            <th>Category</th>
+            <th>Hours</th>
+            <th>Certificate</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${courses.sort((a, b) => new Date(b.date) - new Date(a.date)).map(course => `
+            <tr>
+              <td>${new Date(course.date).toLocaleDateString()}</td>
+              <td>${course.title}</td>
+              <td>${course.provider}</td>
+              <td>${course.category.replace(/([A-Z])/g, ' $1').trim()}</td>
+              <td style="text-align: center;">${course.hours}</td>
+              <td>${course.certificate ? '<span class="certificate-badge">✓ On File</span>' : '-'}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+      <p style="margin-top: 10px; color: #64748b; font-size: 14px;">
+        Total Courses: ${courses.length} | Total Hours: ${hours.total}
+      </p>
+    </div>
+
+    <div class="category-limits">
+      <h2 style="color: #1e293b; margin: 30px 0 20px;">Category Limits</h2>
+      <div class="requirements-grid">
+        ${Object.entries(requirements?.limits || {}).map(([category, limit]) => {
+          const current = hours[category] || 0;
+          const percentage = (current / limit) * 100;
+          const status = checkLimits(category, current);
+          return `
+            <div class="requirement-item" style="border-left-color: ${
+              status === 'exceeded' ? '#ef4444' : 
+              status === 'warning' ? '#f59e0b' : 
+              '#3b82f6'
+            }">
+              <strong>${category.replace(/([A-Z])/g, ' $1').trim()}</strong><br>
+              <span style="font-size: 20px; font-weight: bold; color: ${
+                status === 'exceeded' ? '#ef4444' : '#1e293b'
+              }">${current}/${limit}</span> hours
+              ${status === 'exceeded' ? '<br><small style="color: #ef4444;">Limit exceeded!</small>' : ''}
+            </div>
+          `;
+        }).join('')}
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>This report was generated from the Illinois CE Tracker application.</p>
+      <p>Please retain this report and all certificates for your records.</p>
+      <p style="margin-top: 10px; font-weight: 600;">
+        Report Date: ${reportDate} | License Renewal: ${new Date(user.renewalDate).toLocaleDateString()}
+      </p>
+    </div>
+  </div>
+</body>
+</html>
+      `;
+
+      // Prepare files for ZIP
+      const files = [
+        {
+          name: `CE_Report_${user.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.html`,
+          content: reportContent
+        }
+      ];
+
+      // Add certificates to ZIP
+      courses.forEach((course, index) => {
+        if (course.certificate) {
+          const base64Data = course.certificate.data.split(',')[1];
+          const binaryData = atob(base64Data);
+          const bytes = new Uint8Array(binaryData.length);
+          for (let i = 0; i < binaryData.length; i++) {
+            bytes[i] = binaryData.charCodeAt(i);
+          }
+          
+          const extension = course.certificate.name.split('.').pop();
+          files.push({
+            name: `certificates/${index + 1}_${course.title.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30)}.${extension}`,
+            content: bytes
+          });
+        }
+      });
+
+      // Create ZIP file
+      const zipData = await createZip(files);
+      
+      // Download ZIP file
+      const blob = new Blob([zipData], { type: 'application/zip' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `CE_Report_${user.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.zip`;
+      link.click();
+      URL.revokeObjectURL(url);
+      
+    } catch (error) {
+      console.error('Error generating report:', error);
+      alert('Error generating report. Please try again.');
+    }
   };
 
   const getDaysUntilRenewal = () => {
@@ -1208,7 +1570,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Upload Certificate <span className="text-xs text-gray-500">(JPG, PNG only for OCR)</span>
+                      Upload Certificate/Documentation <span className="text-xs text-gray-500">(PDF, JPG, PNG)</span>
                     </label>
                     <div className="space-y-2">
                       <div className="relative">
@@ -1243,6 +1605,10 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                           </button>
                         </div>
                       )}
+                      <p className="text-xs text-gray-500">
+                        Upload any supporting documentation: certificates, attendance lists, teaching records, journal club participation, etc.
+                        {editingCourse && !isParsing && ' • Images (JPG/PNG) can be scanned for auto-fill.'}
+                      </p>
                     </div>
                   </div>
 
