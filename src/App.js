@@ -1198,14 +1198,190 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
         
         {/* Add all the modals here */}
         {showAddCourse && (
-          <div key="add-course-modal" className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
             <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
               <div className="p-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">
                   {editingCourse ? 'Edit CE Course' : 'Add CE Course'}
                 </h3>
                 
-                <AddCourseForm />
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Upload Certificate <span className="text-xs text-gray-500">(JPG, PNG only for OCR)</span>
+                    </label>
+                    <div className="space-y-2">
+                      <div className="relative">
+                        <input
+                          type="file"
+                          accept=".pdf,.jpg,.jpeg,.png"
+                          onChange={handleCertificateUpload}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                          disabled={isParsing}
+                        />
+                        {isParsing && (
+                          <div className="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center rounded-md">
+                            <div className="text-center">
+                              <Loader2 className="w-6 h-6 animate-spin text-blue-600 mx-auto mb-2" />
+                              <div className="text-sm text-blue-600">Scanning certificate...</div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      {newCourse.certificate && (
+                        <div className="flex items-center justify-between bg-gray-50 p-2 rounded">
+                          <span className="text-sm text-gray-600 truncate">
+                            <FileText className="inline w-4 h-4 mr-1" />
+                            {newCourse.certificate.name}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => setNewCourse(prev => ({...prev, certificate: null}))}
+                            className="text-red-600 hover:text-red-700 text-sm"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Course Title *
+                    </label>
+                    <input
+                      type="text"
+                      value={newCourse.title}
+                      onChange={(e) => setNewCourse(prev => ({...prev, title: e.target.value}))}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Provider Name *
+                    </label>
+                    <input
+                      type="text"
+                      value={newCourse.provider}
+                      onChange={(e) => setNewCourse(prev => ({...prev, provider: e.target.value}))}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Date Completed *
+                    </label>
+                    <input
+                      type="date"
+                      value={newCourse.date}
+                      onChange={(e) => setNewCourse(prev => ({...prev, date: e.target.value}))}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Hours * <span className="text-xs text-gray-500">(1 hour = 50 minutes)</span>
+                    </label>
+                    <input
+                      type="number"
+                      step="0.5"
+                      min="0.5"
+                      value={newCourse.hours}
+                      onChange={(e) => setNewCourse(prev => ({...prev, hours: e.target.value}))}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Category *
+                    </label>
+                    <select
+                      value={newCourse.category}
+                      onChange={(e) => setNewCourse(prev => ({...prev, category: e.target.value}))}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    >
+                      <option value="general">General CE</option>
+                      <option value="ethics">Ethics</option>
+                      <option value="sexualHarassment">Sexual Harassment Prevention</option>
+                      <option value="culturalCompetency">Cultural Competency (NEW 2025)</option>
+                      <option value="implicitBias">Implicit Bias</option>
+                      <option value="dementia">Alzheimer's Disease & Dementia</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Format *
+                    </label>
+                    <select
+                      value={newCourse.format}
+                      onChange={(e) => setNewCourse(prev => ({...prev, format: e.target.value}))}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    >
+                      <option value="live">Live/In-Person</option>
+                      <option value="selfStudy">Self-Study/Online</option>
+                      <option value="teaching">Teaching</option>
+                      <option value="clinicalInstructor">Clinical Instructor</option>
+                      <option value="journalClubs">Journal Club</option>
+                      <option value="inservices">Departmental Inservice</option>
+                      <option value="districtMeetings">IPTA District Meeting</option>
+                      <option value="skillsCertification">Skills Certification (CPR, etc.)</option>
+                    </select>
+                  </div>
+
+                  {newCourse.format === 'selfStudy' && (
+                    <div>
+                      <label className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={newCourse.hasTest}
+                          onChange={(e) => setNewCourse(prev => ({...prev, hasTest: e.target.checked}))}
+                          className="mr-2"
+                        />
+                        <span className="text-sm">Course included a test (required for self-study)</span>
+                      </label>
+                    </div>
+                  )}
+
+                  <div className="flex justify-end space-x-3 mt-6">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowAddCourse(false);
+                        setEditingCourse(null);
+                        setNewCourse({
+                          title: '',
+                          provider: '',
+                          date: '',
+                          hours: '',
+                          category: 'general',
+                          format: 'live',
+                          hasTest: false,
+                          certificate: null
+                        });
+                      }}
+                      className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleAddCourse}
+                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                    >
+                      {editingCourse ? 'Update Course' : 'Add Course'}
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
