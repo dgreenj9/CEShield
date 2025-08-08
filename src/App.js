@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AlertCircle, CheckCircle, Clock, FileText, Plus, Trash2, Download, Info, Loader2, Settings, Pencil, LogOut, User, Lock, Mail, Eye, EyeOff } from 'lucide-react';
+import { AlertCircle, CheckCircle, Clock, FileText, Plus, Trash2, Download, Info, Loader2, Settings, Pencil, LogOut, User, Lock, Mail, Eye, EyeOff, Shield } from 'lucide-react';
 import { supabase } from './supabaseClient';
 
 // Google Vision API key from environment variable
@@ -157,10 +157,16 @@ function AuthForm({ onSuccess }) {
       <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
-            <FileText className="w-8 h-8 text-blue-600" />
+            <Shield className="w-8 h-8 text-blue-600" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-800">Illinois CE Hours Tracker</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-2xl font-bold text-gray-800">CE Shield</h1>
+          <p className="text-gray-600 mt-2 italic">
+            Track your continuing education. Protect your license.
+          </p>
+        </div>
+
+        <div className="mb-4">
+          <p className="text-gray-700 text-center">
             {isSignUp ? 'Create your account' : 'Sign in to your account'}
           </p>
         </div>
@@ -945,8 +951,9 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
 <body>
   <div class="container">
     <div class="header">
-      <h1>Illinois ${user.licenseType} Continuing Education Report</h1>
-      <p style="color: #64748b;">Generated on ${reportDate}</p>
+      <h1>CE Shield - Illinois ${user.licenseType} Continuing Education Report</h1>
+      <p style="color: #64748b; font-style: italic;">Track your continuing education. Protect your license.</p>
+      <p style="color: #64748b; margin-top: 10px;">Generated on ${reportDate}</p>
     </div>
 
     <div class="info-grid">
@@ -1076,7 +1083,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     </div>
 
     <div class="footer">
-      <p>This report was generated from the Illinois CE Tracker application.</p>
+      <p>This report was generated from CE Shield.</p>
       <p>Please retain this report and all certificates for your records.</p>
       <p style="margin-top: 10px; font-weight: 600;">
         Report Date: ${reportDate} | License Renewal: ${new Date(user.renewalDate).toLocaleDateString()}
@@ -1182,7 +1189,10 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
         <div className="max-w-md mx-auto mt-10">
           <div className="bg-white rounded-lg shadow-lg p-6">
             <div className="flex justify-between items-center mb-6">
-              <h1 className="text-2xl font-bold text-gray-800">Illinois CE Hours Tracker</h1>
+              <div className="flex items-center gap-2">
+                <Shield className="w-6 h-6 text-blue-600" />
+                <h1 className="text-2xl font-bold text-gray-800">CE Shield</h1>
+              </div>
               <button
                 onClick={onSignOut}
                 className="text-gray-500 hover:text-gray-700"
@@ -1309,11 +1319,17 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-800">
-                Illinois {user.licenseType} CE Tracker
-              </h1>
-              <p className="text-gray-600">
-                {user.name} • License #{user.licenseNumber}
+              <div className="flex items-center gap-2 mb-1">
+                <Shield className="w-7 h-7 text-blue-600" />
+                <h1 className="text-2xl font-bold text-gray-800">
+                  CE Shield
+                </h1>
+              </div>
+              <p className="text-gray-600 italic text-sm mb-2">
+                Track your continuing education. Protect your license.
+              </p>
+              <p className="text-gray-700">
+                {user.name} • {user.licenseType} License #{user.licenseNumber}
               </p>
             </div>
             <div className="flex items-start gap-4">
