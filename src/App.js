@@ -399,7 +399,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
           license_number: userData.licenseNumber,
           renewal_date: userData.renewalDate,
           is_first_renewal: userData.isFirstRenewal,
-          state: userData.state,
+          state: userData.state || 'IL',
           updated_at: new Date().toISOString()
         });
 
