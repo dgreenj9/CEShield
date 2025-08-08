@@ -161,7 +161,7 @@ function AuthForm({ onSuccess }) {
           </div>
           <h1 className="text-2xl font-bold text-gray-800">CE Shield</h1>
           <p className="text-gray-600 mt-2 italic">
-            Track your continuing education. Protect your license.
+            Track your continuing education.<br />Protect your license.
           </p>
         </div>
 
@@ -306,7 +306,8 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     licenseType: '',
     licenseNumber: '',
     renewalDate: '',
-    isFirstRenewal: false
+    isFirstRenewal: false,
+    state: 'IL' // Add state field, default to Illinois
   });
 
   const [profileComplete, setProfileComplete] = useState(false);
@@ -354,10 +355,11 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
           licenseType: profileData.license_type || '',
           licenseNumber: profileData.license_number || '',
           renewalDate: profileData.renewal_date || '',
-          isFirstRenewal: profileData.is_first_renewal || false
+          isFirstRenewal: profileData.is_first_renewal || false,
+          state: profileData.state || 'IL'
         });
         // Mark profile as complete if we have the required fields
-        if (profileData.name && profileData.license_type) {
+        if (profileData.name && profileData.license_type && profileData.state) {
           setProfileComplete(true);
         }
       }
@@ -397,6 +399,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
           license_number: userData.licenseNumber,
           renewal_date: userData.renewalDate,
           is_first_renewal: userData.isFirstRenewal,
+          state: userData.state,
           updated_at: new Date().toISOString()
         });
 
@@ -417,49 +420,52 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
 
   // Remove the auto-save useEffect - we'll save manually instead
 
-  // Define requirements based on license type
+  // Define requirements based on state and license type
   const getRequirements = () => {
-    if (user.licenseType === 'PT') {
-      return {
-        total: 40,
-        mandatory: {
-          ethics: 3,
-          sexualHarassment: 1,
-          culturalCompetency: 1,
-          implicitBias: 1,
-          dementia: 1
-        },
-        limits: {
-          selfStudy: 30,
-          teaching: 20,
-          clinicalInstructor: 10,
-          journalClubs: 5,
-          inservices: 5,
-          districtMeetings: 5,
-          skillsCertification: 5
-        }
-      };
-    } else if (user.licenseType === 'OT') {
-      return {
-        total: 24,
-        mandatory: {
-          ethics: 1,
-          sexualHarassment: 1,
-          culturalCompetency: 1,
-          implicitBias: 1,
-          dementia: 1
-        },
-        limits: {
-          selfStudy: 12,
-          teaching: 12,
-          clinicalInstructor: 6,
-          journalClubs: 3,
-          inservices: 3,
-          districtMeetings: 3,
-          skillsCertification: 3
-        }
-      };
+    if (user.state === 'IL') {
+      if (user.licenseType === 'PT') {
+        return {
+          total: 40,
+          mandatory: {
+            ethics: 3,
+            sexualHarassment: 1,
+            culturalCompetency: 1,
+            implicitBias: 1,
+            dementia: 1
+          },
+          limits: {
+            selfStudy: 30,
+            teaching: 20,
+            clinicalInstructor: 10,
+            journalClubs: 5,
+            inservices: 5,
+            districtMeetings: 5,
+            skillsCertification: 5
+          }
+        };
+      } else if (user.licenseType === 'OT') {
+        return {
+          total: 24,
+          mandatory: {
+            ethics: 1,
+            sexualHarassment: 1,
+            culturalCompetency: 1,
+            implicitBias: 1,
+            dementia: 1
+          },
+          limits: {
+            selfStudy: 12,
+            teaching: 12,
+            clinicalInstructor: 6,
+            journalClubs: 3,
+            inservices: 3,
+            districtMeetings: 3,
+            skillsCertification: 3
+          }
+        };
+      }
     }
+    // Add other states here in the future
     return null;
   };
 
@@ -951,8 +957,8 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
 <body>
   <div class="container">
     <div class="header">
-      <h1>CE Shield - Illinois ${user.licenseType} Continuing Education Report</h1>
-      <p style="color: #64748b; font-style: italic;">Track your continuing education. Protect your license.</p>
+      <h1>CE Shield - ${user.state} ${user.licenseType} Continuing Education Report</h1>
+      <p style="color: #64748b; font-style: italic;">Track your continuing education.<br />Protect your license.</p>
       <p style="color: #64748b; margin-top: 10px;">Generated on ${reportDate}</p>
     </div>
 
@@ -960,6 +966,10 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
       <div class="info-item">
         <span class="info-label">Name</span>
         <span class="info-value">${user.name}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">State</span>
+        <span class="info-value">${user.state === 'IL' ? 'Illinois' : user.state}</span>
       </div>
       <div class="info-item">
         <span class="info-label">License Type</span>
@@ -1212,37 +1222,67 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
             <div>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Select Your License Type
+                  Select Your State
                 </label>
-                <div className="grid grid-cols-2 gap-4">
-                  <button
-                    onClick={() => setUser({...user, licenseType: 'PT'})}
-                    className={`p-4 rounded-lg border-2 ${
-                      user.licenseType === 'PT' 
-                        ? 'border-blue-500 bg-blue-50' 
-                        : 'border-gray-300 hover:border-gray-400'
-                    }`}
+                <div className="relative">
+                  <select
+                    value={user.state || ''}
+                    onChange={(e) => setUser({...user, state: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
-                    <div className="font-semibold">PT</div>
-                    <div className="text-sm text-gray-600">Physical Therapist</div>
-                    <div className="text-xs text-gray-500 mt-1">40 hours/2 years</div>
-                  </button>
-                  <button
-                    onClick={() => setUser({...user, licenseType: 'OT'})}
-                    className={`p-4 rounded-lg border-2 ${
-                      user.licenseType === 'OT' 
-                        ? 'border-blue-500 bg-blue-50' 
-                        : 'border-gray-300 hover:border-gray-400'
-                    }`}
-                  >
-                    <div className="font-semibold">OT</div>
-                    <div className="text-sm text-gray-600">Occupational Therapist</div>
-                    <div className="text-xs text-gray-500 mt-1">24 hours/2 years</div>
-                  </button>
+                    <option value="">Choose a state</option>
+                    <option value="IL">Illinois</option>
+                  </select>
+                  <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
                 </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  Currently supporting Illinois. More states coming soon!
+                </p>
               </div>
 
-              {user.licenseType && (
+              {user.state && (
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Select Your License Type
+                  </label>
+                  <div className="grid grid-cols-2 gap-4">
+                    <button
+                      onClick={() => setUser({...user, licenseType: 'PT'})}
+                      className={`p-4 rounded-lg border-2 ${
+                        user.licenseType === 'PT' 
+                          ? 'border-blue-500 bg-blue-50' 
+                          : 'border-gray-300 hover:border-gray-400'
+                      }`}
+                    >
+                      <div className="font-semibold">PT</div>
+                      <div className="text-sm text-gray-600">Physical Therapist</div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        {user.state === 'IL' ? '40 hours/2 years' : 'Requirements vary'}
+                      </div>
+                    </button>
+                    <button
+                      onClick={() => setUser({...user, licenseType: 'OT'})}
+                      className={`p-4 rounded-lg border-2 ${
+                        user.licenseType === 'OT' 
+                          ? 'border-blue-500 bg-blue-50' 
+                          : 'border-gray-300 hover:border-gray-400'
+                      }`}
+                    >
+                      <div className="font-semibold">OT</div>
+                      <div className="text-sm text-gray-600">Occupational Therapist</div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        {user.state === 'IL' ? '24 hours/2 years' : 'Requirements vary'}
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {user.state && user.licenseType && (
                 <>
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1259,13 +1299,14 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
 
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      License Number
+                      {user.state} License Number
                     </label>
                     <input
                       type="text"
                       value={user.licenseNumber}
                       onChange={(e) => setUser({...user, licenseNumber: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      placeholder={`Enter your ${user.state} license number`}
                       required
                     />
                   </div>
@@ -1326,10 +1367,10 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                 </h1>
               </div>
               <p className="text-gray-600 italic text-sm mb-2">
-                Track your continuing education. Protect your license.
+                Track your continuing education.<br />Protect your license.
               </p>
               <p className="text-gray-700">
-                {user.name} • {user.licenseType} License #{user.licenseNumber}
+                {user.name} • {user.state} {user.licenseType} License #{user.licenseNumber}
               </p>
             </div>
             <div className="flex items-start gap-4">
@@ -1384,13 +1425,13 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
           </div>
         )}
 
-        {/* Cultural Competency Alert */}
-        {!user.isFirstRenewal && hours.culturalCompetency === 0 && (
+        {/* Cultural Competency Alert - Illinois specific */}
+        {user.state === 'IL' && !user.isFirstRenewal && hours.culturalCompetency === 0 && (
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
             <div className="flex items-start">
               <Info className="w-5 h-5 text-blue-600 mr-2 mt-0.5" />
               <div className="text-blue-800">
-                <div className="font-semibold">NEW 2025 Requirement!</div>
+                <div className="font-semibold">NEW 2025 Illinois Requirement!</div>
                 <div className="text-sm">
                   Cultural competency training (1 hour) is now required. You have 3 renewal cycles to complete it, but you can start now.
                 </div>
@@ -2044,6 +2085,22 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
+                  State
+                </label>
+                <select
+                  value={localUser.state || 'IL'}
+                  onChange={(e) => setLocalUser({...localUser, state: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                >
+                  <option value="IL">Illinois</option>
+                </select>
+                <p className="text-xs text-gray-500 mt-1">
+                  Currently supporting Illinois. More states coming soon!
+                </p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   License Type
                 </label>
                 <div className="grid grid-cols-2 gap-4">
@@ -2064,7 +2121,9 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                     }`}
                   >
                     <div className="font-semibold">PT</div>
-                    <div className="text-xs text-gray-600">40 hours/2 years</div>
+                    <div className="text-xs text-gray-600">
+                      {localUser.state === 'IL' ? '40 hours/2 years' : 'Requirements vary'}
+                    </div>
                   </button>
                   <button
                     onClick={() => {
@@ -2083,7 +2142,9 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                     }`}
                   >
                     <div className="font-semibold">OT</div>
-                    <div className="text-xs text-gray-600">24 hours/2 years</div>
+                    <div className="text-xs text-gray-600">
+                      {localUser.state === 'IL' ? '24 hours/2 years' : 'Requirements vary'}
+                    </div>
                   </button>
                 </div>
               </div>
@@ -2102,7 +2163,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  License Number
+                  {localUser.state} License Number
                 </label>
                 <input
                   type="text"
