@@ -7,14 +7,15 @@ const CEShieldLogo = ({ showTagline = true, className = "" }) => {
   if (showTagline) {
     return (
       <div className={className}>
-        <div className="flex items-center justify-center gap-2 h-[40px]">
-          {/* Shield Icon */}
+        <div className="flex items-center justify-center gap-2">
+          {/* Shield Icon - adjusted positioning */}
           <svg 
             width="60" 
-            height="40" 
-            viewBox="0 0 60 40" 
+            height="36" 
+            viewBox="0 0 60 36" 
             xmlns="http://www.w3.org/2000/svg"
             className="flex-shrink-0"
+            style={{ marginTop: '-2px' }}
           >
             <g transform="translate(0, 0)">
               <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
@@ -25,9 +26,9 @@ const CEShieldLogo = ({ showTagline = true, className = "" }) => {
                     fill="#8b5cf6" opacity="0.85"/>
             </g>
           </svg>
-          {/* Text Logo - CE thin, Shield bold */}
-          <h1 className="text-[38px] leading-none text-gray-900 flex items-center h-full">
-            <span className="font-thin">CE</span><span className="font-semibold">Shield</span>
+          {/* Text Logo - CE thin, Shield medium-bold */}
+          <h1 className="text-[36px] leading-[36px] text-gray-900">
+            <span className="font-thin">CE</span><span className="font-medium">Shield</span>
           </h1>
         </div>
         <p className="text-xs text-gray-600 tracking-wider text-center mt-3">
@@ -38,14 +39,15 @@ const CEShieldLogo = ({ showTagline = true, className = "" }) => {
   }
   
   return (
-    <div className={`flex items-center gap-2 h-[32px] ${className}`}>
+    <div className={`flex items-center gap-2 ${className}`}>
       {/* Shield Icon Only */}
       <svg 
-        width="40" 
-        height="32" 
-        viewBox="0 0 60 40" 
+        width="48" 
+        height="29" 
+        viewBox="0 0 60 36" 
         xmlns="http://www.w3.org/2000/svg"
         className="flex-shrink-0"
+        style={{ marginTop: '-1px' }}
       >
         <g transform="translate(0, 0)">
           <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
@@ -56,8 +58,8 @@ const CEShieldLogo = ({ showTagline = true, className = "" }) => {
                 fill="#8b5cf6" opacity="0.85"/>
         </g>
       </svg>
-      <h2 className="text-[30px] leading-none text-gray-900 flex items-center h-full">
-        <span className="font-thin">CE</span><span className="font-semibold">Shield</span>
+      <h2 className="text-[29px] leading-[29px] text-gray-900">
+        <span className="font-thin">CE</span><span className="font-medium">Shield</span>
       </h2>
     </div>
   );
@@ -219,13 +221,14 @@ function AuthForm({ onSuccess }) {
         <div className="text-center mb-6">
           <div className="flex justify-center mb-3">
             <div className="inline-block">
-              <div className="flex items-center justify-center gap-2 h-[40px]">
+              <div className="flex items-center justify-center gap-2">
                 <svg 
                   width="60" 
-                  height="40" 
-                  viewBox="0 0 60 40" 
+                  height="36" 
+                  viewBox="0 0 60 36" 
                   xmlns="http://www.w3.org/2000/svg"
                   className="flex-shrink-0"
+                  style={{ marginTop: '-2px' }}
                 >
                   <g transform="translate(0, 0)">
                     <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
@@ -236,8 +239,8 @@ function AuthForm({ onSuccess }) {
                           fill="#8b5cf6" opacity="0.85"/>
                   </g>
                 </svg>
-                <h1 className="text-[38px] leading-none text-gray-900 flex items-center h-full">
-                  <span className="font-thin">CE</span><span className="font-semibold">Shield</span>
+                <h1 className="text-[36px] leading-[36px] text-gray-900">
+                  <span className="font-thin">CE</span><span className="font-medium">Shield</span>
                 </h1>
               </div>
               <p className="text-xs text-gray-600 tracking-wider text-center mt-3">
@@ -898,9 +901,10 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
       margin-bottom: 4px;
     }
     .logo-text {
-      font-size: 40px;
-      line-height: 40px;
+      font-size: 36px;
+      line-height: 36px;
       color: #111;
+      vertical-align: middle;
     }
     .tagline {
       font-size: 10px;
@@ -1060,14 +1064,14 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     <div class="header">
       <div class="logo-container">
         <div class="logo-wrapper">
-          <svg width="60" height="40" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+          <svg width="60" height="36" viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg" style="margin-top: -2px;">
             <g transform="translate(0, 0)">
               <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill="#dbeafe"/>
               <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill="#06b6d4" opacity="0.85"/>
               <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="#8b5cf6" opacity="0.85"/>
             </g>
           </svg>
-          <div class="logo-text"><span style="font-weight: 100;">CE</span><span style="font-weight: 600;">Shield</span></div>
+          <div class="logo-text"><span style="font-weight: 100;">CE</span><span style="font-weight: 500;">Shield</span></div>
         </div>
         <div class="tagline">TRACK EDUCATION. PROTECT YOUR LICENSE.</div>
       </div>
@@ -1473,13 +1477,14 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
           <div className="flex justify-between items-center">
             <div>
               <div className="mb-2">
-                <div className="flex items-center gap-2 h-[32px]">
+                <div className="flex items-center gap-2">
                   <svg 
-                    width="40" 
-                    height="32" 
-                    viewBox="0 0 60 40" 
+                    width="48" 
+                    height="29" 
+                    viewBox="0 0 60 36" 
                     xmlns="http://www.w3.org/2000/svg"
                     className="flex-shrink-0"
+                    style={{ marginTop: '-1px' }}
                   >
                     <g transform="translate(0, 0)">
                       <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
@@ -1490,8 +1495,8 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                             fill="#8b5cf6" opacity="0.85"/>
                     </g>
                   </svg>
-                  <h2 className="text-[30px] leading-none text-gray-900 flex items-center h-full">
-                    <span className="font-thin">CE</span><span className="font-semibold">Shield</span>
+                  <h2 className="text-[29px] leading-[29px] text-gray-900">
+                    <span className="font-thin">CE</span><span className="font-medium">Shield</span>
                   </h2>
                 </div>
                 <p className="text-xs text-gray-600 tracking-wider mt-1">
