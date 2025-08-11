@@ -3,35 +3,45 @@ import { AlertCircle, CheckCircle, Clock, FileText, Plus, Trash2, Download, Info
 import { supabase } from './supabaseClient';
 
 // CE Shield Logo Component
-const CEShieldLogo = ({ showTagline = true, className = "" }) => (
-  <svg 
-    width="340" 
-    height={showTagline ? "100" : "52"} 
-    viewBox={showTagline ? "0 0 340 100" : "0 0 70 52"} 
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-  >
-    <g transform={showTagline ? "translate(20, 20)" : "translate(0, 0)"}>
-      <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
-            fill="#dbeafe"/>
-      <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
-            fill="#06b6d4" opacity="0.85"/>
-      <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
-            fill="#8b5cf6" opacity="0.85"/>
-    </g>
-    
-    {showTagline && (
-      <>
-        <text x="90" y="45" fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="32" fontWeight="300" fill="#111">
-          CE<tspan fontWeight="500">Shield</tspan>
-        </text>
-        <text x="140" y="75" fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="10" fill="#666" letterSpacing="1.5" textAnchor="middle">
+const CEShieldLogo = ({ showTagline = true, className = "" }) => {
+  if (showTagline) {
+    return (
+      <div className={className}>
+        <div className="flex items-center justify-center gap-2 mb-2">
+          {/* Shield Icon */}
+          <div className="flex -space-x-3">
+            <div className="w-8 h-10 bg-blue-100 rounded-b-lg transform -rotate-6"></div>
+            <div className="w-8 h-10 bg-cyan-400 rounded-b-lg opacity-85"></div>
+            <div className="w-8 h-10 bg-purple-500 rounded-b-lg opacity-85 transform rotate-6"></div>
+          </div>
+          {/* Text Logo */}
+          <div>
+            <h1 className="text-3xl font-light text-gray-900">
+              CE<span className="font-medium">Shield</span>
+            </h1>
+          </div>
+        </div>
+        <p className="text-xs text-gray-600 tracking-wider text-center">
           TRACK EDUCATION. PROTECT YOUR LICENSE.
-        </text>
-      </>
-    )}
-  </svg>
-);
+        </p>
+      </div>
+    );
+  }
+  
+  return (
+    <div className={`flex items-center gap-2 ${className}`}>
+      {/* Shield Icon Only */}
+      <div className="flex -space-x-2">
+        <div className="w-6 h-8 bg-blue-100 rounded-b-lg transform -rotate-6"></div>
+        <div className="w-6 h-8 bg-cyan-400 rounded-b-lg opacity-85"></div>
+        <div className="w-6 h-8 bg-purple-500 rounded-b-lg opacity-85 transform rotate-6"></div>
+      </div>
+      <h2 className="text-xl font-light text-gray-900">
+        CE<span className="font-medium">Shield</span>
+      </h2>
+    </div>
+  );
+};
 
 // Google Vision API key from environment variable
 const GOOGLE_VISION_API_KEY = process.env.REACT_APP_GOOGLE_VISION_KEY || '';
@@ -188,7 +198,7 @@ function AuthForm({ onSuccess }) {
       <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <CEShieldLogo showTagline={true} className="w-full max-w-xs" />
+            <CEShieldLogo showTagline={true} className="inline-block" />
           </div>
         </div>
 
@@ -836,6 +846,47 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     .logo-container {
       margin-bottom: 20px;
     }
+    .logo-shields {
+      display: inline-flex;
+      margin-left: -8px;
+      margin-bottom: 8px;
+    }
+    .shield {
+      width: 32px;
+      height: 40px;
+      border-radius: 0 0 8px 8px;
+      margin-left: -12px;
+    }
+    .shield:first-child {
+      background: #dbeafe;
+      transform: rotate(-6deg);
+      margin-left: 0;
+    }
+    .shield:nth-child(2) {
+      background: #06b6d4;
+      opacity: 0.85;
+    }
+    .shield:nth-child(3) {
+      background: #8b5cf6;
+      opacity: 0.85;
+      transform: rotate(6deg);
+    }
+    .logo-text {
+      font-size: 32px;
+      font-weight: 300;
+      color: #111;
+      display: inline-block;
+      margin-left: 12px;
+    }
+    .logo-text span {
+      font-weight: 500;
+    }
+    .tagline {
+      font-size: 10px;
+      color: #666;
+      letter-spacing: 1.5px;
+      margin-top: 4px;
+    }
     h1 { 
       color: #1e40af;
       margin-bottom: 10px;
@@ -988,19 +1039,15 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
   <div class="container">
     <div class="header">
       <div class="logo-container">
-        <svg width="280" height="80" viewBox="0 0 340 100" xmlns="http://www.w3.org/2000/svg">
-          <g transform="translate(20, 20)">
-            <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill="#dbeafe"/>
-            <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill="#06b6d4" opacity="0.85"/>
-            <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="#8b5cf6" opacity="0.85"/>
-          </g>
-          <text x="90" y="45" font-family="'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="300" fill="#111">
-            CE<tspan font-weight="500">Shield</tspan>
-          </text>
-          <text x="140" y="75" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#666" letter-spacing="1.5" text-anchor="middle">
-            TRACK EDUCATION. PROTECT YOUR LICENSE.
-          </text>
-        </svg>
+        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+          <div class="logo-shields">
+            <div class="shield"></div>
+            <div class="shield"></div>
+            <div class="shield"></div>
+          </div>
+          <div class="logo-text">CE<span>Shield</span></div>
+        </div>
+        <div class="tagline">TRACK EDUCATION. PROTECT YOUR LICENSE.</div>
       </div>
       <h1>${user.state} ${user.licenseType} Continuing Education Report</h1>
       <p style="color: #64748b; margin-top: 10px;">Generated on ${reportDate}</p>
