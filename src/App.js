@@ -7,13 +7,14 @@ const CEShieldLogo = ({ showTagline = true, className = "" }) => {
   if (showTagline) {
     return (
       <div className={className}>
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-2 h-[40px]">
           {/* Shield Icon */}
           <svg 
             width="60" 
             height="40" 
             viewBox="0 0 60 40" 
             xmlns="http://www.w3.org/2000/svg"
+            className="flex-shrink-0"
           >
             <g transform="translate(0, 0)">
               <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
@@ -24,12 +25,12 @@ const CEShieldLogo = ({ showTagline = true, className = "" }) => {
                     fill="#8b5cf6" opacity="0.85"/>
             </g>
           </svg>
-          {/* Text Logo - adjusted to match shield height */}
-          <h1 className="text-[40px] leading-[40px] font-light text-gray-900">
-            CE<span className="font-medium">Shield</span>
+          {/* Text Logo - CE thin, Shield bold */}
+          <h1 className="text-[38px] leading-none text-gray-900 flex items-center h-full">
+            <span className="font-thin">CE</span><span className="font-semibold">Shield</span>
           </h1>
         </div>
-        <p className="text-xs text-gray-600 tracking-wider text-center mt-1">
+        <p className="text-xs text-gray-600 tracking-wider text-center mt-3">
           TRACK EDUCATION. PROTECT YOUR LICENSE.
         </p>
       </div>
@@ -37,13 +38,14 @@ const CEShieldLogo = ({ showTagline = true, className = "" }) => {
   }
   
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
+    <div className={`flex items-center gap-2 h-[32px] ${className}`}>
       {/* Shield Icon Only */}
       <svg 
         width="40" 
         height="32" 
         viewBox="0 0 60 40" 
         xmlns="http://www.w3.org/2000/svg"
+        className="flex-shrink-0"
       >
         <g transform="translate(0, 0)">
           <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
@@ -54,8 +56,8 @@ const CEShieldLogo = ({ showTagline = true, className = "" }) => {
                 fill="#8b5cf6" opacity="0.85"/>
         </g>
       </svg>
-      <h2 className="text-[32px] leading-[32px] font-light text-gray-900">
-        CE<span className="font-medium">Shield</span>
+      <h2 className="text-[30px] leading-none text-gray-900 flex items-center h-full">
+        <span className="font-thin">CE</span><span className="font-semibold">Shield</span>
       </h2>
     </div>
   );
@@ -214,15 +216,16 @@ function AuthForm({ onSuccess }) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
-        <div className="text-center mb-8">
-          <div className="flex justify-center mb-4">
+        <div className="text-center mb-6">
+          <div className="flex justify-center mb-3">
             <div className="inline-block">
-              <div className="flex items-center justify-center gap-2">
+              <div className="flex items-center justify-center gap-2 h-[40px]">
                 <svg 
                   width="60" 
                   height="40" 
                   viewBox="0 0 60 40" 
                   xmlns="http://www.w3.org/2000/svg"
+                  className="flex-shrink-0"
                 >
                   <g transform="translate(0, 0)">
                     <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
@@ -233,18 +236,18 @@ function AuthForm({ onSuccess }) {
                           fill="#8b5cf6" opacity="0.85"/>
                   </g>
                 </svg>
-                <h1 className="text-[40px] leading-[40px] font-light text-gray-900">
-                  CE<span className="font-medium">Shield</span>
+                <h1 className="text-[38px] leading-none text-gray-900 flex items-center h-full">
+                  <span className="font-thin">CE</span><span className="font-semibold">Shield</span>
                 </h1>
               </div>
-              <p className="text-xs text-gray-600 tracking-wider text-center mt-1">
+              <p className="text-xs text-gray-600 tracking-wider text-center mt-3">
                 TRACK EDUCATION. PROTECT YOUR LICENSE.
               </p>
             </div>
           </div>
         </div>
 
-        <div className="mb-4">
+        <div className="mb-6">
           <p className="text-gray-700 text-center">
             {isSignUp ? 'Create your account' : 'Sign in to your account'}
           </p>
@@ -897,11 +900,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     .logo-text {
       font-size: 40px;
       line-height: 40px;
-      font-weight: 300;
       color: #111;
-    }
-    .logo-text span {
-      font-weight: 500;
     }
     .tagline {
       font-size: 10px;
@@ -1068,7 +1067,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
               <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="#8b5cf6" opacity="0.85"/>
             </g>
           </svg>
-          <div class="logo-text">CE<span>Shield</span></div>
+          <div class="logo-text"><span style="font-weight: 100;">CE</span><span style="font-weight: 600;">Shield</span></div>
         </div>
         <div class="tagline">TRACK EDUCATION. PROTECT YOUR LICENSE.</div>
       </div>
@@ -1474,12 +1473,13 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
           <div className="flex justify-between items-center">
             <div>
               <div className="mb-2">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 h-[32px]">
                   <svg 
                     width="40" 
                     height="32" 
                     viewBox="0 0 60 40" 
                     xmlns="http://www.w3.org/2000/svg"
+                    className="flex-shrink-0"
                   >
                     <g transform="translate(0, 0)">
                       <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
@@ -1490,8 +1490,8 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                             fill="#8b5cf6" opacity="0.85"/>
                     </g>
                   </svg>
-                  <h2 className="text-[32px] leading-[32px] font-light text-gray-900">
-                    CE<span className="font-medium">Shield</span>
+                  <h2 className="text-[30px] leading-none text-gray-900 flex items-center h-full">
+                    <span className="font-thin">CE</span><span className="font-semibold">Shield</span>
                   </h2>
                 </div>
                 <p className="text-xs text-gray-600 tracking-wider mt-1">
