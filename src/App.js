@@ -24,8 +24,8 @@ const CEShieldLogo = ({ showTagline = true, className = "" }) => {
                     fill="#8b5cf6" opacity="0.85"/>
             </g>
           </svg>
-          {/* Text Logo */}
-          <h1 className="text-3xl font-light text-gray-900">
+          {/* Text Logo - adjusted to match shield height */}
+          <h1 className="text-[40px] leading-[40px] font-light text-gray-900">
             CE<span className="font-medium">Shield</span>
           </h1>
         </div>
@@ -54,7 +54,7 @@ const CEShieldLogo = ({ showTagline = true, className = "" }) => {
                 fill="#8b5cf6" opacity="0.85"/>
         </g>
       </svg>
-      <h2 className="text-xl font-light text-gray-900">
+      <h2 className="text-[32px] leading-[32px] font-light text-gray-900">
         CE<span className="font-medium">Shield</span>
       </h2>
     </div>
@@ -233,7 +233,7 @@ function AuthForm({ onSuccess }) {
                           fill="#8b5cf6" opacity="0.85"/>
                   </g>
                 </svg>
-                <h1 className="text-3xl font-light text-gray-900">
+                <h1 className="text-[40px] leading-[40px] font-light text-gray-900">
                   CE<span className="font-medium">Shield</span>
                 </h1>
               </div>
@@ -895,7 +895,8 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
       margin-bottom: 4px;
     }
     .logo-text {
-      font-size: 28px;
+      font-size: 40px;
+      line-height: 40px;
       font-weight: 300;
       color: #111;
     }
@@ -1489,7 +1490,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                             fill="#8b5cf6" opacity="0.85"/>
                     </g>
                   </svg>
-                  <h2 className="text-xl font-light text-gray-900">
+                  <h2 className="text-[32px] leading-[32px] font-light text-gray-900">
                     CE<span className="font-medium">Shield</span>
                   </h2>
                 </div>
