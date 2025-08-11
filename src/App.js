@@ -2,6 +2,37 @@ import React, { useState, useEffect } from 'react';
 import { AlertCircle, CheckCircle, Clock, FileText, Plus, Trash2, Download, Info, Loader2, Settings, Pencil, LogOut, User, Lock, Mail, Eye, EyeOff, Shield } from 'lucide-react';
 import { supabase } from './supabaseClient';
 
+// CE Shield Logo Component
+const CEShieldLogo = ({ showTagline = true, className = "" }) => (
+  <svg 
+    width="340" 
+    height={showTagline ? "100" : "52"} 
+    viewBox={showTagline ? "0 0 340 100" : "0 0 70 52"} 
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <g transform={showTagline ? "translate(20, 20)" : "translate(0, 0)"}>
+      <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
+            fill="#dbeafe"/>
+      <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
+            fill="#06b6d4" opacity="0.85"/>
+      <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
+            fill="#8b5cf6" opacity="0.85"/>
+    </g>
+    
+    {showTagline && (
+      <>
+        <text x="90" y="45" fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="32" fontWeight="300" fill="#111">
+          CE<tspan fontWeight="500">Shield</tspan>
+        </text>
+        <text x="140" y="75" fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="10" fill="#666" letterSpacing="1.5" textAnchor="middle">
+          TRACK EDUCATION. PROTECT YOUR LICENSE.
+        </text>
+      </>
+    )}
+  </svg>
+);
+
 // Google Vision API key from environment variable
 const GOOGLE_VISION_API_KEY = process.env.REACT_APP_GOOGLE_VISION_KEY || '';
 
@@ -156,13 +187,9 @@ function AuthForm({ onSuccess }) {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
-            <Shield className="w-8 h-8 text-blue-600" />
+          <div className="flex justify-center mb-4">
+            <CEShieldLogo showTagline={true} className="w-full max-w-xs" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-800">CE Shield</h1>
-          <p className="text-gray-600 mt-2 italic">
-            Track your continuing education.<br />Protect your license.
-          </p>
         </div>
 
         <div className="mb-4">
@@ -806,6 +833,9 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
       padding-bottom: 20px;
       margin-bottom: 30px;
     }
+    .logo-container {
+      margin-bottom: 20px;
+    }
     h1 { 
       color: #1e40af;
       margin-bottom: 10px;
@@ -957,8 +987,22 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
 <body>
   <div class="container">
     <div class="header">
-      <h1>CE Shield - ${user.state} ${user.licenseType} Continuing Education Report</h1>
-      <p style="color: #64748b; font-style: italic;">Track your continuing education.<br />Protect your license.</p>
+      <div class="logo-container">
+        <svg width="280" height="80" viewBox="0 0 340 100" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(20, 20)">
+            <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill="#dbeafe"/>
+            <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill="#06b6d4" opacity="0.85"/>
+            <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="#8b5cf6" opacity="0.85"/>
+          </g>
+          <text x="90" y="45" font-family="'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="300" fill="#111">
+            CE<tspan font-weight="500">Shield</tspan>
+          </text>
+          <text x="140" y="75" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" fill="#666" letter-spacing="1.5" text-anchor="middle">
+            TRACK EDUCATION. PROTECT YOUR LICENSE.
+          </text>
+        </svg>
+      </div>
+      <h1>${user.state} ${user.licenseType} Continuing Education Report</h1>
       <p style="color: #64748b; margin-top: 10px;">Generated on ${reportDate}</p>
     </div>
 
@@ -1199,9 +1243,8 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
         <div className="max-w-md mx-auto mt-10">
           <div className="bg-white rounded-lg shadow-lg p-6">
             <div className="flex justify-between items-center mb-6">
-              <div className="flex items-center gap-2">
-                <Shield className="w-6 h-6 text-blue-600" />
-                <h1 className="text-2xl font-bold text-gray-800">CE Shield</h1>
+              <div className="flex items-center">
+                <CEShieldLogo showTagline={false} className="h-10" />
               </div>
               <button
                 onClick={onSignOut}
@@ -1360,15 +1403,9 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <div className="flex justify-between items-center">
             <div>
-              <div className="flex items-center gap-2 mb-1">
-                <Shield className="w-7 h-7 text-blue-600" />
-                <h1 className="text-2xl font-bold text-gray-800">
-                  CE Shield
-                </h1>
+              <div className="mb-3">
+                <CEShieldLogo showTagline={false} className="h-12" />
               </div>
-              <p className="text-gray-600 italic text-sm mb-2">
-                Track your continuing education.<br />Protect your license.
-              </p>
               <p className="text-gray-700">
                 {user.name} • {user.state} {user.licenseType} License #{user.licenseNumber}
               </p>
