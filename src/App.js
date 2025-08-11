@@ -8,16 +8,15 @@ const CEShieldLogo = ({ showTagline = true, className = "" }) => {
     return (
       <div className={className}>
         <div className="flex items-center justify-center gap-2">
-          {/* Shield Icon - adjusted positioning */}
+          {/* Shield Icon - sized to match text height */}
           <svg 
-            width="60" 
+            width="54" 
             height="36" 
-            viewBox="0 0 60 36" 
+            viewBox="0 0 60 40" 
             xmlns="http://www.w3.org/2000/svg"
             className="flex-shrink-0"
-            style={{ marginTop: '-2px' }}
           >
-            <g transform="translate(0, 0)">
+            <g transform="translate(0, 4)">
               <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
                     fill="#dbeafe"/>
               <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
@@ -26,7 +25,7 @@ const CEShieldLogo = ({ showTagline = true, className = "" }) => {
                     fill="#8b5cf6" opacity="0.85"/>
             </g>
           </svg>
-          {/* Text Logo - CE thin, Shield medium-bold */}
+          {/* Text Logo - CE thin, Shield medium */}
           <h1 className="text-[36px] leading-[36px] text-gray-900">
             <span className="font-thin">CE</span><span className="font-medium">Shield</span>
           </h1>
@@ -40,16 +39,15 @@ const CEShieldLogo = ({ showTagline = true, className = "" }) => {
   
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      {/* Shield Icon Only */}
+      {/* Shield Icon Only - sized to match text height */}
       <svg 
-        width="48" 
+        width="44" 
         height="29" 
-        viewBox="0 0 60 36" 
+        viewBox="0 0 60 40" 
         xmlns="http://www.w3.org/2000/svg"
         className="flex-shrink-0"
-        style={{ marginTop: '-1px' }}
       >
-        <g transform="translate(0, 0)">
+        <g transform="translate(0, 3)">
           <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
                 fill="#dbeafe"/>
           <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
@@ -223,14 +221,13 @@ function AuthForm({ onSuccess }) {
             <div className="inline-block">
               <div className="flex items-center justify-center gap-2">
                 <svg 
-                  width="60" 
+                  width="54" 
                   height="36" 
-                  viewBox="0 0 60 36" 
+                  viewBox="0 0 60 40" 
                   xmlns="http://www.w3.org/2000/svg"
                   className="flex-shrink-0"
-                  style={{ marginTop: '-2px' }}
                 >
-                  <g transform="translate(0, 0)">
+                  <g transform="translate(0, 4)">
                     <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
                           fill="#dbeafe"/>
                     <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
@@ -1064,8 +1061,8 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     <div class="header">
       <div class="logo-container">
         <div class="logo-wrapper">
-          <svg width="60" height="36" viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg" style="margin-top: -2px;">
-            <g transform="translate(0, 0)">
+          <svg width="54" height="36" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(0, 4)">
               <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill="#dbeafe"/>
               <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill="#06b6d4" opacity="0.85"/>
               <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="#8b5cf6" opacity="0.85"/>
@@ -1479,14 +1476,13 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
               <div className="mb-2">
                 <div className="flex items-center gap-2">
                   <svg 
-                    width="48" 
+                    width="44" 
                     height="29" 
-                    viewBox="0 0 60 36" 
+                    viewBox="0 0 60 40" 
                     xmlns="http://www.w3.org/2000/svg"
                     className="flex-shrink-0"
-                    style={{ marginTop: '-1px' }}
                   >
-                    <g transform="translate(0, 0)">
+                    <g transform="translate(0, 3)">
                       <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
                             fill="#dbeafe"/>
                       <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
