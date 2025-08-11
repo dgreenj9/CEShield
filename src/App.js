@@ -7,21 +7,29 @@ const CEShieldLogo = ({ showTagline = true, className = "" }) => {
   if (showTagline) {
     return (
       <div className={className}>
-        <div className="flex items-center justify-center gap-2 mb-2">
+        <div className="flex items-center justify-center gap-2">
           {/* Shield Icon */}
-          <div className="flex -space-x-3">
-            <div className="w-8 h-10 bg-blue-100 rounded-b-lg transform -rotate-6"></div>
-            <div className="w-8 h-10 bg-cyan-400 rounded-b-lg opacity-85"></div>
-            <div className="w-8 h-10 bg-purple-500 rounded-b-lg opacity-85 transform rotate-6"></div>
-          </div>
+          <svg 
+            width="60" 
+            height="40" 
+            viewBox="0 0 60 40" 
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g transform="translate(0, 0)">
+              <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
+                    fill="#dbeafe"/>
+              <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
+                    fill="#06b6d4" opacity="0.85"/>
+              <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
+                    fill="#8b5cf6" opacity="0.85"/>
+            </g>
+          </svg>
           {/* Text Logo */}
-          <div>
-            <h1 className="text-3xl font-light text-gray-900">
-              CE<span className="font-medium">Shield</span>
-            </h1>
-          </div>
+          <h1 className="text-3xl font-light text-gray-900">
+            CE<span className="font-medium">Shield</span>
+          </h1>
         </div>
-        <p className="text-xs text-gray-600 tracking-wider text-center">
+        <p className="text-xs text-gray-600 tracking-wider text-center mt-1">
           TRACK EDUCATION. PROTECT YOUR LICENSE.
         </p>
       </div>
@@ -31,11 +39,21 @@ const CEShieldLogo = ({ showTagline = true, className = "" }) => {
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       {/* Shield Icon Only */}
-      <div className="flex -space-x-2">
-        <div className="w-6 h-8 bg-blue-100 rounded-b-lg transform -rotate-6"></div>
-        <div className="w-6 h-8 bg-cyan-400 rounded-b-lg opacity-85"></div>
-        <div className="w-6 h-8 bg-purple-500 rounded-b-lg opacity-85 transform rotate-6"></div>
-      </div>
+      <svg 
+        width="40" 
+        height="32" 
+        viewBox="0 0 60 40" 
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g transform="translate(0, 0)">
+          <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
+                fill="#dbeafe"/>
+          <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
+                fill="#06b6d4" opacity="0.85"/>
+          <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
+                fill="#8b5cf6" opacity="0.85"/>
+        </g>
+      </svg>
       <h2 className="text-xl font-light text-gray-900">
         CE<span className="font-medium">Shield</span>
       </h2>
@@ -198,7 +216,31 @@ function AuthForm({ onSuccess }) {
       <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <CEShieldLogo showTagline={true} className="inline-block" />
+            <div className="inline-block">
+              <div className="flex items-center justify-center gap-2">
+                <svg 
+                  width="60" 
+                  height="40" 
+                  viewBox="0 0 60 40" 
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g transform="translate(0, 0)">
+                    <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
+                          fill="#dbeafe"/>
+                    <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
+                          fill="#06b6d4" opacity="0.85"/>
+                    <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
+                          fill="#8b5cf6" opacity="0.85"/>
+                  </g>
+                </svg>
+                <h1 className="text-3xl font-light text-gray-900">
+                  CE<span className="font-medium">Shield</span>
+                </h1>
+              </div>
+              <p className="text-xs text-gray-600 tracking-wider text-center mt-1">
+                TRACK EDUCATION. PROTECT YOUR LICENSE.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -846,37 +888,16 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     .logo-container {
       margin-bottom: 20px;
     }
-    .logo-shields {
-      display: inline-flex;
-      margin-left: -8px;
-      margin-bottom: 8px;
-    }
-    .shield {
-      width: 32px;
-      height: 40px;
-      border-radius: 0 0 8px 8px;
-      margin-left: -12px;
-    }
-    .shield:first-child {
-      background: #dbeafe;
-      transform: rotate(-6deg);
-      margin-left: 0;
-    }
-    .shield:nth-child(2) {
-      background: #06b6d4;
-      opacity: 0.85;
-    }
-    .shield:nth-child(3) {
-      background: #8b5cf6;
-      opacity: 0.85;
-      transform: rotate(6deg);
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
     }
     .logo-text {
-      font-size: 32px;
+      font-size: 28px;
       font-weight: 300;
       color: #111;
-      display: inline-block;
-      margin-left: 12px;
     }
     .logo-text span {
       font-weight: 500;
@@ -885,7 +906,6 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
       font-size: 10px;
       color: #666;
       letter-spacing: 1.5px;
-      margin-top: 4px;
     }
     h1 { 
       color: #1e40af;
@@ -1039,12 +1059,14 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
   <div class="container">
     <div class="header">
       <div class="logo-container">
-        <div style="display: flex; align-items: center; margin-bottom: 8px;">
-          <div class="logo-shields">
-            <div class="shield"></div>
-            <div class="shield"></div>
-            <div class="shield"></div>
-          </div>
+        <div class="logo-wrapper">
+          <svg width="60" height="40" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(0, 0)">
+              <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill="#dbeafe"/>
+              <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill="#06b6d4" opacity="0.85"/>
+              <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="#8b5cf6" opacity="0.85"/>
+            </g>
+          </svg>
           <div class="logo-text">CE<span>Shield</span></div>
         </div>
         <div class="tagline">TRACK EDUCATION. PROTECT YOUR LICENSE.</div>
@@ -1450,10 +1472,32 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <div className="flex justify-between items-center">
             <div>
-              <div className="mb-3">
-                <CEShieldLogo showTagline={false} className="h-12" />
+              <div className="mb-2">
+                <div className="flex items-center gap-2">
+                  <svg 
+                    width="40" 
+                    height="32" 
+                    viewBox="0 0 60 40" 
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g transform="translate(0, 0)">
+                      <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
+                            fill="#dbeafe"/>
+                      <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
+                            fill="#06b6d4" opacity="0.85"/>
+                      <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
+                            fill="#8b5cf6" opacity="0.85"/>
+                    </g>
+                  </svg>
+                  <h2 className="text-xl font-light text-gray-900">
+                    CE<span className="font-medium">Shield</span>
+                  </h2>
+                </div>
+                <p className="text-xs text-gray-600 tracking-wider mt-1">
+                  TRACK EDUCATION. PROTECT YOUR LICENSE.
+                </p>
               </div>
-              <p className="text-gray-700">
+              <p className="text-gray-700 mt-2">
                 {user.name} • {user.state} {user.licenseType} License #{user.licenseNumber}
               </p>
             </div>
