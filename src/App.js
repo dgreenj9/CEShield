@@ -4,7 +4,7 @@ import { supabase } from './supabaseClient';
 
 // Color palette from landing page
 const colors = {
-  primaryBlue: '#7dd3fc',  // Lighter sky blue, cohesive with the light blue palette
+  primaryBlue: '#3b82f6',  // Sky blue, slightly more vibrant
   primaryPurple: '#8b5cf6',
   lightBlue: '#e0f2fe',    // Light blue background
   mutedPurple: '#e9d5ff',
