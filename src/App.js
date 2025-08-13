@@ -18,7 +18,7 @@ const colors = {
 };
 
 // CE Shield Logo Component - Updated to match landing page design
-const CEShieldLogo = ({ showTagline = true, className = "", size = "large" }) => {
+const CEShieldLogo = ({ showTagline = true, className = "", size = "large", centered = false }) => {
   const scales = {
     small: { svg: "30", text: "14", tagline: "8" },
     medium: { svg: "44", text: "20", tagline: "10" },
@@ -29,7 +29,7 @@ const CEShieldLogo = ({ showTagline = true, className = "", size = "large" }) =>
   
   if (showTagline) {
     return (
-      <div className={className}>
+      <div className={`${centered ? 'flex flex-col items-center' : ''} ${className}`}>
         <div className="flex items-center gap-2">
           <svg 
             width={scale.svg} 
@@ -51,7 +51,7 @@ const CEShieldLogo = ({ showTagline = true, className = "", size = "large" }) =>
             <span className="font-light">CE</span><span className="font-normal">Shield</span>
           </h1>
         </div>
-        <p className={`text-[${scale.tagline}px] tracking-[1.5px] mt-2 uppercase`} style={{ color: colors.textGray, paddingLeft: '0' }}>
+        <p className={`text-[${scale.tagline}px] tracking-[1.5px] mt-2 uppercase ${centered ? 'text-center' : ''}`} style={{ color: colors.textGray, paddingLeft: '0' }}>
           Track Education. Protect Your License.
         </p>
       </div>
@@ -545,7 +545,9 @@ function AuthForm({ onSuccess }) {
     <div className="min-h-screen flex items-center justify-center p-4" style={{ background: `linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%)` }}>
       <div className="w-full max-w-md" style={{ background: 'white', padding: '2rem', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.08)', border: `1px solid ${colors.slateLight}` }}>
         <div className="text-center mb-6">
-          <CEShieldLogo showTagline={true} className="mx-auto" size="large" />
+          <div className="flex justify-center">
+            <CEShieldLogo showTagline={true} centered={true} size="large" />
+          </div>
         </div>
 
         <div className="mb-6">
