@@ -544,7 +544,33 @@ function AuthForm({ onSuccess }) {
     <div className="min-h-screen flex items-center justify-center p-4" style={{ background: `linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%)` }}>
       <div className="w-full max-w-md" style={{ background: 'white', padding: '2rem', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.08)', border: `1px solid ${colors.slateLight}` }}>
         <div className="text-center mb-6">
-          <CEShieldLogo showTagline={true} className="mx-auto" size="large" />
+          <div className="flex justify-center">
+            <div className="flex items-center gap-2">
+              <svg 
+                width="54" 
+                height="36" 
+                viewBox="0 0 60 40" 
+                xmlns="http://www.w3.org/2000/svg"
+                className="flex-shrink-0"
+              >
+                <g transform="translate(0, 4)">
+                  <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
+                        fill={colors.lightBlue}/>
+                  <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
+                        fill={colors.primaryBlue} opacity="0.85"/>
+                  <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
+                        fill={colors.primaryPurple} opacity="0.85"/>
+                </g>
+              </svg>
+              <h1 style={{ fontSize: '30px', lineHeight: '30px', color: colors.textDark }}>
+                <span className="font-light">CE</span><span className="font-normal">Shield</span>
+              </h1>
+            </div>
+          </div>
+          <p style={{ fontSize: '12px', letterSpacing: '1.5px', marginTop: '0.75rem', textTransform: 'uppercase', color: colors.textGray }}>
+            Track Education. Protect Your License.
+          </p>
+        </div>
         </div>
 
         <div className="mb-6">
@@ -1811,7 +1837,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
 
   // Main dashboard with updated design
   return (
-    <div className="min-h-screen" style={{ background: colors.grayLight }}>
+    <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%)' }}>
       <div className="max-w-7xl mx-auto p-4">
         {/* Header with updated design */}
         <div className="mb-6" style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
