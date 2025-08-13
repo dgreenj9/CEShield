@@ -23,7 +23,7 @@ const CEShieldLogo = ({ showTagline = true, className = "", size = "large", cent
     small: { svg: "30", text: "14", tagline: "8" },
     medium: { svg: "44", text: "20", tagline: "10" },
     large: { svg: "54", text: "30", tagline: "10" },
-    xlarge: { svg: "48", text: "48", tagline: "9" }
+    xlarge: { svg: "48", text: "32", tagline: "9" }
   };
   
   const scale = scales[size] || scales.large;
@@ -48,8 +48,8 @@ const CEShieldLogo = ({ showTagline = true, className = "", size = "large", cent
                     fill={colors.primaryPurple} opacity="0.85"/>
             </g>
           </svg>
-          <h1 style={{ fontSize: `${scale.text}px`, lineHeight: '0.75', color: colors.textDark }}>
-            <span className="font-light">CE</span><span className="font-normal">Shield</span>
+          <h1 style={{ fontSize: `${scale.text}px`, lineHeight: '1', color: colors.textDark }}>
+            <span style={{ fontWeight: 300 }}>CE</span><span style={{ fontWeight: 500 }}>Shield</span>
           </h1>
         </div>
         <p className={`text-[${scale.tagline}px] tracking-[1.5px] mt-2 uppercase ${centered ? 'text-center whitespace-nowrap' : ''}`} style={{ color: colors.textGray, paddingLeft: '0' }}>
@@ -77,8 +77,8 @@ const CEShieldLogo = ({ showTagline = true, className = "", size = "large", cent
                 fill={colors.primaryPurple} opacity="0.85"/>
         </g>
       </svg>
-      <h2 style={{ fontSize: `${scale.text}px`, lineHeight: '0.75', color: colors.textDark }}>
-        <span className="font-light">CE</span><span className="font-normal">Shield</span>
+      <h2 style={{ fontSize: `${scale.text}px`, lineHeight: '1', color: colors.textDark }}>
+        <span style={{ fontWeight: 300 }}>CE</span><span style={{ fontWeight: 500 }}>Shield</span>
       </h2>
     </div>
   );
