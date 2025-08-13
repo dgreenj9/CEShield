@@ -22,7 +22,8 @@ const CEShieldLogo = ({ showTagline = true, className = "", size = "large", cent
   const scales = {
     small: { svg: "30", text: "14", tagline: "8" },
     medium: { svg: "44", text: "20", tagline: "10" },
-    large: { svg: "54", text: "30", tagline: "10" }
+    large: { svg: "54", text: "30", tagline: "10" },
+    xlarge: { svg: "64", text: "36", tagline: "9" }
   };
   
   const scale = scales[size] || scales.large;
@@ -51,7 +52,7 @@ const CEShieldLogo = ({ showTagline = true, className = "", size = "large", cent
             <span className="font-light">CE</span><span className="font-normal">Shield</span>
           </h1>
         </div>
-        <p className={`text-[${scale.tagline}px] tracking-[1.5px] mt-2 uppercase ${centered ? 'text-center' : ''}`} style={{ color: colors.textGray, paddingLeft: '0' }}>
+        <p className={`text-[${scale.tagline}px] tracking-[1.5px] mt-2 uppercase ${centered ? 'text-center whitespace-nowrap' : ''}`} style={{ color: colors.textGray, paddingLeft: '0' }}>
           Track Education. Protect Your License.
         </p>
       </div>
@@ -546,7 +547,7 @@ function AuthForm({ onSuccess }) {
       <div className="w-full max-w-md" style={{ background: 'white', padding: '2rem', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.08)', border: `1px solid ${colors.slateLight}` }}>
         <div className="text-center mb-6">
           <div className="flex justify-center">
-            <CEShieldLogo showTagline={true} centered={true} size="large" />
+            <CEShieldLogo showTagline={true} centered={true} size="xlarge" />
           </div>
         </div>
 
