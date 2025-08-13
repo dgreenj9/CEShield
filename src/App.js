@@ -125,9 +125,9 @@ function LandingPage({ onGetStarted }) {
               transition: 'all 0.2s ease'
             }}
             onMouseEnter={(e) => {
-              e.target.style.background = '#0891b2';
+              e.target.style.background = '#2563eb';
               e.target.style.transform = 'translateY(-1px)';
-              e.target.style.boxShadow = '0 4px 12px rgba(6, 182, 212, 0.2)';
+              e.target.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.2)';
             }}
             onMouseLeave={(e) => {
               e.target.style.background = colors.primaryBlue;
@@ -210,9 +210,9 @@ function LandingPage({ onGetStarted }) {
                 transition: 'all 0.2s ease'
               }}
               onMouseEnter={(e) => {
-                e.target.style.background = '#0891b2';
+                e.target.style.background = '#2563eb';
                 e.target.style.transform = 'translateY(-1px)';
-                e.target.style.boxShadow = '0 4px 12px rgba(6, 182, 212, 0.2)';
+                e.target.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.2)';
               }}
               onMouseLeave={(e) => {
                 e.target.style.background = colors.primaryBlue;
@@ -630,7 +630,7 @@ function AuthForm({ onSuccess }) {
             }}
             onMouseEnter={(e) => {
               if (!loading && email && password) {
-                e.target.style.background = '#0891b2';
+                e.target.style.background = '#2563eb';
               }
             }}
             onMouseLeave={(e) => {
@@ -1992,7 +1992,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
               cursor: 'pointer'
             }}
             onMouseEnter={(e) => {
-              e.target.style.background = '#0891b2';
+              e.target.style.background = '#2563eb';
             }}
             onMouseLeave={(e) => {
               e.target.style.background = colors.primaryBlue;
