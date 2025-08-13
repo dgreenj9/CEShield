@@ -1265,18 +1265,11 @@ function AuthForm({ onSuccess }) {
     }
   };
 
-  // Handle Enter key press
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && email && password && !loading) {
-      handleSubmit();
-    }
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center p-4" style={{ background: `linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%)` }}>
       <div className="w-full max-w-md" style={{ background: 'white', padding: '2rem', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.08)', border: `1px solid ${colors.slateLight}` }}>
-        <div className="flex justify-center mb-6">
-          <CEShieldLogo showTagline={true} className="text-center" size="large" />
+        <div className="text-center mb-6">
+          <CEShieldLogo showTagline={true} className="mx-auto" size="large" />
         </div>
 
         <div className="mb-6">
@@ -1295,7 +1288,6 @@ function AuthForm({ onSuccess }) {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              onKeyPress={handleKeyPress}
               className="w-full px-3 py-2 focus:outline-none focus:ring-2"
               style={{ 
                 border: `1px solid ${colors.slateLight}`,
@@ -1316,7 +1308,6 @@ function AuthForm({ onSuccess }) {
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                onKeyPress={handleKeyPress}
                 className="w-full px-3 py-2 pr-10 focus:outline-none focus:ring-2"
                 style={{ 
                   border: `1px solid ${colors.slateLight}`,
