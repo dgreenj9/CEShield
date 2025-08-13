@@ -23,14 +23,739 @@ const CEShieldLogo = ({ showTagline = true, className = "", size = "large" }) =>
     small: { svg: "30", text: "14", tagline: "8" },
     medium: { svg: "44", text: "20", tagline: "10" },
     large: { svg: "54", text: "30", tagline: "12" }
-  };
+  // Main dashboard with updated design
+  return (
+    <div className="min-h-screen" style={{ background: colors.grayLight }}>
+      <div className="max-w-7xl mx-auto p-4">
+        {/* Header with updated design */}
+        <div className="mb-6" style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
+          <div className="flex justify-between items-start">
+            <div style={{ textAlign: 'left' }}>
+              <CEShieldLogo showTagline={true} size="medium" />
+              <p className="mt-2 text-xs" style={{ color: colors.textGray, fontSize: '0.75rem' }}>
+                {user.name} • {user.state} {user.licenseType} License #{user.licenseNumber}
+              </p>
+            </div>
+            <div className="flex items-start gap-4">
+              <button
+                onClick={() => setShowSettings(true)}
+                style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' }}
+                title="Settings"
+              >
+                <Settings className="w-5 h-5" />
+              </button>
+              <button
+                onClick={onSignOut}
+                style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' }}
+                title="Sign Out"
+              >
+                <LogOut className="w-5 h-5" />
+              </button>
+              <div className="text-right">
+                {daysUntilRenewal !== null && (
+                  <div className="text-lg font-semibold" style={{ color: daysUntilRenewal < 90 ? '#dc2626' : colors.textDark }}>
+                    <Clock className="inline-block w-5 h-5 mr-1" />
+                    {daysUntilRenewal} days until renewal
+                  </div>
+                )}
+                <p className="text-sm" style={{ color: colors.textGray }}>
+                  Renewal: {new Date(user.renewalDate).toLocaleDateString()}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Save indicator */}
+        {savingData && (
+          <div className="fixed top-4 right-4 px-4 py-2 flex items-center z-50" style={{ background: colors.primaryBlue, color: 'white', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)' }}>
+            <Loader2 className="w-4 h-4 animate-spin mr-2" />
+            Saving...
+          </div>
+        )}
+
+        {/* First Renewal Notice */}
+        {user.isFirstRenewal && (
+          <div className="p-4 mb-6" style={{ background: '#f0fdf4', border: '1px solid #86efac' }}>
+            <div className="flex items-center">
+              <CheckCircle className="w-5 h-5 mr-2" style={{ color: '#10b981' }} />
+              <span style={{ color: '#166534' }}>
+                First renewal - No CE requirements needed!
+              </span>
+            </div>
+          </div>
+        )}
+
+        {/* Cultural Competency Alert */}
+        {user.state === 'IL' && !user.isFirstRenewal && hours.culturalCompetency === 0 && (
+          <div className="p-4 mb-6" style={{ background: colors.lightBlue, border: `1px solid ${colors.primaryBlue}` }}>
+            <div className="flex items-start">
+              <Info className="w-5 h-5 mr-2 mt-0.5" style={{ color: colors.primaryBlue }} />
+              <div style={{ color: colors.textDark }}>
+                <div className="font-semibold">NEW 2025 Illinois Requirement!</div>
+                <div className="text-sm">
+                  Cultural competency training (1 hour) is now required. You have 3 renewal cycles to complete it, but you can start now.
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Progress Overview with updated design */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          {/* Total Progress */}
+          <div style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
+            <h2 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Overall Progress</h2>
+            <div className="relative pt-1">
+              <div className="flex mb-2 items-center justify-between">
+                <div>
+                  <span className="text-xs font-semibold inline-block py-1 px-2 uppercase" style={{ background: colors.lightBlue, color: colors.primaryBlue }}>
+                    Total CE Hours
+                  </span>
+                </div>
+                <div className="text-right">
+                  <span className="text-xs font-semibold inline-block" style={{ color: colors.primaryBlue }}>
+                    {hours.total} / {requirements?.total || 0}
+                  </span>
+                </div>
+              </div>
+              <div className="overflow-hidden h-2 mb-4 text-xs flex" style={{ background: colors.slateLight }}>
+                <div 
+                  style={{ 
+                    width: `${Math.min((hours.total / (requirements?.total || 1)) * 100, 100)}%`,
+                    background: colors.primaryBlue
+                  }}
+                  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Mandatory Requirements */}
+          <div style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
+            <h2 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Mandatory Requirements</h2>
+            <div className="space-y-2">
+              {Object.entries(requirements?.mandatory || {}).map(([key, required]) => {
+                if (required === 0) return null;
+                const completed = hours[key] || 0;
+                const isComplete = completed >= required;
+                const isNew2025 = key === 'culturalCompetency';
+                
+                return (
+                  <div key={key} className="flex items-center justify-between">
+                    <span className="text-sm capitalize">
+                      {key.replace(/([A-Z])/g, ' $1').trim()}
+                      {isNew2025 && <span className="text-xs ml-1" style={{ color: colors.primaryBlue }}>(NEW 2025)</span>}
+                    </span>
+                    <div className="flex items-center">
+                      <span className="text-sm font-medium mr-2" style={{ color: isComplete ? '#10b981' : '#dc2626' }}>
+                        {completed}/{required}
+                      </span>
+                      {isComplete ? (
+                        <CheckCircle className="w-4 h-4" style={{ color: '#10b981' }} />
+                      ) : (
+                        <AlertCircle className="w-4 h-4" style={{ color: '#dc2626' }} />
+                      )}
+                    </div>
+                  </div>
+                );
+
+  // Modal Components with updated design
+  function AddCourseModal() {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="w-full max-w-md max-h-[90vh] overflow-y-auto" style={{ background: 'white', padding: '2rem', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)' }}>
+          <h3 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>
+            {editingCourse ? 'Edit CE Course' : 'Add CE Course'}
+          </h3>
+          
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Upload Certificate/Documentation <span className="text-xs" style={{ color: colors.textGray }}>(PDF, JPG, PNG)</span>
+              </label>
+              <div className="space-y-2">
+                <div className="relative">
+                  <input
+                    type="file"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={handleCertificateUpload}
+                    className="w-full px-3 py-2 text-sm"
+                    style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                    disabled={isParsing}
+                  />
+                  {isParsing && (
+                    <div className="absolute inset-0 flex items-center justify-center" style={{ background: 'rgba(255, 255, 255, 0.9)' }}>
+                      <div className="text-center">
+                        <Loader2 className="w-6 h-6 animate-spin mx-auto mb-2" style={{ color: colors.primaryBlue }} />
+                        <div className="text-sm" style={{ color: colors.primaryBlue }}>Scanning certificate...</div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                {newCourse.certificate && (
+                  <div className="flex items-center justify-between p-2" style={{ background: colors.grayLight }}>
+                    <span className="text-sm truncate" style={{ color: colors.textGray }}>
+                      <FileText className="inline w-4 h-4 mr-1" />
+                      {newCourse.certificate.name}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setNewCourse(prev => ({...prev, certificate: null}))}
+                      className="text-sm"
+                      style={{ color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer' }}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                )}
+                <p className="text-xs" style={{ color: colors.textGray }}>
+                  Upload any supporting documentation: certificates, attendance lists, teaching records, etc.
+                  {!editingCourse && ' • Images can be scanned for auto-fill.'}
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Course Title *
+              </label>
+              <input
+                type="text"
+                value={newCourse.title}
+                onChange={(e) => setNewCourse(prev => ({...prev, title: e.target.value}))}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Provider Name *
+              </label>
+              <input
+                type="text"
+                value={newCourse.provider}
+                onChange={(e) => setNewCourse(prev => ({...prev, provider: e.target.value}))}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Date Completed *
+              </label>
+              <input
+                type="date"
+                value={newCourse.date}
+                onChange={(e) => setNewCourse(prev => ({...prev, date: e.target.value}))}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Hours * <span className="text-xs" style={{ color: colors.textGray }}>(1 hour = 50 minutes)</span>
+              </label>
+              <input
+                type="number"
+                step="0.5"
+                min="0.5"
+                value={newCourse.hours}
+                onChange={(e) => setNewCourse(prev => ({...prev, hours: e.target.value}))}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Category *
+              </label>
+              <select
+                value={newCourse.category}
+                onChange={(e) => setNewCourse(prev => ({...prev, category: e.target.value}))}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+              >
+                <option value="general">General CE</option>
+                <option value="ethics">Ethics</option>
+                <option value="sexualHarassment">Sexual Harassment Prevention</option>
+                <option value="culturalCompetency">Cultural Competency (NEW 2025)</option>
+                <option value="implicitBias">Implicit Bias</option>
+                <option value="dementia">Alzheimer's Disease & Dementia</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Format *
+              </label>
+              <select
+                value={newCourse.format}
+                onChange={(e) => setNewCourse(prev => ({...prev, format: e.target.value}))}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+              >
+                <option value="live">Live/In-Person</option>
+                <option value="selfStudy">Self-Study/Online</option>
+                <option value="teaching">Teaching</option>
+                <option value="clinicalInstructor">Clinical Instructor</option>
+                <option value="journalClubs">Journal Club</option>
+                <option value="inservices">Departmental Inservice</option>
+                <option value="districtMeetings">IPTA District Meeting</option>
+                <option value="skillsCertification">Skills Certification (CPR, etc.)</option>
+              </select>
+            </div>
+
+            {newCourse.format === 'selfStudy' && (
+              <div>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={newCourse.hasTest}
+                    onChange={(e) => setNewCourse(prev => ({...prev, hasTest: e.target.checked}))}
+                    className="mr-2"
+                  />
+                  <span className="text-sm">Course included a test (required for self-study)</span>
+                </label>
+              </div>
+            )}
+
+            <div className="flex justify-end space-x-3 mt-6">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowAddCourse(false);
+                  setEditingCourse(null);
+                  setNewCourse({
+                    title: '',
+                    provider: '',
+                    date: '',
+                    hours: '',
+                    category: 'general',
+                    format: 'live',
+                    hasTest: false,
+                    certificate: null
+                  });
+                }}
+                className="px-4 py-2"
+                style={{ color: colors.textDark, background: colors.slateLight, border: 'none', cursor: 'pointer' }}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleAddCourse}
+                className="px-4 py-2"
+                style={{ background: colors.primaryBlue, color: 'white', border: 'none', cursor: 'pointer' }}
+              >
+                {editingCourse ? 'Update Course' : 'Add Course'}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function DeleteConfirmationModal() {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="w-full max-w-md" style={{ background: 'white', padding: '2rem', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)' }}>
+          <h3 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Confirm Deletion</h3>
+          <p className="mb-6" style={{ color: colors.textGray }}>
+            Are you sure you want to delete the course "{courseToDelete.title}"? This action cannot be undone.
+          </p>
+          <div className="flex justify-end space-x-3">
+            <button
+              onClick={() => setCourseToDelete(null)}
+              className="px-4 py-2"
+              style={{ color: colors.textDark, background: colors.slateLight, border: 'none', cursor: 'pointer' }}
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() => deleteCourse(courseToDelete.id)}
+              className="px-4 py-2"
+              style={{ background: '#dc2626', color: 'white', border: 'none', cursor: 'pointer' }}
+            >
+              Delete Course
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function SettingsModal() {
+    const [localUser, setLocalUser] = useState({...user});
+    
+    const handleSave = async () => {
+      const saved = await saveUserProfile(localUser);
+      if (saved) {
+        setUser(localUser);
+        setShowSettings(false);
+        alert('Settings saved successfully!');
+      }
+    };
+    
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="w-full max-w-md" style={{ background: 'white', padding: '2rem', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)' }}>
+          <h3 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Profile Settings</h3>
+          
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                State
+              </label>
+              <select
+                value={localUser.state || 'IL'}
+                onChange={(e) => setLocalUser({...localUser, state: e.target.value})}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+              >
+                <option value="IL">Illinois</option>
+              </select>
+              <p className="text-xs mt-1" style={{ color: colors.textGray }}>
+                Currently supporting Illinois. More states coming soon!
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                License Type
+              </label>
+              <div className="grid grid-cols-2 gap-4">
+                <button
+                  onClick={() => {
+                    if (localUser.licenseType !== 'PT' && courses.length > 0) {
+                      if (window.confirm('Changing license type will update all requirements. Continue?')) {
+                        setLocalUser({...localUser, licenseType: 'PT'});
+                      }
+                    } else {
+                      setLocalUser({...localUser, licenseType: 'PT'});
+                    }
+                  }}
+                  className="p-3"
+                  style={{
+                    border: `2px solid ${localUser.licenseType === 'PT' ? colors.primaryBlue : colors.slateLight}`,
+                    background: localUser.licenseType === 'PT' ? colors.lightBlue : 'white',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <div className="font-semibold">PT</div>
+                  <div className="text-xs" style={{ color: colors.textGray }}>
+                    {localUser.state === 'IL' ? '40 hours/2 years' : 'Requirements vary'}
+                  </div>
+                </button>
+                <button
+                  onClick={() => {
+                    if (localUser.licenseType !== 'OT' && courses.length > 0) {
+                      if (window.confirm('Changing license type will update all requirements. Continue?')) {
+                        setLocalUser({...localUser, licenseType: 'OT'});
+                      }
+                    } else {
+                      setLocalUser({...localUser, licenseType: 'OT'});
+                    }
+                  }}
+                  className="p-3"
+                  style={{
+                    border: `2px solid ${localUser.licenseType === 'OT' ? colors.primaryBlue : colors.slateLight}`,
+                    background: localUser.licenseType === 'OT' ? colors.lightBlue : 'white',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <div className="font-semibold">OT</div>
+                  <div className="text-xs" style={{ color: colors.textGray }}>
+                    {localUser.state === 'IL' ? '24 hours/2 years' : 'Requirements vary'}
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Your Name
+              </label>
+              <input
+                type="text"
+                value={localUser.name}
+                onChange={(e) => setLocalUser({...localUser, name: e.target.value})}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                {localUser.state} License Number
+              </label>
+              <input
+                type="text"
+                value={localUser.licenseNumber}
+                onChange={(e) => setLocalUser({...localUser, licenseNumber: e.target.value})}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Renewal Date
+              </label>
+              <input
+                type="date"
+                value={localUser.renewalDate}
+                onChange={(e) => setLocalUser({...localUser, renewalDate: e.target.value})}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+              />
+            </div>
+
+            <div>
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={localUser.isFirstRenewal}
+                  onChange={(e) => setLocalUser({...localUser, isFirstRenewal: e.target.checked})}
+                  className="mr-2"
+                />
+                <span className="text-sm">This is my first renewal (CE exempt)</span>
+              </label>
+            </div>
+
+            <div className="flex justify-end space-x-3">
+              <button
+                onClick={() => setShowSettings(false)}
+                className="px-4 py-2"
+                style={{ color: colors.textDark, background: colors.slateLight, border: 'none', cursor: 'pointer' }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSave}
+                className="px-4 py-2"
+                style={{ 
+                  background: savingData ? colors.slateMedium : colors.primaryBlue, 
+                  color: 'white', 
+                  border: 'none', 
+                  cursor: savingData ? 'not-allowed' : 'pointer',
+                  opacity: savingData ? 0.5 : 1
+                }}
+                disabled={savingData}
+              >
+                {savingData ? 'Saving...' : 'Save Changes'}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Category Limits with updated design */}
+        <div className="mb-6" style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
+          <h2 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Category Limits</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {Object.entries(requirements?.limits || {}).map(([category, limit]) => {
+              const current = hours[category] || 0;
+              const status = checkLimits(category, current);
+              
+              return (
+                <div key={category} className="text-center">
+                  <div className="text-xs capitalize" style={{ color: colors.textGray }}>
+                    {category.replace(/([A-Z])/g, ' $1').trim()}
+                  </div>
+                  <div className="text-lg font-semibold" style={{ 
+                    color: status === 'exceeded' ? '#dc2626' : 
+                           status === 'warning' ? '#f59e0b' : 
+                           colors.textDark
+                  }}>
+                    {current}/{limit}
+                  </div>
+                  {status === 'exceeded' && (
+                    <div className="text-xs" style={{ color: '#dc2626' }}>Limit exceeded!</div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Add Course Button */}
+        <div className="mb-6">
+          <button
+            onClick={() => setShowAddCourse(true)}
+            className="px-4 py-2 flex items-center transition-all"
+            style={{
+              background: colors.primaryBlue,
+              color: 'white',
+              border: 'none',
+              fontWeight: 500,
+              cursor: 'pointer'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = '#2563eb';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = colors.primaryBlue;
+            }}
+          >
+            <Plus className="w-5 h-5 mr-2" />
+            Add CE Course
+          </button>
+        </div>
+
+        {/* Course List with updated design */}
+        <div style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg font-semibold" style={{ color: colors.textDark }}>CE Courses</h2>
+            <div className="flex gap-2">
+              <button
+                onClick={() => generateReport(false)}
+                className="flex items-center text-sm"
+                style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer' }}
+                title="Download HTML report"
+              >
+                <Download className="w-4 h-4 mr-1" />
+                HTML Report
+              </button>
+              <button
+                onClick={() => generateReport(true)}
+                className="flex items-center text-sm"
+                style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer' }}
+                title="Download all certificates/documentation as ZIP"
+              >
+                <Download className="w-4 h-4 mr-1" />
+                Certificates (ZIP)
+              </button>
+            </div>
+          </div>
+          
+          {courses.length === 0 ? (
+            <p className="text-center py-8" style={{ color: colors.textGray }}>
+              No courses added yet. Click "Add CE Course" to get started.
+            </p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="min-w-full">
+                <thead>
+                  <tr style={{ borderBottom: `1px solid ${colors.slateLight}` }}>
+                    <th className="text-left py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Date</th>
+                    <th className="text-left py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Course</th>
+                    <th className="text-left py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Provider</th>
+                    <th className="text-left py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Category</th>
+                    <th className="text-center py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Hours</th>
+                    <th className="text-center py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {courses.sort((a, b) => new Date(b.date) - new Date(a.date)).map(course => (
+                    <tr key={course.id} style={{ borderBottom: `1px solid ${colors.slateLight}` }}>
+                      <td className="py-2 px-2 text-sm">{new Date(course.date).toLocaleDateString()}</td>
+                      <td className="py-2 px-2 text-sm">
+                        <div>{course.title}</div>
+                        <div className="flex items-center gap-2">
+                          {course.format === 'selfStudy' && (
+                            <span className="text-xs" style={{ color: colors.textGray }}>Self-study</span>
+                          )}
+                          {course.certificate && (
+                            <span className="text-xs flex items-center" style={{ color: '#10b981' }}>
+                              <FileText className="w-3 h-3 mr-1" />
+                              Certificate
+                            </span>
+                          )}
+                        </div>
+                      </td>
+                      <td className="py-2 px-2 text-sm">{course.provider}</td>
+                      <td className="py-2 px-2 text-sm capitalize">
+                        {course.category === 'culturalCompetency' && (
+                          <span className="text-xs" style={{ color: colors.primaryBlue }}>(NEW) </span>
+                        )}
+                        {course.category.replace(/([A-Z])/g, ' $1').trim()}
+                      </td>
+                      <td className="py-2 px-2 text-sm text-center">{course.hours}</td>
+                      <td className="py-2 px-2 text-sm text-center">
+                        <div className="flex items-center justify-center gap-1">
+                          {course.certificate && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const link = document.createElement('a');
+                                link.href = course.certificate.data;
+                                link.download = course.certificate.name;
+                                link.click();
+                              }}
+                              className="p-1"
+                              style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer' }}
+                              title="Download Certificate"
+                            >
+                              <Download className="w-4 h-4" />
+                            </button>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => editCourse(course)}
+                            className="p-1"
+                            style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer' }}
+                            title="Edit Course"
+                          >
+                            <Pencil className="w-4 h-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => confirmDelete(course)}
+                            className="p-1"
+                            style={{ color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer' }}
+                            title="Delete Course"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+        
+        {/* Modals with updated design */}
+        {showAddCourse && (
+          <AddCourseModal />
+        )}
+        
+        {courseToDelete && (
+          <DeleteConfirmationModal />
+        )}
+        
+        {showSettings && (
+          <SettingsModal />
+        )}
+      </div>
+    </div>
+  );;
   
   const scale = scales[size] || scales.large;
   
   if (showTagline) {
     return (
       <div className={className}>
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center gap-2">
           <svg 
             width={scale.svg} 
             height={parseInt(scale.svg) * 0.67} 
@@ -51,7 +776,7 @@ const CEShieldLogo = ({ showTagline = true, className = "", size = "large" }) =>
             <span className="font-light">CE</span><span className="font-normal">Shield</span>
           </h1>
         </div>
-        <p className={`text-[${scale.tagline}px] tracking-[1.5px] mt-2 uppercase text-center`} style={{ color: colors.textGray, paddingLeft: '0' }}>
+        <p className={`text-[${scale.tagline}px] tracking-[1.5px] mt-2 uppercase`} style={{ color: colors.textGray, paddingLeft: '0' }}>
           Track Education. Protect Your License.
         </p>
       </div>
@@ -283,8 +1008,7 @@ function LandingPage({ onGetStarted }) {
           {[
             { icon: '📍', title: 'State-Specific Requirements', desc: 'Automatically tracks your state\'s PT & OT requirements including all mandatory training categories. Stay compliant with changing regulations and new requirements as they emerge.', bg: colors.mutedTeal },
             { icon: '📊', title: 'Smart Category Tracking', desc: 'Monitor all CE categories with automatic limit warnings. Track self-study, teaching hours, clinical instruction, and mandatory requirements.', bg: colors.mutedPurple },
-            { icon: '🔒', title: 'Secure Document Storage', desc: 'Keep all certificates in one encrypted, HIPAA-compliant vault. Upload PDFs and images, download reports for audits anytime.', bg: colors.lightBlue },
-            { icon: '💡', title: 'CE Recommendations', desc: 'Get personalized course recommendations based on your requirements and renewal timeline. Never miss mandatory training or approach category limits unexpectedly.', bg: colors.mutedTeal }
+            { icon: '🔒', title: 'Secure Document Storage', desc: 'Keep all certificates in one encrypted, HIPAA-compliant vault. Upload PDFs and images, download reports for audits anytime.', bg: colors.lightBlue }
           ].map((feature, idx) => (
             <div key={idx} style={{
               padding: '2rem',
@@ -541,37 +1265,18 @@ function AuthForm({ onSuccess }) {
     }
   };
 
+  // Handle Enter key press
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && email && password && !loading) {
+      handleSubmit();
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4" style={{ background: `linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%)` }}>
       <div className="w-full max-w-md" style={{ background: 'white', padding: '2rem', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.08)', border: `1px solid ${colors.slateLight}` }}>
-        <div className="text-center mb-6">
-          <div className="flex justify-center">
-            <div className="flex items-center gap-2">
-              <svg 
-                width="54" 
-                height="36" 
-                viewBox="0 0 60 40" 
-                xmlns="http://www.w3.org/2000/svg"
-                className="flex-shrink-0"
-              >
-                <g transform="translate(0, 4)">
-                  <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
-                        fill={colors.lightBlue}/>
-                  <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
-                        fill={colors.primaryBlue} opacity="0.85"/>
-                  <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
-                        fill={colors.primaryPurple} opacity="0.85"/>
-                </g>
-              </svg>
-              <h1 style={{ fontSize: '30px', lineHeight: '30px', color: colors.textDark }}>
-                <span className="font-light">CE</span><span className="font-normal">Shield</span>
-              </h1>
-            </div>
-          </div>
-          <p style={{ fontSize: '12px', letterSpacing: '1.5px', marginTop: '0.75rem', textTransform: 'uppercase', color: colors.textGray }}>
-            Track Education. Protect Your License.
-          </p>
-        </div>
+        <div className="flex justify-center mb-6">
+          <CEShieldLogo showTagline={true} className="text-center" size="large" />
         </div>
 
         <div className="mb-6">
@@ -590,6 +1295,7 @@ function AuthForm({ onSuccess }) {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onKeyPress={handleKeyPress}
               className="w-full px-3 py-2 focus:outline-none focus:ring-2"
               style={{ 
                 border: `1px solid ${colors.slateLight}`,
@@ -610,6 +1316,7 @@ function AuthForm({ onSuccess }) {
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyPress={handleKeyPress}
                 className="w-full px-3 py-2 pr-10 focus:outline-none focus:ring-2"
                 style={{ 
                   border: `1px solid ${colors.slateLight}`,
@@ -1835,730 +2542,3 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
       </div>
     );
   }
-
-  // Main dashboard with updated design
-  return (
-    <div className="min-h-screen" style={{ background: colors.grayLight }}>
-      <div className="max-w-7xl mx-auto p-4">
-        {/* Header with updated design */}
-        <div className="mb-6" style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
-          <div className="flex justify-between items-start">
-            <div style={{ textAlign: 'left' }}>
-              <CEShieldLogo showTagline={true} size="medium" />
-              <p className="mt-2 text-xs" style={{ color: colors.textGray, fontSize: '0.75rem' }}>
-                {user.name} • {user.state} {user.licenseType} License #{user.licenseNumber}
-              </p>
-            </div>
-            <div className="flex items-start gap-4">
-              <button
-                onClick={() => setShowSettings(true)}
-                style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' }}
-                title="Settings"
-              >
-                <Settings className="w-5 h-5" />
-              </button>
-              <button
-                onClick={onSignOut}
-                style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' }}
-                title="Sign Out"
-              >
-                <LogOut className="w-5 h-5" />
-              </button>
-              <div className="text-right">
-                {daysUntilRenewal !== null && (
-                  <div className="text-lg font-semibold" style={{ color: daysUntilRenewal < 90 ? '#dc2626' : colors.textDark }}>
-                    <Clock className="inline-block w-5 h-5 mr-1" />
-                    {daysUntilRenewal} days until renewal
-                  </div>
-                )}
-                <p className="text-sm" style={{ color: colors.textGray }}>
-                  Renewal: {new Date(user.renewalDate).toLocaleDateString()}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Save indicator */}
-        {savingData && (
-          <div className="fixed top-4 right-4 px-4 py-2 flex items-center z-50" style={{ background: colors.primaryBlue, color: 'white', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)' }}>
-            <Loader2 className="w-4 h-4 animate-spin mr-2" />
-            Saving...
-          </div>
-        )}
-
-        {/* First Renewal Notice */}
-        {user.isFirstRenewal && (
-          <div className="p-4 mb-6" style={{ background: '#f0fdf4', border: '1px solid #86efac' }}>
-            <div className="flex items-center">
-              <CheckCircle className="w-5 h-5 mr-2" style={{ color: '#10b981' }} />
-              <span style={{ color: '#166534' }}>
-                First renewal - No CE requirements needed!
-              </span>
-            </div>
-          </div>
-        )}
-
-        {/* Cultural Competency Alert */}
-        {user.state === 'IL' && !user.isFirstRenewal && hours.culturalCompetency === 0 && (
-          <div className="p-4 mb-6" style={{ background: colors.lightBlue, border: `1px solid ${colors.primaryBlue}` }}>
-            <div className="flex items-start">
-              <Info className="w-5 h-5 mr-2 mt-0.5" style={{ color: colors.primaryBlue }} />
-              <div style={{ color: colors.textDark }}>
-                <div className="font-semibold">NEW 2025 Illinois Requirement!</div>
-                <div className="text-sm">
-                  Cultural competency training (1 hour) is now required. You have 3 renewal cycles to complete it, but you can start now.
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Progress Overview with updated design */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          {/* Total Progress */}
-          <div style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
-            <h2 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Overall Progress</h2>
-            <div className="relative pt-1">
-              <div className="flex mb-2 items-center justify-between">
-                <div>
-                  <span className="text-xs font-semibold inline-block py-1 px-2 uppercase" style={{ background: colors.lightBlue, color: colors.primaryBlue }}>
-                    Total CE Hours
-                  </span>
-                </div>
-                <div className="text-right">
-                  <span className="text-xs font-semibold inline-block" style={{ color: colors.primaryBlue }}>
-                    {hours.total} / {requirements?.total || 0}
-                  </span>
-                </div>
-              </div>
-              <div className="overflow-hidden h-2 mb-4 text-xs flex" style={{ background: colors.slateLight }}>
-                <div 
-                  style={{ 
-                    width: `${Math.min((hours.total / (requirements?.total || 1)) * 100, 100)}%`,
-                    background: colors.primaryBlue
-                  }}
-                  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Mandatory Requirements */}
-          <div style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
-            <h2 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Mandatory Requirements</h2>
-            <div className="space-y-2">
-              {Object.entries(requirements?.mandatory || {}).map(([key, required]) => {
-                if (required === 0) return null;
-                const completed = hours[key] || 0;
-                const isComplete = completed >= required;
-                const isNew2025 = key === 'culturalCompetency';
-                
-                return (
-                  <div key={key} className="flex items-center justify-between">
-                    <span className="text-sm capitalize">
-                      {key.replace(/([A-Z])/g, ' $1').trim()}
-                      {isNew2025 && <span className="text-xs ml-1" style={{ color: colors.primaryBlue }}>(NEW 2025)</span>}
-                    </span>
-                    <div className="flex items-center">
-                      <span className="text-sm font-medium mr-2" style={{ color: isComplete ? '#10b981' : '#dc2626' }}>
-                        {completed}/{required}
-                      </span>
-                      {isComplete ? (
-                        <CheckCircle className="w-4 h-4" style={{ color: '#10b981' }} />
-                      ) : (
-                        <AlertCircle className="w-4 h-4" style={{ color: '#dc2626' }} />
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        {/* Category Limits with updated design */}
-        <div className="mb-6" style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
-          <h2 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Category Limits</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {Object.entries(requirements?.limits || {}).map(([category, limit]) => {
-              const current = hours[category] || 0;
-              const status = checkLimits(category, current);
-              
-              return (
-                <div key={category} className="text-center">
-                  <div className="text-xs capitalize" style={{ color: colors.textGray }}>
-                    {category.replace(/([A-Z])/g, ' $1').trim()}
-                  </div>
-                  <div className="text-lg font-semibold" style={{ 
-                    color: status === 'exceeded' ? '#dc2626' : 
-                           status === 'warning' ? '#f59e0b' : 
-                           colors.textDark
-                  }}>
-                    {current}/{limit}
-                  </div>
-                  {status === 'exceeded' && (
-                    <div className="text-xs" style={{ color: '#dc2626' }}>Limit exceeded!</div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Add Course Button */}
-        <div className="mb-6">
-          <button
-            onClick={() => setShowAddCourse(true)}
-            className="px-4 py-2 flex items-center transition-all"
-            style={{
-              background: colors.primaryBlue,
-              color: 'white',
-              border: 'none',
-              fontWeight: 500,
-              cursor: 'pointer'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.background = '#2563eb';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.background = colors.primaryBlue;
-            }}
-          >
-            <Plus className="w-5 h-5 mr-2" />
-            Add CE Course
-          </button>
-        </div>
-
-        {/* Course List with updated design */}
-        <div style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-semibold" style={{ color: colors.textDark }}>CE Courses</h2>
-            <div className="flex gap-2">
-              <button
-                onClick={() => generateReport(false)}
-                className="flex items-center text-sm"
-                style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer' }}
-                title="Download HTML report"
-              >
-                <Download className="w-4 h-4 mr-1" />
-                HTML Report
-              </button>
-              <button
-                onClick={() => generateReport(true)}
-                className="flex items-center text-sm"
-                style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer' }}
-                title="Download all certificates/documentation as ZIP"
-              >
-                <Download className="w-4 h-4 mr-1" />
-                Certificates (ZIP)
-              </button>
-            </div>
-          </div>
-          
-          {courses.length === 0 ? (
-            <p className="text-center py-8" style={{ color: colors.textGray }}>
-              No courses added yet. Click "Add CE Course" to get started.
-            </p>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="min-w-full">
-                <thead>
-                  <tr style={{ borderBottom: `1px solid ${colors.slateLight}` }}>
-                    <th className="text-left py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Date</th>
-                    <th className="text-left py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Course</th>
-                    <th className="text-left py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Provider</th>
-                    <th className="text-left py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Category</th>
-                    <th className="text-center py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Hours</th>
-                    <th className="text-center py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {courses.sort((a, b) => new Date(b.date) - new Date(a.date)).map(course => (
-                    <tr key={course.id} style={{ borderBottom: `1px solid ${colors.slateLight}` }}>
-                      <td className="py-2 px-2 text-sm">{new Date(course.date).toLocaleDateString()}</td>
-                      <td className="py-2 px-2 text-sm">
-                        <div>{course.title}</div>
-                        <div className="flex items-center gap-2">
-                          {course.format === 'selfStudy' && (
-                            <span className="text-xs" style={{ color: colors.textGray }}>Self-study</span>
-                          )}
-                          {course.certificate && (
-                            <span className="text-xs flex items-center" style={{ color: '#10b981' }}>
-                              <FileText className="w-3 h-3 mr-1" />
-                              Certificate
-                            </span>
-                          )}
-                        </div>
-                      </td>
-                      <td className="py-2 px-2 text-sm">{course.provider}</td>
-                      <td className="py-2 px-2 text-sm capitalize">
-                        {course.category === 'culturalCompetency' && (
-                          <span className="text-xs" style={{ color: colors.primaryBlue }}>(NEW) </span>
-                        )}
-                        {course.category.replace(/([A-Z])/g, ' $1').trim()}
-                      </td>
-                      <td className="py-2 px-2 text-sm text-center">{course.hours}</td>
-                      <td className="py-2 px-2 text-sm text-center">
-                        <div className="flex items-center justify-center gap-1">
-                          {course.certificate && (
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const link = document.createElement('a');
-                                link.href = course.certificate.data;
-                                link.download = course.certificate.name;
-                                link.click();
-                              }}
-                              className="p-1"
-                              style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer' }}
-                              title="Download Certificate"
-                            >
-                              <Download className="w-4 h-4" />
-                            </button>
-                          )}
-                          <button
-                            type="button"
-                            onClick={() => editCourse(course)}
-                            className="p-1"
-                            style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer' }}
-                            title="Edit Course"
-                          >
-                            <Pencil className="w-4 h-4" />
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => confirmDelete(course)}
-                            className="p-1"
-                            style={{ color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer' }}
-                            title="Delete Course"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-        
-        {/* Modals with updated design */}
-        {showAddCourse && (
-          <AddCourseModal />
-        )}
-        
-        {courseToDelete && (
-          <DeleteConfirmationModal />
-        )}
-        
-        {showSettings && (
-          <SettingsModal />
-        )}
-      </div>
-    </div>
-  );
-
-  // Modal Components with updated design
-  function AddCourseModal() {
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-        <div className="w-full max-w-md max-h-[90vh] overflow-y-auto" style={{ background: 'white', padding: '2rem', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)' }}>
-          <h3 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>
-            {editingCourse ? 'Edit CE Course' : 'Add CE Course'}
-          </h3>
-          
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-                Upload Certificate/Documentation <span className="text-xs" style={{ color: colors.textGray }}>(PDF, JPG, PNG)</span>
-              </label>
-              <div className="space-y-2">
-                <div className="relative">
-                  <input
-                    type="file"
-                    accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={handleCertificateUpload}
-                    className="w-full px-3 py-2 text-sm"
-                    style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
-                    disabled={isParsing}
-                  />
-                  {isParsing && (
-                    <div className="absolute inset-0 flex items-center justify-center" style={{ background: 'rgba(255, 255, 255, 0.9)' }}>
-                      <div className="text-center">
-                        <Loader2 className="w-6 h-6 animate-spin mx-auto mb-2" style={{ color: colors.primaryBlue }} />
-                        <div className="text-sm" style={{ color: colors.primaryBlue }}>Scanning certificate...</div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                {newCourse.certificate && (
-                  <div className="flex items-center justify-between p-2" style={{ background: colors.grayLight }}>
-                    <span className="text-sm truncate" style={{ color: colors.textGray }}>
-                      <FileText className="inline w-4 h-4 mr-1" />
-                      {newCourse.certificate.name}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => setNewCourse(prev => ({...prev, certificate: null}))}
-                      className="text-sm"
-                      style={{ color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer' }}
-                    >
-                      Remove
-                    </button>
-                  </div>
-                )}
-                <p className="text-xs" style={{ color: colors.textGray }}>
-                  Upload any supporting documentation: certificates, attendance lists, teaching records, etc.
-                  {!editingCourse && ' • Images can be scanned for auto-fill.'}
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-                Course Title *
-              </label>
-              <input
-                type="text"
-                value={newCourse.title}
-                onChange={(e) => setNewCourse(prev => ({...prev, title: e.target.value}))}
-                className="w-full px-3 py-2"
-                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-                Provider Name *
-              </label>
-              <input
-                type="text"
-                value={newCourse.provider}
-                onChange={(e) => setNewCourse(prev => ({...prev, provider: e.target.value}))}
-                className="w-full px-3 py-2"
-                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-                Date Completed *
-              </label>
-              <input
-                type="date"
-                value={newCourse.date}
-                onChange={(e) => setNewCourse(prev => ({...prev, date: e.target.value}))}
-                className="w-full px-3 py-2"
-                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-                Hours * <span className="text-xs" style={{ color: colors.textGray }}>(1 hour = 50 minutes)</span>
-              </label>
-              <input
-                type="number"
-                step="0.5"
-                min="0.5"
-                value={newCourse.hours}
-                onChange={(e) => setNewCourse(prev => ({...prev, hours: e.target.value}))}
-                className="w-full px-3 py-2"
-                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-                Category *
-              </label>
-              <select
-                value={newCourse.category}
-                onChange={(e) => setNewCourse(prev => ({...prev, category: e.target.value}))}
-                className="w-full px-3 py-2"
-                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
-              >
-                <option value="general">General CE</option>
-                <option value="ethics">Ethics</option>
-                <option value="sexualHarassment">Sexual Harassment Prevention</option>
-                <option value="culturalCompetency">Cultural Competency (NEW 2025)</option>
-                <option value="implicitBias">Implicit Bias</option>
-                <option value="dementia">Alzheimer's Disease & Dementia</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-                Format *
-              </label>
-              <select
-                value={newCourse.format}
-                onChange={(e) => setNewCourse(prev => ({...prev, format: e.target.value}))}
-                className="w-full px-3 py-2"
-                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
-              >
-                <option value="live">Live/In-Person</option>
-                <option value="selfStudy">Self-Study/Online</option>
-                <option value="teaching">Teaching</option>
-                <option value="clinicalInstructor">Clinical Instructor</option>
-                <option value="journalClubs">Journal Club</option>
-                <option value="inservices">Departmental Inservice</option>
-                <option value="districtMeetings">IPTA District Meeting</option>
-                <option value="skillsCertification">Skills Certification (CPR, etc.)</option>
-              </select>
-            </div>
-
-            {newCourse.format === 'selfStudy' && (
-              <div>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={newCourse.hasTest}
-                    onChange={(e) => setNewCourse(prev => ({...prev, hasTest: e.target.checked}))}
-                    className="mr-2"
-                  />
-                  <span className="text-sm">Course included a test (required for self-study)</span>
-                </label>
-              </div>
-            )}
-
-            <div className="flex justify-end space-x-3 mt-6">
-              <button
-                type="button"
-                onClick={() => {
-                  setShowAddCourse(false);
-                  setEditingCourse(null);
-                  setNewCourse({
-                    title: '',
-                    provider: '',
-                    date: '',
-                    hours: '',
-                    category: 'general',
-                    format: 'live',
-                    hasTest: false,
-                    certificate: null
-                  });
-                }}
-                className="px-4 py-2"
-                style={{ color: colors.textDark, background: colors.slateLight, border: 'none', cursor: 'pointer' }}
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={handleAddCourse}
-                className="px-4 py-2"
-                style={{ background: colors.primaryBlue, color: 'white', border: 'none', cursor: 'pointer' }}
-              >
-                {editingCourse ? 'Update Course' : 'Add Course'}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  function DeleteConfirmationModal() {
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-        <div className="w-full max-w-md" style={{ background: 'white', padding: '2rem', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)' }}>
-          <h3 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Confirm Deletion</h3>
-          <p className="mb-6" style={{ color: colors.textGray }}>
-            Are you sure you want to delete the course "{courseToDelete.title}"? This action cannot be undone.
-          </p>
-          <div className="flex justify-end space-x-3">
-            <button
-              onClick={() => setCourseToDelete(null)}
-              className="px-4 py-2"
-              style={{ color: colors.textDark, background: colors.slateLight, border: 'none', cursor: 'pointer' }}
-            >
-              Cancel
-            </button>
-            <button
-              onClick={() => deleteCourse(courseToDelete.id)}
-              className="px-4 py-2"
-              style={{ background: '#dc2626', color: 'white', border: 'none', cursor: 'pointer' }}
-            >
-              Delete Course
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  function SettingsModal() {
-    const [localUser, setLocalUser] = useState({...user});
-    
-    const handleSave = async () => {
-      const saved = await saveUserProfile(localUser);
-      if (saved) {
-        setUser(localUser);
-        setShowSettings(false);
-        alert('Settings saved successfully!');
-      }
-    };
-    
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-        <div className="w-full max-w-md" style={{ background: 'white', padding: '2rem', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)' }}>
-          <h3 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Profile Settings</h3>
-          
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-                State
-              </label>
-              <select
-                value={localUser.state || 'IL'}
-                onChange={(e) => setLocalUser({...localUser, state: e.target.value})}
-                className="w-full px-3 py-2"
-                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
-              >
-                <option value="IL">Illinois</option>
-              </select>
-              <p className="text-xs mt-1" style={{ color: colors.textGray }}>
-                Currently supporting Illinois. More states coming soon!
-              </p>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-                License Type
-              </label>
-              <div className="grid grid-cols-2 gap-4">
-                <button
-                  onClick={() => {
-                    if (localUser.licenseType !== 'PT' && courses.length > 0) {
-                      if (window.confirm('Changing license type will update all requirements. Continue?')) {
-                        setLocalUser({...localUser, licenseType: 'PT'});
-                      }
-                    } else {
-                      setLocalUser({...localUser, licenseType: 'PT'});
-                    }
-                  }}
-                  className="p-3"
-                  style={{
-                    border: `2px solid ${localUser.licenseType === 'PT' ? colors.primaryBlue : colors.slateLight}`,
-                    background: localUser.licenseType === 'PT' ? colors.lightBlue : 'white',
-                    cursor: 'pointer'
-                  }}
-                >
-                  <div className="font-semibold">PT</div>
-                  <div className="text-xs" style={{ color: colors.textGray }}>
-                    {localUser.state === 'IL' ? '40 hours/2 years' : 'Requirements vary'}
-                  </div>
-                </button>
-                <button
-                  onClick={() => {
-                    if (localUser.licenseType !== 'OT' && courses.length > 0) {
-                      if (window.confirm('Changing license type will update all requirements. Continue?')) {
-                        setLocalUser({...localUser, licenseType: 'OT'});
-                      }
-                    } else {
-                      setLocalUser({...localUser, licenseType: 'OT'});
-                    }
-                  }}
-                  className="p-3"
-                  style={{
-                    border: `2px solid ${localUser.licenseType === 'OT' ? colors.primaryBlue : colors.slateLight}`,
-                    background: localUser.licenseType === 'OT' ? colors.lightBlue : 'white',
-                    cursor: 'pointer'
-                  }}
-                >
-                  <div className="font-semibold">OT</div>
-                  <div className="text-xs" style={{ color: colors.textGray }}>
-                    {localUser.state === 'IL' ? '24 hours/2 years' : 'Requirements vary'}
-                  </div>
-                </button>
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-                Your Name
-              </label>
-              <input
-                type="text"
-                value={localUser.name}
-                onChange={(e) => setLocalUser({...localUser, name: e.target.value})}
-                className="w-full px-3 py-2"
-                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-                {localUser.state} License Number
-              </label>
-              <input
-                type="text"
-                value={localUser.licenseNumber}
-                onChange={(e) => setLocalUser({...localUser, licenseNumber: e.target.value})}
-                className="w-full px-3 py-2"
-                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-                Renewal Date
-              </label>
-              <input
-                type="date"
-                value={localUser.renewalDate}
-                onChange={(e) => setLocalUser({...localUser, renewalDate: e.target.value})}
-                className="w-full px-3 py-2"
-                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
-              />
-            </div>
-
-            <div>
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={localUser.isFirstRenewal}
-                  onChange={(e) => setLocalUser({...localUser, isFirstRenewal: e.target.checked})}
-                  className="mr-2"
-                />
-                <span className="text-sm">This is my first renewal (CE exempt)</span>
-              </label>
-            </div>
-
-            <div className="flex justify-end space-x-3">
-              <button
-                onClick={() => setShowSettings(false)}
-                className="px-4 py-2"
-                style={{ color: colors.textDark, background: colors.slateLight, border: 'none', cursor: 'pointer' }}
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleSave}
-                className="px-4 py-2"
-                style={{ 
-                  background: savingData ? colors.slateMedium : colors.primaryBlue, 
-                  color: 'white', 
-                  border: 'none', 
-                  cursor: savingData ? 'not-allowed' : 'pointer',
-                  opacity: savingData ? 0.5 : 1
-                }}
-                disabled={savingData}
-              >
-                {savingData ? 'Saving...' : 'Save Changes'}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
