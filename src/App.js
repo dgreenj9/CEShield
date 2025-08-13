@@ -1,37 +1,58 @@
 import React, { useState, useEffect } from 'react';
-import { AlertCircle, CheckCircle, Clock, FileText, Plus, Trash2, Download, Info, Loader2, Settings, Pencil, LogOut, User, Lock, Mail, Eye, EyeOff, Shield } from 'lucide-react';
+import { AlertCircle, CheckCircle, Clock, FileText, Plus, Trash2, Download, Info, Loader2, Settings, Pencil, LogOut, User, Lock, Mail, Eye, EyeOff, Shield, ChevronDown } from 'lucide-react';
 import { supabase } from './supabaseClient';
 
-// CE Shield Logo Component
-const CEShieldLogo = ({ showTagline = true, className = "" }) => {
+// Color palette from landing page
+const colors = {
+  primaryBlue: '#06b6d4',
+  primaryPurple: '#8b5cf6',
+  lightBlue: '#dbeafe',
+  mutedPurple: '#e9d5ff',
+  mutedTeal: '#cffafe',
+  slateDark: '#1e293b',
+  slateMedium: '#475569',
+  slateLight: '#f1f5f9',
+  grayLight: '#f9fafb',
+  textDark: '#111827',
+  textGray: '#6b7280'
+};
+
+// CE Shield Logo Component - Updated to match landing page design
+const CEShieldLogo = ({ showTagline = true, className = "", size = "large" }) => {
+  const scales = {
+    small: { svg: "30", text: "14", tagline: "8" },
+    medium: { svg: "44", text: "20", tagline: "10" },
+    large: { svg: "54", text: "30", tagline: "12" }
+  };
+  
+  const scale = scales[size] || scales.large;
+  
   if (showTagline) {
     return (
       <div className={className}>
         <div className="flex items-center justify-center gap-2">
-          {/* Shield Icon - sized to match text height */}
           <svg 
-            width="54" 
-            height="36" 
+            width={scale.svg} 
+            height={parseInt(scale.svg) * 0.67} 
             viewBox="0 0 60 40" 
             xmlns="http://www.w3.org/2000/svg"
             className="flex-shrink-0"
           >
             <g transform="translate(0, 4)">
               <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
-                    fill="#dbeafe"/>
+                    fill={colors.lightBlue}/>
               <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
-                    fill="#06b6d4" opacity="0.85"/>
+                    fill={colors.primaryBlue} opacity="0.85"/>
               <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
-                    fill="#8b5cf6" opacity="0.85"/>
+                    fill={colors.primaryPurple} opacity="0.85"/>
             </g>
           </svg>
-          {/* Text Logo - CE thin, Shield medium */}
-          <h1 className="text-[36px] leading-[36px] text-gray-900">
-            <span className="font-thin">CE</span><span className="font-medium">Shield</span>
+          <h1 className={`text-[${scale.text}px] leading-[${scale.text}px]`} style={{ color: colors.textDark }}>
+            <span className="font-light">CE</span><span className="font-normal">Shield</span>
           </h1>
         </div>
-        <p className="text-xs text-gray-600 tracking-wider text-center mt-3">
-          TRACK EDUCATION. PROTECT YOUR LICENSE.
+        <p className={`text-[${scale.tagline}px] tracking-[1.5px] text-center mt-3 uppercase`} style={{ color: colors.textGray }}>
+          Track Education. Protect Your License.
         </p>
       </div>
     );
@@ -39,29 +60,318 @@ const CEShieldLogo = ({ showTagline = true, className = "" }) => {
   
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      {/* Shield Icon Only - sized to match text height */}
       <svg 
-        width="44" 
-        height="29" 
+        width={scale.svg} 
+        height={parseInt(scale.svg) * 0.67} 
         viewBox="0 0 60 40" 
         xmlns="http://www.w3.org/2000/svg"
         className="flex-shrink-0"
       >
         <g transform="translate(0, 3)">
           <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
-                fill="#dbeafe"/>
+                fill={colors.lightBlue}/>
           <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
-                fill="#06b6d4" opacity="0.85"/>
+                fill={colors.primaryBlue} opacity="0.85"/>
           <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
-                fill="#8b5cf6" opacity="0.85"/>
+                fill={colors.primaryPurple} opacity="0.85"/>
         </g>
       </svg>
-      <h2 className="text-[29px] leading-[29px] text-gray-900">
-        <span className="font-thin">CE</span><span className="font-medium">Shield</span>
+      <h2 className={`text-[${scale.text}px] leading-[${scale.text}px]`} style={{ color: colors.textDark }}>
+        <span className="font-light">CE</span><span className="font-normal">Shield</span>
       </h2>
     </div>
   );
 };
+
+// Landing Page Component
+function LandingPage({ onGetStarted }) {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className="min-h-screen" style={{ backgroundColor: 'white' }}>
+      {/* Navigation */}
+      <nav 
+        style={{
+          position: 'fixed',
+          top: 0,
+          width: '100%',
+          background: scrolled ? 'rgba(255, 255, 255, 0.98)' : 'rgba(255, 255, 255, 0.95)',
+          backdropFilter: 'blur(10px)',
+          zIndex: 1000,
+          padding: '1rem 2rem',
+          boxShadow: scrolled ? '0 1px 3px rgba(0, 0, 0, 0.05)' : 'none',
+          transition: 'all 0.3s ease'
+        }}
+      >
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <CEShieldLogo showTagline={false} size="medium" />
+          <button
+            onClick={onGetStarted}
+            style={{
+              background: colors.primaryBlue,
+              color: 'white',
+              padding: '0.625rem 1.5rem',
+              border: 'none',
+              fontWeight: 500,
+              cursor: 'pointer',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = '#0891b2';
+              e.target.style.transform = 'translateY(-1px)';
+              e.target.style.boxShadow = '0 4px 12px rgba(6, 182, 212, 0.2)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = colors.primaryBlue;
+              e.target.style.transform = 'translateY(0)';
+              e.target.style.boxShadow = 'none';
+            }}
+          >
+            Get Started
+          </button>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section style={{
+        minHeight: '90vh',
+        display: 'flex',
+        alignItems: 'center',
+        background: 'linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%)',
+        paddingTop: '100px',
+        position: 'relative'
+      }}>
+        <div style={{
+          content: '',
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '100px',
+          background: 'linear-gradient(180deg, transparent 0%, white 100%)'
+        }}></div>
+        
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '2rem',
+          display: 'grid',
+          gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr',
+          gap: '4rem',
+          alignItems: 'center',
+          position: 'relative',
+          zIndex: 1
+        }}>
+          <div>
+            <h1 style={{
+              fontSize: window.innerWidth > 768 ? '3rem' : '2rem',
+              lineHeight: 1.2,
+              marginBottom: '1.5rem',
+              color: colors.textDark,
+              fontWeight: 400
+            }}>
+              Never Worry About License Renewal Again
+            </h1>
+            <p style={{
+              fontSize: '0.875rem',
+              color: colors.textGray,
+              marginBottom: '2rem',
+              letterSpacing: '1.5px',
+              textTransform: 'uppercase'
+            }}>
+              Track Education. Protect Your License.
+            </p>
+            <p style={{
+              fontSize: '1.125rem',
+              color: colors.slateMedium,
+              marginBottom: '2rem',
+              lineHeight: 1.75
+            }}>
+              CE Shield is the smart continuing education tracker designed by clinicians, for clinicians. Stay compliant, organized, and ahead of deadlines with intelligent tracking for PT and OT professionals.
+            </p>
+            <button
+              onClick={onGetStarted}
+              style={{
+                background: colors.primaryBlue,
+                color: 'white',
+                padding: '0.875rem 2rem',
+                border: 'none',
+                fontSize: '1.125rem',
+                fontWeight: 500,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = '#0891b2';
+                e.target.style.transform = 'translateY(-1px)';
+                e.target.style.boxShadow = '0 4px 12px rgba(6, 182, 212, 0.2)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = colors.primaryBlue;
+                e.target.style.transform = 'translateY(0)';
+                e.target.style.boxShadow = 'none';
+              }}
+            >
+              Start Today
+            </button>
+          </div>
+          
+          {window.innerWidth > 768 && (
+            <div style={{
+              background: 'white',
+              padding: '2rem',
+              boxShadow: '0 20px 40px rgba(0, 0, 0, 0.08)',
+              border: `1px solid ${colors.slateLight}`
+            }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: '1.5rem',
+                paddingBottom: '1rem',
+                borderBottom: `1px solid ${colors.slateLight}`
+              }}>
+                <CEShieldLogo showTagline={false} size="small" />
+              </div>
+              <div style={{ padding: '1rem', background: colors.grayLight }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                  <span style={{ fontSize: '14px', color: colors.textGray }}>Overall Progress</span>
+                  <span style={{ fontSize: '14px', fontWeight: 600 }}>30/40 Hours</span>
+                </div>
+                <div style={{ height: '6px', background: colors.slateLight, overflow: 'hidden' }}>
+                  <div style={{ height: '100%', background: colors.primaryBlue, width: '75%' }}></div>
+                </div>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1.5rem' }}>
+                <div style={{ padding: '1rem', background: colors.grayLight, borderLeft: `3px solid ${colors.primaryBlue}` }}>
+                  <div style={{ fontSize: '12px', color: colors.textGray }}>Ethics</div>
+                  <div style={{ fontWeight: 600, color: colors.primaryBlue }}>3/3 ✓</div>
+                </div>
+                <div style={{ padding: '1rem', background: colors.grayLight, borderLeft: '3px solid #e5e7eb' }}>
+                  <div style={{ fontSize: '12px', color: colors.textGray }}>Cultural Comp.</div>
+                  <div style={{ fontWeight: 600, color: colors.textGray }}>0/1</div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section style={{ padding: '5rem 2rem', background: 'white' }}>
+        <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 4rem' }}>
+          <h2 style={{ fontSize: '2.25rem', marginBottom: '1rem', color: colors.textDark, fontWeight: 400 }}>
+            Everything You Need for CE Compliance
+          </h2>
+          <p style={{ color: colors.textGray }}>Built by healthcare professionals, for healthcare professionals</p>
+        </div>
+        
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '2rem'
+        }}>
+          {[
+            { icon: '📍', title: 'State-Specific Requirements', desc: 'Automatically tracks Illinois PT & OT requirements including mandatory ethics, sexual harassment prevention, and the new 2025 cultural competency training.', bg: colors.mutedTeal },
+            { icon: '📊', title: 'Smart Category Tracking', desc: 'Monitor all CE categories with automatic limit warnings. Track self-study, teaching hours, clinical instruction, and mandatory requirements.', bg: colors.mutedPurple },
+            { icon: '🔒', title: 'Secure Document Storage', desc: 'Keep all certificates in one encrypted, HIPAA-compliant vault. Upload PDFs and images, download reports for audits anytime.', bg: colors.lightBlue },
+            { icon: '📅', title: 'Renewal Date Tracking', desc: 'Visual countdown to your renewal date with progress tracking. Get intelligent reminders about approaching deadlines.', bg: colors.mutedTeal }
+          ].map((feature, idx) => (
+            <div key={idx} style={{
+              padding: '2rem',
+              transition: 'all 0.2s ease',
+              border: `1px solid ${colors.slateLight}`,
+              background: 'white'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.06)';
+              e.currentTarget.style.borderColor = colors.primaryBlue;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.borderColor = colors.slateLight;
+            }}>
+              <div style={{
+                width: '48px',
+                height: '48px',
+                background: feature.bg,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '1.5rem',
+                fontSize: '1.5rem'
+              }}>
+                {feature.icon}
+              </div>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', color: colors.textDark, fontWeight: 500 }}>
+                {feature.title}
+              </h3>
+              <p style={{ color: colors.textGray, lineHeight: 1.6 }}>{feature.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section style={{ padding: '5rem 2rem', background: colors.grayLight, textAlign: 'center' }}>
+        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+          <h2 style={{ fontSize: '2.25rem', marginBottom: '1.5rem', color: colors.textDark, fontWeight: 400 }}>
+            Ready to Protect Your License?
+          </h2>
+          <p style={{ color: colors.textGray, marginBottom: '2rem' }}>
+            Join PTs and OTs who track their CE with confidence.
+          </p>
+          <button
+            onClick={onGetStarted}
+            style={{
+              background: colors.primaryBlue,
+              color: 'white',
+              padding: '0.875rem 2rem',
+              border: 'none',
+              fontSize: '1.125rem',
+              fontWeight: 500,
+              cursor: 'pointer',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = '#0891b2';
+              e.target.style.transform = 'translateY(-1px)';
+              e.target.style.boxShadow = '0 4px 12px rgba(6, 182, 212, 0.2)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = colors.primaryBlue;
+              e.target.style.transform = 'translateY(0)';
+              e.target.style.boxShadow = 'none';
+            }}
+          >
+            Get Started
+          </button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer style={{ background: colors.slateDark, color: 'white', padding: '3rem 2rem 2rem', textAlign: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '2rem' }}>
+          <CEShieldLogo showTagline={false} size="medium" />
+        </div>
+        <div style={{ paddingTop: '2rem', borderTop: '1px solid rgba(255, 255, 255, 0.1)', color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.875rem' }}>
+          <p>© 2025 CE Shield. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  );
+}
 
 // Google Vision API key from environment variable
 const GOOGLE_VISION_API_KEY = process.env.REACT_APP_GOOGLE_VISION_KEY || '';
@@ -171,7 +481,7 @@ const createZip = async (files) => {
   return zipFile;
 };
 
-// Auth Component
+// Auth Component with updated design
 function AuthForm({ onSuccess }) {
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
@@ -214,48 +524,21 @@ function AuthForm({ onSuccess }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
+    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: `linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%)` }}>
+      <div className="w-full max-w-md" style={{ background: 'white', padding: '2rem', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.08)', border: `1px solid ${colors.slateLight}` }}>
         <div className="text-center mb-6">
-          <div className="flex justify-center mb-3">
-            <div className="inline-block">
-              <div className="flex items-center justify-center gap-2">
-                <svg 
-                  width="54" 
-                  height="36" 
-                  viewBox="0 0 60 40" 
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="flex-shrink-0"
-                >
-                  <g transform="translate(0, 4)">
-                    <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
-                          fill="#dbeafe"/>
-                    <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
-                          fill="#06b6d4" opacity="0.85"/>
-                    <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
-                          fill="#8b5cf6" opacity="0.85"/>
-                  </g>
-                </svg>
-                <h1 className="text-[36px] leading-[36px] text-gray-900">
-                  <span className="font-thin">CE</span><span className="font-medium">Shield</span>
-                </h1>
-              </div>
-              <p className="text-xs text-gray-600 tracking-wider text-center mt-3">
-                TRACK EDUCATION. PROTECT YOUR LICENSE.
-              </p>
-            </div>
-          </div>
+          <CEShieldLogo showTagline={true} className="mx-auto" size="large" />
         </div>
 
         <div className="mb-6">
-          <p className="text-gray-700 text-center">
+          <p className="text-center" style={{ color: colors.textGray }}>
             {isSignUp ? 'Create your account' : 'Sign in to your account'}
           </p>
         </div>
 
-        <div onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block mb-2 text-sm font-medium" style={{ color: colors.textDark }}>
               <Mail className="inline w-4 h-4 mr-1" />
               Email
             </label>
@@ -263,13 +546,18 @@ function AuthForm({ onSuccess }) {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 focus:outline-none focus:ring-2"
+              style={{ 
+                border: `1px solid ${colors.slateLight}`,
+                background: colors.grayLight,
+                focusRingColor: colors.primaryBlue
+              }}
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block mb-2 text-sm font-medium" style={{ color: colors.textDark }}>
               <Lock className="inline w-4 h-4 mr-1" />
               Password
             </label>
@@ -278,14 +566,20 @@ function AuthForm({ onSuccess }) {
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
+                className="w-full px-3 py-2 pr-10 focus:outline-none focus:ring-2"
+                style={{ 
+                  border: `1px solid ${colors.slateLight}`,
+                  background: colors.grayLight,
+                  focusRingColor: colors.primaryBlue
+                }}
                 required
                 minLength={6}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-2 top-2.5 text-gray-500 hover:text-gray-700"
+                className="absolute right-2 top-2.5"
+                style={{ color: colors.textGray }}
               >
                 {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
               </button>
@@ -293,7 +587,13 @@ function AuthForm({ onSuccess }) {
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded-md text-sm">
+            <div style={{ 
+              background: '#fef2f2',
+              border: '1px solid #fecaca',
+              color: '#dc2626',
+              padding: '0.75rem',
+              fontSize: '0.875rem'
+            }}>
               {error}
             </div>
           )}
@@ -302,7 +602,25 @@ function AuthForm({ onSuccess }) {
             type="button"
             onClick={handleSubmit}
             disabled={loading || !email || !password}
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+            className="w-full py-2 px-4 flex items-center justify-center transition-all"
+            style={{
+              background: loading || !email || !password ? colors.slateMedium : colors.primaryBlue,
+              color: 'white',
+              border: 'none',
+              fontWeight: 500,
+              cursor: loading || !email || !password ? 'not-allowed' : 'pointer',
+              opacity: loading || !email || !password ? 0.5 : 1
+            }}
+            onMouseEnter={(e) => {
+              if (!loading && email && password) {
+                e.target.style.background = '#0891b2';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!loading && email && password) {
+                e.target.style.background = colors.primaryBlue;
+              }
+            }}
           >
             {loading ? (
               <Loader2 className="w-5 h-5 animate-spin" />
@@ -320,14 +638,15 @@ function AuthForm({ onSuccess }) {
               setIsSignUp(!isSignUp);
               setError('');
             }}
-            className="text-blue-600 hover:text-blue-700 text-sm"
+            className="text-sm"
+            style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer' }}
           >
             {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
           </button>
         </div>
 
-        <div className="mt-6 pt-6 border-t border-gray-200">
-          <p className="text-xs text-gray-500 text-center">
+        <div className="mt-6 pt-6" style={{ borderTop: `1px solid ${colors.slateLight}` }}>
+          <p className="text-xs text-center" style={{ color: colors.textGray }}>
             Your data is securely stored and encrypted. We never share your information.
           </p>
         </div>
@@ -340,6 +659,7 @@ function AuthForm({ onSuccess }) {
 export default function CETracker() {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showLanding, setShowLanding] = useState(true);
   
   // Check for existing session on mount
   useEffect(() => {
@@ -349,7 +669,10 @@ export default function CETracker() {
   const checkUser = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      setCurrentUser(user);
+      if (user) {
+        setCurrentUser(user);
+        setShowLanding(false);
+      }
     } catch (error) {
       console.error('Error checking user:', error);
     } finally {
@@ -360,17 +683,26 @@ export default function CETracker() {
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setCurrentUser(null);
+    setShowLanding(true);
     // Clear local data
     localStorage.removeItem('ce_tracker_user_profiles');
     localStorage.removeItem('ce_tracker_courses');
   };
 
+  const handleGetStarted = () => {
+    setShowLanding(false);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+        <Loader2 className="w-8 h-8 animate-spin" style={{ color: colors.primaryBlue }} />
       </div>
     );
+  }
+
+  if (showLanding && !currentUser) {
+    return <LandingPage onGetStarted={handleGetStarted} />;
   }
 
   if (!currentUser) {
@@ -380,7 +712,7 @@ export default function CETracker() {
   return <CETrackerDashboard user={currentUser} onSignOut={handleSignOut} />;
 }
 
-// CE Tracker Dashboard (your existing component with modifications)
+// CE Tracker Dashboard with updated design
 function CETrackerDashboard({ user: authUser, onSignOut }) {
   // State management
   const [user, setUser] = useState({
@@ -389,7 +721,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     licenseNumber: '',
     renewalDate: '',
     isFirstRenewal: false,
-    state: 'IL' // Add state field, default to Illinois
+    state: 'IL'
   });
 
   const [profileComplete, setProfileComplete] = useState(false);
@@ -468,7 +800,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     }
   };
 
-  // Save user profile to Supabase (only when explicitly called)
+  // Save user profile to Supabase
   const saveUserProfile = async (userData) => {
     setSavingData(true);
     try {
@@ -499,8 +831,6 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
       setSavingData(false);
     }
   };
-
-  // Remove the auto-save useEffect - we'll save manually instead
 
   // Define requirements based on state and license type
   const getRequirements = () => {
@@ -547,7 +877,6 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
         };
       }
     }
-    // Add other states here in the future
     return null;
   };
 
@@ -600,7 +929,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     return 'ok';
   };
 
-  // Parse certificate using Google Vision API (same as before)
+  // Parse certificate using Google Vision API
   const parseCertificate = async (file) => {
     setIsParsing(true);
     
@@ -688,14 +1017,14 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
         alert('File size must be less than 5MB');
-        e.target.value = ''; // Reset the input
+        e.target.value = '';
         return;
       }
       
       const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'];
       if (!allowedTypes.includes(file.type)) {
         alert('Please upload a PDF or image file (JPG, PNG)');
-        e.target.value = ''; // Reset the input
+        e.target.value = '';
         return;
       }
       
@@ -728,7 +1057,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
         }
       };
       reader.readAsDataURL(file);
-      e.target.value = ''; // Reset the input after processing
+      e.target.value = '';
     }
   };
 
@@ -855,7 +1184,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     setCourseToDelete(course);
   };
 
-  // Generate report or certificates
+  // Generate report with updated design
   const generateReport = async (certificatesOnly = false) => {
     try {
       const reportDate = new Date().toLocaleDateString();
@@ -869,10 +1198,10 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
       line-height: 1.6;
-      color: #333;
-      background: #f5f5f5;
+      color: ${colors.textDark};
+      background: ${colors.grayLight};
       padding: 20px;
     }
     .container {
@@ -880,11 +1209,10 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
       margin: 0 auto;
       background: white;
       padding: 40px;
-      border-radius: 10px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     .header {
-      border-bottom: 3px solid #2563eb;
+      border-bottom: 3px solid ${colors.primaryBlue};
       padding-bottom: 20px;
       margin-bottom: 30px;
     }
@@ -900,18 +1228,20 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     .logo-text {
       font-size: 36px;
       line-height: 36px;
-      color: #111;
+      color: ${colors.textDark};
       vertical-align: middle;
     }
     .tagline {
       font-size: 10px;
-      color: #666;
+      color: ${colors.textGray};
       letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
     h1 { 
-      color: #1e40af;
+      color: ${colors.textDark};
       margin-bottom: 10px;
       font-size: 28px;
+      font-weight: 400;
     }
     .info-grid {
       display: grid;
@@ -919,8 +1249,8 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
       gap: 20px;
       margin-bottom: 30px;
       padding: 20px;
-      background: #f8fafc;
-      border-radius: 8px;
+      background: ${colors.grayLight};
+      border: 1px solid ${colors.slateLight};
     }
     .info-item {
       display: flex;
@@ -928,7 +1258,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     }
     .info-label {
       font-size: 12px;
-      color: #64748b;
+      color: ${colors.textGray};
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 4px;
@@ -936,7 +1266,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     .info-value {
       font-size: 16px;
       font-weight: 600;
-      color: #1e293b;
+      color: ${colors.textDark};
     }
     .progress-section {
       margin-bottom: 30px;
@@ -944,16 +1274,14 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     .progress-bar {
       width: 100%;
       height: 30px;
-      background: #e5e7eb;
-      border-radius: 15px;
+      background: ${colors.slateLight};
       overflow: hidden;
       position: relative;
       margin: 10px 0;
     }
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #3b82f6, #2563eb);
-      border-radius: 15px;
+      background: ${colors.primaryBlue};
       display: flex;
       align-items: center;
       justify-content: center;
@@ -970,9 +1298,8 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     }
     .requirement-item {
       padding: 15px;
-      background: #f8fafc;
-      border-radius: 8px;
-      border-left: 4px solid #3b82f6;
+      background: ${colors.grayLight};
+      border-left: 4px solid ${colors.primaryBlue};
     }
     .requirement-complete {
       border-left-color: #10b981;
@@ -988,11 +1315,11 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
       margin-top: 20px;
     }
     th {
-      background: #f1f5f9;
+      background: ${colors.slateLight};
       padding: 12px;
       text-align: left;
       font-weight: 600;
-      color: #475569;
+      color: ${colors.slateMedium};
       border-bottom: 2px solid #e2e8f0;
     }
     td {
@@ -1000,14 +1327,13 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
       border-bottom: 1px solid #e2e8f0;
     }
     tr:hover {
-      background: #f8fafc;
+      background: ${colors.grayLight};
     }
     .certificate-badge {
       display: inline-block;
       padding: 2px 8px;
       background: #10b981;
       color: white;
-      border-radius: 4px;
       font-size: 12px;
     }
     .footer {
@@ -1015,18 +1341,17 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
       padding-top: 20px;
       border-top: 1px solid #e2e8f0;
       text-align: center;
-      color: #64748b;
+      color: ${colors.textGray};
       font-size: 14px;
     }
     .alert {
       padding: 15px;
-      border-radius: 8px;
       margin-bottom: 20px;
     }
     .alert-info {
-      background: #dbeafe;
-      border-left: 4px solid #3b82f6;
-      color: #1e40af;
+      background: ${colors.lightBlue};
+      border-left: 4px solid ${colors.primaryBlue};
+      color: ${colors.textDark};
     }
     .stats-grid {
       display: grid;
@@ -1037,17 +1362,17 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     .stat-card {
       text-align: center;
       padding: 20px;
-      background: #f8fafc;
-      border-radius: 8px;
+      background: ${colors.grayLight};
+      border: 1px solid ${colors.slateLight};
     }
     .stat-value {
       font-size: 32px;
       font-weight: bold;
-      color: #2563eb;
+      color: ${colors.primaryBlue};
     }
     .stat-label {
       font-size: 14px;
-      color: #64748b;
+      color: ${colors.textGray};
       margin-top: 5px;
     }
     @media print {
@@ -1063,17 +1388,17 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
         <div class="logo-wrapper">
           <svg width="54" height="36" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
             <g transform="translate(0, 4)">
-              <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill="#dbeafe"/>
-              <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill="#06b6d4" opacity="0.85"/>
-              <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="#8b5cf6" opacity="0.85"/>
+              <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill="${colors.lightBlue}"/>
+              <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill="${colors.primaryBlue}" opacity="0.85"/>
+              <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="${colors.primaryPurple}" opacity="0.85"/>
             </g>
           </svg>
-          <div class="logo-text"><span style="font-weight: 100;">CE</span><span style="font-weight: 500;">Shield</span></div>
+          <div class="logo-text"><span style="font-weight: 300;">CE</span><span style="font-weight: 400;">Shield</span></div>
         </div>
         <div class="tagline">TRACK EDUCATION. PROTECT YOUR LICENSE.</div>
       </div>
       <h1>${user.state} ${user.licenseType} Continuing Education Report</h1>
-      <p style="color: #64748b; margin-top: 10px;">Generated on ${reportDate}</p>
+      <p style="color: ${colors.textGray}; margin-top: 10px;">Generated on ${reportDate}</p>
     </div>
 
     <div class="info-grid">
@@ -1107,7 +1432,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     ` : ''}
 
     <div class="progress-section">
-      <h2 style="color: #1e293b; margin-bottom: 20px;">Overall Progress</h2>
+      <h2 style="color: ${colors.textDark}; margin-bottom: 20px; font-weight: 400;">Overall Progress</h2>
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-value">${hours.total}</div>
@@ -1122,7 +1447,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
           <div class="stat-label">Hours Remaining</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">${daysUntilRenewal || 'N/A'}</div>
+          <div class="stat-value">${getDaysUntilRenewal() || 'N/A'}</div>
           <div class="stat-label">Days Until Renewal</div>
         </div>
       </div>
@@ -1134,7 +1459,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     </div>
 
     <div class="requirements-section">
-      <h2 style="color: #1e293b; margin-bottom: 20px;">Mandatory Requirements</h2>
+      <h2 style="color: ${colors.textDark}; margin-bottom: 20px; font-weight: 400;">Mandatory Requirements</h2>
       <div class="requirements-grid">
         ${Object.entries(requirements?.mandatory || {}).map(([key, required]) => {
           if (required === 0) return '';
@@ -1152,7 +1477,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     </div>
 
     <div class="courses-section">
-      <h2 style="color: #1e293b; margin-bottom: 20px;">Completed Courses</h2>
+      <h2 style="color: ${colors.textDark}; margin-bottom: 20px; font-weight: 400;">Completed Courses</h2>
       <table>
         <thead>
           <tr>
@@ -1177,33 +1502,9 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
           `).join('')}
         </tbody>
       </table>
-      <p style="margin-top: 10px; color: #64748b; font-size: 14px;">
+      <p style="margin-top: 10px; color: ${colors.textGray}; font-size: 14px;">
         Total Courses: ${courses.length} | Total Hours: ${hours.total}
       </p>
-    </div>
-
-    <div class="category-limits">
-      <h2 style="color: #1e293b; margin: 30px 0 20px;">Category Limits</h2>
-      <div class="requirements-grid">
-        ${Object.entries(requirements?.limits || {}).map(([category, limit]) => {
-          const current = hours[category] || 0;
-          const percentage = (current / limit) * 100;
-          const status = checkLimits(category, current);
-          return `
-            <div class="requirement-item" style="border-left-color: ${
-              status === 'exceeded' ? '#ef4444' : 
-              status === 'warning' ? '#f59e0b' : 
-              '#3b82f6'
-            }">
-              <strong>${category.replace(/([A-Z])/g, ' $1').trim()}</strong><br>
-              <span style="font-size: 20px; font-weight: bold; color: ${
-                status === 'exceeded' ? '#ef4444' : '#1e293b'
-              }">${current}/${limit}</span> hours
-              ${status === 'exceeded' ? '<br><small style="color: #ef4444;">Limit exceeded!</small>' : ''}
-            </div>
-          `;
-        }).join('')}
-      </div>
     </div>
 
     <div class="footer">
@@ -1301,32 +1602,30 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
   if (loadingData) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+        <Loader2 className="w-8 h-8 animate-spin" style={{ color: colors.primaryBlue }} />
       </div>
     );
   }
 
-  // Setup screen - show if profile is not complete
+  // Setup screen with updated design
   if (!profileComplete) {
     return (
-      <div className="min-h-screen bg-gray-50 p-4">
+      <div className="min-h-screen p-4" style={{ background: colors.grayLight }}>
         <div className="max-w-md mx-auto mt-10">
-          <div className="bg-white rounded-lg shadow-lg p-6">
+          <div style={{ background: 'white', padding: '2rem', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.06)', border: `1px solid ${colors.slateLight}` }}>
             <div className="flex justify-between items-center mb-6">
-              <div className="flex items-center">
-                <CEShieldLogo showTagline={false} className="h-10" />
-              </div>
+              <CEShieldLogo showTagline={false} size="medium" />
               <button
                 onClick={onSignOut}
-                className="text-gray-500 hover:text-gray-700"
+                style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer' }}
                 title="Sign Out"
               >
                 <LogOut className="w-5 h-5" />
               </button>
             </div>
             
-            <div className="mb-4 p-3 bg-blue-50 rounded-lg">
-              <p className="text-sm text-blue-800">
+            <div className="mb-4 p-3" style={{ background: colors.lightBlue }}>
+              <p className="text-sm" style={{ color: colors.textDark }}>
                 <User className="inline w-4 h-4 mr-1" />
                 Signed in as: {authUser.email}
               </p>
@@ -1334,60 +1633,65 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
 
             <div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
                   Select Your State
                 </label>
                 <div className="relative">
                   <select
                     value={user.state || ''}
                     onChange={(e) => setUser({...user, state: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 appearance-none focus:outline-none focus:ring-2"
+                    style={{ 
+                      border: `1px solid ${colors.slateLight}`,
+                      background: colors.grayLight,
+                      focusRingColor: colors.primaryBlue
+                    }}
                   >
                     <option value="">Choose a state</option>
                     <option value="IL">Illinois</option>
                   </select>
                   <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
+                    <ChevronDown className="w-5 h-5" style={{ color: colors.textGray }} />
                   </div>
                 </div>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs mt-1" style={{ color: colors.textGray }}>
                   Currently supporting Illinois. More states coming soon!
                 </p>
               </div>
 
               {user.state && (
                 <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
                     Select Your License Type
                   </label>
                   <div className="grid grid-cols-2 gap-4">
                     <button
                       onClick={() => setUser({...user, licenseType: 'PT'})}
-                      className={`p-4 rounded-lg border-2 ${
-                        user.licenseType === 'PT' 
-                          ? 'border-blue-500 bg-blue-50' 
-                          : 'border-gray-300 hover:border-gray-400'
-                      }`}
+                      className="p-4 transition-all"
+                      style={{
+                        border: `2px solid ${user.licenseType === 'PT' ? colors.primaryBlue : colors.slateLight}`,
+                        background: user.licenseType === 'PT' ? colors.lightBlue : 'white',
+                        cursor: 'pointer'
+                      }}
                     >
                       <div className="font-semibold">PT</div>
-                      <div className="text-sm text-gray-600">Physical Therapist</div>
-                      <div className="text-xs text-gray-500 mt-1">
+                      <div className="text-sm" style={{ color: colors.textGray }}>Physical Therapist</div>
+                      <div className="text-xs mt-1" style={{ color: colors.textGray }}>
                         {user.state === 'IL' ? '40 hours/2 years' : 'Requirements vary'}
                       </div>
                     </button>
                     <button
                       onClick={() => setUser({...user, licenseType: 'OT'})}
-                      className={`p-4 rounded-lg border-2 ${
-                        user.licenseType === 'OT' 
-                          ? 'border-blue-500 bg-blue-50' 
-                          : 'border-gray-300 hover:border-gray-400'
-                      }`}
+                      className="p-4 transition-all"
+                      style={{
+                        border: `2px solid ${user.licenseType === 'OT' ? colors.primaryBlue : colors.slateLight}`,
+                        background: user.licenseType === 'OT' ? colors.lightBlue : 'white',
+                        cursor: 'pointer'
+                      }}
                     >
                       <div className="font-semibold">OT</div>
-                      <div className="text-sm text-gray-600">Occupational Therapist</div>
-                      <div className="text-xs text-gray-500 mt-1">
+                      <div className="text-sm" style={{ color: colors.textGray }}>Occupational Therapist</div>
+                      <div className="text-xs mt-1" style={{ color: colors.textGray }}>
                         {user.state === 'IL' ? '24 hours/2 years' : 'Requirements vary'}
                       </div>
                     </button>
@@ -1398,41 +1702,56 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
               {user.state && user.licenseType && (
                 <>
                   <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
                       Your Name
                     </label>
                     <input
                       type="text"
                       value={user.name}
                       onChange={(e) => setUser({...user, name: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-2 focus:outline-none focus:ring-2"
+                      style={{ 
+                        border: `1px solid ${colors.slateLight}`,
+                        background: colors.grayLight,
+                        focusRingColor: colors.primaryBlue
+                      }}
                       required
                     />
                   </div>
 
                   <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
                       {user.state} License Number
                     </label>
                     <input
                       type="text"
                       value={user.licenseNumber}
                       onChange={(e) => setUser({...user, licenseNumber: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-2 focus:outline-none focus:ring-2"
+                      style={{ 
+                        border: `1px solid ${colors.slateLight}`,
+                        background: colors.grayLight,
+                        focusRingColor: colors.primaryBlue
+                      }}
                       placeholder={`Enter your ${user.state} license number`}
                       required
                     />
                   </div>
 
                   <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
                       Renewal Date
                     </label>
                     <input
                       type="date"
                       value={user.renewalDate}
                       onChange={(e) => setUser({...user, renewalDate: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-2 focus:outline-none focus:ring-2"
+                      style={{ 
+                        border: `1px solid ${colors.slateLight}`,
+                        background: colors.grayLight,
+                        focusRingColor: colors.primaryBlue
+                      }}
                       required
                     />
                   </div>
@@ -1451,7 +1770,15 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
 
                   <button
                     onClick={() => saveUserProfile(user)}
-                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
+                    className="w-full py-2 px-4 transition-all"
+                    style={{
+                      background: (!user.name || !user.licenseNumber || !user.renewalDate) ? colors.slateMedium : colors.primaryBlue,
+                      color: 'white',
+                      border: 'none',
+                      fontWeight: 500,
+                      cursor: (!user.name || !user.licenseNumber || !user.renewalDate) ? 'not-allowed' : 'pointer',
+                      opacity: (!user.name || !user.licenseNumber || !user.renewalDate) ? 0.5 : 1
+                    }}
                     disabled={!user.name || !user.licenseNumber || !user.renewalDate}
                   >
                     Continue
@@ -1465,69 +1792,42 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     );
   }
 
-  // Main dashboard (rest of your existing UI with minor modifications)
+  // Main dashboard with updated design
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ background: colors.grayLight }}>
       <div className="max-w-7xl mx-auto p-4">
-        {/* Header with Sign Out button */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        {/* Header with updated design */}
+        <div className="mb-6" style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
           <div className="flex justify-between items-center">
             <div>
-              <div className="mb-2">
-                <div className="flex items-center gap-2">
-                  <svg 
-                    width="44" 
-                    height="29" 
-                    viewBox="0 0 60 40" 
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="flex-shrink-0"
-                  >
-                    <g transform="translate(0, 3)">
-                      <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
-                            fill="#dbeafe"/>
-                      <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
-                            fill="#06b6d4" opacity="0.85"/>
-                      <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
-                            fill="#8b5cf6" opacity="0.85"/>
-                    </g>
-                  </svg>
-                  <h2 className="text-[29px] leading-[29px] text-gray-900">
-                    <span className="font-thin">CE</span><span className="font-medium">Shield</span>
-                  </h2>
-                </div>
-                <p className="text-xs text-gray-600 tracking-wider mt-1">
-                  TRACK EDUCATION. PROTECT YOUR LICENSE.
-                </p>
-              </div>
-              <p className="text-gray-700 mt-2">
+              <CEShieldLogo showTagline={true} size="medium" />
+              <p className="mt-2" style={{ color: colors.textGray }}>
                 {user.name} • {user.state} {user.licenseType} License #{user.licenseNumber}
               </p>
             </div>
             <div className="flex items-start gap-4">
               <button
                 onClick={() => setShowSettings(true)}
-                className="text-gray-600 hover:text-gray-800 p-2"
+                style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' }}
                 title="Settings"
               >
                 <Settings className="w-5 h-5" />
               </button>
               <button
                 onClick={onSignOut}
-                className="text-gray-600 hover:text-gray-800 p-2"
+                style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' }}
                 title="Sign Out"
               >
                 <LogOut className="w-5 h-5" />
               </button>
               <div className="text-right">
                 {daysUntilRenewal !== null && (
-                  <div className={`text-lg font-semibold ${
-                    daysUntilRenewal < 90 ? 'text-red-600' : 'text-gray-700'
-                  }`}>
+                  <div className="text-lg font-semibold" style={{ color: daysUntilRenewal < 90 ? '#dc2626' : colors.textDark }}>
                     <Clock className="inline-block w-5 h-5 mr-1" />
                     {daysUntilRenewal} days until renewal
                   </div>
                 )}
-                <p className="text-sm text-gray-600">
+                <p className="text-sm" style={{ color: colors.textGray }}>
                   Renewal: {new Date(user.renewalDate).toLocaleDateString()}
                 </p>
               </div>
@@ -1537,7 +1837,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
 
         {/* Save indicator */}
         {savingData && (
-          <div className="fixed top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center z-50">
+          <div className="fixed top-4 right-4 px-4 py-2 flex items-center z-50" style={{ background: colors.primaryBlue, color: 'white', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)' }}>
             <Loader2 className="w-4 h-4 animate-spin mr-2" />
             Saving...
           </div>
@@ -1545,22 +1845,22 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
 
         {/* First Renewal Notice */}
         {user.isFirstRenewal && (
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+          <div className="p-4 mb-6" style={{ background: '#f0fdf4', border: '1px solid #86efac' }}>
             <div className="flex items-center">
-              <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
-              <span className="text-green-800">
+              <CheckCircle className="w-5 h-5 mr-2" style={{ color: '#10b981' }} />
+              <span style={{ color: '#166534' }}>
                 First renewal - No CE requirements needed!
               </span>
             </div>
           </div>
         )}
 
-        {/* Cultural Competency Alert - Illinois specific */}
+        {/* Cultural Competency Alert */}
         {user.state === 'IL' && !user.isFirstRenewal && hours.culturalCompetency === 0 && (
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+          <div className="p-4 mb-6" style={{ background: colors.lightBlue, border: `1px solid ${colors.primaryBlue}` }}>
             <div className="flex items-start">
-              <Info className="w-5 h-5 text-blue-600 mr-2 mt-0.5" />
-              <div className="text-blue-800">
+              <Info className="w-5 h-5 mr-2 mt-0.5" style={{ color: colors.primaryBlue }} />
+              <div style={{ color: colors.textDark }}>
                 <div className="font-semibold">NEW 2025 Illinois Requirement!</div>
                 <div className="text-sm">
                   Cultural competency training (1 hour) is now required. You have 3 renewal cycles to complete it, but you can start now.
@@ -1570,36 +1870,39 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
           </div>
         )}
 
-        {/* Progress Overview */}
+        {/* Progress Overview with updated design */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           {/* Total Progress */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4">Overall Progress</h2>
+          <div style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
+            <h2 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Overall Progress</h2>
             <div className="relative pt-1">
               <div className="flex mb-2 items-center justify-between">
                 <div>
-                  <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200">
+                  <span className="text-xs font-semibold inline-block py-1 px-2 uppercase" style={{ background: colors.lightBlue, color: colors.primaryBlue }}>
                     Total CE Hours
                   </span>
                 </div>
                 <div className="text-right">
-                  <span className="text-xs font-semibold inline-block text-blue-600">
+                  <span className="text-xs font-semibold inline-block" style={{ color: colors.primaryBlue }}>
                     {hours.total} / {requirements?.total || 0}
                   </span>
                 </div>
               </div>
-              <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200">
+              <div className="overflow-hidden h-2 mb-4 text-xs flex" style={{ background: colors.slateLight }}>
                 <div 
-                  style={{ width: `${Math.min((hours.total / (requirements?.total || 1)) * 100, 100)}%` }}
-                  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600"
+                  style={{ 
+                    width: `${Math.min((hours.total / (requirements?.total || 1)) * 100, 100)}%`,
+                    background: colors.primaryBlue
+                  }}
+                  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
                 />
               </div>
             </div>
           </div>
 
           {/* Mandatory Requirements */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4">Mandatory Requirements</h2>
+          <div style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
+            <h2 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Mandatory Requirements</h2>
             <div className="space-y-2">
               {Object.entries(requirements?.mandatory || {}).map(([key, required]) => {
                 if (required === 0) return null;
@@ -1611,16 +1914,16 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                   <div key={key} className="flex items-center justify-between">
                     <span className="text-sm capitalize">
                       {key.replace(/([A-Z])/g, ' $1').trim()}
-                      {isNew2025 && <span className="text-blue-600 text-xs ml-1">(NEW 2025)</span>}
+                      {isNew2025 && <span className="text-xs ml-1" style={{ color: colors.primaryBlue }}>(NEW 2025)</span>}
                     </span>
                     <div className="flex items-center">
-                      <span className={`text-sm font-medium mr-2 ${isComplete ? 'text-green-600' : 'text-red-600'}`}>
+                      <span className="text-sm font-medium mr-2" style={{ color: isComplete ? '#10b981' : '#dc2626' }}>
                         {completed}/{required}
                       </span>
                       {isComplete ? (
-                        <CheckCircle className="w-4 h-4 text-green-600" />
+                        <CheckCircle className="w-4 h-4" style={{ color: '#10b981' }} />
                       ) : (
-                        <AlertCircle className="w-4 h-4 text-red-600" />
+                        <AlertCircle className="w-4 h-4" style={{ color: '#dc2626' }} />
                       )}
                     </div>
                   </div>
@@ -1630,9 +1933,9 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
           </div>
         </div>
 
-        {/* Category Limits */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Category Limits</h2>
+        {/* Category Limits with updated design */}
+        <div className="mb-6" style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
+          <h2 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Category Limits</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {Object.entries(requirements?.limits || {}).map(([category, limit]) => {
               const current = hours[category] || 0;
@@ -1640,18 +1943,18 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
               
               return (
                 <div key={category} className="text-center">
-                  <div className="text-xs text-gray-600 capitalize">
+                  <div className="text-xs capitalize" style={{ color: colors.textGray }}>
                     {category.replace(/([A-Z])/g, ' $1').trim()}
                   </div>
-                  <div className={`text-lg font-semibold ${
-                    status === 'exceeded' ? 'text-red-600' : 
-                    status === 'warning' ? 'text-yellow-600' : 
-                    'text-gray-800'
-                  }`}>
+                  <div className="text-lg font-semibold" style={{ 
+                    color: status === 'exceeded' ? '#dc2626' : 
+                           status === 'warning' ? '#f59e0b' : 
+                           colors.textDark
+                  }}>
                     {current}/{limit}
                   </div>
                   {status === 'exceeded' && (
-                    <div className="text-xs text-red-600">Limit exceeded!</div>
+                    <div className="text-xs" style={{ color: '#dc2626' }}>Limit exceeded!</div>
                   )}
                 </div>
               );
@@ -1663,21 +1966,35 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
         <div className="mb-6">
           <button
             onClick={() => setShowAddCourse(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 flex items-center"
+            className="px-4 py-2 flex items-center transition-all"
+            style={{
+              background: colors.primaryBlue,
+              color: 'white',
+              border: 'none',
+              fontWeight: 500,
+              cursor: 'pointer'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = '#0891b2';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = colors.primaryBlue;
+            }}
           >
             <Plus className="w-5 h-5 mr-2" />
             Add CE Course
           </button>
         </div>
 
-        {/* Course List */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        {/* Course List with updated design */}
+        <div style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-semibold text-gray-800">CE Courses</h2>
+            <h2 className="text-lg font-semibold" style={{ color: colors.textDark }}>CE Courses</h2>
             <div className="flex gap-2">
               <button
                 onClick={() => generateReport(false)}
-                className="text-blue-600 hover:text-blue-700 flex items-center text-sm"
+                className="flex items-center text-sm"
+                style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer' }}
                 title="Download HTML report"
               >
                 <Download className="w-4 h-4 mr-1" />
@@ -1685,7 +2002,8 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
               </button>
               <button
                 onClick={() => generateReport(true)}
-                className="text-blue-600 hover:text-blue-700 flex items-center text-sm"
+                className="flex items-center text-sm"
+                style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer' }}
                 title="Download all certificates/documentation as ZIP"
               >
                 <Download className="w-4 h-4 mr-1" />
@@ -1695,34 +2013,34 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
           </div>
           
           {courses.length === 0 ? (
-            <p className="text-gray-600 text-center py-8">
+            <p className="text-center py-8" style={{ color: colors.textGray }}>
               No courses added yet. Click "Add CE Course" to get started.
             </p>
           ) : (
             <div className="overflow-x-auto">
               <table className="min-w-full">
                 <thead>
-                  <tr className="border-b">
-                    <th className="text-left py-2 px-2 text-sm font-medium text-gray-700">Date</th>
-                    <th className="text-left py-2 px-2 text-sm font-medium text-gray-700">Course</th>
-                    <th className="text-left py-2 px-2 text-sm font-medium text-gray-700">Provider</th>
-                    <th className="text-left py-2 px-2 text-sm font-medium text-gray-700">Category</th>
-                    <th className="text-center py-2 px-2 text-sm font-medium text-gray-700">Hours</th>
-                    <th className="text-center py-2 px-2 text-sm font-medium text-gray-700">Actions</th>
+                  <tr style={{ borderBottom: `1px solid ${colors.slateLight}` }}>
+                    <th className="text-left py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Date</th>
+                    <th className="text-left py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Course</th>
+                    <th className="text-left py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Provider</th>
+                    <th className="text-left py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Category</th>
+                    <th className="text-center py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Hours</th>
+                    <th className="text-center py-2 px-2 text-sm font-medium" style={{ color: colors.textGray }}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {courses.sort((a, b) => new Date(b.date) - new Date(a.date)).map(course => (
-                    <tr key={course.id} className="border-b hover:bg-gray-50">
+                    <tr key={course.id} style={{ borderBottom: `1px solid ${colors.slateLight}` }}>
                       <td className="py-2 px-2 text-sm">{new Date(course.date).toLocaleDateString()}</td>
                       <td className="py-2 px-2 text-sm">
                         <div>{course.title}</div>
                         <div className="flex items-center gap-2">
                           {course.format === 'selfStudy' && (
-                            <span className="text-xs text-gray-500">Self-study</span>
+                            <span className="text-xs" style={{ color: colors.textGray }}>Self-study</span>
                           )}
                           {course.certificate && (
-                            <span className="text-xs text-green-600 flex items-center">
+                            <span className="text-xs flex items-center" style={{ color: '#10b981' }}>
                               <FileText className="w-3 h-3 mr-1" />
                               Certificate
                             </span>
@@ -1732,7 +2050,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                       <td className="py-2 px-2 text-sm">{course.provider}</td>
                       <td className="py-2 px-2 text-sm capitalize">
                         {course.category === 'culturalCompetency' && (
-                          <span className="text-blue-600 text-xs">(NEW) </span>
+                          <span className="text-xs" style={{ color: colors.primaryBlue }}>(NEW) </span>
                         )}
                         {course.category.replace(/([A-Z])/g, ' $1').trim()}
                       </td>
@@ -1748,7 +2066,8 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                                 link.download = course.certificate.name;
                                 link.click();
                               }}
-                              className="p-1 text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded"
+                              className="p-1"
+                              style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer' }}
                               title="Download Certificate"
                             >
                               <Download className="w-4 h-4" />
@@ -1757,7 +2076,8 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                           <button
                             type="button"
                             onClick={() => editCourse(course)}
-                            className="p-1 text-gray-600 hover:text-gray-700 hover:bg-gray-50 rounded"
+                            className="p-1"
+                            style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer' }}
                             title="Edit Course"
                           >
                             <Pencil className="w-4 h-4" />
@@ -1765,7 +2085,8 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                           <button
                             type="button"
                             onClick={() => confirmDelete(course)}
-                            className="p-1 text-red-600 hover:text-red-700 hover:bg-red-50 rounded"
+                            className="p-1"
+                            style={{ color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer' }}
                             title="Delete Course"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -1780,199 +2101,9 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
           )}
         </div>
         
-        {/* Add all the modals here */}
+        {/* Modals with updated design */}
         {showAddCourse && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
-              <div className="p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                  {editingCourse ? 'Edit CE Course' : 'Add CE Course'}
-                </h3>
-                
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Upload Certificate/Documentation <span className="text-xs text-gray-500">(PDF, JPG, PNG)</span>
-                    </label>
-                    <div className="space-y-2">
-                      <div className="relative">
-                        <input
-                          type="file"
-                          accept=".pdf,.jpg,.jpeg,.png"
-                          onChange={handleCertificateUpload}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
-                          disabled={isParsing}
-                        />
-                        {isParsing && (
-                          <div className="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center rounded-md">
-                            <div className="text-center">
-                              <Loader2 className="w-6 h-6 animate-spin text-blue-600 mx-auto mb-2" />
-                              <div className="text-sm text-blue-600">Scanning certificate...</div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                      {newCourse.certificate && (
-                        <div className="flex items-center justify-between bg-gray-50 p-2 rounded">
-                          <span className="text-sm text-gray-600 truncate">
-                            <FileText className="inline w-4 h-4 mr-1" />
-                            {newCourse.certificate.name}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => setNewCourse(prev => ({...prev, certificate: null}))}
-                            className="text-red-600 hover:text-red-700 text-sm"
-                          >
-                            Remove
-                          </button>
-                        </div>
-                      )}
-                      <p className="text-xs text-gray-500">
-                        Upload any supporting documentation: certificates, attendance lists, teaching records, journal club participation, etc.
-                        {editingCourse && !isParsing && ' • Images (JPG/PNG) can be scanned for auto-fill.'}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Course Title *
-                    </label>
-                    <input
-                      type="text"
-                      value={newCourse.title}
-                      onChange={(e) => setNewCourse(prev => ({...prev, title: e.target.value}))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Provider Name *
-                    </label>
-                    <input
-                      type="text"
-                      value={newCourse.provider}
-                      onChange={(e) => setNewCourse(prev => ({...prev, provider: e.target.value}))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Date Completed *
-                    </label>
-                    <input
-                      type="date"
-                      value={newCourse.date}
-                      onChange={(e) => setNewCourse(prev => ({...prev, date: e.target.value}))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Hours * <span className="text-xs text-gray-500">(1 hour = 50 minutes)</span>
-                    </label>
-                    <input
-                      type="number"
-                      step="0.5"
-                      min="0.5"
-                      value={newCourse.hours}
-                      onChange={(e) => setNewCourse(prev => ({...prev, hours: e.target.value}))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Category *
-                    </label>
-                    <select
-                      value={newCourse.category}
-                      onChange={(e) => setNewCourse(prev => ({...prev, category: e.target.value}))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    >
-                      <option value="general">General CE</option>
-                      <option value="ethics">Ethics</option>
-                      <option value="sexualHarassment">Sexual Harassment Prevention</option>
-                      <option value="culturalCompetency">Cultural Competency (NEW 2025)</option>
-                      <option value="implicitBias">Implicit Bias</option>
-                      <option value="dementia">Alzheimer's Disease & Dementia</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Format *
-                    </label>
-                    <select
-                      value={newCourse.format}
-                      onChange={(e) => setNewCourse(prev => ({...prev, format: e.target.value}))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    >
-                      <option value="live">Live/In-Person</option>
-                      <option value="selfStudy">Self-Study/Online</option>
-                      <option value="teaching">Teaching</option>
-                      <option value="clinicalInstructor">Clinical Instructor</option>
-                      <option value="journalClubs">Journal Club</option>
-                      <option value="inservices">Departmental Inservice</option>
-                      <option value="districtMeetings">IPTA District Meeting</option>
-                      <option value="skillsCertification">Skills Certification (CPR, etc.)</option>
-                    </select>
-                  </div>
-
-                  {newCourse.format === 'selfStudy' && (
-                    <div>
-                      <label className="flex items-center">
-                        <input
-                          type="checkbox"
-                          checked={newCourse.hasTest}
-                          onChange={(e) => setNewCourse(prev => ({...prev, hasTest: e.target.checked}))}
-                          className="mr-2"
-                        />
-                        <span className="text-sm">Course included a test (required for self-study)</span>
-                      </label>
-                    </div>
-                  )}
-
-                  <div className="flex justify-end space-x-3 mt-6">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setShowAddCourse(false);
-                        setEditingCourse(null);
-                        setNewCourse({
-                          title: '',
-                          provider: '',
-                          date: '',
-                          hours: '',
-                          category: 'general',
-                          format: 'live',
-                          hasTest: false,
-                          certificate: null
-                        });
-                      }}
-                      className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleAddCourse}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                    >
-                      {editingCourse ? 'Update Course' : 'Add Course'}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <AddCourseModal />
         )}
         
         {courseToDelete && (
@@ -1986,181 +2117,206 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     </div>
   );
 
-  // Modal Components (defined inside CETrackerDashboard)
-  function AddCourseForm() {
+  // Modal Components with updated design
+  function AddCourseModal() {
     return (
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Upload Certificate <span className="text-xs text-gray-500">(JPG, PNG only for OCR)</span>
-          </label>
-          <div className="space-y-2">
-            <div className="relative">
-              <input
-                type="file"
-                accept=".pdf,.jpg,.jpeg,.png"
-                onChange={handleCertificateUpload}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
-                disabled={isParsing}
-              />
-              {isParsing && (
-                <div className="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center rounded-md">
-                  <div className="text-center">
-                    <Loader2 className="w-6 h-6 animate-spin text-blue-600 mx-auto mb-2" />
-                    <div className="text-sm text-blue-600">Scanning certificate...</div>
-                  </div>
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="w-full max-w-md max-h-[90vh] overflow-y-auto" style={{ background: 'white', padding: '2rem', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)' }}>
+          <h3 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>
+            {editingCourse ? 'Edit CE Course' : 'Add CE Course'}
+          </h3>
+          
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Upload Certificate/Documentation <span className="text-xs" style={{ color: colors.textGray }}>(PDF, JPG, PNG)</span>
+              </label>
+              <div className="space-y-2">
+                <div className="relative">
+                  <input
+                    type="file"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={handleCertificateUpload}
+                    className="w-full px-3 py-2 text-sm"
+                    style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                    disabled={isParsing}
+                  />
+                  {isParsing && (
+                    <div className="absolute inset-0 flex items-center justify-center" style={{ background: 'rgba(255, 255, 255, 0.9)' }}>
+                      <div className="text-center">
+                        <Loader2 className="w-6 h-6 animate-spin mx-auto mb-2" style={{ color: colors.primaryBlue }} />
+                        <div className="text-sm" style={{ color: colors.primaryBlue }}>Scanning certificate...</div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
+                {newCourse.certificate && (
+                  <div className="flex items-center justify-between p-2" style={{ background: colors.grayLight }}>
+                    <span className="text-sm truncate" style={{ color: colors.textGray }}>
+                      <FileText className="inline w-4 h-4 mr-1" />
+                      {newCourse.certificate.name}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setNewCourse(prev => ({...prev, certificate: null}))}
+                      className="text-sm"
+                      style={{ color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer' }}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                )}
+                <p className="text-xs" style={{ color: colors.textGray }}>
+                  Upload any supporting documentation: certificates, attendance lists, teaching records, etc.
+                  {!editingCourse && ' • Images can be scanned for auto-fill.'}
+                </p>
+              </div>
             </div>
-            {newCourse.certificate && (
-              <div className="flex items-center justify-between bg-gray-50 p-2 rounded">
-                <span className="text-sm text-gray-600 truncate">
-                  <FileText className="inline w-4 h-4 mr-1" />
-                  {newCourse.certificate.name}
-                </span>
-                <button
-                  onClick={() => setNewCourse(prev => ({...prev, certificate: null}))}
-                  className="text-red-600 hover:text-red-700 text-sm"
-                >
-                  Remove
-                </button>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Course Title *
+              </label>
+              <input
+                type="text"
+                value={newCourse.title}
+                onChange={(e) => setNewCourse(prev => ({...prev, title: e.target.value}))}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Provider Name *
+              </label>
+              <input
+                type="text"
+                value={newCourse.provider}
+                onChange={(e) => setNewCourse(prev => ({...prev, provider: e.target.value}))}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Date Completed *
+              </label>
+              <input
+                type="date"
+                value={newCourse.date}
+                onChange={(e) => setNewCourse(prev => ({...prev, date: e.target.value}))}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Hours * <span className="text-xs" style={{ color: colors.textGray }}>(1 hour = 50 minutes)</span>
+              </label>
+              <input
+                type="number"
+                step="0.5"
+                min="0.5"
+                value={newCourse.hours}
+                onChange={(e) => setNewCourse(prev => ({...prev, hours: e.target.value}))}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Category *
+              </label>
+              <select
+                value={newCourse.category}
+                onChange={(e) => setNewCourse(prev => ({...prev, category: e.target.value}))}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+              >
+                <option value="general">General CE</option>
+                <option value="ethics">Ethics</option>
+                <option value="sexualHarassment">Sexual Harassment Prevention</option>
+                <option value="culturalCompetency">Cultural Competency (NEW 2025)</option>
+                <option value="implicitBias">Implicit Bias</option>
+                <option value="dementia">Alzheimer's Disease & Dementia</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Format *
+              </label>
+              <select
+                value={newCourse.format}
+                onChange={(e) => setNewCourse(prev => ({...prev, format: e.target.value}))}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+              >
+                <option value="live">Live/In-Person</option>
+                <option value="selfStudy">Self-Study/Online</option>
+                <option value="teaching">Teaching</option>
+                <option value="clinicalInstructor">Clinical Instructor</option>
+                <option value="journalClubs">Journal Club</option>
+                <option value="inservices">Departmental Inservice</option>
+                <option value="districtMeetings">IPTA District Meeting</option>
+                <option value="skillsCertification">Skills Certification (CPR, etc.)</option>
+              </select>
+            </div>
+
+            {newCourse.format === 'selfStudy' && (
+              <div>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={newCourse.hasTest}
+                    onChange={(e) => setNewCourse(prev => ({...prev, hasTest: e.target.checked}))}
+                    className="mr-2"
+                  />
+                  <span className="text-sm">Course included a test (required for self-study)</span>
+                </label>
               </div>
             )}
+
+            <div className="flex justify-end space-x-3 mt-6">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowAddCourse(false);
+                  setEditingCourse(null);
+                  setNewCourse({
+                    title: '',
+                    provider: '',
+                    date: '',
+                    hours: '',
+                    category: 'general',
+                    format: 'live',
+                    hasTest: false,
+                    certificate: null
+                  });
+                }}
+                className="px-4 py-2"
+                style={{ color: colors.textDark, background: colors.slateLight, border: 'none', cursor: 'pointer' }}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleAddCourse}
+                className="px-4 py-2"
+                style={{ background: colors.primaryBlue, color: 'white', border: 'none', cursor: 'pointer' }}
+              >
+                {editingCourse ? 'Update Course' : 'Add Course'}
+              </button>
+            </div>
           </div>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Course Title *
-          </label>
-          <input
-            type="text"
-            value={newCourse.title}
-            onChange={(e) => setNewCourse(prev => ({...prev, title: e.target.value}))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Provider Name *
-          </label>
-          <input
-            type="text"
-            value={newCourse.provider}
-            onChange={(e) => setNewCourse(prev => ({...prev, provider: e.target.value}))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Date Completed *
-          </label>
-          <input
-            type="date"
-            value={newCourse.date}
-            onChange={(e) => setNewCourse(prev => ({...prev, date: e.target.value}))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Hours * <span className="text-xs text-gray-500">(1 hour = 50 minutes)</span>
-          </label>
-          <input
-            type="number"
-            step="0.5"
-            min="0.5"
-            value={newCourse.hours}
-            onChange={(e) => setNewCourse(prev => ({...prev, hours: e.target.value}))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Category *
-          </label>
-          <select
-            value={newCourse.category}
-            onChange={(e) => setNewCourse(prev => ({...prev, category: e.target.value}))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-          >
-            <option value="general">General CE</option>
-            <option value="ethics">Ethics</option>
-            <option value="sexualHarassment">Sexual Harassment Prevention</option>
-            <option value="culturalCompetency">Cultural Competency (NEW 2025)</option>
-            <option value="implicitBias">Implicit Bias</option>
-            <option value="dementia">Alzheimer's Disease & Dementia</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Format *
-          </label>
-          <select
-            value={newCourse.format}
-            onChange={(e) => setNewCourse(prev => ({...prev, format: e.target.value}))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-          >
-            <option value="live">Live/In-Person</option>
-            <option value="selfStudy">Self-Study/Online</option>
-            <option value="teaching">Teaching</option>
-            <option value="clinicalInstructor">Clinical Instructor</option>
-            <option value="journalClubs">Journal Club</option>
-            <option value="inservices">Departmental Inservice</option>
-            <option value="districtMeetings">IPTA District Meeting</option>
-            <option value="skillsCertification">Skills Certification (CPR, etc.)</option>
-          </select>
-        </div>
-
-        {newCourse.format === 'selfStudy' && (
-          <div>
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                checked={newCourse.hasTest}
-                onChange={(e) => setNewCourse(prev => ({...prev, hasTest: e.target.checked}))}
-                className="mr-2"
-              />
-              <span className="text-sm">Course included a test (required for self-study)</span>
-            </label>
-          </div>
-        )}
-
-        <div className="flex justify-end space-x-3 mt-6">
-          <button
-            onClick={() => {
-              setShowAddCourse(false);
-              setEditingCourse(null);
-              setNewCourse({
-                title: '',
-                provider: '',
-                date: '',
-                hours: '',
-                category: 'general',
-                format: 'live',
-                hasTest: false,
-                certificate: null
-              });
-            }}
-            className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleAddCourse}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-          >
-            {editingCourse ? 'Update Course' : 'Add Course'}
-          </button>
         </div>
       </div>
     );
@@ -2169,21 +2325,23 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
   function DeleteConfirmationModal() {
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-        <div className="bg-white rounded-lg max-w-md w-full p-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Confirm Deletion</h3>
-          <p className="text-gray-600 mb-6">
+        <div className="w-full max-w-md" style={{ background: 'white', padding: '2rem', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)' }}>
+          <h3 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Confirm Deletion</h3>
+          <p className="mb-6" style={{ color: colors.textGray }}>
             Are you sure you want to delete the course "{courseToDelete.title}"? This action cannot be undone.
           </p>
           <div className="flex justify-end space-x-3">
             <button
               onClick={() => setCourseToDelete(null)}
-              className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300"
+              className="px-4 py-2"
+              style={{ color: colors.textDark, background: colors.slateLight, border: 'none', cursor: 'pointer' }}
             >
               Cancel
             </button>
             <button
               onClick={() => deleteCourse(courseToDelete.id)}
-              className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+              className="px-4 py-2"
+              style={{ background: '#dc2626', color: 'white', border: 'none', cursor: 'pointer' }}
             >
               Delete Course
             </button>
@@ -2194,7 +2352,6 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
   }
 
   function SettingsModal() {
-    // Local state for the form
     const [localUser, setLocalUser] = useState({...user});
     
     const handleSave = async () => {
@@ -2208,140 +2365,152 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
     
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-        <div className="bg-white rounded-lg max-w-md w-full">
-          <div className="p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Profile Settings</h3>
-            
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  State
-                </label>
-                <select
-                  value={localUser.state || 'IL'}
-                  onChange={(e) => setLocalUser({...localUser, state: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                >
-                  <option value="IL">Illinois</option>
-                </select>
-                <p className="text-xs text-gray-500 mt-1">
-                  Currently supporting Illinois. More states coming soon!
-                </p>
-              </div>
+        <div className="w-full max-w-md" style={{ background: 'white', padding: '2rem', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)' }}>
+          <h3 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Profile Settings</h3>
+          
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                State
+              </label>
+              <select
+                value={localUser.state || 'IL'}
+                onChange={(e) => setLocalUser({...localUser, state: e.target.value})}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+              >
+                <option value="IL">Illinois</option>
+              </select>
+              <p className="text-xs mt-1" style={{ color: colors.textGray }}>
+                Currently supporting Illinois. More states coming soon!
+              </p>
+            </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  License Type
-                </label>
-                <div className="grid grid-cols-2 gap-4">
-                  <button
-                    onClick={() => {
-                      if (localUser.licenseType !== 'PT' && courses.length > 0) {
-                        if (window.confirm('Changing license type will update all requirements. Continue?')) {
-                          setLocalUser({...localUser, licenseType: 'PT'});
-                        }
-                      } else {
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                License Type
+              </label>
+              <div className="grid grid-cols-2 gap-4">
+                <button
+                  onClick={() => {
+                    if (localUser.licenseType !== 'PT' && courses.length > 0) {
+                      if (window.confirm('Changing license type will update all requirements. Continue?')) {
                         setLocalUser({...localUser, licenseType: 'PT'});
                       }
-                    }}
-                    className={`p-3 rounded-lg border-2 ${
-                      localUser.licenseType === 'PT' 
-                        ? 'border-blue-500 bg-blue-50' 
-                        : 'border-gray-300 hover:border-gray-400'
-                    }`}
-                  >
-                    <div className="font-semibold">PT</div>
-                    <div className="text-xs text-gray-600">
-                      {localUser.state === 'IL' ? '40 hours/2 years' : 'Requirements vary'}
-                    </div>
-                  </button>
-                  <button
-                    onClick={() => {
-                      if (localUser.licenseType !== 'OT' && courses.length > 0) {
-                        if (window.confirm('Changing license type will update all requirements. Continue?')) {
-                          setLocalUser({...localUser, licenseType: 'OT'});
-                        }
-                      } else {
+                    } else {
+                      setLocalUser({...localUser, licenseType: 'PT'});
+                    }
+                  }}
+                  className="p-3"
+                  style={{
+                    border: `2px solid ${localUser.licenseType === 'PT' ? colors.primaryBlue : colors.slateLight}`,
+                    background: localUser.licenseType === 'PT' ? colors.lightBlue : 'white',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <div className="font-semibold">PT</div>
+                  <div className="text-xs" style={{ color: colors.textGray }}>
+                    {localUser.state === 'IL' ? '40 hours/2 years' : 'Requirements vary'}
+                  </div>
+                </button>
+                <button
+                  onClick={() => {
+                    if (localUser.licenseType !== 'OT' && courses.length > 0) {
+                      if (window.confirm('Changing license type will update all requirements. Continue?')) {
                         setLocalUser({...localUser, licenseType: 'OT'});
                       }
-                    }}
-                    className={`p-3 rounded-lg border-2 ${
-                      localUser.licenseType === 'OT' 
-                        ? 'border-blue-500 bg-blue-50' 
-                        : 'border-gray-300 hover:border-gray-400'
-                    }`}
-                  >
-                    <div className="font-semibold">OT</div>
-                    <div className="text-xs text-gray-600">
-                      {localUser.state === 'IL' ? '24 hours/2 years' : 'Requirements vary'}
-                    </div>
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  value={localUser.name}
-                  onChange={(e) => setLocalUser({...localUser, name: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {localUser.state} License Number
-                </label>
-                <input
-                  type="text"
-                  value={localUser.licenseNumber}
-                  onChange={(e) => setLocalUser({...localUser, licenseNumber: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Renewal Date
-                </label>
-                <input
-                  type="date"
-                  value={localUser.renewalDate}
-                  onChange={(e) => setLocalUser({...localUser, renewalDate: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                />
-              </div>
-
-              <div>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={localUser.isFirstRenewal}
-                    onChange={(e) => setLocalUser({...localUser, isFirstRenewal: e.target.checked})}
-                    className="mr-2"
-                  />
-                  <span className="text-sm">This is my first renewal (CE exempt)</span>
-                </label>
-              </div>
-
-              <div className="flex justify-end space-x-3">
-                <button
-                  onClick={() => setShowSettings(false)}
-                  className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300"
+                    } else {
+                      setLocalUser({...localUser, licenseType: 'OT'});
+                    }
+                  }}
+                  className="p-3"
+                  style={{
+                    border: `2px solid ${localUser.licenseType === 'OT' ? colors.primaryBlue : colors.slateLight}`,
+                    background: localUser.licenseType === 'OT' ? colors.lightBlue : 'white',
+                    cursor: 'pointer'
+                  }}
                 >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleSave}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                  disabled={savingData}
-                >
-                  {savingData ? 'Saving...' : 'Save Changes'}
+                  <div className="font-semibold">OT</div>
+                  <div className="text-xs" style={{ color: colors.textGray }}>
+                    {localUser.state === 'IL' ? '24 hours/2 years' : 'Requirements vary'}
+                  </div>
                 </button>
               </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Your Name
+              </label>
+              <input
+                type="text"
+                value={localUser.name}
+                onChange={(e) => setLocalUser({...localUser, name: e.target.value})}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                {localUser.state} License Number
+              </label>
+              <input
+                type="text"
+                value={localUser.licenseNumber}
+                onChange={(e) => setLocalUser({...localUser, licenseNumber: e.target.value})}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
+                Renewal Date
+              </label>
+              <input
+                type="date"
+                value={localUser.renewalDate}
+                onChange={(e) => setLocalUser({...localUser, renewalDate: e.target.value})}
+                className="w-full px-3 py-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+              />
+            </div>
+
+            <div>
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={localUser.isFirstRenewal}
+                  onChange={(e) => setLocalUser({...localUser, isFirstRenewal: e.target.checked})}
+                  className="mr-2"
+                />
+                <span className="text-sm">This is my first renewal (CE exempt)</span>
+              </label>
+            </div>
+
+            <div className="flex justify-end space-x-3">
+              <button
+                onClick={() => setShowSettings(false)}
+                className="px-4 py-2"
+                style={{ color: colors.textDark, background: colors.slateLight, border: 'none', cursor: 'pointer' }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSave}
+                className="px-4 py-2"
+                style={{ 
+                  background: savingData ? colors.slateMedium : colors.primaryBlue, 
+                  color: 'white', 
+                  border: 'none', 
+                  cursor: savingData ? 'not-allowed' : 'pointer',
+                  opacity: savingData ? 0.5 : 1
+                }}
+                disabled={savingData}
+              >
+                {savingData ? 'Saving...' : 'Save Changes'}
+              </button>
             </div>
           </div>
         </div>
