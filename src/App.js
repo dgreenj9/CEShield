@@ -178,7 +178,7 @@ function LandingPage({ onGetStarted }) {
               color: colors.textDark,
               fontWeight: 400
             }}>
-              Never Worry About License Renewal Again
+              Never Worry About License Renewal Again.
             </h1>
             <p style={{
               fontSize: '0.875rem',
