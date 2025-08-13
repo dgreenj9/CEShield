@@ -283,7 +283,8 @@ function LandingPage({ onGetStarted }) {
           {[
             { icon: '📍', title: 'State-Specific Requirements', desc: 'Automatically tracks your state\'s PT & OT requirements including all mandatory training categories. Stay compliant with changing regulations and new requirements as they emerge.', bg: colors.mutedTeal },
             { icon: '📊', title: 'Smart Category Tracking', desc: 'Monitor all CE categories with automatic limit warnings. Track self-study, teaching hours, clinical instruction, and mandatory requirements.', bg: colors.mutedPurple },
-            { icon: '🔒', title: 'Secure Document Storage', desc: 'Keep all certificates in one encrypted, HIPAA-compliant vault. Upload PDFs and images, download reports for audits anytime.', bg: colors.lightBlue }
+            { icon: '🔒', title: 'Secure Document Storage', desc: 'Keep all certificates in one encrypted, HIPAA-compliant vault. Upload PDFs and images, download reports for audits anytime.', bg: colors.lightBlue },
+            { icon: '💡', title: 'CE Recommendations', desc: 'Get personalized course recommendations based on your requirements and renewal timeline. Never miss mandatory training or approach category limits unexpectedly.', bg: colors.mutedTeal }
           ].map((feature, idx) => (
             <div key={idx} style={{
               padding: '2rem',
