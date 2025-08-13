@@ -17,69 +17,45 @@ const colors = {
   textGray: '#6b7280'
 };
 
-// CE Shield Logo Component - Updated to match landing page design
+// CE Shield Logo Component - Using the matrix design
 const CEShieldLogo = ({ showTagline = true, className = "", size = "large", centered = false }) => {
   const scales = {
-    small: { svg: "30", text: "14", tagline: "8" },
-    medium: { svg: "44", text: "20", tagline: "10" },
-    large: { svg: "54", text: "30", tagline: "10" },
-    xlarge: { svg: "48", text: "32", tagline: "9" }
+    small: { width: "120", height: "35", svgWidth: "30", textSize: "18" },
+    medium: { width: "160", height: "45", svgWidth: "44", textSize: "24" },
+    large: { width: "200", height: "55", svgWidth: "54", textSize: "30" },
+    xlarge: { width: "240", height: "65", svgWidth: "60", textSize: "36" }
   };
   
   const scale = scales[size] || scales.large;
-  
-  if (showTagline) {
-    return (
-      <div className={`${centered ? 'flex flex-col items-center' : ''} ${className}`}>
-        <div className="flex items-center gap-2 align-middle">
-          <svg 
-            width={scale.svg} 
-            height={parseInt(scale.svg) * 0.67} 
-            viewBox="0 0 60 40" 
-            xmlns="http://www.w3.org/2000/svg"
-            className="flex-shrink-0"
-          >
-            <g transform="translate(0, 4)">
-              <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
-                    fill={colors.lightBlue}/>
-              <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
-                    fill={colors.primaryBlue} opacity="0.85"/>
-              <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
-                    fill={colors.primaryPurple} opacity="0.85"/>
-            </g>
-          </svg>
-          <h1 style={{ fontSize: `${scale.text}px`, lineHeight: '1', color: colors.textDark }}>
-            <span style={{ fontWeight: 300 }}>CE</span><span style={{ fontWeight: 500 }}>Shield</span>
-          </h1>
-        </div>
-        <p className={`text-[${scale.tagline}px] tracking-[1.5px] mt-2 uppercase ${centered ? 'text-center whitespace-nowrap' : ''}`} style={{ color: colors.textGray, paddingLeft: '0' }}>
-          Track Education. Protect Your License.
-        </p>
-      </div>
-    );
-  }
+  const transform = size === 'small' ? 'translate(3, 8)' : 
+                     size === 'medium' ? 'translate(4, 10)' :
+                     size === 'xlarge' ? 'translate(5, 14)' : 'translate(5, 12)';
   
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
-      <svg 
-        width={scale.svg} 
-        height={parseInt(scale.svg) * 0.67} 
-        viewBox="0 0 60 40" 
-        xmlns="http://www.w3.org/2000/svg"
-        className="flex-shrink-0"
-      >
-        <g transform="translate(0, 3)">
-          <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
-                fill={colors.lightBlue}/>
-          <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
-                fill={colors.primaryBlue} opacity="0.85"/>
-          <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
-                fill={colors.primaryPurple} opacity="0.85"/>
+    <div className={`${centered ? 'flex flex-col items-center' : ''} ${className}`}>
+      <svg width={scale.width} height={scale.height} viewBox={`0 0 ${scale.width} ${scale.height}`} xmlns="http://www.w3.org/2000/svg">
+        <g transform={transform}>
+          <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill="#dbeafe"/>
+          <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill="#3b82f6" opacity="0.85"/>
+          <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="#8b5cf6" opacity="0.85"/>
         </g>
+        <text 
+          x={size === 'small' ? "45" : size === 'medium' ? "60" : size === 'xlarge' ? "80" : "75"} 
+          y={size === 'small' ? "22" : size === 'medium' ? "28" : size === 'xlarge' ? "40" : "35"} 
+          fontFamily="'Helvetica Neue', Arial, sans-serif" 
+          fontSize={scale.textSize} 
+          fontWeight="300" 
+          fill="#111827"
+        >
+          CE<tspan fontWeight="400">Shield</tspan>
+        </text>
       </svg>
-      <h2 style={{ fontSize: `${scale.text}px`, lineHeight: '1', color: colors.textDark }}>
-        <span style={{ fontWeight: 300 }}>CE</span><span style={{ fontWeight: 500 }}>Shield</span>
-      </h2>
+      {showTagline && (
+        <p className={`text-[9px] tracking-[1.5px] mt-2 uppercase ${centered ? 'text-center whitespace-nowrap' : ''}`} 
+           style={{ color: colors.textGray, paddingLeft: '0' }}>
+          Track Education. Protect Your License.
+        </p>
+      )}
     </div>
   );
 };
