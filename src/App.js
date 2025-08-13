@@ -507,7 +507,8 @@ function AuthForm({ onSuccess }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e?.preventDefault?.();
     if (!email || !password) return;
     
     setLoading(true);
@@ -554,99 +555,102 @@ function AuthForm({ onSuccess }) {
         </div>
 
         <div className="space-y-4">
-          <div>
-            <label className="block mb-2 text-sm font-medium" style={{ color: colors.textDark }}>
-              <Mail className="inline w-4 h-4 mr-1" />
-              Email
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 focus:outline-none focus:ring-2"
-              style={{ 
-                border: `1px solid ${colors.slateLight}`,
-                background: colors.grayLight,
-                focusRingColor: colors.primaryBlue
-              }}
-              required
-            />
-          </div>
+          <form onSubmit={handleSubmit}>
+            <div className="space-y-4">
+              <div>
+                <label className="block mb-2 text-sm font-medium" style={{ color: colors.textDark }}>
+                  <Mail className="inline w-4 h-4 mr-1" />
+                  Email
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-3 py-2 focus:outline-none focus:ring-2"
+                  style={{ 
+                    border: `1px solid ${colors.slateLight}`,
+                    background: colors.grayLight,
+                    focusRingColor: colors.primaryBlue
+                  }}
+                  required
+                />
+              </div>
 
-          <div>
-            <label className="block mb-2 text-sm font-medium" style={{ color: colors.textDark }}>
-              <Lock className="inline w-4 h-4 mr-1" />
-              Password
-            </label>
-            <div className="relative">
-              <input
-                type={showPassword ? 'text' : 'password'}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-3 py-2 pr-10 focus:outline-none focus:ring-2"
-                style={{ 
-                  border: `1px solid ${colors.slateLight}`,
-                  background: colors.grayLight,
-                  focusRingColor: colors.primaryBlue
-                }}
-                required
-                minLength={6}
-              />
+              <div>
+                <label className="block mb-2 text-sm font-medium" style={{ color: colors.textDark }}>
+                  <Lock className="inline w-4 h-4 mr-1" />
+                  Password
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full px-3 py-2 pr-10 focus:outline-none focus:ring-2"
+                    style={{ 
+                      border: `1px solid ${colors.slateLight}`,
+                      background: colors.grayLight,
+                      focusRingColor: colors.primaryBlue
+                    }}
+                    required
+                    minLength={6}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-2 top-2.5"
+                    style={{ color: colors.textGray }}
+                  >
+                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  </button>
+                </div>
+              </div>
+
+              {error && (
+                <div style={{ 
+                  background: '#fef2f2',
+                  border: '1px solid #fecaca',
+                  color: '#dc2626',
+                  padding: '0.75rem',
+                  fontSize: '0.875rem'
+                }}>
+                  {error}
+                </div>
+              )}
+
               <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-2 top-2.5"
-                style={{ color: colors.textGray }}
+                type="submit"
+                disabled={loading || !email || !password}
+                className="w-full py-2 px-4 flex items-center justify-center transition-all"
+                style={{
+                  background: loading || !email || !password ? colors.slateMedium : colors.primaryBlue,
+                  color: 'white',
+                  border: 'none',
+                  fontWeight: 500,
+                  cursor: loading || !email || !password ? 'not-allowed' : 'pointer',
+                  opacity: loading || !email || !password ? 0.5 : 1
+                }}
+                onMouseEnter={(e) => {
+                  if (!loading && email && password) {
+                    e.target.style.background = '#2563eb';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!loading && email && password) {
+                    e.target.style.background = colors.primaryBlue;
+                  }
+                }}
               >
-                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                {loading ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : (
+                  <>
+                    {isSignUp ? 'Create Account' : 'Sign In'}
+                  </>
+                )}
               </button>
             </div>
-          </div>
-
-          {error && (
-            <div style={{ 
-              background: '#fef2f2',
-              border: '1px solid #fecaca',
-              color: '#dc2626',
-              padding: '0.75rem',
-              fontSize: '0.875rem'
-            }}>
-              {error}
-            </div>
-          )}
-
-          <button
-            type="button"
-            onClick={handleSubmit}
-            disabled={loading || !email || !password}
-            className="w-full py-2 px-4 flex items-center justify-center transition-all"
-            style={{
-              background: loading || !email || !password ? colors.slateMedium : colors.primaryBlue,
-              color: 'white',
-              border: 'none',
-              fontWeight: 500,
-              cursor: loading || !email || !password ? 'not-allowed' : 'pointer',
-              opacity: loading || !email || !password ? 0.5 : 1
-            }}
-            onMouseEnter={(e) => {
-              if (!loading && email && password) {
-                e.target.style.background = '#2563eb';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!loading && email && password) {
-                e.target.style.background = colors.primaryBlue;
-              }
-            }}
-          >
-            {loading ? (
-              <Loader2 className="w-5 h-5 animate-spin" />
-            ) : (
-              <>
-                {isSignUp ? 'Create Account' : 'Sign In'}
-              </>
-            )}
-          </button>
+          </form>
         </div>
 
         <div className="mt-6 text-center">
@@ -2096,7 +2100,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
                             className="p-1"
                             style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer' }}
                             title="Edit Course"
-                          >
+                            >
                             <Pencil className="w-4 h-4" />
                           </button>
                           <button
