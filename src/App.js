@@ -4,7 +4,7 @@ import { supabase } from './supabaseClient';
 
 // Color palette from landing page
 const colors = {
-  primaryBlue: '#60a5fa',  // Sky blue, cohesive with the light blue palette
+  primaryBlue: '#7dd3fc',  // Lighter sky blue, cohesive with the light blue palette
   primaryPurple: '#8b5cf6',
   lightBlue: '#e0f2fe',    // Light blue background
   mutedPurple: '#e9d5ff',
@@ -281,7 +281,7 @@ function LandingPage({ onGetStarted }) {
           gap: '2rem'
         }}>
           {[
-            { icon: '📍', title: 'State-Specific Requirements', desc: 'Automatically tracks Illinois PT & OT requirements including mandatory ethics, sexual harassment prevention, and the new 2025 cultural competency training.', bg: colors.mutedTeal },
+            { icon: '📍', title: 'State-Specific Requirements', desc: 'Automatically tracks your state\'s PT & OT requirements including all mandatory training categories. Stay compliant with changing regulations and new requirements as they emerge.', bg: colors.mutedTeal },
             { icon: '📊', title: 'Smart Category Tracking', desc: 'Monitor all CE categories with automatic limit warnings. Track self-study, teaching hours, clinical instruction, and mandatory requirements.', bg: colors.mutedPurple },
             { icon: '🔒', title: 'Secure Document Storage', desc: 'Keep all certificates in one encrypted, HIPAA-compliant vault. Upload PDFs and images, download reports for audits anytime.', bg: colors.lightBlue }
           ].map((feature, idx) => (
