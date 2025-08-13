@@ -4,9 +4,9 @@ import { supabase } from './supabaseClient';
 
 // Color palette from landing page
 const colors = {
-  primaryBlue: '#06b6d4',
+  primaryBlue: '#0891b2',  // More professional muted teal-blue
   primaryPurple: '#8b5cf6',
-  lightBlue: '#dbeafe',
+  lightBlue: '#e0f2fe',    // Slightly more muted light blue
   mutedPurple: '#e9d5ff',
   mutedTeal: '#cffafe',
   slateDark: '#1e293b',
@@ -363,7 +363,25 @@ function LandingPage({ onGetStarted }) {
       {/* Footer */}
       <footer style={{ background: colors.slateDark, color: 'white', padding: '3rem 2rem 2rem', textAlign: 'center' }}>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '2rem' }}>
-          <CEShieldLogo showTagline={false} size="medium" />
+          <svg 
+            width="44" 
+            height="29" 
+            viewBox="0 0 60 40" 
+            xmlns="http://www.w3.org/2000/svg"
+            className="flex-shrink-0"
+          >
+            <g transform="translate(0, 3)">
+              <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
+                    fill={colors.lightBlue}/>
+              <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
+                    fill={colors.primaryBlue} opacity="0.85"/>
+              <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
+                    fill={colors.primaryPurple} opacity="0.85"/>
+            </g>
+          </svg>
+          <h2 style={{ fontSize: '20px', lineHeight: '20px', color: 'white', marginLeft: '8px' }}>
+            <span className="font-light">CE</span><span className="font-normal">Shield</span>
+          </h2>
         </div>
         <div style={{ paddingTop: '2rem', borderTop: '1px solid rgba(255, 255, 255, 0.1)', color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.875rem' }}>
           <p>© 2025 CE Shield. All rights reserved.</p>
