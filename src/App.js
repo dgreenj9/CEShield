@@ -22,7 +22,7 @@ const CEShieldLogo = ({ showTagline = true, className = "", size = "large", cent
   const scales = {
     small: { svg: "30", text: "14", tagline: "8" },
     medium: { svg: "44", text: "20", tagline: "10" },
-    large: { svg: "54", text: "30", tagline: "12" }
+    large: { svg: "54", text: "30", tagline: "10" }
   };
   
   const scale = scales[size] || scales.large;
