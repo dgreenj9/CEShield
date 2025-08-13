@@ -1837,7 +1837,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
 
   // Main dashboard with updated design
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%)' }}>
+    <div className="min-h-screen" style={{ background: colors.grayLight }}>
       <div className="max-w-7xl mx-auto p-4">
         {/* Header with updated design */}
         <div className="mb-6" style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
