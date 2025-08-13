@@ -4,9 +4,9 @@ import { supabase } from './supabaseClient';
 
 // Color palette from landing page
 const colors = {
-  primaryBlue: '#0891b2',  // More professional muted teal-blue
+  primaryBlue: '#60a5fa',  // Sky blue, cohesive with the light blue palette
   primaryPurple: '#8b5cf6',
-  lightBlue: '#e0f2fe',    // Slightly more muted light blue
+  lightBlue: '#e0f2fe',    // Light blue background
   mutedPurple: '#e9d5ff',
   mutedTeal: '#cffafe',
   slateDark: '#1e293b',
@@ -30,7 +30,7 @@ const CEShieldLogo = ({ showTagline = true, className = "", size = "large" }) =>
   if (showTagline) {
     return (
       <div className={className}>
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center gap-2">
           <svg 
             width={scale.svg} 
             height={parseInt(scale.svg) * 0.67} 
@@ -51,7 +51,7 @@ const CEShieldLogo = ({ showTagline = true, className = "", size = "large" }) =>
             <span className="font-light">CE</span><span className="font-normal">Shield</span>
           </h1>
         </div>
-        <p className={`text-[${scale.tagline}px] tracking-[1.5px] text-center mt-3 uppercase`} style={{ color: colors.textGray }}>
+        <p className={`text-[${scale.tagline}px] tracking-[1.5px] mt-2 uppercase`} style={{ color: colors.textGray, paddingLeft: '0' }}>
           Track Education. Protect Your License.
         </p>
       </div>
@@ -283,8 +283,7 @@ function LandingPage({ onGetStarted }) {
           {[
             { icon: '📍', title: 'State-Specific Requirements', desc: 'Automatically tracks Illinois PT & OT requirements including mandatory ethics, sexual harassment prevention, and the new 2025 cultural competency training.', bg: colors.mutedTeal },
             { icon: '📊', title: 'Smart Category Tracking', desc: 'Monitor all CE categories with automatic limit warnings. Track self-study, teaching hours, clinical instruction, and mandatory requirements.', bg: colors.mutedPurple },
-            { icon: '🔒', title: 'Secure Document Storage', desc: 'Keep all certificates in one encrypted, HIPAA-compliant vault. Upload PDFs and images, download reports for audits anytime.', bg: colors.lightBlue },
-            { icon: '📅', title: 'Renewal Date Tracking', desc: 'Visual countdown to your renewal date with progress tracking. Get intelligent reminders about approaching deadlines.', bg: colors.mutedTeal }
+            { icon: '🔒', title: 'Secure Document Storage', desc: 'Keep all certificates in one encrypted, HIPAA-compliant vault. Upload PDFs and images, download reports for audits anytime.', bg: colors.lightBlue }
           ].map((feature, idx) => (
             <div key={idx} style={{
               padding: '2rem',
@@ -1816,10 +1815,10 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
       <div className="max-w-7xl mx-auto p-4">
         {/* Header with updated design */}
         <div className="mb-6" style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
-          <div className="flex justify-between items-center">
-            <div>
+          <div className="flex justify-between items-start">
+            <div style={{ textAlign: 'left' }}>
               <CEShieldLogo showTagline={true} size="medium" />
-              <p className="mt-2" style={{ color: colors.textGray }}>
+              <p className="mt-2 text-xs" style={{ color: colors.textGray, fontSize: '0.75rem' }}>
                 {user.name} • {user.state} {user.licenseType} License #{user.licenseNumber}
               </p>
             </div>
