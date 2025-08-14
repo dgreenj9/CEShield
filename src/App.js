@@ -17,45 +17,69 @@ const colors = {
   textGray: '#6b7280'
 };
 
-// CE Shield Logo Component - Using the matrix design
+// CE Shield Logo Component - Updated to match landing page design
 const CEShieldLogo = ({ showTagline = true, className = "", size = "large", centered = false }) => {
   const scales = {
-    small: { width: "120", height: "35", svgWidth: "30", textSize: "18" },
-    medium: { width: "160", height: "45", svgWidth: "44", textSize: "24" },
-    large: { width: "200", height: "55", svgWidth: "54", textSize: "30" },
-    xlarge: { width: "240", height: "65", svgWidth: "60", textSize: "36" }
+    small: { svg: "30", text: "14", tagline: "8" },
+    medium: { svg: "44", text: "20", tagline: "10" },
+    large: { svg: "54", text: "30", tagline: "10" },
+    xlarge: { svg: "48", text: "32", tagline: "9" }
   };
   
   const scale = scales[size] || scales.large;
-  const transform = size === 'small' ? 'translate(3, 8)' : 
-                     size === 'medium' ? 'translate(4, 10)' :
-                     size === 'xlarge' ? 'translate(5, 14)' : 'translate(5, 12)';
   
-  return (
-    <div className={`${centered ? 'flex flex-col items-center' : ''} ${className}`}>
-      <svg width={scale.width} height={scale.height} viewBox={`0 0 ${scale.width} ${scale.height}`} xmlns="http://www.w3.org/2000/svg">
-        <g transform={transform}>
-          <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill="#dbeafe"/>
-          <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill="#3b82f6" opacity="0.85"/>
-          <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="#8b5cf6" opacity="0.85"/>
-        </g>
-        <text 
-          x={size === 'small' ? "45" : size === 'medium' ? "60" : size === 'xlarge' ? "80" : "75"} 
-          y={size === 'small' ? "22" : size === 'medium' ? "28" : size === 'xlarge' ? "40" : "35"} 
-          fontFamily="'Helvetica Neue', Arial, sans-serif" 
-          fontSize={scale.textSize} 
-          fontWeight="300" 
-          fill="#111827"
-        >
-          CE<tspan fontWeight="400">Shield</tspan>
-        </text>
-      </svg>
-      {showTagline && (
-        <p className={`text-[9px] tracking-[1.5px] mt-2 uppercase ${centered ? 'text-center whitespace-nowrap' : ''}`} 
-           style={{ color: colors.textGray, paddingLeft: '0' }}>
+  if (showTagline) {
+    return (
+      <div className={`${centered ? 'flex flex-col items-center' : ''} ${className}`}>
+        <div className="flex items-center gap-2 align-middle">
+          <svg 
+            width={scale.svg} 
+            height={parseInt(scale.svg) * 0.67} 
+            viewBox="0 0 60 40" 
+            xmlns="http://www.w3.org/2000/svg"
+            className="flex-shrink-0"
+          >
+            <g transform="translate(0, 4)">
+              <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
+                    fill={colors.lightBlue}/>
+              <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
+                    fill={colors.primaryBlue} opacity="0.85"/>
+              <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
+                    fill={colors.primaryPurple} opacity="0.85"/>
+            </g>
+          </svg>
+          <h1 style={{ fontSize: `${scale.text}px`, lineHeight: '1', color: colors.textDark }}>
+            <span style={{ fontWeight: 300 }}>CE</span><span style={{ fontWeight: 500 }}>Shield</span>
+          </h1>
+        </div>
+        <p className={`text-[${scale.tagline}px] tracking-[1.5px] mt-2 uppercase ${centered ? 'text-center whitespace-nowrap' : ''}`} style={{ color: colors.textGray, paddingLeft: '0' }}>
           Track Education. Protect Your License.
         </p>
-      )}
+      </div>
+    );
+  }
+  
+  return (
+    <div className={`flex items-center gap-2 ${className}`}>
+      <svg 
+        width={scale.svg} 
+        height={parseInt(scale.svg) * 0.67} 
+        viewBox="0 0 60 40" 
+        xmlns="http://www.w3.org/2000/svg"
+        className="flex-shrink-0"
+      >
+        <g transform="translate(0, 3)">
+          <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" 
+                fill={colors.lightBlue}/>
+          <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" 
+                fill={colors.primaryBlue} opacity="0.85"/>
+          <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" 
+                fill={colors.primaryPurple} opacity="0.85"/>
+        </g>
+      </svg>
+      <h2 style={{ fontSize: `${scale.text}px`, lineHeight: '1', color: colors.textDark }}>
+        <span style={{ fontWeight: 300 }}>CE</span><span style={{ fontWeight: 500 }}>Shield</span>
+      </h2>
     </div>
   );
 };
@@ -1962,8 +1986,8 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
           </div>
         </div>
 
-        {/* Add Course and Matrix Buttons */}
-        <div className="mb-6 flex gap-4">
+        {/* Add Course Button */}
+        <div className="mb-6">
           <button
             onClick={() => setShowAddCourse(true)}
             className="px-4 py-2 flex items-center transition-all"
@@ -1983,26 +2007,6 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
           >
             <Plus className="w-5 h-5 mr-2" />
             Add CE Course
-          </button>
-          
-          <button
-            onClick={() => setShowMatrix(true)}
-            className="px-4 py-2 flex items-center transition-all"
-            style={{
-              background: colors.primaryPurple,
-              color: 'white',
-              border: 'none',
-              fontWeight: 500,
-              cursor: 'pointer'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.background = '#7c3aed';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.background = colors.primaryPurple;
-            }}
-          >
-            📊 Evidence-Based Certifications Matrix
           </button>
         </div>
 
@@ -2132,10 +2136,6 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
         
         {showSettings && (
           <SettingsModal />
-        )}
-        
-        {showMatrix && (
-          <EvidenceMatrixModal />
         )}
       </div>
     </div>
@@ -2535,205 +2535,6 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
               >
                 {savingData ? 'Saving...' : 'Save Changes'}
               </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  function EvidenceMatrixModal() {
-    const [typeFilter, setTypeFilter] = useState('');
-    const [disciplineFilter, setDisciplineFilter] = useState('');
-    const [searchFilter, setSearchFilter] = useState('');
-    
-    const getScoreClass = (score) => {
-      if (score >= 90) return { background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)', color: 'white' };
-      if (score >= 70) return { background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)', color: 'white' };
-      if (score >= 50) return { background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)', color: 'white' };
-      if (score >= 30) return { background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)', color: 'white' };
-      return { background: 'linear-gradient(135deg, #94a3b8 0%, #64748b 100%)', color: 'white' };
-    };
-    
-    const getTypeStyle = (type) => {
-      const styles = {
-        'Certification': { background: colors.lightBlue, color: colors.primaryBlue },
-        'Program': { background: colors.mutedTeal, color: '#0891b2' },
-        'Technology': { background: colors.mutedPurple, color: colors.primaryPurple }
-      };
-      return styles[type] || styles.Certification;
-    };
-    
-    const filteredData = matrixData.filter(item => {
-      const matchesType = !typeFilter || item.type === typeFilter;
-      const matchesDiscipline = !disciplineFilter || item.discipline.includes(disciplineFilter);
-      const matchesSearch = !searchFilter || 
-        item.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
-        item.evidence.toLowerCase().includes(searchFilter.toLowerCase());
-      return matchesType && matchesDiscipline && matchesSearch;
-    });
-    
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 z-50" style={{ overflowY: 'auto' }}>
-        <div className="min-h-screen py-8 px-4">
-          <div className="max-w-7xl mx-auto" style={{ background: 'white', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)' }}>
-            {/* Header */}
-            <div style={{ background: 'linear-gradient(180deg, #f9fafb 0%, white 100%)', padding: '2rem', borderBottom: `1px solid ${colors.slateLight}` }}>
-              <div className="flex justify-between items-start mb-4">
-                <h2 className="text-2xl font-light" style={{ color: colors.textDark }}>
-                  Evidence-Based Rehabilitation Certifications Matrix
-                </h2>
-                <button
-                  onClick={() => setShowMatrix(false)}
-                  className="p-2"
-                  style={{ background: colors.slateLight, color: colors.textDark, border: 'none', cursor: 'pointer' }}
-                >
-                  ✕
-                </button>
-              </div>
-              <p style={{ color: colors.textGray, marginBottom: '1.5rem' }}>
-                Comprehensive Ranking of Top Certifications by Clinical Utility
-              </p>
-              
-              {/* Legend */}
-              <div className="flex gap-4 flex-wrap">
-                <div className="flex items-center gap-2">
-                  <div style={{ width: '12px', height: '12px', background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)' }}></div>
-                  <span style={{ fontSize: '0.875rem', color: colors.textGray }}>Elite (90+)</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div style={{ width: '12px', height: '12px', background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)' }}></div>
-                  <span style={{ fontSize: '0.875rem', color: colors.textGray }}>High (70-89)</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div style={{ width: '12px', height: '12px', background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)' }}></div>
-                  <span style={{ fontSize: '0.875rem', color: colors.textGray }}>Moderate (50-69)</span>
-                </div>
-              </div>
-            </div>
-            
-            {/* Filters */}
-            <div style={{ background: colors.grayLight, padding: '1.5rem', borderBottom: `1px solid ${colors.slateLight}` }}>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <label style={{ fontSize: '0.75rem', color: colors.textGray, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '1px' }}>
-                    Filter by Type
-                  </label>
-                  <select
-                    value={typeFilter}
-                    onChange={(e) => setTypeFilter(e.target.value)}
-                    className="w-full mt-1 px-3 py-2"
-                    style={{ border: `1px solid ${colors.slateLight}`, background: 'white' }}
-                  >
-                    <option value="">All Types</option>
-                    <option value="Certification">Certification</option>
-                    <option value="Program">Program</option>
-                    <option value="Technology">Technology</option>
-                  </select>
-                </div>
-                
-                <div>
-                  <label style={{ fontSize: '0.75rem', color: colors.textGray, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '1px' }}>
-                    Filter by Discipline
-                  </label>
-                  <select
-                    value={disciplineFilter}
-                    onChange={(e) => setDisciplineFilter(e.target.value)}
-                    className="w-full mt-1 px-3 py-2"
-                    style={{ border: `1px solid ${colors.slateLight}`, background: 'white' }}
-                  >
-                    <option value="">All Disciplines</option>
-                    <option value="PT">Physical Therapy</option>
-                    <option value="OT">Occupational Therapy</option>
-                    <option value="SLP">Speech Therapy</option>
-                    <option value="All">Multidisciplinary</option>
-                  </select>
-                </div>
-                
-                <div>
-                  <label style={{ fontSize: '0.75rem', color: colors.textGray, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '1px' }}>
-                    Search
-                  </label>
-                  <input
-                    type="text"
-                    value={searchFilter}
-                    onChange={(e) => setSearchFilter(e.target.value)}
-                    placeholder="Search certifications..."
-                    className="w-full mt-1 px-3 py-2"
-                    style={{ border: `1px solid ${colors.slateLight}`, background: 'white' }}
-                  />
-                </div>
-              </div>
-            </div>
-            
-            {/* Table */}
-            <div style={{ padding: '2rem', maxHeight: '60vh', overflowY: 'auto' }}>
-              <table className="w-full">
-                <thead>
-                  <tr style={{ borderBottom: `2px solid ${colors.slateLight}` }}>
-                    <th className="text-left py-3 px-2" style={{ color: colors.textGray, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Rank</th>
-                    <th className="text-left py-3 px-2" style={{ color: colors.textGray, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Certification</th>
-                    <th className="text-left py-3 px-2" style={{ color: colors.textGray, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Type</th>
-                    <th className="text-center py-3 px-2" style={{ color: colors.textGray, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Discipline</th>
-                    <th className="text-center py-3 px-2" style={{ color: colors.textGray, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Score</th>
-                    <th className="text-left py-3 px-2" style={{ color: colors.textGray, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Key Evidence</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredData.map((item, idx) => (
-                    <tr key={idx} style={{ borderBottom: `1px solid ${colors.slateLight}` }}>
-                      <td className="py-3 px-2 text-center font-semibold" style={{ color: colors.slateMedium }}>{item.rank}</td>
-                      <td className="py-3 px-2 font-medium" style={{ color: colors.textDark }}>{item.name}</td>
-                      <td className="py-3 px-2">
-                        <span className="px-2 py-1 text-xs font-medium uppercase" style={{ ...getTypeStyle(item.type), letterSpacing: '0.5px' }}>
-                          {item.type}
-                        </span>
-                      </td>
-                      <td className="py-3 px-2 text-center" style={{ color: colors.textGray }}>{item.discipline}</td>
-                      <td className="py-3 px-2 text-center">
-                        <span className="px-3 py-1 font-semibold" style={getScoreClass(item.score)}>
-                          {item.score}
-                        </span>
-                      </td>
-                      <td className="py-3 px-2 text-sm" style={{ color: colors.textGray }}>{item.evidence}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              
-              {filteredData.length === 0 && (
-                <div className="text-center py-8" style={{ color: colors.textGray }}>
-                  No certifications match your search criteria
-                </div>
-              )}
-            </div>
-            
-            {/* Stats */}
-            <div style={{ background: colors.grayLight, padding: '2rem', borderTop: `1px solid ${colors.slateLight}` }}>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="text-center">
-                  <div className="text-2xl font-light" style={{ color: colors.primaryBlue }}>{filteredData.length}</div>
-                  <div className="text-xs uppercase" style={{ color: colors.textGray, letterSpacing: '0.5px' }}>Total Shown</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-light" style={{ color: colors.primaryBlue }}>
-                    {filteredData.filter(item => item.score >= 90).length}
-                  </div>
-                  <div className="text-xs uppercase" style={{ color: colors.textGray, letterSpacing: '0.5px' }}>Elite Tier</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-light" style={{ color: colors.primaryBlue }}>
-                    {filteredData.filter(item => item.score >= 70).length}
-                  </div>
-                  <div className="text-xs uppercase" style={{ color: colors.textGray, letterSpacing: '0.5px' }}>Evidence-Based</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-light" style={{ color: colors.primaryBlue }}>
-                    {user.licenseType}
-                  </div>
-                  <div className="text-xs uppercase" style={{ color: colors.textGray, letterSpacing: '0.5px' }}>Your License</div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
