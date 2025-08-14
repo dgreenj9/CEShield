@@ -610,13 +610,16 @@ const AuthForm = ({ onSuccess }) => {
               <Mail className="inline w-4 h-4 mr-1" />
               Email
             </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              style={inputStyle}
-              required
-            />
+            <div className="relative">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-3 py-2 pr-10 focus:outline-none focus:ring-2"
+                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                required
+              />
+            </div>
           </div>
 
           <div>
