@@ -2820,7 +2820,7 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
       </div>
     );
   }
-
+  
   function MethodologyModal({ onClose }) {
     return (
       <div className="fixed inset-0 bg-black bg-opacity-75 z-[60] overflow-y-auto">
