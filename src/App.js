@@ -1,4 +1,43 @@
-import React, { useState, useEffect } from 'react';
+}
+
+  function MethodologyModal({ onClose }) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-75 z-[60] overflow-y-auto">
+        <div className="min-h-screen py-8 px-4">
+          <div className="max-w-4xl mx-auto" style={{ background: 'white', padding: '3rem', position: 'relative' }}>
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 p-2"
+              style={{ background: colors.slateLight, color: colors.textDark }}
+            >
+              ✕
+            </button>
+            
+            <h2 className="text-2xl font-light mb-6" style={{ color: colors.textDark }}>
+              Clinical Utility Scoring Methodology
+            </h2>
+            
+            {/* Core Philosophy */}
+            <div style={{ background: colors.grayLight, padding: '1.5rem', marginBottom: '2rem', borderLeft: `3px solid ${colors.primaryBlue}` }}>
+              <h3 className="font-semibold mb-3" style={{ color: colors.textDark }}>Core Philosophy</h3>
+              <p style={{ color: colors.textGray, lineHeight: 1.7, marginBottom: '1rem' }}>
+                This evidence-based framework evaluates rehabilitation certifications, programs, skills, and technologies based on their <strong>demonstrable impact on patient outcomes</strong> rather than professional prestige or theoretical knowledge. The scoring system prioritizes real-world clinical utility—the practical value an intervention brings to improving patient quality of life, functional independence, and measurable health outcomes.
+              </p>
+              <p style={{ color: colors.textGray, lineHeight: 1.7 }}>
+                Unlike traditional certification rankings that emphasize hours of training or exam difficulty, this methodology asks a fundamental question: <em>"Does evidence show that patients treated by certified practitioners or with this intervention achieve better outcomes than those receiving standard care?"</em>
+              </p>
+            </div>
+
+            {/* Five Scoring Domains */}
+            <h3 className="font-semibold mb-4" style={{ color: colors.textDark }}>Five Evidence-Based Scoring Domains</h3>
+            
+            {/* Domain 1 */}
+            <div style={{ background: 'white', padding: '1.5rem', border: `1px solid ${colors.slateLight}`, borderLeft: `3px solid #22c55e`, marginBottom: '1rem' }}>
+              <h4 style={{ color: '#16a34a', fontWeight: 500, marginBottom: '0.75rem' }}>
+                1. Clinical Outcome Improvements (40% weight)
+              </h4>
+              <p style={{ color: colors.textGray, marginBottom: '0.75rem' }}>
+                The mostimport React, { useState, useEffect } from 'react';
 import { AlertCircle, CheckCircle, Clock, FileText, Plus, Trash2, Download, Info, Loader2, Settings, Pencil, LogOut, User, Lock, Mail, Eye, EyeOff, Shield, ChevronDown } from 'lucide-react';
 import { supabase } from './supabaseClient';
 
@@ -17,32 +56,29 @@ const colors = {
   textGray: '#6b7280'
 };
 
-// CE Shield Logo Component - Using the matrix design
+// CE Shield Logo Component - Using the matrix design with proper spacing
 const CEShieldLogo = ({ showTagline = true, className = "", size = "large", centered = false }) => {
   const scales = {
-    small: { width: "120", height: "35", svgWidth: "30", textSize: "18" },
-    medium: { width: "160", height: "45", svgWidth: "44", textSize: "24" },
-    large: { width: "200", height: "55", svgWidth: "54", textSize: "30" },
-    xlarge: { width: "240", height: "65", svgWidth: "60", textSize: "36" }
+    small: { width: "150", height: "35", textX: "70", textY: "22", textSize: "18" },
+    medium: { width: "180", height: "45", textX: "75", textY: "28", textSize: "24" },
+    large: { width: "220", height: "55", textX: "85", textY: "35", textSize: "30" },
+    xlarge: { width: "260", height: "65", textX: "95", textY: "40", textSize: "36" }
   };
   
   const scale = scales[size] || scales.large;
-  const transform = size === 'small' ? 'translate(3, 8)' : 
-                     size === 'medium' ? 'translate(4, 10)' :
-                     size === 'xlarge' ? 'translate(5, 14)' : 'translate(5, 12)';
   
   return (
     <div className={`${centered ? 'flex flex-col items-center' : ''} ${className}`}>
       <svg width={scale.width} height={scale.height} viewBox={`0 0 ${scale.width} ${scale.height}`} xmlns="http://www.w3.org/2000/svg">
-        <g transform={transform}>
+        <g transform={`translate(10, ${size === 'small' ? '8' : size === 'medium' ? '10' : size === 'xlarge' ? '14' : '12'})`}>
           <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill="#dbeafe"/>
           <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill="#3b82f6" opacity="0.85"/>
           <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="#8b5cf6" opacity="0.85"/>
         </g>
         <text 
-          x={size === 'small' ? "45" : size === 'medium' ? "60" : size === 'xlarge' ? "80" : "75"} 
-          y={size === 'small' ? "22" : size === 'medium' ? "28" : size === 'xlarge' ? "40" : "35"} 
-          fontFamily="'Helvetica Neue', Arial, sans-serif" 
+          x={scale.textX} 
+          y={scale.textY} 
+          fontFamily="'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" 
           fontSize={scale.textSize} 
           fontWeight="300" 
           fill="#111827"
@@ -1962,8 +1998,8 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
           </div>
         </div>
 
-        {/* Add Course Button */}
-        <div className="mb-6">
+        {/* Add Course and Matrix Buttons */}
+        <div className="mb-6 flex flex-wrap gap-4">
           <button
             onClick={() => setShowAddCourse(true)}
             className="px-4 py-2 flex items-center transition-all"
@@ -1972,17 +2008,43 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
               color: 'white',
               border: 'none',
               fontWeight: 500,
-              cursor: 'pointer'
+              cursor: 'pointer',
+              borderRadius: '4px'
             }}
             onMouseEnter={(e) => {
               e.target.style.background = '#2563eb';
+              e.target.style.transform = 'translateY(-1px)';
             }}
             onMouseLeave={(e) => {
               e.target.style.background = colors.primaryBlue;
+              e.target.style.transform = 'translateY(0)';
             }}
           >
             <Plus className="w-5 h-5 mr-2" />
             Add CE Course
+          </button>
+          
+          <button
+            onClick={() => setShowMatrix(true)}
+            className="px-4 py-2 flex items-center transition-all"
+            style={{
+              background: colors.primaryPurple,
+              color: 'white',
+              border: 'none',
+              fontWeight: 500,
+              cursor: 'pointer',
+              borderRadius: '4px'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = '#7c3aed';
+              e.target.style.transform = 'translateY(-1px)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = colors.primaryPurple;
+              e.target.style.transform = 'translateY(0)';
+            }}
+          >
+            📊 Evidence-Based Certifications Matrix
           </button>
         </div>
 
@@ -2112,6 +2174,10 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
         
         {showSettings && (
           <SettingsModal />
+        )}
+        
+        {showMatrix && (
+          <EvidenceMatrixModal />
         )}
       </div>
     </div>
@@ -2511,6 +2577,410 @@ function CETrackerDashboard({ user: authUser, onSignOut }) {
               >
                 {savingData ? 'Saving...' : 'Save Changes'}
               </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function EvidenceMatrixModal() {
+    const [typeFilter, setTypeFilter] = useState('');
+    const [disciplineFilter, setDisciplineFilter] = useState('');
+    const [searchFilter, setSearchFilter] = useState('');
+    const [showMethodology, setShowMethodology] = useState(false);
+    
+    const getScoreClass = (score) => {
+      if (score >= 90) return { background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)', color: 'white' };
+      if (score >= 70) return { background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)', color: 'white' };
+      if (score >= 50) return { background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)', color: 'white' };
+      if (score >= 30) return { background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)', color: 'white' };
+      return { background: 'linear-gradient(135deg, #94a3b8 0%, #64748b 100%)', color: 'white' };
+    };
+    
+    const getTypeStyle = (type) => {
+      const styles = {
+        'Certification': { background: colors.lightBlue, color: colors.primaryBlue },
+        'Program': { background: colors.mutedTeal, color: '#0891b2' },
+        'Technology': { background: colors.mutedPurple, color: colors.primaryPurple },
+        'Board Cert': { background: '#fee2e2', color: '#dc2626' },
+        'Fellowship': { background: '#fef3c7', color: '#d97706' },
+        'Training': { background: '#fce7f3', color: '#be185d' },
+        'Degree': { background: '#f3e8ff', color: '#7c3aed' },
+        'Protocol': { background: colors.mutedTeal, color: '#0891b2' },
+        'Specialty': { background: colors.lightBlue, color: colors.primaryBlue },
+        'Equipment': { background: colors.mutedPurple, color: colors.primaryPurple }
+      };
+      return styles[type] || styles.Certification;
+    };
+    
+    const filteredData = matrixData.filter(item => {
+      const matchesType = !typeFilter || item.type === typeFilter;
+      const matchesDiscipline = !disciplineFilter || item.discipline.includes(disciplineFilter);
+      const matchesSearch = !searchFilter || 
+        item.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        item.evidence.toLowerCase().includes(searchFilter.toLowerCase());
+      return matchesType && matchesDiscipline && matchesSearch;
+    });
+    
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 z-50" style={{ overflowY: 'auto' }}>
+        <div className="min-h-screen py-8 px-4">
+          <div className="max-w-7xl mx-auto" style={{ background: 'white', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)' }}>
+            {/* Header */}
+            <div style={{ background: 'linear-gradient(180deg, #f9fafb 0%, white 100%)', padding: '2rem', borderBottom: `1px solid ${colors.slateLight}` }}>
+              <div className="flex justify-between items-start mb-4">
+                <h2 className="text-2xl font-light" style={{ color: colors.textDark }}>
+                  Evidence-Based Rehabilitation Certifications Matrix
+                </h2>
+                <button
+                  onClick={() => setShowMatrix(false)}
+                  className="p-2"
+                  style={{ background: colors.slateLight, color: colors.textDark, border: 'none', cursor: 'pointer' }}
+                >
+                  ✕
+                </button>
+              </div>
+              <p style={{ color: colors.textGray, marginBottom: '1.5rem' }}>
+                Comprehensive Ranking of 110 Certifications & Interventions by Clinical Utility
+              </p>
+              
+              {/* Methodology Button */}
+              <button
+                onClick={() => setShowMethodology(true)}
+                className="mb-4 px-4 py-2"
+                style={{
+                  background: colors.primaryBlue,
+                  color: 'white',
+                  border: 'none',
+                  fontWeight: 500,
+                  cursor: 'pointer'
+                }}
+              >
+                📊 View Scoring Methodology
+              </button>
+              
+              {/* Legend */}
+              <div className="flex gap-4 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <div style={{ width: '12px', height: '12px', background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)' }}></div>
+                  <span style={{ fontSize: '0.875rem', color: colors.textGray }}>Elite (90-100)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div style={{ width: '12px', height: '12px', background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)' }}></div>
+                  <span style={{ fontSize: '0.875rem', color: colors.textGray }}>High (70-89)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div style={{ width: '12px', height: '12px', background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)' }}></div>
+                  <span style={{ fontSize: '0.875rem', color: colors.textGray }}>Moderate (50-69)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div style={{ width: '12px', height: '12px', background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)' }}></div>
+                  <span style={{ fontSize: '0.875rem', color: colors.textGray }}>Low (30-49)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div style={{ width: '12px', height: '12px', background: 'linear-gradient(135deg, #94a3b8 0%, #64748b 100%)' }}></div>
+                  <span style={{ fontSize: '0.875rem', color: colors.textGray }}>Insufficient (<30)</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Filters */}
+            <div style={{ background: colors.grayLight, padding: '1.5rem', borderBottom: `1px solid ${colors.slateLight}` }}>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label style={{ fontSize: '0.75rem', color: colors.textGray, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '1px' }}>
+                    Filter by Type
+                  </label>
+                  <select
+                    value={typeFilter}
+                    onChange={(e) => setTypeFilter(e.target.value)}
+                    className="w-full mt-1 px-3 py-2"
+                    style={{ border: `1px solid ${colors.slateLight}`, background: 'white' }}
+                  >
+                    <option value="">All Types</option>
+                    <option value="Certification">Certification</option>
+                    <option value="Program">Program</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Board Cert">Board Certification</option>
+                    <option value="Fellowship">Fellowship</option>
+                    <option value="Training">Training</option>
+                    <option value="Degree">Degree</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label style={{ fontSize: '0.75rem', color: colors.textGray, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '1px' }}>
+                    Filter by Discipline
+                  </label>
+                  <select
+                    value={disciplineFilter}
+                    onChange={(e) => setDisciplineFilter(e.target.value)}
+                    className="w-full mt-1 px-3 py-2"
+                    style={{ border: `1px solid ${colors.slateLight}`, background: 'white' }}
+                  >
+                    <option value="">All Disciplines</option>
+                    <option value="PT">Physical Therapy</option>
+                    <option value="OT">Occupational Therapy</option>
+                    <option value="SLP">Speech Therapy</option>
+                    <option value="All">Multidisciplinary</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label style={{ fontSize: '0.75rem', color: colors.textGray, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '1px' }}>
+                    Search
+                  </label>
+                  <input
+                    type="text"
+                    value={searchFilter}
+                    onChange={(e) => setSearchFilter(e.target.value)}
+                    placeholder="Search certifications..."
+                    className="w-full mt-1 px-3 py-2"
+                    style={{ border: `1px solid ${colors.slateLight}`, background: 'white' }}
+                  />
+                </div>
+              </div>
+            </div>
+            
+            {/* Table */}
+            <div style={{ padding: '2rem', maxHeight: '60vh', overflowY: 'auto' }}>
+              <table className="w-full">
+                <thead>
+                  <tr style={{ borderBottom: `2px solid ${colors.slateLight}` }}>
+                    <th className="text-left py-3 px-2" style={{ color: colors.textGray, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Rank</th>
+                    <th className="text-left py-3 px-2" style={{ color: colors.textGray, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Certification</th>
+                    <th className="text-left py-3 px-2" style={{ color: colors.textGray, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Type</th>
+                    <th className="text-center py-3 px-2" style={{ color: colors.textGray, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Discipline</th>
+                    <th className="text-center py-3 px-2" style={{ color: colors.textGray, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Score</th>
+                    <th className="text-left py-3 px-2" style={{ color: colors.textGray, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Key Evidence</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredData.map((item, idx) => (
+                    <tr key={idx} style={{ borderBottom: `1px solid ${colors.slateLight}` }}>
+                      <td className="py-3 px-2 text-center font-semibold" style={{ color: colors.slateMedium }}>{item.rank}</td>
+                      <td className="py-3 px-2 font-medium" style={{ color: colors.textDark }}>{item.name}</td>
+                      <td className="py-3 px-2">
+                        <span className="px-2 py-1 text-xs font-medium uppercase" style={{ ...getTypeStyle(item.type), letterSpacing: '0.5px' }}>
+                          {item.type}
+                        </span>
+                      </td>
+                      <td className="py-3 px-2 text-center" style={{ color: colors.textGray }}>{item.discipline}</td>
+                      <td className="py-3 px-2 text-center">
+                        <span className="px-3 py-1 font-semibold" style={getScoreClass(item.score)}>
+                          {item.score}
+                        </span>
+                      </td>
+                      <td className="py-3 px-2 text-sm" style={{ color: colors.textGray }}>{item.evidence}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              
+              {filteredData.length === 0 && (
+                <div className="text-center py-8" style={{ color: colors.textGray }}>
+                  No certifications match your search criteria
+                </div>
+              )}
+            </div>
+            
+            {/* Stats */}
+            <div style={{ background: colors.grayLight, padding: '2rem', borderTop: `1px solid ${colors.slateLight}` }}>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="text-center">
+                  <div className="text-2xl font-light" style={{ color: colors.primaryBlue }}>{filteredData.length}</div>
+                  <div className="text-xs uppercase" style={{ color: colors.textGray, letterSpacing: '0.5px' }}>Total Shown</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-light" style={{ color: colors.primaryBlue }}>
+                    {filteredData.filter(item => item.score >= 90).length}
+                  </div>
+                  <div className="text-xs uppercase" style={{ color: colors.textGray, letterSpacing: '0.5px' }}>Elite Tier (90+)</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-light" style={{ color: colors.primaryBlue }}>
+                    {filteredData.filter(item => item.score >= 70).length}
+                  </div>
+                  <div className="text-xs uppercase" style={{ color: colors.textGray, letterSpacing: '0.5px' }}>Evidence-Based (70+)</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-light" style={{ color: colors.primaryBlue }}>
+                    {filteredData.filter(item => item.score < 30).length}
+                  </div>
+                  <div className="text-xs uppercase" style={{ color: colors.textGray, letterSpacing: '0.5px' }}>Insufficient (<30)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Methodology Modal */}
+        {showMethodology && <MethodologyModal onClose={() => setShowMethodology(false)} />}
+      </div>
+    );
+  }
+
+  function MethodologyModal({ onClose }) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-75 z-[60] overflow-y-auto">
+        <div className="min-h-screen py-8 px-4">
+          <div className="max-w-4xl mx-auto" style={{ background: 'white', padding: '3rem', position: 'relative' }}>
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 p-2"
+              style={{ background: colors.slateLight, color: colors.textDark }}
+            >
+              ✕
+            </button>
+            
+            <h2 className="text-2xl font-light mb-6" style={{ color: colors.textDark }}>
+              Clinical Utility Scoring Methodology
+            </h2>
+            
+            {/* Core Philosophy */}
+            <div style={{ background: colors.grayLight, padding: '1.5rem', marginBottom: '2rem', borderLeft: `3px solid ${colors.primaryBlue}` }}>
+              <h3 className="font-semibold mb-3" style={{ color: colors.textDark }}>Core Philosophy</h3>
+              <p style={{ color: colors.textGray, lineHeight: 1.7, marginBottom: '1rem' }}>
+                This evidence-based framework evaluates rehabilitation certifications, programs, skills, and technologies based on their <strong>demonstrable impact on patient outcomes</strong> rather than professional prestige or theoretical knowledge. The scoring system prioritizes real-world clinical utility—the practical value an intervention brings to improving patient quality of life, functional independence, and measurable health outcomes.
+              </p>
+              <p style={{ color: colors.textGray, lineHeight: 1.7 }}>
+                Unlike traditional certification rankings that emphasize hours of training or exam difficulty, this methodology asks a fundamental question: <em>"Does evidence show that patients treated by certified practitioners or with this intervention achieve better outcomes than those receiving standard care?"</em>
+              </p>
+            </div>
+
+            {/* Five Scoring Domains */}
+            <h3 className="font-semibold mb-4" style={{ color: colors.textDark }}>Five Evidence-Based Scoring Domains</h3>
+            
+            {/* Domain 1 */}
+            <div style={{ background: 'white', padding: '1.5rem', border: `1px solid ${colors.slateLight}`, borderLeft: `3px solid #22c55e`, marginBottom: '1rem' }}>
+              <h4 style={{ color: '#16a34a', fontWeight: 500, marginBottom: '0.75rem' }}>
+                1. Clinical Outcome Improvements (40% weight)
+              </h4>
+              <p style={{ color: colors.textGray, marginBottom: '0.75rem' }}>
+                The most heavily weighted domain measures tangible patient improvements:
+              </p>
+              <ul style={{ color: colors.textGray, marginLeft: '1.5rem' }}>
+                <li>Functional gains on validated scales (GMFM, FIM, Berg Balance)</li>
+                <li>Pain reduction (VAS, numeric rating scales)</li>
+                <li>Quality of life improvements (SF-36, condition-specific measures)</li>
+                <li>Reduced mortality, morbidity, or complication rates</li>
+                <li>Return-to-work or activity participation rates</li>
+              </ul>
+            </div>
+
+            {/* Domain 2 */}
+            <div style={{ background: 'white', padding: '1.5rem', border: `1px solid ${colors.slateLight}`, borderLeft: `3px solid ${colors.primaryBlue}`, marginBottom: '1rem' }}>
+              <h4 style={{ color: colors.primaryBlue, fontWeight: 500, marginBottom: '0.75rem' }}>
+                2. Treatment Efficiency (20% weight)
+              </h4>
+              <p style={{ color: colors.textGray, marginBottom: '0.75rem' }}>
+                Evaluates resource utilization and speed of recovery:
+              </p>
+              <ul style={{ color: colors.textGray, marginLeft: '1.5rem' }}>
+                <li>Reduced number of treatment sessions to achieve goals</li>
+                <li>Shorter length of stay in healthcare facilities</li>
+                <li>Faster return to baseline function</li>
+                <li>Prevention of readmissions or secondary complications</li>
+              </ul>
+            </div>
+
+            {/* Domain 3 */}
+            <div style={{ background: 'white', padding: '1.5rem', border: `1px solid ${colors.slateLight}`, borderLeft: `3px solid #f59e0b`, marginBottom: '1rem' }}>
+              <h4 style={{ color: '#d97706', fontWeight: 500, marginBottom: '0.75rem' }}>
+                3. Cost-Effectiveness (15% weight)
+              </h4>
+              <p style={{ color: colors.textGray, marginBottom: '0.75rem' }}>
+                Measures economic value and healthcare savings:
+              </p>
+              <ul style={{ color: colors.textGray, marginLeft: '1.5rem' }}>
+                <li>Direct medical cost reductions</li>
+                <li>Return on investment (ROI) calculations</li>
+                <li>Quality-adjusted life years (QALYs) gained</li>
+                <li>Insurance coverage and reimbursement rates</li>
+              </ul>
+            </div>
+
+            {/* Domain 4 */}
+            <div style={{ background: 'white', padding: '1.5rem', border: `1px solid ${colors.slateLight}`, borderLeft: `3px solid #f97316`, marginBottom: '1rem' }}>
+              <h4 style={{ color: '#ea580c', fontWeight: 500, marginBottom: '0.75rem' }}>
+                4. Evidence Quality (15% weight)
+              </h4>
+              <p style={{ color: colors.textGray, marginBottom: '0.75rem' }}>
+                Rates the rigor and strength of supporting research:
+              </p>
+              <ul style={{ color: colors.textGray, marginLeft: '1.5rem' }}>
+                <li>Number and quality of randomized controlled trials</li>
+                <li>Systematic reviews and meta-analyses</li>
+                <li>Sample sizes and statistical power</li>
+                <li>Consistency of findings across studies</li>
+                <li>Publication in high-impact peer-reviewed journals</li>
+              </ul>
+            </div>
+
+            {/* Domain 5 */}
+            <div style={{ background: 'white', padding: '1.5rem', border: `1px solid ${colors.slateLight}`, borderLeft: `3px solid ${colors.primaryPurple}`, marginBottom: '1rem' }}>
+              <h4 style={{ color: colors.primaryPurple, fontWeight: 500, marginBottom: '0.75rem' }}>
+                5. Patient Satisfaction & Experience (10% weight)
+              </h4>
+              <p style={{ color: colors.textGray, marginBottom: '0.75rem' }}>
+                Incorporates patient-centered outcomes:
+              </p>
+              <ul style={{ color: colors.textGray, marginLeft: '1.5rem' }}>
+                <li>Patient-reported outcome measures (PROMs)</li>
+                <li>Treatment adherence and completion rates</li>
+                <li>Patient preference and choice</li>
+                <li>Caregiver satisfaction and burden reduction</li>
+              </ul>
+            </div>
+
+            {/* Scoring Thresholds */}
+            <h3 className="font-semibold mb-4 mt-6" style={{ color: colors.textDark }}>Scoring Thresholds & Categories</h3>
+            
+            <div style={{ background: colors.grayLight, padding: '1.5rem', marginBottom: '2rem' }}>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="text-center">
+                  <div style={{ background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)', color: 'white', padding: '0.75rem', marginBottom: '0.5rem', fontWeight: 500 }}>
+                    Elite (90-100)
+                  </div>
+                  <p style={{ color: colors.textGray, fontSize: '0.85rem' }}>Multiple RCTs, superior outcomes, cost savings</p>
+                </div>
+                <div className="text-center">
+                  <div style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)', color: 'white', padding: '0.75rem', marginBottom: '0.5rem', fontWeight: 500 }}>
+                    High (70-89)
+                  </div>
+                  <p style={{ color: colors.textGray, fontSize: '0.85rem' }}>Strong evidence, consistent benefits</p>
+                </div>
+                <div className="text-center">
+                  <div style={{ background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)', color: 'white', padding: '0.75rem', marginBottom: '0.5rem', fontWeight: 500 }}>
+                    Moderate (50-69)
+                  </div>
+                  <p style={{ color: colors.textGray, fontSize: '0.85rem' }}>Some evidence, mixed results</p>
+                </div>
+                <div className="text-center">
+                  <div style={{ background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)', color: 'white', padding: '0.75rem', marginBottom: '0.5rem', fontWeight: 500 }}>
+                    Low (30-49)
+                  </div>
+                  <p style={{ color: colors.textGray, fontSize: '0.85rem' }}>Weak evidence, small effects</p>
+                </div>
+                <div className="text-center">
+                  <div style={{ background: 'linear-gradient(135deg, #94a3b8 0%, #64748b 100%)', color: 'white', padding: '0.75rem', marginBottom: '0.5rem', fontWeight: 500 }}>
+                    Insufficient (<30)
+                  </div>
+                  <p style={{ color: colors.textGray, fontSize: '0.85rem' }}>No comparative studies</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Why This Matters */}
+            <div style={{ background: colors.primaryBlue, color: 'white', padding: '1.5rem', marginTop: '2rem' }}>
+              <h3 style={{ color: 'white', marginBottom: '1rem', fontWeight: 500 }}>Why This Methodology Matters</h3>
+              <p style={{ lineHeight: 1.7, marginBottom: '1rem' }}>
+                Healthcare systems face increasing pressure to demonstrate value while controlling costs. This scoring system provides the first comprehensive, evidence-based framework for making certification and training investments based on measurable patient benefit.
+              </p>
+              <p style={{ lineHeight: 1.7 }}>
+                By prioritizing interventions with proven clinical utility, organizations can maximize patient outcomes per dollar invested and build evidence-based career development pathways.
+              </p>
             </div>
           </div>
         </div>
