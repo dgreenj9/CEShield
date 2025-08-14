@@ -40,7 +40,7 @@ const CEShieldLogo = ({ showTagline = true, className = "", size = "large", cent
 
   const logoText = (
     <h1 style={{ fontSize: `${scale.text}px`, lineHeight: '1', color: colors.textDark }}>
-      <span style={{ fontWeight: 300 }}>CE</span><span style={{ fontWeight: 500 }}>Shield</span>
+      <span style={{ fontWeight: 200 }}>CE</span><span style={{ fontWeight: 400 }}>Shield</span>
     </h1>
   );
 
@@ -52,7 +52,7 @@ const CEShieldLogo = ({ showTagline = true, className = "", size = "large", cent
           {logoText}
         </div>
         <p className={`text-[${scale.tagline}px] tracking-[1.5px] mt-2 uppercase ${centered ? 'text-center whitespace-nowrap' : ''}`} 
-           style={{ color: colors.textGray, paddingLeft: '0' }}>
+           style={{ color: colors.textGray, paddingLeft: '0', fontSize: size === 'xlarge' ? '10px' : `${scale.tagline}px` }}>
           Track Education. Protect Your License.
         </p>
       </div>
