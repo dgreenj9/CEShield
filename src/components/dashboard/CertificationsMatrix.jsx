@@ -310,9 +310,9 @@ const CertificationsMatrix = () => {
 
   return (
     <div className="mb-6" style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex items-center gap-2">
-          <h2 className="text-lg font-semibold" style={{ color: colors.textDark }}>
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 mb-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
+          <h2 className="text-base md:text-lg font-semibold" style={{ color: colors.textDark }}>
             Continuing Education By Clinical Quality Impact
           </h2>
           <span className="text-xs px-2 py-1" style={{ background: colors.lightBlue, color: colors.primaryBlue, borderRadius: '4px' }}>
@@ -321,7 +321,7 @@ const CertificationsMatrix = () => {
         </div>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-2 px-3 py-1.5 text-sm transition-all"
+          className="flex items-center gap-2 px-3 py-1.5 text-sm transition-all w-full sm:w-auto justify-center"
           style={{ 
             background: isExpanded ? colors.primaryBlue : 'white',
             color: isExpanded ? 'white' : colors.primaryBlue,
@@ -335,8 +335,8 @@ const CertificationsMatrix = () => {
       </div>
 
       {isExpanded && (
-        <div className="mb-4 flex flex-wrap gap-3">
-          <div className="flex gap-2">
+        <div className="mb-4 flex flex-col md:flex-row gap-3">
+          <div className="flex flex-wrap gap-2 w-full md:w-auto">
             {[
               { value: 'all', label: 'All', count: certifications.length },
               { value: 'elite', label: 'Elite (90+)', count: certifications.filter(c => c.score >= 90).length },
@@ -348,7 +348,7 @@ const CertificationsMatrix = () => {
               <button
                 key={filter.value}
                 onClick={() => setSelectedFilter(filter.value)}
-                className="px-3 py-1.5 text-sm transition-all"
+                className="px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm transition-all flex-1 sm:flex-initial"
                 style={{
                   background: selectedFilter === filter.value ? colors.primaryBlue : colors.grayLight,
                   color: selectedFilter === filter.value ? 'white' : colors.textGray,
@@ -356,7 +356,15 @@ const CertificationsMatrix = () => {
                   cursor: 'pointer'
                 }}
               >
-                {filter.label} ({filter.count})
+                <span className="hidden sm:inline">{filter.label}</span>
+                <span className="sm:hidden">
+                  {filter.value === 'all' ? 'All' : 
+                   filter.value === 'elite' ? '90+' :
+                   filter.value === 'high' ? '70-89' :
+                   filter.value === 'moderate' ? '50-69' :
+                   filter.value === 'low' ? '30-49' : '<30'}
+                </span>
+                <span className="ml-1">({filter.count})</span>
               </button>
             ))}
           </div>
@@ -365,11 +373,12 @@ const CertificationsMatrix = () => {
             placeholder="Search certifications..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="px-3 py-1.5 text-sm"
+            className="px-3 py-1.5 text-sm w-full md:w-auto"
             style={{ 
               border: `1px solid ${colors.slateLight}`,
               background: colors.grayLight,
-              minWidth: '200px'
+              minWidth: '0',
+              md: { minWidth: '200px' }
             }}
           />
         </div>
@@ -379,20 +388,40 @@ const CertificationsMatrix = () => {
         {filteredCerts.map((cert) => (
           <div 
             key={`${cert.rank}-${cert.name}`}
-            className="flex items-center gap-3 p-3 transition-all hover:bg-gray-50"
+            className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 p-3 transition-all hover:bg-gray-50"
             style={{ 
               background: colors.grayLight,
               borderLeft: `3px solid ${cert.score >= 90 ? '#22c55e' : cert.score >= 70 ? colors.primaryBlue : cert.score >= 50 ? '#f59e0b' : '#f97316'}`
             }}
           >
-            <div className="text-center" style={{ minWidth: '40px' }}>
-              <div className="text-xs" style={{ color: colors.textGray }}>Rank</div>
-              <div className="font-semibold" style={{ color: colors.textDark }}>#{cert.rank}</div>
+            {/* Mobile: Row layout for rank and score */}
+            <div className="flex items-center justify-between sm:contents">
+              <div className="text-center sm:text-center" style={{ minWidth: '40px' }}>
+                <div className="text-xs" style={{ color: colors.textGray }}>Rank</div>
+                <div className="font-semibold" style={{ color: colors.textDark }}>#{cert.rank}</div>
+              </div>
+              
+              {/* Mobile: Score shown at top right */}
+              <div className="sm:hidden">
+                <div 
+                  className="px-3 py-1 font-semibold"
+                  style={{ 
+                    ...getScoreStyle(cert.score),
+                    borderRadius: '4px',
+                    fontSize: '0.875rem'
+                  }}
+                >
+                  {cert.score}
+                </div>
+              </div>
             </div>
             
+            {/* Content section */}
             <div className="flex-1">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="font-medium" style={{ color: colors.textDark }}>{cert.name}</span>
+              <div className="flex flex-wrap items-center gap-2 mb-1">
+                <span className="font-medium text-sm sm:text-base" style={{ color: colors.textDark }}>
+                  {cert.name}
+                </span>
                 <span 
                   className="text-xs px-2 py-0.5"
                   style={{ 
@@ -407,13 +436,14 @@ const CertificationsMatrix = () => {
                   {cert.discipline}
                 </span>
               </div>
-              <div className="text-sm" style={{ color: colors.textGray }}>
+              <div className="text-xs sm:text-sm" style={{ color: colors.textGray }}>
                 {cert.evidence}
               </div>
               <CitationSection certName={cert.name} />
             </div>
             
-            <div className="text-center" style={{ minWidth: '60px' }}>
+            {/* Desktop: Score on the right */}
+            <div className="hidden sm:block text-center" style={{ minWidth: '60px' }}>
               <div 
                 className="px-3 py-1 font-semibold"
                 style={{ 
