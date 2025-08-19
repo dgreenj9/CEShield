@@ -1,3 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M12 2l7 3v8c0 3.5-2.5 6.5-7 9c-4.5-2.5-7-5.5-7-9V5l7-3z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Three overlapping shields matching your logo -->
+  <g transform="translate(-1, 1)">
+    <!-- Light blue shield -->
+    <path d="M2 4 L2 15 Q2 23 12 27 Q22 23 22 15 L22 4 Z" 
+          fill="#e0f2fe"/>
+    
+    <!-- Primary blue shield -->
+    <path d="M8 4 L8 15 Q8 23 18 27 Q28 23 28 15 L28 4 Z" 
+          fill="#3b82f6" 
+          opacity="0.85"/>
+    
+    <!-- Purple shield -->
+    <path d="M14 4 L14 15 Q14 23 24 27 Q34 23 34 15 L34 4 Z" 
+          fill="#8b5cf6" 
+          opacity="0.85"/>
+  </g>
 </svg>
