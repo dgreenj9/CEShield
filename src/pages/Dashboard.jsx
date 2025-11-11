@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AlertCircle, CheckCircle, Clock, FileText, Plus, Trash2, Download, Info, Loader2, Settings, Pencil, LogOut, User } from 'lucide-react';
+import { AlertCircle, CheckCircle, Clock, FileText, Plus, Trash2, Download, Info, Loader2, Settings, Pencil, LogOut } from 'lucide-react';
 import { colors } from '../utils/constants';
 import { getRequirements, calculateHours } from '../utils/calculations';
 import { generateReport } from '../utils/reportGenerator';

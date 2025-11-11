@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckCircle, Loader2, Mail, Eye, EyeOff, Lock, LogOut } from 'lucide-react';
+import { CheckCircle, Loader2, Mail, Eye, EyeOff, Lock } from 'lucide-react';
 import { supabase } from '../../services/supabaseClient';
 import { colors } from '../../utils/constants';
 import CEShieldLogo from '../common/CEShieldLogo';
