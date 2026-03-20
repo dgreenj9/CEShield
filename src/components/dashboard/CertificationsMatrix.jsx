@@ -25,7 +25,7 @@ const CertificationsMatrix = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showMethodology, setShowMethodology] = useState(false);
   const [showCitations, setShowCitations] = useState(false);
-  const [showWeights, setShowWeights] = useState(false);
+  const [showWeights, setShowWeights] = useState(true);
   const [expandedCitations, setExpandedCitations] = useState({});
   const [expandedSubScores, setExpandedSubScores] = useState({});
   const [weights, setWeights] = useState(DEFAULT_WEIGHTS);
@@ -284,7 +284,7 @@ const CertificationsMatrix = () => {
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 mb-4">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
           <h2 className="text-base md:text-lg font-semibold" style={{ color: colors.textDark }}>
-            Continuing Education By Clinical Quality Impact
+            Evidence-Based Certification Rankings
           </h2>
           <span className="text-xs px-2 py-1" style={{ background: colors.lightBlue, color: colors.primaryBlue, borderRadius: '4px' }}>
             110 Ranked
@@ -306,8 +306,7 @@ const CertificationsMatrix = () => {
       </div>
 
       {/* Weight Sliders */}
-      {isExpanded && (
-        <div className="mb-4">
+      <div className="mb-4">
           <button
             onClick={() => setShowWeights(!showWeights)}
             className="flex items-center gap-2 text-sm px-3 py-1.5 mb-3 transition-colors"
@@ -375,11 +374,9 @@ const CertificationsMatrix = () => {
             </div>
           )}
         </div>
-      )}
 
       {/* Discipline Filter */}
-      {isExpanded && (
-        <div className="mb-3">
+      <div className="mb-3">
           <div className="flex flex-wrap gap-1.5 mb-3">
             {['All', ...ALL_DISCIPLINES].map(disc => (
               <button
@@ -400,11 +397,9 @@ const CertificationsMatrix = () => {
             ))}
           </div>
         </div>
-      )}
 
       {/* Tier Filter + Search */}
-      {isExpanded && (
-        <div className="mb-4 flex flex-col md:flex-row gap-3">
+      <div className="mb-4 flex flex-col md:flex-row gap-3">
           <div className="flex flex-wrap gap-2 w-full md:w-auto">
             {[
               { value: 'all', label: 'All', count: tierCounts.all },
@@ -441,7 +436,6 @@ const CertificationsMatrix = () => {
             style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight, minWidth: '200px' }}
           />
         </div>
-      )}
 
       {/* Certification List */}
       <div className="space-y-2">
