@@ -359,7 +359,7 @@ const CertificationsMatrix = () => {
                       value={weights[key]}
                       onChange={e => handleWeightChange(key, parseInt(e.target.value, 10))}
                       className="w-full"
-                      style={{ accentColor: colors.primaryBlue }}
+                      style={{ accentColor: DIMENSION_BAR_COLORS[key] }}
                     />
                   </div>
                 ))}
