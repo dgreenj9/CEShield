@@ -292,7 +292,7 @@ const CertificationsMatrix = () => {
             Evidence-Based Certification Rankings
           </h2>
           <span className="text-xs px-2 py-1" style={{ background: colors.lightBlue, color: colors.primaryBlue, borderRadius: '4px' }}>
-            110 Ranked
+            {certData.length} Ranked
           </span>
         </div>
         <button
@@ -359,7 +359,7 @@ const CertificationsMatrix = () => {
                       value={weights[key]}
                       onChange={e => handleWeightChange(key, parseInt(e.target.value, 10))}
                       className="w-full"
-                      style={{ accentColor: DIMENSION_BAR_COLORS[key] }}
+                      style={{ accentColor: colors.primaryBlue }}
                     />
                   </div>
                 ))}
@@ -508,7 +508,7 @@ const CertificationsMatrix = () => {
       {!isExpanded && (
         <div className="mt-3 pt-3 text-center" style={{ borderTop: `1px solid ${colors.slateLight}` }}>
           <p className="text-sm" style={{ color: colors.textGray }}>
-            Showing top 5 evidence-based certifications. Click expand to view all 110 ranked certifications with adjustable weights.
+            Showing top 5 certifications. Click expand to view all {certData.length} ranked certifications.
           </p>
         </div>
       )}
@@ -520,7 +520,7 @@ const CertificationsMatrix = () => {
             <div>
               <h4 className="font-medium mb-2" style={{ color: colors.textDark }}>About This Matrix</h4>
               <p style={{ color: colors.textGray, fontSize: '0.813rem', lineHeight: '1.5' }}>
-                Evidence-based rankings of 110 rehabilitation certifications. Scores are computed dynamically from 5 sub-dimensions — adjust weights above to personalize the ranking to your priorities.
+                Evidence-based rankings of {certData.length} rehabilitation certifications scored across {DIMENSION_KEYS.length} dimensions. Adjust the weights above to personalize rankings to your priorities — scores and ranks update live.
               </p>
             </div>
             <div>
@@ -540,7 +540,7 @@ const CertificationsMatrix = () => {
             <div>
               <h4 className="font-medium mb-2" style={{ color: colors.textDark }}>Key Finding</h4>
               <p style={{ color: colors.textGray, fontSize: '0.813rem', lineHeight: '1.5' }}>
-                Most credential-specific outcome evidence is absent — scores reflect evidence for the intervention, not the credential. Expand any row to see the scoring rationale.
+                Most certifications lack credential-specific outcome studies — scores reflect evidence for the intervention, not the credential itself. Open Score Breakdown on any row to see the full rationale.
               </p>
               <button
                 onClick={() => setShowCitations(!showCitations)}
