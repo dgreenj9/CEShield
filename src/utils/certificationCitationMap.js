@@ -126,14 +126,15 @@ export const CERTIFICATION_TO_CITATION_MAP = {
 // Methodology content for the popup
 export const METHODOLOGY_CONTENT = {
   title: "Evidence-Based Certification Scoring Methodology",
-  version: "Version 2.0 - January 2025",
-  overview: "This comprehensive scoring system evaluates rehabilitation certifications based on their demonstrated impact on patient outcomes, not industry prestige or popularity.",
-  
+  version: "Version 3.0 - March 2026",
+  overview: "This scoring system evaluates rehabilitation certifications based on their demonstrated impact on patient outcomes, not industry prestige or popularity. Each certification is scored across five dimensions; the weights for each dimension are adjustable via the sliders above and default to the values shown below.",
+
   scoringComponents: [
     {
       name: "Clinical Outcomes",
-      weight: "40%",
-      description: "Direct measurable improvements in patient function, recovery rates, and clinical metrics",
+      dimensionKey: "clinicalOutcomes",
+      defaultWeight: "40%",
+      description: "Magnitude and durability of functional improvements in patients",
       criteria: [
         "Effect sizes from RCTs and systematic reviews",
         "Functional improvement scores",
@@ -143,9 +144,10 @@ export const METHODOLOGY_CONTENT = {
       ]
     },
     {
-      name: "Treatment Efficiency",
-      weight: "20%",
-      description: "Resource utilization and time-to-outcome improvements",
+      name: "Efficiency",
+      dimensionKey: "efficiency",
+      defaultWeight: "20%",
+      description: "Time-to-outcome, caseload throughput, and workflow integration",
       criteria: [
         "Reduced treatment sessions needed",
         "Faster achievement of goals",
@@ -156,8 +158,9 @@ export const METHODOLOGY_CONTENT = {
     },
     {
       name: "Cost-Effectiveness",
-      weight: "15%",
-      description: "Economic value and return on investment",
+      dimensionKey: "costEffectiveness",
+      defaultWeight: "15%",
+      description: "Cost per QALY, payer coverage, and downstream savings",
       criteria: [
         "Direct medical cost savings",
         "Indirect cost reductions",
@@ -168,20 +171,22 @@ export const METHODOLOGY_CONTENT = {
     },
     {
       name: "Evidence Quality",
-      weight: "15%",
-      description: "Strength and reliability of supporting research",
+      dimensionKey: "evidenceQuality",
+      defaultWeight: "15%",
+      description: "RCT rigor, systematic review support, and replication quality",
       criteria: [
         "Number of high-quality studies",
         "Systematic review/meta-analysis support",
         "Study design quality (RCTs vs observational)",
-        "Sample sizes and power",
-        "Publication in peer-reviewed journals"
+        "Sample sizes and statistical power",
+        "Independent replication across research groups"
       ]
     },
     {
       name: "Patient Satisfaction",
-      weight: "10%",
-      description: "Patient-reported outcomes and experience measures",
+      dimensionKey: "patientSatisfaction",
+      defaultWeight: "10%",
+      description: "Patient-reported experience, adherence, and engagement",
       criteria: [
         "Patient satisfaction scores",
         "Quality of life improvements",
@@ -191,61 +196,54 @@ export const METHODOLOGY_CONTENT = {
       ]
     }
   ],
-  
+
   scoringTiers: [
     {
-      tier: "Elite Evidence",
-      range: "90-100",
+      tier: "Strong Evidence",
+      range: "70-100",
       color: "#22c55e",
-      description: "Exceptional evidence of superior outcomes with strong economic value",
-      count: 4
+      description: "Strong evidence of meaningful patient benefit across multiple outcome domains",
+      count: 9
     },
     {
-      tier: "High Evidence",
-      range: "70-89",
+      tier: "Good Evidence",
+      range: "50-69",
       color: "#3b82f6",
-      description: "Strong evidence supporting effectiveness across multiple domains",
-      count: 19
+      description: "Good evidence with consistent benefits, some limitations in scope or credential specificity",
+      count: 35
     },
     {
       tier: "Moderate Evidence",
-      range: "50-69",
-      color: "#fbbf24",
-      description: "Moderate evidence with some proven benefits but limitations",
-      count: 32
-    },
-    {
-      tier: "Low Evidence",
       range: "30-49",
-      color: "#fb923c",
-      description: "Limited evidence, primarily theoretical or small-scale support",
-      count: 21
+      color: "#fbbf24",
+      description: "Moderate or emerging evidence; benefits present but effect sizes modest or populations narrow",
+      count: 27
     },
     {
-      tier: "Insufficient Evidence",
+      tier: "Limited Evidence",
       range: "0-29",
       color: "#94a3b8",
-      description: "Minimal or no comparative outcome studies available",
-      count: 34
+      description: "Minimal or no comparative outcome studies; theoretical basis or credential-specific evidence absent",
+      count: 39
     }
   ],
-  
+
   keyFindings: [
-    "Only 4% of certifications (4/110) achieve Elite status with scores ≥90",
-    "21% demonstrate High Evidence (70-89) for improving patient outcomes",
-    "31% show Insufficient Evidence despite widespread industry adoption",
-    "Board certifications show surprisingly low correlation with outcomes",
-    "Technology-based interventions show promise but lack certification-specific data",
-    "Fall prevention programs demonstrate the strongest cost-effectiveness ratios"
+    "8% of certifications (9/110) score in the Strong tier (70+) with default weights — rankings shift when weights are adjusted",
+    "Most certifications lack credential-specific outcome studies; scores reflect evidence for the intervention, not the credential itself",
+    "35% score in the Limited tier despite widespread clinical adoption, primarily due to absent comparative research",
+    "Board certifications show consistently low scores — rigorous certification processes do not guarantee measured outcome differences",
+    "Technology-based interventions score well on efficiency but lack superiority evidence over dose-matched conventional care",
+    "Fall prevention programs (Otago, Matter of Balance) show among the strongest cost-effectiveness ratios of any rehabilitation intervention"
   ],
-  
-  dataSource: "Analysis based on 284 peer-reviewed citations including systematic reviews, meta-analyses, RCTs, and economic evaluations published through January 2025.",
-  
+
+  dataSource: "Scoring based on comprehensive literature review through March 2026, including systematic reviews, meta-analyses, RCTs, and economic evaluations. Citation count reflects curated references attached to individual certifications.",
+
   limitations: [
-    "Some certifications have limited research due to recent development",
-    "Head-to-head certification comparisons are rare",
-    "Publication bias may favor positive results",
-    "Geographic variations in practice and reimbursement affect generalizability",
-    "Rapidly evolving technology certifications may have outdated evidence"
+    "Credential-specific comparative studies (certified vs. non-certified practitioners) are almost universally absent — a known gap in the rehabilitation literature",
+    "Some certifications have limited research due to recent development or niche population scope",
+    "Publication bias may favor positive results, particularly for proprietary techniques",
+    "Geographic and payer variations affect cost-effectiveness generalizability",
+    "Tier counts reflect default weights; adjusting sliders will change which tier each certification falls into"
   ]
 };

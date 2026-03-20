@@ -40,6 +40,11 @@ const CertificationsMatrix = () => {
     return scored.map((cert, i) => ({ ...cert, rank: i + 1 }));
   }, [weights]);
 
+  const totalCitations = useMemo(
+    () => Object.values(citationsData).reduce((sum, arr) => sum + arr.length, 0),
+    []
+  );
+
   const handleWeightChange = (changedKey, newValue) => {
     const clamped = Math.max(0, Math.min(100, newValue));
     const otherKeys = Object.keys(weights).filter(k => k !== changedKey);
@@ -542,7 +547,7 @@ const CertificationsMatrix = () => {
                 className="text-xs mt-2"
                 style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
               >
-                View All 284 Citations →
+                View All {totalCitations} Citations →
               </button>
             </div>
           </div>
@@ -569,7 +574,7 @@ const CertificationsMatrix = () => {
             <div className="p-4 overflow-y-auto max-h-[60vh]">
               <div className="mb-4 p-3 rounded" style={{ background: colors.lightBlue }}>
                 <p className="text-sm" style={{ color: colors.primaryBlue }}>
-                  <strong>284 Total Citations</strong> from evidence-based rehabilitation certification research.
+                  <strong>{totalCitations} Citations</strong> from evidence-based rehabilitation certification research.
                   Citations are organized by certification type and include peer-reviewed studies, systematic reviews,
                   meta-analyses, and professional guidelines.
                 </p>
@@ -647,7 +652,7 @@ const CertificationsMatrix = () => {
                       <div className="flex justify-between items-start mb-2">
                         <h5 className="font-medium" style={{ color: colors.textDark }}>{component.name}</h5>
                         <span className="px-2 py-1 rounded text-sm font-semibold" style={{ background: colors.primaryBlue, color: 'white' }}>
-                          {component.weight}
+                          {weights[component.dimensionKey]}%
                         </span>
                       </div>
                       <p className="text-sm mb-2" style={{ color: colors.textGray }}>{component.description}</p>
