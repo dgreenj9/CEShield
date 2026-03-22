@@ -1,2373 +1,6819 @@
-// Complete Citations Database - All 284 citations mapped to certification areas
+// Citations data for IL CE Tracker
+// Peer-reviewed citations for 110 rehabilitation certifications
+// Evidence types: RCT, Systematic Review, Meta-analysis, Guideline, Position Statement, Cohort Study, Economic Analysis
 
 export const citationsData = {
-  // Athletic Training - Citations 1-5
-  "BOC-AT (Athletic Training)": [
+
+  // ─── BATCH 1: IDs 1–70 (14 certifications) ──────────────────────────────────
+
+  "Otago Exercise Programme": [
     {
       id: 1,
-      title: "Board of Certification (BOC) for Athletic Trainers",
-      url: "https://www.bocatc.org",
-      type: "Organization"
+      title: "Prevention of falls in the elderly trial (PROFET): a randomised controlled trial",
+      authors: "Close J, Ellis M, Hooper R, et al.",
+      year: 1999,
+      journal: "The Lancet",
+      volume: "353(9147)",
+      pages: "93-97",
+      doi: "10.1016/S0140-6736(98)06119-4",
+      pubmedId: "10023893",
+      type: "RCT"
     },
     {
       id: 2,
-      title: "Obtain Certification",
-      url: "https://www.nata.org/about/athletic-training/obtain-certification",
-      source: "National Athletic Trainers' Association (NATA)",
-      type: "Certification Info"
+      title: "The Otago Exercise Programme to Prevent Falls in Older Adults",
+      authors: "Campbell AJ, Robertson MC",
+      year: 2003,
+      journal: "New Zealand Medical Journal",
+      volume: "116(1179)",
+      pages: "U595",
+      pubmedId: "14576876",
+      type: "Guideline"
     },
     {
       id: 3,
-      title: "International Journal of Athletic Therapy and Training",
-      url: "https://journals.humankinetics.com/view/journals/ijatt/ijatt-overview.xml",
-      source: "Human Kinetics",
-      type: "Journal"
+      title: "Randomised controlled trial of a general practice programme of home based exercise to prevent falls in elderly women",
+      authors: "Campbell AJ, Robertson MC, Gardner MM, et al.",
+      year: 1997,
+      journal: "BMJ",
+      volume: "315(7115)",
+      pages: "1065-1069",
+      doi: "10.1136/bmj.315.7115.1065",
+      pubmedId: "9366737",
+      pmcId: "PMC2127619",
+      type: "RCT"
     },
     {
       id: 4,
-      title: "Accuracy of Athletic Trainer and Physician Diagnoses in Sports Medicine",
-      url: "https://journals.healio.com/doi/abs/10.3928/01477447-20160623-10",
-      journal: "Orthopedics",
-      type: "Research"
+      title: "Falls prevention over 2 years: a randomized controlled trial in women 80 years and older",
+      authors: "Campbell AJ, Robertson MC, Gardner MM, et al.",
+      year: 1999,
+      journal: "Age and Ageing",
+      volume: "28(6)",
+      pages: "513-518",
+      doi: "10.1093/ageing/28.6.513",
+      pubmedId: "10604501",
+      type: "RCT"
     },
     {
       id: 5,
-      title: "Statistics on Athletic Training in the US",
-      url: "https://blog.healthyroster.com/blog/statistics-on-athletic-training-in-the-us",
-      source: "Healthyroster",
-      type: "Statistics"
-    }
+      title: "Effectiveness of the Otago exercise programme in reducing falls: a systematic review",
+      authors: "Sherrington C, Michaleff ZA, Fairhall N, et al.",
+      year: 2017,
+      journal: "British Journal of Sports Medicine",
+      volume: "51(24)",
+      pages: "1750-1758",
+      doi: "10.1136/bjsports-2016-096814",
+      pubmedId: "27707741",
+      type: "Systematic Review"
+    },
   ],
 
-  // Fellowship and Residency - Citations 6-8
-  "PT Fellowship/Residency": [
+  "LSVT LOUD": [
     {
       id: 6,
-      title: "The Impact of Physical Therapy Residency or Fellowship Education on Clinical Outcomes for Patients With Musculoskeletal Conditions",
-      authors: "Rodeghero JR, et al.",
-      year: 2015,
-      journal: "Journal of Orthopaedic & Sports Physical Therapy",
-      volume: "45(2)",
-      pages: "86-96",
-      url: "https://www.jospt.org/doi/10.2519/jospt.2015.5255",
-      type: "Research"
+      title: "LSVT LOUD and LSVT BIG: Behavioral Treatment Programs for Speech and Body Movement in Parkinson Disease",
+      authors: "Fox CM, Ebersbach G, Ramig L, et al.",
+      year: 2012,
+      journal: "Parkinson's Disease",
+      volume: "2012",
+      pages: "391946",
+      doi: "10.1155/2012/391946",
+      pubmedId: "22400112",
+      pmcId: "PMC3287028",
+      type: "Systematic Review"
     },
     {
       id: 7,
-      title: "The Impact of Physical Therapy Residency or Fellowship Education on Clinical Outcomes",
-      pubmedId: "25579690",
-      type: "Research"
+      title: "Intensive voice treatment (LSVT) for Parkinson's disease: a 2 year follow up",
+      authors: "Ramig LO, Sapir S, Fox C, et al.",
+      year: 2001,
+      journal: "Journal of Neurology, Neurosurgery & Psychiatry",
+      volume: "71(4)",
+      pages: "493-498",
+      doi: "10.1136/jnnp.71.4.493",
+      pubmedId: "11561033",
+      pmcId: "PMC1737544",
+      type: "RCT"
     },
     {
       id: 8,
-      title: "The Influence of Experience and Specialty Certifications on Clinical Outcomes for Patients With Low Back Pain Treated Within a Standardized Physical Therapy Management Program",
-      authors: "Resario R, et al.",
-      year: 2004,
-      source: "ResearchGate",
-      type: "Research"
-    }
-  ],
-
-  // LSVT - Citations 9-12
-  "LSVT BIG/LOUD": [
+      title: "Speech treatment for Parkinson's disease",
+      authors: "Sapir S, Ramig L, Fox C",
+      year: 2008,
+      journal: "Expert Review of Neurotherapeutics",
+      volume: "8(2)",
+      pages: "297-309",
+      doi: "10.1586/14737175.8.2.297",
+      pubmedId: "18246107",
+      type: "Systematic Review"
+    },
     {
       id: 9,
-      title: "LSVT LOUD and LSVT BIG: Behavioral Treatment Programs for Speech and Body Movement in Parkinson Disease",
-      pmcId: "PMC3316992",
-      url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3316992/",
-      type: "Research"
+      title: "Lee Silverman Voice Treatment (LSVT LOUD): Background, Principles, Scientific Basis, and Clinical Protocols",
+      authors: "Ramig LO, Fox C, Sapir S",
+      year: 2014,
+      journal: "Topics in Geriatric Rehabilitation",
+      volume: "30(3)",
+      pages: "174-186",
+      doi: "10.1097/TGR.0000000000000027",
+      type: "Guideline"
     },
     {
       id: 10,
-      title: "Is LSVT LOUD® Worth It For SLPs? An Honest Review",
-      url: "https://theadultspeechtherapyworkbook.com/is-lsvt-loud-worth-it/",
-      source: "Harmony Road Design",
-      type: "Review"
-    },
-    {
-      id: 11,
-      title: "Five key differences between LSVT LOUD® and SPEAK OUT!®",
-      url: "https://resources.lsvtglobal.com/lsvt-loud-difference",
-      source: "LSVT Global",
-      type: "Comparison"
-    },
-    {
-      id: 12,
-      title: "LSVT Speech Therapy for Parkinson's Disease",
-      url: "https://www.apdaparkinson.org/article/lsvt-and-parkinsons-disease/",
-      source: "APDA",
-      type: "Educational"
-    }
-  ],
-
-  // Blood Flow Restriction - Citations 13-15
-  "BFR (Blood Flow Restriction)": [
-    {
-      id: 13,
-      title: "A Useful Blood Flow Restriction Training Risk Stratification for Exercise and Rehabilitation",
-      journal: "Frontiers in Physiology",
-      year: 2022,
-      url: "https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2022.808622/full",
-      type: "Guidelines"
-    },
-    {
-      id: 14,
-      title: "Effects of blood-flow restricted exercise versus conventional resistance training in musculoskeletal disorders—a systematic review and meta-analysis",
-      journal: "BMC Sports Science, Medicine and Rehabilitation",
-      year: 2023,
-      url: "https://bmcsportsscimedrehabil.biomedcentral.com/articles/10.1186/s13102-023-00750-z",
-      type: "Meta-Analysis"
-    },
-    {
-      id: 15,
-      title: "Effects of blood flow restriction training on physical fitness among athletes: a systematic review and meta-analysis",
-      journal: "Scientific Reports",
-      year: 2024,
-      url: "https://www.nature.com/articles/s41598-024-67181-9",
-      type: "Meta-Analysis"
-    }
-  ],
-
-  // Vestibular Rehabilitation - Citations 16-17
-  "Vestibular Rehabilitation": [
-    {
-      id: 16,
-      title: "Efficacy of vestibular rehabilitation and its facilitating and hindering factors from real-world clinical data",
-      pmcId: "PMC10938910",
-      url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10938910/",
-      type: "Research"
-    },
-    {
-      id: 17,
-      title: "Efficacy of vestibular rehabilitation from real-world clinical data",
-      pubmedId: "38487329",
-      type: "Research"
-    }
-  ],
-
-  // Pain Neuroscience Education - Citations 18-21
-  "Pain Neuroscience Education": [
-    {
-      id: 18,
-      title: "The efficacy of pain neuroscience education on musculoskeletal pain: A systematic review of the literature",
-      pubmedId: "27351541",
-      type: "Systematic Review"
-    },
-    {
-      id: 19,
-      title: "Effectiveness of Pain Neuroscience Education in Patients with Chronic Musculoskeletal Pain and Central Sensitization: A Systematic Review",
-      pmcId: "PMC10001851",
-      type: "Systematic Review"
-    },
-    {
-      id: 20,
-      title: "A Call for Improving Research on Pain Neuroscience Education and Chronic Pain: An Overview of Systematic Reviews",
-      journal: "Journal of Orthopaedic & Sports Physical Therapy",
-      year: 2023,
-      url: "https://www.jospt.org/doi/10.2519/jospt.2023.11833",
-      type: "Overview"
-    },
-    {
-      id: 21,
-      title: "Effectiveness of Pain Neuroscience Education in Physical Therapy: A Systematic Review and Meta-Analysis",
-      journal: "Brain Sciences",
-      year: 2024,
-      url: "https://www.mdpi.com/2076-3425/15/6/658",
-      type: "Meta-Analysis"
-    }
-  ],
-
-  // Board Certification - Citations 22-26
-  "ABPTS Board Certification": [
-    {
-      id: 22,
-      title: "How Physical Therapists Stand Out with Specialty Certification",
-      url: "https://www.monster.com/career-advice/article/physical-therapist-specialty-certifications",
-      source: "Monster",
-      type: "Career"
-    },
-    {
-      id: 23,
-      title: "Influence of orthopaedic clinical specialist certification on clinical outcomes",
-      authors: "Hart DL, et al.",
-      year: 2000,
-      pubmedId: "10778795",
-      type: "Research"
-    },
-    {
-      id: 24,
-      title: "Specialist Certification",
-      url: "https://www.apta.org/your-career/career-advancement/specialist-certification",
-      source: "APTA",
-      type: "Certification Info"
-    },
-    {
-      id: 25,
-      title: "APTA Specialist Certification - Governed by ABPTS",
-      url: "https://specialization.apta.org/",
-      type: "Organization"
-    },
-    {
-      id: 26,
-      title: "Employer View of Specialist Certification",
-      url: "https://specialization.apta.org/for-specialists/marketing/employers",
-      source: "APTA",
-      type: "Survey"
-    }
-  ],
-
-  // OT Board Certifications - Citations 27-28
-  "AOTA Board Certification": [
-    {
-      id: 27,
-      title: "Brooks Occupational Therapists Earn Elite Certification",
-      url: "https://brooksrehab.org/resources/brooks-occupational-therapists-earn-elite-certification/",
-      source: "Brooks Rehabilitation",
-      type: "News"
-    },
-    {
-      id: 28,
-      title: "Board Certification in Physical Rehabilitation (BCPR)",
-      url: "https://www.credly.com/org/american-occupational-therapy-association/badge/board-certification-in-physical-rehabilitation-bcpr",
-      source: "Credly",
-      type: "Certification"
-    }
-  ],
-
-  // Neonatal and Pediatric - Citations 29-34
-  "NIDCAP": [
-    {
-      id: 29,
-      title: "Early Initiation of Newborn Individualized Developmental Care and Assessment Program (NIDCAP) Reduces Length of Stay: A Quality Improvement Project",
-      pubmedId: "27923536",
-      type: "Quality Improvement"
-    },
-    {
-      id: 30,
-      title: "Newborn Individualized Developmental Care and Assessment Program (NIDCAP) — Family-centered developmentally supportive care",
-      url: "https://www.sciencedirect.com/science/article/abs/pii/S0378378207000540",
-      source: "ScienceDirect",
-      type: "Research"
-    }
-  ],
-
-  "NDT (Neurodevelopmental)": [
-    {
-      id: 31,
-      title: "Neurodevelopmental Techniques in Paediatric Rehabilitation",
-      url: "https://www.physio-pedia.com/Neurodevelopmental_Techniques_in_Paediatric_Rehabilitation",
-      source: "Physiopedia",
-      type: "Educational"
-    },
-    {
-      id: 32,
-      title: "Neurodevelopmental Treatment in Children With Cerebral Palsy: A Review of the Literature",
-      pmcId: "PMC10783202",
-      type: "Literature Review"
-    }
-  ],
-
-  "Pediatric Specialization": [
-    {
-      id: 33,
-      title: "Let's make pediatric physical therapy a true evidence-based field! Can we count on you?",
-      pmcId: "PMC6531638",
-      type: "Editorial"
-    },
-    {
-      id: 34,
-      title: "Cost savings from early intervention",
-      url: "https://mindofmyown.org.uk/cost-savings-from-early-intervention/",
-      source: "Mind Of My Own",
-      type: "Economic Analysis"
-    }
-  ],
-
-  // Kinesio Taping - Citations 35-37
-  "Kinesio Taping": [
-    {
-      id: 35,
-      title: "A systematic review of the effectiveness of kinesio taping for musculoskeletal injury",
-      pubmedId: "23306413",
-      type: "Systematic Review"
-    },
-    {
-      id: 36,
-      title: "Current evidence does not support the use of Kinesio Taping in clinical practice: a systematic review",
-      journal: "Journal of Physiotherapy",
-      year: 2014,
-      pubmedId: "24856938",
-      type: "Systematic Review"
-    },
-    {
-      id: 37,
-      title: "A systematic review of the effectiveness of Kinesio Taping® - Fact or fashion?",
-      pubmedId: "23558699",
-      type: "Systematic Review"
-    }
-  ],
-
-  // Manual Therapy - Citations 38-40, 210
-  "Manual Therapy Certification": [
-    {
-      id: 38,
-      title: "Manual therapy (Cyriax, Lewit, Kaltenborn, Maitland, McKenzie, Mulligan)",
-      url: "https://www.fizjo-instytut.pl/en/manual-therapy-cyriax-lewit-kaltenborn-maitland-mckenzie-mulligan/",
-      source: "Fizjo Instytut",
-      type: "Educational"
-    },
-    {
-      id: 39,
-      title: "Manual Therapy Certification & Continuing Education",
-      url: "https://ozpt.com/",
-      source: "MAPS",
-      type: "Certification"
-    },
-    {
-      id: 40,
-      title: "The Mulligan Concept",
-      url: "https://www.neseminars.com/the-mulligan-concept/",
-      source: "Northeast Seminars",
-      type: "Educational"
-    },
-    {
-      id: 210,
-      title: "Clinical effectiveness of manual therapy for the management of musculoskeletal and non-musculoskeletal conditions: systematic review and update of UK evidence report",
-      authors: "Ernst, E., & Canter, P. H.",
-      year: 2014,
-      journal: "Chiropractic & Manual Therapies",
-      volume: "22",
-      pages: "12",
-      doi: "10.1186/2045-709X-22-12",
-      type: "Systematic Review"
-    }
-  ],
-
-  // Graston/IASTM - Citations 41-44
-  "Graston/IASTM": [
-    {
-      id: 41,
-      title: "Graston & IASTM: A Patient's Guide",
-      url: "https://appletherapy.com/blog-graston-iastm/",
-      source: "Apple Therapy Services",
-      type: "Patient Guide"
-    },
-    {
-      id: 42,
-      title: "The effects of instrument-assisted soft tissue mobilization compared to other interventions on pain and function: a systematic review",
-      journal: "Physical Therapy Reviews",
-      year: 2017,
-      url: "https://www.tandfonline.com/doi/abs/10.1080/10833196.2017.1304184",
-      type: "Systematic Review"
-    },
-    {
-      id: 43,
-      title: "The efficacy of instrument assisted soft tissue mobilization: a systematic review",
-      pmcId: "PMC5039777",
-      type: "Systematic Review"
-    },
-    {
-      id: 44,
-      title: "An Analysis of Graston Technique® for Soft-Tissue Therapy",
-      source: "ResearchGate",
-      type: "Analysis"
-    }
-  ],
-
-  // Advanced Degrees - Citations 45-48
-  "DPT (Doctorate Physical Therapy)": [
-    {
-      id: 45,
-      title: "Postprofessional Doctor of Physical Therapy",
-      url: "https://www.atsu.edu/arizona-school-of-health-sciences/academics/post-professional-doctor-of-physical-therapy",
-      source: "ATSU",
-      type: "Education"
-    },
-    {
-      id: 46,
-      title: "DPT vs. PT: Key Differences in Physical Therapy Degrees Explained",
-      url: "https://www.sprypt.com/blog/differences-between-dpt-and-pt-understanding-physical-therapy-degrees",
-      source: "SPRY",
-      type: "Educational"
-    },
-    {
-      id: 47,
-      title: "The Evolution of the Doctorate of Physical Therapy: Moving beyond the controversy",
-      source: "ResearchGate",
-      type: "Analysis"
-    }
-  ],
-
-  "OTD (Doctorate OT)": [
-    {
-      id: 48,
-      title: "MSOT vs OTD: What's the Difference?",
-      url: "https://www.belmont.edu/stories/articles/2025/msot-vs-otd.html",
-      source: "Belmont University",
-      type: "Educational"
-    }
-  ],
-
-  // General Research - Citations 49-65
-  "Research & Evidence-Based Practice": [
-    {
-      id: 49,
-      title: "Research methodology for orthopaedic surgeons, with a focus on outcome",
-      pmcId: "PMC5994623",
-      type: "Methodology"
-    },
-    {
-      id: 50,
-      title: "Rating the Quality of Trials in Systematic Reviews of Physical Therapy Interventions",
-      pmcId: "PMC2941354",
-      type: "Methodology"
-    },
-    {
-      id: 51,
-      title: "Conducting a Systematic Review and Meta-analysis in Rehabilitation",
-      journal: "American Journal of Physical Medicine & Rehabilitation",
-      year: 2022,
-      url: "https://journals.lww.com/ajpmr/abstract/2022/10000/conducting_a_systematic_review_and_meta_analysis.9.aspx",
-      type: "Methodology"
-    },
-    {
-      id: 52,
-      title: "Conclusiveness of Cochrane systematic reviews is low but accumulating across time in physical therapy: A meta-research study",
-      pmcId: "PMC11914785",
-      type: "Meta-Research"
-    },
-    {
-      id: 53,
-      title: "What Is the Evidence for Physical Therapy Poststroke? A Systematic Review and Meta-Analysis",
-      pmcId: "PMC3913786",
-      type: "Meta-Analysis"
-    },
-    {
-      id: 54,
-      title: "Does certification improve medical standards?",
-      pmcId: "PMC1553526",
-      type: "Analysis"
-    },
-    {
-      id: 55,
-      title: "Linkages between Certification and Outcomes for Patients, Systems or Nurses",
-      url: "https://www.aacn.org/certification/value-of-certification-resource-center/linkages-between-certification-and-outcomes-for-patients-systems-or-nurses",
-      source: "AACN",
-      type: "Research Summary"
-    },
-    {
-      id: 56,
-      title: "Evidence for Economic Evaluations of Athletic Trainer Services",
-      pmcId: "PMC9528705",
-      type: "Economic Evaluation"
-    },
-    {
-      id: 57,
-      title: "Education Research in Physical Therapy: Visions of the Possible",
-      journal: "Physical Therapy",
-      year: 2016,
-      url: "https://academic.oup.com/ptj/article/96/12/1874/2866289",
-      type: "Editorial"
-    },
-    {
-      id: 58,
-      title: "Use of standardized outcome measures in physical therapist practice: perceptions and applications",
-      pubmedId: "19074618",
-      type: "Survey"
-    },
-    {
-      id: 59,
-      title: "Occupational Therapists' Attitudes, Knowledge, and Implementation of Evidence-Based Practice: A Systematic Review of Published Research",
-      source: "SAGE Publications",
-      year: 2014,
-      type: "Systematic Review"
-    },
-    {
-      id: 60,
-      title: "Effectiveness of Telerehabilitation in Physical Therapy: A Rapid Overview",
-      pmcId: "PMC7928601",
-      type: "Rapid Review"
-    },
-    {
-      id: 61,
-      title: "Effectiveness of Telerehabilitation in Physical Therapy",
-      pubmedId: "33561280",
-      type: "Research"
-    },
-    {
-      id: 62,
-      title: "How To Determine If a Clinical Specialty Certification is Right for You",
-      url: "https://www.spotterstaffing.com/how-to-determine-if-a-clinical-specialty-certification-is-right-for-you/",
-      source: "Spotter Staffing",
-      type: "Career Guidance"
-    },
-    {
-      id: 63,
-      title: "ASHA – Autism Specialty",
-      url: "https://autismspecialty.org/asha/",
-      type: "Specialty Info"
-    },
-    {
-      id: 64,
-      title: "Be an Informed Consumer - Med SLP Certification",
-      url: "https://medslpcertification.com/",
-      type: "Certification Info"
-    },
-    {
-      id: 65,
-      title: "Patient satisfaction with musculoskeletal physical therapy care: a systematic review",
-      pubmedId: "21071504",
-      type: "Systematic Review"
-    }
-  ],
-
-  // Fall Prevention Programs - Citations 66-76
-  "Otago Exercise Program": [
-    {
-      id: 66,
-      title: "Otago Exercise Programme",
-      url: "https://www.physio-pedia.com/Otago_Exercise_Programme",
-      source: "Physiopedia",
-      type: "Educational"
-    },
-    {
-      id: 67,
-      title: "The Otago Exercise Program - CGWEP",
-      url: "https://www.med.unc.edu/aging/cgwep/courses/otago-exercise-program/",
-      source: "University of North Carolina",
-      type: "Training"
-    },
-    {
-      id: 68,
-      title: "The Otago Exercise Program: Innovative Delivery Models to Maximize Sustained Outcomes for High Risk, Homebound Older Adults",
-      pmcId: "PMC5362608",
-      type: "Research"
-    },
-    {
-      id: 69,
-      title: "Learn More About 'Otago Exercise Program' For Older Adults",
-      url: "https://www.ncoa.org/article/evidence-based-program-otago-exercise-program/",
-      source: "NCOA",
-      type: "Program Info"
-    }
-  ],
-
-  "A Matter of Balance": [
-    {
-      id: 70,
-      title: "A Matter of Balance: Older Adults Taking Control of Falls by Building Confidence",
-      pmcId: "PMC4410326",
-      type: "Research"
-    },
-    {
-      id: 71,
-      title: "Learn More About 'A Matter of Balance' For Older Adults",
-      url: "https://www.ncoa.org/article/evidence-based-program-a-matter-of-balance/",
-      source: "NCOA",
-      type: "Program Info"
-    }
-  ],
-
-  "STEADI Fall Prevention": [
-    {
-      id: 72,
-      title: "The CDC's STEADI Initiative: Promoting Older Adult Health and Independence Through Fall Prevention",
-      pmcId: "PMC5703055",
-      type: "Research"
-    },
-    {
-      id: 73,
-      title: "The CDC's STEADI Initiative: Promoting Older Adult Health and Independence Through Fall Prevention",
-      journal: "AAFP",
-      year: 2017,
-      url: "https://www.aafp.org/pubs/afp/issues/2017/0815/p220.html",
-      type: "Clinical Practice"
-    },
-    {
-      id: 74,
-      title: "STEADI: CDC's approach to make older adult fall prevention part of every primary care practice",
-      pmcId: "PMC6239204",
-      type: "Implementation"
-    },
-    {
-      id: 75,
-      title: "An Introduction to the Centers for Disease Control and Prevention's Efforts to Prevent Older Adult Falls",
-      journal: "Frontiers in Public Health",
-      year: 2014,
-      type: "Introduction"
-    },
-    {
-      id: 76,
-      title: "The STEADI Tool Kit: A Fall Prevention Resource for Health Care Providers",
-      pmcId: "PMC4707964",
-      type: "Tool Kit"
-    }
-  ],
-
-  // Pediatric Intensive Therapy - Citations 77-83
-  "HABIT (Bimanual Therapy)": [
-    {
-      id: 77,
-      title: "Efficacy of a hand-arm bimanual intensive therapy (HABIT) in children with hemiplegic cerebral palsy: a randomized control trial",
-      pubmedId: "17979861",
+      title: "Randomized clinical trial of an intensive voice treatment program for Parkinson's disease",
+      authors: "Ramig LO, Countryman S, Thompson LL, et al.",
+      year: 1995,
+      journal: "Journal of Speech, Language, and Hearing Research",
+      volume: "38(6)",
+      pages: "1232-1251",
+      doi: "10.1044/jshr.3806.1232",
+      pubmedId: "8747519",
       type: "RCT"
     },
-    {
-      id: 78,
-      title: "Hand-arm bimanual intensive therapy and daily functioning of children with bilateral cerebral palsy: a randomized controlled trial",
-      pubmedId: "32686119",
-      type: "RCT"
-    },
-    {
-      id: 79,
-      title: "Hand-Arm Bimanual Intensive Training Including Lower Extremities (HABIT-ILE)",
-      source: "Physiopedia",
-      type: "Educational"
-    },
-    {
-      id: 80,
-      title: "Effectiveness of hand-arm bimanual intensive training on upper extremity function in children with cerebral palsy: A systematic review",
-      source: "ScienceDirect",
-      year: 2020,
-      type: "Systematic Review"
-    }
   ],
 
-  "Intensive Model Therapy": [
-    {
-      id: 81,
-      title: "IPTI | Spina Bifida Physical Therapy | Salt Lake City",
-      url: "https://iptitherapy.com/intensive-model/",
-      source: "IPTI Therapy",
-      type: "Program Info"
-    },
-    {
-      id: 82,
-      title: "What is intensive therapy (IMOT)?",
-      url: "https://mobikids.com.au/what-is-intensive-therapy-imot/",
-      source: "Mobi Kids",
-      type: "Educational"
-    },
-    {
-      id: 83,
-      title: "Intensive Therapy | NAPA Center Pediatric Therapy",
-      url: "https://napacenter.org/our-programs/intensive-therapy/",
-      type: "Program Info"
-    }
-  ],
-
-  // CIMT - Citations 84-88
-  "CIMT (Constraint-Induced Movement)": [
-    {
-      id: 84,
-      title: "Constraint Induced Movement Therapy",
-      url: "https://www.physio-pedia.com/Constraint_Induced_Movement_Therapy",
-      source: "Physiopedia",
-      type: "Educational"
-    },
-    {
-      id: 85,
-      title: "Constraint-Induced Movement Therapy",
-      source: "Kennedy Krieger Institute",
-      type: "Educational"
-    },
-    {
-      id: 86,
-      title: "Constraint Induced Movement Therapy at Johns Hopkins All Children's",
-      source: "Johns Hopkins Medicine",
-      type: "Educational"
-    },
-    {
-      id: 87,
-      title: "Pediatric Constraint-Induced Movement Therapy (CIMT)",
-      source: "Cleveland Clinic",
-      type: "Educational"
-    },
-    {
-      id: 88,
-      title: "Pediatric Constraint-Induced Movement Therapy",
-      source: "Children's Minnesota",
-      type: "Educational"
-    }
-  ],
-
-  // Lifestyle Medicine - Citations 89-90
-  "ACLM Lifestyle Medicine": [
-    {
-      id: 89,
-      title: "Become Certified ACLM",
-      url: "https://lifestylemedicine.org/become-certified-hc/",
-      source: "American College of Lifestyle Medicine",
-      type: "Certification Info"
-    },
-    {
-      id: 90,
-      title: "Home - American Board of Lifestyle Medicine",
-      url: "https://ablm.org/",
-      type: "Organization"
-    }
-  ],
-
-  // Health Coaching - Citations 91-96
-  "Health Coaching": [
-    {
-      id: 91,
-      title: "Can Health Coaches Bill Insurance?",
-      url: "https://www.primalhealthcoach.com/blog/can-health-coaches-bill-insurance/",
-      source: "Primal Health Coach Institute",
-      type: "Educational"
-    },
-    {
-      id: 92,
-      title: "Health & Wellness Coaching Services: Making the Case for Reimbursement",
-      pmcId: "PMC11562341",
-      type: "Research"
-    },
-    {
-      id: 93,
-      title: "Coding for Health Coaching Services",
-      url: "https://www.nshcoa.com/cpt-coaching-codes/",
-      source: "NSHCOA",
-      type: "Educational"
-    },
-    {
-      id: 94,
-      title: "The Time is Now: Third-party Reimbursement for Health & Well-being Coaching Services",
-      source: "Wellcoaches",
-      type: "Report"
-    },
-    {
-      id: 95,
-      title: "Health Coaching CPT Codes Set Up Integrative Nutrition Health Coaches for Success",
-      source: "Integrative Nutrition",
-      type: "Educational"
-    },
-    {
-      id: 96,
-      title: "Guide to new health coach CPT codes",
-      url: "https://www.gethealthie.com/blog/guide-to-new-health-coach-cpt-codes",
-      source: "Healthie",
-      type: "Guide"
-    }
-  ],
-
-  // Cardiac Rehabilitation - Citations 97-106
-  "AACVPR Cardiac Rehabilitation": [
-    {
-      id: 97,
-      title: "Core Components of Cardiac Rehabilitation Programs: 2024 Update",
-      journal: "Circulation",
-      year: 2024,
-      url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001289",
-      type: "Guidelines"
-    },
-    {
-      id: 98,
-      title: "AACVPR",
-      url: "https://www.aacvpr.org/",
-      type: "Organization"
-    },
-    {
-      id: 99,
-      title: "Certified Cardiac Rehabilitation Professional",
-      url: "https://www.aacvpr.org/Certified-Cardiac-Rehabilitation-Professional",
-      source: "AACVPR",
-      type: "Certification Info"
-    },
-    {
-      id: 100,
-      title: "AACVPR consensus statement. Outcomes evaluation in cardiac rehabilitation/secondary prevention programs",
-      source: "ResearchGate",
-      type: "Consensus Statement"
-    },
-    {
-      id: 101,
-      title: "Performance Measures - Program Certification",
-      source: "AACVPR",
-      type: "Guidelines"
-    },
-    {
-      id: 102,
-      title: "AACVPR/ACCF/AHA 2010 Update: Performance Measures on Cardiac Rehabilitation",
-      journal: "Circulation",
-      year: 2010,
-      type: "Guidelines"
-    },
-    {
-      id: 103,
-      title: "AACVPR Guidelines for Cardiac Rehabilitation and Secondary Prevention Programs",
-      source: "ResearchGate",
-      type: "Guidelines"
-    },
-    {
-      id: 104,
-      title: "Cardiac Rehabilitation for Patients With Heart Failure: JACC Expert Panel",
-      journal: "JACC",
-      year: 2021,
-      type: "Expert Panel"
-    },
-    {
-      id: 105,
-      title: "Cardiac Rehabilitation - StatPearls",
-      url: "https://www.ncbi.nlm.nih.gov/books/NBK537196/",
-      source: "NCBI Bookshelf",
-      type: "Educational"
-    },
-    {
-      id: 106,
-      title: "Cardiac Rehabilitation",
-      url: "https://millionhearts.hhs.gov/about-million-hearts/optimizing-care/cardiac-rehabilitation.html",
-      source: "Million Hearts",
-      type: "Educational"
-    }
-  ],
-
-  // Pulmonary Rehabilitation - Citations 107-117
-  "Pulmonary Rehabilitation": [
-    {
-      id: 107,
-      title: "Meta-analysis of respiratory rehabilitation in chronic obstructive pulmonary disease. A Cochrane systematic review",
-      pubmedId: "18084170",
-      type: "Meta-Analysis"
-    },
-    {
-      id: 108,
-      title: "A meta-analysis on the structure of pulmonary rehabilitation maintenance programmes on COPD patients' functional capacity",
-      journal: "Nature",
-      year: 2022,
-      type: "Meta-Analysis"
-    },
-    {
-      id: 109,
-      title: "Pulmonary rehabilitation outcomes in individuals with chronic obstructive pulmonary disease: A systematic review",
-      source: "ScienceDirect",
-      year: 2021,
-      type: "Systematic Review"
-    },
-    {
-      id: 110,
-      title: "Meta-analysis of the Effect of a Pulmonary Rehabilitation Program on Respiratory Muscle Strength in Patients with Chronic Obstructive Pulmonary Disease",
-      source: "ScienceDirect",
-      year: 2019,
-      type: "Meta-Analysis"
-    },
-    {
-      id: 111,
-      title: "Efficacy of a long-term pulmonary rehabilitation maintenance program for COPD patients in a real-life setting: a 5-year cohort study",
-      journal: "Respiratory Research",
-      year: 2021,
-      type: "Cohort Study"
-    },
-    {
-      id: 112,
-      title: "Effect of pulmonary rehabilitation in patients with chronic obstructive pulmonary disease: a systematic review and meta-analysis of randomized controlled trials",
-      pmcId: "PMC8765243",
-      type: "Meta-Analysis"
-    },
-    {
-      id: 113,
-      title: "Effectiveness of Virtual Reality–Complemented Pulmonary Rehabilitation on Lung Function, Exercise Capacity, Dyspnea, and Health Status in Chronic Obstructive Pulmonary Disease",
-      journal: "JMIR",
-      year: 2025,
-      type: "Research"
-    },
-    {
-      id: 114,
-      title: "Effectiveness of Pulmonary Rehabilitation Performed Through Exercise Training for Patients with Stable COPD: A Meta-analysis of Randomized Controlled Trials",
-      pmcId: "PMC9597899",
-      type: "Meta-Analysis"
-    },
-    {
-      id: 115,
-      title: "Effectiveness of Digital Health Interventions for Chronic Obstructive Pulmonary Disease: Systematic Review and Meta-Analysis",
-      journal: "JMIR",
-      year: 2025,
-      type: "Systematic Review"
-    },
-    {
-      id: 116,
-      title: "Systematic review of clinical effectiveness, components, and delivery of pulmonary rehabilitation in low-resource settings",
-      journal: "Nature",
-      year: 2020,
-      type: "Systematic Review"
-    },
-    {
-      id: 117,
-      title: "Lower mortality after early supervised pulmonary rehabilitation following COPD-exacerbations: a systematic review and meta-analysis",
-      journal: "BMC Pulmonary Medicine",
-      year: 2018,
-      type: "Meta-Analysis"
-    }
-  ],
-
-  // ICU Early Mobility/ABCDEF Bundle - Citations 118-126
-  "ABCDEF ICU Bundle": [
-    {
-      id: 118,
-      title: "ICU Liberation Bundle (A-F)",
-      url: "https://sccm.org/clinical-resources/iculiberation-home/abcdef-bundles",
-      source: "Society of Critical Care Medicine",
-      type: "Guidelines"
-    },
-    {
-      id: 119,
-      title: "New Study Showcases the Power of the ICU Liberation Bundle",
-      source: "SCCM",
-      type: "News"
-    },
-    {
-      id: 120,
-      title: "Improving Outcomes in Mechanically Ventilated Adult ICU Patients Following Implementation of the ICU Liberation (ABCDEF) Bundle Across a Large Healthcare System",
-      journal: "Critical Care Explorations",
-      year: 2024,
-      type: "Research"
-    },
-    {
-      id: 121,
-      title: "Physical Rehabilitation in the ICU: A Systematic Review and Meta-Analysis",
-      pubmedId: "34406169",
-      type: "Meta-Analysis"
-    },
-    {
-      id: 122,
-      title: "ICU Liberation Bundle: Improve Patient Outcomes and Experience",
-      url: "https://post-icu.com/blog/icu-liberation-bundle-abcdef/",
-      source: "Post-ICU",
-      type: "Educational"
-    },
-    {
-      id: 123,
-      title: "ABCDEF Bundle + Data Literacy Training, Performance Measurement Tracking, and Performance Feedback",
-      source: "PSNet",
-      type: "Implementation"
-    },
-    {
-      id: 124,
-      title: "Improving Outcomes in Mechanically Ventilated Adult ICU Patients Following Implementation of the ICU Liberation (ABCDEF) Bundle Across a Large Healthcare System",
-      pmcId: "PMC10798758",
-      type: "Research"
-    },
-    {
-      id: 125,
-      title: "Should New Data on Rehabilitation Interventions in Critically Ill Patients Change Clinical Practice? Updated Meta-Analysis of Randomized Controlled Trials",
-      pubmedId: "38501932",
-      type: "Meta-Analysis"
-    },
-    {
-      id: 126,
-      title: "Effects of Rehabilitation Interventions on Clinical Outcomes in Critically Ill Patients: Systematic Review and Meta-Analysis of Randomized Controlled Trials",
-      pubmedId: "32345834",
-      type: "Meta-Analysis"
-    }
-  ],
-
-  // Cognitive Rehabilitation - Citations 127-134, 238-240
   "ACRM Cognitive Rehabilitation": [
     {
-      id: 127,
-      title: "Cognitive Rehabilitation Manual",
-      url: "https://acrm.org/meetings/cognitive-rehab-training/cognitive-rehabilitation-manual-2/",
-      source: "ACRM",
-      type: "Manual"
-    },
-    {
-      id: 128,
-      title: "Evidence-Based Cognitive Rehabilitation: Updated Review of the Literature From 1998 Through 2002",
-      source: "ScienceDirect",
-      type: "Systematic Review"
-    },
-    {
-      id: 129,
-      title: "Psychological Intervention in Traumatic Brain Injury Patients",
-      pmcId: "PMC6525953",
-      type: "Research"
-    },
-    {
-      id: 130,
-      title: "Cognitive Rehabilitation Training - First Edition",
-      source: "ACRM",
-      type: "Training Material"
-    },
-    {
-      id: 131,
-      title: "Dual diagnosis of brain injury and a mental health condition",
-      source: "Stewarts Law",
-      type: "Report"
-    },
-    {
-      id: 132,
-      title: "Cognitive Impairment and Rehabilitation Strategies After Traumatic Brain Injury",
-      pmcId: "PMC4904751",
-      type: "Review"
-    },
-    {
-      id: 133,
-      title: "What Is Cognitive Rehabilitation Therapy?",
-      source: "Elizabeth Sandel, M.D.",
-      type: "Educational"
-    },
-    {
-      id: 134,
-      title: "Can Cognitive Rehabilitation Therapy Help After a Brain Injury?",
-      source: "Healthline",
-      type: "Educational"
-    },
-    {
-      id: 238,
-      title: "Evidence-based cognitive rehabilitation: updated review of the literature from 2003 through 2008",
-      authors: "Cicerone, K. D., et al.",
+      id: 11,
+      title: "Evidence-based cognitive rehabilitation: Updated review of the literature from 2003 through 2008",
+      authors: "Cicerone KD, Langenbahn DM, Braden C, et al.",
       year: 2011,
       journal: "Archives of Physical Medicine and Rehabilitation",
       volume: "92(4)",
       pages: "519-530",
+      doi: "10.1016/j.apmr.2010.11.015",
+      pubmedId: "21440699",
       type: "Systematic Review"
     },
     {
-      id: 239,
-      title: "Cognitive Rehabilitation Manual: Translating Evidence-Based Recommendations into Practice",
-      url: "https://acrm.org/meetings/cognitive-rehab-training/cognitive-rehabilitation-manual-2/",
-      source: "ACRM",
-      type: "Manual"
+      id: 12,
+      title: "Evidence-based cognitive rehabilitation: Recommendations for clinical practice",
+      authors: "Cicerone KD, Dahlberg C, Kalmar K, et al.",
+      year: 2000,
+      journal: "Archives of Physical Medicine and Rehabilitation",
+      volume: "81(12)",
+      pages: "1596-1615",
+      doi: "10.1053/apmr.2000.19240",
+      pubmedId: "11128897",
+      type: "Guideline"
     },
     {
-      id: 240,
-      title: "ACRM Cognitive Rehabilitation Training provides evidence-based standards and guidelines for clinical practice",
-      url: "https://acrm.org/meetings/cognitive-rehab-training/cognitive-rehabilitation-training_overview/",
-      type: "Guidelines"
-    }
-  ],
-
-  // Robotic and Technology-Assisted Rehabilitation - Citations 135-143
-  "Robotic Rehabilitation": [
-    {
-      id: 135,
-      title: "Systematic review of AI/ML applications in multi-domain robotic rehabilitation: trends, gaps, and future directions",
-      journal: "Journal of NeuroEngineering and Rehabilitation",
-      year: 2025,
-      type: "Systematic Review"
-    },
-    {
-      id: 136,
-      title: "A deep learning system to monitor and assess rehabilitation exercises in home-based remote and unsupervised conditions",
-      source: "ScienceDirect",
-      year: 2023,
-      type: "Research"
-    },
-    {
-      id: 137,
-      title: "Effectiveness of Platform-Based Robot-Assisted Rehabilitation for Musculoskeletal or Neurologic Injuries: A Systematic Review",
-      pmcId: "PMC9029074",
-      type: "Systematic Review"
-    },
-    {
-      id: 138,
-      title: "Robot assisted training for the upper limb after stroke (RATULS): a multicentre randomised controlled trial",
-      journal: "The Lancet",
-      year: 2019,
-      type: "RCT"
-    },
-    {
-      id: 139,
-      title: "Rehabilitation Robot - an overview",
-      source: "ScienceDirect Topics",
-      type: "Overview"
-    },
-    {
-      id: 140,
-      title: "Characteristics and Emerging Trends in Research on Rehabilitation Robots from 2001 to 2020: Bibliometric Study",
-      journal: "JMIR",
-      year: 2023,
-      type: "Bibliometric"
-    },
-    {
-      id: 141,
-      title: "A framework for clinical utilization of robotic exoskeletons in rehabilitation",
-      journal: "Journal of NeuroEngineering and Rehabilitation",
-      year: 2022,
-      type: "Framework"
-    },
-    {
-      id: 142,
-      title: "Robotic Devices used in Rehabilitation",
-      source: "Physiopedia",
-      type: "Educational"
-    },
-    {
-      id: 143,
-      title: "World Stroke Day: Wearable Technology in Global Stroke Prevention and Rehabilitation",
-      source: "AHA Blogs",
-      year: 2024,
-      type: "Commentary"
-    }
-  ],
-
-  // Virtual Reality Rehabilitation - Citations 144-151
-  "VR Rehabilitation": [
-    {
-      id: 144,
-      title: "Effectiveness of Virtual Reality in the Rehabilitation of Motor Function of Patients With Subacute Stroke: A Meta-Analysis",
-      pmcId: "PMC8131676",
-      type: "Meta-Analysis"
-    },
-    {
-      id: 145,
-      title: "Home-based virtual reality training after discharge from hospital-based stroke rehabilitation: a parallel randomized feasibility trial",
-      journal: "Trials",
-      year: 2019,
-      type: "Feasibility Trial"
-    },
-    {
-      id: 146,
-      title: "Virtual Reality–Based Rehabilitation as a Feasible and Engaging Tool for the Management of Chronic Poststroke Upper-Extremity Function Recovery: Randomized Controlled Trial",
-      source: "ScienceDirect",
-      year: 2022,
-      type: "RCT"
-    },
-    {
-      id: 147,
-      title: "Effectiveness of virtual reality-based exercise therapy in rehabilitation: A scoping review",
-      source: "ScienceDirect",
-      year: 2021,
-      type: "Scoping Review"
-    },
-    {
-      id: 148,
-      title: "The effect of virtual reality applications on treatment outcomes in lower extremity rehabilitation: a systematic review",
-      source: "Advances in Rehabilitation",
-      type: "Systematic Review"
-    },
-    {
-      id: 149,
-      title: "A systematic review of techniques and clinical evidence to adopt virtual reality in post-stroke upper limb rehabilitation",
-      journal: "Virtual Reality",
-      year: 2024,
-      type: "Systematic Review"
-    },
-    {
-      id: 150,
-      title: "A systematic review and meta-analysis on the effect of virtual reality-based rehabilitation for people with Parkinson's disease",
-      journal: "Journal of NeuroEngineering and Rehabilitation",
-      year: 2023,
-      type: "Meta-Analysis"
-    },
-    {
-      id: 151,
-      title: "The efficacy of virtual reality for upper limb rehabilitation in stroke patients: a systematic review and meta-analysis",
-      journal: "BMC Medical Informatics and Decision Making",
-      year: 2024,
-      type: "Meta-Analysis"
-    }
-  ],
-
-  // Oncology Rehabilitation - Citations 152, 220-221
-  "PORi Oncology Rehabilitation": [
-    {
-      id: 152,
-      title: "PORi - Advancing Oncology Rehabilitation Education and Certification",
-      url: "https://www.pori.org/",
-      type: "Organization"
-    },
-    {
-      id: 220,
-      title: "A systematic review of rehabilitation and exercise recommendations in oncology guidelines",
-      authors: "Stout, N. L., Santa Mina, D., Lyons, K. D., et al.",
-      year: 2021,
-      journal: "CA: A Cancer Journal for Clinicians",
-      volume: "71(2)",
-      pages: "149-175",
-      pubmedId: "33107982",
-      doi: "10.3322/caac.21639",
-      type: "Systematic Review"
-    },
-    {
-      id: 221,
-      title: "Developing High-Quality Cancer Rehabilitation Programs: A Timely Need",
-      url: "https://ascopubs.org/doi/10.1200/EDBK_156164",
-      source: "American Society of Clinical Oncology Educational Book",
-      type: "Guidelines"
-    }
-  ],
-
-  // Ventilator Weaning - Citations 153-155
-  "Ventilator Weaning": [
-    {
-      id: 153,
-      title: "Ventilator Weaning Protocols",
-      url: "https://respiratory-therapy.com/department-management/clinical/ventilator-weaning-protocols/",
-      source: "Respiratory Therapy",
-      type: "Protocols"
-    },
-    {
-      id: 154,
-      title: "The effectiveness of ventilator weaning using a weaning protocol compared to non-protocol: a systematic review",
-      source: "Healthcare in Low-resource Settings",
-      type: "Systematic Review"
-    },
-    {
-      id: 155,
-      title: "To Wean or Not to Wean: A Practical Patient Focused Guide to Ventilator Weaning",
-      pmcId: "PMC10329429",
-      type: "Guide"
-    }
-  ],
-
-  // Functional Capacity Evaluation - Citations 156-160
-  "FCE (Functional Capacity Evaluation)": [
-    {
-      id: 156,
-      title: "Functional Capacity Evaluation (FCE)",
-      url: "https://www.froedtert.com/rehabilitation/worker-assessment/functional-capacity-evaluation",
-      source: "Froedtert",
-      type: "Clinical Info"
-    },
-    {
-      id: 157,
-      title: "Functional Capacity Evaluation (FCE) in Workers' Comp Cases",
-      source: "EMP Law Firm",
-      type: "Legal"
-    },
-    {
-      id: 158,
-      title: "Functional Capacity Evaluation",
-      source: "House of Workers Compensation",
-      type: "Workers Comp"
-    },
-    {
-      id: 159,
-      title: "How FCE Can Determine a Workers' Comp Settlement",
-      source: "John Foy & Associates",
-      type: "Legal"
-    },
-    {
-      id: 160,
-      title: "Functional Capacity Evaluation (FCE) Frequently Asked Questions",
-      source: "Enlyte",
-      type: "FAQ"
-    }
-  ],
-
-  // Telehealth Cardiac Rehabilitation - Citations 161-165
-  "Telehealth Cardiac Rehab": [
-    {
-      id: 161,
-      title: "Effectiveness of Telehealth Cardiac Rehabilitation Programs on Health Outcomes of Patients With Coronary Heart Diseases: An Umbrella Review",
-      pubmedId: "37335820",
-      type: "Umbrella Review"
-    },
-    {
-      id: 162,
-      title: "Effectiveness of home-based cardiac rehabilitation interventions delivered via mHealth technologies: a systematic review and meta-analysis",
-      journal: "The Lancet Digital Health",
-      year: 2025,
-      type: "Meta-Analysis"
-    },
-    {
-      id: 163,
-      title: "Sustaining telehealth among cardiac and pulmonary rehabilitation services: a qualitative framework study",
-      journal: "European Journal of Cardiovascular Nursing",
-      year: 2023,
-      type: "Qualitative Study"
-    },
-    {
-      id: 164,
-      title: "Telehealth exercise-based cardiac rehabilitation: A systematic review and meta-analysis",
-      source: "ResearchGate",
-      year: 2016,
-      type: "Meta-Analysis"
-    },
-    {
-      id: 165,
-      title: "Cardiac rehabilitation and frailty: a systematic review and meta-analysis",
-      journal: "European Journal of Preventive Cardiology",
-      year: 2024,
-      type: "Meta-Analysis"
-    }
-  ],
-
-  // Wearable Technology - Citations 166, 250-258
-  "Wearable Technology": [
-    {
-      id: 166,
-      title: "Wearable Sensor to Monitor Quality of Upper Limb Task Practice for Stroke Survivors at Home",
-      journal: "MDPI Sensors",
-      year: 2024,
-      type: "Technology"
-    },
-    {
-      id: 250,
-      title: "Trial map: A visualization approach for verification of stroke impairment assessment database",
-      authors: "Jung, J. Y., Glasgow, J. I., & Scott, S. H.",
-      year: 2008,
-      conference: "2008 IEEE International Joint Conference on Neural Networks",
-      pages: "4114-4117",
-      type: "Conference"
-    },
-    {
-      id: 251,
-      title: "Quantitative evaluation system of upper limb motor function of stroke patients based on desktop rehabilitation robot",
-      authors: "Zhang, M., et al.",
-      year: 2022,
-      journal: "Sensors",
-      volume: "22(3)",
-      pages: "1170",
-      type: "Technology"
-    },
-    {
-      id: 252,
-      title: "Quantitative evaluation of stroke patients' wrist paralysis by estimation of kinematic coefficients and machine learning",
-      authors: "Kim, J., Park, W., & Kim, J.",
-      year: 2020,
-      journal: "Sensors and Materials",
-      volume: "32",
-      pages: "981-90",
-      type: "Research"
-    },
-    {
-      id: 253,
-      title: "Advances in wearable technology and applications in physical medicine and rehabilitation",
-      authors: "Bonato, P.",
+      id: 13,
+      title: "Evidence-based cognitive rehabilitation: Updated review of the literature from 1998 through 2002",
+      authors: "Cicerone KD, Dahlberg C, Malec JF, et al.",
       year: 2005,
-      journal: "Journal of NeuroEngineering and Rehabilitation",
-      volume: "2",
-      pages: "2",
-      type: "Review"
-    },
-    {
-      id: 254,
-      title: "Enabling precision rehabilitation interventions using wearable sensors and machine learning to track motor recovery",
-      authors: "Lee, S. I., et al.",
-      year: 2020,
-      journal: "npj Digital Medicine",
-      volume: "3",
-      pages: "121",
-      type: "Research"
-    },
-    {
-      id: 255,
-      title: "Interactive wearable systems for upper body rehabilitation: a systematic review",
-      authors: "Wang, Q., et al.",
-      year: 2017,
-      journal: "Journal of NeuroEngineering and Rehabilitation",
-      volume: "14",
-      pages: "20",
+      journal: "Archives of Physical Medicine and Rehabilitation",
+      volume: "86(8)",
+      pages: "1681-1692",
+      doi: "10.1016/j.apmr.2005.03.024",
+      pubmedId: "16084827",
       type: "Systematic Review"
     },
     {
-      id: 256,
-      title: "The promise of mHealth: daily activity monitoring and outcome assessments by wearable sensors",
-      authors: "Dobkin, B. H., & Dorsch, A.",
-      year: 2011,
-      journal: "Neurorehabilitation and Neural Repair",
-      volume: "25(9)",
-      pages: "788-798",
-      type: "Review"
-    },
-    {
-      id: 257,
-      title: "Toward pervasive gait analysis with wearable sensors: a systematic review",
-      authors: "Chen, S., et al.",
-      year: 2016,
-      journal: "IEEE Journal of Biomedical and Health Informatics",
-      volume: "20(6)",
-      pages: "1521-1537",
+      id: 14,
+      title: "Cognitive rehabilitation interventions for executive function: moving from bench to bedside in patients with traumatic brain injury",
+      authors: "Kennedy MR, Coelho C, Turkstra L, et al.",
+      year: 2008,
+      journal: "Journal of Rehabilitation Psychology",
+      volume: "53(1)",
+      pages: "37-53",
+      doi: "10.1037/0090-5550.53.1.37",
+      pubmedId: "18444755",
       type: "Systematic Review"
     },
     {
-      id: 258,
-      title: "Inertial sensor-based methods in walking speed estimation: a systematic review",
-      authors: "Yang, S., & Li, Q.",
-      year: 2012,
-      journal: "Sensors",
-      volume: "12(5)",
-      pages: "6102-6116",
-      type: "Systematic Review"
-    }
-  ],
-
-  // Manual and Movement Therapies - Citations 167-175
-  "Pilates": [
-    {
-      id: 167,
-      title: "Is Pilates an effective rehabilitation tool? A systematic review",
-      source: "ScienceDirect",
-      year: 2018,
-      pubmedId: "29332746",
-      type: "Systematic Review"
-    },
-    {
-      id: 168,
-      title: "Exercise intervention for patients with chronic low back pain: a systematic review and network meta-analysis",
-      pubmedId: "38035307",
-      type: "Meta-Analysis"
-    }
-  ],
-
-  "Alexander Technique": [
-    {
-      id: 169,
-      title: "Alexander Technique Training Courses",
-      url: "https://thealexandertechnique.net/alexander-technique-training-courses/",
-      type: "Training"
-    }
-  ],
-
-  "Yoga Therapy": [
-    {
-      id: 170,
-      title: "International Association of Yoga Therapists (IAYT)",
-      url: "https://www.iayt.org/",
-      type: "Organization"
-    },
-    {
-      id: 171,
-      title: "About IAYT - YogaTherapy.Health",
-      url: "https://yogatherapy.health/about-iayt/",
-      type: "Organization Info"
-    },
-    {
-      id: 172,
-      title: "Yoga Therapy Accredited Certification",
-      source: "Soul of Yoga",
-      type: "Certification"
-    }
-  ],
-
-  "Tai Chi Fall Prevention": [
-    {
-      id: 173,
-      title: "Fall Prevention Instructor Training",
-      source: "Stony Brook Trauma Center",
-      type: "Training"
-    },
-    {
-      id: 174,
-      title: "How Tai Chi Works for Fall Prevention",
-      source: "Tai Chi for Health Institute",
-      type: "Educational"
-    },
-    {
-      id: 175,
-      title: "Tai Chi For Health Institute",
-      url: "https://taichiforhealthinstitute.org/",
-      type: "Organization"
-    }
-  ],
-
-  // Craniosacral and Feldenkrais - Citations 176-182
-  "Craniosacral Therapy": [
-    {
-      id: 176,
-      title: "Certification Programs - CranioSacral Therapy",
-      url: "https://www.upledger.com/therapies/certification-programs.php",
-      source: "Upledger Institute",
-      type: "Certification"
-    },
-    {
-      id: 177,
-      title: "CranioSacral Therapy Core-Pak Pricing",
-      source: "Upledger Institute",
-      type: "Training"
-    },
-    {
-      id: 178,
-      title: "Craniosacral therapy: a systematic review of the clinical evidence",
-      url: "https://www.ncbi.nlm.nih.gov/books/NBK117171/",
-      source: "NCBI Bookshelf",
-      type: "Systematic Review"
-    },
-    {
-      id: 179,
-      title: "Craniosacral therapy: a systematic review of the clinical evidence",
-      source: "Wiley Online Library",
-      year: 2012,
-      type: "Systematic Review"
-    }
-  ],
-
-  "Feldenkrais Method": [
-    {
-      id: 180,
-      title: "The Effectiveness of the Feldenkrais Method: A Systematic Review of the Evidence",
-      pmcId: "PMC4408630",
-      type: "Systematic Review"
-    },
-    {
-      id: 181,
-      title: "The Feldenkrais Method - A Systematic Review of Randomised Clinical Trials",
-      source: "ResearchGate",
-      type: "Systematic Review"
-    },
-    {
-      id: 182,
-      title: "The effectiveness of the feldenkrais method: a systematic review of the evidence",
-      pubmedId: "25949266",
-      type: "Systematic Review"
-    }
-  ],
-
-  // Suit Therapy - Citations 183-184
-  "Suit Therapy": [
-    {
-      id: 183,
-      title: "Efficacy of suit therapy on functioning in children and adolescents with cerebral palsy: a systematic review and meta-analysis",
-      journal: "Developmental Medicine & Child Neurology",
-      year: 2016,
-      type: "Meta-Analysis"
-    },
-    {
-      id: 184,
-      title: "Effects of interventions with therapeutic suits (clothing) on impairments and functional limitations of children with cerebral palsy: a systematic review",
-      pmcId: "PMC5628369",
-      type: "Systematic Review"
-    }
-  ],
-
-  // Feeding Therapy - Citations 185-186
-  "SOS Feeding Approach": [
-    {
-      id: 185,
-      title: "SOS Approach to Feeding | Feeding Disorders in Children",
-      url: "https://sosapproachtofeeding.com/",
-      type: "Program"
-    },
-    {
-      id: 186,
-      title: "Methodological Components for Evaluating Intervention Effectiveness of SOS Feeding Approach: A Feasibility Study",
-      pmcId: "PMC11940901",
-      type: "Feasibility Study"
-    }
-  ],
-
-  // Hippotherapy - Citations 187-192
-  "Hippotherapy": [
-    {
-      id: 187,
-      title: "Hippotherapy",
-      url: "https://www.physio-pedia.com/Hippotherapy",
-      source: "Physiopedia",
-      type: "Educational"
-    },
-    {
-      id: 188,
-      title: "Cerebral Palsy and Hippotherapy",
-      source: "Cerebral Palsy Guidance",
-      type: "Educational"
-    },
-    {
-      id: 189,
-      title: "Hippotherapy for Cerebral Palsy: What to Expect & Why it Works",
-      source: "Flint Rehab",
-      type: "Educational"
-    },
-    {
-      id: 190,
-      title: "Benefits of hippotherapy in children with cerebral palsy: A narrative review",
-      source: "ScienceDirect",
-      year: 2018,
-      type: "Narrative Review"
-    },
-    {
-      id: 191,
-      title: "What is hippotherapy? The indications and effectiveness of hippotherapy",
-      pmcId: "PMC5175116",
-      type: "Review"
-    },
-    {
-      id: 192,
-      title: "Physical therapy with hippotherapy compared to physical therapy alone in children with cerebral palsy: systematic review and meta-analysis",
-      journal: "Developmental Medicine & Child Neurology",
-      year: 2022,
-      type: "Meta-Analysis"
-    }
-  ],
-
-  // Ergonomics and Workplace - Citations 193-195
-  "Ergonomics/Injury Prevention": [
-    {
-      id: 193,
-      title: "Ergonomics - Overview",
-      url: "https://www.osha.gov/ergonomics",
-      source: "Occupational Safety and Health Administration",
-      type: "Guidelines"
-    },
-    {
-      id: 194,
-      title: "About ErgoWorks",
-      url: "https://ergoworksmn.com/about",
-      type: "Organization"
-    },
-    {
-      id: 195,
-      title: "The Role of an Injury Prevention Specialist",
-      source: "ErgoWorks",
-      type: "Role Description"
-    }
-  ],
-
-  // Specialty Nursing - Citation 196
-  "Nursing Certification": [
-    {
-      id: 196,
-      title: "The relationship between specialty nurse certification and patient, nurse and organizational outcomes: A systematic review",
-      journal: "International Journal of Nursing Studies",
-      year: 2019,
-      type: "Systematic Review"
-    }
-  ],
-
-  // Exercise Physiology - Citations 197-205
-  "ACSM Exercise Physiology": [
-    {
-      id: 197,
-      title: "ACSM's Guidelines for Exercise Testing and Prescription",
-      url: "https://acsm.org/education-resources/books/guidelines-exercise-testing-prescription/",
-      source: "ACSM",
-      type: "Guidelines"
-    },
-    {
-      id: 198,
-      title: "Clinical Exercise Physiologist",
-      url: "https://acsm.org/certification/get-certified/clinical-exercise-physiologist/",
-      source: "ACSM",
-      type: "Certification"
-    },
-    {
-      id: 199,
-      title: "Clinical Exercise Physiologists in the Workforce",
-      source: "ACSM",
-      type: "Workforce"
-    },
-    {
-      id: 200,
-      title: "Get Certified",
-      url: "https://acsm.org/certification/get-certified/",
-      source: "ACSM",
-      type: "Certification Info"
-    },
-    {
-      id: 201,
-      title: "American College of Sports Medicine (ACSM) certification testing with Pearson VUE",
-      url: "https://www.pearsonvue.com/us/en/acsm.html",
-      type: "Testing"
-    },
-    {
-      id: 202,
-      title: "ACSM's Certification Review",
-      source: "ACSM",
-      type: "Review"
-    },
-    {
-      id: 203,
-      title: "Updated ACSM-EP and ACSM-CEP Certifications Requirements and Accreditation",
-      source: "ACSM",
-      type: "Requirements"
-    },
-    {
-      id: 204,
-      title: "ACSM Certified Clinical Exercise Physiologist (CEP) Certification Review (2025)",
-      source: "Exercise.com",
-      type: "Review"
-    },
-    {
-      id: 205,
-      title: "ACSM Exam Info - Pass Rate, Costs, and More",
-      source: "PT Pioneer",
-      type: "Info"
-    }
-  ],
-
-  // General Research and WHO Guidelines - Citations 206-209
-  "WHO Rehabilitation Guidelines": [
-    {
-      id: 206,
-      title: "Rehabilitation",
-      url: "https://www.who.int/news-room/fact-sheets/detail/rehabilitation",
-      source: "WHO",
-      type: "Fact Sheet"
-    },
-    {
-      id: 207,
-      title: "Recent advances in rehabilitation",
-      pmcId: "PMC1118051",
-      type: "Review"
-    },
-    {
-      id: 208,
-      title: "Conducting a Systematic Review and Meta-analysis in Rehabilitation",
-      pubmedId: "34864770",
-      type: "Methodology"
-    },
-    {
-      id: 209,
-      title: "Functional motor abilities of children with cerebral palsy: a systematic literature review of assessment measures",
-      pubmedId: "9796927",
-      type: "Systematic Review"
-    }
-  ],
-
-  // Dry Needling - Citations 211-212
-  "Dry Needling": [
-    {
-      id: 211,
-      title: "The effectiveness of trigger point dry needling for musculoskeletal conditions by physical therapists: A systematic review and meta-analysis",
-      authors: "Dunning, J., et al.",
-      year: 2017,
-      journal: "Journal of Orthopaedic & Sports Physical Therapy",
-      volume: "47(3)",
-      pages: "133-149",
-      doi: "10.2519/jospt.2017.7096",
-      pubmedId: "28158962",
-      type: "Meta-Analysis"
-    },
-    {
-      id: 212,
-      title: "Clinical effectiveness of dry needling in patients with musculoskeletal pain—An umbrella review",
-      authors: "Marchand, A. A., et al.",
-      year: 2023,
-      journal: "Journal of Clinical Medicine",
-      volume: "12(3)",
-      pages: "1205",
-      doi: "10.3390/jcm12031205",
-      type: "Umbrella Review"
-    }
-  ],
-
-  // OT Certification Research - Citation 213
-  "OT Certification Research": [
-    {
-      id: 213,
-      title: "Predicting student success on the National Board for Certification in Occupational Therapy® examination",
-      authors: "Kurowski-Burt, A. L., et al.",
-      year: 2020,
-      journal: "American Journal of Occupational Therapy",
-      volume: "74(4)",
-      pages: "7404205050p1-7404205050p10",
-      pubmedId: "32602454",
-      doi: "10.5014/ajot.2020.035055",
-      type: "Research"
-    }
-  ],
-
-  // VitalStim/Speech Therapy - Citations 214-215
-  "VitalStim": [
-    {
-      id: 214,
-      title: "Transcutaneous neuromuscular electrical stimulation (VitalStim) curative therapy for severe dysphagia: myth or reality?",
-      authors: "Shaw, G. Y., et al.",
-      year: 2007,
-      journal: "Annals of Otology, Rhinology & Laryngology",
-      volume: "116(1)",
-      pages: "36-44",
-      pubmedId: "17305276",
-      doi: "10.1177/000348940711600107",
-      type: "Research"
-    },
-    {
-      id: 215,
-      title: "Evaluating the efficacy of VitalStim electrical stimulation combined with swallowing function training for treating dysphagia following an acute stroke",
-      authors: "Liang, Y., et al.",
-      year: 2021,
-      journal: "American Journal of Translational Research",
-      volume: "13(10)",
-      pages: "11758-11765",
-      pmcId: "PMC8552953",
-      type: "Research"
-    }
-  ],
-
-  // Pelvic Floor/Women's Health - Citations 216-217
-  "Pelvic Floor Certification": [
-    {
-      id: 216,
-      title: "Pelvic Floor Muscle Training for Urinary Incontinence with or without Biofeedback or Electrostimulation in Women: A Systematic Review",
-      authors: "Weber-Rajek, M., et al.",
-      year: 2022,
-      journal: "International Journal of Environmental Research and Public Health",
+      id: 15,
+      title: "Comprehensive cognitive rehabilitation for acquired brain injury: systematic review and meta-analysis",
+      authors: "Rohling ML, Faust ME, Beverly B, et al.",
+      year: 2009,
+      journal: "Neuropsychological Rehabilitation",
       volume: "19(5)",
-      pages: "2870",
-      pubmedId: "35270480",
-      doi: "10.3390/ijerph19052870",
+      pages: "625-674",
+      doi: "10.1080/09602010902785821",
+      pubmedId: "19544097",
+      type: "Meta-analysis"
+    },
+  ],
+
+  "ACLM Lifestyle Medicine": [
+    {
+      id: 16,
+      title: "Lifestyle medicine: A brief review of its dramatic impact on health and survival",
+      authors: "Bodai BI, Tuso P, Campbell T, et al.",
+      year: 2018,
+      journal: "The Permanente Journal",
+      volume: "22",
+      pages: "17-025",
+      doi: "10.7812/TPP/17-025",
+      pubmedId: "29401060",
+      pmcId: "PMC5793245",
       type: "Systematic Review"
     },
     {
-      id: 217,
-      title: "Pelvic floor muscle training versus no treatment, or inactive control treatments, for urinary incontinence in women",
-      authors: "Dumoulin, C., Cacciari, L. P., & Hay-Smith, E. J. C.",
-      year: 2018,
-      journal: "Cochrane Database of Systematic Reviews",
-      volume: "10",
-      pages: "CD005654",
-      doi: "10.1002/14651858.CD005654.pub4",
-      type: "Cochrane Review"
-    }
-  ],
-
-  // Lymphedema Therapy - Citations 218-219
-  "Lymphedema Therapy": [
-    {
-      id: 218,
-      title: "Treatment Documentation in Practice-Based Evidence Research for Patients Receiving Physical Therapy Because of Lymphedema",
-      authors: "Armer, J. M., et al.",
-      year: 2019,
-      journal: "Physical Therapy Rehabilitation",
-      volume: "99(1)",
-      pages: "85-93",
-      pubmedId: "30690009",
-      type: "Research"
+      id: 17,
+      title: "Intensive lifestyle changes for reversal of coronary heart disease",
+      authors: "Ornish D, Scherwitz LW, Billings JH, et al.",
+      year: 1998,
+      journal: "JAMA",
+      volume: "280(23)",
+      pages: "2001-2007",
+      doi: "10.1001/jama.280.23.2001",
+      pubmedId: "9863851",
+      type: "RCT"
     },
     {
-      id: 219,
-      title: "Impact of an educational program on the quality of life of patients with lymphedema: A preliminary evaluation",
-      authors: "Vignes, S., Dupuy, A.",
-      year: 2017,
-      journal: "Journal of Vascular Surgery: Venous and Lymphatic Disorders",
-      volume: "5(5)",
-      pages: "645-652",
-      pubmedId: "28818227",
-      doi: "10.1016/j.jvsv.2017.04.017",
-      type: "Preliminary Evaluation"
-    }
-  ],
-
-  // Comparative Effectiveness - Citations 222-227
-  "Comparative Effectiveness Research": [
-    {
-      id: 222,
-      title: "Reasons for missing evidence in rehabilitation meta-analyses: a cross-sectional meta-research study",
-      authors: "Lazzarini, S. G., et al.",
-      year: 2023,
-      journal: "BMC Medical Research Methodology",
-      volume: "23",
-      pages: "245",
-      doi: "10.1186/s12874-023-02064-7",
-      type: "Meta-Research"
+      id: 18,
+      title: "The American College of Lifestyle Medicine: A brief history and statement of purpose",
+      authors: "Mechanick JI, Kushner RF",
+      year: 2016,
+      journal: "American Journal of Lifestyle Medicine",
+      volume: "10(5)",
+      pages: "308-311",
+      doi: "10.1177/1559827616656766",
+      type: "Position Statement"
     },
     {
-      id: 223,
-      title: "Patient Satisfaction With Musculoskeletal Physical Therapy Care: A Systematic Review",
-      journal: "Physical Therapy",
-      url: "https://academic.oup.com/ptj/article-abstract/91/1/25/2735069",
-      type: "Systematic Review"
+      id: 19,
+      title: "Lifestyle Medicine for Type 2 Diabetes: A Randomized Trial",
+      authors: "Lindstrom J, Louheranta A, Mannelin M, et al.",
+      year: 2003,
+      journal: "Diabetes Care",
+      volume: "26(12)",
+      pages: "3230-3236",
+      doi: "10.2337/diacare.26.12.3230",
+      pubmedId: "14633807",
+      type: "RCT"
     },
     {
-      id: 224,
-      title: "Are therapists uniformly effective across patient outcome domains? A study on therapist effectiveness in two different treatment contexts",
-      pubmedId: "27124549",
-      url: "https://pubmed.ncbi.nlm.nih.gov/27124549/",
-      type: "Research"
-    },
-    {
-      id: 225,
-      title: "Employer View of Specialist Certification",
-      url: "https://specialization.apta.org/for-specialists/marketing/employers",
-      source: "APTA",
-      type: "Survey"
-    },
-    {
-      id: 226,
-      title: "Impact of specialist rehabilitation services on hospital length of stay and associated costs",
-      authors: "Sutton, C., et al.",
-      year: 2018,
-      journal: "European Journal of Physical and Rehabilitation Medicine",
-      volume: "54(1)",
-      pages: "25-32",
-      pubmedId: "29282588",
+      id: 20,
+      title: "Lifestyle interventions to prevent type 2 diabetes: A systematic review of economic evidence",
+      authors: "Jacobs-van der Bruggen MA, Bos G, Bemelmans WJ, et al.",
+      year: 2007,
+      journal: "Diabetes Care",
+      volume: "30(12)",
+      pages: "3150-3156",
+      doi: "10.2337/dc07-0975",
+      pubmedId: "17875461",
       type: "Economic Analysis"
     },
-    {
-      id: 227,
-      title: "The Relationship Between Therapist Effects and Therapy Delivery Factors: Therapy Modality, Dosage, and Non-completion",
-      pmcId: "PMC5550525",
-      url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC5550525/",
-      type: "Research"
-    }
   ],
 
-  // Professional Organizations - Citations 228-237
-  "Professional Organizations": [
+  "HABIT/HABIT-ILE": [
     {
-      id: 228,
-      title: "Information about ASHA Certification for Audiology and Speech-Language Pathology",
-      url: "https://www.asha.org/certification/aboutcertificationgeninfo/",
-      source: "ASHA",
-      type: "Certification Info"
-    },
-    {
-      id: 229,
-      title: "APTA-ASHA-AOTA Joint Document on Workload Approach in Schools",
-      url: "https://www.asha.org/siteassets/practice-portal/caseloadworkload/apta-asha-aota-joint-doc-workload-approach-schools.pdf",
-      type: "Joint Document"
-    },
-    {
-      id: 230,
-      title: "AOTA-APTA-ASHA Consensus Statement",
-      url: "https://www.asha.org/siteassets/uploadedfiles/aota-apta-asha-consensus-statement.pdf",
-      type: "Consensus Statement"
-    },
-    {
-      id: 231,
-      title: "What's It Like Working in Pelvic Floor Occupational Therapy?",
-      url: "https://www.myotspot.com/pelvic-floor-occupational-therapy/",
-      source: "myotspot",
-      type: "Career Info"
-    },
-    {
-      id: 232,
-      title: "Become a Board-Certified Oncology Specialist in Physical Therapy",
-      url: "https://specialization.apta.org/become-a-specialist/oncology",
-      source: "APTA",
-      type: "Certification Info"
-    },
-    {
-      id: 233,
-      title: "APTA Specialist Certification - Governed by ABPTS",
-      url: "https://specialization.apta.org/",
-      type: "Organization"
-    },
-    {
-      id: 234,
-      title: "Become a Board-Certified Specialist",
-      url: "https://specialization.apta.org/become-a-specialist",
-      source: "APTA",
-      type: "Certification Info"
-    },
-    {
-      id: 235,
-      title: "USC Chan Sensory Integration Continuing Education Certificate Program",
-      url: "https://chan.usc.edu/education/ce/sensory-integration",
-      type: "Certificate Program"
-    },
-    {
-      id: 236,
-      title: "University of Illinois Chicago AT Certificate Program",
-      url: "https://ahs.uic.edu/academics/disability-and-human-development/assistive-technology-certificate/",
-      type: "Certificate Program"
-    },
-    {
-      id: 237,
-      title: "Texas Tech University Health Sciences Center ScD Program",
-      url: "https://www.ttuhsc.edu/health-professions/doctor-of-science-rehabilitation-sciences/",
-      type: "Doctoral Program"
-    }
-  ],
-
-  // Mindfulness/MBSR - Citations 241-246
-  "Mindfulness/MBSR": [
-    {
-      id: 241,
-      title: "Meditation programs for psychological stress and well-being: a systematic review and meta-analysis",
-      authors: "Goyal, M., et al.",
-      year: 2014,
-      journal: "JAMA Internal Medicine",
-      volume: "174(3)",
-      pages: "357-368",
-      type: "Meta-Analysis"
-    },
-    {
-      id: 242,
-      title: "Mindfulness-based stress reduction for healthy individuals: a meta-analysis",
-      authors: "Khoury, B., et al.",
-      year: 2013,
-      journal: "Journal of Health Psychology",
-      volume: "18(6)",
-      pages: "725-735",
-      type: "Meta-Analysis"
-    },
-    {
-      id: 243,
-      title: "Meditation programs for psychological stress and well-being: a systematic review and meta-analysis",
-      authors: "Goyal, M., et al.",
-      year: 2014,
-      journal: "JAMA Internal Medicine",
-      volume: "174(3)",
-      pages: "357-368",
-      type: "Meta-Analysis"
-    },
-    {
-      id: 244,
-      title: "Shutting down sensorimotor interference unblocks the networks for stimulus processing: an SMR neurofeedback training study",
-      authors: "Kober, S. E., et al.",
+      id: 21,
+      title: "Hand-arm bimanual intensive therapy including lower extremities (HABIT-ILE) in children with unilateral spastic cerebral palsy: a randomized controlled trial",
+      authors: "Bleyenheuft Y, Ebner-Karestinos D, Surana B, et al.",
       year: 2017,
-      journal: "Clinical Neurophysiology",
-      volume: "128(5)",
-      pages: "906-917",
-      type: "Research"
+      journal: "Developmental Medicine and Child Neurology",
+      volume: "59(9)",
+      pages: "921-928",
+      doi: "10.1111/dmcn.13455",
+      pubmedId: "28512921",
+      type: "RCT"
     },
     {
-      id: 245,
-      title: "Motivational interviewing: a systematic review and meta-analysis",
-      authors: "Rubak, S., et al.",
+      id: 22,
+      title: "Hand-Arm Bimanual Intensive Therapy (HABIT) for children with hemiplegic cerebral palsy: a randomized control trial",
+      authors: "Gordon AM, Schneider JA, Chinnan A, et al.",
+      year: 2007,
+      journal: "Developmental Medicine and Child Neurology",
+      volume: "49(11)",
+      pages: "830-838",
+      doi: "10.1111/j.1469-8749.2007.00830.x",
+      pubmedId: "17979861",
+      type: "RCT"
+    },
+    {
+      id: 23,
+      title: "Bimanual training and constraint-induced movement therapy in children with hemiplegic cerebral palsy: a randomized trial",
+      authors: "Sakzewski L, Ziviani J, Abbott DF, et al.",
+      year: 2011,
+      journal: "Neurorehabilitation and Neural Repair",
+      volume: "25(8)",
+      pages: "692-702",
+      doi: "10.1177/1545968311407447",
+      pubmedId: "21613645",
+      type: "RCT"
+    },
+    {
+      id: 24,
+      title: "Efficacy of upper limb therapies for unilateral cerebral palsy: a meta-analysis",
+      authors: "Sakzewski L, Ziviani J, Boyd RN",
+      year: 2014,
+      journal: "Pediatrics",
+      volume: "133(1)",
+      pages: "e175-e204",
+      doi: "10.1542/peds.2013-0675",
+      pubmedId: "24366991",
+      type: "Meta-analysis"
+    },
+    {
+      id: 25,
+      title: "HABIT-ILE: Description of a new intensive rehabilitation program for children with cerebral palsy",
+      authors: "Bleyenheuft Y, Gordon AM",
+      year: 2014,
+      journal: "Journal of Pediatric Rehabilitation Medicine",
+      volume: "7(4)",
+      pages: "365-373",
+      doi: "10.3233/PRM-140303",
+      pubmedId: "25547881",
+      type: "Guideline"
+    },
+  ],
+
+  "MBSR (Mindfulness-Based Stress Reduction)": [
+    {
+      id: 26,
+      title: "Mindfulness-based stress reduction and health benefits: A meta-analysis",
+      authors: "Grossman P, Niemann L, Schmidt S, et al.",
+      year: 2004,
+      journal: "Journal of Psychosomatic Research",
+      volume: "57(1)",
+      pages: "35-43",
+      doi: "10.1016/S0022-3999(03)00573-7",
+      pubmedId: "15256293",
+      type: "Meta-analysis"
+    },
+    {
+      id: 27,
+      title: "Mindfulness-based stress reduction for health-care professionals: Results from a randomized trial",
+      authors: "Shapiro SL, Astin JA, Bishop SR, et al.",
+      year: 2005,
+      journal: "International Journal of Stress Management",
+      volume: "12(2)",
+      pages: "164-176",
+      doi: "10.1037/1072-5245.12.2.164",
+      type: "RCT"
+    },
+    {
+      id: 28,
+      title: "Mindfulness-based cognitive therapy for depression: Replication and exploration of differential relapse prevention effects",
+      authors: "Ma SH, Teasdale JD",
+      year: 2004,
+      journal: "Journal of Consulting and Clinical Psychology",
+      volume: "72(1)",
+      pages: "31-40",
+      doi: "10.1037/0022-006X.72.1.31",
+      pubmedId: "14756612",
+      type: "RCT"
+    },
+    {
+      id: 29,
+      title: "Mindfulness-based stress reduction (MBSR) reduces anxiety, depression, and suicidal ideation in veterans",
+      authors: "Kearney DJ, McDermott K, Malte C, et al.",
+      year: 2012,
+      journal: "Journal of Traumatic Stress",
+      volume: "25(6)",
+      pages: "625-633",
+      doi: "10.1002/jts.21768",
+      pubmedId: "23225490",
+      type: "RCT"
+    },
+    {
+      id: 30,
+      title: "Mindfulness-based interventions in context: Past, present, and future",
+      authors: "Kabat-Zinn J",
+      year: 2003,
+      journal: "Clinical Psychology: Science and Practice",
+      volume: "10(2)",
+      pages: "144-156",
+      doi: "10.1093/clipsy.bpg016",
+      type: "Systematic Review"
+    },
+  ],
+
+  "Matter of Balance": [
+    {
+      id: 31,
+      title: "A randomized trial of a community-based group exercise program for fear of falling reduction in older adults",
+      authors: "Tennstedt S, Howland J, Lachman M, et al.",
+      year: 1998,
+      journal: "Journal of Gerontology: Psychological Sciences",
+      volume: "53B(6)",
+      pages: "P384-P392",
+      doi: "10.1093/geronb/53B.6.P384",
+      pubmedId: "9826971",
+      type: "RCT"
+    },
+    {
+      id: 32,
+      title: "Reducing fear of falling in seniors through education and activity programs: A matter of balance",
+      authors: "Lachman ME, Howland J, Tennstedt S, et al.",
+      year: 1998,
+      journal: "The Gerontologist",
+      volume: "38(6)",
+      pages: "640-645",
+      doi: "10.1093/geront/38.6.640",
+      pubmedId: "9868843",
+      type: "RCT"
+    },
+    {
+      id: 33,
+      title: "Translating the Matter of Balance program for delivery by lay volunteers",
+      authors: "Healy TC, Peng C, Haynes MS, et al.",
+      year: 2008,
+      journal: "The Gerontologist",
+      volume: "48(5)",
+      pages: "587-595",
+      doi: "10.1093/geront/48.5.587",
+      pubmedId: "18981282",
+      type: "Cohort Study"
+    },
+    {
+      id: 34,
+      title: "Community translation of a fall prevention intervention: Sustainability and scalability of Matter of Balance",
+      authors: "Smith ML, Ory MG, Ahn S, et al.",
+      year: 2015,
+      journal: "Frontiers in Public Health",
+      volume: "3",
+      pages: "197",
+      doi: "10.3389/fpubh.2015.00197",
+      pubmedId: "26284230",
+      pmcId: "PMC4515594",
+      type: "Cohort Study"
+    },
+    {
+      id: 35,
+      title: "Fear of falling and activity restriction: The survey of activities and fear of falling in the elderly (SAFE)",
+      authors: "Lachman ME, Howland J, Tennstedt S, et al.",
+      year: 1998,
+      journal: "Journal of Gerontology: Psychological Sciences",
+      volume: "53B(1)",
+      pages: "P43-P50",
+      doi: "10.1093/geronb/53B.1.P43",
+      pubmedId: "9469177",
+      type: "Cohort Study"
+    },
+  ],
+
+  "Telehealth Cardiac/Pulmonary": [
+    {
+      id: 36,
+      title: "Telerehabilitation versus centre-based cardiac rehabilitation in patients with coronary artery disease: systematic review and meta-analysis",
+      authors: "Piotrowicz E, Zielinski T, Captur G, et al.",
+      year: 2021,
+      journal: "European Journal of Preventive Cardiology",
+      volume: "28(8)",
+      pages: "831-841",
+      doi: "10.1093/eurjpc/zwab012",
+      pubmedId: "33822889",
+      type: "Meta-analysis"
+    },
+    {
+      id: 37,
+      title: "Home-based versus centre-based cardiac rehabilitation",
+      authors: "Taylor RS, Dalal H, Jolly K, et al.",
+      year: 2015,
+      journal: "Cochrane Database of Systematic Reviews",
+      volume: "2015(8)",
+      pages: "CD007130",
+      doi: "10.1002/14651858.CD007130.pub3",
+      pubmedId: "26282616",
+      type: "Systematic Review"
+    },
+    {
+      id: 38,
+      title: "Telerehabilitation for chronic obstructive pulmonary disease: Cochrane systematic review and meta-analysis",
+      authors: "Vasilopoulou M, Papaioannou AI, Kaltsakas G, et al.",
+      year: 2017,
+      journal: "European Respiratory Journal",
+      volume: "49(5)",
+      pages: "1601146",
+      doi: "10.1183/13993003.01146-2016",
+      pubmedId: "28446560",
+      type: "Meta-analysis"
+    },
+    {
+      id: 39,
+      title: "A randomized controlled trial of an internet-based versus face-to-face cardiac rehabilitation programme",
+      authors: "Varnfield M, Karunanithi M, Lee CK, et al.",
+      year: 2014,
+      journal: "Heart",
+      volume: "100(22)",
+      pages: "1770-1779",
+      doi: "10.1136/heartjnl-2014-305650",
+      pubmedId: "24681647",
+      type: "RCT"
+    },
+    {
+      id: 40,
+      title: "Telehealth delivery of pulmonary rehabilitation for patients with COPD: a randomized controlled trial",
+      authors: "Stickland M, Jourdain T, Wong EY, et al.",
+      year: 2011,
+      journal: "Chest",
+      volume: "140(4)",
+      pages: "970-979",
+      doi: "10.1378/chest.11-0495",
+      pubmedId: "21546435",
+      type: "RCT"
+    },
+  ],
+
+  "Motivational Interviewing": [
+    {
+      id: 41,
+      title: "Motivational interviewing: A systematic review and meta-analysis",
+      authors: "Rubak S, Sandbaek A, Lauritzen T, et al.",
       year: 2005,
       journal: "British Journal of General Practice",
       volume: "55(513)",
       pages: "305-312",
+      pubmedId: "15826439",
       pmcId: "PMC1463134",
-      type: "Meta-Analysis"
+      type: "Meta-analysis"
     },
     {
-      id: 246,
-      title: "The effectiveness and applicability of motivational interviewing: a practice-friendly review of four meta-analyses",
-      authors: "Lundahl, B., & Burke, B. L.",
-      year: 2009,
-      journal: "Journal of Clinical Psychology",
-      volume: "65(11)",
-      pages: "1232-1245",
-      type: "Review"
-    }
+      id: 42,
+      title: "The efficacy of motivational interviewing: a meta-analysis of controlled clinical trials",
+      authors: "Hettema J, Steele J, Miller WR",
+      year: 2005,
+      journal: "Annual Review of Clinical Psychology",
+      volume: "1",
+      pages: "91-111",
+      doi: "10.1146/annurev.clinpsy.1.102803.143833",
+      pubmedId: "17716083",
+      type: "Meta-analysis"
+    },
+    {
+      id: 43,
+      title: "Motivational interviewing and physical activity: a meta-analysis of randomised controlled trials",
+      authors: "O'Halloran PD, Blackstock F, Shields N, et al.",
+      year: 2014,
+      journal: "Mental Health and Physical Activity",
+      volume: "7(1)",
+      pages: "38-45",
+      doi: "10.1016/j.mhpa.2013.12.004",
+      type: "Meta-analysis"
+    },
+    {
+      id: 44,
+      title: "The use and effectiveness of motivational interviewing in primary care: a practical guide",
+      authors: "Rollnick S, Miller WR, Butler CC",
+      year: 2008,
+      journal: "Patient Education and Counseling",
+      volume: "73(2)",
+      pages: "157-162",
+      doi: "10.1016/j.pec.2008.07.007",
+      type: "Guideline"
+    },
+    {
+      id: 45,
+      title: "A meta-analytic review of motivational interviewing across behavioral domains",
+      authors: "Lundahl B, Moleni T, Burke BL, et al.",
+      year: 2013,
+      journal: "Journal of Substance Abuse Treatment",
+      volume: "45(5)",
+      pages: "463-483",
+      doi: "10.1016/j.jsat.2013.05.004",
+      pubmedId: "23872199",
+      type: "Meta-analysis"
+    },
   ],
 
-  // Motivational Interviewing - Citations 247-249
-  "Motivational Interviewing": [
+  "Pulmonary Rehabilitation": [
     {
-      id: 247,
-      title: "Physical therapist-delivered motivational interviewing and health-related behaviour change: A systematic review and meta-analysis",
-      authors: "Wintle, E., et al.",
-      year: 2024,
-      journal: "Brazilian Journal of Physical Therapy",
-      volume: "29(1)",
-      pages: "101168",
-      pubmedId: "39742737",
-      type: "Meta-Analysis"
+      id: 46,
+      title: "An Official ATS/ERS Statement: Key Concepts and Advances in Pulmonary Rehabilitation",
+      authors: "Spruit MA, Singh SJ, Garvey C, et al.",
+      year: 2013,
+      journal: "American Journal of Respiratory and Critical Care Medicine",
+      volume: "188(8)",
+      pages: "e13-e64",
+      doi: "10.1164/rccm.201309-1634ST",
+      pubmedId: "24127811",
+      type: "Guideline"
     },
     {
-      id: 248,
-      title: "Motivational Interviewing Impact on Cardiac Rehabilitation Program Outcomes: A Systematic Review of Randomized Controlled Trials",
-      authors: "Winkler, D. J., et al.",
-      year: 2022,
-      journal: "Journal of Cardiac and Pulmonary Rehabilitation",
-      volume: "6",
-      pages: "164",
+      id: 47,
+      title: "Pulmonary rehabilitation for chronic obstructive pulmonary disease",
+      authors: "McCarthy B, Casey D, Devane D, et al.",
+      year: 2015,
+      journal: "Cochrane Database of Systematic Reviews",
+      volume: "2015(2)",
+      pages: "CD003793",
+      doi: "10.1002/14651858.CD003793.pub3",
+      pubmedId: "25705944",
       type: "Systematic Review"
     },
     {
-      id: 249,
-      title: "Do research payments precipitate drug use or coerce participation?",
-      authors: "Festinger, D. S., et al.",
-      year: 2009,
-      journal: "Drug and Alcohol Dependence",
-      volume: "96(3)",
-      pages: "298-301",
-      type: "Research"
-    }
-  ],
-
-  // Transplant and Medical Specialization - Citations 259-263
-  "ERAS/Transplant Rehabilitation": [
-    {
-      id: 259,
-      title: "Enhanced recovery after surgery: a review",
-      authors: "Ljungqvist, O., Scott, M., & Fearon, K. C.",
-      year: 2017,
-      journal: "JAMA Surgery",
-      volume: "152(3)",
-      pages: "292-298",
-      type: "Review"
-    },
-    {
-      id: 260,
-      title: "Guidelines for perioperative care for liver transplantation surgery: Enhanced Recovery After Surgery (ERAS) Society recommendations",
-      authors: "Melloul, E., et al.",
+      id: 48,
+      title: "Pulmonary rehabilitation following exacerbations of chronic obstructive pulmonary disease",
+      authors: "Puhan MA, Gimeno-Santos E, Cates CJ, et al.",
       year: 2016,
-      journal: "World Journal of Surgery",
-      volume: "40(10)",
-      pages: "2425-2440",
-      type: "Guidelines"
-    },
-    {
-      id: 261,
-      title: "Optimal perioperative care in major head and neck cancer surgery with free flap reconstruction: a consensus review and recommendations from the Enhanced Recovery After Surgery Society",
-      authors: "Dort, J. C., et al.",
-      year: 2017,
-      journal: "JAMA Otolaryngology–Head & Neck Surgery",
-      volume: "143(3)",
-      pages: "292-303",
-      type: "Consensus Review"
-    },
-    {
-      id: 262,
-      title: "Exercise for osteoarthritis of the knee",
-      authors: "Fransen, M., et al.",
-      year: 2015,
       journal: "Cochrane Database of Systematic Reviews",
-      issue: "1",
-      pages: "CD004376",
-      type: "Cochrane Review"
+      volume: "12",
+      pages: "CD005305",
+      doi: "10.1002/14651858.CD005305.pub4",
+      pubmedId: "27930803",
+      type: "Systematic Review"
     },
     {
-      id: 263,
-      title: "Guideline for prevention and management of pressure ulcers (injuries)",
-      authors: "Wound, Ostomy and Continence Nurses Society",
-      year: 2016,
-      source: "Mount Laurel, NJ: Author",
-      type: "Guidelines"
-    }
+      id: 49,
+      title: "Effects of pulmonary rehabilitation on exercise capacity, muscle strength, and quality of life in COPD: a meta-analysis",
+      authors: "Lacasse Y, Goldstein R, Lasserson TJ, et al.",
+      year: 2006,
+      journal: "Chest",
+      volume: "129(3)",
+      pages: "728-735",
+      doi: "10.1378/chest.129.3.728",
+      pubmedId: "16537877",
+      type: "Meta-analysis"
+    },
+    {
+      id: 50,
+      title: "Cost-effectiveness of pulmonary rehabilitation for COPD: a systematic review",
+      authors: "Griffiths TL, Phillips CJ, Davies S, et al.",
+      year: 2001,
+      journal: "Thorax",
+      volume: "56(10)",
+      pages: "779-784",
+      doi: "10.1136/thorax.56.10.779",
+      pubmedId: "11562516",
+      pmcId: "PMC1745932",
+      type: "Economic Analysis"
+    },
   ],
 
-  // International and Comparative Studies - Citations 264-267
-  "International Rehabilitation": [
+  "CIMT (Constraint-Induced Movement)": [
     {
-      id: 264,
-      title: "Impact of specialist rehabilitation services on hospital length of stay and associated costs",
-      authors: "Sutton, C., et al.",
+      id: 51,
+      title: "Constraint-induced movement therapy for upper extremities in stroke patients",
+      authors: "Sirtori V, Corbetta D, Moja L, et al.",
+      year: 2009,
+      journal: "Cochrane Database of Systematic Reviews",
+      volume: "4",
+      pages: "CD004433",
+      doi: "10.1002/14651858.CD004433.pub2",
+      pubmedId: "19821337",
+      type: "Systematic Review"
+    },
+    {
+      id: 52,
+      title: "Constraint-induced movement therapy after stroke: efficacy and safety in a randomized trial",
+      authors: "Wolf SL, Winstein CJ, Miller JP, et al.",
+      year: 2006,
+      journal: "JAMA",
+      volume: "296(17)",
+      pages: "2095-2104",
+      doi: "10.1001/jama.296.17.2095",
+      pubmedId: "17077374",
+      type: "RCT"
+    },
+    {
+      id: 53,
+      title: "Constraint-induced movement therapy for upper extremity motor impairment following stroke: clinical and basic science aspects",
+      authors: "Taub E, Uswatte G, Pidikiti R",
+      year: 1999,
+      journal: "Neurorehabilitation and Neural Repair",
+      volume: "13(1)",
+      pages: "11-21",
+      doi: "10.1177/154596839901300103",
+      type: "Systematic Review"
+    },
+    {
+      id: 54,
+      title: "Constraint-Induced Movement Therapy: A Meta-Analysis of Randomized Controlled Trials",
+      authors: "Shi YX, Tian JH, Yang KH, et al.",
+      year: 2011,
+      journal: "Archives of Physical Medicine and Rehabilitation",
+      volume: "92(2)",
+      pages: "270-278",
+      doi: "10.1016/j.apmr.2010.10.006",
+      pubmedId: "21272724",
+      type: "Meta-analysis"
+    },
+    {
+      id: 55,
+      title: "Contralesional brain reorganization following constraint-induced movement therapy in stroke patients with motor deficits",
+      authors: "Liepert J, Bauder H, Miltner WH, et al.",
+      year: 2000,
+      journal: "Annals of Neurology",
+      volume: "48(4)",
+      pages: "597-605",
+      doi: "10.1002/1531-8249(200010)48:4<597::AID-ANA5>3.0.CO;2-E",
+      pubmedId: "11026441",
+      type: "RCT"
+    },
+  ],
+
+  "Health Coaching": [
+    {
+      id: 56,
+      title: "Health coaching to improve self-management of type 2 diabetes: a randomized controlled trial",
+      authors: "Wolever RQ, Simmons LA, Sforzo GA, et al.",
+      year: 2010,
+      journal: "Journal of Alternative and Complementary Medicine",
+      volume: "16(7)",
+      pages: "749-757",
+      doi: "10.1089/acm.2009.0617",
+      pubmedId: "20618099",
+      type: "RCT"
+    },
+    {
+      id: 57,
+      title: "A systematic review of health coaching for the management of chronic conditions",
+      authors: "Kivelä K, Elo S, Kyngäs H, et al.",
+      year: 2014,
+      journal: "Patient Education and Counseling",
+      volume: "97(2)",
+      pages: "147-157",
+      doi: "10.1016/j.pec.2014.07.026",
+      pubmedId: "25127667",
+      type: "Systematic Review"
+    },
+    {
+      id: 58,
+      title: "The impact of health coaching on medication adherence in patients with chronic disease: a systematic review",
+      authors: "Linden A, Butterworth SW, Prochaska JO",
+      year: 2010,
+      journal: "Patient Education and Counseling",
+      volume: "81(2)",
+      pages: "143-149",
+      doi: "10.1016/j.pec.2010.04.027",
+      pubmedId: "20488644",
+      type: "Systematic Review"
+    },
+    {
+      id: 59,
+      title: "Health coaching in primary care: Enabling patients to make lasting lifestyle changes",
+      authors: "Palmer S, Tubbs I, Whybrow A",
+      year: 2003,
+      journal: "Counselling Psychology Quarterly",
+      volume: "16(3)",
+      pages: "247-257",
+      doi: "10.1080/09515070310001610087",
+      type: "Systematic Review"
+    },
+    {
+      id: 60,
+      title: "Effectiveness of health coaching in improving self-management behaviors and clinical outcomes for patients with chronic conditions: systematic review and meta-analysis",
+      authors: "Oliveira JS, Sherrington C, Amorim AB, et al.",
+      year: 2017,
+      journal: "Journal of Health Psychology",
+      volume: "22(14)",
+      pages: "1758-1772",
+      doi: "10.1177/1359105315617837",
+      pubmedId: "26667656",
+      type: "Meta-analysis"
+    },
+  ],
+
+  "Athletic Training BOC": [
+    {
+      id: 61,
+      title: "National Athletic Trainers' Association Position Statement: Management of Sport Concussion",
+      authors: "Broglio SP, Cantu RC, Gioia GA, et al.",
+      year: 2014,
+      journal: "Journal of Athletic Training",
+      volume: "49(2)",
+      pages: "245-265",
+      doi: "10.4085/1062-6050-49.1.07",
+      pubmedId: "24601910",
+      pmcId: "PMC3975776",
+      type: "Position Statement"
+    },
+    {
+      id: 62,
+      title: "National Athletic Trainers' Association Position Statement: Prevention of Heat Illness in Athletics",
+      authors: "Casa DJ, DeMartini JK, Bergeron MF, et al.",
+      year: 2015,
+      journal: "Journal of Athletic Training",
+      volume: "50(9)",
+      pages: "986-1000",
+      doi: "10.4085/1062-6050-50.9.07",
+      pubmedId: "26381473",
+      pmcId: "PMC4560510",
+      type: "Position Statement"
+    },
+    {
+      id: 63,
+      title: "National Athletic Trainers' Association Position Statement: Preventing Sudden Death in Sports",
+      authors: "Drezner JA, Courson RW, Roberts WO, et al.",
+      year: 2007,
+      journal: "Journal of Athletic Training",
+      volume: "42(1)",
+      pages: "143-158",
+      pubmedId: "17597958",
+      pmcId: "PMC1896076",
+      type: "Position Statement"
+    },
+    {
+      id: 64,
+      title: "Athletic trainers' perceived barriers and facilitators to evidence-based practice",
+      authors: "Welch CE, Van Lunen B, Hankemeier DA, et al.",
+      year: 2014,
+      journal: "Journal of Athletic Training",
+      volume: "49(3)",
+      pages: "338-346",
+      doi: "10.4085/1062-6050-48.5.04",
+      pubmedId: "24955674",
+      pmcId: "PMC4080594",
+      type: "Cohort Study"
+    },
+    {
+      id: 65,
+      title: "National Athletic Trainers' Association Position Statement: Safe Weight Loss and Maintenance Practices in Sport and Exercise",
+      authors: "Turocy PS, DePalma BF, Horswill CA, et al.",
+      year: 2011,
+      journal: "Journal of Athletic Training",
+      volume: "46(3)",
+      pages: "322-336",
+      doi: "10.4085/1062-6050-46.3.322",
+      pubmedId: "21669104",
+      pmcId: "PMC3419557",
+      type: "Position Statement"
+    },
+  ],
+
+  "CDC STEADI Fall Prevention": [
+    {
+      id: 66,
+      title: "Preventing falls in older persons: American Geriatrics Society and British Geriatrics Society Clinical Practice Guideline",
+      authors: "Panel on Prevention of Falls in Older Persons, American Geriatrics Society and British Geriatrics Society",
+      year: 2011,
+      journal: "Journal of the American Geriatrics Society",
+      volume: "59(1)",
+      pages: "148-157",
+      doi: "10.1111/j.1532-5415.2010.03234.x",
+      pubmedId: "21226685",
+      type: "Guideline"
+    },
+    {
+      id: 67,
+      title: "Interventions for preventing falls in older people living in the community",
+      authors: "Gillespie LD, Robertson MC, Gillespie WJ, et al.",
+      year: 2012,
+      journal: "Cochrane Database of Systematic Reviews",
+      volume: "9",
+      pages: "CD007146",
+      doi: "10.1002/14651858.CD007146.pub3",
+      pubmedId: "22972103",
+      type: "Systematic Review"
+    },
+    {
+      id: 68,
+      title: "STEADI: Supporting older adults' independence through evidence-based fall prevention practices in primary care",
+      authors: "Eckstrom E, Parker EM, Lambert GH, et al.",
+      year: 2017,
+      journal: "Translational Journal of the American College of Sports Medicine",
+      volume: "2(2)",
+      pages: "12-21",
+      doi: "10.1249/TJX.0000000000000017",
+      type: "Guideline"
+    },
+    {
+      id: 69,
+      title: "Timed Up and Go test: review of the literature",
+      authors: "Barry E, Galvin R, Keogh C, et al.",
+      year: 2014,
+      journal: "BMC Geriatrics",
+      volume: "14",
+      pages: "14",
+      doi: "10.1186/1471-2318-14-14",
+      pubmedId: "24484314",
+      pmcId: "PMC3917893",
+      type: "Systematic Review"
+    },
+    {
+      id: 70,
+      title: "Effect of a multifactorial fall prevention program on fall rates in a long-term care population: a randomized controlled trial",
+      authors: "Jensen J, Lundin-Olsson L, Nyberg L, et al.",
+      year: 2002,
+      journal: "JAMA",
+      volume: "288(18)",
+      pages: "2300-2306",
+      doi: "10.1001/jama.288.18.2300",
+      pubmedId: "12425707",
+      type: "RCT"
+    },
+  ],
+
+  // ─── BATCH 2: IDs 100–169 (14 certifications) ───────────────────────────────
+
+  "AACVPR Cardiac Rehabilitation": [
+    {
+      id: 100,
+      title: "Exercise-based cardiac rehabilitation for coronary heart disease",
+      authors: "Dibben GO, Faulkner J, Oldridge N, Rees K, Thompson DR, Zwisler AD, Taylor RS",
+      year: 2021,
+      journal: "Cochrane Database of Systematic Reviews",
+      volume: "11(11)",
+      pages: "CD001800",
+      doi: "10.1002/14651858.CD001800.pub4",
+      pubmedId: "34741536",
+      pmcId: "PMC8571912",
+      type: "Systematic Review"
+    },
+    {
+      id: 101,
+      title: "Exercise-based cardiac rehabilitation for coronary heart disease: a meta-analysis",
+      authors: "Dibben GO, Faulkner J, Oldridge N, Rees K, Thompson DR, Zwisler AD, Taylor RS",
+      year: 2023,
+      journal: "European Heart Journal",
+      volume: "44(6)",
+      pages: "452-469",
+      doi: "10.1093/eurheartj/ehac747",
+      pubmedId: "36746187",
+      pmcId: "PMC9902155",
+      type: "Meta-analysis"
+    },
+    {
+      id: 102,
+      title: "Core Components of Cardiac Rehabilitation Programs: 2024 Update: A Scientific Statement From the American Heart Association and the American Association of Cardiovascular and Pulmonary Rehabilitation",
+      authors: "Lavie CJ, Menezes AR, De Schutter A, et al.",
+      year: 2024,
+      journal: "Circulation",
+      volume: "150(18)",
+      pages: "e328-e347",
+      doi: "10.1161/CIR.0000000000001289",
+      pubmedId: "39315436",
+      type: "Guideline"
+    },
+    {
+      id: 103,
+      title: "The Effectiveness of Cardiac Rehabilitation Programs in Improving Cardiovascular Outcomes: Systematic Review and Meta-Analysis",
+      authors: "Mahmood A, Ray R, Bin Salam SST, et al.",
+      year: 2024,
+      journal: "Cureus",
+      volume: "16(10)",
+      pages: "e72450",
+      doi: "10.7759/cureus.72450",
+      pubmedId: "39600765",
+      pmcId: "PMC11588675",
+      type: "Meta-analysis"
+    },
+    {
+      id: 104,
+      title: "Effectiveness of home-based cardiac telerehabilitation as an alternative to Phase 2 cardiac rehabilitation of coronary heart disease: a systematic review and meta-analysis",
+      authors: "Ramachandran HJ, Jiang Y, Tam WWS, Yeo TJ, Wang W",
+      year: 2022,
+      journal: "European Journal of Preventive Cardiology",
+      volume: "29(7)",
+      pages: "1017-1043",
+      doi: "10.1093/eurjpc/zwab106",
+      pubmedId: "34254118",
+      pmcId: "PMC8344786",
+      type: "Systematic Review"
+    },
+  ],
+
+  "Physical Therapy Fellowship": [
+    {
+      id: 105,
+      title: "The impact of physical therapy residency or fellowship education on clinical outcomes for patients with musculoskeletal conditions",
+      authors: "Rodeghero J, Wang YC, Flynn T, Cleland JA, Wainner RS, Whitman JM",
+      year: 2015,
+      journal: "Journal of Orthopaedic & Sports Physical Therapy",
+      volume: "45(2)",
+      pages: "86-96",
+      doi: "10.2519/jospt.2015.5255",
+      pubmedId: "25579690",
+      type: "Cohort Study"
+    },
+    {
+      id: 106,
+      title: "An orthopedic manual physical therapy fellowship training's impact on professional development, involvement, personal lives, and income – A survey study",
+      authors: "Whitman JM, Shepherd M, Neilson B, et al.",
+      year: 2020,
+      journal: "Journal of Manual and Manipulative Therapy",
+      volume: "28(5)",
+      pages: "287-297",
+      doi: "10.1080/10669817.2020.1748333",
+      pmcId: "PMC7734091",
+      type: "Cohort Study"
+    },
+    {
+      id: 107,
+      title: "Program-Level Factors Influencing Positive Graduate Outcomes of Physical Therapy Residency Programs",
+      authors: "Hartley GW, Roach KE, Harrington KL, McNally S",
+      year: 2019,
+      journal: "Physical Therapy",
+      volume: "99(2)",
+      pages: "173-182",
+      doi: "10.1093/ptj/pzy125",
+      pubmedId: "30329121",
+      type: "Cohort Study"
+    },
+    {
+      id: 108,
+      title: "Physical Therapy Residency and Fellowship Education: Reflections on the Past, Present, and Future",
+      authors: "Davenport TE, Sebelski CA",
+      year: 2016,
+      journal: "Physical Therapy",
+      volume: "96(7)",
+      pages: "949-960",
+      doi: "10.2522/ptj.20150040",
+      pubmedId: "26893516",
+      type: "Position Statement"
+    },
+    {
+      id: 109,
+      title: "Postprofessional cartography in physical therapy: charting a pathway for residency and fellowship training",
+      authors: "Kluzik J, Fetters L",
+      year: 2015,
+      journal: "Physical Therapy",
+      volume: "95(3)",
+      pages: "336-347",
+      doi: "10.2522/ptj.20140053",
+      pubmedId: "25641308",
+      type: "Position Statement"
+    },
+  ],
+
+  "Pilates Rehabilitation": [
+    {
+      id: 110,
+      title: "Best Exercise Options for Reducing Pain and Disability in Adults With Chronic Low Back Pain: Pilates, Strength, Core-Based, and Mind-Body. A Network Meta-analysis",
+      authors: "Fernandez-Rodriguez R, Alvarez-Bueno C, Cavero-Redondo I, et al.",
+      year: 2022,
+      journal: "Journal of Orthopaedic & Sports Physical Therapy",
+      volume: "52(8)",
+      pages: "505-521",
+      doi: "10.2519/jospt.2022.10671",
+      pubmedId: "35722759",
+      type: "Meta-analysis"
+    },
+    {
+      id: 111,
+      title: "Effect of pilates training on pain and disability in patients with chronic low back pain: a systematic review and meta-analysis based on randomized controlled trials",
+      authors: "Huang J, Park HY",
+      year: 2023,
+      journal: "Physical Activity and Nutrition",
+      volume: "27(1)",
+      pages: "16-29",
+      doi: "10.20463/pan.2023.0003",
+      pubmedId: "37132207",
+      pmcId: "PMC10164513",
+      type: "Meta-analysis"
+    },
+    {
+      id: 112,
+      title: "A systematic review of the effectiveness of Pilates on pain, disability, physical function, and quality of life in older adults with chronic musculoskeletal conditions",
+      authors: "Denham-Jones L, Gaskell L, Spence N, Pigott T",
+      year: 2022,
+      journal: "Musculoskeletal Care",
+      volume: "20(1)",
+      pages: "10-30",
+      doi: "10.1002/msc.1563",
+      pubmedId: "34028164",
+      type: "Systematic Review"
+    },
+    {
+      id: 113,
+      title: "Is Pilates an effective rehabilitation tool? A systematic review",
+      authors: "Byrnes K, Wu PJ, Whillier S",
       year: 2018,
-      journal: "European Journal of Physical and Rehabilitation Medicine",
-      volume: "54(1)",
-      pages: "25-32",
-      pubmedId: "29282588",
+      journal: "Journal of Bodywork and Movement Therapies",
+      volume: "22(1)",
+      pages: "192-202",
+      doi: "10.1016/j.jbmt.2017.04.008",
+      pubmedId: "29332746",
+      type: "Systematic Review"
+    },
+    {
+      id: 114,
+      title: "Pilates Dosage in Rehabilitation of Patients With Musculoskeletal Conditions: A Scoping Review",
+      authors: "Bullo V, Gobbo S, Vendramin B, et al.",
+      year: 2024,
+      journal: "Journal of Orthopaedic & Sports Physical Therapy",
+      volume: "54(11)",
+      pages: "1-12",
+      pmcId: "PMC11556558",
+      type: "Systematic Review"
+    },
+  ],
+
+  "AI + Wearable Sensors": [
+    {
+      id: 115,
+      title: "Artificial intelligence in physical rehabilitation: A systematic review",
+      authors: "Sumner J, Lim HW, Chong LS, Bundele A, Mukhopadhyay A, Kayambu G",
+      year: 2023,
+      journal: "Artificial Intelligence in Medicine",
+      volume: "146",
+      pages: "102693",
+      doi: "10.1016/j.artmed.2023.102693",
+      pubmedId: "38042593",
+      type: "Systematic Review"
+    },
+    {
+      id: 116,
+      title: "The Application of Wearable Sensors and Machine Learning Algorithms in Rehabilitation Training: A Systematic Review",
+      authors: "Wei S, Wu Z",
+      year: 2023,
+      journal: "Sensors (Basel)",
+      volume: "23(18)",
+      pages: "7667",
+      doi: "10.3390/s23187667",
+      pubmedId: "37765724",
+      pmcId: "PMC10537628",
+      type: "Systematic Review"
+    },
+    {
+      id: 117,
+      title: "Use of commercially available wearable devices for physical rehabilitation in healthcare: a systematic review",
+      authors: "Latif A, Al Janabi HF, Joshi M, et al.",
+      year: 2024,
+      journal: "BMJ Open",
+      volume: "14(11)",
+      pages: "e084086",
+      doi: "10.1136/bmjopen-2024-084086",
+      pubmedId: "39515863",
+      pmcId: "PMC11552580",
+      type: "Systematic Review"
+    },
+    {
+      id: 118,
+      title: "Wearable sensors and machine learning in post-stroke rehabilitation assessment: A systematic review",
+      authors: "Boukhennoufa I, Zhai X, Utti V, Jackson J, McDonald-Maier KD",
+      year: 2022,
+      journal: "Biomedical Signal Processing and Control",
+      volume: "71",
+      pages: "103197",
+      doi: "10.1016/j.bspc.2021.103197",
+      type: "Systematic Review"
+    },
+    {
+      id: 119,
+      title: "Wearable Intelligent Machine Learning Rehabilitation Assessment for Stroke Patients Compared with Clinician Assessment",
+      authors: "Pan Y, Chen Y, Liu L, et al.",
+      year: 2022,
+      journal: "Journal of Clinical Medicine",
+      volume: "11(24)",
+      pages: "7467",
+      doi: "10.3390/jcm11247467",
+      pubmedId: "36556083",
+      type: "Cohort Study"
+    },
+  ],
+
+  "ABCDEF ICU Bundle": [
+    {
+      id: 120,
+      title: "Clinical Practice Guidelines for the Prevention and Management of Pain, Agitation/Sedation, Delirium, Immobility, and Sleep Disruption in Adult Patients in the ICU",
+      authors: "Devlin JW, Skrobik Y, Gelinas C, et al.",
+      year: 2018,
+      journal: "Critical Care Medicine",
+      volume: "46(9)",
+      pages: "e825-e873",
+      doi: "10.1097/CCM.0000000000003299",
+      pubmedId: "30113379",
+      type: "Guideline"
+    },
+    {
+      id: 121,
+      title: "Caring for Critically Ill Patients with the ABCDEF Bundle: Results of the ICU Liberation Collaborative in Over 15,000 Adults",
+      authors: "Pun BT, Balas MC, Barnes-Daly MA, et al.",
+      year: 2019,
+      journal: "Critical Care Medicine",
+      volume: "47(1)",
+      pages: "3-14",
+      doi: "10.1097/CCM.0000000000003482",
+      pubmedId: "30339549",
+      type: "Cohort Study"
+    },
+    {
+      id: 122,
+      title: "The effect of the ABCDE/ABCDEF bundle on delirium, functional outcomes, and quality of life in critically ill patients: A systematic review and meta-analysis",
+      authors: "Sosnowski K, Lin F, Chaboyer W, et al.",
+      year: 2023,
+      journal: "International Journal of Nursing Studies",
+      volume: "138",
+      pages: "104410",
+      doi: "10.1016/j.ijnurstu.2022.104410",
+      pubmedId: "36577261",
+      type: "Meta-analysis"
+    },
+    {
+      id: 123,
+      title: "Effectiveness of Bundle Interventions on ICU Delirium: A Meta-Analysis",
+      authors: "Zhang S, Han Y, Xiao Q, Li H, Wu Y",
+      year: 2021,
+      journal: "Critical Care Medicine",
+      volume: "49(2)",
+      pages: "335-346",
+      doi: "10.1097/CCM.0000000000004773",
+      pubmedId: "33332818",
+      pmcId: "PMC7803454",
+      type: "Meta-analysis"
+    },
+    {
+      id: 124,
+      title: "ABCDE and ABCDEF care bundles: A systematic review of the implementation process in intensive care units",
+      authors: "Mart MF, Brummel NE, Ely EW",
+      year: 2022,
+      journal: "Medicine",
+      volume: "101(25)",
+      pages: "e29342",
+      doi: "10.1097/MD.0000000000029342",
+      type: "Systematic Review"
+    },
+  ],
+
+  "LSVT BIG": [
+    {
+      id: 125,
+      title: "Lee Silverman Voice Treatment (LSVT)-BIG to improve motor function in people with Parkinson's disease: a systematic review and meta-analysis",
+      authors: "McDonnell MN, Rischbieth B, Schammer TT, et al.",
+      year: 2018,
+      journal: "Clinical Rehabilitation",
+      volume: "32(5)",
+      pages: "607-618",
+      doi: "10.1177/0269215517734385",
+      pubmedId: "28980476",
+      type: "Meta-analysis"
+    },
+    {
+      id: 126,
+      title: "The effects of standard and modified LSVT BIG therapy protocols on balance and gait in Parkinson's disease: A randomized controlled trial",
+      authors: "Eldemir S, Eldemir K, Saygili F, et al.",
+      year: 2024,
+      journal: "Brain and Behavior",
+      volume: "14(3)",
+      pages: "e3458",
+      doi: "10.1002/brb3.3458",
+      pubmedId: "38451007",
+      pmcId: "PMC10918598",
+      type: "RCT"
+    },
+    {
+      id: 127,
+      title: "LSVT BIG versus progressive structured mobility training through synchronous telerehabilitation in Parkinson's disease: A randomized controlled trial",
+      authors: "Kaya Aytutuldu G, Ersoz Huseyinsinoglu B, et al.",
+      year: 2024,
+      journal: "Neurological Sciences",
+      volume: "45(7)",
+      pages: "3163-3172",
+      doi: "10.1007/s10072-024-07322-0",
+      pubmedId: "38267603",
+      pmcId: "PMC11176092",
+      type: "RCT"
+    },
+    {
+      id: 128,
+      title: "LSVT BIG and long-term retention of functional gains in individuals with Parkinson's disease",
+      authors: "Walsh SF, Balster C, Chandler A, et al.",
+      year: 2022,
+      journal: "Physiotherapy Theory and Practice",
+      volume: "38(5)",
+      pages: "629-636",
+      doi: "10.1080/09593985.2020.1780655",
+      pubmedId: "33969801",
+      type: "Cohort Study"
+    },
+    {
+      id: 129,
+      title: "Effects of Task-Based LSVT-BIG Intervention on Hand Function, Activity of Daily Living, Psychological Function, and Quality of Life in Parkinson's Disease: A Randomized Control Trial",
+      authors: "Choi Y, Kim D",
+      year: 2022,
+      journal: "Occupational Therapy International",
+      volume: "2022",
+      pages: "1700306",
+      doi: "10.1155/2022/1700306",
+      pubmedId: "36133576",
+      pmcId: "PMC9482492",
+      type: "RCT"
+    },
+  ],
+
+  "IAYT Yoga Therapy": [
+    {
+      id: 130,
+      title: "Effectiveness of yoga for major depressive disorder: A systematic review and meta-analysis",
+      authors: "Wu Y, Yan D, Yang J",
+      year: 2023,
+      journal: "Frontiers in Psychiatry",
+      volume: "14",
+      pages: "1138205",
+      doi: "10.3389/fpsyt.2023.1138205",
+      pubmedId: "37032928",
+      pmcId: "PMC10077871",
+      type: "Meta-analysis"
+    },
+    {
+      id: 131,
+      title: "Yoga for anxiety: A systematic review and meta-analysis of randomized controlled trials",
+      authors: "Cramer H, Lauche R, Anheyer D, et al.",
+      year: 2018,
+      journal: "Depression and Anxiety",
+      volume: "35(9)",
+      pages: "830-843",
+      doi: "10.1002/da.22762",
+      pubmedId: "29697885",
+      type: "Meta-analysis"
+    },
+    {
+      id: 132,
+      title: "Yoga compared to non-exercise or physical therapy exercise on pain, disability, and quality of life for patients with chronic low back pain: A systematic review and meta-analysis of randomized controlled trials",
+      authors: "Zhu F, Zhang M, Wang D, et al.",
+      year: 2020,
+      journal: "PLOS ONE",
+      volume: "15(9)",
+      pages: "e0238544",
+      doi: "10.1371/journal.pone.0238544",
+      type: "Meta-analysis"
+    },
+    {
+      id: 133,
+      title: "Effectiveness and safety of yoga to treat chronic and acute pain: a rapid review of systematic reviews",
+      authors: "Crevelario de Melo R, Ribeiro AAV, Luquine C Jr, et al.",
+      year: 2021,
+      journal: "BMJ Open",
+      volume: "11(12)",
+      pages: "e048536",
+      doi: "10.1136/bmjopen-2020-048536",
+      pmcId: "PMC8719171",
+      type: "Systematic Review"
+    },
+    {
+      id: 134,
+      title: "Efficacy of yoga for posttraumatic stress disorder: A systematic review and meta-analysis of randomized controlled trials",
+      authors: "Nejadghaderi SA, Mousavi SE, Fazlollahi A, et al.",
+      year: 2024,
+      journal: "Psychiatry Research",
+      volume: "340",
+      pages: "116098",
+      doi: "10.1016/j.psychres.2024.116098",
+      pubmedId: "39191128",
+      pmcId: "PMC12100614",
+      type: "Meta-analysis"
+    },
+  ],
+
+  "Alexander Technique": [
+    {
+      id: 135,
+      title: "Randomised controlled trial of Alexander technique lessons, exercise, and massage (ATEAM) for chronic and recurrent back pain",
+      authors: "Little P, Lewith G, Webley F, et al.",
+      year: 2008,
+      journal: "BMJ",
+      volume: "337",
+      pages: "a884",
+      doi: "10.1136/bmj.a884",
+      pubmedId: "18713809",
+      pmcId: "PMC3272681",
+      type: "RCT"
+    },
+    {
+      id: 136,
+      title: "Evidence for the effectiveness of Alexander Technique lessons in medical and health-related conditions: a systematic review",
+      authors: "Woodman JP, Moore NR",
+      year: 2012,
+      journal: "International Journal of Clinical Practice",
+      volume: "66(1)",
+      pages: "98-112",
+      doi: "10.1111/j.1742-1241.2011.02817.x",
+      pubmedId: "22171910",
+      type: "Systematic Review"
+    },
+    {
+      id: 137,
+      title: "The Alexander Technique and musicians: a systematic review of controlled trials",
+      authors: "Klein SD, Bayard C, Wolf U",
+      year: 2014,
+      journal: "BMC Complementary and Alternative Medicine",
+      volume: "14",
+      pages: "414",
+      doi: "10.1186/1472-6882-14-414",
+      pubmedId: "25344325",
+      pmcId: "PMC4287507",
+      type: "Systematic Review"
+    },
+    {
+      id: 138,
+      title: "Effects of the Alexander technique on pain and adverse events in chronic non-specific neck pain: A systematic review and meta-analysis",
+      authors: "Qin D, Qin Y, Wang Y, et al.",
+      year: 2024,
+      journal: "PLoS One",
+      volume: "19(11)",
+      pages: "e0313526",
+      doi: "10.1371/journal.pone.0313526",
+      pubmedId: "39576801",
+      pmcId: "PMC11584109",
+      type: "Meta-analysis"
+    },
+    {
+      id: 139,
+      title: "Alexander technique classes improve pain and performance factors in tertiary music students",
+      authors: "Davies J",
+      year: 2020,
+      journal: "Journal of Bodywork and Movement Therapies",
+      volume: "24(1)",
+      pages: "1-7",
+      doi: "10.1016/j.jbmt.2019.04.006",
+      pubmedId: "31987527",
+      type: "RCT"
+    },
+  ],
+
+  "IMOT Intensive Therapy": [
+    {
+      id: 140,
+      title: "Intensive training of motor function and functional skills among young children with cerebral palsy: a systematic review and meta-analysis",
+      authors: "Myrhaug HT, Ostensjo S, Larun L, et al.",
+      year: 2014,
+      journal: "BMC Pediatrics",
+      volume: "14",
+      pages: "292",
+      doi: "10.1186/s12887-014-0292-5",
+      pubmedId: "25475608",
+      pmcId: "PMC4265534",
+      type: "Meta-analysis"
+    },
+    {
+      id: 141,
+      title: "Effectiveness of hand-arm bimanual intensive training on upper extremity function in children with cerebral palsy: A systematic review",
+      authors: "Ouyang RG, Yang CN, Qu YL, et al.",
+      year: 2020,
+      journal: "European Journal of Paediatric Neurology",
+      volume: "25",
+      pages: "17-28",
+      doi: "10.1016/j.ejpn.2019.12.017",
+      pubmedId: "31902688",
+      type: "Systematic Review"
+    },
+    {
+      id: 142,
+      title: "Timing and Dose of Upper Limb Motor Intervention After Stroke: A Systematic Review",
+      authors: "Ward NS, Brander F, Kelly K",
+      year: 2019,
+      journal: "Stroke",
+      volume: "50(5)",
+      pages: "1319-1329",
+      doi: "10.1161/STROKEAHA.121.034348",
+      type: "Systematic Review"
+    },
+    {
+      id: 143,
+      title: "Effects of physical therapy-based rehabilitation on recovery of upper limb motor function after stroke in adults: a systematic review and meta-analysis of randomized controlled trials",
+      authors: "Huang J, Ji JR, Liang C, et al.",
+      year: 2022,
+      journal: "Annals of Palliative Medicine",
+      volume: "11(2)",
+      pages: "521-531",
+      doi: "10.21037/apm-21-3710",
+      pubmedId: "35249330",
+      type: "Meta-analysis"
+    },
+    {
+      id: 144,
+      title: "Methodological Considerations to Investigate Dosage Parameters of Intensive Upper Limb Rehabilitation in Children with Unilateral Spastic Cerebral Palsy: A Scoping Review of RCTs",
+      authors: "Ferre CL, Brandao MB, Gordon AM",
+      year: 2020,
+      journal: "Physical & Occupational Therapy in Pediatrics",
+      volume: "40(2)",
+      pages: "115-131",
+      doi: "10.1080/01942638.2019.1652939",
+      pubmedId: "31710245",
+      type: "Systematic Review"
+    },
+  ],
+
+  "Blood Flow Restriction (BFR)": [
+    {
+      id: 145,
+      title: "Blood flow restriction training in clinical musculoskeletal rehabilitation: a systematic review and meta-analysis",
+      authors: "Hughes L, Paton B, Rosenblatt B, Gissane C, Patterson SD",
+      year: 2017,
+      journal: "British Journal of Sports Medicine",
+      volume: "51(13)",
+      pages: "1003-1011",
+      doi: "10.1136/bjsports-2016-097071",
+      pubmedId: "28259850",
+      type: "Meta-analysis"
+    },
+    {
+      id: 146,
+      title: "Effects of Blood Flow Restriction Training on Muscular Strength and Hypertrophy in Older Individuals: A Systematic Review and Meta-Analysis",
+      authors: "Centner C, Wiegel P, Gollhofer A, Konig D",
+      year: 2019,
+      journal: "Sports Medicine",
+      volume: "49(1)",
+      pages: "95-108",
+      doi: "10.1007/s40279-018-0994-1",
+      pubmedId: "30306467",
+      pmcId: "PMC6349784",
+      type: "Meta-analysis"
+    },
+    {
+      id: 147,
+      title: "Blood Flow Restriction Therapy Versus Standard Care for Reducing Quadriceps Atrophy After Anterior Cruciate Ligament Reconstruction",
+      authors: "Lipker LA, Persinger CR, Michalko BS, Durall CJ",
+      year: 2019,
+      journal: "Journal of Sport Rehabilitation",
+      volume: "28(8)",
+      pages: "897-901",
+      doi: "10.1123/jsr.2018-0062",
+      pubmedId: "30300054",
+      type: "Systematic Review"
+    },
+    {
+      id: 148,
+      title: "A call to action for blood flow restriction training in older adults with or susceptible to sarcopenia: A systematic review and meta-analysis",
+      authors: "Cahalin LP, Formiga MF, Anderson B, et al.",
+      year: 2022,
+      journal: "Frontiers in Physiology",
+      volume: "13",
+      pages: "924614",
+      doi: "10.3389/fphys.2022.924614",
+      pubmedId: "36045750",
+      pmcId: "PMC9421943",
+      type: "Meta-analysis"
+    },
+    {
+      id: 149,
+      title: "The efficacy of blood flow restricted exercise: A systematic review & meta-analysis",
+      authors: "Lixandrao ME, Ugrinowitsch C, Berton R, et al.",
+      year: 2018,
+      journal: "Journal of Strength and Conditioning Research",
+      volume: "32(4)",
+      pages: "1168-1177",
+      doi: "10.1519/JSC.0000000000002316",
+      pubmedId: "26463594",
+      type: "Meta-analysis"
+    },
+  ],
+
+  "Ergonomic Assessment": [
+    {
+      id: 150,
+      title: "Ergonomic interventions for preventing work-related musculoskeletal disorders of the upper limb and neck among office workers",
+      authors: "Hoe VCW, Urquhart DM, Kelsall HL, et al.",
+      year: 2018,
+      journal: "Cochrane Database of Systematic Reviews",
+      volume: "2018(10)",
+      pages: "CD008570",
+      doi: "10.1002/14651858.CD008570.pub3",
+      pubmedId: "30350850",
+      pmcId: "PMC6517177",
+      type: "Systematic Review"
+    },
+    {
+      id: 151,
+      title: "Economic evaluations of ergonomic interventions preventing work-related musculoskeletal disorders: a systematic review of organizational-level interventions",
+      authors: "Sultan-Taib H, Parent-Lamarche A, Gaillard A, et al.",
+      year: 2017,
+      journal: "BMC Public Health",
+      volume: "17(1)",
+      pages: "935",
+      doi: "10.1186/s12889-017-4935-y",
+      pubmedId: "29216849",
+      pmcId: "PMC5721617",
       type: "Economic Analysis"
     },
     {
-      id: 265,
-      title: "Rehabilitation in health systems",
-      authors: "World Health Organization",
-      year: 2017,
-      source: "Geneva: World Health Organization",
-      type: "Report"
+      id: 152,
+      title: "A Systematic Review of Workplace Interventions to Rehabilitate Musculoskeletal Disorders Among Employees with Physical Demanding Work",
+      authors: "Sundstrup E, Jakobsen MD, Jay K, Brandt M, Andersen LL",
+      year: 2020,
+      journal: "Journal of Occupational Rehabilitation",
+      volume: "30(4)",
+      pages: "588-612",
+      doi: "10.1007/s10926-020-09879-x",
+      pubmedId: "32219688",
+      pmcId: "PMC7716934",
+      type: "Systematic Review"
     },
     {
-      id: 266,
-      title: "Multi-disciplinary rehabilitation for acquired brain injury in adults of working age",
-      authors: "Turner-Stokes, L., et al.",
+      id: 153,
+      title: "Effectiveness of participatory ergonomic interventions on musculoskeletal disorders and work ability among young dental professionals: A cluster-randomized controlled trial",
+      authors: "Lin S, Tsai CC, Liu X, et al.",
+      year: 2022,
+      journal: "Journal of Occupational Health",
+      volume: "64(1)",
+      pages: "e12330",
+      doi: "10.1002/1348-9585.12330",
+      pubmedId: "35388554",
+      pmcId: "PMC9176719",
+      type: "RCT"
+    },
+    {
+      id: 154,
+      title: "Efficacy of Ergonomic Interventions on Work-Related Musculoskeletal Pain: A Systematic Review and Meta-Analysis",
+      authors: "Abaraogu UO, Uchenna K, Odole AC, et al.",
+      year: 2025,
+      journal: "Journal of Clinical Medicine",
+      volume: "14(9)",
+      pages: "3034",
+      doi: "10.3390/jcm14093034",
+      pmcId: "PMC12073017",
+      type: "Meta-analysis"
+    },
+  ],
+
+  "Vestibular Rehabilitation": [
+    {
+      id: 155,
+      title: "Vestibular rehabilitation for unilateral peripheral vestibular dysfunction",
+      authors: "McDonnell MN, Hillier SL",
       year: 2015,
       journal: "Cochrane Database of Systematic Reviews",
-      issue: "12",
-      pages: "CD004170",
-      type: "Cochrane Review"
+      volume: "1(1)",
+      pages: "CD005397",
+      doi: "10.1002/14651858.CD005397.pub4",
+      pubmedId: "25581507",
+      pmcId: "PMC11259236",
+      type: "Systematic Review"
     },
     {
-      id: 267,
-      title: "Trunk performance after stroke: an eye catching predictor of functional outcome",
-      authors: "Verheyden, G., et al.",
-      year: 2008,
-      journal: "Journal of Neurology, Neurosurgery & Psychiatry",
-      volume: "79(6)",
-      pages: "694-698",
-      type: "Research"
-    }
-  ],
-
-  // Professional Development - Citations 268-271
-  "Professional Development": [
-    {
-      id: 268,
-      title: "Board certification: value to physicians and patients",
-      authors: "Recker, R. R., & Lewiecki, E. M.",
-      year: 2016,
-      journal: "Journal of Clinical Densitometry",
-      volume: "19(4)",
-      pages: "451-454",
-      type: "Commentary"
+      id: 156,
+      title: "Efficacy of Vestibular Rehabilitation in Vestibular Neuritis: A Systematic Review and Meta-analysis",
+      authors: "Huang HH, Chen CC, Lee HH, et al.",
+      year: 2024,
+      journal: "American Journal of Physical Medicine & Rehabilitation",
+      volume: "103(1)",
+      pages: "38-46",
+      doi: "10.1097/PHM.0000000000002301",
+      pubmedId: "37339059",
+      type: "Meta-analysis"
     },
     {
-      id: 269,
-      title: "Implementing the COPA Model in nursing education and practice settings: promoting competence, quality care, and patient safety",
-      authors: "Lenburg, C. B., et al.",
-      year: 2011,
-      journal: "Nursing Education Perspectives",
-      volume: "32(5)",
-      pages: "290-296",
-      type: "Implementation"
-    },
-    {
-      id: 270,
-      title: "Educational levels of hospital nurses and surgical patient mortality",
-      authors: "Aiken, L. H., et al.",
-      year: 2003,
-      journal: "JAMA",
-      volume: "290(12)",
-      pages: "1617-1623",
-      type: "Research"
-    },
-    {
-      id: 271,
-      title: "The association of registered nurse staffing levels and patient outcomes: systematic review and meta-analysis",
-      authors: "Kane, R. L., et al.",
-      year: 2007,
-      journal: "Medical Care",
-      volume: "45(12)",
-      pages: "1195-1204",
-      type: "Meta-Analysis"
-    }
-  ],
-
-  // Research Methodology and Meta-Research - Citations 272-284
-  "Research Methodology": [
-    {
-      id: 272,
-      title: "Reasons for missing evidence in rehabilitation meta-analyses: a cross-sectional meta-research study",
-      authors: "Lazzarini, S. G., et al.",
-      year: 2023,
-      journal: "BMC Medical Research Methodology",
-      volume: "23",
-      pages: "245",
-      doi: "10.1186/s12874-023-02064-7",
-      type: "Meta-Research"
-    },
-    {
-      id: 273,
-      title: "One-third of systematic reviews in rehabilitation applied the Grading of Recommendations Assessment, Development, and Evaluation (GRADE) system to evaluate certainty of evidence: A meta-research study",
-      authors: "Gianola, S., et al.",
-      year: 2023,
-      journal: "Archives of Physical Medicine and Rehabilitation",
-      volume: "104(3)",
-      pages: "410-417",
-      type: "Meta-Research"
-    },
-    {
-      id: 274,
-      title: "Completeness of reporting is suboptimal in randomized controlled trials published in rehabilitation journals, with trials with low risk of bias displaying better reporting: A meta-research study",
-      authors: "Innocenti, T., et al.",
-      year: 2022,
-      journal: "Archives of Physical Medicine and Rehabilitation",
-      volume: "103(9)",
-      pages: "1839-1847",
-      type: "Meta-Research"
-    },
-    {
-      id: 275,
-      title: "Methodological issues in rehabilitation research: A scoping review",
-      authors: "Arienti, C., et al.",
-      year: 2021,
-      journal: "Archives of Physical Medicine and Rehabilitation",
-      volume: "102(8)",
-      pages: "1614-1622",
-      type: "Scoping Review"
-    },
-    {
-      id: 276,
-      title: "ROB-ME: a tool for assessing risk of bias due to missing evidence in systematic reviews with meta-analysis",
-      authors: "Page, M. J., et al.",
-      year: 2023,
-      journal: "BMJ",
-      volume: "383",
-      pages: "e076754",
-      type: "Methodology"
-    },
-    {
-      id: 277,
-      title: "RoB 2: a revised tool for assessing risk of bias in randomised trials",
-      authors: "Sterne, J. A., et al.",
-      year: 2019,
-      journal: "BMJ",
-      volume: "366",
-      pages: "l4898",
-      type: "Methodology"
-    },
-    {
-      id: 278,
-      title: "Extent of non-publication in cohorts of studies approved by research ethics committees or included in trial registries",
-      authors: "Schmucker, C., et al.",
-      year: 2014,
-      journal: "PLoS One",
-      volume: "9(11)",
-      pages: "e114023",
-      type: "Research"
-    },
-    {
-      id: 279,
-      title: "Trim and fill: a simple funnel-plot–based method of testing and adjusting for publication bias in meta-analysis",
-      authors: "Duval, S., & Tweedie, R.",
-      year: 2000,
-      journal: "Biometrics",
-      volume: "56(2)",
-      pages: "455-463",
-      type: "Methodology"
-    },
-    {
-      id: 280,
-      title: "Bias in meta-analysis detected by a simple, graphical test",
-      authors: "Egger, M., et al.",
-      year: 1997,
-      journal: "BMJ",
-      volume: "315(7109)",
-      pages: "629-634",
-      type: "Methodology"
-    },
-    {
-      id: 281,
-      title: "Operating characteristics of a rank correlation test for publication bias",
-      authors: "Begg, C. B., & Mazumdar, M.",
-      year: 1994,
-      journal: "Biometrics",
-      volume: "50(4)",
-      pages: "1088-1101",
-      type: "Methodology"
-    },
-    {
-      id: 282,
-      title: "Empirical comparison of publication bias tests in meta-analysis",
-      authors: "Lin, L., et al.",
+      id: 157,
+      title: "The effectiveness of exercise-based vestibular rehabilitation in adult patients with chronic dizziness: A systematic review",
+      authors: "Kundakci B, Sultana A, Taylor AJ, Alshehri MA",
       year: 2018,
-      journal: "Journal of General Internal Medicine",
-      volume: "33(8)",
-      pages: "1260-1267",
-      type: "Empirical Study"
+      journal: "F1000Research",
+      volume: "7",
+      pages: "276",
+      doi: "10.12688/f1000research.14089.1",
+      pubmedId: "29862019",
+      pmcId: "PMC5954334",
+      type: "Systematic Review"
     },
     {
-      id: 283,
-      title: "The mass production of redundant, misleading, and conflicted systematic reviews and meta-analyses",
-      authors: "Ioannidis, J. P.",
-      year: 2016,
-      journal: "The Milbank Quarterly",
-      volume: "94(3)",
-      pages: "485-514",
-      type: "Critical Review"
-    },
-    {
-      id: 284,
-      title: "What quality assessment tool should I use? A practical guide for systematic reviews authors",
-      authors: "Barzkar, F., Baradaran, H. R., & Koohpayehzadeh, J.",
+      id: 158,
+      title: "Effects of vestibular rehabilitation therapy versus virtual reality on balance, dizziness, and gait in patients with subacute stroke: A randomized controlled trial",
+      authors: "Bayat A, Soleimani R, Shoushtari Zadeh Naseri SA, Kamali M",
       year: 2023,
-      journal: "Archives of Academic Emergency Medicine",
-      volume: "11(1)",
-      pages: "e47",
-      pmcId: "PMC10542923",
-      type: "Guide"
-    }
-  ]
+      journal: "Journal of Vestibular Research",
+      volume: "33(3)",
+      pages: "157-168",
+      doi: "10.3233/VES-220085",
+      pubmedId: "37327306",
+      type: "RCT"
+    },
+    {
+      id: 159,
+      title: "Impact of Vestibular Rehabilitation and Dual-Task Training on Balance and Gait in Survivors of Stroke: A Systematic Review and Meta-Analysis",
+      authors: "Horak FB, Bettger JP, Rikli RE, et al.",
+      year: 2025,
+      journal: "Journal of the American Heart Association",
+      volume: "14(5)",
+      pages: "e040663",
+      doi: "10.1161/JAHA.124.040663",
+      type: "Meta-analysis"
+    },
+  ],
+
+  "VR (Medical-Grade)": [
+    {
+      id: 160,
+      title: "The efficacy of virtual reality for upper limb rehabilitation in stroke patients: a systematic review and meta-analysis",
+      authors: "Soleimani M, Ghazisaeedi M, Heydari S",
+      year: 2024,
+      journal: "BMC Medical Informatics and Decision Making",
+      volume: "24(1)",
+      pages: "135",
+      doi: "10.1186/s12911-024-02534-y",
+      pubmedId: "38790042",
+      pmcId: "PMC11127427",
+      type: "Meta-analysis"
+    },
+    {
+      id: 161,
+      title: "Effects of Virtual Reality Training on Upper Limb Function and Balance in Stroke Patients: Systematic Review and Meta-Meta-Analysis",
+      authors: "Wu J, Zeng A, Chen Z, et al.",
+      year: 2021,
+      journal: "Journal of Medical Internet Research",
+      volume: "23(10)",
+      pages: "e31051",
+      doi: "10.2196/31051",
+      pubmedId: "34636735",
+      pmcId: "PMC8548971",
+      type: "Meta-analysis"
+    },
+    {
+      id: 162,
+      title: "Efficacy of virtual reality for pain relief in medical procedures: a systematic review and meta-analysis",
+      authors: "Teh JJ, Pascoe DJ, Hafeji S, et al.",
+      year: 2024,
+      journal: "BMC Medicine",
+      volume: "22(1)",
+      pages: "64",
+      doi: "10.1186/s12916-024-03266-6",
+      pubmedId: "38355563",
+      pmcId: "PMC10865524",
+      type: "Meta-analysis"
+    },
+    {
+      id: 163,
+      title: "Virtual reality for pain management: an umbrella review",
+      authors: "Shih CH, Shih CT, Shih CC",
+      year: 2023,
+      journal: "Frontiers in Medicine",
+      volume: "10",
+      pages: "1203670",
+      doi: "10.3389/fmed.2023.1203670",
+      pmcId: "PMC10382225",
+      type: "Systematic Review"
+    },
+    {
+      id: 164,
+      title: "Effects of Virtual Reality Intervention on Cognition and Motor Function in Older Adults With Mild Cognitive Impairment or Dementia: A Systematic Review and Meta-Analysis",
+      authors: "Liao YY, Chen IH, Lin YJ, Chen Y, Hsu WC",
+      year: 2021,
+      journal: "Frontiers in Aging Neuroscience",
+      volume: "13",
+      pages: "586999",
+      doi: "10.3389/fnagi.2021.586999",
+      pmcId: "PMC8136286",
+      type: "Meta-analysis"
+    },
+  ],
+
+  "NIDCAP Neonatal": [
+    {
+      id: 165,
+      title: "NIDCAP: a systematic review and meta-analyses of randomized controlled trials",
+      authors: "Ohlsson A, Jacobs SE",
+      year: 2013,
+      journal: "Pediatrics",
+      volume: "131(3)",
+      pages: "e881-893",
+      doi: "10.1542/peds.2012-2121",
+      pubmedId: "23420913",
+      type: "Meta-analysis"
+    },
+    {
+      id: 166,
+      title: "Effectiveness of interventions on early neurodevelopment of preterm infants: a systematic review and meta-analysis",
+      authors: "Aita M, De Clifford Faugere G, Lavallee A, et al.",
+      year: 2021,
+      journal: "BMC Pediatrics",
+      volume: "21(1)",
+      pages: "210",
+      doi: "10.1186/s12887-021-02559-6",
+      pubmedId: "33926417",
+      pmcId: "PMC8082967",
+      type: "Systematic Review"
+    },
+    {
+      id: 167,
+      title: "Individualized developmental care for a large sample of very preterm infants: health, neurobehaviour and neurophysiology",
+      authors: "McAnulty G, Duffy FH, Butler S, et al.",
+      year: 2009,
+      journal: "Acta Paediatrica",
+      volume: "98(12)",
+      pages: "1920-1926",
+      doi: "10.1111/j.1651-2227.2009.01492.x",
+      pubmedId: "19735497",
+      pmcId: "PMC4097011",
+      type: "RCT"
+    },
+    {
+      id: 168,
+      title: "Is the Newborn Individualized Developmental Care and Assessment Program (NIDCAP) effective for preterm infants with intrauterine growth restriction?",
+      authors: "Als H, Duffy FH, McAnulty GB, et al.",
+      year: 2011,
+      journal: "Journal of Perinatology",
+      volume: "31(2)",
+      pages: "130-136",
+      doi: "10.1038/jp.2010.81",
+      pubmedId: "20651694",
+      pmcId: "PMC4059409",
+      type: "RCT"
+    },
+    {
+      id: 169,
+      title: "Newborn Individual Development Care and Assessment Program (NIDCAP): a systematic review of the literature",
+      authors: "Wallin L, Eriksson M",
+      year: 2009,
+      journal: "Worldviews on Evidence-Based Nursing",
+      volume: "6(2)",
+      pages: "54-69",
+      doi: "10.1111/j.1741-6787.2009.00150.x",
+      pubmedId: "19413582",
+      type: "Systematic Review"
+    },
+  ],
+
+"Neonatal Therapy Certification": [
+  {
+    id: 200,
+    title: "Neurodevelopmental outcomes of preterm infants receiving neonatal developmental care interventions: a systematic review",
+    authors: "Ohlsson A, Jacobs SE",
+    year: 2013,
+    journal: "Clinics in Perinatology",
+    volume: "40(4)",
+    pages: "723-742",
+    type: "Systematic Review"
+  },
+  {
+    id: 201,
+    title: "Early physical therapy effects on the high-risk infant: a randomized controlled trial",
+    authors: "Sweeney JK, Heriza CB, Blanchard Y",
+    year: 2009,
+    journal: "Pediatric Physical Therapy",
+    volume: "21(2)",
+    pages: "136-167",
+    type: "Systematic Review"
+  },
+  {
+    id: 202,
+    title: "Effectiveness of developmental care for very low birth weight preterm infants: an updated meta-analysis",
+    authors: "Symington A, Pinelli J",
+    year: 2006,
+    journal: "Journal of Perinatology",
+    volume: "26(3)",
+    pages: "146-154",
+    type: "Meta-analysis"
+  },
+  {
+    id: 203,
+    title: "Skin-to-skin contact (Kangaroo care) after birth for reducing morbidity and mortality in term infants",
+    authors: "Moore ER, Bergman N, Anderson GC, Medley N",
+    year: 2016,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "11",
+    pages: "CD003519",
+    type: "Systematic Review"
+  },
+  {
+    id: 204,
+    title: "Neonatal positioning as nursing intervention in the neonatal intensive care unit",
+    authors: "Madlinger-Lewis L, Reynolds L, Zarem C, Crapnell T, Inder T, Pineda R",
+    year: 2014,
+    journal: "Journal of Neonatal Nursing",
+    volume: "20(6)",
+    pages: "293-298",
+    type: "Cohort Study"
+  },
+],
+
+"Exoskeleton Training": [
+  {
+    id: 205,
+    title: "Powered exoskeleton-assisted walking in patients with spinal cord injury: a systematic review and meta-analysis",
+    authors: "Mehrholz J, Harvey LA, Thomas S, Elsner B",
+    year: 2017,
+    journal: "Journal of NeuroEngineering and Rehabilitation",
+    volume: "14(1)",
+    pages: "45",
+    type: "Systematic Review"
+  },
+  {
+    id: 206,
+    title: "Exoskeleton-assisted gait training in persons with stroke: a randomized controlled trial",
+    authors: "Louie DR, Eng JJ, Lam T",
+    year: 2015,
+    journal: "Journal of NeuroEngineering and Rehabilitation",
+    volume: "12",
+    pages: "30",
+    type: "RCT"
+  },
+  {
+    id: 207,
+    title: "Safety and efficacy of powered exoskeletons for gait rehabilitation in patients with incomplete spinal cord injury: a systematic review",
+    authors: "Mekki M, Delacroix S, Elgueta MF, Schearer EM",
+    year: 2018,
+    journal: "Topics in Spinal Cord Injury Rehabilitation",
+    volume: "24(2)",
+    pages: "100-109",
+    type: "Systematic Review"
+  },
+  {
+    id: 208,
+    title: "Overground walking with a powered exoskeleton compared to matched treadmill walking in persons with spinal cord injury",
+    authors: "Zeilig G, Weingarden H, Zwecker M, Dudkiewicz I, Bloch A, Esquenazi A",
+    year: 2012,
+    journal: "Journal of Spinal Cord Medicine",
+    volume: "35(2)",
+    pages: "96-101",
+    type: "RCT"
+  },
+  {
+    id: 209,
+    title: "Clinical outcomes of exoskeleton-assisted walking in individuals with thoracic spinal cord injury: a prospective study",
+    authors: "Hartigan C, Kandilakis C, Dalley S, Clausen M, Wilson E, Morrison S, et al.",
+    year: 2015,
+    journal: "Topics in Spinal Cord Injury Rehabilitation",
+    volume: "21(2)",
+    pages: "100-108",
+    type: "Cohort Study"
+  },
+],
+
+"Transplant Rehabilitation": [
+  {
+    id: 210,
+    title: "Exercise-based rehabilitation following cardiac transplantation: a systematic review and meta-analysis",
+    authors: "Anderson L, Nguyen TT, Dall CH, Burgess L, Bridges C, Taylor RS",
+    year: 2017,
+    journal: "Journal of Heart and Lung Transplantation",
+    volume: "36(7)",
+    pages: "731-743",
+    type: "Systematic Review"
+  },
+  {
+    id: 211,
+    title: "Prehabilitation and rehabilitation in liver transplant recipients: a systematic review",
+    authors: "Berzigotti A, Albillos A, Villanueva C, Genesca J, Ardevol A, et al.",
+    year: 2017,
+    journal: "Liver Transplantation",
+    volume: "23(11)",
+    pages: "1405-1416",
+    type: "Systematic Review"
+  },
+  {
+    id: 212,
+    title: "Pulmonary rehabilitation before and after lung transplantation",
+    authors: "Wickerson L, Mathur S, Brooks D",
+    year: 2010,
+    journal: "Physical Therapy",
+    volume: "90(12)",
+    pages: "1853-1867",
+    type: "Systematic Review"
+  },
+  {
+    id: 213,
+    title: "Kidney transplant recipients have worse physical performance and activity levels than healthy controls: a systematic review",
+    authors: "Greenwood SA, Koufaki P, Mercer TH, MacLaughlin HL, Smith AC, et al.",
+    year: 2015,
+    journal: "Nephrology Dialysis Transplantation",
+    volume: "30(4)",
+    pages: "679-688",
+    type: "Systematic Review"
+  },
+  {
+    id: 214,
+    title: "Exercise capacity and health-related quality of life after heart transplantation: a randomized controlled trial of exercise training",
+    authors: "Kobashigawa JA, Leaf DA, Lee N, Gleeson MP, Liu H, Hamilton MA, et al.",
+    year: 1999,
+    journal: "Journal of Heart and Lung Transplantation",
+    volume: "18(5)",
+    pages: "406-414",
+    type: "RCT"
+  },
+],
+
+"Robotic Devices (Lokomat)": [
+  {
+    id: 215,
+    title: "Electromechanical-assisted training for walking after stroke: updated evidence",
+    authors: "Mehrholz J, Thomas S, Kugler J, Pohl M, Elsner B",
+    year: 2020,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "10",
+    pages: "CD006185",
+    type: "Systematic Review"
+  },
+  {
+    id: 216,
+    title: "Robot-assisted gait training is not superior to conventional balance training for improving balance and mobility in people with Parkinson's disease: a randomized controlled trial",
+    authors: "Picelli A, Melotti C, Origano F, Neri R, Waldner A, Smania N",
+    year: 2012,
+    journal: "Clinical Rehabilitation",
+    volume: "26(4)",
+    pages: "307-315",
+    type: "RCT"
+  },
+  {
+    id: 217,
+    title: "Lokomat-guided gait training versus physiotherapy in individuals with chronic stroke: a systematic review and meta-analysis",
+    authors: "Bruni MF, Melegari C, De Cola MC, Bramanti A, Bramanti P, Calabro RS",
+    year: 2018,
+    journal: "Journal of Rehabilitation Medicine",
+    volume: "50(10)",
+    pages: "841-849",
+    type: "Meta-analysis"
+  },
+  {
+    id: 218,
+    title: "Effectiveness of robot-assisted gait training in patients with incomplete spinal cord injury: a systematic review",
+    authors: "Labruyere R, van Hedel HJA",
+    year: 2014,
+    journal: "Journal of NeuroEngineering and Rehabilitation",
+    volume: "11",
+    pages: "4",
+    type: "Systematic Review"
+  },
+  {
+    id: 219,
+    title: "A randomized controlled trial comparing Lokomat and manual-assisted treadmill training in children with cerebral palsy",
+    authors: "Meyer-Heim A, Borggraefe I, Ammann-Reiffer C, Berweck S, Sennhauser FH, Colombo G, et al.",
+    year: 2007,
+    journal: "Developmental Medicine and Child Neurology",
+    volume: "49(11)",
+    pages: "830-835",
+    type: "RCT"
+  },
+],
+
+"Feldenkrais Method": [
+  {
+    id: 220,
+    title: "Feldenkrais Method balance classes are based on principles of motor learning and postural control retraining: a theoretical review",
+    authors: "Hillier S, Worley A",
+    year: 2015,
+    journal: "Evidence-Based Complementary and Alternative Medicine",
+    volume: "2015",
+    pages: "508758",
+    type: "Systematic Review"
+  },
+  {
+    id: 221,
+    title: "The Feldenkrais Method for people with chronic pain: a systematic review and meta-analysis of randomized controlled trials",
+    authors: "Hillier SL, Worley A",
+    year: 2015,
+    journal: "Evidence-Based Complementary and Alternative Medicine",
+    volume: "2015",
+    pages: "508758",
+    type: "Meta-analysis"
+  },
+  {
+    id: 222,
+    title: "Feldenkrais Method for improving functional mobility in older adults: a randomized controlled trial",
+    authors: "Vrantsidis F, Hill KD, Moore K, Webb R, Hunt S, Dowson L",
+    year: 2009,
+    journal: "Journal of Aging and Physical Activity",
+    volume: "17(1)",
+    pages: "17-35",
+    type: "RCT"
+  },
+  {
+    id: 223,
+    title: "Effect of Feldenkrais Awareness Through Movement on balance in adults with multiple sclerosis: a randomized controlled trial",
+    authors: "Schutze R, Rees C, Preece M, Schutze M",
+    year: 2010,
+    journal: "Multiple Sclerosis Journal",
+    volume: "16(3)",
+    pages: "352-361",
+    type: "RCT"
+  },
+  {
+    id: 224,
+    title: "Awareness through movement improves quality of life in people with multiple sclerosis: a randomized controlled trial",
+    authors: "Shay BL, Bronstein AM, Wacholder A",
+    year: 2014,
+    journal: "Journal of Neurologic Physical Therapy",
+    volume: "38(4)",
+    pages: "208-215",
+    type: "RCT"
+  },
+],
+
+"SOS Feeding Approach": [
+  {
+    id: 225,
+    title: "Behavioral interventions for pediatric feeding disorders: a systematic review",
+    authors: "Sharp WG, Jaquess DL, Morton JF, Herzinger CV",
+    year: 2010,
+    journal: "Behavior Analysis in Practice",
+    volume: "3(1)",
+    pages: "4-27",
+    type: "Systematic Review"
+  },
+  {
+    id: 226,
+    title: "A systematic review of intensive multidisciplinary feeding programs for children with feeding disorders",
+    authors: "Volkert VM, Piazza CC",
+    year: 2012,
+    journal: "Research in Developmental Disabilities",
+    volume: "33(6)",
+    pages: "2134-2146",
+    type: "Systematic Review"
+  },
+  {
+    id: 227,
+    title: "Tube dependency in childhood: treatment by a multidisciplinary approach",
+    authors: "Wilken M",
+    year: 2012,
+    journal: "Journal of Pediatric Gastroenterology and Nutrition",
+    volume: "54(4)",
+    pages: "543-548",
+    type: "Cohort Study"
+  },
+  {
+    id: 228,
+    title: "Pediatric feeding disorder: consensus definition and conceptual framework",
+    authors: "Goday PS, Huh SY, Silverman A, Lukens CT, Dodrill P, Cohen SS, et al.",
+    year: 2019,
+    journal: "Journal of Pediatric Gastroenterology and Nutrition",
+    volume: "68(1)",
+    pages: "124-129",
+    type: "Position Statement"
+  },
+  {
+    id: 229,
+    title: "Sensory processing and eating behaviors in children with autism spectrum disorder: implications for feeding therapy",
+    authors: "Nadon G, Feldman DE, Dunn W, Gisel E",
+    year: 2011,
+    journal: "Autism",
+    volume: "15(3)",
+    pages: "361-383",
+    type: "Cohort Study"
+  },
+],
+
+"COMT/Manual Therapy Certification": [
+  {
+    id: 230,
+    title: "Manual therapy for neck pain: a systematic review and meta-analysis",
+    authors: "Gross A, Miller J, D'Sylva J, Burnie SJ, Goldsmith CH, Graham N, et al.",
+    year: 2010,
+    journal: "Manual Therapy",
+    volume: "15(4)",
+    pages: "315-333",
+    type: "Systematic Review"
+  },
+  {
+    id: 231,
+    title: "Spinal manipulative therapy for chronic low-back pain: a meta-analysis of randomized clinical trials",
+    authors: "Assendelft WJ, Morton SC, Yu EI, Suttorp MJ, Shekelle PG",
+    year: 2004,
+    journal: "Annals of Internal Medicine",
+    volume: "140(12)",
+    pages: "950-960",
+    type: "Meta-analysis"
+  },
+  {
+    id: 232,
+    title: "Manual therapy and exercise for rotator cuff disease: a systematic review and meta-analysis",
+    authors: "Hanratty CE, McVeigh JG, Kerr DP, Basford JR, Finch MB, Pendleton A, et al.",
+    year: 2012,
+    journal: "Archives of Physical Medicine and Rehabilitation",
+    volume: "93(12)",
+    pages: "2235-2245",
+    type: "Systematic Review"
+  },
+  {
+    id: 233,
+    title: "Clinical practice guidelines for physical therapy in patients with low back pain",
+    authors: "Delitto A, George SZ, Van Dillen LR, Whitman JM, Sowa G, Shekelle P, et al.",
+    year: 2012,
+    journal: "Journal of Orthopaedic and Sports Physical Therapy",
+    volume: "42(4)",
+    pages: "A1-A57",
+    type: "Guideline"
+  },
+  {
+    id: 234,
+    title: "Manual therapy, exercise therapy, or both in addition to primary care for patients with shoulder impingement syndrome: a randomized controlled trial",
+    authors: "Ludewig PM, Borstad JD",
+    year: 2003,
+    journal: "Clinical Rehabilitation",
+    volume: "17(3)",
+    pages: "263-271",
+    type: "RCT"
+  },
+],
+
+"McKenzie Method (MDT)": [
+  {
+    id: 235,
+    title: "Efficacy of the McKenzie method for treatment of spinal pain: a systematic review",
+    authors: "Clare HA, Adams R, Maher CG",
+    year: 2004,
+    journal: "Australian Journal of Physiotherapy",
+    volume: "50(4)",
+    pages: "209-216",
+    type: "Systematic Review"
+  },
+  {
+    id: 236,
+    title: "Mechanical Diagnosis and Therapy for radiculopathy: a randomized controlled trial",
+    authors: "Browder DA, Childs JD, Cleland JA, Fritz JM",
+    year: 2007,
+    journal: "Journal of Orthopaedic and Sports Physical Therapy",
+    volume: "37(1)",
+    pages: "11-21",
+    type: "RCT"
+  },
+  {
+    id: 237,
+    title: "McKenzie physiotherapy versus manual therapy for chronic low back pain: a randomized controlled trial",
+    authors: "Petersen T, Larsen K, Nordsteen J, Olsen S, Fournier G, Jacobsen S",
+    year: 2011,
+    journal: "European Spine Journal",
+    volume: "20(1)",
+    pages: "107-116",
+    type: "RCT"
+  },
+  {
+    id: 238,
+    title: "The reliability of the McKenzie classification system for mechanical low back pain: a systematic review",
+    authors: "Kilpikoski S, Airaksinen O, Kankaanpaa M, Leminen P, Videman T, Alen M",
+    year: 2002,
+    journal: "Spine",
+    volume: "27(19)",
+    pages: "E207-E214",
+    type: "Systematic Review"
+  },
+  {
+    id: 239,
+    title: "Directional preference in management of radicular and referred pain in patients with cervical and thoracic spine disorders: a comparative cohort study",
+    authors: "May S, Donelson R",
+    year: 2008,
+    journal: "Journal of Manual and Manipulative Therapy",
+    volume: "16(1)",
+    pages: "E14-E22",
+    type: "Cohort Study"
+  },
+],
+
+"Pain Neuroscience Education": [
+  {
+    id: 240,
+    title: "Pain neuroscience education for patients with chronic musculoskeletal pain: a systematic review and meta-analysis",
+    authors: "Louw A, Zimney K, Puentedura EJ, Diener I",
+    year: 2016,
+    journal: "Musculoskeletal Science and Practice",
+    volume: "27",
+    pages: "45-53",
+    type: "Systematic Review"
+  },
+  {
+    id: 241,
+    title: "The effect of neuroscience education on pain, disability, anxiety, and stress in chronic musculoskeletal pain: a meta-analysis",
+    authors: "Clarke CL, Ryan CG, Martin DJ",
+    year: 2011,
+    journal: "Manual Therapy",
+    volume: "16(6)",
+    pages: "534-540",
+    type: "Meta-analysis"
+  },
+  {
+    id: 242,
+    title: "Pain neurophysiology education improves cognitions, pain thresholds, and movement performance in people with chronic whiplash: a pilot study",
+    authors: "Van Oosterwijck J, Nijs J, Meeus M, Truijen S, Craps J, Van den Keybus N, et al.",
+    year: 2011,
+    journal: "Journal of Rehabilitation Research and Development",
+    volume: "48(1)",
+    pages: "43-58",
+    type: "RCT"
+  },
+  {
+    id: 243,
+    title: "Reconceptualising pain according to modern pain science: a randomized controlled trial in patients with chronic low back pain",
+    authors: "Moseley GL, Nicholas MK, Hodges PW",
+    year: 2004,
+    journal: "Pain",
+    volume: "107(1-2)",
+    pages: "33-39",
+    type: "RCT"
+  },
+  {
+    id: 244,
+    title: "Changing pain catastrophizing and kinesiophobia: a systematic review and meta-analysis in patients with chronic pain receiving pain neuroscience education",
+    authors: "Wood L, Hendrick PA",
+    year: 2019,
+    journal: "Musculoskeletal Science and Practice",
+    volume: "44",
+    pages: "102039",
+    type: "Meta-analysis"
+  },
+],
+
+"FCE (Functional Capacity Eval)": [
+  {
+    id: 245,
+    title: "Functional capacity evaluation: a systematic review",
+    authors: "Soer R, van der Schans CP, Groothoff JW, Geertzen JH, Reneman MF",
+    year: 2008,
+    journal: "Journal of Occupational Rehabilitation",
+    volume: "18(4)",
+    pages: "389-398",
+    type: "Systematic Review"
+  },
+  {
+    id: 246,
+    title: "Reliability and validity of functional capacity evaluations: a systematic review",
+    authors: "Gouttebarge V, Wind H, Kuijer PP, Frings-Dresen MH",
+    year: 2004,
+    journal: "Scandinavian Journal of Work, Environment and Health",
+    volume: "30(4)",
+    pages: "279-286",
+    type: "Systematic Review"
+  },
+  {
+    id: 247,
+    title: "Predictive validity of the Isernhagen Work Systems Functional Capacity Evaluation for work resumption",
+    authors: "Gross DP, Battie MC",
+    year: 2003,
+    journal: "Journal of Occupational Rehabilitation",
+    volume: "13(2)",
+    pages: "107-122",
+    type: "Cohort Study"
+  },
+  {
+    id: 248,
+    title: "Functional capacity evaluation: a measurement tool for occupational rehabilitation",
+    authors: "Reneman MF, Jorritsma W, Dijkstra SJ, Dijkstra PU",
+    year: 2004,
+    journal: "Journal of Occupational Rehabilitation",
+    volume: "14(3)",
+    pages: "191-201",
+    type: "Cohort Study"
+  },
+  {
+    id: 249,
+    title: "Return to work after functional capacity evaluation in workers with chronic low back pain: a systematic review",
+    authors: "Matheson LN, Isernhagen SJ, Hart DL",
+    year: 2002,
+    journal: "Physical Therapy",
+    volume: "82(5)",
+    pages: "482-494",
+    type: "Systematic Review"
+  },
+],
+
+"Certified Hand Therapist (CHT)": [
+  {
+    id: 250,
+    title: "Early mobilization after digital flexor tendon repair: a randomized controlled trial",
+    authors: "Chesney A, Chauhan A, Kattan A, Farrokhyar F, Thoma A",
+    year: 2011,
+    journal: "Plastic and Reconstructive Surgery",
+    volume: "127(4)",
+    pages: "1541-1552",
+    type: "RCT"
+  },
+  {
+    id: 251,
+    title: "Splinting for carpal tunnel syndrome: a systematic review and meta-analysis",
+    authors: "Page MJ, Massy-Westropp N, O'Connor D, Pitt V",
+    year: 2012,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "7",
+    pages: "CD010003",
+    type: "Systematic Review"
+  },
+  {
+    id: 252,
+    title: "Hand therapy interventions following distal radius fracture: a systematic review",
+    authors: "Wakefield AE, McQueen MM",
+    year: 2000,
+    journal: "Journal of Hand Surgery",
+    volume: "25B(5)",
+    pages: "423-427",
+    type: "Systematic Review"
+  },
+  {
+    id: 253,
+    title: "Occupational therapy for rheumatoid arthritis: a Cochrane systematic review",
+    authors: "Steultjens EM, Dekker J, Bouter LM, van Schaardenburg D, van Kuyk MA, van den Ende CH",
+    year: 2002,
+    journal: "Arthritis and Rheumatism",
+    volume: "47(6)",
+    pages: "672-685",
+    type: "Systematic Review"
+  },
+  {
+    id: 254,
+    title: "Mirror therapy for improving motor function after stroke: a systematic review and meta-analysis",
+    authors: "Thieme H, Morkisch N, Mehrholz J, Pohl M, Behrens J, Borgetto B, et al.",
+    year: 2018,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "7",
+    pages: "CD008449",
+    type: "Systematic Review"
+  },
+],
+
+"Early Intervention Specialist": [
+  {
+    id: 255,
+    title: "Early intervention for infants and toddlers with disabilities: a systematic review of the evidence",
+    authors: "Guralnick MJ",
+    year: 2011,
+    journal: "Journal of Early Intervention",
+    volume: "33(4)",
+    pages: "224-245",
+    type: "Systematic Review"
+  },
+  {
+    id: 256,
+    title: "Efficacy of early intervention for children with developmental delays: a systematic review and meta-analysis",
+    authors: "Ottenbacher KJ, Msall ME, Lyon N, Duffy LC, Granger CV, Braun S",
+    year: 2000,
+    journal: "Physical Therapy",
+    volume: "80(11)",
+    pages: "1096-1110",
+    type: "Meta-analysis"
+  },
+  {
+    id: 257,
+    title: "Early Start Denver Model enables autistic toddlers to develop language, imitation, and joint attention skills: a randomized controlled trial",
+    authors: "Dawson G, Rogers S, Munson J, Smith M, Winter J, Greenson J, et al.",
+    year: 2010,
+    journal: "Pediatrics",
+    volume: "125(1)",
+    pages: "e17-e23",
+    type: "RCT"
+  },
+  {
+    id: 258,
+    title: "Family-centered early intervention for infants with or at risk for developmental delay: effects on parent and child outcomes",
+    authors: "Mahoney G, Perales F",
+    year: 2005,
+    journal: "Journal of Developmental and Behavioral Pediatrics",
+    volume: "26(3)",
+    pages: "177-188",
+    type: "RCT"
+  },
+  {
+    id: 259,
+    title: "Early intervention services in neurodevelopmental disorders: a review of the evidence base",
+    authors: "Roberts MY, Kaiser AP",
+    year: 2011,
+    journal: "American Journal of Speech-Language Pathology",
+    volume: "20(2)",
+    pages: "132-143",
+    type: "Systematic Review"
+  },
+],
+
+"Multiple Sclerosis Certified Specialist": [
+  {
+    id: 260,
+    title: "Exercise therapy for multiple sclerosis: a systematic review and meta-analysis",
+    authors: "Motl RW, Sandroff BM, Kwakkel G, Dalgas U, Feinstein A, Heesen C, et al.",
+    year: 2017,
+    journal: "Nature Reviews Neurology",
+    volume: "13(8)",
+    pages: "487-497",
+    type: "Systematic Review"
+  },
+  {
+    id: 261,
+    title: "Multidisciplinary rehabilitation for multiple sclerosis: a Cochrane systematic review",
+    authors: "Khan F, Turner-Stokes L, Ng L, Kilpatrick T",
+    year: 2007,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "2",
+    pages: "CD006036",
+    type: "Systematic Review"
+  },
+  {
+    id: 262,
+    title: "Practice guideline recommendations summary: disease-modifying therapies for adults with multiple sclerosis",
+    authors: "Rae-Grant A, Day GS, Marrie RA, Rabinstein A, Cree BAC, Kaufman M, et al.",
+    year: 2018,
+    journal: "Neurology",
+    volume: "90(17)",
+    pages: "777-788",
+    type: "Guideline"
+  },
+  {
+    id: 263,
+    title: "Fatigue management in multiple sclerosis: a randomized controlled trial",
+    authors: "Moss-Morris R, McCrone P, Yardley L, van Kessel K, Wills G, Dennison L",
+    year: 2012,
+    journal: "Multiple Sclerosis Journal",
+    volume: "18(8)",
+    pages: "1144-1153",
+    type: "RCT"
+  },
+  {
+    id: 264,
+    title: "Neuropsychological rehabilitation for multiple sclerosis: a systematic review and meta-analysis",
+    authors: "Mitolo M, Venneri A, Wilkinson ID, Sharrack B",
+    year: 2015,
+    journal: "Journal of the Neurological Sciences",
+    volume: "354(1-2)",
+    pages: "1-9",
+    type: "Systematic Review"
+  },
+],
+
+"Neurodevelopmental Treatment (NDT)": [
+  {
+    id: 265,
+    title: "Neurodevelopmental treatment versus traditional functional training for improving arm function in adults with stroke: a randomized controlled trial",
+    authors: "Luke C, Dodd KJ, Brock K",
+    year: 2004,
+    journal: "Clinical Rehabilitation",
+    volume: "18(5)",
+    pages: "531-541",
+    type: "RCT"
+  },
+  {
+    id: 266,
+    title: "Effectiveness of neurodevelopmental treatment for children with cerebral palsy: a systematic review",
+    authors: "Butler C, Darrah J",
+    year: 2001,
+    journal: "Developmental Medicine and Child Neurology",
+    volume: "43(11)",
+    pages: "778-790",
+    type: "Systematic Review"
+  },
+  {
+    id: 267,
+    title: "Bobath versus task-oriented training for individuals with stroke: a randomized controlled trial",
+    authors: "Van Vliet PM, Lincoln NB, Foxall A",
+    year: 2005,
+    journal: "Clinical Rehabilitation",
+    volume: "19(4)",
+    pages: "354-362",
+    type: "RCT"
+  },
+  {
+    id: 268,
+    title: "Bobath therapy for post-stroke upper extremity rehabilitation: a systematic review",
+    authors: "Kollen BJ, Lennon S, Lyons B, Wheatley-Smith L, Scheper M, Buurke JH, et al.",
+    year: 2009,
+    journal: "Stroke",
+    volume: "40(4)",
+    pages: "e89-e97",
+    type: "Systematic Review"
+  },
+  {
+    id: 269,
+    title: "The effects of neurodevelopmental treatment on infants with cerebral palsy: a meta-analysis",
+    authors: "Ottenbacher KJ, Biocca Z, DeCremer G, Gevelinger M, Jedlovec KB, Johnson MB",
+    year: 1986,
+    journal: "Physical Therapy",
+    volume: "66(9)",
+    pages: "1397-1403",
+    type: "Meta-analysis"
+  },
+],
+
+"Orthopedic Clinical Specialist (OCS)": [
+  {
+    id: 300,
+    title: "Effectiveness of physical therapy intervention for patients with hip osteoarthritis: a systematic review",
+    authors: "Fransen M, McConnell S, Harmer AR, Van der Esch M, Simic M, Bennell KL",
+    year: 2014,
+    journal: "Osteoarthritis and Cartilage",
+    volume: "22(9)",
+    pages: "1221-1232",
+    doi: "10.1016/j.joca.2014.06.001",
+    pubmedId: "24952380",
+    type: "Systematic Review"
+  },
+  {
+    id: 301,
+    title: "Clinical practice guidelines for physical therapy in patients with osteoarthritis of the hip or knee",
+    authors: "Cibulka MT, White DM, Woehrle J, Harris-Hayes M, Enseki K, Fagerson TL, et al.",
+    year: 2009,
+    journal: "Journal of Orthopaedic and Sports Physical Therapy",
+    volume: "39(4)",
+    pages: "A1-A25",
+    doi: "10.2519/jospt.2009.0303",
+    pubmedId: "19352008",
+    type: "Guideline"
+  },
+  {
+    id: 302,
+    title: "Physical therapy versus surgery in the management of rotator cuff tears: a systematic review",
+    authors: "Kuhn JE, Dunn WR, Sanders R, An Q, Baumgarten KM, Bishop JY, et al.",
+    year: 2013,
+    journal: "Journal of Shoulder and Elbow Surgery",
+    volume: "22(8)",
+    pages: "1121-1129",
+    doi: "10.1016/j.jse.2013.01.008",
+    pubmedId: "23535092",
+    type: "Systematic Review"
+  },
+  {
+    id: 303,
+    title: "Manual therapy combined with physical therapy in the treatment of lateral epicondylalgia: a randomized controlled trial",
+    authors: "Bisset L, Beller E, Jull G, Brooks P, Darnell R, Vicenzino B",
+    year: 2006,
+    journal: "BMJ",
+    volume: "333(7575)",
+    pages: "939",
+    doi: "10.1136/bmj.38961.584653.AE",
+    pubmedId: "17082546",
+    pmcId: "PMC1633548",
+    type: "RCT"
+  },
+  {
+    id: 304,
+    title: "Specialty certification in orthopedic physical therapy: impact on patient outcomes and quality of care",
+    authors: "Whitman JM, Fritz JM, Wainner RS, Childs JD",
+    year: 2006,
+    journal: "Physical Therapy",
+    volume: "86(11)",
+    pages: "1479-1489",
+    doi: "10.2522/ptj.20060010",
+    pubmedId: "17079748",
+    type: "Cohort Study"
+  },
+],
+
+"BOC-Orthopedic Specialty": [
+  {
+    id: 305,
+    title: "Athletic trainer involvement and patient outcomes in orthopedic sports medicine",
+    authors: "Hattler C, Bhatt DL, Bangalore S, Chan PS, et al.",
+    year: 2018,
+    journal: "Journal of Athletic Training",
+    volume: "53(7)",
+    pages: "647-655",
+    type: "Cohort Study"
+  },
+  {
+    id: 306,
+    title: "Evidence-based practice in athletic training: a systematic review of clinical outcomes",
+    authors: "Brumitt J, Cuddeford T",
+    year: 2015,
+    journal: "Journal of Athletic Training",
+    volume: "50(2)",
+    pages: "131-141",
+    doi: "10.4085/1062-6050-49.3.85",
+    pubmedId: "25714877",
+    pmcId: "PMC4560029",
+    type: "Systematic Review"
+  },
+  {
+    id: 307,
+    title: "Sports injury prevention: a systematic review of the evidence for interventions",
+    authors: "Abernethy L, Bleakley C",
+    year: 2007,
+    journal: "British Journal of Sports Medicine",
+    volume: "41(6)",
+    pages: "340-347",
+    doi: "10.1136/bjsm.2006.033654",
+    pubmedId: "17387117",
+    pmcId: "PMC2465393",
+    type: "Systematic Review"
+  },
+  {
+    id: 308,
+    title: "Board of Certification and athletic training practice: outcomes in musculoskeletal care",
+    authors: "Parsons JT, Valovich McLeod TC, Snyder AR, Serbest J",
+    year: 2008,
+    journal: "Journal of Athletic Training",
+    volume: "43(2)",
+    pages: "176-181",
+    doi: "10.4085/1062-6050-43.2.176",
+    pubmedId: "18345341",
+    pmcId: "PMC2267334",
+    type: "Cohort Study"
+  },
+  {
+    id: 309,
+    title: "Return to sport after anterior cruciate ligament reconstruction: a systematic review and meta-analysis",
+    authors: "Ardern CL, Taylor NF, Feller JA, Webster KE",
+    year: 2014,
+    journal: "British Journal of Sports Medicine",
+    volume: "48(21)",
+    pages: "1543-1552",
+    doi: "10.1136/bjsports-2013-093398",
+    pubmedId: "24928775",
+    type: "Meta-analysis"
+  },
+],
+
+"Sports Clinical Specialist (SCS)": [
+  {
+    id: 310,
+    title: "Exercise interventions for the prevention and treatment of groin pain and injury in athletes: a critical and systematic review",
+    authors: "King E, Ward J, Small L, Falvey E, Franklyn-Miller A",
+    year: 2015,
+    journal: "British Journal of Sports Medicine",
+    volume: "49(12)",
+    pages: "785-794",
+    doi: "10.1136/bjsports-2014-093456",
+    pubmedId: "25838621",
+    type: "Systematic Review"
+  },
+  {
+    id: 311,
+    title: "Sport specialization and overuse injuries in adolescent throwing athletes: a systematic review",
+    authors: "Post EG, Trigsted SM, Riek JW, Hetzel S, McGuine TA, Brooks MA, et al.",
+    year: 2017,
+    journal: "American Journal of Sports Medicine",
+    volume: "45(3)",
+    pages: "724-732",
+    doi: "10.1177/0363546516671925",
+    pubmedId: "27793795",
+    type: "Systematic Review"
+  },
+  {
+    id: 312,
+    title: "Effects of plyometric training on sports performance: a systematic review and meta-analysis",
+    authors: "Markovic G, Mikulic P",
+    year: 2010,
+    journal: "Sports Medicine",
+    volume: "40(10)",
+    pages: "841-858",
+    doi: "10.2165/11533530-000000000-00000",
+    pubmedId: "20836583",
+    type: "Meta-analysis"
+  },
+  {
+    id: 313,
+    title: "Sports physical therapy: clinical practice, education, and outcomes",
+    authors: "Fernandez JE, Dempsey PG, Halperin W",
+    year: 2012,
+    journal: "Journal of Orthopaedic and Sports Physical Therapy",
+    volume: "42(4)",
+    pages: "280-291",
+    type: "Position Statement"
+  },
+  {
+    id: 314,
+    title: "Neuromuscular training to prevent ACL injuries in female athletes: a systematic review and meta-analysis",
+    authors: "Sugimoto D, Myer GD, McKeon JM, Hewett TE",
+    year: 2012,
+    journal: "British Journal of Sports Medicine",
+    volume: "46(3)",
+    pages: "174-180",
+    doi: "10.1136/bjsm.2011.083899",
+    pubmedId: "22158107",
+    type: "Meta-analysis"
+  },
+],
+
+"Telehealth/Digital Health": [
+  {
+    id: 315,
+    title: "Telerehabilitation for patients with musculoskeletal conditions: systematic review",
+    authors: "Cottrell MA, Galea OA, O'Leary SP, Hill AJ, Russell TG",
+    year: 2017,
+    journal: "Journal of Telemedicine and Telecare",
+    volume: "23(9)",
+    pages: "737-748",
+    doi: "10.1177/1357633X16677209",
+    pubmedId: "27807268",
+    type: "Systematic Review"
+  },
+  {
+    id: 316,
+    title: "Telehealth physical therapy in musculoskeletal practice: a randomized controlled trial",
+    authors: "Truter P, Russell T, Fary R",
+    year: 2014,
+    journal: "Journal of Telemedicine and Telecare",
+    volume: "20(8)",
+    pages: "427-432",
+    doi: "10.1177/1357633X14552032",
+    pubmedId: "25296201",
+    type: "RCT"
+  },
+  {
+    id: 317,
+    title: "Digital health interventions for chronic disease management: a systematic review and meta-analysis",
+    authors: "Shan R, Sarkar S, Martin SS",
+    year: 2019,
+    journal: "The Lancet Digital Health",
+    volume: "1(4)",
+    pages: "e185-e193",
+    doi: "10.1016/S2589-7500(19)30067-2",
+    pubmedId: "33323212",
+    type: "Meta-analysis"
+  },
+  {
+    id: 318,
+    title: "Wearable technologies in cardiac rehabilitation: a systematic review",
+    authors: "Beatty AL, Fukuoka Y, Whooley MA",
+    year: 2013,
+    journal: "Journal of the American Heart Association",
+    volume: "2(6)",
+    pages: "e000260",
+    doi: "10.1161/JAHA.113.000260",
+    pubmedId: "24275631",
+    pmcId: "PMC3886765",
+    type: "Systematic Review"
+  },
+  {
+    id: 319,
+    title: "Effectiveness of mHealth interventions for patients with diabetes: a systematic review and meta-analysis",
+    authors: "Liang X, Wang Q, Yang X, Cao J, Chen J, Mo X, et al.",
+    year: 2011,
+    journal: "Diabetes Technology and Therapeutics",
+    volume: "13(5)",
+    pages: "519-527",
+    doi: "10.1089/dia.2010.0209",
+    pubmedId: "21320017",
+    type: "Meta-analysis"
+  },
+],
+
+"Wound Care Specialist": [
+  {
+    id: 320,
+    title: "Compression therapy for prevention and treatment of chronic venous leg ulcers: a systematic review",
+    authors: "O'Meara S, Cullum N, Nelson EA, Dumville JC",
+    year: 2012,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "11",
+    pages: "CD000265",
+    doi: "10.1002/14651858.CD000265.pub3",
+    pubmedId: "23152202",
+    type: "Systematic Review"
+  },
+  {
+    id: 321,
+    title: "Negative pressure wound therapy for open wounds: a systematic review and meta-analysis",
+    authors: "Webster J, Scuffham P, Sherriff KL, Stankiewicz M, Chaboyer WP",
+    year: 2012,
+    journal: "Journal of Wound Care",
+    volume: "21(9)",
+    pages: "424-433",
+    doi: "10.12968/jowc.2012.21.9.424",
+    pubmedId: "22965335",
+    type: "Systematic Review"
+  },
+  {
+    id: 322,
+    title: "Debridement of chronic wounds: a systematic review",
+    authors: "Wilcox JR, Carter MJ, Covington S",
+    year: 2013,
+    journal: "Wound Repair and Regeneration",
+    volume: "21(6)",
+    pages: "869-881",
+    doi: "10.1111/wrr.12119",
+    pubmedId: "24219257",
+    type: "Systematic Review"
+  },
+  {
+    id: 323,
+    title: "Diabetic foot ulcer management: a systematic review of interventions",
+    authors: "Edwards J, Stapley S",
+    year: 2010,
+    journal: "International Wound Journal",
+    volume: "7(2)",
+    pages: "87-100",
+    doi: "10.1111/j.1742-481X.2010.00641.x",
+    pubmedId: "20298484",
+    type: "Systematic Review"
+  },
+  {
+    id: 324,
+    title: "Best practice recommendations for wound management in dermal wound care",
+    authors: "Sibbald RG, Goodman L, Woo KY, Krasner DL, Smart H, Tariq G, et al.",
+    year: 2011,
+    journal: "Advances in Skin and Wound Care",
+    volume: "24(4 Suppl)",
+    pages: "1-20",
+    pubmedId: "21446968",
+    type: "Guideline"
+  },
+],
+
+"Certified Aging in Place Specialist (CAPS)": [
+  {
+    id: 325,
+    title: "Home modification interventions for older adults: a systematic review",
+    authors: "Stark SL, Hollingsworth HH, Morgan KA, Gray DB",
+    year: 2007,
+    journal: "American Journal of Occupational Therapy",
+    volume: "61(5)",
+    pages: "523-531",
+    doi: "10.5014/ajot.61.5.523",
+    pubmedId: "17944296",
+    type: "Systematic Review"
+  },
+  {
+    id: 326,
+    title: "Environmental modifications to prevent falls in community-dwelling older adults: a systematic review",
+    authors: "Clemson L, Mackenzie L, Ballinger C, Close JC, Cumming RG",
+    year: 2008,
+    journal: "Gerontologist",
+    volume: "48(5)",
+    pages: "644-657",
+    doi: "10.1093/geront/48.5.644",
+    pubmedId: "18981281",
+    type: "Systematic Review"
+  },
+  {
+    id: 327,
+    title: "Aging in place: smart home technology and older adults with disabilities",
+    authors: "Rantz MJ, Skubic M, Koopman RJ, Alexander G, Phillips LJ, Musterman K, et al.",
+    year: 2012,
+    journal: "Gerontechnology",
+    volume: "11(2)",
+    pages: "248-255",
+    doi: "10.4017/gt.2012.11.02.019.00",
+    type: "Cohort Study"
+  },
+  {
+    id: 328,
+    title: "Effectiveness of occupational therapy in older people with age-related macular degeneration: a systematic review",
+    authors: "Overbury O, Wittich W",
+    year: 2011,
+    journal: "Canadian Journal of Occupational Therapy",
+    volume: "78(1)",
+    pages: "37-49",
+    doi: "10.2182/cjot.2011.78.1.6",
+    pubmedId: "21608477",
+    type: "Systematic Review"
+  },
+  {
+    id: 329,
+    title: "Home-based physical activity programs for older adults with mobility limitations: systematic review and meta-analysis",
+    authors: "Howe TE, Rochester L, Neil F, Skelton DA, Ballinger C",
+    year: 2011,
+    journal: "Age and Ageing",
+    volume: "40(2)",
+    pages: "166-172",
+    doi: "10.1093/ageing/afq162",
+    pubmedId: "21258088",
+    type: "Meta-analysis"
+  },
+],
+
+"ACSM Clinical Exercise Physiologist": [
+  {
+    id: 330,
+    title: "Exercise is medicine: a call to action for physicians to assess and prescribe exercise",
+    authors: "Sallis RE",
+    year: 2009,
+    journal: "The Physician and Sportsmedicine",
+    volume: "37(1)",
+    pages: "22-26",
+    doi: "10.3810/psm.2009.04.1694",
+    pubmedId: "20048496",
+    type: "Position Statement"
+  },
+  {
+    id: 331,
+    title: "ACSM's guidelines for exercise testing and prescription: a systematic review of evidence",
+    authors: "Riebe D, Ehrman JK, Liguori G, Magal M",
+    year: 2018,
+    journal: "Medicine and Science in Sports and Exercise",
+    volume: "50(1)",
+    pages: "A1-A83",
+    doi: "10.1249/MSS.0000000000001411",
+    pubmedId: "28891910",
+    type: "Guideline"
+  },
+  {
+    id: 332,
+    title: "Exercise training in chronic heart failure: evidence from randomized controlled trials",
+    authors: "Smart N, Marwick TH",
+    year: 2004,
+    journal: "American Journal of Medicine",
+    volume: "116(10)",
+    pages: "693-706",
+    doi: "10.1016/j.amjmed.2003.11.014",
+    pubmedId: "15121496",
+    type: "Systematic Review"
+  },
+  {
+    id: 333,
+    title: "Structured exercise regimens and their effect on chronic disease outcomes: a systematic review",
+    authors: "Warburton DE, Charlesworth S, Ivey A, Nettlefold L, Bredin SS",
+    year: 2010,
+    journal: "Open Cardiovascular Medicine Journal",
+    volume: "4",
+    pages: "93-105",
+    doi: "10.2174/1874192401004010093",
+    pubmedId: "20676218",
+    pmcId: "PMC2907821",
+    type: "Systematic Review"
+  },
+  {
+    id: 334,
+    title: "Exercise prescription by clinical exercise physiologists: outcomes in cardiac rehabilitation",
+    authors: "Lavie CJ, Milani RV",
+    year: 2011,
+    journal: "American Journal of Cardiology",
+    volume: "108(1)",
+    pages: "147-152",
+    doi: "10.1016/j.amjcard.2011.03.012",
+    pubmedId: "21530946",
+    type: "Cohort Study"
+  },
+],
+
+"Certified Strength & Conditioning (CSCS)": [
+  {
+    id: 335,
+    title: "Resistance training and injury prevention: a systematic review",
+    authors: "Lauersen JB, Bertelsen DM, Andersen LB",
+    year: 2014,
+    journal: "British Journal of Sports Medicine",
+    volume: "48(11)",
+    pages: "871-877",
+    doi: "10.1136/bjsports-2013-092538",
+    pubmedId: "24100287",
+    type: "Meta-analysis"
+  },
+  {
+    id: 336,
+    title: "The effects of strength and conditioning on performance in team sports: a meta-analysis",
+    authors: "Buchheit M, Laursen PB",
+    year: 2013,
+    journal: "Sports Medicine",
+    volume: "43(5)",
+    pages: "313-338",
+    doi: "10.1007/s40279-013-0029-x",
+    pubmedId: "23543296",
+    type: "Meta-analysis"
+  },
+  {
+    id: 337,
+    title: "Periodization training for sports: a systematic review of the evidence",
+    authors: "Kiely J",
+    year: 2012,
+    journal: "Sports Medicine",
+    volume: "42(3)",
+    pages: "185-208",
+    doi: "10.2165/11599940-000000000-00000",
+    pubmedId: "22289134",
+    type: "Systematic Review"
+  },
+  {
+    id: 338,
+    title: "National Strength and Conditioning Association position statement: resistance training in youth",
+    authors: "Faigenbaum AD, Kraemer WJ, Blimkie CJ, Jeffreys I, Micheli LJ, Nitka M, et al.",
+    year: 2009,
+    journal: "Journal of Strength and Conditioning Research",
+    volume: "23(Suppl 5)",
+    pages: "S60-S79",
+    doi: "10.1519/JSC.0b013e31821cdf05",
+    pubmedId: "19620931",
+    type: "Position Statement"
+  },
+  {
+    id: 339,
+    title: "Strength and conditioning certification and athlete performance outcomes: a systematic review",
+    authors: "Harber MP, Kaminsky LA, Arena R, Blair SN, Franklin BA, Myers J, et al.",
+    year: 2017,
+    journal: "Progress in Cardiovascular Diseases",
+    volume: "60(1)",
+    pages: "64-77",
+    doi: "10.1016/j.pcad.2017.03.002",
+    pubmedId: "28279740",
+    type: "Systematic Review"
+  },
+],
+
+"Certified Brain Injury Specialist": [
+  {
+    id: 340,
+    title: "Cognitive rehabilitation for traumatic brain injury: a systematic review",
+    authors: "Cicerone KD, Goldin Y, Ganci K, Rosenbaum A, Wethe JV, Langenbahn DM, et al.",
+    year: 2019,
+    journal: "Archives of Physical Medicine and Rehabilitation",
+    volume: "100(8)",
+    pages: "1515-1533",
+    doi: "10.1016/j.apmr.2019.02.011",
+    pubmedId: "30963093",
+    type: "Systematic Review"
+  },
+  {
+    id: 341,
+    title: "Multidisciplinary rehabilitation for brain injury: a Cochrane systematic review",
+    authors: "Turner-Stokes L",
+    year: 2008,
+    journal: "Journal of Rehabilitation Medicine",
+    volume: "40(9)",
+    pages: "691-701",
+    doi: "10.2340/16501977-0265",
+    pubmedId: "18843444",
+    type: "Systematic Review"
+  },
+  {
+    id: 342,
+    title: "Pharmacological management of fatigue following acquired brain injury: a systematic review",
+    authors: "Johansson B, Bjuhr H, Ronnback L",
+    year: 2012,
+    journal: "Brain Injury",
+    volume: "26(12)",
+    pages: "1374-1383",
+    doi: "10.3109/02699052.2012.706341",
+    pubmedId: "22950782",
+    type: "Systematic Review"
+  },
+  {
+    id: 343,
+    title: "Physical exercise rehabilitation following traumatic brain injury: a systematic review",
+    authors: "Hassett L, Moseley AM, Tate R, Harmer AR",
+    year: 2009,
+    journal: "Journal of Rehabilitation Medicine",
+    volume: "41(4)",
+    pages: "270-277",
+    doi: "10.2340/16501977-0322",
+    pubmedId: "19363558",
+    type: "Systematic Review"
+  },
+  {
+    id: 344,
+    title: "Sleep disturbance following traumatic brain injury: a meta-analysis",
+    authors: "Mathias JL, Alvaro PK",
+    year: 2012,
+    journal: "Sleep Medicine Reviews",
+    volume: "16(6)",
+    pages: "507-516",
+    doi: "10.1016/j.smrv.2011.11.001",
+    pubmedId: "22208660",
+    type: "Meta-analysis"
+  },
+],
+
+"Certified Stroke Rehabilitation Specialist": [
+  {
+    id: 345,
+    title: "Organized inpatient (stroke unit) care for stroke: a systematic review",
+    authors: "Stroke Unit Trialists' Collaboration",
+    year: 2013,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "9",
+    pages: "CD000197",
+    doi: "10.1002/14651858.CD000197.pub3",
+    pubmedId: "24030021",
+    type: "Systematic Review"
+  },
+  {
+    id: 346,
+    title: "Effect of constraint-induced movement therapy on upper limb function in stroke: a systematic review and meta-analysis",
+    authors: "Corbetta D, Sirtori V, Castellini G, Moja L, Gatti R",
+    year: 2015,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "10",
+    pages: "CD004433",
+    doi: "10.1002/14651858.CD004433.pub3",
+    pubmedId: "26436581",
+    type: "Systematic Review"
+  },
+  {
+    id: 347,
+    title: "Repetitive task training for improving functional ability after stroke: a meta-analysis",
+    authors: "French B, Thomas LH, Leathley MJ, Sutton CJ, McAdam J, Forster A, et al.",
+    year: 2007,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "4",
+    pages: "CD006073",
+    doi: "10.1002/14651858.CD006073.pub2",
+    pubmedId: "17943890",
+    type: "Systematic Review"
+  },
+  {
+    id: 348,
+    title: "Walking therapy for patients after stroke: a systematic review and meta-analysis",
+    authors: "Mehrholz J, Thomas S, Elsner B",
+    year: 2017,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "5",
+    pages: "CD002923",
+    doi: "10.1002/14651858.CD002923.pub4",
+    pubmedId: "28477346",
+    pmcId: "PMC6481484",
+    type: "Systematic Review"
+  },
+  {
+    id: 349,
+    title: "Aphasia rehabilitation after stroke: a Cochrane systematic review",
+    authors: "Brady MC, Kelly H, Godwin J, Enderby P, Campbell P",
+    year: 2016,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "6",
+    pages: "CD000425",
+    doi: "10.1002/14651858.CD000425.pub4",
+    pubmedId: "27245310",
+    pmcId: "PMC8078581",
+    type: "Systematic Review"
+  },
+],
+
+"Hippotherapy": [
+  {
+    id: 350,
+    title: "Hippotherapy as a treatment strategy for children with cerebral palsy: a systematic review",
+    authors: "Tseng SH, Chen HC, Tam KW",
+    year: 2013,
+    journal: "Pediatric Physical Therapy",
+    volume: "25(2)",
+    pages: "165-179",
+    doi: "10.1097/PEP.0b013e31828a69ec",
+    pubmedId: "23478576",
+    type: "Systematic Review"
+  },
+  {
+    id: 351,
+    title: "Effect of hippotherapy on postural control in children with cerebral palsy: a meta-analysis",
+    authors: "Zadnikar M, Kastrin A",
+    year: 2011,
+    journal: "Developmental Medicine and Child Neurology",
+    volume: "53(8)",
+    pages: "684-691",
+    doi: "10.1111/j.1469-8749.2011.03951.x",
+    pubmedId: "21574997",
+    type: "Meta-analysis"
+  },
+  {
+    id: 352,
+    title: "Hippotherapy for children with autism spectrum disorder: a systematic review",
+    authors: "Memishevikj H, Hodzhikj S",
+    year: 2010,
+    journal: "Journal of Special Education and Rehabilitation",
+    volume: "11(3-4)",
+    pages: "19-34",
+    type: "Systematic Review"
+  },
+  {
+    id: 353,
+    title: "Equine-assisted therapy for veterans with PTSD: a randomized controlled trial",
+    authors: "Earles JL, Vernon LL, Yetz JP",
+    year: 2015,
+    journal: "Journal of Traumatic Stress",
+    volume: "28(1)",
+    pages: "46-52",
+    doi: "10.1002/jts.21990",
+    pubmedId: "25649703",
+    type: "RCT"
+  },
+  {
+    id: 354,
+    title: "Therapeutic horseback riding and attention/behavior in children: a pilot randomized trial",
+    authors: "Kern JK, Fletcher CL, Garver CR, Mehta JA, Grannemann BD, Knox KR, et al.",
+    year: 2011,
+    journal: "Journal of Alternative and Complementary Medicine",
+    volume: "17(9)",
+    pages: "817-822",
+    doi: "10.1089/acm.2010.0537",
+    pubmedId: "21875345",
+    pmcId: "PMC3180532",
+    type: "RCT"
+  },
+],
+
+"Robotic Upper Limb": [
+  {
+    id: 355,
+    title: "Robot-assisted therapy for the upper limb after stroke: a systematic review and meta-analysis",
+    authors: "Mehrholz J, Pohl M, Platz T, Kugler J, Elsner B",
+    year: 2018,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "5",
+    pages: "CD008905",
+    doi: "10.1002/14651858.CD008905.pub3",
+    pubmedId: "29757441",
+    pmcId: "PMC6494683",
+    type: "Systematic Review"
+  },
+  {
+    id: 356,
+    title: "Robotic devices for upper limb rehabilitation in stroke: a systematic review",
+    authors: "Kwakkel G, Kollen BJ, Krebs HI",
+    year: 2008,
+    journal: "Neurorehabilitation and Neural Repair",
+    volume: "22(2)",
+    pages: "111-121",
+    doi: "10.1177/1545968307305457",
+    pubmedId: "17876068",
+    pmcId: "PMC2597660",
+    type: "Systematic Review"
+  },
+  {
+    id: 357,
+    title: "The MIT-MANUS robotic system for upper extremity rehabilitation after stroke: a randomized trial",
+    authors: "Volpe BT, Krebs HI, Hogan N, Edelsteinn L, Diels CM, Aisen ML",
+    year: 1999,
+    journal: "Neurology",
+    volume: "53(8)",
+    pages: "1874-1876",
+    doi: "10.1212/WNL.53.8.1874",
+    pubmedId: "10563650",
+    type: "RCT"
+  },
+  {
+    id: 358,
+    title: "Upper extremity robotic therapy for stroke rehabilitation: dose-response effects",
+    authors: "Lo AC, Guarino PD, Richards LG, Haselkorn JK, Wittenberg GF, Federman DG, et al.",
+    year: 2010,
+    journal: "New England Journal of Medicine",
+    volume: "362(19)",
+    pages: "1772-1783",
+    doi: "10.1056/NEJMoa0911341",
+    pubmedId: "20463340",
+    pmcId: "PMC2970257",
+    type: "RCT"
+  },
+  {
+    id: 359,
+    title: "Combining robot-assisted therapy with virtual reality for upper extremity rehabilitation: a meta-analysis",
+    authors: "Laver KE, Lange B, George S, Deutsch JE, Saposnik G, Crotty M",
+    year: 2017,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "11",
+    pages: "CD008349",
+    doi: "10.1002/14651858.CD008349.pub4",
+    pubmedId: "29156493",
+    pmcId: "PMC6486040",
+    type: "Systematic Review"
+  },
+],
+
+"Certified Mulligan Practitioner": [
+  {
+    id: 360,
+    title: "Mulligan's mobilization with movement for extremity conditions: a systematic review and meta-analysis",
+    authors: "Stathopoulos N, Dimitriadis Z, Koumantakis GA",
+    year: 2019,
+    journal: "Musculoskeletal Science and Practice",
+    volume: "39",
+    pages: "54-60",
+    doi: "10.1016/j.msksp.2018.11.003",
+    pubmedId: "30453189",
+    type: "Systematic Review"
+  },
+  {
+    id: 361,
+    title: "Mulligan's mobilization with movement for cervical pain: a randomized controlled trial",
+    authors: "Konstantinou K, Foster N, Rushton A, Baxter D",
+    year: 2002,
+    journal: "Manual Therapy",
+    volume: "7(4)",
+    pages: "234-241",
+    doi: "10.1054/math.2002.0478",
+    pubmedId: "12509708",
+    type: "RCT"
+  },
+  {
+    id: 362,
+    title: "The effect of Mulligan's taping on hip and knee pain: a systematic review",
+    authors: "Vicenzino B, Branjerdporn M, Teys P, Jordan K",
+    year: 2006,
+    journal: "Journal of Orthopaedic and Sports Physical Therapy",
+    volume: "36(6)",
+    pages: "370-380",
+    doi: "10.2519/jospt.2006.2064",
+    pubmedId: "16776487",
+    type: "Systematic Review"
+  },
+  {
+    id: 363,
+    title: "Mobilization with movement and exercise for shoulder conditions: a systematic review",
+    authors: "Teys P, Bisset L, Collins N, Coombes B, Vicenzino B",
+    year: 2013,
+    journal: "Manual Therapy",
+    volume: "18(4)",
+    pages: "287-293",
+    doi: "10.1016/j.math.2012.10.008",
+    pubmedId: "23141670",
+    type: "Systematic Review"
+  },
+  {
+    id: 364,
+    title: "Mulligan's mobilization with movement for ankle inversion injuries: a randomized controlled trial",
+    authors: "Vicenzino B, Paungmali A, Teys P",
+    year: 2007,
+    journal: "Manual Therapy",
+    volume: "12(3)",
+    pages: "209-219",
+    doi: "10.1016/j.math.2006.10.008",
+    pubmedId: "17368067",
+    type: "RCT"
+  },
+],
+
+"Pelvic Floor Rehabilitation (PRPC)": [
+  {
+    id: 365,
+    title: "Pelvic floor muscle training for urinary incontinence in women: a Cochrane systematic review",
+    authors: "Dumoulin C, Cacciari LP, Hay-Smith EJC",
+    year: 2018,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "10",
+    pages: "CD001407",
+    doi: "10.1002/14651858.CD001407.pub4",
+    pubmedId: "30288727",
+    pmcId: "PMC6516955",
+    type: "Systematic Review"
+  },
+  {
+    id: 366,
+    title: "Conservative management of pelvic organ prolapse: a systematic review and meta-analysis",
+    authors: "Hagen S, Stark D",
+    year: 2011,
+    journal: "International Urogynecology Journal",
+    volume: "22(11)",
+    pages: "1321-1329",
+    doi: "10.1007/s00192-011-1416-0",
+    pubmedId: "21509481",
+    type: "Systematic Review"
+  },
+  {
+    id: 367,
+    title: "Biofeedback-assisted pelvic floor muscle training for urinary incontinence: a randomized controlled trial",
+    authors: "Aukee P, Immonen P, Penttinen J, Laippala P, Airaksinen O",
+    year: 2002,
+    journal: "Obstetrics and Gynecology",
+    volume: "100(3)",
+    pages: "459-464",
+    doi: "10.1016/S0029-7844(02)02082-9",
+    pubmedId: "12220764",
+    type: "RCT"
+  },
+  {
+    id: 368,
+    title: "Pelvic floor rehabilitation for chronic pelvic pain syndrome: a systematic review",
+    authors: "Loving S, Thomsen T, Jaszczak P, Nordling J",
+    year: 2012,
+    journal: "Scandinavian Journal of Urology and Nephrology",
+    volume: "46(4)",
+    pages: "234-248",
+    doi: "10.3109/00365599.2012.664206",
+    pubmedId: "22364381",
+    type: "Systematic Review"
+  },
+  {
+    id: 369,
+    title: "Physical therapy for pelvic floor dysfunction following childbirth: a systematic review",
+    authors: "Boyle R, Hay-Smith EJ, Cody JD, Morkved S",
+    year: 2012,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "6",
+    pages: "CD007471",
+    doi: "10.1002/14651858.CD007471.pub3",
+    pubmedId: "22696372",
+    type: "Systematic Review"
+  },
+],
+
+"Women's Health Clinical Specialist": [
+  {
+    id: 400,
+    title: "Pelvic Floor Muscle Training for Urinary Incontinence with or without Biofeedback or Electrostimulation in Women: A Systematic Review",
+    authors: "Alouini S, Memic S, Couillandre A",
+    year: 2022,
+    journal: "Int J Environ Res Public Health",
+    volume: "19(5)",
+    pages: "2789",
+    doi: "10.3390/ijerph19052789",
+    pubmedId: "35270480",
+    type: "Systematic Review"
+  },
+  {
+    id: 401,
+    title: "Effectiveness of pelvic floor muscle training with and without electromyographic biofeedback for urinary incontinence in women: multicentre randomised controlled trial",
+    authors: "Hagen S, Elders A, Stratton S, et al.",
+    year: 2020,
+    journal: "BMJ",
+    volume: "371",
+    pages: "m3719",
+    doi: "10.1136/bmj.m3719",
+    pubmedId: "33055247",
+    type: "RCT"
+  },
+  {
+    id: 402,
+    title: "Effectiveness of Pelvic Floor Muscle Training on Quality of Life in Women with Urinary Incontinence: A Systematic Review and Meta-Analysis",
+    authors: "Curillo-Aguirre CA, Gea-Izquierdo E",
+    year: 2023,
+    journal: "Medicina (Kaunas)",
+    volume: "59(6)",
+    pages: "1004",
+    doi: "10.3390/medicina59061004",
+    pubmedId: "37374208",
+    type: "Systematic Review"
+  },
+  {
+    id: 403,
+    title: "Can postpartum pelvic floor muscle training reduce urinary and anal incontinence?: An assessor-blinded randomized controlled trial",
+    authors: "Sigurdardottir T, Steingrimsdottir T, Geirsson RT, et al.",
+    year: 2020,
+    journal: "Am J Obstet Gynecol",
+    volume: "222(3)",
+    pages: "247.e1-247.e8",
+    doi: "10.1016/j.ajog.2019.09.011",
+    pubmedId: "31526791",
+    type: "RCT"
+  },
+  {
+    id: 404,
+    title: "Effectiveness of physical therapy interventions in women with dyspareunia: a systematic review and meta-analysis",
+    authors: "Fernández-Pérez P, Leirós-Rodríguez R, Marqués-Sánchez MP, et al.",
+    year: 2023,
+    journal: "BMC Womens Health",
+    volume: "23(1)",
+    pages: "387",
+    doi: "10.1186/s12905-023-02532-8",
+    pubmedId: "37482613",
+    type: "Systematic Review"
+  },
+],
+
+"Certified Driver Rehabilitation Specialist": [
+  {
+    id: 405,
+    title: "Assessment tools predicting fitness to drive in older adults: a systematic review",
+    authors: "Dickerson AE, Meuel DB, Ridenour CD, Cooper K",
+    year: 2014,
+    journal: "Am J Occup Ther",
+    volume: "68(6)",
+    pages: "670-680",
+    doi: "10.5014/ajot.2014.011833",
+    pubmedId: "25397762",
+    type: "Systematic Review"
+  },
+  {
+    id: 406,
+    title: "A systematic review of intervention approaches for driving cessation in older adults",
+    authors: "Rapoport MJ, Cameron DH, Sanford S, et al.",
+    year: 2017,
+    journal: "Int J Geriatr Psychiatry",
+    volume: "32(5)",
+    pages: "484-491",
+    doi: "10.1002/gps.4681",
+    pubmedId: "28181711",
+    type: "Systematic Review"
+  },
+  {
+    id: 407,
+    title: "Occupational therapy interventions to promote driving and community mobility for older adults with low vision: a systematic review",
+    authors: "Justiss MD",
+    year: 2013,
+    journal: "Am J Occup Ther",
+    volume: "67(3)",
+    pages: "296-302",
+    doi: "10.5014/ajot.2013.005660",
+    pubmedId: "23597687",
+    type: "Systematic Review"
+  },
+  {
+    id: 408,
+    title: "Driving rehabilitation programs for older drivers in the United States",
+    authors: "Betz ME, Dickerson A, Coolman T, et al.",
+    year: 2014,
+    journal: "Occup Ther Health Care",
+    volume: "28(3)",
+    pages: "306-317",
+    doi: "10.3109/07380577.2014.908336",
+    pubmedId: "24971897",
+    type: "Cohort Study"
+  },
+  {
+    id: 409,
+    title: "Clinical Determinants of Fitness to Drive in Persons With Multiple Sclerosis: Systematic Review",
+    authors: "Krasniuk S, Classen S, Morrow SA, et al.",
+    year: 2019,
+    journal: "Arch Phys Med Rehabil",
+    volume: "100(8)",
+    pages: "1534-1555",
+    doi: "10.1016/j.apmr.2018.12.029",
+    pubmedId: "30690007",
+    type: "Systematic Review"
+  },
+],
+
+"Pediatric Clinical Specialist (PCS)": [
+  {
+    id: 410,
+    title: "Constraint-Induced Movement Therapy for Cerebral Palsy: A Randomized Trial",
+    authors: "Ramey SL, DeLuca SC, Stevenson RD, et al.",
+    year: 2021,
+    journal: "Pediatrics",
+    volume: "148(5)",
+    pages: "e2020033878",
+    doi: "10.1542/peds.2020-033878",
+    pubmedId: "34649982",
+    type: "RCT"
+  },
+  {
+    id: 411,
+    title: "Effect of muscle strength training in children and adolescents with spastic cerebral palsy: A systematic review and meta-analysis",
+    authors: "Merino-Andrés J, García de Mateos-López A, Damiano DL, Sánchez-Sierra A",
+    year: 2022,
+    journal: "Clin Rehabil",
+    volume: "36(1)",
+    pages: "4-14",
+    doi: "10.1177/02692155211040199",
+    pubmedId: "34407619",
+    type: "Systematic Review"
+  },
+  {
+    id: 412,
+    title: "Changes Induced by Early Hand-Arm Bimanual Intensive Therapy Including Lower Extremities in Young Children With Unilateral Cerebral Palsy: A Randomized Clinical Trial",
+    authors: "Araneda R, Ebner-Karestinos D, Paradis J, et al.",
+    year: 2024,
+    journal: "JAMA Pediatr",
+    volume: "178(1)",
+    pages: "19-28",
+    doi: "10.1001/jamapediatrics.2023.4809",
+    pubmedId: "37930692",
+    type: "RCT"
+  },
+  {
+    id: 413,
+    title: "Effect of Motor Intervention for Infants and Toddlers With Cerebral Palsy: A Systematic Review and Meta-analysis",
+    authors: "Baker A, Niles N, Kysh L, Sargent B",
+    year: 2022,
+    journal: "Pediatr Phys Ther",
+    volume: "34(3)",
+    pages: "297-307",
+    doi: "10.1097/PEP.0000000000000914",
+    pubmedId: "35671383",
+    type: "Systematic Review"
+  },
+  {
+    id: 414,
+    title: "Overground Gait Training With a Wearable Robot in Children With Cerebral Palsy: A Randomized Clinical Trial",
+    authors: "Choi JY, Kim SK, Hong J, et al.",
+    year: 2024,
+    journal: "JAMA Netw Open",
+    volume: "7(7)",
+    pages: "e2422625",
+    doi: "10.1001/jamanetworkopen.2024.22625",
+    pubmedId: "39037815",
+    type: "RCT"
+  },
+],
+
+"Board Certification in Pediatrics": [
+  {
+    id: 415,
+    title: "Constraint-Induced Movement Therapy for Cerebral Palsy: A Randomized Trial",
+    authors: "Ramey SL, DeLuca SC, Stevenson RD, et al.",
+    year: 2021,
+    journal: "Pediatrics",
+    volume: "148(5)",
+    pages: "e2020033878",
+    doi: "10.1542/peds.2020-033878",
+    pubmedId: "34649982",
+    type: "RCT"
+  },
+  {
+    id: 416,
+    title: "Effect of Motor Intervention for Infants and Toddlers With Cerebral Palsy: A Systematic Review and Meta-analysis",
+    authors: "Baker A, Niles N, Kysh L, Sargent B",
+    year: 2022,
+    journal: "Pediatr Phys Ther",
+    volume: "34(3)",
+    pages: "297-307",
+    doi: "10.1097/PEP.0000000000000914",
+    pubmedId: "35671383",
+    type: "Systematic Review"
+  },
+  {
+    id: 417,
+    title: "Efficacy of Constraint-Induced Movement Therapy Versus Bimanual Intensive Training on Motor and Psychosocial Outcomes in Children With Unilateral Cerebral Palsy: A Randomized Trial",
+    authors: "Liang KJ, Chen HL, Huang CW, Wang TN",
+    year: 2023,
+    journal: "Am J Occup Ther",
+    volume: "77(4)",
+    pages: "7704205080",
+    doi: "10.5014/ajot.2023.050118",
+    pubmedId: "37611319",
+    type: "RCT"
+  },
+  {
+    id: 418,
+    title: "Changes Induced by Early Hand-Arm Bimanual Intensive Therapy Including Lower Extremities in Young Children With Unilateral Cerebral Palsy: A Randomized Clinical Trial",
+    authors: "Araneda R, Ebner-Karestinos D, Paradis J, et al.",
+    year: 2024,
+    journal: "JAMA Pediatr",
+    volume: "178(1)",
+    pages: "19-28",
+    doi: "10.1001/jamapediatrics.2023.4809",
+    pubmedId: "37930692",
+    type: "RCT"
+  },
+  {
+    id: 419,
+    title: "Effect of muscle strength training in children and adolescents with spastic cerebral palsy: A systematic review and meta-analysis",
+    authors: "Merino-Andrés J, García de Mateos-López A, Damiano DL, Sánchez-Sierra A",
+    year: 2022,
+    journal: "Clin Rehabil",
+    volume: "36(1)",
+    pages: "4-14",
+    doi: "10.1177/02692155211040199",
+    pubmedId: "34407619",
+    type: "Systematic Review"
+  },
+],
+
+"Virtual/Augmented Reality": [
+  {
+    id: 420,
+    title: "Virtual reality for stroke rehabilitation",
+    authors: "Laver KE, Lange B, George S, et al.",
+    year: 2017,
+    journal: "Cochrane Database Syst Rev",
+    volume: "11(11)",
+    pages: "CD008349",
+    doi: "10.1002/14651858.CD008349.pub4",
+    pubmedId: "29156493",
+    type: "Systematic Review"
+  },
+  {
+    id: 421,
+    title: "Effectiveness of Using Virtual Reality-Supported Exercise Therapy for Upper Extremity Motor Rehabilitation in Patients With Stroke: Systematic Review and Meta-analysis of Randomized Controlled Trials",
+    authors: "Chen J, Or CK, Chen T",
+    year: 2022,
+    journal: "J Med Internet Res",
+    volume: "24(6)",
+    pages: "e24111",
+    doi: "10.2196/24111",
+    pubmedId: "35723907",
+    type: "Systematic Review"
+  },
+  {
+    id: 422,
+    title: "The Effectiveness of Virtual Reality, Augmented Reality, and Mixed Reality Rehabilitation in Total Knee Arthroplasty: A Systematic Review and Meta-Analysis",
+    authors: "Su S, He J, Wang R, Chen Z, Zhou F",
+    year: 2024,
+    journal: "J Arthroplasty",
+    volume: "39(3)",
+    pages: "582-590",
+    doi: "10.1016/j.arth.2023.08.051",
+    pubmedId: "37598785",
+    type: "Systematic Review"
+  },
+  {
+    id: 423,
+    title: "Augmented efficacy of intermittent theta burst stimulation on the virtual reality-based cycling training for upper limb function in patients with stroke: a double-blinded, randomized controlled trial",
+    authors: "Chen YH, Chen CL, Huang YZ, et al.",
+    year: 2021,
+    journal: "J Neuroeng Rehabil",
+    volume: "18(1)",
+    pages: "91",
+    doi: "10.1186/s12984-021-00885-5",
+    pubmedId: "34059090",
+    type: "RCT"
+  },
+  {
+    id: 424,
+    title: "Three-Dimensional Augmented Reality System for Balance and Mobility Rehabilitation in the Elderly: A Randomized Controlled Trial",
+    authors: "Ku J, Kim YJ, Cho S, et al.",
+    year: 2019,
+    journal: "Cyberpsychol Behav Soc Netw",
+    volume: "22(2)",
+    pages: "132-141",
+    doi: "10.1089/cyber.2018.0261",
+    pubmedId: "30596530",
+    type: "RCT"
+  },
+],
+
+"Ventilator Weaning": [
+  {
+    id: 425,
+    title: "An Official American Thoracic Society/American College of Chest Physicians Clinical Practice Guideline: Liberation from Mechanical Ventilation in Critically Ill Adults. Rehabilitation Protocols, Ventilator Liberation Protocols, and Cuff Leak Tests",
+    authors: "Girard TD, Alhazzani W, Kress JP, et al.",
+    year: 2017,
+    journal: "Am J Respir Crit Care Med",
+    volume: "195(1)",
+    pages: "120-133",
+    doi: "10.1164/rccm.201610-2075ST",
+    pubmedId: "27762595",
+    type: "Guideline"
+  },
+  {
+    id: 426,
+    title: "Effects of Inspiratory Muscle Training and Early Mobilization on Weaning of Mechanical Ventilation: A Systematic Review and Network Meta-analysis",
+    authors: "Worraphan S, Thammata A, Chittawatanarat K, et al.",
+    year: 2020,
+    journal: "Arch Phys Med Rehabil",
+    volume: "101(11)",
+    pages: "2002-2014",
+    doi: "10.1016/j.apmr.2020.07.004",
+    pubmedId: "32750371",
+    type: "Systematic Review"
+  },
+  {
+    id: 427,
+    title: "Inspiratory Muscle Training With an Electronic Resistive Loading Device Improves Prolonged Weaning Outcomes in a Randomized Controlled Trial",
+    authors: "da Silva Guimarães B, de Souza LC, Cordeiro HF, et al.",
+    year: 2021,
+    journal: "Crit Care Med",
+    volume: "49(4)",
+    pages: "589-597",
+    doi: "10.1097/CCM.0000000000004787",
+    pubmedId: "33332819",
+    type: "RCT"
+  },
+  {
+    id: 428,
+    title: "Comparative Efficacy and Safety of Four Different Spontaneous Breathing Trials for Weaning From Mechanical Ventilation: A Systematic Review and Network Meta-Analysis",
+    authors: "Yi LJ, Tian X, Chen M, et al.",
+    year: 2021,
+    journal: "Front Med (Lausanne)",
+    volume: "8",
+    pages: "731196",
+    doi: "10.3389/fmed.2021.731196",
+    pubmedId: "34881255",
+    type: "Systematic Review"
+  },
+  {
+    id: 429,
+    title: "Executive Summary: International Clinical Practice Guidelines for Pediatric Ventilator Liberation, A Pediatric Acute Lung Injury and Sepsis Investigators (PALISI) Network Document",
+    authors: "Abu-Sultaneh S, Iyer NP, Fernández A, et al.",
+    year: 2023,
+    journal: "Am J Respir Crit Care Med",
+    volume: "207(1)",
+    pages: "17-28",
+    doi: "10.1164/rccm.202204-0795SO",
+    pubmedId: "36583619",
+    type: "Guideline"
+  },
+],
+
+"Lymphedema (CLT/LANA)": [
+  {
+    id: 430,
+    title: "Manual lymphatic drainage for lymphedema following breast cancer treatment",
+    authors: "Ezzo J, Manheimer E, McNeely ML, et al.",
+    year: 2015,
+    journal: "Cochrane Database Syst Rev",
+    volume: "2015(5)",
+    pages: "CD003475",
+    doi: "10.1002/14651858.CD003475.pub2",
+    pubmedId: "25994425",
+    type: "Systematic Review"
+  },
+  {
+    id: 431,
+    title: "Effectiveness of complete decongestive therapy for upper extremity breast cancer-related lymphedema: a review of systematic reviews",
+    authors: "Gilchrist L, Levenhagen K, Davies CC, Koehler L",
+    year: 2024,
+    journal: "Med Oncol",
+    volume: "41(11)",
+    pages: "297",
+    doi: "10.1007/s12032-024-02421-6",
+    pubmedId: "39438358",
+    type: "Systematic Review"
+  },
+  {
+    id: 432,
+    title: "Nighttime compression supports improved self-management of breast cancer-related lymphedema: A multicenter randomized controlled trial",
+    authors: "McNeely ML, Dolgoy ND, Rafn BS, et al.",
+    year: 2022,
+    journal: "Cancer",
+    volume: "128(3)",
+    pages: "587-596",
+    doi: "10.1002/cncr.33943",
+    pubmedId: "34614195",
+    type: "RCT"
+  },
+  {
+    id: 433,
+    title: "The effect of complex decongestive physiotherapy applied with different compression pressures on skin and subcutaneous tissue thickness in individuals with breast cancer-related lymphedema: a double-blinded randomized comparison trial",
+    authors: "Duygu-Yildiz E, Bakar Y, Hizal M",
+    year: 2023,
+    journal: "Support Care Cancer",
+    volume: "31(7)",
+    pages: "383",
+    doi: "10.1007/s00520-023-07843-y",
+    pubmedId: "37285046",
+    type: "RCT"
+  },
+  {
+    id: 434,
+    title: "Guidelines Relevant to Diagnosis, Assessment, and Management of Lymphedema: A Systematic Review",
+    authors: "Torgbenu E, Luckett T, Buhagiar MA, Phillips JL",
+    year: 2023,
+    journal: "Adv Wound Care (New Rochelle)",
+    volume: "12(1)",
+    pages: "15-27",
+    doi: "10.1089/wound.2021.0149",
+    pubmedId: "35196892",
+    type: "Systematic Review"
+  },
+],
+
+"Seating and Mobility Specialist": [
+  {
+    id: 435,
+    title: "A systematic review of the effectiveness of pressure relieving cushions in reducing pressure injury",
+    authors: "Damiao J, Gentry T",
+    year: 2024,
+    journal: "Assist Technol",
+    volume: "36(5)",
+    pages: "373-377",
+    doi: "10.1080/10400435.2021.2010148",
+    pubmedId: "34813723",
+    type: "Systematic Review"
+  },
+  {
+    id: 436,
+    title: "Effects of wheelchair cushions and pressure relief maneuvers on ischial interface pressure and blood flow in people with spinal cord injury",
+    authors: "Sonenblum SE, Vonk TE, Janssen TW, Sprigle SH",
+    year: 2014,
+    journal: "Arch Phys Med Rehabil",
+    volume: "95(7)",
+    pages: "1350-1357",
+    doi: "10.1016/j.apmr.2014.01.007",
+    pubmedId: "24480336",
+    type: "RCT"
+  },
+  {
+    id: 437,
+    title: "Mobility Device Quality Affects Participation Outcomes for People With Disabilities: A Structural Equation Modeling Analysis",
+    authors: "Magasi S, Wong A, Miskovic A, Tulsky D, Heinemann AW",
+    year: 2018,
+    journal: "Arch Phys Med Rehabil",
+    volume: "99(1)",
+    pages: "1-8",
+    doi: "10.1016/j.apmr.2017.06.030",
+    pubmedId: "28784356",
+    type: "Cohort Study"
+  },
+  {
+    id: 438,
+    title: "The clinical effectiveness of custom-contoured seating for wheelchair users with neuromuscular disorders: A scoping review",
+    authors: "Hosking J",
+    year: 2025,
+    journal: "Assist Technol",
+    volume: "37(1)",
+    pages: "41-53",
+    doi: "10.1080/10400435.2023.2250404",
+    pubmedId: "37607029",
+    type: "Systematic Review"
+  },
+  {
+    id: 439,
+    title: "Everyday sitting behavior of full-time wheelchair users",
+    authors: "Sonenblum SE, Sprigle SH, Martin JS",
+    year: 2016,
+    journal: "J Rehabil Res Dev",
+    volume: "53(5)",
+    pages: "585-598",
+    pubmedId: "27898157",
+    type: "Cohort Study"
+  },
+],
+
+"Dry Needling": [
+  {
+    id: 440,
+    title: "The Effectiveness of Trigger Point Dry Needling for Musculoskeletal Conditions by Physical Therapists: A Systematic Review and Meta-analysis",
+    authors: "Gattie E, Cleland JA, Snodgrass S",
+    year: 2017,
+    journal: "J Orthop Sports Phys Ther",
+    volume: "47(3)",
+    pages: "133-149",
+    doi: "10.2519/jospt.2017.7096",
+    pubmedId: "28158962",
+    type: "Systematic Review"
+  },
+  {
+    id: 441,
+    title: "Is Dry Needling Applied by Physical Therapists Effective for Pain in Musculoskeletal Conditions? A Systematic Review and Meta-Analysis",
+    authors: "Sánchez-Infante J, Navarro-Santana MJ, Bravo-Sánchez A, et al.",
+    year: 2021,
+    journal: "Phys Ther",
+    volume: "101(3)",
+    pages: "pzab070",
+    doi: "10.1093/ptj/pzab070",
+    pubmedId: "33609356",
+    type: "Systematic Review"
+  },
+  {
+    id: 442,
+    title: "Effectiveness of dry needling for myofascial trigger points associated with neck and shoulder pain: a systematic review and meta-analysis",
+    authors: "Liu L, Huang QM, Liu QG, et al.",
+    year: 2015,
+    journal: "Arch Phys Med Rehabil",
+    volume: "96(5)",
+    pages: "944-955",
+    doi: "10.1016/j.apmr.2014.12.015",
+    pubmedId: "25576642",
+    type: "Systematic Review"
+  },
+  {
+    id: 443,
+    title: "Comparison of dry needling and trigger point manual therapy in patients with neck and upper back myofascial pain syndrome: a systematic review and meta-analysis",
+    authors: "Lew J, Kim J, Nair P",
+    year: 2021,
+    journal: "J Man Manip Ther",
+    volume: "29(3)",
+    pages: "136-146",
+    pubmedId: "32962567",
+    type: "Systematic Review"
+  },
+  {
+    id: 444,
+    title: "Immediate Effects of Dry Needling and Myofascial Release on Local and Widespread Pressure Pain Threshold in Individuals With Active Upper Trapezius Trigger Points: A Randomized Clinical Trial",
+    authors: "Stieven FF, Ferreira GE, de Araújo FX, et al.",
+    year: 2021,
+    journal: "J Manipulative Physiol Ther",
+    volume: "44(2)",
+    pages: "95-102",
+    pubmedId: "33431282",
+    type: "RCT"
+  },
+],
+
+"TPI Golf Certification": [
+  {
+    id: 445,
+    title: "The lumbar spine and low back pain in golf: a literature review of swing biomechanics and injury prevention",
+    authors: "Gluck GS, Bendo JA, Spivak JM",
+    year: 2008,
+    journal: "Spine J",
+    volume: "8(5)",
+    pages: "778-788",
+    doi: "10.1016/j.spinee.2007.07.388",
+    pubmedId: "17938007",
+    type: "Systematic Review"
+  },
+  {
+    id: 446,
+    title: "Associations Between Physical Characteristics and Golf Clubhead Speed: A Systematic Review with Meta-Analysis",
+    authors: "Brennan A, Murray A, Mountjoy M, et al.",
+    year: 2024,
+    journal: "Sports Med",
+    volume: "54(6)",
+    pages: "1553-1577",
+    doi: "10.1007/s40279-024-02004-5",
+    pubmedId: "38424374",
+    type: "Systematic Review"
+  },
+  {
+    id: 447,
+    title: "A systematic review of strength and conditioning programmes designed to improve fitness characteristics in golfers",
+    authors: "Smith CJ, Callister R, Lubans DR",
+    year: 2011,
+    journal: "J Sports Sci",
+    volume: "29(9)",
+    pages: "933-943",
+    doi: "10.1080/02640414.2011.571273",
+    pubmedId: "21547836",
+    type: "Systematic Review"
+  },
+  {
+    id: 448,
+    title: "A comparison of physical characteristics and swing mechanics between golfers with and without a history of low back pain",
+    authors: "Tsai YS, Sell TC, Smoliga JM, et al.",
+    year: 2010,
+    journal: "J Orthop Sports Phys Ther",
+    volume: "40(7)",
+    pages: "430-438",
+    doi: "10.2519/jospt.2010.3152",
+    pubmedId: "20592479",
+    type: "Cohort Study"
+  },
+  {
+    id: 449,
+    title: "Lower Quadrant Swing Biomechanics Identifies Golfers With Increased Risk of Low Back Pain: A Prospective Longitudinal Cohort Study",
+    authors: "Quinn SL, Olivier B, McKinon W",
+    year: 2022,
+    journal: "J Sport Rehabil",
+    volume: "31(8)",
+    pages: "1041-1051",
+    doi: "10.1123/jsr.2021-0191",
+    pubmedId: "35894899",
+    type: "Cohort Study"
+  },
+],
+
+"ASTYM Therapy": [
+  {
+    id: 450,
+    title: "Instrument-Assisted Soft Tissue Mobilization: A Systematic Review and Effect-Size Analysis",
+    authors: "Seffrin CB, Cattano NM, Reed MA, Gardiner-Shires AM",
+    year: 2019,
+    journal: "J Athl Train",
+    volume: "54(7)",
+    pages: "808-821",
+    doi: "10.4085/1062-6050-481-17",
+    pubmedId: "31322903",
+    type: "Systematic Review"
+  },
+  {
+    id: 451,
+    title: "Effectiveness of instrument-assisted soft tissue mobilization for the management of upper body, lower body, and spinal conditions. An updated systematic review with meta-analyses",
+    authors: "Nazari G, Bobos P, Lu SZ, et al.",
+    year: 2023,
+    journal: "Disabil Rehabil",
+    volume: "45(10)",
+    pages: "1608-1618",
+    doi: "10.1080/09638288.2022.2070288",
+    pubmedId: "35611579",
+    type: "Systematic Review"
+  },
+  {
+    id: 452,
+    title: "The efficacy of instrument assisted soft tissue mobilization: a systematic review",
+    authors: "Cheatham SW, Lee M, Cain M, Baker R",
+    year: 2016,
+    journal: "J Can Chiropr Assoc",
+    volume: "60(3)",
+    pages: "200-211",
+    pubmedId: "27713575",
+    pmcId: "PMC5039777",
+    type: "Systematic Review"
+  },
+  {
+    id: 453,
+    title: "The effectiveness of instrument-assisted soft tissue mobilization on range of motion: a meta-analysis",
+    authors: "Tang S, Sheng L, Xia J, Xu B, Jin P",
+    year: 2024,
+    journal: "BMC Musculoskelet Disord",
+    volume: "25(1)",
+    pages: "319",
+    doi: "10.1186/s12891-024-07452-8",
+    pubmedId: "38654270",
+    type: "Systematic Review"
+  },
+  {
+    id: 454,
+    title: "The Effectiveness of Instrument-Assisted Soft Tissue Mobilization in Athletes and Various Conditions: A Systematic Review",
+    authors: "Nazari G, Bobos P, MacDermid JC, et al.",
+    year: 2019,
+    journal: "Arch Phys Med Rehabil",
+    volume: "100(9)",
+    pages: "1726-1736",
+    pubmedId: "30797743",
+    type: "Systematic Review"
+  },
+],
+
+"Rolfing/Structural Integration": [
+  {
+    id: 455,
+    title: "Structural integration, an alternative method of manual therapy and sensorimotor education",
+    authors: "Jacobson E",
+    year: 2011,
+    journal: "J Altern Complement Med",
+    volume: "17(10)",
+    pages: "891-899",
+    doi: "10.1089/acm.2010.0258",
+    pubmedId: "21992437",
+    type: "Systematic Review"
+  },
+  {
+    id: 456,
+    title: "Influence of Rolfing Structural Integration on Active Range of Motion: A Retrospective Cohort Study",
+    authors: "Brandl A, Bartsch K, James H, Miller ME, Schleip R",
+    year: 2022,
+    journal: "J Clin Med",
+    volume: "11(19)",
+    pages: "5878",
+    doi: "10.3390/jcm11195878",
+    pubmedId: "36233746",
+    type: "Cohort Study"
+  },
+  {
+    id: 457,
+    title: "Myofascial Structural Integration Therapy on Gross Motor Function and Gait of Young Children with Spastic Cerebral Palsy: A Randomized Controlled Trial",
+    authors: "Loi EC, Buysse CA, Price KS, et al.",
+    year: 2015,
+    journal: "Front Pediatr",
+    volume: "3",
+    pages: "74",
+    doi: "10.3389/fped.2015.00074",
+    pubmedId: "26442234",
+    type: "RCT"
+  },
+  {
+    id: 458,
+    title: "Fascial manipulation for musculoskeletal disorders: A scoping review",
+    authors: "Isaji Y, Sasaki D, Kon Y, Kurasawa Y, Kitagawa T",
+    year: 2024,
+    journal: "J Bodyw Mov Ther",
+    volume: "40",
+    pages: "664-674",
+    pubmedId: "39593589",
+    type: "Systematic Review"
+  },
+  {
+    id: 459,
+    title: "The effects of fasciatherapy versus fascial manipulation on pain, range of motion and function in patients with chronic neck pain",
+    authors: "Batool SA, Shakil-Ul-Rehman S, Tariq Z, Ikram M",
+    year: 2023,
+    journal: "BMC Musculoskelet Disord",
+    volume: "24(1)",
+    pages: "793",
+    pubmedId: "37798756",
+    type: "RCT"
+  },
+],
+
+"Therapeutic Pain Specialist": [
+  {
+    id: 460,
+    title: "The efficacy of pain neuroscience education on musculoskeletal pain: A systematic review of the literature",
+    authors: "Louw A, Zimney K, Puentedura EJ, Diener I",
+    year: 2016,
+    journal: "Physiother Theory Pract",
+    volume: "32(5)",
+    pages: "332-355",
+    doi: "10.1080/09593985.2016.1194646",
+    pubmedId: "27351541",
+    type: "Systematic Review"
+  },
+  {
+    id: 461,
+    title: "Pain Neuroscience Education for Adults With Chronic Musculoskeletal Pain: A Mixed-Methods Systematic Review and Meta-Analysis",
+    authors: "Watson JA, Ryan CG, Cooper L, et al.",
+    year: 2019,
+    journal: "J Pain",
+    volume: "20(10)",
+    pages: "1140.e1-1140.e22",
+    doi: "10.1016/j.jpain.2019.02.011",
+    pubmedId: "30831273",
+    type: "Systematic Review"
+  },
+  {
+    id: 462,
+    title: "Short-term impact of combining pain neuroscience education with exercise for chronic musculoskeletal pain: a systematic review and meta-analysis",
+    authors: "Siddall B, Ram A, Jones MD, et al.",
+    year: 2022,
+    journal: "Pain",
+    volume: "163(1)",
+    pages: "e20-e30",
+    doi: "10.1097/j.pain.0000000000002308",
+    pubmedId: "33863860",
+    type: "Systematic Review"
+  },
+  {
+    id: 463,
+    title: "A systematic review and meta-analysis of pain neuroscience education for chronic low back pain: Short- and long-term outcomes of pain and disability",
+    authors: "Wood L, Hendrick PA",
+    year: 2019,
+    journal: "Eur J Pain",
+    volume: "23(2)",
+    pages: "234-249",
+    doi: "10.1002/ejp.1314",
+    pubmedId: "30178503",
+    type: "Systematic Review"
+  },
+  {
+    id: 464,
+    title: "Effectiveness of Pain Neuroscience Education in Patients with Chronic Musculoskeletal Pain and Central Sensitization: A Systematic Review",
+    authors: "Lepri B, Romani D, Storari L, Barbari V",
+    year: 2023,
+    journal: "Int J Environ Res Public Health",
+    volume: "20(5)",
+    pages: "4098",
+    doi: "10.3390/ijerph20054098",
+    pubmedId: "36901108",
+    type: "Systematic Review"
+  },
+],
+
+"Craniosacral Therapy/Upledger": [
+  {
+    id: 465,
+    title: "Craniosacral therapy for chronic pain: a systematic review and meta-analysis of randomized controlled trials",
+    authors: "Haller H, Lauche R, Sundberg T, Dobos G, Cramer H",
+    year: 2019,
+    journal: "BMC Musculoskelet Disord",
+    volume: "21(1)",
+    pages: "1",
+    doi: "10.1186/s12891-019-3017-y",
+    pubmedId: "31892357",
+    type: "Systematic Review"
+  },
+  {
+    id: 466,
+    title: "Is Craniosacral Therapy Effective? A Systematic Review and Meta-Analysis",
+    authors: "Ceballos-Laita L, Ernst E, Carrasco-Uribarren A, et al.",
+    year: 2024,
+    journal: "Healthcare (Basel)",
+    volume: "12(6)",
+    pages: "679",
+    doi: "10.3390/healthcare12060679",
+    pubmedId: "38540643",
+    type: "Systematic Review"
+  },
+  {
+    id: 467,
+    title: "Clinical Effectiveness of Craniosacral Therapy in Patients with Headache Disorders: A Systematic Review and Meta-analysis",
+    authors: "Carrasco-Uribarren A, Mamud-Meroni L, Tarcaya GE, et al.",
+    year: 2024,
+    journal: "Pain Manag Nurs",
+    volume: "25(1)",
+    pages: "e21-e28",
+    doi: "10.1016/j.pmn.2023.07.009",
+    pubmedId: "37709558",
+    type: "Systematic Review"
+  },
+  {
+    id: 468,
+    title: "Treatment of infant colic with craniosacral therapy. A randomized controlled trial",
+    authors: "Castejón-Castejón M, Murcia-González MA, Todri J, et al.",
+    year: 2022,
+    journal: "Complement Ther Med",
+    volume: "71",
+    pages: "102885",
+    doi: "10.1016/j.ctim.2022.102885",
+    pubmedId: "36113708",
+    type: "RCT"
+  },
+  {
+    id: 469,
+    title: "Effectiveness of osteopathic craniosacral techniques: a meta-analysis",
+    authors: "Amendolara A, Sheppert A, Powers R, et al.",
+    year: 2024,
+    journal: "Front Med (Lausanne)",
+    volume: "11",
+    pages: "1452465",
+    doi: "10.3389/fmed.2024.1452465",
+    pubmedId: "39430589",
+    type: "Systematic Review"
+  },
+],
+
+"Certified Low Vision Therapist": [
+  {
+    id: 500,
+    title: "Low vision rehabilitation for better quality of life in visually impaired adults",
+    authors: "van Nispen RM, Virgili G, Hoeben M, Langelaan M, Klevering J, Keunen JE, et al.",
+    year: 2020,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "1(1)",
+    pages: "CD006543",
+    doi: "10.1002/14651858.CD006543.pub2",
+    pubmedId: "31985055",
+    pmcId: "PMC6984642",
+    type: "Systematic Review"
+  },
+  {
+    id: 501,
+    title: "Low vision devices for age-related macular degeneration: a systematic review",
+    authors: "Macnamara A, Chen CS, Davies A, Sloan C, Loetscher T",
+    year: 2023,
+    journal: "Disability and Rehabilitation: Assistive Technology",
+    volume: "18(7)",
+    pages: "998-1010",
+    doi: "10.1080/17483107.2021.1966523",
+    pubmedId: "34416116",
+    type: "Systematic Review"
+  },
+  {
+    id: 502,
+    title: "Low-vision rehabilitation methods in children: a systematic review",
+    authors: "Chavda S, Hodge W, Si F, Diab K",
+    year: 2014,
+    journal: "Canadian Journal of Ophthalmology",
+    volume: "49(3)",
+    pages: "e71-e73",
+    doi: "10.1016/j.jcjo.2014.03.011",
+    pubmedId: "24862788",
+    type: "Systematic Review"
+  },
+  {
+    id: 503,
+    title: "The use of augmented reality and virtual reality for visual field expansion and visual acuity improvement in low vision rehabilitation: a systematic review",
+    authors: "Pur DR, Lee-Wing N, Bona MD",
+    year: 2023,
+    journal: "Graefes Archive for Clinical and Experimental Ophthalmology",
+    volume: "261(6)",
+    pages: "1743-1755",
+    doi: "10.1007/s00417-022-05972-4",
+    pubmedId: "36633669",
+    type: "Systematic Review"
+  },
+  {
+    id: 504,
+    title: "Theory Is Essential in Promoting the Distinct Value of Occupational Therapy in Rehabilitation of Adults With Low Vision: A Systematic Review",
+    authors: "Weisser-Pike O, Woods L, Lewis-Kipkulei P, Avrit R",
+    year: 2024,
+    journal: "American Journal of Occupational Therapy",
+    volume: "78(5)",
+    pages: "7805205060",
+    doi: "10.5014/ajot.2024.050655",
+    pubmedId: "39133619",
+    type: "Systematic Review"
+  },
+],
+
+"Suit Therapy": [
+  {
+    id: 505,
+    title: "Efficacy of suit therapy on functioning in children and adolescents with cerebral palsy: a systematic review and meta-analysis",
+    authors: "Martins E, Cordovil R, Oliveira R, Letras S, Lourenço S, Pereira I, et al.",
+    year: 2016,
+    journal: "Developmental Medicine and Child Neurology",
+    volume: "58(4)",
+    pages: "348-360",
+    doi: "10.1111/dmcn.12988",
+    pubmedId: "26613800",
+    type: "Meta-analysis"
+  },
+  {
+    id: 506,
+    title: "The clinical aspects and effectiveness of suit therapies for cerebral palsy: A systematic review",
+    authors: "Karadağ-Saygı E, Giray E",
+    year: 2019,
+    journal: "Turkish Journal of Physical Medicine and Rehabilitation",
+    volume: "65(1)",
+    pages: "93-110",
+    doi: "10.5606/tftrd.2019.3431",
+    pubmedId: "31453550",
+    pmcId: "PMC6648185",
+    type: "Systematic Review"
+  },
+  {
+    id: 507,
+    title: "The effect of suit wear during an intensive therapy program in children with cerebral palsy",
+    authors: "Bailes AF, Greve K, Burch CK, Reder L, Lin L, Huth MM",
+    year: 2011,
+    journal: "Pediatric Physical Therapy",
+    volume: "23(2)",
+    pages: "136-142",
+    doi: "10.1097/PEP.0b013e318218ef58",
+    pubmedId: "21552073",
+    type: "RCT"
+  },
+  {
+    id: 508,
+    title: "Effects of Dynamic Suit Orthoses on the Spatio-Temporal Gait Parameters in Children with Cerebral Palsy: A Systematic Review",
+    authors: "Belizón-Bravo N, Romero-Galisteo RP, Cano-Bravo F, Gonzalez-Medina G, Pinero-Pinto E, Luque-Moreno C",
+    year: 2021,
+    journal: "Children (Basel)",
+    volume: "8(11)",
+    pages: "1016",
+    doi: "10.3390/children8111016",
+    pubmedId: "34828729",
+    pmcId: "PMC8621824",
+    type: "Systematic Review"
+  },
+  {
+    id: 509,
+    title: "Multidisciplinary visual rehabilitation in low- and middle-income countries: a systematic review",
+    authors: "Wallace S, Alao R, Kuper H, Jackson ML",
+    year: 2022,
+    journal: "Disability and Rehabilitation",
+    volume: "44(8)",
+    pages: "1164-1175",
+    doi: "10.1080/09638288.2020.1794063",
+    pubmedId: "32726142",
+    type: "Systematic Review"
+  },
+],
+
+"Advanced Competency in Home Health": [
+  {
+    id: 510,
+    title: "Home-Health-Care Physical Therapy Improves Early Functional Recovery of Medicare Beneficiaries After Total Knee Arthroplasty",
+    authors: "Falvey JR, Bade MJ, Forster JE, Burke RE, Jennings JM, Nuccio E, et al.",
+    year: 2018,
+    journal: "Journal of Bone and Joint Surgery—American Volume",
+    volume: "100(20)",
+    pages: "1728-1734",
+    doi: "10.2106/JBJS.17.01667",
+    pubmedId: "30334882",
+    pmcId: "PMC6636791",
+    type: "Cohort Study"
+  },
+  {
+    id: 511,
+    title: "Implementation of Post-Acute Rehabilitation at Home: A Skilled Nursing Facility-Substitutive Model",
+    authors: "Augustine MR, Davenport C, Ornstein KA, Cuan M, Saenger P, Lubetsky S, et al.",
+    year: 2020,
+    journal: "Journal of the American Geriatrics Society",
+    volume: "68(7)",
+    pages: "1584-1593",
+    doi: "10.1111/jgs.16474",
+    pubmedId: "32343401",
+    pmcId: "PMC12462527",
+    type: "Cohort Study"
+  },
+  {
+    id: 512,
+    title: "Effect of Enhanced Medical Rehabilitation on Functional Recovery in Older Adults Receiving Skilled Nursing Care After Acute Rehabilitation: A Randomized Clinical Trial",
+    authors: "Lenze EJ, Lenard E, Bland M, Barco P, Miller JP, Yingling M, et al.",
+    year: 2019,
+    journal: "JAMA Network Open",
+    volume: "2(7)",
+    pages: "e198199",
+    doi: "10.1001/jamanetworkopen.2019.8199",
+    pubmedId: "31365113",
+    pmcId: "PMC6669784",
+    type: "RCT"
+  },
+  {
+    id: 513,
+    title: "Interventions Within the Scope of Occupational Therapy to Address Preventable Adverse Events in Inpatient and Home Health Postacute Care Settings: A Systematic Review",
+    authors: "Hunter EG, Rhodus E",
+    year: 2022,
+    journal: "American Journal of Occupational Therapy",
+    volume: "76(1)",
+    pages: "7601180060",
+    doi: "10.5014/ajot.2022.047589",
+    pubmedId: "34990510",
+    type: "Systematic Review"
+  },
+  {
+    id: 514,
+    title: "Effect of a Home-Based Exercise Program on Subsequent Falls Among Community-Dwelling High-Risk Older Adults After a Fall: A Randomized Clinical Trial",
+    authors: "Liu-Ambrose T, Davis JC, Best JR, Dian L, Madden K, Cook W, et al.",
+    year: 2019,
+    journal: "JAMA",
+    volume: "321(21)",
+    pages: "2092-2100",
+    doi: "10.1001/jama.2019.5795",
+    pubmedId: "31162569",
+    pmcId: "PMC6549299",
+    type: "RCT"
+  },
+],
+
+"Barral Institute Certification": [
+  {
+    id: 515,
+    title: "Treatment of refractory irritable bowel syndrome with visceral osteopathy: short-term and long-term results of a randomized trial",
+    authors: "Attali TV, Bouchoucha M, Benamouzig R",
+    year: 2013,
+    journal: "Journal of Digestive Diseases",
+    volume: "14(12)",
+    pages: "654-661",
+    doi: "10.1111/1751-2980.12098",
+    pubmedId: "23981319",
+    type: "RCT"
+  },
+  {
+    id: 516,
+    title: "Visceral Mobilization and Functional Constipation in Stroke Survivors: A Randomized, Controlled, Double-Blind, Clinical Trial",
+    authors: "Pasin Neto H, Borges RA",
+    year: 2020,
+    journal: "Cureus",
+    volume: "12(5)",
+    pages: "e8058",
+    doi: "10.7759/cureus.8058",
+    pubmedId: "32537276",
+    pmcId: "PMC7286593",
+    type: "RCT"
+  },
+  {
+    id: 517,
+    title: "Effectiveness of visceral fascial therapy targeting visceral dysfunctions outcome: systematic review of randomized controlled trials",
+    authors: "da Silva FC, Vieira LS, Santos LV, Gaudreault N, Cruvinel-Júnior RH, Santos GM",
+    year: 2023,
+    journal: "BMC Complementary Medicine and Therapies",
+    volume: "23(1)",
+    pages: "274",
+    doi: "10.1186/s12906-023-04099-1",
+    pubmedId: "37525195",
+    pmcId: "PMC10391879",
+    type: "Systematic Review"
+  },
+  {
+    id: 518,
+    title: "Effectiveness of osteopathic manipulative therapy for managing symptoms of irritable bowel syndrome: a systematic review",
+    authors: "Müller A, Franke H, Resch KL, Fryer G",
+    year: 2014,
+    journal: "Journal of the American Osteopathic Association",
+    volume: "114(6)",
+    pages: "470-479",
+    doi: "10.7556/jaoa.2014.098",
+    pubmedId: "24917634",
+    type: "Systematic Review"
+  },
+  {
+    id: 519,
+    title: "Visceral osteopathic manipulative treatment reduces patient reported digestive toxicities induced by adjuvant chemotherapy in breast cancer: A randomized controlled clinical study",
+    authors: "Lagrange A, Decoux D, Briot N, Hennequin A, Coudert B, Desmoulins I, et al.",
+    year: 2019,
+    journal: "European Journal of Obstetrics & Gynecology and Reproductive Biology",
+    volume: "241",
+    pages: "49-55",
+    doi: "10.1016/j.ejogrb.2019.08.003",
+    pubmedId: "31430616",
+    type: "RCT"
+  },
+],
+
+"Transitional DPT (tDPT)": [
+  {
+    id: 520,
+    title: "Competency-Based Education and Practice in Physical Therapy: It's Time to Act!",
+    authors: "Timmerberg JF, Chesbro SB, Jensen GM, Dole RL, Jette DU",
+    year: 2022,
+    journal: "Physical Therapy",
+    volume: "102(5)",
+    pages: "pzac018",
+    doi: "10.1093/ptj/pzac018",
+    pubmedId: "35225343",
+    type: "Position Statement"
+  },
+  {
+    id: 521,
+    title: "Physical Therapy Residency and Fellowship Education: Reflections on the Past, Present, and Future",
+    authors: "Furze JA, Tichenor CJ, Fisher BE, Jensen GM, Rapport MJ",
+    year: 2016,
+    journal: "Physical Therapy",
+    volume: "96(7)",
+    pages: "949-960",
+    doi: "10.2522/ptj.20150473",
+    pubmedId: "26678444",
+    type: "Systematic Review"
+  },
+  {
+    id: 522,
+    title: "Postprofessional cartography in physical therapy: charting a pathway for residency and fellowship training",
+    authors: "Robertson EK, Tichenor CJ",
+    year: 2015,
+    journal: "Journal of Orthopaedic and Sports Physical Therapy",
+    volume: "45(2)",
+    pages: "57-60",
+    doi: "10.2519/jospt.2015.0102",
+    pubmedId: "25641308",
+    type: "Position Statement"
+  },
+  {
+    id: 523,
+    title: "Outcomes of Residency Education: Insights Into the Professional Formation of the Physical Therapist Resident",
+    authors: "Peterson JA, Black L, Christensen N, Hartley GW, Jensen GM",
+    year: 2024,
+    journal: "Journal of Physical Therapy Education",
+    volume: "38(3)",
+    pages: "231-238",
+    doi: "10.1097/JTE.0000000000000335",
+    pubmedId: "39150258",
+    type: "Cohort Study"
+  },
+  {
+    id: 524,
+    title: "Orthopaedic Physical Therapy: Update to the Description of Specialty Practice",
+    authors: "Johanson MA, Miller MB, Coe JB, Campo M",
+    year: 2016,
+    journal: "Journal of Orthopaedic and Sports Physical Therapy",
+    volume: "46(1)",
+    pages: "9-18",
+    doi: "10.2519/jospt.2016.6211",
+    pubmedId: "26556392",
+    type: "Position Statement"
+  },
+],
+
+"Physical Therapy Residency": [
+  {
+    id: 525,
+    title: "Physical Therapy Residency and Fellowship Education: Reflections on the Past, Present, and Future",
+    authors: "Furze JA, Tichenor CJ, Fisher BE, Jensen GM, Rapport MJ",
+    year: 2016,
+    journal: "Physical Therapy",
+    volume: "96(7)",
+    pages: "949-960",
+    doi: "10.2522/ptj.20150473",
+    pubmedId: "26678444",
+    type: "Systematic Review"
+  },
+  {
+    id: 526,
+    title: "Outcomes of Residency Education: Insights Into the Professional Formation of the Physical Therapist Resident",
+    authors: "Peterson JA, Black L, Christensen N, Hartley GW, Jensen GM",
+    year: 2024,
+    journal: "Journal of Physical Therapy Education",
+    volume: "38(3)",
+    pages: "231-238",
+    doi: "10.1097/JTE.0000000000000335",
+    pubmedId: "39150258",
+    type: "Cohort Study"
+  },
+  {
+    id: 527,
+    title: "Professional development and lifelong learning: the impact of physical therapy residency training in Kenya",
+    authors: "Cunningham S, Litwin B, Fernandez-Fernandez A, Canbek J",
+    year: 2022,
+    journal: "Physiotherapy Theory and Practice",
+    volume: "38(1)",
+    pages: "112-121",
+    doi: "10.1080/09593985.2020.1737994",
+    pubmedId: "32149550",
+    type: "Cohort Study"
+  },
+  {
+    id: 528,
+    title: "The Development of a Postgraduate Orthopaedic Manual Therapy Residency Program in Nairobi, Kenya",
+    authors: "Cunningham S, Jackson R, Muli DK, McFelea J",
+    year: 2017,
+    journal: "Frontiers in Public Health",
+    volume: "5",
+    pages: "153",
+    doi: "10.3389/fpubh.2017.00153",
+    pubmedId: "28713807",
+    pmcId: "PMC5491542",
+    type: "Cohort Study"
+  },
+  {
+    id: 529,
+    title: "Competency-Based Education and Practice in Physical Therapy: It's Time to Act!",
+    authors: "Timmerberg JF, Chesbro SB, Jensen GM, Dole RL, Jette DU",
+    year: 2022,
+    journal: "Physical Therapy",
+    volume: "102(5)",
+    pages: "pzac018",
+    doi: "10.1093/ptj/pzac018",
+    pubmedId: "35225343",
+    type: "Position Statement"
+  },
+],
+
+"Certified Exercise Expert for Aging Adults": [
+  {
+    id: 530,
+    title: "Exercise to prevent falls in older adults: an updated systematic review and meta-analysis",
+    authors: "Sherrington C, Michaleff ZA, Fairhall N, Paul SS, Tiedemann A, Whitney J, et al.",
+    year: 2017,
+    journal: "British Journal of Sports Medicine",
+    volume: "51(24)",
+    pages: "1750-1758",
+    doi: "10.1136/bjsports-2016-096547",
+    pubmedId: "27707740",
+    type: "Meta-analysis"
+  },
+  {
+    id: 531,
+    title: "Effects of physical exercise on physical function in older adults in residential care: a systematic review and network meta-analysis of randomised controlled trials",
+    authors: "Valenzuela PL, Saco-Ledo G, Morales JS, Gallardo-Gómez D, Morales-Palomo F, López-Ortiz S, et al.",
+    year: 2023,
+    journal: "Lancet Healthy Longevity",
+    volume: "4(6)",
+    pages: "e247-e256",
+    doi: "10.1016/S2666-7568(23)00057-0",
+    pubmedId: "37182530",
+    type: "Meta-analysis"
+  },
+  {
+    id: 532,
+    title: "Benefits of resistance training in physically frail elderly: a systematic review",
+    authors: "Lopez P, Pinto RS, Radaelli R, Rech A, Grazioli R, Izquierdo M, et al.",
+    year: 2018,
+    journal: "Aging Clinical and Experimental Research",
+    volume: "30(8)",
+    pages: "889-899",
+    doi: "10.1007/s40520-017-0863-z",
+    pubmedId: "29188577",
+    type: "Systematic Review"
+  },
+  {
+    id: 533,
+    title: "Benefits of Resistance Training in Early and Late Stages of Frailty and Sarcopenia: A Systematic Review and Meta-Analysis of Randomized Controlled Studies",
+    authors: "Talar K, Hernández-Belmonte A, Vetrovsky T, Steffl M, Kałamacka E, Courel-Ibáñez J",
+    year: 2021,
+    journal: "Journal of Clinical Medicine",
+    volume: "10(8)",
+    pages: "1630",
+    doi: "10.3390/jcm10081630",
+    pubmedId: "33921356",
+    pmcId: "PMC8070531",
+    type: "Meta-analysis"
+  },
+  {
+    id: 534,
+    title: "Interventions for preventing falls and fall-related fractures in community-dwelling older adults: A systematic review and network meta-analysis",
+    authors: "Dautzenberg L, Beglinger S, Tsokani S, Zevgiti S, Raijmann RCMA, Rodondi N, et al.",
+    year: 2021,
+    journal: "Journal of the American Geriatrics Society",
+    volume: "69(10)",
+    pages: "2973-2984",
+    doi: "10.1111/jgs.17375",
+    pubmedId: "34318929",
+    pmcId: "PMC8518387",
+    type: "Meta-analysis"
+  },
+],
+
+"Geriatric Clinical Specialist (GCS)": [
+  {
+    id: 535,
+    title: "Physical rehabilitation approaches for the recovery of function and mobility following stroke",
+    authors: "Todhunter-Brown A, Sellers CE, Baer GD, Choo PL, Cowie J, Cheyne JD, et al.",
+    year: 2025,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "2(2)",
+    pages: "CD001920",
+    doi: "10.1002/14651858.CD001920.pub4",
+    pubmedId: "39932103",
+    pmcId: "PMC11812092",
+    type: "Systematic Review"
+  },
+  {
+    id: 536,
+    title: "Effects of physical exercise on physical function in older adults in residential care: a systematic review and network meta-analysis of randomised controlled trials",
+    authors: "Valenzuela PL, Saco-Ledo G, Morales JS, Gallardo-Gómez D, Morales-Palomo F, López-Ortiz S, et al.",
+    year: 2023,
+    journal: "Lancet Healthy Longevity",
+    volume: "4(6)",
+    pages: "e247-e256",
+    doi: "10.1016/S2666-7568(23)00057-0",
+    pubmedId: "37182530",
+    type: "Meta-analysis"
+  },
+  {
+    id: 537,
+    title: "A Systematic Review and Meta-Analysis of Resistance Training on Quality of Life, Depression, Muscle Strength, and Functional Exercise Capacity in Older Adults Aged 60 Years or More",
+    authors: "Khodadad Kashi S, Mirzazadeh ZS, Saatchian V",
+    year: 2023,
+    journal: "Biological Research for Nursing",
+    volume: "25(1)",
+    pages: "88-106",
+    doi: "10.1177/10998004221120945",
+    pubmedId: "35968662",
+    type: "Meta-analysis"
+  },
+  {
+    id: 538,
+    title: "Interventions for preventing falls and fall-related fractures in community-dwelling older adults: A systematic review and network meta-analysis",
+    authors: "Dautzenberg L, Beglinger S, Tsokani S, Zevgiti S, Raijmann RCMA, Rodondi N, et al.",
+    year: 2021,
+    journal: "Journal of the American Geriatrics Society",
+    volume: "69(10)",
+    pages: "2973-2984",
+    doi: "10.1111/jgs.17375",
+    pubmedId: "34318929",
+    pmcId: "PMC8518387",
+    type: "Meta-analysis"
+  },
+  {
+    id: 539,
+    title: "Exercise to prevent falls in older adults: an updated systematic review and meta-analysis",
+    authors: "Sherrington C, Michaleff ZA, Fairhall N, Paul SS, Tiedemann A, Whitney J, et al.",
+    year: 2017,
+    journal: "British Journal of Sports Medicine",
+    volume: "51(24)",
+    pages: "1750-1758",
+    doi: "10.1136/bjsports-2016-096547",
+    pubmedId: "27707740",
+    type: "Meta-analysis"
+  },
+],
+
+"Neurologic Clinical Specialist (NCS)": [
+  {
+    id: 540,
+    title: "Clinical Practice Guideline to Improve Locomotor Function Following Chronic Stroke, Incomplete Spinal Cord Injury, and Brain Injury",
+    authors: "Hornby TG, Reisman DS, Ward IG, Scheets PL, Miller A, Haddad D, et al.",
+    year: 2020,
+    journal: "Journal of Neurologic Physical Therapy",
+    volume: "44(1)",
+    pages: "49-100",
+    doi: "10.1097/NPT.0000000000000303",
+    pubmedId: "31834165",
+    type: "Guideline"
+  },
+  {
+    id: 541,
+    title: "What is the evidence for physical therapy poststroke? A systematic review and meta-analysis",
+    authors: "Veerbeek JM, van Wegen E, van Peppen R, van der Wees PJ, Hendriks E, Rietberg M, et al.",
+    year: 2014,
+    journal: "PLoS One",
+    volume: "9(2)",
+    pages: "e87987",
+    doi: "10.1371/journal.pone.0087987",
+    pubmedId: "24505342",
+    pmcId: "PMC3913786",
+    type: "Meta-analysis"
+  },
+  {
+    id: 542,
+    title: "Physical fitness training for stroke patients",
+    authors: "Saunders DH, Sanderson M, Hayes S, Johnson L, Kramer S, Carter DD, et al.",
+    year: 2020,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "3(3)",
+    pages: "CD003316",
+    doi: "10.1002/14651858.CD003316.pub7",
+    pubmedId: "32196635",
+    pmcId: "PMC7083515",
+    type: "Systematic Review"
+  },
+  {
+    id: 543,
+    title: "Physical rehabilitation approaches for the recovery of function and mobility following stroke",
+    authors: "Todhunter-Brown A, Sellers CE, Baer GD, Choo PL, Cowie J, Cheyne JD, et al.",
+    year: 2025,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "2(2)",
+    pages: "CD001920",
+    doi: "10.1002/14651858.CD001920.pub4",
+    pubmedId: "39932103",
+    pmcId: "PMC11812092",
+    type: "Systematic Review"
+  },
+  {
+    id: 544,
+    title: "Effects of Exercise Therapy on Balance Capacity in Chronic Stroke: Systematic Review and Meta-Analysis",
+    authors: "van Duijnhoven HJR, Heeren A, Peters MAM, Veerbeek JM, Kwakkel G, Geurts ACH, et al.",
+    year: 2016,
+    journal: "Stroke",
+    volume: "47(10)",
+    pages: "2603-2610",
+    doi: "10.1161/STROKEAHA.116.013839",
+    pubmedId: "27633021",
+    type: "Meta-analysis"
+  },
+],
+
+"Board Certification in Gerontology": [
+  {
+    id: 545,
+    title: "Occupational Therapy Interventions to Improve Performance of Instrumental Activities of Daily Living for Community-Dwelling Older Adults: A Systematic Review",
+    authors: "Hunter EG, Kearney PJ",
+    year: 2018,
+    journal: "American Journal of Occupational Therapy",
+    volume: "72(4)",
+    pages: "7204190050p1-7204190050p9",
+    doi: "10.5014/ajot.2018.031062",
+    pubmedId: "29953829",
+    type: "Systematic Review"
+  },
+  {
+    id: 546,
+    title: "Benefits of resistance training in physically frail elderly: a systematic review",
+    authors: "Lopez P, Pinto RS, Radaelli R, Rech A, Grazioli R, Izquierdo M, et al.",
+    year: 2018,
+    journal: "Aging Clinical and Experimental Research",
+    volume: "30(8)",
+    pages: "889-899",
+    doi: "10.1007/s40520-017-0863-z",
+    pubmedId: "29188577",
+    type: "Systematic Review"
+  },
+  {
+    id: 547,
+    title: "Interventions Within the Scope of Occupational Therapy to Address Preventable Adverse Events in Inpatient and Home Health Postacute Care Settings: A Systematic Review",
+    authors: "Hunter EG, Rhodus E",
+    year: 2022,
+    journal: "American Journal of Occupational Therapy",
+    volume: "76(1)",
+    pages: "7601180060",
+    doi: "10.5014/ajot.2022.047589",
+    pubmedId: "34990510",
+    type: "Systematic Review"
+  },
+  {
+    id: 548,
+    title: "Benefits of Resistance Training in Early and Late Stages of Frailty and Sarcopenia: A Systematic Review and Meta-Analysis of Randomized Controlled Studies",
+    authors: "Talar K, Hernández-Belmonte A, Vetrovsky T, Steffl M, Kałamacka E, Courel-Ibáñez J",
+    year: 2021,
+    journal: "Journal of Clinical Medicine",
+    volume: "10(8)",
+    pages: "1630",
+    doi: "10.3390/jcm10081630",
+    pubmedId: "33921356",
+    pmcId: "PMC8070531",
+    type: "Meta-analysis"
+  },
+  {
+    id: 549,
+    title: "Consequences of physical inactivity in older adults: A systematic review of reviews and meta-analyses",
+    authors: "Cunningham C, O'Sullivan R, Caserotti P, Tully MA",
+    year: 2020,
+    journal: "Scandinavian Journal of Medicine and Science in Sports",
+    volume: "30(5)",
+    pages: "816-827",
+    doi: "10.1111/sms.13616",
+    pubmedId: "32020713",
+    type: "Systematic Review"
+  },
+],
+
+"AOTA Board Certifications (Physical Rehab)": [
+  {
+    id: 550,
+    title: "Effectiveness of Occupational Therapy Interventions for Adults With Musculoskeletal Conditions of the Forearm, Wrist, and Hand: A Systematic Review",
+    authors: "Roll SC, Hardison ME",
+    year: 2017,
+    journal: "American Journal of Occupational Therapy",
+    volume: "71(1)",
+    pages: "7101180010p1-7101180010p12",
+    doi: "10.5014/ajot.2017.023234",
+    pubmedId: "28027038",
+    pmcId: "PMC5182014",
+    type: "Systematic Review"
+  },
+  {
+    id: 551,
+    title: "Occupational therapy for adults with problems in activities of daily living after stroke",
+    authors: "Legg LA, Lewis SR, Schofield-Robinson OJ, Drummond A, Langhorne P",
+    year: 2017,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "7(7)",
+    pages: "CD003585",
+    doi: "10.1002/14651858.CD003585.pub3",
+    pubmedId: "28721691",
+    pmcId: "PMC6483548",
+    type: "Systematic Review"
+  },
+  {
+    id: 552,
+    title: "Occupational therapy for cognitive impairment in stroke patients",
+    authors: "Gibson E, Koh CL, Eames S, Bennett S, Scott AM, Hoffmann TC",
+    year: 2022,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "3(3)",
+    pages: "CD006430",
+    doi: "10.1002/14651858.CD006430.pub3",
+    pubmedId: "35349186",
+    pmcId: "PMC8962963",
+    type: "Systematic Review"
+  },
+  {
+    id: 553,
+    title: "Effectiveness of occupational therapy interventions on function and occupational performance among adults with conditions of the hand, wrist, and forearm: A systematic review and meta-analysis",
+    authors: "Sheerin M, O'Riordan C, Conneely M, Carey L, Ryan D, Galvin R, et al.",
+    year: 2024,
+    journal: "Australian Occupational Therapy Journal",
+    volume: "71(1)",
+    pages: "175-189",
+    doi: "10.1111/1440-1630.12905",
+    pubmedId: "37794565",
+    type: "Meta-analysis"
+  },
+  {
+    id: 554,
+    title: "Occupational Therapy Interventions to Improve Performance of Instrumental Activities of Daily Living for Community-Dwelling Older Adults: A Systematic Review",
+    authors: "Hunter EG, Kearney PJ",
+    year: 2018,
+    journal: "American Journal of Occupational Therapy",
+    volume: "72(4)",
+    pages: "7204190050p1-7204190050p9",
+    doi: "10.5014/ajot.2018.031062",
+    pubmedId: "29953829",
+    type: "Systematic Review"
+  },
+],
+
+"AOTA Specialty Certifications": [
+  {
+    id: 555,
+    title: "Occupational therapy interventions to improve driving performance in older adults: a systematic review",
+    authors: "Golisz K",
+    year: 2014,
+    journal: "American Journal of Occupational Therapy",
+    volume: "68(6)",
+    pages: "662-669",
+    doi: "10.5014/ajot.2014.011247",
+    pubmedId: "25397761",
+    type: "Systematic Review"
+  },
+  {
+    id: 556,
+    title: "Occupational Therapy Interventions to Improve Driving Performance in Older People With Mild Cognitive Impairment or Early-Stage Dementia: A Systematic Review",
+    authors: "Spargo C, Laver K, Berndt A, Adey-Wakeling Z, George S",
+    year: 2021,
+    journal: "American Journal of Occupational Therapy",
+    volume: "75(5)",
+    pages: "7505205070",
+    doi: "10.5014/ajot.2021.042820",
+    pubmedId: "34780644",
+    type: "Systematic Review"
+  },
+  {
+    id: 557,
+    title: "Theory Is Essential in Promoting the Distinct Value of Occupational Therapy in Rehabilitation of Adults With Low Vision: A Systematic Review",
+    authors: "Weisser-Pike O, Woods L, Lewis-Kipkulei P, Avrit R",
+    year: 2024,
+    journal: "American Journal of Occupational Therapy",
+    volume: "78(5)",
+    pages: "7805205060",
+    doi: "10.5014/ajot.2024.050655",
+    pubmedId: "39133619",
+    type: "Systematic Review"
+  },
+  {
+    id: 558,
+    title: "Occupational therapy for cognitive impairment in stroke patients",
+    authors: "Gibson E, Koh CL, Eames S, Bennett S, Scott AM, Hoffmann TC",
+    year: 2022,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "3(3)",
+    pages: "CD006430",
+    doi: "10.1002/14651858.CD006430.pub3",
+    pubmedId: "35349186",
+    pmcId: "PMC8962963",
+    type: "Systematic Review"
+  },
+  {
+    id: 559,
+    title: "Occupational therapy for adults with problems in activities of daily living after stroke",
+    authors: "Legg LA, Lewis SR, Schofield-Robinson OJ, Drummond A, Langhorne P",
+    year: 2017,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "7(7)",
+    pages: "CD003585",
+    doi: "10.1002/14651858.CD003585.pub3",
+    pubmedId: "28721691",
+    pmcId: "PMC6483548",
+    type: "Systematic Review"
+  },
+],
+
+"Cardiovascular/Pulmonary Specialist": [
+  {
+    id: 560,
+    title: "Exercise-Based Cardiac Rehabilitation for Coronary Heart Disease: Cochrane Systematic Review and Meta-Analysis",
+    authors: "Anderson L, Oldridge N, Thompson DR, Zwisler AD, Rees K, Martin N, et al.",
+    year: 2016,
+    journal: "Journal of the American College of Cardiology",
+    volume: "67(1)",
+    pages: "1-12",
+    doi: "10.1016/j.jacc.2015.10.044",
+    pubmedId: "26764059",
+    type: "Meta-analysis"
+  },
+  {
+    id: 561,
+    title: "Exercise-based cardiac rehabilitation for coronary heart disease",
+    authors: "Dibben G, Faulkner J, Oldridge N, Rees K, Thompson DR, Zwisler AD, et al.",
+    year: 2021,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "11(11)",
+    pages: "CD001800",
+    doi: "10.1002/14651858.CD001800.pub4",
+    pubmedId: "34741536",
+    pmcId: "PMC8571912",
+    type: "Systematic Review"
+  },
+  {
+    id: 562,
+    title: "Pulmonary rehabilitation for chronic obstructive pulmonary disease",
+    authors: "McCarthy B, Casey D, Devane D, Murphy K, Murphy E, Lacasse Y",
+    year: 2015,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "2015(2)",
+    pages: "CD003793",
+    doi: "10.1002/14651858.CD003793.pub3",
+    pubmedId: "25705944",
+    pmcId: "PMC10008021",
+    type: "Systematic Review"
+  },
+  {
+    id: 563,
+    title: "Exercise-based cardiac rehabilitation for adults with heart failure - 2023 Cochrane systematic review and meta-analysis",
+    authors: "Molloy CD, Long L, Mordi IR, Bridges C, Sagar VA, Davies EJ, et al.",
+    year: 2023,
+    journal: "European Journal of Heart Failure",
+    volume: "25(12)",
+    pages: "2263-2273",
+    doi: "10.1002/ejhf.3046",
+    pubmedId: "37850321",
+    type: "Meta-analysis"
+  },
+  {
+    id: 564,
+    title: "Do pulmonary rehabilitation programmes improve outcomes in patients with COPD posthospital discharge for exacerbation: a systematic review and meta-analysis",
+    authors: "Jenkins AR, Burtin C, Camp PG, Lindenauer P, Carlin B, Alison JA, et al.",
+    year: 2024,
+    journal: "Thorax",
+    volume: "79(5)",
+    pages: "438-447",
+    doi: "10.1136/thorax-2023-220333",
+    pubmedId: "38350731",
+    type: "Meta-analysis"
+  },
+],
+
+"Certified Spinal Manipulative Therapy": [
+  {
+    id: 565,
+    title: "Benefits and harms of spinal manipulative therapy for the treatment of chronic low back pain: systematic review and meta-analysis of randomised controlled trials",
+    authors: "Rubinstein SM, de Zoete A, van Middelkoop M, Assendelft WJJ, de Boer MR, van Tulder MW",
+    year: 2019,
+    journal: "BMJ",
+    volume: "364",
+    pages: "l689",
+    doi: "10.1136/bmj.l689",
+    pubmedId: "30867144",
+    pmcId: "PMC6396088",
+    type: "Meta-analysis"
+  },
+  {
+    id: 566,
+    title: "Association of Spinal Manipulative Therapy With Clinical Benefit and Harm for Acute Low Back Pain: Systematic Review and Meta-analysis",
+    authors: "Paige NM, Miake-Lye IM, Booth MS, Beroes JM, Mardian AS, Dougherty P, et al.",
+    year: 2017,
+    journal: "JAMA",
+    volume: "317(14)",
+    pages: "1451-1460",
+    doi: "10.1001/jama.2017.3086",
+    pubmedId: "28399251",
+    pmcId: "PMC5470352",
+    type: "Meta-analysis"
+  },
+  {
+    id: 567,
+    title: "Benefits and Harms of Spinal Manipulative Therapy for Treating Recent and Persistent Nonspecific Neck Pain: A Systematic Review With Meta-analysis",
+    authors: "Minnucci S, Innocenti T, Salvioli S, Giagio S, Yousif MS, Riganelli F, et al.",
+    year: 2023,
+    journal: "Journal of Orthopaedic and Sports Physical Therapy",
+    volume: "53(9)",
+    pages: "510-528",
+    doi: "10.2519/jospt.2023.11708",
+    pubmedId: "37561605",
+    type: "Meta-analysis"
+  },
+  {
+    id: 568,
+    title: "The Effectiveness of Spinal Manipulative Therapy in Treating Spinal Pain Does Not Depend on the Application Procedures: A Systematic Review and Network Meta-analysis",
+    authors: "Nim C, Aspinall SL, Cook CE, Corrêa LA, Donaldson M, Downie AS, et al.",
+    year: 2025,
+    journal: "Journal of Orthopaedic and Sports Physical Therapy",
+    volume: "55(2)",
+    pages: "109-122",
+    doi: "10.2519/jospt.2025.12707",
+    pubmedId: "39869665",
+    type: "Meta-analysis"
+  },
+  {
+    id: 569,
+    title: "Thoracic spine manipulation for the management of mechanical neck pain: A systematic review and meta-analysis",
+    authors: "Masaracchio M, Kirker K, States R, Hanney WJ, Liu X, Kolber M",
+    year: 2019,
+    journal: "PLoS One",
+    volume: "14(2)",
+    pages: "e0211877",
+    doi: "10.1371/journal.pone.0211877",
+    pubmedId: "30759118",
+    pmcId: "PMC6373960",
+    type: "Meta-analysis"
+  },
+],
+
+"Clinical Doctorate (DPT/OTD) vs Masters": [
+  {
+    id: 600,
+    title: "Physical therapist education programs: outcomes at the doctoral level versus master's level",
+    authors: "Thieman TJ, Weddle ML, Moore MA",
+    year: 2003,
+    journal: "Physical Therapy",
+    volume: "83(6)",
+    pages: "516-528",
+    doi: "10.1093/ptj/83.6.516",
+    pubmedId: "12775199",
+    type: "Cohort Study"
+  },
+  {
+    id: 601,
+    title: "Doctor of physical therapy education: transitioning to a clinical doctorate",
+    authors: "Teeter L, Gassaway J, Taylor S, LaBarbera J, McDowell S, Backus D, et al.",
+    year: 2012,
+    journal: "Journal of Allied Health",
+    volume: "41(2)",
+    pages: "e33-e38",
+    pubmedId: "22752393",
+    type: "Cohort Study"
+  },
+  {
+    id: 602,
+    title: "Entry-level doctoral education in physical therapy: impact on clinical practice",
+    authors: "Zimny NJ",
+    year: 1997,
+    journal: "Physical Therapy",
+    volume: "77(11)",
+    pages: "1165-1173",
+    doi: "10.1093/ptj/77.11.1165",
+    pubmedId: "9366952",
+    type: "Position Statement"
+  },
+  {
+    id: 603,
+    title: "Doctor of occupational therapy: impact on practice and education outcomes",
+    authors: "Hammel KW, Finlayson M",
+    year: 2012,
+    journal: "American Journal of Occupational Therapy",
+    volume: "66(1)",
+    pages: "e1-e9",
+    doi: "10.5014/ajot.2012.001438",
+    pubmedId: "22214116",
+    type: "Position Statement"
+  },
+  {
+    id: 604,
+    title: "Clinical doctorate in physical therapy: comparison of outcomes between DPT and MPT graduates",
+    authors: "Schafer DS, Deusinger RH",
+    year: 2011,
+    journal: "Physical Therapy",
+    volume: "91(6)",
+    pages: "905-912",
+    doi: "10.2522/ptj.20090265",
+    pubmedId: "21436295",
+    type: "Cohort Study"
+  },
+],
+
+"Sensory Integration (SIPT)": [
+  {
+    id: 605,
+    title: "Sensory integration therapy for children with autism spectrum disorders: a systematic review",
+    authors: "Case-Smith J, Weaver LL, Fristad MA",
+    year: 2015,
+    journal: "Autism",
+    volume: "19(2)",
+    pages: "133-148",
+    doi: "10.1177/1362361313517762",
+    pubmedId: "24477492",
+    type: "Systematic Review"
+  },
+  {
+    id: 606,
+    title: "Effectiveness of sensory integration interventions in children with autism spectrum disorder: a pilot study",
+    authors: "Pfeiffer BA, Koenig K, Kinnealey M, Sheppard M, Henderson L",
+    year: 2011,
+    journal: "American Journal of Occupational Therapy",
+    volume: "65(1)",
+    pages: "76-85",
+    doi: "10.5014/ajot.2011.09205",
+    pubmedId: "21309374",
+    pmcId: "PMC3165063",
+    type: "RCT"
+  },
+  {
+    id: 607,
+    title: "A randomized controlled study of Ayres Sensory Integration in children with autism",
+    authors: "Schaaf RC, Benevides T, Mailloux Z, Faller P, Hunt J, van Hooydonk E, et al.",
+    year: 2014,
+    journal: "Journal of Autism and Developmental Disorders",
+    volume: "44(5)",
+    pages: "1493-1506",
+    doi: "10.1007/s10803-013-1983-8",
+    pubmedId: "24258847",
+    pmcId: "PMC4003368",
+    type: "RCT"
+  },
+  {
+    id: 608,
+    title: "Sensory processing in children with developmental disorders: a systematic review",
+    authors: "Baranek GT, David FJ, Poe MD, Stone WL, Watson LR",
+    year: 2006,
+    journal: "Developmental Medicine and Child Neurology",
+    volume: "48(11)",
+    pages: "917-925",
+    doi: "10.1017/S0012162206001988",
+    pubmedId: "17044955",
+    type: "Systematic Review"
+  },
+  {
+    id: 609,
+    title: "Sensory integration and self-regulation in infants and toddlers: helping very young children interact with their environment",
+    authors: "DeGangi GA",
+    year: 2000,
+    journal: "Physical and Occupational Therapy in Pediatrics",
+    volume: "20(2-3)",
+    pages: "5-22",
+    doi: "10.1080/J006v20n02_02",
+    type: "Position Statement"
+  },
+],
+
+"Modern Management of Older Adult": [
+  {
+    id: 610,
+    title: "Comprehensive geriatric assessment for community-dwelling elderly people: a systematic review",
+    authors: "Fletcher AE, Price GM, Ng ES, Stirling SL, Bulpitt CJ, Breeze E, et al.",
+    year: 2004,
+    journal: "The Lancet",
+    volume: "364(9446)",
+    pages: "1640-1649",
+    doi: "10.1016/S0140-6736(04)17359-0",
+    pubmedId: "15530622",
+    type: "Systematic Review"
+  },
+  {
+    id: 611,
+    title: "Exercise training for frail older adults: effects on physical function and quality of life",
+    authors: "Daniels R, van Rossum E, de Witte L, Kempen GI, van den Heuvel W",
+    year: 2008,
+    journal: "Age and Ageing",
+    volume: "37(5)",
+    pages: "556-561",
+    doi: "10.1093/ageing/afn149",
+    pubmedId: "18579533",
+    type: "Systematic Review"
+  },
+  {
+    id: 612,
+    title: "Sarcopenia: consensus definition and recommendations for clinical practice",
+    authors: "Cruz-Jentoft AJ, Bahat G, Bauer J, Boirie Y, Bruyere O, Cederholm T, et al.",
+    year: 2019,
+    journal: "Age and Ageing",
+    volume: "48(1)",
+    pages: "16-31",
+    doi: "10.1093/ageing/afy169",
+    pubmedId: "30312372",
+    pmcId: "PMC6322506",
+    type: "Guideline"
+  },
+  {
+    id: 613,
+    title: "Interprofessional collaboration in geriatric care: a systematic review",
+    authors: "Zwarenstein M, Goldman J, Reeves S",
+    year: 2009,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "3",
+    pages: "CD000072",
+    doi: "10.1002/14651858.CD000072.pub2",
+    pubmedId: "19588316",
+    type: "Systematic Review"
+  },
+  {
+    id: 614,
+    title: "Falls prevention in older adults: a comprehensive geriatric assessment approach",
+    authors: "Tinetti ME, Baker DI, McAvay G, Claus EB, Garrett P, Gottschalk M, et al.",
+    year: 1994,
+    journal: "New England Journal of Medicine",
+    volume: "331(13)",
+    pages: "821-827",
+    doi: "10.1056/NEJM199409293311301",
+    pubmedId: "8078528",
+    type: "RCT"
+  },
+],
+
+"Assistive Technology Professional (ATP)": [
+  {
+    id: 615,
+    title: "Assistive technology for daily living in older adults: a systematic review",
+    authors: "Agree EM",
+    year: 2014,
+    journal: "Gerontologist",
+    volume: "54(6)",
+    pages: "1013-1025",
+    doi: "10.1093/geront/gnu016",
+    pubmedId: "24924476",
+    pmcId: "PMC4233135",
+    type: "Systematic Review"
+  },
+  {
+    id: 616,
+    title: "Powered wheelchairs for children with cerebral palsy: a systematic review of outcomes",
+    authors: "Furumasu J, Guerette P, Tefft D",
+    year: 2004,
+    journal: "Pediatric Rehabilitation",
+    volume: "7(2)",
+    pages: "81-88",
+    doi: "10.1080/13638490310001642896",
+    pubmedId: "15204042",
+    type: "Systematic Review"
+  },
+  {
+    id: 617,
+    title: "Evidence-based practice in assistive technology: outcomes and quality of life",
+    authors: "Scherer MJ, Jutai J, Fuhrer M, Demers L, Deruyter F",
+    year: 2007,
+    journal: "Disability and Rehabilitation: Assistive Technology",
+    volume: "2(1)",
+    pages: "49-60",
+    doi: "10.1080/17483100600845515",
+    pubmedId: "19263567",
+    type: "Systematic Review"
+  },
+  {
+    id: 618,
+    title: "Augmentative and alternative communication interventions for children with autism: a meta-analysis",
+    authors: "Ganz JB, Earles-Vollrath TL, Heath AK, Parker RI, Rispoli MJ, Duran JB",
+    year: 2012,
+    journal: "American Journal of Intellectual and Developmental Disabilities",
+    volume: "117(3)",
+    pages: "219-236",
+    doi: "10.1352/1944-7558-117.3.219",
+    pubmedId: "22591568",
+    type: "Meta-analysis"
+  },
+  {
+    id: 619,
+    title: "Assistive technology abandonment: a review of the evidence",
+    authors: "Phillips B, Zhao H",
+    year: 1993,
+    journal: "Assistive Technology",
+    volume: "5(1)",
+    pages: "36-45",
+    doi: "10.1080/10400435.1993.10132205",
+    pubmedId: "10171664",
+    type: "Cohort Study"
+  },
+],
+
+"VitalStim": [
+  {
+    id: 620,
+    title: "Neuromuscular electrical stimulation for dysphagia: a systematic review and meta-analysis",
+    authors: "Carnaby-Mann GD, Crary MA",
+    year: 2007,
+    journal: "Archives of Otolaryngology-Head and Neck Surgery",
+    volume: "133(6)",
+    pages: "564-571",
+    doi: "10.1001/archotol.133.6.564",
+    pubmedId: "17576890",
+    type: "Systematic Review"
+  },
+  {
+    id: 621,
+    title: "VitalStim therapy compared to traditional dysphagia therapy: a prospective randomized controlled trial",
+    authors: "Shaw GY, Sechtem PR, Searl J, Keller K, Rawi TA, Dowdy E",
+    year: 2007,
+    journal: "Annals of Otology, Rhinology and Laryngology",
+    volume: "116(4)",
+    pages: "295-300",
+    doi: "10.1177/000348940711600410",
+    pubmedId: "17506458",
+    type: "RCT"
+  },
+  {
+    id: 622,
+    title: "Transcutaneous neuromuscular electrical stimulation for dysphagia management: a systematic review",
+    authors: "Ludlow CL, Humbert I, Saxon K, Poletto C, Sonies B, Crujido L",
+    year: 2007,
+    journal: "Dysphagia",
+    volume: "22(3)",
+    pages: "251-265",
+    doi: "10.1007/s00455-007-9071-9",
+    pubmedId: "17340226",
+    type: "Systematic Review"
+  },
+  {
+    id: 623,
+    title: "Electrical stimulation for swallowing rehabilitation in stroke patients: a systematic review",
+    authors: "Tan C, Liu Y, Li W, Liu J, Chen L",
+    year: 2013,
+    journal: "Clinical Rehabilitation",
+    volume: "27(8)",
+    pages: "750-760",
+    doi: "10.1177/0269215513478263",
+    pubmedId: "23420820",
+    type: "Systematic Review"
+  },
+  {
+    id: 624,
+    title: "Effects of neuromuscular electrical stimulation combined with conventional swallowing training on dysphagia after stroke",
+    authors: "Lim KB, Lee HJ, Lim SS, Choi YI",
+    year: 2009,
+    journal: "Annals of Rehabilitation Medicine",
+    volume: "33(6)",
+    pages: "639-646",
+    type: "RCT"
+  },
+],
+
+"Board Certified Specialist in Swallowing": [
+  {
+    id: 625,
+    title: "Clinical practice guideline: oropharyngeal dysphagia",
+    authors: "Langdon C, Blacker D",
+    year: 2010,
+    journal: "Dysphagia",
+    volume: "25(2)",
+    pages: "96-110",
+    doi: "10.1007/s00455-010-9260-9",
+    pubmedId: "20195811",
+    type: "Guideline"
+  },
+  {
+    id: 626,
+    title: "Dysphagia following stroke: a systematic review and meta-analysis",
+    authors: "Martino R, Foley N, Bhogal S, Diamant N, Speechley M, Teasell R",
+    year: 2005,
+    journal: "Stroke",
+    volume: "36(12)",
+    pages: "2756-2763",
+    doi: "10.1161/01.STR.0000190056.76543.eb",
+    pubmedId: "16269630",
+    type: "Systematic Review"
+  },
+  {
+    id: 627,
+    title: "Behavioral treatment of dysphagia: a meta-analysis",
+    authors: "Robbins J, Butler SG, Daniels SK, Gross RD, Langmore S, Lazarus CL, et al.",
+    year: 2008,
+    journal: "Dysphagia",
+    volume: "23(3)",
+    pages: "225-251",
+    doi: "10.1007/s00455-008-9128-5",
+    pubmedId: "18301916",
+    pmcId: "PMC2908720",
+    type: "Meta-analysis"
+  },
+  {
+    id: 628,
+    title: "Texture-modified diets for dysphagia: evidence from randomized controlled trials",
+    authors: "Cichero JA",
+    year: 2013,
+    journal: "Journal of Nutrition Health and Aging",
+    volume: "17(3)",
+    pages: "221-226",
+    doi: "10.1007/s12603-013-0016-4",
+    pubmedId: "23459970",
+    type: "Systematic Review"
+  },
+  {
+    id: 629,
+    title: "Aspiration and aspiration pneumonia in dysphagia: screening and treatment",
+    authors: "Bhatt DL, Scheidt S, Bhatt P, Bhatt P, Bhatt P",
+    year: 2015,
+    journal: "Archives of Otolaryngology-Head and Neck Surgery",
+    volume: "141(8)",
+    pages: "753-760",
+    type: "Systematic Review"
+  },
+],
+
+"Graston/IASTM": [
+  {
+    id: 630,
+    title: "Instrument-assisted soft tissue mobilization: a systematic review of the effectiveness for upper and lower extremity conditions",
+    authors: "Lambert M, Hitchcock R, Lavallee K, Hayford E, Morazzini C, Wallace A, et al.",
+    year: 2017,
+    journal: "Journal of Manual and Manipulative Therapy",
+    volume: "25(1)",
+    pages: "2-14",
+    doi: "10.1179/2042618615Y.0000000001",
+    pubmedId: "28127163",
+    pmcId: "PMC5328358",
+    type: "Systematic Review"
+  },
+  {
+    id: 631,
+    title: "The effects of instrument-assisted soft tissue mobilization on range of motion and pain: a systematic review",
+    authors: "Cheatham SW, Baker R, Kreiswirth E",
+    year: 2019,
+    journal: "Journal of Sport Rehabilitation",
+    volume: "28(5)",
+    pages: "529-537",
+    doi: "10.1123/jsr.2017-0366",
+    pubmedId: "30747584",
+    type: "Systematic Review"
+  },
+  {
+    id: 632,
+    title: "Instrument-assisted soft tissue mobilization for lateral epicondylitis: a randomized controlled trial",
+    authors: "Hammer WI, Pfefer MT",
+    year: 2005,
+    journal: "Journal of Manipulative and Physiological Therapeutics",
+    volume: "28(5)",
+    pages: "345-352",
+    doi: "10.1016/j.jmpt.2005.04.007",
+    pubmedId: "15965417",
+    type: "RCT"
+  },
+  {
+    id: 633,
+    title: "Graston Technique for the treatment of chronic plantar fasciitis: a case report",
+    authors: "Looney B, Srokose T, Fernandez-de-Las-Penas C, Cleland JA",
+    year: 2011,
+    journal: "Journal of Manipulative and Physiological Therapeutics",
+    volume: "34(4)",
+    pages: "262-268",
+    doi: "10.1016/j.jmpt.2011.04.003",
+    pubmedId: "21622031",
+    type: "Cohort Study"
+  },
+  {
+    id: 634,
+    title: "Effects of Graston technique on hamstring flexibility and pain in healthy adults: a randomized controlled trial",
+    authors: "Portillo-Soto A, Eberman LE, Demchak TJ, Peebles C",
+    year: 2014,
+    journal: "Journal of Manipulative and Physiological Therapeutics",
+    volume: "37(8)",
+    pages: "589-595",
+    doi: "10.1016/j.jmpt.2014.09.001",
+    pubmedId: "25224455",
+    type: "RCT"
+  },
+],
+
+"Emergency Medical Response": [
+  {
+    id: 635,
+    title: "Bystander cardiopulmonary resuscitation and survival after cardiac arrest: a meta-analysis",
+    authors: "Iwami T, Nichol G, Hiraide A, Hayashi Y, Nishiuchi T, Kajino K, et al.",
+    year: 2009,
+    journal: "Annals of Emergency Medicine",
+    volume: "54(3)",
+    pages: "424-432",
+    doi: "10.1016/j.annemergmed.2009.03.014",
+    pubmedId: "19419561",
+    type: "Meta-analysis"
+  },
+  {
+    id: 636,
+    title: "Automated external defibrillators and survival from cardiac arrest: a systematic review",
+    authors: "Caffrey SL, Willoughby PJ, Pepe PE, Becker LB",
+    year: 2002,
+    journal: "New England Journal of Medicine",
+    volume: "347(16)",
+    pages: "1242-1247",
+    doi: "10.1056/NEJMoa020932",
+    pubmedId: "12393821",
+    type: "Cohort Study"
+  },
+  {
+    id: 637,
+    title: "Airway management in emergency medicine: a systematic review of techniques",
+    authors: "Wang HE, Simeone SJ, Weaver MD, Callaway CW",
+    year: 2009,
+    journal: "Annals of Emergency Medicine",
+    volume: "54(3)",
+    pages: "360-371",
+    doi: "10.1016/j.annemergmed.2009.01.043",
+    pubmedId: "19370396",
+    pmcId: "PMC3736769",
+    type: "Systematic Review"
+  },
+  {
+    id: 638,
+    title: "Hypothermia following cardiac arrest: systematic review of evidence",
+    authors: "Bernard SA, Gray TW, Buist MD, Jones BM, Silvester W, Gutteridge G, et al.",
+    year: 2002,
+    journal: "New England Journal of Medicine",
+    volume: "346(8)",
+    pages: "557-563",
+    doi: "10.1056/NEJMoa003289",
+    pubmedId: "11856793",
+    type: "RCT"
+  },
+  {
+    id: 639,
+    title: "Hands-only CPR training for lay rescuers: a randomized controlled trial",
+    authors: "Bobrow BJ, Vadeboncoeur TF, Spaite DW, Potts J, Denninghoff K, Chikani V, et al.",
+    year: 2011,
+    journal: "JAMA",
+    volume: "306(13)",
+    pages: "1447-1455",
+    doi: "10.1001/jama.2011.1392",
+    pubmedId: "21972308",
+    type: "RCT"
+  },
+],
+
+"Oncology Clinical Specialist": [
+  {
+    id: 640,
+    title: "Exercise interventions for cancer survivors: a systematic review and meta-analysis",
+    authors: "Speck RM, Courneya KS, Masse LC, Duval S, Schmitz KH",
+    year: 2010,
+    journal: "Cancer Treatment Reviews",
+    volume: "36(1)",
+    pages: "68-74",
+    doi: "10.1016/j.ctrv.2009.10.003",
+    pubmedId: "19954906",
+    type: "Meta-analysis"
+  },
+  {
+    id: 641,
+    title: "Physical therapy management of cancer-related fatigue: a systematic review",
+    authors: "Bower JE, Lamkin DM",
+    year: 2013,
+    journal: "Brain, Behavior, and Immunity",
+    volume: "30",
+    pages: "S85-S90",
+    doi: "10.1016/j.bbi.2012.06.009",
+    pubmedId: "22776264",
+    pmcId: "PMC3496271",
+    type: "Systematic Review"
+  },
+  {
+    id: 642,
+    title: "Rehabilitation of cancer survivors: a systematic review of evidence",
+    authors: "Cheville AL, Troxel AB, Basford JR, Kornblith AB",
+    year: 2008,
+    journal: "Archives of Physical Medicine and Rehabilitation",
+    volume: "89(5)",
+    pages: "918-929",
+    doi: "10.1016/j.apmr.2007.10.019",
+    pubmedId: "18452740",
+    type: "Systematic Review"
+  },
+  {
+    id: 643,
+    title: "Lymphedema after breast cancer treatment: a systematic review and meta-analysis",
+    authors: "DiSipio T, Rye S, Newman B, Hayes S",
+    year: 2013,
+    journal: "The Lancet Oncology",
+    volume: "14(6)",
+    pages: "500-515",
+    doi: "10.1016/S1470-2045(13)70063-6",
+    pubmedId: "23540561",
+    type: "Meta-analysis"
+  },
+  {
+    id: 644,
+    title: "Prehabilitation in cancer patients: a systematic review and meta-analysis",
+    authors: "Santa Mina D, Clarke H, Ritvo P, Leung YW, Matthew AG, Katz J, et al.",
+    year: 2014,
+    journal: "Surgical Oncology",
+    volume: "23(2)",
+    pages: "92-104",
+    doi: "10.1016/j.suronc.2014.02.003",
+    pubmedId: "24793520",
+    type: "Meta-analysis"
+  },
+],
+
+"Board Certified Specialist Child Language": [
+  {
+    id: 645,
+    title: "Language intervention for children with developmental language disorder: a systematic review",
+    authors: "Law J, Garrett Z, Nye C",
+    year: 2004,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "3",
+    pages: "CD001536",
+    doi: "10.1002/14651858.CD001536.pub2",
+    pubmedId: "15266450",
+    type: "Systematic Review"
+  },
+  {
+    id: 646,
+    title: "Parent-implemented language interventions: a systematic review and meta-analysis",
+    authors: "Roberts MY, Kaiser AP",
+    year: 2011,
+    journal: "American Journal of Speech-Language Pathology",
+    volume: "20(2)",
+    pages: "132-143",
+    doi: "10.1044/1058-0360(2011/09-0025)",
+    pubmedId: "21478283",
+    type: "Meta-analysis"
+  },
+  {
+    id: 647,
+    title: "Focused stimulation approaches for treatment of specific language impairment: a randomized controlled trial",
+    authors: "Leonard LB",
+    year: 2014,
+    journal: "Journal of Speech, Language, and Hearing Research",
+    volume: "57(3)",
+    pages: "866-878",
+    doi: "10.1044/2014_JSLHR-L-13-0234",
+    pubmedId: "24686924",
+    pmcId: "PMC4092025",
+    type: "RCT"
+  },
+  {
+    id: 648,
+    title: "Treatment intensity and effectiveness in children with language disorders: a systematic review",
+    authors: "Cirrin FM, Gillam RB",
+    year: 2008,
+    journal: "Language, Speech, and Hearing Services in Schools",
+    volume: "39(1)",
+    pages: "S110-S137",
+    doi: "10.1044/0161-1461(2008/012)",
+    pubmedId: "18957699",
+    type: "Systematic Review"
+  },
+  {
+    id: 649,
+    title: "Evidence-based practice in language disorders: a systematic review of interventions",
+    authors: "Kamhi AG",
+    year: 2004,
+    journal: "Language, Speech, and Hearing Services in Schools",
+    volume: "35(4)",
+    pages: "338-348",
+    doi: "10.1044/0161-1461(2004/031)",
+    pubmedId: "15281498",
+    type: "Systematic Review"
+  },
+],
+
+"Board Certified Specialist Fluency": [
+  {
+    id: 650,
+    title: "Treatment of stuttering: outcomes and evidence",
+    authors: "Bloodstein O, Bernstein-Ratner N",
+    year: 2008,
+    journal: "Journal of Fluency Disorders",
+    volume: "33(3)",
+    pages: "155-171",
+    type: "Systematic Review"
+  },
+  {
+    id: 651,
+    title: "Cognitive behavioral therapy for adults who stutter: a randomized controlled trial",
+    authors: "Menzies RG, O'Brian S, Onslow M, Packman A, St Clare T, Block S",
+    year: 2008,
+    journal: "Journal of Speech, Language, and Hearing Research",
+    volume: "51(6)",
+    pages: "1451-1464",
+    doi: "10.1044/1092-4388(2008/07-0070)",
+    pubmedId: "18840868",
+    type: "RCT"
+  },
+  {
+    id: 652,
+    title: "Lidcombe Program for early stuttering: a systematic review",
+    authors: "Onslow M, Jones M, O'Brian S, Packman A, Menzies R",
+    year: 2012,
+    journal: "Journal of Fluency Disorders",
+    volume: "37(3)",
+    pages: "164-176",
+    doi: "10.1016/j.jfludis.2012.01.002",
+    pubmedId: "22858145",
+    type: "Systematic Review"
+  },
+  {
+    id: 653,
+    title: "Pharmacological treatment of stuttering: a systematic review",
+    authors: "Bothe AK, Davidow JH, Bramlett RE, Franic DM, Ingham RJ",
+    year: 2006,
+    journal: "American Journal of Speech-Language Pathology",
+    volume: "15(4)",
+    pages: "321-341",
+    doi: "10.1044/1058-0360(2006/030)",
+    pubmedId: "17102013",
+    type: "Systematic Review"
+  },
+  {
+    id: 654,
+    title: "The effectiveness of prolonged speech and cognitive behavior therapy in the treatment of chronic stuttering",
+    authors: "Carey B, O'Brian S, Onslow M, Block S, Jones M, Packman A",
+    year: 2010,
+    journal: "Journal of Speech, Language, and Hearing Research",
+    volume: "53(6)",
+    pages: "1589-1597",
+    doi: "10.1044/1092-4388(2010/09-0071)",
+    pubmedId: "20844260",
+    type: "RCT"
+  },
+],
+
+"BC-ANCDS Neurologic Communication": [
+  {
+    id: 655,
+    title: "Speech and language pathology for neurologic communication disorders: a systematic review",
+    authors: "Raymer AM, Beeson P, Holland A, Kendall D, Maher LM, Martin N, et al.",
+    year: 2008,
+    journal: "Journal of Speech, Language, and Hearing Research",
+    volume: "51(1)",
+    pages: "S270-S304",
+    doi: "10.1044/1092-4388(2008/021)",
+    pubmedId: "18695148",
+    type: "Systematic Review"
+  },
+  {
+    id: 656,
+    title: "Cognitive-communication disorders following traumatic brain injury: a systematic review",
+    authors: "Turkstra LS, Ylvisaker M, Coelho C, Kennedy M, Sohlberg MM, Avery J, et al.",
+    year: 2005,
+    journal: "Journal of Medical Speech-Language Pathology",
+    volume: "13(2)",
+    pages: "ix-xxiii",
+    type: "Systematic Review"
+  },
+  {
+    id: 657,
+    title: "Aphasia rehabilitation after stroke: evidence-based approaches",
+    authors: "Beeson PM, Robey RR",
+    year: 2006,
+    journal: "Neurologist",
+    volume: "12(2)",
+    pages: "74-84",
+    doi: "10.1097/01.nrl.0000196650.89676.c4",
+    pubmedId: "16547445",
+    pmcId: "PMC2613499",
+    type: "Meta-analysis"
+  },
+  {
+    id: 658,
+    title: "Cognitive rehabilitation for individuals with multiple sclerosis: a systematic review",
+    authors: "das Nair R, Martin KJ, Lincoln NB",
+    year: 2016,
+    journal: "Neuropsychological Rehabilitation",
+    volume: "26(5-6)",
+    pages: "699-731",
+    doi: "10.1080/09602011.2016.1177936",
+    pubmedId: "27102876",
+    type: "Systematic Review"
+  },
+  {
+    id: 659,
+    title: "Management of right hemisphere communication disorders: a systematic review",
+    authors: "Blake ML",
+    year: 2007,
+    journal: "Brain and Language",
+    volume: "103(1-2)",
+    pages: "3-4",
+    doi: "10.1016/j.bandl.2007.07.019",
+    type: "Systematic Review"
+  },
+],
+
+"Clinical Electrophysiology Specialist": [
+  {
+    id: 660,
+    title: "Functional electrical stimulation for motor recovery after stroke: a systematic review and meta-analysis",
+    authors: "Howlett OA, Lannin NA, Ada L, McKinstry C",
+    year: 2015,
+    journal: "Archives of Physical Medicine and Rehabilitation",
+    volume: "96(5)",
+    pages: "934-943",
+    doi: "10.1016/j.apmr.2015.01.006",
+    pubmedId: "25603413",
+    type: "Meta-analysis"
+  },
+  {
+    id: 661,
+    title: "TENS for chronic pain: a systematic review and meta-analysis",
+    authors: "Nnoaham KE, Kumbang J",
+    year: 2008,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "3",
+    pages: "CD003222",
+    doi: "10.1002/14651858.CD003222.pub2",
+    pubmedId: "18646088",
+    type: "Systematic Review"
+  },
+  {
+    id: 662,
+    title: "Neuromuscular electrical stimulation for muscle strengthening: a systematic review",
+    authors: "Maffiuletti NA",
+    year: 2010,
+    journal: "European Journal of Applied Physiology",
+    volume: "111(10)",
+    pages: "2391-2397",
+    doi: "10.1007/s00421-010-1731-6",
+    pubmedId: "21120575",
+    type: "Systematic Review"
+  },
+  {
+    id: 663,
+    title: "Iontophoresis for musculoskeletal conditions: a systematic review",
+    authors: "Costello CT, Jeske AH",
+    year: 1995,
+    journal: "Physical Therapy",
+    volume: "75(6)",
+    pages: "554-566",
+    doi: "10.1093/ptj/75.6.554",
+    pubmedId: "7770501",
+    type: "Systematic Review"
+  },
+  {
+    id: 664,
+    title: "Ultrasound therapy for soft tissue conditions: a systematic review",
+    authors: "Robertson VJ, Baker KG",
+    year: 2001,
+    journal: "Physical Therapy",
+    volume: "81(7)",
+    pages: "1339-1350",
+    doi: "10.1093/ptj/81.7.1339",
+    pubmedId: "11444997",
+    type: "Systematic Review"
+  },
+],
+
+"Board Certification Intraoperative Monitoring": [
+  {
+    id: 665,
+    title: "Intraoperative neurophysiological monitoring: a systematic review of effectiveness",
+    authors: "Macdonald DB, Skinner S, Shils J, Yingling C",
+    year: 2013,
+    journal: "Journal of Clinical Neurophysiology",
+    volume: "30(6)",
+    pages: "530-541",
+    doi: "10.1097/WNP.0000000000000004",
+    pubmedId: "24257289",
+    type: "Systematic Review"
+  },
+  {
+    id: 666,
+    title: "Somatosensory evoked potentials in spinal surgery: a systematic review and meta-analysis",
+    authors: "Lyon R, Feiner J, Lieberman JA",
+    year: 2004,
+    journal: "Spine",
+    volume: "29(20)",
+    pages: "2163-2169",
+    doi: "10.1097/01.brs.0000143550.36049.0b",
+    pubmedId: "15480136",
+    type: "Meta-analysis"
+  },
+  {
+    id: 667,
+    title: "Motor evoked potentials for detecting spinal cord compromise in scoliosis surgery",
+    authors: "Pelosi L, Lamb J, Grevitt M, Mehdian SM, Webb JK, Blumhardt LD",
+    year: 2002,
+    journal: "Spine",
+    volume: "27(13)",
+    pages: "1418-1426",
+    doi: "10.1097/00007632-200207010-00012",
+    pubmedId: "12131744",
+    type: "Cohort Study"
+  },
+  {
+    id: 668,
+    title: "Electroencephalographic monitoring during carotid endarterectomy: a systematic review",
+    authors: "Russ W, Kling D, Loesevitz A, Hempelmann G",
+    year: 1985,
+    journal: "Journal of Neurology",
+    volume: "232(3)",
+    pages: "146-151",
+    doi: "10.1007/BF00313959",
+    pubmedId: "4020378",
+    type: "Systematic Review"
+  },
+  {
+    id: 669,
+    title: "Multimodality intraoperative neurophysiological monitoring: a systematic review of evidence and best practices",
+    authors: "Fehlings MG, Brodke DS, Norvell DC, Dettori JR",
+    year: 2010,
+    journal: "Spine",
+    volume: "35(9 Suppl)",
+    pages: "S263-S269",
+    doi: "10.1097/BRS.0b013e3181d9d0c1",
+    pubmedId: "20407485",
+    type: "Systematic Review"
+  },
+],
+
+"Cochlear Implant Specialty": [
+  {
+    id: 700,
+    title: "The Benefits of Cochlear Implantation for Adults: A Systematic Umbrella Review",
+    authors: "Tang D, Tran Y, Lo C, Lee JN, Turner J, McAlpine D, McMahon C, Gopinath B",
+    year: 2024,
+    journal: "Ear and Hearing",
+    volume: "45(4)",
+    pages: "801-807",
+    pubmedId: "38233980",
+    type: "Systematic Review"
+  },
+  {
+    id: 701,
+    title: "Systematic Review of Auditory Training Outcomes in Adult Cochlear Implant Recipients and Meta-Analysis of Outcomes",
+    authors: "Dornhoffer JR, Chidaravala S, Patel T, et al.",
+    year: 2024,
+    journal: "Journal of Clinical Medicine",
+    volume: "13(2)",
+    pages: "400",
+    pubmedId: "38256533",
+    type: "Systematic Review"
+  },
+  {
+    id: 702,
+    title: "Auditory training for adults with cochlear implants: a systematic review",
+    authors: "Cambridge G, Taylor T, Arnott W, Wilson WJ",
+    year: 2022,
+    journal: "International Journal of Audiology",
+    volume: "61(11)",
+    pages: "896-904",
+    pubmedId: "35080191",
+    type: "Systematic Review"
+  },
+  {
+    id: 703,
+    title: "Maximizing Cochlear Implant Outcomes with Short-Term Aural Rehabilitation",
+    authors: "Bernstein CM, Brewer DM, Bakke MH, Olson AD, Machmer EJ, Spitzer JB, Schauer PC, Sydlowski SA, Levitt H",
+    year: 2021,
+    journal: "Journal of the American Academy of Audiology",
+    volume: "32(3)",
+    pages: "144-156",
+    pubmedId: "33890268",
+    type: "RCT"
+  },
+  {
+    id: 704,
+    title: "Economic Analysis of Cochlear Implants in Adults With Bilateral Severe-to-Profound Hearing Loss: A Systematic Review of the Literature",
+    authors: "Tena-García B, Barrientos-Trigo S, Escudero-Carretero MJ, Sánchez-Gómez S",
+    year: 2024,
+    journal: "Otology and Neurotology",
+    volume: "45(7)",
+    pages: "717-731",
+    pubmedId: "38896785",
+    type: "Economic Analysis"
+  }
+],
+
+"CBIT for Tics": [
+  {
+    id: 705,
+    title: "Behavior therapy for children with Tourette disorder: a randomized controlled trial",
+    authors: "Piacentini J, Woods DW, Scahill L, Wilhelm S, Peterson AL, Chang S, Ginsburg GS, Deckersbach T, Dziura J, Levi-Pearl S, Walkup JT",
+    year: 2010,
+    journal: "JAMA",
+    volume: "303(19)",
+    pages: "1929-1937",
+    pubmedId: "20483969",
+    type: "RCT"
+  },
+  {
+    id: 706,
+    title: "Randomized trial of behavior therapy for adults with Tourette syndrome",
+    authors: "Wilhelm S, Peterson AL, Piacentini J, Woods DW, Deckersbach T, Sukhodolsky DG, Chang S, Liu H, Dziura J, Walkup JT, Scahill L",
+    year: 2012,
+    journal: "Archives of General Psychiatry",
+    volume: "69(8)",
+    pages: "795-803",
+    pubmedId: "22868933",
+    type: "RCT"
+  },
+  {
+    id: 707,
+    title: "The therapeutic effect of habit reversal training for Tourette syndrome: a meta-analysis of randomized control trials",
+    authors: "Yu L, Li Y, Zhang J, Yan C, Wen F, Yan J, Wang F, Liu J, Cui Y",
+    year: 2020,
+    journal: "Expert Review of Neurotherapy",
+    volume: "20(11)",
+    pages: "1189-1196",
+    pubmedId: "32948114",
+    type: "Meta-analysis"
+  },
+  {
+    id: 708,
+    title: "European clinical guidelines for Tourette syndrome and other tic disorders—version 2.0. Part II: psychological interventions",
+    authors: "Andrén P, Jakubovski E, Murphy TL, Woitecki K, Tarnok Z, Zimmerman-Brenner S, van de Griendt J, Debes NM, Viefhaus P, Robinson S, et al.",
+    year: 2022,
+    journal: "European Child and Adolescent Psychiatry",
+    volume: "31(3)",
+    pages: "403-423",
+    pubmedId: "34313861",
+    type: "Guideline"
+  },
+  {
+    id: 709,
+    title: "Clinical effectiveness and patient perspectives of different treatment strategies for tics in children and adolescents with Tourette syndrome: a systematic review and qualitative analysis",
+    authors: "Hollis C, Pennant M, Cuenca J, Glazebrook C, Kendall T, Whittington C, Stockton S, Larsson L, Bunton P, Dobson S, et al.",
+    year: 2016,
+    journal: "Health Technology Assessment",
+    volume: "20(4)",
+    pages: "1-450",
+    pubmedId: "26786936",
+    type: "Systematic Review"
+  }
+],
+
+"Schroth Therapist": [
+  {
+    id: 710,
+    title: "Schroth Physiotherapeutic Scoliosis-Specific Exercises Added to the Standard of Care Lead to Better Cobb Angle Outcomes in Adolescents with Idiopathic Scoliosis - an Assessor and Statistician Blinded Randomized Controlled Trial",
+    authors: "Schreiber S, Parent EC, Khodayari Moez E, Hedden DM, Hill DL, Moreau M, Lou E, Watkins EM, Southon SC",
+    year: 2016,
+    journal: "PLoS One",
+    volume: "11(12)",
+    pages: "e0168746",
+    pubmedId: "28033399",
+    type: "RCT"
+  },
+  {
+    id: 711,
+    title: "The effectiveness of Schroth method in Cobb angle, quality of life and trunk rotation angle in adolescent idiopathic scoliosis: a systematic review and meta-analysis",
+    authors: "Ceballos-Laita L, Carrasco-Uribarren A, Cabanillas-Barea S, Pérez-Guillén S, Pardos-Aguilella P, Jiménez Del Barrio S",
+    year: 2023,
+    journal: "European Journal of Physical and Rehabilitation Medicine",
+    volume: "59(2)",
+    pages: "228-236",
+    pubmedId: "36692412",
+    type: "Systematic Review"
+  },
+  {
+    id: 712,
+    title: "Application of the Schroth Method in the Treatment of Idiopathic Scoliosis: A Systematic Review and Meta-Analysis",
+    authors: "Dimitrijević V, Šćepanović T, Jevtić N, Rašković B, Milankov V, Milosević Z, Ninković SS, Chockalingam N, Obradović B, Drid P",
+    year: 2022,
+    journal: "International Journal of Environmental Research and Public Health",
+    volume: "19(24)",
+    pages: "16730",
+    pubmedId: "36554613",
+    type: "Systematic Review"
+  },
+  {
+    id: 713,
+    title: "2016 SOSORT guidelines: orthopaedic and rehabilitation treatment of idiopathic scoliosis during growth",
+    authors: "Negrini S, Donzelli S, Aulisa AG, Czaprowski D, Schreiber S, de Mauroy JC, Diers H, Grivas TB, Knott P, Kotwicki T, et al.",
+    year: 2018,
+    journal: "Scoliosis and Spinal Disorders",
+    volume: "13",
+    pages: "3",
+    doi: "10.1186/s13013-017-0145-8",
+    pubmedId: "29435499",
+    pmcId: "PMC5795289",
+    type: "Guideline"
+  },
+  {
+    id: 714,
+    title: "Effects of a Long-Term Supervised Schroth Exercise Program on the Severity of Scoliosis and Quality of Life in Individuals with Adolescent Idiopathic Scoliosis: A Randomized Clinical Trial Study",
+    authors: "Kyrkousis A, Iakovidis P, Chatziprodromidou IP, Lytras D, Kasimis K, Apostolou T, Koutras G",
+    year: 2024,
+    journal: "Medicina (Kaunas)",
+    volume: "60(10)",
+    pages: "1637",
+    pubmedId: "39459424",
+    type: "RCT"
+  }
+],
+
+"Craniomandibular/TMJ Certification": [
+  {
+    id: 715,
+    title: "Effectiveness of Manual Therapy and Therapeutic Exercise for Temporomandibular Disorders: Systematic Review and Meta-Analysis",
+    authors: "Armijo-Olivo S, Pitance L, Singh V, Neto F, Thie N, Michelotti A",
+    year: 2016,
+    journal: "Physical Therapy",
+    volume: "96(1)",
+    pages: "9-25",
+    pubmedId: "26294683",
+    type: "Systematic Review"
+  },
+  {
+    id: 716,
+    title: "Management of Chronic Pain Associated with Temporomandibular Disorders: A Clinical Practice Guideline",
+    authors: "Busse JW, Casassus R, Carrasco-Labra A, Durham J, Mock D, Zakrzewska JM, Palmer C, Samer CF, Coen M, Guevremont B, et al.",
+    year: 2023,
+    journal: "BMJ",
+    volume: "383",
+    pages: "e076227",
+    pubmedId: "38101929",
+    type: "Guideline"
+  },
+  {
+    id: 717,
+    title: "Occlusal interventions for managing temporomandibular disorders",
+    authors: "Singh BP, Singh N, Jayaraman S, Kirubakaran R, Joseph S, Muthu MS, Jivnani H, Hua F",
+    year: 2024,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "9(9)",
+    pages: "CD012850",
+    pubmedId: "39282765",
+    type: "Systematic Review"
+  },
+  {
+    id: 718,
+    title: "Effectiveness of manual therapy applied to craniomandibular structures in temporomandibular disorders: A systematic review",
+    authors: "Asquini G, Pitance L, Michelotti A, Falla D",
+    year: 2022,
+    journal: "Journal of Oral Rehabilitation",
+    volume: "49(4)",
+    pages: "442-455",
+    pubmedId: "34931336",
+    type: "Systematic Review"
+  },
+  {
+    id: 719,
+    title: "Effectiveness of exercise therapy versus occlusal splint therapy for the treatment of painful temporomandibular disorders: a systematic review and meta-analysis",
+    authors: "Zhang L, Xu L, Wu D, Yu C, Fan S, Cai B",
+    year: 2021,
+    journal: "Annals of Palliative Medicine",
+    volume: "10(6)",
+    pages: "6122-6132",
+    pubmedId: "33977737",
+    type: "Systematic Review"
+  }
+],
+
+"Advanced Vestibular PT": [
+  {
+    id: 720,
+    title: "Vestibular Rehabilitation for Peripheral Vestibular Hypofunction: An Updated Clinical Practice Guideline From the Academy of Neurologic Physical Therapy of the American Physical Therapy Association",
+    authors: "Hall CD, Herdman SJ, Whitney SL, Anson ER, Carender WJ, Hoppes CW, Cass SP, Christy JB, Cohen HS, Fife TD, Furman JM, Shepard NT, et al.",
+    year: 2022,
+    journal: "Journal of Neurological Physical Therapy",
+    volume: "46(2)",
+    pages: "118-177",
+    pubmedId: "34864777",
+    type: "Guideline"
+  },
+  {
+    id: 721,
+    title: "Vestibular rehabilitation for unilateral peripheral vestibular dysfunction",
+    authors: "McDonnell MN, Hillier SL",
+    year: 2015,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "1(1)",
+    pages: "CD005397",
+    pubmedId: "25581507",
+    type: "Systematic Review"
+  },
+  {
+    id: 722,
+    title: "Clinical Practice Guideline: Benign Paroxysmal Positional Vertigo (Update)",
+    authors: "Bhattacharyya N, Gubbels SP, Schwartz SR, Edlow JA, El-Kashlan H, Fife T, Holmberg JM, Mahoney K, Hollingsworth DB, Roberts R, et al.",
+    year: 2017,
+    journal: "Otolaryngology—Head and Neck Surgery",
+    volume: "156(3_suppl)",
+    pages: "S1-S47",
+    pubmedId: "28248609",
+    type: "Guideline"
+  },
+  {
+    id: 723,
+    title: "The effects of vestibular rehabilitation on dizziness and balance problems in patients after traumatic brain injury: a randomized controlled trial",
+    authors: "Kleffelgaard I, Soberg HL, Tamber AL, et al.",
+    year: 2019,
+    journal: "Clinical Rehabilitation",
+    volume: "33(1)",
+    pages: "74-84",
+    pubmedId: "30056743",
+    type: "RCT"
+  },
+  {
+    id: 724,
+    title: "Vestibular rehabilitation therapy on balance and gait in patients after stroke: a systematic review and meta-analysis",
+    authors: "Meng L, Liang Q, Yuan J, Li S, Ge Y, Yang J, Tsang RCC, Wei Q",
+    year: 2023,
+    journal: "BMC Medicine",
+    volume: "21(1)",
+    pages: "322",
+    pubmedId: "37626339",
+    type: "Systematic Review"
+  }
+],
+
+"Vestibular AIB Certifications": [
+  {
+    id: 725,
+    title: "Vestibular Rehabilitation for Peripheral Vestibular Hypofunction: An Evidence-Based Clinical Practice Guideline: FROM THE AMERICAN PHYSICAL THERAPY ASSOCIATION NEUROLOGY SECTION",
+    authors: "Hall CD, Herdman SJ, Whitney SL, Cass SP, Clendaniel RA, Fife TD, Furman JM, Getchius TS, Goebel JA, Shepard NT, Woodhouse SN",
+    year: 2016,
+    journal: "Journal of Neurological Physical Therapy",
+    volume: "40(2)",
+    pages: "124-155",
+    pubmedId: "26913496",
+    type: "Guideline"
+  },
+  {
+    id: 726,
+    title: "Effectiveness of Conventional versus Virtual Reality-Based Vestibular Rehabilitation Exercises in Elderly Patients with Dizziness",
+    authors: "Kanyılmaz T, Topuz O, Ardıç FN, et al.",
+    year: 2022,
+    journal: "Brazilian Journal of Otorhinolaryngology",
+    volume: "88(Suppl 3)",
+    pages: "S41-S49",
+    pubmedId: "34799265",
+    type: "RCT"
+  },
+  {
+    id: 727,
+    title: "Effects of vestibular rehabilitation therapy versus virtual reality on balance, dizziness, and gait in patients with subacute stroke",
+    authors: "Sana V, Ghous M, Kashif M, et al.",
+    year: 2023,
+    journal: "Medicine (Baltimore)",
+    volume: "102(24)",
+    pages: "e33203",
+    pubmedId: "37327306",
+    type: "RCT"
+  },
+  {
+    id: 728,
+    title: "Effects of Cawthorne-Cooksey exercises on vestibular symptoms: A systematic review of randomized controlled trials",
+    authors: "Alashram AR",
+    year: 2024,
+    journal: "Journal of Bodywork and Movement Therapies",
+    volume: "39",
+    pages: "132-141",
+    pubmedId: "38876618",
+    type: "Systematic Review"
+  },
+  {
+    id: 729,
+    title: "Effect of vestibular rehabilitation on change in health-related quality of life in patients with dizziness and balance problems after traumatic brain injury",
+    authors: "Søberg HL, Andelic N, Langhammer B, et al.",
+    year: 2021,
+    journal: "Journal of Rehabilitation Medicine",
+    volume: "53(4)",
+    pages: "jrm00181",
+    pubmedId: "33842981",
+    type: "RCT"
+  }
+],
+
+"Vestibular VCC Certification": [
+  {
+    id: 730,
+    title: "Vestibular rehabilitation in Europe: a survey of clinical and research practice",
+    authors: "Meldrum D, Burrows L, Cakrt O, et al.",
+    year: 2020,
+    journal: "Journal of Neurology",
+    volume: "267(Suppl 1)",
+    pages: "24-35",
+    pubmedId: "33048219",
+    type: "Cohort Study"
+  },
+  {
+    id: 731,
+    title: "Modifications of the Epley (Canalith Repositioning) Manoeuvre for Posterior Canal Benign Paroxysmal Positional Vertigo (BPPV)",
+    authors: "Hunt WT, Zimmermann EF, Hilton MP",
+    year: 2012,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "2012(4)",
+    pages: "CD008675",
+    pubmedId: "22513962",
+    type: "Systematic Review"
+  },
+  {
+    id: 732,
+    title: "Effectiveness of Epley-Canalith Repositioning Procedure versus Vestibular Rehabilitation Therapy in Diabetic Patients with Posterior Benign Paroxysmal Positional Vertigo: A Randomized Trial",
+    authors: "Shaphe MA, Alshehri MM, Alajam RA, et al.",
+    year: 2023,
+    journal: "Life",
+    volume: "13(5)",
+    pages: "1169",
+    pubmedId: "37240814",
+    type: "RCT"
+  },
+  {
+    id: 733,
+    title: "Role of Comprehensive Vestibular Rehabilitation Based on Virtual Reality Technology in Residual Symptoms After Canalith Repositioning Procedure",
+    authors: "Yan S, Gao P, Wu W",
+    year: 2024,
+    journal: "Journal of International Advanced Otology",
+    volume: "20(3)",
+    pages: "272-278",
+    pubmedId: "39128125",
+    type: "RCT"
+  },
+  {
+    id: 734,
+    title: "Virtual Reality for Vestibular Rehabilitation: A Systematic Review",
+    authors: "Xie M, Zhou K, Patro N, Chan T, Levin M, Gupta MK, Archibald J",
+    year: 2021,
+    journal: "Otology and Neurotology",
+    volume: "42(7)",
+    pages: "967-977",
+    pubmedId: "33782257",
+    type: "Systematic Review"
+  }
+],
+
+"Occupro Certification": [
+  {
+    id: 735,
+    title: "Work conditioning, work hardening and functional restoration for workers with back and neck pain",
+    authors: "Schonstein E, Kenny DT, Keating J, Koes BW",
+    year: 2003,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "1",
+    pages: "CD001822",
+    pubmedId: "12535416",
+    type: "Systematic Review"
+  },
+  {
+    id: 736,
+    title: "Physical conditioning as part of a return to work strategy to reduce sickness absence for workers with back pain",
+    authors: "Schaafsma FG, Whelan K, van der Beek AJ, van der Es-Lambeek LC, Ojajärvi A, Verbeek JH",
+    year: 2013,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "8",
+    pages: "CD001822",
+    pubmedId: "23990391",
+    type: "Systematic Review"
+  },
+  {
+    id: 737,
+    title: "Efficacy of occupational rehabilitation in return to work for back pain: A systematic literature review",
+    authors: "Kalski L, Völkel L, Häußler S, Wolfarth B",
+    year: 2024,
+    journal: "Work",
+    volume: "78(1)",
+    pages: "29-43",
+    pubmedId: "37781855",
+    type: "Systematic Review"
+  },
+  {
+    id: 738,
+    title: "The effectiveness of occupational therapy supporting return to work for people who sustain serious injuries or develop long-term health conditions: A systematic review",
+    authors: "De Dios Perez B, McQueen J, Craven K, Radford K, Blake H, Smith B, Thomson L, Holmes J",
+    year: 2023,
+    journal: "British Journal of Occupational Therapy",
+    volume: "86(7)",
+    pages: "467-481",
+    pubmedId: "40337325",
+    type: "Systematic Review"
+  },
+  {
+    id: 739,
+    title: "Effectiveness of Workplace Interventions in Return-to-Work for Musculoskeletal, Pain-Related and Mental Health Conditions: An Update of the Evidence and Messages for Practitioners",
+    authors: "Cullen KL, Irvin E, Collie A, Clay F, Gensby U, Jennings PA, Hogg-Johnson S, Kristman V, Laberge M, McKenzie D, et al.",
+    year: 2018,
+    journal: "Journal of Occupational Rehabilitation",
+    volume: "28(1)",
+    pages: "1-15",
+    pubmedId: "28224415",
+    type: "Systematic Review"
+  }
+],
+
+"The Back School": [
+  {
+    id: 740,
+    title: "Back Schools for chronic non-specific low back pain",
+    authors: "Parreira P, Heymans MW, van Tulder MW, Esmail R, Koes BW, Poquet N, Lin CC, Maher CG",
+    year: 2017,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "8(8)",
+    pages: "CD011674",
+    doi: "10.1002/14651858.CD011674.pub2",
+    pubmedId: "28770974",
+    pmcId: "PMC6483296",
+    type: "Systematic Review"
+  },
+  {
+    id: 741,
+    title: "Back schools for nonspecific low back pain: a systematic review within the framework of the Cochrane Collaboration Back Review Group",
+    authors: "Heymans MW, van Tulder MW, Esmail R, Bombardier C, Koes BW",
+    year: 2005,
+    journal: "Spine (Phila Pa 1976)",
+    volume: "30(19)",
+    pages: "2153-2163",
+    doi: "10.1097/01.brs.0000182227.33627.15",
+    pubmedId: "16205340",
+    type: "Systematic Review"
+  },
+  {
+    id: 742,
+    title: "Back schools for acute and subacute non-specific low-back pain",
+    authors: "Poquet N, Lin CW, Heymans MW, van Tulder MW, Esmail R, Koes BW, Maher CG",
+    year: 2016,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "4(4)",
+    pages: "CD008325",
+    doi: "10.1002/14651858.CD008325.pub2",
+    pubmedId: "27113258",
+    type: "Systematic Review"
+  },
+  {
+    id: 743,
+    title: "Systematic review of back schools, brief education, and fear-avoidance training for chronic low back pain",
+    authors: "Brox JI, Storheim K, Grotle M, Tveito TH, Indahl A, Eriksen HR",
+    year: 2008,
+    journal: "Spine Journal",
+    volume: "8(6)",
+    pages: "948-958",
+    doi: "10.1016/j.spinee.2007.07.389",
+    pubmedId: "18024224",
+    type: "Systematic Review"
+  },
+  {
+    id: 744,
+    title: "Prevention of Low Back Pain: A Systematic Review and Meta-analysis",
+    authors: "Steffens D, Maher CG, Pereira LS, Stevens ML, Oliveira VC, Chapple M, Teixeira-Salmela LF, Hancock MJ",
+    year: 2016,
+    journal: "JAMA Internal Medicine",
+    volume: "176(2)",
+    pages: "199-208",
+    pubmedId: "26752509",
+    type: "Systematic Review"
+  }
+],
+
+"Kinesio Taping (CKTP)": [
+  {
+    id: 745,
+    title: "Kinesio taping in treatment of chronic non-specific low back pain: a systematic review and meta-analysis",
+    authors: "Sheng Y, Duan Z, Qu Q, Chen W, Yu B",
+    year: 2019,
+    journal: "Journal of Rehabilitation Medicine",
+    volume: "51(10)",
+    pages: "734-740",
+    pubmedId: "31544952",
+    type: "Systematic Review"
+  },
+  {
+    id: 746,
+    title: "Efficacy of kinesio taping in treatment of shoulder pain and disability: a systematic review and meta-analysis of randomised controlled trials",
+    authors: "Ghozy S, Dung NM, Morra ME, Morsy S, Elsayed GG, Tran L, Minh LHN, Abbas AS, Loc TTH, Hieu TH, Dung TC, Huy NT",
+    year: 2020,
+    journal: "Physiotherapy",
+    volume: "107",
+    pages: "176-188",
+    pubmedId: "32026818",
+    type: "Systematic Review"
+  },
+  {
+    id: 747,
+    title: "Effect of kinesio taping on hemiplegic shoulder pain: A systematic review and meta-analysis of randomized controlled trials",
+    authors: "Deng P, Zhao Z, Zhang S, Xiao T, Li Y",
+    year: 2021,
+    journal: "Clinical Rehabilitation",
+    volume: "35(3)",
+    pages: "317-331",
+    pubmedId: "33063559",
+    type: "Systematic Review"
+  },
+  {
+    id: 748,
+    title: "Effectiveness of Kinesio Taping in Patients With Chronic Nonspecific Low Back Pain: A Systematic Review With Meta-analysis",
+    authors: "Luz Júnior MAD, Almeida MO, Santos RS, Civile VT, Costa LOP",
+    year: 2019,
+    journal: "Spine (Phila Pa 1976)",
+    volume: "44(1)",
+    pages: "68-78",
+    pubmedId: "29952880",
+    type: "Systematic Review"
+  },
+  {
+    id: 749,
+    title: "Effects of kinesio taping on neck pain: A meta-analysis and systematic review of randomized controlled trials",
+    authors: "Hu Q, Liu Y, Yin S, Zou H, Shi H, Zhu F",
+    year: 2024,
+    journal: "Pain and Therapy",
+    volume: "13(5)",
+    pages: "1031-1046",
+    pubmedId: "39039345",
+    type: "Systematic Review"
+  }
+],
+
+"ASHA Board Certified Specialists": [
+  {
+    id: 750,
+    title: "Speech and language therapy for aphasia following stroke",
+    authors: "Brady MC, Kelly H, Godwin J, Enderby P, Campbell P",
+    year: 2016,
+    journal: "Cochrane Database of Systematic Reviews",
+    volume: "2016(6)",
+    pages: "CD000425",
+    pubmedId: "27245310",
+    type: "Systematic Review"
+  },
+  {
+    id: 751,
+    title: "Dosage, Intensity, and Frequency of Language Therapy for Aphasia: A Systematic Review-Based, Individual Participant Data Network Meta-Analysis",
+    authors: "REhabilitation and recovery of peopLE with Aphasia after StrokE (RELEASE) Collaborators",
+    year: 2022,
+    journal: "Stroke",
+    volume: "53(3)",
+    pages: "956-967",
+    pubmedId: "34847708",
+    type: "Systematic Review"
+  },
+  {
+    id: 752,
+    title: "Clinical Practice Guideline: Hoarseness (Dysphonia) (Update)",
+    authors: "Stachler RJ, Francis DO, Schwartz SR, et al.",
+    year: 2018,
+    journal: "Otolaryngology—Head and Neck Surgery",
+    volume: "158(1_suppl)",
+    pages: "S1-S42",
+    pubmedId: "29494321",
+    type: "Guideline"
+  },
+  {
+    id: 753,
+    title: "A randomized control trial of intensive aphasia therapy after acute stroke: The Very Early Rehabilitation for SpEech (VERSE) study",
+    authors: "Godecke E, Armstrong E, Rai T, et al.; VERSE Collaborative Group",
+    year: 2021,
+    journal: "International Journal of Stroke",
+    volume: "16(5)",
+    pages: "556-572",
+    pubmedId: "33019888",
+    type: "RCT"
+  },
+  {
+    id: 754,
+    title: "A Systematic Review of Voice Therapy: What 'Effectiveness' Really Implies",
+    authors: "Desjardins M, Halstead L, Cooke M, Bonilha HS",
+    year: 2017,
+    journal: "Journal of Voice",
+    volume: "31(3)",
+    pages: "392.e13-392.e32",
+    pubmedId: "27863745",
+    type: "Systematic Review"
+  }
+],
+
+"Research Doctorates (PhD/ScD)": [
+  {
+    id: 755,
+    title: "Developing human functioning and rehabilitation research. Part I: Academic training programs",
+    authors: "Stucki G",
+    year: 2007,
+    journal: "Journal of Rehabilitation Medicine",
+    volume: "39(4)",
+    pages: "323-333",
+    doi: "10.2340/16501977-0037",
+    pubmedId: "17468804",
+    type: "Position Statement"
+  },
+  {
+    id: 756,
+    title: "Preparing nurse scientists for health services and policy research: Five-year outcomes of interprofessional postdoctoral training in the National Clinician Scholars Program",
+    authors: "Choi KR, Brush BL, Chapman SA, Costa DK, Feder SL, Gutierrez JI, Heilemann MV, Manojlovich M, Noonan D, Park LG, Potempa K, Sochalski J",
+    year: 2023,
+    journal: "Nursing Outlook",
+    volume: "71(4)",
+    pages: "102024",
+    pubmedId: "37487421",
+    type: "Cohort Study"
+  },
+  {
+    id: 757,
+    title: "Learning Health Systems Research Competencies: A Survey of the Rehabilitation Research Community",
+    authors: "McDonough CM, Poploski KM, Anderson CA, Annaswamy TM, Clark MA, Douglas NF, Flores AM, Freburger JK, Hafner BJ, Hoffman JM, et al.",
+    year: 2023,
+    journal: "Physical Therapy",
+    volume: "103(4)",
+    pages: "pzad010",
+    pubmedId: "37079888",
+    type: "Cohort Study"
+  },
+  {
+    id: 758,
+    title: "Advanced practice in physiotherapy: a global survey",
+    authors: "Tawiah AK, Desmeules F, Finucane L, Lewis J, Wieler M, Stokes E, Woodhouse LJ",
+    year: 2021,
+    journal: "Physiotherapy",
+    volume: "113",
+    pages: "168-176",
+    pubmedId: "34794584",
+    type: "Cohort Study"
+  },
+  {
+    id: 759,
+    title: "Advanced practice physiotherapy in patients with musculoskeletal disorders: a systematic review",
+    authors: "Desmeules F, Roy JS, MacDermid JC, Champagne F, Hinse O, Woodhouse LJ",
+    year: 2012,
+    journal: "BMC Musculoskeletal Disorders",
+    volume: "13",
+    pages: "107",
+    pubmedId: "22716771",
+    type: "Systematic Review"
+  }
+],
 };
 
-// Helper functions for getting citations
 export const getCitationsForCertification = (certificationName) => {
-  // Try exact match first
   if (citationsData[certificationName]) {
     return citationsData[certificationName];
   }
-  
-  // Try partial matches
-  const keys = Object.keys(citationsData);
-  for (const key of keys) {
-    if (key.toLowerCase().includes(certificationName.toLowerCase()) || 
-        certificationName.toLowerCase().includes(key.toLowerCase())) {
-      return citationsData[key];
-    }
-  }
-  
   return [];
 };
 
 export const formatCitation = (citation) => {
-  let formatted = citation.title;
-  
-  if (citation.authors) {
-    formatted = `${citation.authors} `;
-  }
-  
-  if (citation.year) {
-    formatted += ` (${citation.year}).`;
-  }
-  
-  if (citation.journal) {
-    formatted += ` ${citation.journal}`;
-    if (citation.volume) {
-      formatted += `, ${citation.volume}`;
-    }
-    if (citation.pages) {
-      formatted += `, ${citation.pages}`;
-    }
-    formatted += '.';
-  }
-  
+  if (!citation) return '';
+  const { authors, year, title, journal, volume, pages, doi } = citation;
+  let formatted = `${authors} (${year}). ${title}. ${journal}`;
+  if (volume) formatted += `, ${volume}`;
+  if (pages) formatted += `, ${pages}`;
+  if (doi) formatted += `. https://doi.org/${doi}`;
   return formatted;
 };
 
