@@ -135,16 +135,16 @@ export const METHODOLOGY_CONTENT = {
       ]
     },
     {
-      name: "Efficiency",
+      name: "Certification Investment",
       dimensionKey: "efficiency",
       defaultWeight: "20%",
-      description: "Time-to-outcome, caseload throughput, and workflow integration",
+      description: "Clinician investment to obtain the certification: cost, time, and accessibility of training",
       criteria: [
-        "Reduced treatment sessions needed",
-        "Faster achievement of goals",
-        "Decreased length of stay",
-        "Improved discharge destinations",
-        "Resource optimization"
+        "Course or exam cost",
+        "Time to complete training (hours, days, months)",
+        "Availability of training sites",
+        "Recertification burden",
+        "Equipment or facility prerequisites"
       ]
     },
     {
@@ -161,16 +161,16 @@ export const METHODOLOGY_CONTENT = {
       ]
     },
     {
-      name: "Evidence Quality",
-      dimensionKey: "evidenceQuality",
+      name: "Billing & Reimbursement",
+      dimensionKey: "reimbursement",
       defaultWeight: "15%",
-      description: "RCT rigor, systematic review support, and replication quality",
+      description: "Billing impact: whether certification unlocks codes or strengthens payer authorization; breadth of payer coverage",
       criteria: [
-        "Number of high-quality studies",
-        "Systematic review/meta-analysis support",
-        "Study design quality (RCTs vs observational)",
-        "Sample sizes and statistical power",
-        "Independent replication across research groups"
+        "Whether certification is required by payers (e.g., CMS/Medicare mandates)",
+        "Unlocks new CPT codes or billing categories",
+        "Strengthens medical necessity documentation",
+        "Breadth of payer coverage (Medicare, commercial, workers comp, self-pay)",
+        "No billing impact vs. incremental vs. gating requirement"
       ]
     },
     {
@@ -220,11 +220,11 @@ export const METHODOLOGY_CONTENT = {
   ],
 
   keyFindings: [
-    "8% of certifications (9/110) score in the Strong tier (70+) with default weights — rankings shift when weights are adjusted",
+    "Rankings shift more meaningfully when adjusting weights now that Billing & Reimbursement replaces the redundant Evidence Quality dimension",
     "Most certifications lack credential-specific outcome studies; scores reflect evidence for the intervention, not the credential itself",
-    "35% score in the Limited tier despite widespread clinical adoption, primarily due to absent comparative research",
-    "Board certifications show consistently low scores — rigorous certification processes do not guarantee measured outcome differences",
-    "Technology-based interventions score well on efficiency but lack superiority evidence over dose-matched conventional care",
+    "AACVPR Cardiac Rehab and Pulmonary Rehab score highest on Billing & Reimbursement — CMS literally requires program standards for billing",
+    "Lymphedema CLT/LANA scores high on reimbursement due to the 2024 Lymphedema Treatment Act mandating Medicare coverage",
+    "Certification Investment scores reveal a wide range: CDC STEADI (free, 2 hours) vs. Alexander Technique (1,600 hours, 3 years)",
     "Fall prevention programs (Otago, Matter of Balance) show among the strongest cost-effectiveness ratios of any rehabilitation intervention"
   ],
 

@@ -173,7 +173,7 @@ const CertificationsMatrix = () => {
     clinicalOutcomes: '#22c55e',
     efficiency: '#3b82f6',
     costEffectiveness: '#f59e0b',
-    evidenceQuality: '#8b5cf6',
+    reimbursement: '#8b5cf6',
     patientSatisfaction: '#ec4899',
   };
 
