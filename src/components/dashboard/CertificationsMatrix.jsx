@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { ChevronDown, BookOpen, ExternalLink, Info, SlidersHorizontal } from 'lucide-react';
+import { ChevronDown, BookOpen, ExternalLink, Info, SlidersHorizontal, Search, X } from 'lucide-react';
 import { colors } from '../../utils/constants';
 import { formatCitation, citationsData } from '../../utils/citationsDataFinal';
 import { CERTIFICATION_TO_CITATION_MAP, METHODOLOGY_CONTENT } from '../../utils/certificationCitationMap';
@@ -380,6 +380,39 @@ const CertificationsMatrix = () => {
           )}
         </div>
 
+      {/* Search */}
+      <div className="mb-4">
+        <div
+          className="flex items-center gap-2 px-3 py-2.5"
+          style={{
+            border: `2px solid ${searchTerm ? colors.primaryBlue : colors.slateLight}`,
+            background: 'white',
+            borderRadius: '6px',
+            transition: 'border-color 0.15s',
+          }}
+        >
+          <Search className="w-4 h-4 flex-shrink-0" style={{ color: searchTerm ? colors.primaryBlue : colors.textGray }} />
+          <input
+            type="text"
+            placeholder="Search certifications by name, discipline, or evidence type…"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="flex-1 bg-transparent outline-none text-sm"
+            style={{ color: colors.textDark, minWidth: 0 }}
+          />
+          {searchTerm && (
+            <button
+              onClick={() => setSearchTerm('')}
+              className="flex-shrink-0 p-0.5 rounded"
+              style={{ color: colors.textGray, cursor: 'pointer', background: 'none', border: 'none' }}
+              aria-label="Clear search"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+      </div>
+
       {/* Discipline Filter */}
       <div className="mb-3">
           <div className="flex flex-wrap gap-1.5 mb-3">
@@ -403,9 +436,9 @@ const CertificationsMatrix = () => {
           </div>
         </div>
 
-      {/* Tier Filter + Search */}
-      <div className="mb-4 flex flex-col md:flex-row gap-3">
-          <div className="flex flex-wrap gap-2 w-full md:w-auto">
+      {/* Tier Filter */}
+      <div className="mb-4">
+          <div className="flex flex-wrap gap-2">
             {[
               { value: 'all', label: 'All', count: tierCounts.all },
               { value: 'strong', label: 'Strong (70+)', count: tierCounts.strong },
@@ -432,14 +465,6 @@ const CertificationsMatrix = () => {
               </button>
             ))}
           </div>
-          <input
-            type="text"
-            placeholder="Search certifications..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="px-3 py-1.5 text-sm w-full md:w-auto"
-            style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight, minWidth: '200px' }}
-          />
         </div>
 
       {/* Certification List */}
