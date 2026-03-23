@@ -148,16 +148,29 @@ export const METHODOLOGY_CONTENT = {
       ]
     },
     {
-      name: "Cost-Effectiveness",
-      dimensionKey: "costEffectiveness",
+      name: "Caseload Applicability",
+      dimensionKey: "caseloadApplicability",
       defaultWeight: "15%",
-      description: "Cost per QALY, payer coverage, and downstream savings",
+      description: "What proportion of a typical clinical caseload would directly benefit from this certification",
       criteria: [
-        "Direct medical cost savings",
-        "Indirect cost reductions",
-        "Insurance reimbursement rates",
-        "Cost per quality-adjusted life year",
-        "Healthcare utilization reduction"
+        "Breadth of patient diagnoses served",
+        "Relevance across practice settings",
+        "Population size that could benefit",
+        "Whether cert requires specialized equipment or facility",
+        "Niche vs. cross-cutting clinical utility"
+      ]
+    },
+    {
+      name: "Market Demand",
+      dimensionKey: "marketDemand",
+      defaultWeight: "10%",
+      description: "Clinician adoption rates and employer demand: how widely held and how often required by employers",
+      criteria: [
+        "Frequency in job postings (required or preferred)",
+        "Number of credentialed clinicians (proxy for adoption)",
+        "Employer recognition across practice settings",
+        "Whether cert enables new practice settings",
+        "Salary premium or hiring differentiation"
       ]
     },
     {

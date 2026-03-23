@@ -28,6 +28,7 @@ const CertificationsMatrix = () => {
   const [showWeights, setShowWeights] = useState(true);
   const [expandedCitations, setExpandedCitations] = useState({});
   const [expandedSubScores, setExpandedSubScores] = useState({});
+  const [expandedROI, setExpandedROI] = useState({});
   const [weights, setWeights] = useState(DEFAULT_WEIGHTS);
 
   // Compute dynamic scores and ranks
@@ -172,9 +173,30 @@ const CertificationsMatrix = () => {
   const DIMENSION_BAR_COLORS = {
     clinicalOutcomes: '#22c55e',
     efficiency: '#3b82f6',
-    costEffectiveness: '#f59e0b',
+    caseloadApplicability: '#f59e0b',
     reimbursement: '#8b5cf6',
+    marketDemand: '#ef4444',
     patientSatisfaction: '#ec4899',
+  };
+
+  // Career ROI: computed from marketDemand, reimbursement, efficiency (lower invest = better ROI)
+  const computeCareerROI = (subScores) => {
+    const score = (subScores.marketDemand || 0) * 0.40
+                + (subScores.reimbursement || 0) * 0.30
+                + (subScores.efficiency || 0) * 0.30;
+    if (score >= 80) return { grade: 'A', color: '#22c55e' };
+    if (score >= 65) return { grade: 'B', color: '#84cc16' };
+    if (score >= 50) return { grade: 'C', color: '#f59e0b' };
+    if (score >= 35) return { grade: 'D', color: '#f97316' };
+    return { grade: 'F', color: '#ef4444' };
+  };
+
+  const ROI_REASONING = {
+    A: 'High employer demand + strong billing/revenue impact + accessible to obtain.',
+    B: 'Good employer demand with solid billing or accessibility advantages.',
+    C: 'Moderate demand or billing value; typical career impact.',
+    D: 'Limited employer demand, minimal billing impact, or high investment relative to return.',
+    F: 'Very low demand, minimal billing impact, and/or very high investment cost.',
   };
 
   const CitationSection = ({ certName }) => {
@@ -508,6 +530,52 @@ const CertificationsMatrix = () => {
                   {cert.type}
                 </span>
                 <span className="text-xs" style={{ color: colors.textGray }}>{cert.discipline}</span>
+                {(() => {
+                  const roi = computeCareerROI(cert.subScores);
+                  return (
+                    <span style={{ position: 'relative', display: 'inline-block' }}>
+                      <button
+                        onClick={e => { e.stopPropagation(); setExpandedROI(prev => ({ ...prev, [cert.name]: !prev[cert.name] })); }}
+                        title="Career ROI"
+                        className="text-xs px-1.5 py-0.5 font-bold"
+                        style={{
+                          background: roi.color + '20',
+                          color: roi.color,
+                          border: `1px solid ${roi.color}60`,
+                          borderRadius: '4px',
+                          cursor: 'pointer',
+                          lineHeight: '1.4',
+                        }}
+                      >
+                        ROI: {roi.grade}
+                      </button>
+                      {expandedROI[cert.name] && (
+                        <div
+                          className="absolute z-10 p-2 text-xs rounded shadow-lg"
+                          style={{
+                            top: '100%',
+                            left: 0,
+                            marginTop: '4px',
+                            background: 'white',
+                            border: `1px solid ${colors.slateLight}`,
+                            minWidth: '220px',
+                            color: colors.textGray,
+                            lineHeight: '1.5',
+                          }}
+                        >
+                          <div className="font-semibold mb-1" style={{ color: roi.color }}>Career ROI: {roi.grade}</div>
+                          <div className="mb-1">{ROI_REASONING[roi.grade]}</div>
+                          <div style={{ color: colors.textGray, fontSize: '0.7rem' }}>
+                            Market Demand: {cert.subScores.marketDemand} · Billing: {cert.subScores.reimbursement} · Cert Accessibility: {cert.subScores.efficiency}
+                          </div>
+                          <div style={{ color: colors.textGray, fontSize: '0.65rem', marginTop: '4px', fontStyle: 'italic' }}>
+                            Speculative — based on clinician demand, billing impact, and investment cost.
+                          </div>
+                        </div>
+                      )}
+                    </span>
+                  );
+                })()}
               </div>
               <div className="text-xs sm:text-sm mb-1" style={{ color: colors.textGray }}>
                 {cert.evidence}
