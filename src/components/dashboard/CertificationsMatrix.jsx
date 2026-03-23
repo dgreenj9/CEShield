@@ -192,12 +192,24 @@ const CertificationsMatrix = () => {
   };
 
   const ROI_REASONING = {
-    A: 'High employer demand + strong billing/revenue impact + accessible to obtain.',
-    B: 'Good employer demand with solid billing or accessibility advantages.',
-    C: 'Moderate demand or billing value; typical career impact.',
-    D: 'Limited employer demand, minimal billing impact, or high investment relative to return.',
-    F: 'Very low demand, minimal billing impact, and/or very high investment cost.',
+    A: 'High employer demand in clinical settings + strong billing/revenue impact + accessible to obtain.',
+    B: 'Good clinical employer demand with solid billing or accessibility advantages.',
+    C: 'Moderate clinical demand or billing value; typical clinical practice impact.',
+    D: 'Limited clinical employer demand, minimal billing impact, or high investment relative to clinical return.',
+    F: 'Very low clinical demand, minimal billing impact, and/or very high investment cost relative to clinical practice value.',
   };
+
+  // Certs with significant career value outside direct clinical practice
+  const ALT_CAREER_VALUE = new Set([
+    'Research Doctorates (PhD/ScD)',
+    'Physical Therapy Fellowship',
+    'Physical Therapy Residency',
+    'Transitional DPT (tDPT)',
+    'Clinical Doctorate (DPT/OTD) vs Masters',
+    'AI + Wearable Sensors',
+    'Telehealth/Digital Health',
+    'ACLM Lifestyle Medicine',
+  ]);
 
   const CitationSection = ({ certName }) => {
     const citations = getCitationsForCertification(certName);
@@ -536,7 +548,7 @@ const CertificationsMatrix = () => {
                     <span style={{ position: 'relative', display: 'inline-block' }}>
                       <button
                         onClick={e => { e.stopPropagation(); setExpandedROI(prev => ({ ...prev, [cert.name]: !prev[cert.name] })); }}
-                        title="Career ROI"
+                        title="Clinical Practice ROI"
                         className="text-xs px-1.5 py-0.5 font-bold"
                         style={{
                           background: roi.color + '20',
@@ -558,18 +570,23 @@ const CertificationsMatrix = () => {
                             marginTop: '4px',
                             background: 'white',
                             border: `1px solid ${colors.slateLight}`,
-                            minWidth: '220px',
+                            minWidth: '240px',
                             color: colors.textGray,
                             lineHeight: '1.5',
                           }}
                         >
-                          <div className="font-semibold mb-1" style={{ color: roi.color }}>Career ROI: {roi.grade}</div>
+                          <div className="font-semibold mb-1" style={{ color: roi.color }}>Clinical Practice ROI: {roi.grade}</div>
                           <div className="mb-1">{ROI_REASONING[roi.grade]}</div>
                           <div style={{ color: colors.textGray, fontSize: '0.7rem' }}>
                             Market Demand: {cert.subScores.marketDemand} · Billing: {cert.subScores.reimbursement} · Cert Accessibility: {cert.subScores.efficiency}
                           </div>
+                          {ALT_CAREER_VALUE.has(cert.name) && (
+                            <div style={{ color: '#3b82f6', fontSize: '0.68rem', marginTop: '5px', borderTop: `1px solid ${colors.slateLight}`, paddingTop: '4px' }}>
+                              ℹ️ This credential may have significant value in academic, research, or health technology careers not reflected in this clinical score.
+                            </div>
+                          )}
                           <div style={{ color: colors.textGray, fontSize: '0.65rem', marginTop: '4px', fontStyle: 'italic' }}>
-                            Speculative — based on clinician demand, billing impact, and investment cost.
+                            Speculative — reflects direct clinical practice value only.
                           </div>
                         </div>
                       )}
