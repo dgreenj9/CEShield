@@ -47,6 +47,8 @@ export const certifications = [
       marketDemand: 'High demand within pulmonary rehab programs; narrow employer base limits overall demand score.',
       patientSatisfaction: 'High adherence when transportation addressed; group format improves social engagement and self-efficacy.',
     },
+    roiSignals: { privatePractice: 30, academic: 42 },
+
   },
   {
     name: 'AACVPR Cardiac Rehabilitation',
@@ -63,6 +65,8 @@ export const certifications = [
       marketDemand: 'Required or strongly preferred for cardiac rehab program leadership; high demand within narrow field.',
       patientSatisfaction: 'Patient-reported quality of life improves significantly; depression reduction is a secondary benefit.',
     },
+    roiSignals: { privatePractice: 22, academic: 52 },
+
   },
   {
     name: 'Otago Exercise Programme',
@@ -79,6 +83,8 @@ export const certifications = [
       marketDemand: 'Growing employer demand in skilled nursing, home health, and geriatric outpatient; increasingly listed in fall prevention roles.',
       patientSatisfaction: 'Acceptable to older adults but motivation to sustain exercise without accountability can wane; lower than group-based programs.',
     },
+    roiSignals: { privatePractice: 55, academic: 40 },
+
   },
   {
     name: 'LSVT LOUD',
@@ -95,6 +101,8 @@ export const certifications = [
       marketDemand: 'Among the most employer-demanded SLP certifications for neuro outpatient; frequently required or preferred in job listings.',
       patientSatisfaction: 'Patients report meaningful communication improvement; family-reported quality of life gains significant in PD.',
     },
+    roiSignals: { privatePractice: 72, academic: 45 },
+
   },
   {
     name: 'ACRM Cognitive Rehabilitation',
@@ -111,6 +119,8 @@ export const certifications = [
       marketDemand: 'Moderate demand in inpatient rehab and TBI programs; not widely listed in general OT/SLP postings.',
       patientSatisfaction: 'Engagement is high when goals are meaningful; fatigue is a limiting factor in early post-injury phases.',
     },
+    roiSignals: { privatePractice: 42, academic: 55 },
+
   },
   {
     name: 'ACLM Lifestyle Medicine',
@@ -127,6 +137,8 @@ export const certifications = [
       marketDemand: 'Emerging demand as health systems adopt lifestyle medicine programs; not yet widely listed in rehab job postings.',
       patientSatisfaction: 'Patient empowerment and self-management are core; high engagement when social support is built in.',
     },
+    roiSignals: { privatePractice: 65, academic: 62 },
+
   },
   {
     name: 'HABIT/HABIT-ILE',
@@ -143,6 +155,8 @@ export const certifications = [
       marketDemand: 'Limited employer demand; niche pediatric neuro cert primarily at academic medical centers.',
       patientSatisfaction: 'Children and families report high engagement and meaningful functional gains; peer interaction adds social benefit.',
     },
+    roiSignals: { privatePractice: 45, academic: 55 },
+
   },
   {
     name: 'MBSR (Mindfulness-Based Stress Reduction)',
@@ -159,6 +173,8 @@ export const certifications = [
       marketDemand: 'Growing demand in integrative health and behavioral health programs; increasingly listed in wellness-focused roles.',
       patientSatisfaction: 'High satisfaction; mindfulness-based skills perceived as empowering and applicable to daily life.',
     },
+    roiSignals: { privatePractice: 75, academic: 60, privatePracticeNote: 'Group delivery enables scalable private revenue; retreats and multi-week programs command significant fees.' },
+
   },
   {
     name: 'Matter of Balance',
@@ -175,6 +191,8 @@ export const certifications = [
       marketDemand: 'Primarily sought for community fall prevention programs; limited clinical employer demand.',
       patientSatisfaction: 'Group social aspect highly valued; peer modeling of activity reduces fear.',
     },
+    roiSignals: { privatePractice: 42, academic: 35 },
+
   },
   {
     name: 'Telehealth Cardiac/Pulmonary',
@@ -191,6 +209,8 @@ export const certifications = [
       marketDemand: 'Growing demand in cardiac and pulmonary rehab programs with telehealth delivery models.',
       patientSatisfaction: 'Convenience strongly preferred by patients with transportation barriers; technology literacy barrier for some older adults.',
     },
+    roiSignals: { privatePractice: 45, academic: 45 },
+
   },
   {
     name: 'Motivational Interviewing',
@@ -207,6 +227,8 @@ export const certifications = [
       marketDemand: 'Frequently valued in behavioral health, primary care rehab, and chronic disease settings; growing recognition in PT/OT.',
       patientSatisfaction: 'Patients report feeling heard and autonomous; reduces resistance to therapy.',
     },
+    roiSignals: { privatePractice: 65, academic: 55 },
+
   },
   {
     name: 'CIMT (Constraint-Induced Movement)',
@@ -223,6 +245,8 @@ export const certifications = [
       marketDemand: 'Moderate demand in neuro specialty programs and stroke rehabilitation centers.',
       patientSatisfaction: 'Restraint tolerated when motivation high; pediatric populations show high family engagement.',
     },
+    roiSignals: { privatePractice: 38, academic: 52 },
+
   },
   {
     name: 'Health Coaching',
@@ -239,6 +263,8 @@ export const certifications = [
       marketDemand: 'Growing employer demand in integrated care, wellness programs, and health system population health roles.',
       patientSatisfaction: 'Patient empowerment is central; self-efficacy gains reported across studies.',
     },
+    roiSignals: { privatePractice: 80, academic: 55, privatePracticeNote: 'Multiple private practice models including NBC-HWC corporate wellness contracts and group coaching revenue streams.' },
+
   },
   {
     name: 'Athletic Training BOC',
@@ -255,6 +281,8 @@ export const certifications = [
       marketDemand: 'Required by law or employer in most AT positions; universally demanded for athletic training roles.',
       patientSatisfaction: 'Athlete trust in AT relationship is high; immediate access improves experience vs delayed care.',
     },
+    roiSignals: { privatePractice: 42, academic: 38 },
+
   },
   {
     name: 'CDC STEADI Fall Prevention',
@@ -271,6 +299,8 @@ export const certifications = [
       marketDemand: 'Valued in geriatric programs and quality improvement roles; not commonly listed as required in job postings.',
       patientSatisfaction: 'Systematic screening normalizes fall risk conversation; patients appreciate structured approach.',
     },
+    roiSignals: { privatePractice: 48, academic: 45 },
+
   },
   {
     name: 'Physical Therapy Fellowship',
@@ -287,6 +317,8 @@ export const certifications = [
       marketDemand: 'Increasingly valued in academic medical centers and residency program faculty roles.',
       patientSatisfaction: 'Expert-level care correlates with patient confidence and engagement.',
     },
+    roiSignals: { privatePractice: 30, academic: 75 },
+
   },
   {
     name: 'Pilates Rehabilitation',
@@ -303,6 +335,8 @@ export const certifications = [
       marketDemand: 'Growing demand in boutique PT practices and wellness-integrated clinics; not widely listed in standard PT postings.',
       patientSatisfaction: 'High patient engagement; mind-body connection aspect appeals to chronic pain population.',
     },
+    roiSignals: { privatePractice: 88, academic: 28, privatePracticeNote: 'Enables hybrid PT/Pilates studio model; $150-300/session is standard in wellness markets.' },
+
   },
   {
     name: 'AI + Wearable Sensors',
@@ -319,6 +353,8 @@ export const certifications = [
       marketDemand: 'Emerging demand in digital health and health system innovation roles; not yet mainstream in clinical job postings.',
       patientSatisfaction: 'Gamification and real-time feedback increase engagement; tech literacy barrier exists.',
     },
+    roiSignals: { privatePractice: 55, academic: 78 },
+
   },
   {
     name: 'ABCDEF ICU Bundle',
@@ -335,6 +371,8 @@ export const certifications = [
       marketDemand: 'Strong demand in ICU and acute care PT/OT roles; standard expectation in Level I trauma and medical ICU positions.',
       patientSatisfaction: 'ICU population limited in self-report; family-reported experience improved; PTSD reduction documented.',
     },
+    roiSignals: { privatePractice: 10, academic: 48 },
+
   },
   {
     name: 'LSVT BIG',
@@ -351,6 +389,8 @@ export const certifications = [
       marketDemand: 'Among the most employer-demanded PT certifications for neuro outpatient; frequently paired with LSVT LOUD.',
       patientSatisfaction: 'Parkinson\'s patients value functional independence improvements; family engagement is high.',
     },
+    roiSignals: { privatePractice: 72, academic: 45 },
+
   },
   {
     name: 'IAYT Yoga Therapy',
@@ -367,6 +407,8 @@ export const certifications = [
       marketDemand: 'Limited employer demand in clinical settings; primarily self-employed or integrative wellness practice.',
       patientSatisfaction: 'Very high; mind-body approach appeals to patients seeking holistic care.',
     },
+    roiSignals: { privatePractice: 72, academic: 32, privatePracticeNote: 'Established consumer wellness market with multiple revenue models including group sessions and retreats.' },
+
   },
   {
     name: 'Alexander Technique',
@@ -383,6 +425,8 @@ export const certifications = [
       marketDemand: 'Very limited employer demand in clinical settings; primarily private practice and performing arts.',
       patientSatisfaction: 'Patients who engage report transformative experience; requires significant commitment.',
     },
+    roiSignals: { privatePractice: 72, academic: 32, privatePracticeNote: 'Professional musicians, dancers, and athletes pay premium rates ($150-250/session); strong performing arts market.' },
+
   },
   {
     name: 'IMOT Intensive Therapy',
@@ -399,6 +443,8 @@ export const certifications = [
       marketDemand: 'Limited US employer demand; primarily academic pediatric centers.',
       patientSatisfaction: 'Children and families report high satisfaction; peer social environment adds value.',
     },
+    roiSignals: { privatePractice: 38, academic: 35 },
+
   },
   {
     name: 'Blood Flow Restriction (BFR)',
@@ -415,6 +461,8 @@ export const certifications = [
       marketDemand: 'Rapidly growing employer demand; increasingly listed in outpatient orthopedic PT postings.',
       patientSatisfaction: 'Discomfort from cuff pressure is the main barrier; patients motivated by ability to exercise sooner post-surgery.',
     },
+    roiSignals: { privatePractice: 75, academic: 42, privatePracticeNote: 'Adds a premium cash-pay offering in direct-pay orthopedic practices; strong patient interest and willingness to pay.' },
+
   },
   {
     name: 'Ergonomic Assessment',
@@ -431,6 +479,8 @@ export const certifications = [
       marketDemand: 'Steady demand in occupational health, corporate wellness, and workers compensation settings.',
       patientSatisfaction: 'Workers value intervention that targets their specific job demands; employer-funded model reduces patient burden.',
     },
+    roiSignals: { privatePractice: 58, academic: 40 },
+
   },
   {
     name: 'Vestibular Rehabilitation',
@@ -447,6 +497,8 @@ export const certifications = [
       marketDemand: 'High employer demand in outpatient PT and neuro specialty; vestibular training frequently listed as preferred or required.',
       patientSatisfaction: 'High when BPPV resolved in 1-2 visits; dramatic symptom relief creates strong satisfaction.',
     },
+    roiSignals: { privatePractice: 75, academic: 38 },
+
   },
   {
     name: 'VR (Medical-Grade)',
@@ -463,6 +515,8 @@ export const certifications = [
       marketDemand: 'Limited current employer demand; growing in academic medical centers and technology-forward practices.',
       patientSatisfaction: 'High engagement, especially in pediatric populations; gamification increases intrinsic motivation.',
     },
+    roiSignals: { privatePractice: 38, academic: 65 },
+
   },
   {
     name: 'NIDCAP Neonatal',
@@ -479,6 +533,8 @@ export const certifications = [
       marketDemand: 'Required or strongly preferred in academic NICU programs; very limited but highly valued within that niche.',
       patientSatisfaction: 'Family-centered care is central; parental stress reduction and bonding improvement documented.',
     },
+    roiSignals: { privatePractice: 8, academic: 62 },
+
   },
   {
     name: 'Neonatal Therapy Certification',
@@ -495,6 +551,8 @@ export const certifications = [
       marketDemand: 'Valued in NICU therapy positions; moderate demand in academic medical centers with established NICU programs.',
       patientSatisfaction: 'Family satisfaction with specialized NICU team is high; parental education component valued.',
     },
+    roiSignals: { privatePractice: 30, academic: 48 },
+
   },
   {
     name: 'Exoskeleton Training',
@@ -511,6 +569,8 @@ export const certifications = [
       marketDemand: 'Growing interest but very limited current employer demand; primarily research hospitals and specialized centers.',
       patientSatisfaction: 'High psychological value of upright posture for wheelchair users; fatigue and safety concerns limit enthusiasm.',
     },
+    roiSignals: { privatePractice: 12, academic: 65 },
+
   },
   {
     name: 'Transplant Rehabilitation',
@@ -527,6 +587,8 @@ export const certifications = [
       marketDemand: 'Demand limited to transplant centers; valued by UNOS-affiliated programs.',
       patientSatisfaction: 'Transplant patients highly motivated; functional recovery goal is personally meaningful.',
     },
+    roiSignals: { privatePractice: 15, academic: 38 },
+
   },
   {
     name: 'Robotic Devices (Lokomat)',
@@ -543,6 +605,8 @@ export const certifications = [
       marketDemand: 'Very limited employer demand; primarily research centers and specialized neuro rehabilitation hospitals.',
       patientSatisfaction: 'Novel technology appeals; some patients prefer robotic to manual assistance.',
     },
+    roiSignals: { privatePractice: 15, academic: 65 },
+
   },
   {
     name: 'Feldenkrais Method',
@@ -559,6 +623,8 @@ export const certifications = [
       marketDemand: 'Very limited employer demand in clinical settings; primarily private practice and performing arts.',
       patientSatisfaction: 'Gentle, non-invasive approach appreciated by chronic pain and elderly populations.',
     },
+    roiSignals: { privatePractice: 68, academic: 30, privatePracticeNote: 'Movement re-education for performing arts and chronic pain; premium cash-pay pricing ($120-200/session).' },
+
   },
   {
     name: 'SOS Feeding Approach',
@@ -575,6 +641,8 @@ export const certifications = [
       marketDemand: 'Moderate employer demand in pediatric feeding programs and feeding specialty clinics.',
       patientSatisfaction: 'Family-centered, non-coercive approach reduces mealtime anxiety for families.',
     },
+    roiSignals: { privatePractice: 65, academic: 40 },
+
   },
   {
     name: 'COMT/Manual Therapy Certification',
@@ -591,6 +659,8 @@ export const certifications = [
       marketDemand: 'Consistently sought in outpatient orthopedic PT postings; manual therapy proficiency widely valued.',
       patientSatisfaction: 'Hands-on care is highly valued; patients often prefer manual therapy.',
     },
+    roiSignals: { privatePractice: 75, academic: 38 },
+
   },
   {
     name: 'McKenzie Method (MDT)',
@@ -607,6 +677,8 @@ export const certifications = [
       marketDemand: 'Among the most widely adopted PT specialty training approaches; frequently listed in spine and outpatient PT postings.',
       patientSatisfaction: 'Patients value self-management skills and understanding of their condition.',
     },
+    roiSignals: { privatePractice: 72, academic: 38 },
+
   },
   {
     name: 'Pain Neuroscience Education',
@@ -623,6 +695,8 @@ export const certifications = [
       marketDemand: 'Growing employer interest; increasingly listed in chronic pain, outpatient ortho, and behavioral health rehab postings.',
       patientSatisfaction: 'Patients report relief from understanding their pain; reduces helplessness and catastrophizing.',
     },
+    roiSignals: { privatePractice: 68, academic: 58 },
+
   },
   {
     name: 'FCE (Functional Capacity Eval)',
@@ -639,6 +713,8 @@ export const certifications = [
       marketDemand: 'Steady demand in workers compensation and disability evaluation; specialized but consistent hiring.',
       patientSatisfaction: 'Patients with valid effort appreciate objectivity; secondary gain situations reduce trust.',
     },
+    roiSignals: { privatePractice: 62, academic: 35 },
+
   },
   {
     name: 'Certified Hand Therapist (CHT)',
@@ -655,6 +731,8 @@ export const certifications = [
       marketDemand: 'Required or strongly preferred at most hand therapy centers; among the most employer-demanded therapy certifications.',
       patientSatisfaction: 'Patients with complex hand injuries appreciate specialized expertise.',
     },
+    roiSignals: { privatePractice: 75, academic: 42 },
+
   },
   {
     name: 'Early Intervention Specialist',
@@ -671,6 +749,8 @@ export const certifications = [
       marketDemand: 'Required for billing in Part C programs; strong employer demand in state-funded early intervention settings.',
       patientSatisfaction: 'Family empowerment through coaching model is highly valued; parents report reduced stress.',
     },
+    roiSignals: { privatePractice: 55, academic: 50 },
+
   },
   {
     name: 'Multiple Sclerosis Certified Specialist',
@@ -687,6 +767,8 @@ export const certifications = [
       marketDemand: 'Valued in MS specialty clinics and neuro rehab programs; limited demand outside these settings.',
       patientSatisfaction: 'MS patients value clinicians who understand disease trajectory and variability.',
     },
+    roiSignals: { privatePractice: 45, academic: 50 },
+
   },
   {
     name: 'Neurodevelopmental Treatment (NDT)',
@@ -703,6 +785,8 @@ export const certifications = [
       marketDemand: 'Frequently listed as required or preferred in pediatric and neuro PT/OT postings; strong institutional adoption.',
       patientSatisfaction: 'Hands-on facilitation approach well-tolerated; neuro population engagement is complex.',
     },
+    roiSignals: { privatePractice: 55, academic: 42 },
+
   },
   {
     name: 'Orthopedic Clinical Specialist (OCS)',
@@ -719,6 +803,8 @@ export const certifications = [
       marketDemand: 'Most-held ABPTS certification (~40,000 holders); frequently required or preferred in outpatient PT postings.',
       patientSatisfaction: 'Patients may prefer credentialed clinicians; confidence in expert care is meaningful.',
     },
+    roiSignals: { privatePractice: 58, academic: 40 },
+
   },
   {
     name: 'BOC-Orthopedic Specialty',
@@ -735,6 +821,8 @@ export const certifications = [
       marketDemand: 'Less employer recognition than ABPTS OCS; moderate demand in orthopedic athletic training settings.',
       patientSatisfaction: 'Athletes may prefer specialist-trained AT for complex injuries.',
     },
+    roiSignals: { privatePractice: 50, academic: 32 },
+
   },
   {
     name: 'Sports Clinical Specialist (SCS)',
@@ -751,6 +839,8 @@ export const certifications = [
       marketDemand: 'Steady employer demand in sports medicine, collegiate athletic, and professional sports settings.',
       patientSatisfaction: 'Athletes value working with sports-specialized clinicians.',
     },
+    roiSignals: { privatePractice: 58, academic: 38 },
+
   },
   {
     name: 'Telehealth/Digital Health',
@@ -767,6 +857,8 @@ export const certifications = [
       marketDemand: 'Growing demand post-pandemic; increasingly listed in virtual care, digital health, and home-based PT/OT roles.',
       patientSatisfaction: 'Convenience is highly valued; technology and privacy concerns exist.',
     },
+    roiSignals: { privatePractice: 60, academic: 70 },
+
   },
   {
     name: 'Wound Care Specialist',
@@ -783,6 +875,8 @@ export const certifications = [
       marketDemand: 'High employer demand in wound care centers, home health, and SNF settings; frequently listed as required.',
       patientSatisfaction: 'Patients with chronic wounds value specialized care; healing progress is motivating.',
     },
+    roiSignals: { privatePractice: 52, academic: 32 },
+
   },
   {
     name: 'Certified Aging in Place Specialist (CAPS)',
@@ -799,6 +893,8 @@ export const certifications = [
       marketDemand: 'Growing demand in home modification consulting and aging-in-place services; moderate clinical employer demand.',
       patientSatisfaction: 'Aging in place is strongly preferred; successful modification is highly valued by older adults.',
     },
+    roiSignals: { privatePractice: 62, academic: 32 },
+
   },
   {
     name: 'ACSM Clinical Exercise Physiologist',
@@ -815,6 +911,8 @@ export const certifications = [
       marketDemand: 'Moderate demand in hospital-based fitness, cardiac rehab support, and employee wellness programs.',
       patientSatisfaction: 'Patients value structured, science-based exercise prescription.',
     },
+    roiSignals: { privatePractice: 55, academic: 48 },
+
   },
   {
     name: 'Certified Strength & Conditioning (CSCS)',
@@ -831,6 +929,8 @@ export const certifications = [
       marketDemand: 'Valued in sports performance, collegiate strength staff, and athletic rehab settings; moderate clinical demand.',
       patientSatisfaction: 'Athletes appreciate evidence-based strength programming; general rehab patients less influenced by credential.',
     },
+    roiSignals: { privatePractice: 62, academic: 42 },
+
   },
   {
     name: 'Certified Brain Injury Specialist',
@@ -847,6 +947,8 @@ export const certifications = [
       marketDemand: 'Moderate demand in TBI programs, inpatient rehab, and brain injury specialty clinics.',
       patientSatisfaction: 'TBI patients and families value clinicians who understand the unique challenges of brain injury.',
     },
+    roiSignals: { privatePractice: 40, academic: 42 },
+
   },
   {
     name: 'Certified Stroke Rehabilitation Specialist',
@@ -863,6 +965,8 @@ export const certifications = [
       marketDemand: 'Moderate demand in stroke rehabilitation units and neuro specialty programs.',
       patientSatisfaction: 'Stroke survivors and families value specialized knowledge of stroke recovery trajectory.',
     },
+    roiSignals: { privatePractice: 40, academic: 38 },
+
   },
   {
     name: 'Hippotherapy',
@@ -879,6 +983,8 @@ export const certifications = [
       marketDemand: 'Very limited employer demand; primarily nonprofit equine therapy centers and adaptive sports programs.',
       patientSatisfaction: 'Exceptional; children and adults with disabilities report transformative experience. Motivation to attend is unmatched.',
     },
+    roiSignals: { privatePractice: 72, academic: 35, privatePracticeNote: 'Equine therapy centers charge $150-250/session; parental willingness to pay is high; nonprofit and grant-funded models also viable.' },
+
   },
   {
     name: 'Robotic Upper Limb',
@@ -895,6 +1001,8 @@ export const certifications = [
       marketDemand: 'Limited employer demand; primarily academic stroke centers and research hospitals.',
       patientSatisfaction: 'Novel technology appeals; some prefer conventional hands-on OT.',
     },
+    roiSignals: { privatePractice: 15, academic: 62 },
+
   },
   {
     name: 'Certified Mulligan Practitioner',
@@ -911,6 +1019,8 @@ export const certifications = [
       marketDemand: 'Moderate employer demand as a manual therapy subspecialization; valued in orthopedic PT practices.',
       patientSatisfaction: 'Immediate pain relief during session is impressive to patients.',
     },
+    roiSignals: { privatePractice: 68, academic: 30 },
+
   },
   {
     name: 'Pelvic Floor Rehabilitation (PRPC)',
@@ -927,6 +1037,8 @@ export const certifications = [
       marketDemand: 'Rapidly growing employer demand as pelvic health PT becomes mainstream; increasingly listed in women\'s health postings.',
       patientSatisfaction: 'High when outcomes achieved; significant stigma around seeking care is barrier.',
     },
+    roiSignals: { privatePractice: 82, academic: 45 },
+
   },
   {
     name: 'Women\'s Health Clinical Specialist',
@@ -943,6 +1055,8 @@ export const certifications = [
       marketDemand: 'Growing demand in women\'s health clinics and pelvic health PT programs.',
       patientSatisfaction: 'Women strongly prefer specialized, knowledgeable clinicians for pelvic health; privacy and safety valued.',
     },
+    roiSignals: { privatePractice: 60, academic: 42 },
+
   },
   {
     name: 'Certified Driver Rehabilitation Specialist',
@@ -959,6 +1073,8 @@ export const certifications = [
       marketDemand: 'Consistent demand in driver rehabilitation centers and adaptive technology programs; very specialized.',
       patientSatisfaction: 'Driving independence is highly valued; emotional significance is substantial.',
     },
+    roiSignals: { privatePractice: 50, academic: 30 },
+
   },
   {
     name: 'Pediatric Clinical Specialist (PCS)',
@@ -975,6 +1091,8 @@ export const certifications = [
       marketDemand: 'Valued in children\'s hospital and pediatric outpatient settings; moderate employer demand.',
       patientSatisfaction: 'Families may prefer credentialed pediatric specialists.',
     },
+    roiSignals: { privatePractice: 52, academic: 38 },
+
   },
   {
     name: 'Board Certification in Pediatrics',
@@ -991,6 +1109,8 @@ export const certifications = [
       marketDemand: 'Valued in pediatric OT settings; moderate employer demand in children\'s hospitals and school-based programs.',
       patientSatisfaction: 'Families value credentialed specialists for children with complex needs.',
     },
+    roiSignals: { privatePractice: 50, academic: 35 },
+
   },
   {
     name: 'Virtual/Augmented Reality',
@@ -1007,6 +1127,8 @@ export const certifications = [
       marketDemand: 'Limited current employer demand; growing in technology-forward neuro and pain programs.',
       patientSatisfaction: 'VR engagement is high when technology is implemented smoothly.',
     },
+    roiSignals: { privatePractice: 38, academic: 62 },
+
   },
   {
     name: 'Ventilator Weaning',
@@ -1023,6 +1145,8 @@ export const certifications = [
       marketDemand: 'Valued in ICU and acute care PT/OT positions; expected competency in critical care specialty.',
       patientSatisfaction: 'Patients cannot self-report during ventilation; family reports reduced anxiety with active weaning plan.',
     },
+    roiSignals: { privatePractice: 10, academic: 38 },
+
   },
   {
     name: 'Lymphedema (CLT/LANA)',
@@ -1039,6 +1163,8 @@ export const certifications = [
       marketDemand: 'Significantly increased demand post-Lymphedema Treatment Act 2024; CLT/LANA increasingly required in lymphedema programs.',
       patientSatisfaction: 'Lymphedema causes significant QoL impairment; effective treatment is highly valued.',
     },
+    roiSignals: { privatePractice: 70, academic: 42 },
+
   },
   {
     name: 'Seating and Mobility Specialist',
@@ -1055,6 +1181,8 @@ export const certifications = [
       marketDemand: 'Consistent demand in CRT clinics and SCI centers; required by some CRT suppliers for billing eligibility.',
       patientSatisfaction: 'Wheelchair users value clinicians who understand their mobility needs.',
     },
+    roiSignals: { privatePractice: 42, academic: 45 },
+
   },
   {
     name: 'Dry Needling',
@@ -1071,6 +1199,8 @@ export const certifications = [
       marketDemand: 'Among the most employer-demanded PT certifications in outpatient ortho; listed in ~30% of outpatient PT postings in permitted states.',
       patientSatisfaction: 'Patient response variable; immediate relief creates strong positive impression when it occurs.',
     },
+    roiSignals: { privatePractice: 90, academic: 35, privatePracticeNote: 'Consumer demand is strong; frequently used to justify direct-pay pricing in cash-pay ortho PT clinics.' },
+
   },
   {
     name: 'TPI Golf Certification',
@@ -1087,6 +1217,8 @@ export const certifications = [
       marketDemand: 'Limited employer demand; primarily cash-pay sports performance and golf fitness settings.',
       patientSatisfaction: 'Golf patients appreciate sport-specific expertise.',
     },
+    roiSignals: { privatePractice: 88, academic: 15, privatePracticeNote: 'Golf performance clients pay $200-400/session; primarily cash-pay sports performance market with premium clientele.' },
+
   },
   {
     name: 'ASTYM Therapy',
@@ -1103,6 +1235,8 @@ export const certifications = [
       marketDemand: 'Moderate employer demand as IASTM approach; valued in orthopedic PT practices using soft tissue techniques.',
       patientSatisfaction: 'Some patients respond well; discomfort during treatment is a barrier.',
     },
+    roiSignals: { privatePractice: 60, academic: 25 },
+
   },
   {
     name: 'Rolfing/Structural Integration',
@@ -1119,6 +1253,8 @@ export const certifications = [
       marketDemand: 'Virtually no employer demand in clinical settings; primarily private practice and wellness settings.',
       patientSatisfaction: 'Clients who complete series report meaningful subjective change.',
     },
+    roiSignals: { privatePractice: 68, academic: 22, privatePracticeNote: 'Established wellness market with premium pricing ($150-250/session); strong consumer recognition outside healthcare.' },
+
   },
   {
     name: 'Therapeutic Pain Specialist',
@@ -1135,6 +1271,8 @@ export const certifications = [
       marketDemand: 'Growing demand in pain management and chronic pain rehabilitation settings.',
       patientSatisfaction: 'Chronic pain patients value comprehensive understanding of their experience.',
     },
+    roiSignals: { privatePractice: 65, academic: 52 },
+
   },
   {
     name: 'Craniosacral Therapy/Upledger',
@@ -1151,6 +1289,8 @@ export const certifications = [
       marketDemand: 'Low employer demand in evidence-based clinical settings; primarily private practice and integrative wellness.',
       patientSatisfaction: 'Some patients report subjective benefit, consistent with placebo response.',
     },
+    roiSignals: { privatePractice: 65, academic: 18, privatePracticeNote: 'Established integrative wellness consumer market; $120-200/session common in wellness and integrative health settings.' },
+
   },
   {
     name: 'Certified Low Vision Therapist',
@@ -1167,6 +1307,8 @@ export const certifications = [
       marketDemand: 'Consistent demand in low vision programs and vision rehabilitation centers; specialized but stable.',
       patientSatisfaction: 'Visual impairment significantly impacts QoL; effective rehabilitation is highly meaningful.',
     },
+    roiSignals: { privatePractice: 35, academic: 35 },
+
   },
   {
     name: 'Suit Therapy',
@@ -1183,6 +1325,8 @@ export const certifications = [
       marketDemand: 'Very limited employer demand; primarily specialized pediatric neuro therapy centers.',
       patientSatisfaction: 'Families invest significantly; expectation-outcome gap can be disappointing.',
     },
+    roiSignals: { privatePractice: 42, academic: 18 },
+
   },
   {
     name: 'Advanced Competency in Home Health',
@@ -1199,6 +1343,8 @@ export const certifications = [
       marketDemand: 'Moderate demand in home health agencies; ACHH credential valued but not yet widely required.',
       patientSatisfaction: 'Patients prefer receiving care at home; specialized home health clinicians improve confidence.',
     },
+    roiSignals: { privatePractice: 48, academic: 30 },
+
   },
   {
     name: 'Barral Institute Certification',
@@ -1215,6 +1361,8 @@ export const certifications = [
       marketDemand: 'Minimal employer demand; primarily private practice with specific manual therapy focus.',
       patientSatisfaction: 'Some patients report benefit, consistent with non-specific and placebo effects.',
     },
+    roiSignals: { privatePractice: 62, academic: 18 },
+
   },
   {
     name: 'Transitional DPT (tDPT)',
@@ -1231,6 +1379,8 @@ export const certifications = [
       marketDemand: 'Limited employer differentiation from DPT; minimal demand advantage over clinical doctorate.',
       patientSatisfaction: 'Patients do not distinguish tDPT from DPT or MPT.',
     },
+    roiSignals: { privatePractice: 20, academic: 52 },
+
   },
   {
     name: 'Physical Therapy Residency',
@@ -1247,6 +1397,8 @@ export const certifications = [
       marketDemand: 'Growing employer demand in academic medical centers, VA system, and specialty PT programs.',
       patientSatisfaction: 'No difference in patient satisfaction vs entry-level in available studies.',
     },
+    roiSignals: { privatePractice: 32, academic: 68 },
+
   },
   {
     name: 'Certified Exercise Expert for Aging Adults',
@@ -1263,6 +1415,8 @@ export const certifications = [
       marketDemand: 'Moderate awareness in geriatric PT/OT; not widely listed as required but growing recognition.',
       patientSatisfaction: 'Older adults value clinicians knowledgeable about age-specific exercise.',
     },
+    roiSignals: { privatePractice: 48, academic: 32 },
+
   },
   {
     name: 'Geriatric Clinical Specialist (GCS)',
@@ -1279,6 +1433,8 @@ export const certifications = [
       marketDemand: 'Valued in geriatric, SNF, and home health PT settings; ~6,000 holders; moderate to high employer demand.',
       patientSatisfaction: 'Older patients may prefer credentialed geriatric specialists.',
     },
+    roiSignals: { privatePractice: 50, academic: 42 },
+
   },
   {
     name: 'Neurologic Clinical Specialist (NCS)',
@@ -1295,6 +1451,8 @@ export const certifications = [
       marketDemand: 'High demand in inpatient rehab and neuro specialty PT; ~10,000 holders; among more sought-after ABPTS certs.',
       patientSatisfaction: 'Neurological patients and families value specialist expertise.',
     },
+    roiSignals: { privatePractice: 52, academic: 48 },
+
   },
   {
     name: 'Board Certification in Gerontology',
@@ -1311,6 +1469,8 @@ export const certifications = [
       marketDemand: 'Moderate employer demand in geriatric and SNF OT settings.',
       patientSatisfaction: 'Older adults value geriatric OT expertise.',
     },
+    roiSignals: { privatePractice: 48, academic: 38 },
+
   },
   {
     name: 'AOTA Board Certifications (Physical Rehab)',
@@ -1327,6 +1487,8 @@ export const certifications = [
       marketDemand: 'Limited employer recognition outside OT professional community; lower demand than ABPTS board certs.',
       patientSatisfaction: 'Credential recognition limited outside OT professional community.',
     },
+    roiSignals: { privatePractice: 35, academic: 32 },
+
   },
   {
     name: 'AOTA Specialty Certifications',
@@ -1343,6 +1505,8 @@ export const certifications = [
       marketDemand: 'Limited employer recognition; specialty areas have consistent but narrow demand.',
       patientSatisfaction: 'Patients may prefer certified specialists in specific domains.',
     },
+    roiSignals: { privatePractice: 38, academic: 28 },
+
   },
   {
     name: 'Cardiovascular/Pulmonary Specialist',
@@ -1359,6 +1523,8 @@ export const certifications = [
       marketDemand: 'Moderate demand in cardiac rehab support and cardiopulmonary PT roles.',
       patientSatisfaction: 'Patients with heart/lung conditions value specialized PT.',
     },
+    roiSignals: { privatePractice: 35, academic: 40 },
+
   },
   {
     name: 'Certified Spinal Manipulative Therapy',
@@ -1375,6 +1541,8 @@ export const certifications = [
       marketDemand: 'Moderate employer demand in orthopedic PT; valued alongside COMT and MDT training.',
       patientSatisfaction: 'Rapid pain relief from manipulation creates high immediate satisfaction.',
     },
+    roiSignals: { privatePractice: 68, academic: 32 },
+
   },
   {
     name: 'Clinical Doctorate (DPT/OTD) vs Masters',
@@ -1391,6 +1559,8 @@ export const certifications = [
       marketDemand: 'DPT now considered standard entry-level credential; widely required by employers even without outcome advantage.',
       patientSatisfaction: 'Patients do not distinguish degree level in satisfaction surveys.',
     },
+    roiSignals: { privatePractice: 22, academic: 55 },
+
   },
   {
     name: 'Sensory Integration (SIPT)',
@@ -1407,6 +1577,8 @@ export const certifications = [
       marketDemand: 'Widely sought in pediatric OT positions; strong adoption in school-based and outpatient pediatric OT settings.',
       patientSatisfaction: 'Families of sensory-sensitive children report perceived improvement.',
     },
+    roiSignals: { privatePractice: 60, academic: 42 },
+
   },
   {
     name: 'Modern Management of Older Adult',
@@ -1423,6 +1595,8 @@ export const certifications = [
       marketDemand: 'Growing recognition in geriatric PT programs; not yet widely listed in job postings.',
       patientSatisfaction: 'Older adults value geriatric-focused care approach.',
     },
+    roiSignals: { privatePractice: 45, academic: 35 },
+
   },
   {
     name: 'Assistive Technology Professional (ATP)',
@@ -1439,6 +1613,8 @@ export const certifications = [
       marketDemand: 'Consistent demand in AT clinics and CRT programs; required by some equipment suppliers.',
       patientSatisfaction: 'Patients with AT needs value expert device matching.',
     },
+    roiSignals: { privatePractice: 42, academic: 42 },
+
   },
   {
     name: 'VitalStim',
@@ -1455,6 +1631,8 @@ export const certifications = [
       marketDemand: 'Moderate employer demand in acute care and outpatient SLP dysphagia programs.',
       patientSatisfaction: 'Some patients prefer active treatment over exercises alone.',
     },
+    roiSignals: { privatePractice: 38, academic: 28 },
+
   },
   {
     name: 'Board Certified Specialist in Swallowing',
@@ -1471,6 +1649,8 @@ export const certifications = [
       marketDemand: 'Moderate demand in acute care, inpatient rehab, and SNF SLP positions with dysphagia focus.',
       patientSatisfaction: 'Patients with dysphagia value specialized SLP expertise.',
     },
+    roiSignals: { privatePractice: 35, academic: 40 },
+
   },
   {
     name: 'Graston/IASTM',
@@ -1487,6 +1667,8 @@ export const certifications = [
       marketDemand: 'Widely adopted technique; moderate employer demand in outpatient PT and sports medicine.',
       patientSatisfaction: 'Novel technique can enhance perceived treatment intensity.',
     },
+    roiSignals: { privatePractice: 58, academic: 25 },
+
   },
   {
     name: 'Emergency Medical Response',
@@ -1503,6 +1685,8 @@ export const certifications = [
       marketDemand: 'Required for most sideline coverage positions in sports medicine and athletic training contexts.',
       patientSatisfaction: 'Athlete confidence in sideline coverage is meaningful but not a clinical outcome.',
     },
+    roiSignals: { privatePractice: 45, academic: 32 },
+
   },
   {
     name: 'Oncology Clinical Specialist',
@@ -1519,6 +1703,8 @@ export const certifications = [
       marketDemand: 'Growing demand as oncology rehab becomes established; limited current employer base but strong trajectory.',
       patientSatisfaction: 'Cancer patients value specialized PT who understands treatment side effects.',
     },
+    roiSignals: { privatePractice: 42, academic: 48 },
+
   },
   {
     name: 'Board Certified Specialist Child Language',
@@ -1535,6 +1721,8 @@ export const certifications = [
       marketDemand: 'Limited employer recognition; ASHA BCS credentials have low market differentiation.',
       patientSatisfaction: 'Families may prefer credentialed language specialists.',
     },
+    roiSignals: { privatePractice: 38, academic: 42 },
+
   },
   {
     name: 'Board Certified Specialist Fluency',
@@ -1551,6 +1739,8 @@ export const certifications = [
       marketDemand: 'Limited employer demand; fluency specialty is a narrow SLP subspecialty.',
       patientSatisfaction: 'Adults who stutter value specialized SLPs.',
     },
+    roiSignals: { privatePractice: 42, academic: 40 },
+
   },
   {
     name: 'BC-ANCDS Neurologic Communication',
@@ -1567,6 +1757,8 @@ export const certifications = [
       marketDemand: 'Limited employer recognition; BC-ANCDS credential not widely listed in job postings.',
       patientSatisfaction: 'Neurological patients value specialized communication expertise.',
     },
+    roiSignals: { privatePractice: 38, academic: 45 },
+
   },
   {
     name: 'Clinical Electrophysiology Specialist',
@@ -1583,6 +1775,8 @@ export const certifications = [
       marketDemand: 'Very limited employer demand; one of the least-held ABPTS certifications.',
       patientSatisfaction: 'Niche credential; patient impact minimal.',
     },
+    roiSignals: { privatePractice: 22, academic: 38 },
+
   },
   {
     name: 'Board Certification Intraoperative Monitoring',
@@ -1599,6 +1793,8 @@ export const certifications = [
       marketDemand: 'Consistent demand in IONM programs; required by some facilities but very narrow clinical setting.',
       patientSatisfaction: 'Intraoperative patient cannot report; surgical team satisfaction relevant.',
     },
+    roiSignals: { privatePractice: 12, academic: 42 },
+
   },
   {
     name: 'Cochlear Implant Specialty',
@@ -1615,6 +1811,8 @@ export const certifications = [
       marketDemand: 'Required or preferred at cochlear implant centers; limited but consistently valued.',
       patientSatisfaction: 'CI recipients highly value specialized programming expertise.',
     },
+    roiSignals: { privatePractice: 35, academic: 45 },
+
   },
   {
     name: 'CBIT for Tics',
@@ -1631,6 +1829,8 @@ export const certifications = [
       marketDemand: 'Limited employer demand; niche behavioral intervention for specific OT and behavioral health roles.',
       patientSatisfaction: 'Tic reduction has substantial QoL impact for patients and families.',
     },
+    roiSignals: { privatePractice: 50, academic: 42 },
+
   },
   {
     name: 'Schroth Therapist',
@@ -1647,6 +1847,8 @@ export const certifications = [
       marketDemand: 'Growing demand in scoliosis specialty clinics and pediatric ortho settings.',
       patientSatisfaction: 'Scoliosis patients value non-brace exercise alternatives.',
     },
+    roiSignals: { privatePractice: 68, academic: 40, privatePracticeNote: 'Scoliosis niche with strong parental willingness to pay; niche practice building with premium pricing potential.' },
+
   },
   {
     name: 'Craniomandibular/TMJ Certification',
@@ -1663,6 +1865,8 @@ export const certifications = [
       marketDemand: 'Moderate demand in craniomandibular and facial pain specialty settings.',
       patientSatisfaction: 'TMD patients with chronic jaw pain value specialized treatment.',
     },
+    roiSignals: { privatePractice: 65, academic: 38 },
+
   },
   {
     name: 'Advanced Vestibular PT',
@@ -1679,6 +1883,8 @@ export const certifications = [
       marketDemand: 'Valued in vestibular specialty clinics; moderate employer demand above standard vestibular certification.',
       patientSatisfaction: 'Complex vestibular patients benefit from advanced expertise.',
     },
+    roiSignals: { privatePractice: 72, academic: 40 },
+
   },
   {
     name: 'Vestibular AIB Certifications',
@@ -1695,6 +1901,8 @@ export const certifications = [
       marketDemand: 'Moderate employer demand in vestibular specialty; AIB pathway is a recognized training route.',
       patientSatisfaction: 'Vestibular patients value any specialized expertise.',
     },
+    roiSignals: { privatePractice: 68, academic: 35 },
+
   },
   {
     name: 'Vestibular VCC Certification',
@@ -1711,6 +1919,8 @@ export const certifications = [
       marketDemand: 'Lower employer recognition than AIB vestibular certifications; growing awareness.',
       patientSatisfaction: 'Vestibular patients benefit from any specialized training.',
     },
+    roiSignals: { privatePractice: 62, academic: 32 },
+
   },
   {
     name: 'Occupro Certification',
@@ -1727,6 +1937,8 @@ export const certifications = [
       marketDemand: 'Very limited employer demand; proprietary platform certification with niche recognition.',
       patientSatisfaction: 'Worker satisfaction with platform-delivered assessments not studied.',
     },
+    roiSignals: { privatePractice: 28, academic: 15 },
+
   },
   {
     name: 'The Back School',
@@ -1743,6 +1955,8 @@ export const certifications = [
       marketDemand: 'Limited employer recognition as distinct certification; LBP education is expected baseline competency.',
       patientSatisfaction: 'Patients value understanding their back pain; education reduces fear.',
     },
+    roiSignals: { privatePractice: 48, academic: 30 },
+
   },
   {
     name: 'Kinesio Taping (CKTP)',
@@ -1759,6 +1973,8 @@ export const certifications = [
       marketDemand: 'Widely held and moderately demanded; taping certification commonly listed as preferred in sports and outpatient roles.',
       patientSatisfaction: 'Patients like the colorful tape and perceive it as active treatment; expectation effects likely.',
     },
+    roiSignals: { privatePractice: 55, academic: 22 },
+
   },
   {
     name: 'ASHA Board Certified Specialists',
@@ -1775,6 +1991,8 @@ export const certifications = [
       marketDemand: 'Limited employer recognition across ASHA BCS portfolio; low differentiation from standard SLP credentials.',
       patientSatisfaction: 'Specialty credentialing signals expertise to patients and referrers.',
     },
+    roiSignals: { privatePractice: 32, academic: 38 },
+
   },
   {
     name: 'Research Doctorates (PhD/ScD)',
@@ -1791,5 +2009,7 @@ export const certifications = [
       marketDemand: 'Demanded in academic faculty, research scientist, and academic health system leadership roles; not clinical demand.',
       patientSatisfaction: 'Patients do not differentiate PhD from clinical doctoral clinicians.',
     },
+    roiSignals: { privatePractice: 22, academic: 98 },
+
   },
 ];

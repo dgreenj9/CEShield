@@ -180,36 +180,34 @@ const CertificationsMatrix = () => {
   };
 
   // Career ROI: computed from marketDemand, reimbursement, efficiency (lower invest = better ROI)
-  const computeCareerROI = (subScores) => {
-    const score = (subScores.marketDemand || 0) * 0.40
-                + (subScores.reimbursement || 0) * 0.30
-                + (subScores.efficiency || 0) * 0.30;
-    if (score >= 80) return { grade: 'A', color: '#22c55e' };
-    if (score >= 65) return { grade: 'B', color: '#84cc16' };
-    if (score >= 50) return { grade: 'C', color: '#f59e0b' };
-    if (score >= 35) return { grade: 'D', color: '#f97316' };
-    return { grade: 'F', color: '#ef4444' };
+  // Three-path Career ROI
+  // Weights sum to 100 within each path.
+  // 'privatePractice' and 'academic' come from cert.roiSignals (supplemental, not in main ranking).
+  const ROI_PATH_WEIGHTS = {
+    CLI: { clinicalOutcomes: 30, efficiency: 10, caseloadApplicability: 20, reimbursement: 20, marketDemand: 15, patientSatisfaction: 5 },
+    PPR: { clinicalOutcomes: 20, efficiency: 20, caseloadApplicability: 10, reimbursement: 10, marketDemand: 15, patientSatisfaction: 5, privatePractice: 20 },
+    ACA: { clinicalOutcomes: 20, efficiency: 5, caseloadApplicability: 5, reimbursement: 5, marketDemand: 15, patientSatisfaction: 5, academic: 45 },
   };
 
-  const ROI_REASONING = {
-    A: 'High employer demand in clinical settings + strong billing/revenue impact + accessible to obtain.',
-    B: 'Good clinical employer demand with solid billing or accessibility advantages.',
-    C: 'Moderate clinical demand or billing value; typical clinical practice impact.',
-    D: 'Limited clinical employer demand, minimal billing impact, or high investment relative to clinical return.',
-    F: 'Very low clinical demand, minimal billing impact, and/or very high investment cost relative to clinical practice value.',
+  const ROI_PATH_LABELS = { CLI: 'Clinical', PPR: 'Private Practice', ACA: 'Academic / Industry' };
+
+  const computeAllPathROI = (subScores, roiSignals) => {
+    const allScores = { ...subScores, ...(roiSignals || {}) };
+    return Object.fromEntries(
+      Object.entries(ROI_PATH_WEIGHTS).map(([path, weights]) => {
+        const score = Object.entries(weights).reduce((sum, [key, w]) => sum + (allScores[key] ?? 0) * (w / 100), 0);
+        return [path, Math.round(score)];
+      })
+    );
   };
 
-  // Certs with significant career value outside direct clinical practice
-  const ALT_CAREER_VALUE = new Set([
-    'Research Doctorates (PhD/ScD)',
-    'Physical Therapy Fellowship',
-    'Physical Therapy Residency',
-    'Transitional DPT (tDPT)',
-    'Clinical Doctorate (DPT/OTD) vs Masters',
-    'AI + Wearable Sensors',
-    'Telehealth/Digital Health',
-    'ACLM Lifestyle Medicine',
-  ]);
+  const roiScoreColor = (score) => {
+    if (score >= 70) return '#22c55e';
+    if (score >= 55) return '#84cc16';
+    if (score >= 40) return '#f59e0b';
+    if (score >= 25) return '#f97316';
+    return '#94a3b8';
+  };
 
   const CitationSection = ({ certName }) => {
     const citations = getCitationsForCertification(certName);
@@ -543,50 +541,75 @@ const CertificationsMatrix = () => {
                 </span>
                 <span className="text-xs" style={{ color: colors.textGray }}>{cert.discipline}</span>
                 {(() => {
-                  const roi = computeCareerROI(cert.subScores);
+                  const pathScores = computeAllPathROI(cert.subScores, cert.roiSignals);
+                  const allScores = { ...cert.subScores, ...(cert.roiSignals || {}) };
+                  const dimLabels = { clinicalOutcomes: 'Clinical', efficiency: 'Cert Access', caseloadApplicability: 'Caseload', reimbursement: 'Billing', marketDemand: 'Market', patientSatisfaction: 'Pt Sat', privatePractice: 'Priv Practice', academic: 'Academic' };
                   return (
                     <span style={{ position: 'relative', display: 'inline-block' }}>
                       <button
                         onClick={e => { e.stopPropagation(); setExpandedROI(prev => ({ ...prev, [cert.name]: !prev[cert.name] })); }}
-                        title="Clinical Practice ROI"
-                        className="text-xs px-1.5 py-0.5 font-bold"
-                        style={{
-                          background: roi.color + '20',
-                          color: roi.color,
-                          border: `1px solid ${roi.color}60`,
-                          borderRadius: '4px',
-                          cursor: 'pointer',
-                          lineHeight: '1.4',
-                        }}
+                        title="Career ROI by path — click to expand"
+                        style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'flex-end', gap: '5px' }}
                       >
-                        ROI: {roi.grade}
+                        {Object.entries(pathScores).map(([path, score]) => {
+                          const c = roiScoreColor(score);
+                          return (
+                            <span key={path} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1px' }}>
+                              <span style={{ fontSize: '0.6rem', color: colors.textGray, lineHeight: 1, whiteSpace: 'nowrap' }}>{path}</span>
+                              <span style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+                                <span style={{ width: '28px', height: '5px', borderRadius: '2px', background: colors.slateLight, overflow: 'hidden', display: 'block' }}>
+                                  <span style={{ display: 'block', height: '100%', width: `${score}%`, background: c, borderRadius: '2px' }} />
+                                </span>
+                                <span style={{ fontSize: '0.6rem', color: c, fontWeight: 600, lineHeight: 1 }}>{score}</span>
+                              </span>
+                            </span>
+                          );
+                        })}
                       </button>
                       {expandedROI[cert.name] && (
                         <div
-                          className="absolute z-10 p-2 text-xs rounded shadow-lg"
+                          className="absolute z-10 rounded shadow-lg"
                           style={{
                             top: '100%',
                             left: 0,
                             marginTop: '4px',
                             background: 'white',
                             border: `1px solid ${colors.slateLight}`,
-                            minWidth: '240px',
+                            minWidth: '260px',
                             color: colors.textGray,
                             lineHeight: '1.5',
+                            fontSize: '0.72rem',
                           }}
                         >
-                          <div className="font-semibold mb-1" style={{ color: roi.color }}>Clinical Practice ROI: {roi.grade}</div>
-                          <div className="mb-1">{ROI_REASONING[roi.grade]}</div>
-                          <div style={{ color: colors.textGray, fontSize: '0.7rem' }}>
-                            Market Demand: {cert.subScores.marketDemand} · Billing: {cert.subScores.reimbursement} · Cert Accessibility: {cert.subScores.efficiency}
+                          <div style={{ padding: '8px 10px 4px', fontWeight: 600, fontSize: '0.75rem', color: colors.textDark, borderBottom: `1px solid ${colors.slateLight}` }}>
+                            Career ROI by Path
                           </div>
-                          {ALT_CAREER_VALUE.has(cert.name) && (
-                            <div style={{ color: '#3b82f6', fontSize: '0.68rem', marginTop: '5px', borderTop: `1px solid ${colors.slateLight}`, paddingTop: '4px' }}>
-                              ℹ️ This credential may have significant value in academic, research, or health technology careers not reflected in this clinical score.
-                            </div>
-                          )}
-                          <div style={{ color: colors.textGray, fontSize: '0.65rem', marginTop: '4px', fontStyle: 'italic' }}>
-                            Speculative — reflects direct clinical practice value only.
+                          {Object.entries(pathScores).map(([path, score]) => {
+                            const c = roiScoreColor(score);
+                            const weights = ROI_PATH_WEIGHTS[path];
+                            return (
+                              <div key={path} style={{ padding: '6px 10px', borderBottom: `1px solid ${colors.slateLight}` }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3px' }}>
+                                  <span style={{ fontWeight: 600, color: colors.textDark }}>{ROI_PATH_LABELS[path]}</span>
+                                  <span style={{ fontWeight: 700, color: c }}>{score}</span>
+                                </div>
+                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3px' }}>
+                                  {Object.entries(weights).map(([key, w]) => (
+                                    <span key={key} style={{ fontSize: '0.65rem', color: colors.textGray }}>
+                                      {dimLabels[key] ?? key}: <strong style={{ color: colors.textDark }}>{(allScores[key] ?? 0)}</strong><span style={{ color: colors.textGray }}>×{w}%</span>
+                                    </span>
+                                  ))}
+                                </div>
+                                {path === 'PPR' && cert.roiSignals?.privatePracticeNote && (
+                                  <div style={{ color: '#3b82f6', fontSize: '0.65rem', marginTop: '4px' }}>
+                                    ℹ️ {cert.roiSignals.privatePracticeNote}
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                          <div style={{ padding: '4px 10px', fontSize: '0.63rem', fontStyle: 'italic', color: colors.textGray }}>
+                            Speculative — based on publicly available market and evidence data.
                           </div>
                         </div>
                       )}
