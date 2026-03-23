@@ -381,7 +381,7 @@ const CertificationsMatrix = () => {
                       </div>
                       <span
                         className="text-sm font-bold ml-4 px-2 py-0.5 rounded"
-                        style={{ background: colors.primaryBlue, color: 'white', minWidth: '44px', textAlign: 'center' }}
+                        style={{ background: DIMENSION_BAR_COLORS[key], color: 'white', minWidth: '44px', textAlign: 'center' }}
                       >
                         {weights[key]}%
                       </span>
