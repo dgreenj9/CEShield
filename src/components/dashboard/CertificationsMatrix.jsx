@@ -177,6 +177,8 @@ const CertificationsMatrix = () => {
     reimbursement: '#8b5cf6',
     marketDemand: '#ef4444',
     patientSatisfaction: '#ec4899',
+    privatePractice: '#0ea5e9',
+    academic: '#a855f7',
   };
 
   // Career ROI: computed from marketDemand, reimbursement, efficiency (lower invest = better ROI)
@@ -596,7 +598,7 @@ const CertificationsMatrix = () => {
                                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3px' }}>
                                   {Object.entries(weights).map(([key, w]) => (
                                     <span key={key} style={{ fontSize: '0.65rem', color: colors.textGray }}>
-                                      {dimLabels[key] ?? key}: <strong style={{ color: colors.textDark }}>{(allScores[key] ?? 0)}</strong><span style={{ color: colors.textGray }}>×{w}%</span>
+                                      {dimLabels[key] ?? key}: <strong style={{ color: colors.textDark }}>{(allScores[key] ?? 0)}</strong><span style={{ color: DIMENSION_BAR_COLORS[key] ?? colors.textGray }}>×{w}%</span>
                                     </span>
                                   ))}
                                 </div>
