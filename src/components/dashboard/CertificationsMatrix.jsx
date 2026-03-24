@@ -29,6 +29,8 @@ const CertificationsMatrix = () => {
   const [expandedCitations, setExpandedCitations] = useState({});
   const [expandedSubScores, setExpandedSubScores] = useState({});
   const [expandedROI, setExpandedROI] = useState({});
+  const [expandedInvestment, setExpandedInvestment] = useState({});
+  const [selectedType, setSelectedType] = useState('All');
   const [weights, setWeights] = useState(DEFAULT_WEIGHTS);
 
   useEffect(() => {
@@ -93,6 +95,10 @@ const CertificationsMatrix = () => {
 
     if (selectedDiscipline !== 'All') {
       filtered = filtered.filter(c => c.disciplines && c.disciplines.includes(selectedDiscipline));
+    }
+
+    if (selectedType !== 'All') {
+      filtered = filtered.filter(c => c.type === selectedType);
     }
 
     if (searchTerm) {
@@ -170,6 +176,10 @@ const CertificationsMatrix = () => {
 
   const toggleSubScores = (certName) => {
     setExpandedSubScores(prev => ({ ...prev, [certName]: !prev[certName] }));
+  };
+
+  const toggleInvestment = (certName) => {
+    setExpandedInvestment(prev => ({ ...prev, [certName]: !prev[certName] }));
   };
 
   const filteredCerts = getFilteredCerts();
@@ -508,6 +518,18 @@ const CertificationsMatrix = () => {
               </button>
             ))}
           </div>
+          {selectedType !== 'All' && (
+            <div className="flex items-center gap-1 mt-1.5">
+              <span className="text-xs" style={{ color: colors.textGray }}>Type:</span>
+              <button
+                onClick={() => setSelectedType('All')}
+                className="flex items-center gap-1 text-xs px-2 py-0.5 rounded"
+                style={{ background: colors.lightBlue, color: colors.primaryBlue, border: `1px solid ${colors.primaryBlue}`, cursor: 'pointer' }}
+              >
+                {selectedType} <X className="w-3 h-3" />
+              </button>
+            </div>
+          )}
         </div>
 
       {/* Tier Filter */}
@@ -575,13 +597,39 @@ const CertificationsMatrix = () => {
                 <span className="font-medium text-sm sm:text-base" style={{ color: colors.textDark }}>
                   {cert.name}
                 </span>
-                <span
+                <button
+                  onClick={e => { e.stopPropagation(); setSelectedType(prev => prev === cert.type ? 'All' : cert.type); }}
+                  title={selectedType === cert.type ? 'Clear type filter' : `Filter by: ${cert.type}`}
                   className="text-xs px-2 py-0.5"
-                  style={{ ...getTypeStyle(cert.type), borderRadius: '3px', fontWeight: '500' }}
+                  style={{
+                    ...getTypeStyle(cert.type),
+                    borderRadius: '3px',
+                    fontWeight: '500',
+                    cursor: 'pointer',
+                    outline: selectedType === cert.type ? '2px solid currentColor' : 'none',
+                    outlineOffset: '1px',
+                  }}
                 >
                   {cert.type}
+                </button>
+                <span className="flex flex-wrap gap-1">
+                  {(cert.disciplines || [cert.discipline]).map(d => (
+                    <button
+                      key={d}
+                      onClick={e => { e.stopPropagation(); setSelectedDiscipline(prev => prev === d ? 'All' : d); }}
+                      title={selectedDiscipline === d ? 'Clear discipline filter' : `Filter by: ${d}`}
+                      className="text-xs px-1.5 py-0.5 rounded transition-colors"
+                      style={{
+                        background: selectedDiscipline === d ? colors.textDark : 'transparent',
+                        color: selectedDiscipline === d ? 'white' : colors.textGray,
+                        border: `1px solid ${selectedDiscipline === d ? colors.textDark : colors.slateLight}`,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {d}
+                    </button>
+                  ))}
                 </span>
-                <span className="text-xs" style={{ color: colors.textGray }}>{cert.discipline}</span>
                 {(() => {
                   const pathScores = computeAllPathROI(cert.subScores, cert.roiSignals);
                   return (
@@ -658,9 +706,45 @@ const CertificationsMatrix = () => {
                   );
                 })()}
               </div>
-              <div className="text-xs sm:text-sm mb-1" style={{ color: colors.textGray }}>
-                {cert.evidence}
+              <div className="text-xs sm:text-sm mb-1 flex items-start gap-2 flex-wrap">
+                <span style={{ color: colors.textGray }}>{cert.evidence}</span>
+                {getCitationsForCertification(cert.name).length > 0 && (
+                  <button
+                    onClick={e => { e.stopPropagation(); toggleCitationsForCert(cert.name); }}
+                    className="flex items-center gap-1 flex-shrink-0 text-xs px-1.5 py-0.5 rounded transition-colors hover:bg-blue-50"
+                    style={{ color: colors.primaryBlue, background: colors.lightBlue, border: `1px solid ${colors.primaryBlue}30`, cursor: 'pointer', whiteSpace: 'nowrap' }}
+                  >
+                    <BookOpen className="w-3 h-3" />
+                    {getCitationsForCertification(cert.name).length} citations
+                  </button>
+                )}
               </div>
+              {cert.justifications?.efficiency && (
+                <div className="mt-1 mb-1">
+                  <button
+                    onClick={e => { e.stopPropagation(); toggleInvestment(cert.name); }}
+                    className="flex items-center gap-1.5 text-xs px-2 py-1 rounded hover:bg-gray-100 transition-colors"
+                    style={{ color: DIMENSION_BAR_COLORS.efficiency, background: 'none', border: 'none', cursor: 'pointer' }}
+                  >
+                    <SlidersHorizontal className="w-3 h-3" />
+                    {expandedInvestment[cert.name] ? 'Hide' : 'Cert Investment'}
+                    <ChevronDown className={`w-3 h-3 transition-transform ${expandedInvestment[cert.name] ? 'rotate-180' : ''}`} />
+                  </button>
+                  {expandedInvestment[cert.name] && (
+                    <div
+                      className="mt-1 text-xs px-3 py-2 rounded"
+                      style={{
+                        background: '#eff6ff',
+                        borderLeft: `3px solid ${DIMENSION_BAR_COLORS.efficiency}`,
+                        color: colors.textGray,
+                        lineHeight: '1.5',
+                      }}
+                    >
+                      {cert.justifications.efficiency}
+                    </div>
+                  )}
+                </div>
+              )}
               <SubScoreSection cert={cert} />
               <CitationSection certName={cert.name} />
             </div>
