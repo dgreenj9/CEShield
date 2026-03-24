@@ -181,17 +181,14 @@ const CertificationsMatrix = () => {
     academic: '#a855f7',
   };
 
-  // Career ROI: computed from marketDemand, reimbursement, efficiency (lower invest = better ROI)
   // Three-path Career ROI
   // Weights sum to 100 within each path.
   // 'privatePractice' and 'academic' come from cert.roiSignals (supplemental, not in main ranking).
   const ROI_PATH_WEIGHTS = {
-    CLI: { clinicalOutcomes: 30, efficiency: 10, caseloadApplicability: 20, reimbursement: 20, marketDemand: 15, patientSatisfaction: 5 },
-    PPR: { clinicalOutcomes: 20, efficiency: 20, caseloadApplicability: 10, reimbursement: 10, marketDemand: 15, patientSatisfaction: 5, privatePractice: 20 },
-    ACA: { clinicalOutcomes: 20, efficiency: 5, caseloadApplicability: 5, reimbursement: 5, marketDemand: 15, patientSatisfaction: 5, academic: 45 },
+    Clinical:  { clinicalOutcomes: 30, efficiency: 10, caseloadApplicability: 20, reimbursement: 20, marketDemand: 15, patientSatisfaction: 5 },
+    Business:  { clinicalOutcomes: 20, efficiency: 20, caseloadApplicability: 10, reimbursement: 10, marketDemand: 15, patientSatisfaction: 5, privatePractice: 20 },
+    Academic:  { clinicalOutcomes: 20, efficiency: 5,  caseloadApplicability: 5,  reimbursement: 5,  marketDemand: 15, patientSatisfaction: 5, academic: 45 },
   };
-
-  const ROI_PATH_LABELS = { CLI: 'Clinical', PPR: 'Private Practice', ACA: 'Academic / Industry' };
 
   const computeAllPathROI = (subScores, roiSignals) => {
     const allScores = { ...subScores, ...(roiSignals || {}) };
@@ -209,6 +206,43 @@ const CertificationsMatrix = () => {
     if (score >= 40) return '#f59e0b';
     if (score >= 25) return '#f97316';
     return '#94a3b8';
+  };
+
+  const getPathNarrative = (path, score, subScores, roiSignals) => {
+    const pp  = roiSignals?.privatePractice ?? 0;
+    const aca = roiSignals?.academic ?? 0;
+    const { caseloadApplicability: caseload = 0, reimbursement: billing = 0, marketDemand: demand = 0 } = subScores;
+
+    if (path === 'Clinical') {
+      if (score >= 65) {
+        if (billing >= 70) return 'Strong clinical ROI — broad caseload fit with meaningful billing and reimbursement impact.';
+        if (demand >= 65)  return 'Strong clinical ROI — high employer demand and wide applicability across patient populations.';
+        return 'Strong clinical practice ROI — high caseload fit and solid market recognition.';
+      }
+      if (score >= 45) {
+        if (caseload <= 35) return 'Good clinical evidence, but limited caseload fit reduces day-to-day practice ROI.';
+        if (billing <= 25)  return 'Solid clinical and caseload value; minimal billing differentiation.';
+        return 'Moderate clinical ROI — solid across caseload, employer demand, and billing dimensions.';
+      }
+      if (caseload <= 25) return 'Highly specialized — limited applicability outside a narrow patient population.';
+      return 'Limited clinical practice ROI; low market demand or narrow billing impact.';
+    }
+
+    if (path === 'Business') {
+      if (pp >= 75) return 'Strong business potential — high consumer demand and premium cash-pay pricing viability.';
+      if (pp >= 55) return 'Good private practice opportunity — established cash-pay market with meaningful pricing leverage.';
+      if (pp >= 35) return 'Moderate business value — some differentiation in direct-pay or entrepreneurial settings.';
+      return 'Limited business differentiation; primarily suited to institutional or insurance-based settings.';
+    }
+
+    if (path === 'Academic') {
+      if (aca >= 80) return 'Exceptional academic value — widely recognized across research, teaching, and health technology roles.';
+      if (aca >= 60) return 'Strong academic pathway — credential transfers well to research, teaching, and industry positions.';
+      if (aca >= 40) return 'Moderate academic value — some research or industry relevance alongside its clinical applications.';
+      return 'Limited academic or industry pathway; credential value is concentrated in direct clinical practice.';
+    }
+
+    return '';
   };
 
   const CitationSection = ({ certName }) => {
@@ -544,13 +578,11 @@ const CertificationsMatrix = () => {
                 <span className="text-xs" style={{ color: colors.textGray }}>{cert.discipline}</span>
                 {(() => {
                   const pathScores = computeAllPathROI(cert.subScores, cert.roiSignals);
-                  const allScores = { ...cert.subScores, ...(cert.roiSignals || {}) };
-                  const dimLabels = { clinicalOutcomes: 'Clinical', efficiency: 'Cert Access', caseloadApplicability: 'Caseload', reimbursement: 'Billing', marketDemand: 'Market', patientSatisfaction: 'Pt Sat', privatePractice: 'Priv Practice', academic: 'Academic' };
                   return (
                     <span style={{ position: 'relative', display: 'inline-block' }}>
                       <button
                         onClick={e => { e.stopPropagation(); setExpandedROI(prev => ({ ...prev, [cert.name]: !prev[cert.name] })); }}
-                        title="Career ROI by path — click to expand"
+                        title="Career ROI — click to expand"
                         style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'flex-end', gap: '5px' }}
                       >
                         {Object.entries(pathScores).map(([path, score]) => {
@@ -577,32 +609,32 @@ const CertificationsMatrix = () => {
                             marginTop: '4px',
                             background: 'white',
                             border: `1px solid ${colors.slateLight}`,
-                            minWidth: '260px',
+                            minWidth: '270px',
+                            maxWidth: '320px',
                             color: colors.textGray,
                             lineHeight: '1.5',
                             fontSize: '0.72rem',
                           }}
                         >
                           <div style={{ padding: '8px 10px 4px', fontWeight: 600, fontSize: '0.75rem', color: colors.textDark, borderBottom: `1px solid ${colors.slateLight}` }}>
-                            Career ROI by Path
+                            Career ROI
                           </div>
                           {Object.entries(pathScores).map(([path, score]) => {
                             const c = roiScoreColor(score);
-                            const weights = ROI_PATH_WEIGHTS[path];
+                            const narrative = getPathNarrative(path, score, cert.subScores, cert.roiSignals);
                             return (
-                              <div key={path} style={{ padding: '6px 10px', borderBottom: `1px solid ${colors.slateLight}` }}>
+                              <div key={path} style={{ padding: '7px 10px', borderBottom: `1px solid ${colors.slateLight}` }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3px' }}>
-                                  <span style={{ fontWeight: 600, color: colors.textDark }}>{ROI_PATH_LABELS[path]}</span>
-                                  <span style={{ fontWeight: 700, color: c }}>{score}</span>
-                                </div>
-                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3px' }}>
-                                  {Object.entries(weights).map(([key, w]) => (
-                                    <span key={key} style={{ fontSize: '0.65rem', color: colors.textGray }}>
-                                      {dimLabels[key] ?? key}: <strong style={{ color: colors.textDark }}>{(allScores[key] ?? 0)}</strong><span style={{ color: DIMENSION_BAR_COLORS[key] ?? colors.textGray }}>×{w}%</span>
+                                  <span style={{ fontWeight: 600, color: colors.textDark }}>{path}</span>
+                                  <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                    <span style={{ width: '50px', height: '5px', borderRadius: '2px', background: colors.slateLight, overflow: 'hidden', display: 'inline-block' }}>
+                                      <span style={{ display: 'block', height: '100%', width: `${score}%`, background: c, borderRadius: '2px' }} />
                                     </span>
-                                  ))}
+                                    <span style={{ fontWeight: 700, color: c, minWidth: '22px', textAlign: 'right' }}>{score}</span>
+                                  </span>
                                 </div>
-                                {path === 'PPR' && cert.roiSignals?.privatePracticeNote && (
+                                <div style={{ color: colors.textGray }}>{narrative}</div>
+                                {path === 'Business' && cert.roiSignals?.privatePracticeNote && (
                                   <div style={{ color: '#3b82f6', fontSize: '0.65rem', marginTop: '4px' }}>
                                     ℹ️ {cert.roiSignals.privatePracticeNote}
                                   </div>
