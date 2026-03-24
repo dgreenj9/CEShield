@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { ChevronDown, BookOpen, ExternalLink, Info, SlidersHorizontal, Search, X } from 'lucide-react';
 import { colors } from '../../utils/constants';
 import { formatCitation, citationsData } from '../../utils/citationsDataFinal';
@@ -30,6 +30,12 @@ const CertificationsMatrix = () => {
   const [expandedSubScores, setExpandedSubScores] = useState({});
   const [expandedROI, setExpandedROI] = useState({});
   const [weights, setWeights] = useState(DEFAULT_WEIGHTS);
+
+  useEffect(() => {
+    const handler = () => setExpandedROI({});
+    document.addEventListener('click', handler);
+    return () => document.removeEventListener('click', handler);
+  }, []);
 
   // Compute dynamic scores and ranks
   const rankedCerts = useMemo(() => {
@@ -603,6 +609,7 @@ const CertificationsMatrix = () => {
                       {expandedROI[cert.name] && (
                         <div
                           className="absolute z-10 rounded shadow-lg"
+                          onClick={e => e.stopPropagation()}
                           style={{
                             top: '100%',
                             left: 0,
