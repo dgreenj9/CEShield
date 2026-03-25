@@ -425,7 +425,7 @@ const CertificationsMatrix = () => {
                         <span className="text-sm font-medium" style={{ color: colors.textDark }}>
                           {DIMENSION_LABELS[key]}
                         </span>
-                        <p className="text-xs mt-0.5" style={{ color: colors.textGray }}>
+                        <p className="hidden sm:block text-xs mt-0.5" style={{ color: colors.textGray }}>
                           {DIMENSION_DESCRIPTIONS[key]}
                         </p>
                       </div>
@@ -664,8 +664,7 @@ const CertificationsMatrix = () => {
                             marginTop: '4px',
                             background: 'white',
                             border: `1px solid ${colors.slateLight}`,
-                            minWidth: '270px',
-                            maxWidth: '320px',
+                            width: 'min(320px, calc(100vw - 1rem))',
                             color: colors.textGray,
                             lineHeight: '1.5',
                             fontSize: '0.72rem',
@@ -819,17 +818,17 @@ const CertificationsMatrix = () => {
           onClick={() => setShowCitations(false)}
         >
           <div
-            className="bg-white rounded-lg shadow-xl max-w-4xl max-h-[80vh] overflow-hidden"
+            className="bg-white rounded-lg shadow-xl max-w-4xl flex flex-col"
             onClick={(e) => e.stopPropagation()}
-            style={{ width: '90%' }}
+            style={{ width: '90%', maxHeight: '90vh' }}
           >
-            <div className="p-4 border-b flex justify-between items-center">
-              <h3 className="text-lg font-semibold" style={{ color: colors.textDark }}>
+            <div className="p-4 border-b flex justify-between items-center flex-shrink-0">
+              <h3 className="text-base sm:text-lg font-semibold" style={{ color: colors.textDark }}>
                 Complete Evidence-Based Certification Research Citations
               </h3>
-              <button onClick={() => setShowCitations(false)} className="text-gray-500 hover:text-gray-700">✕</button>
+              <button onClick={() => setShowCitations(false)} className="p-2 text-gray-500 hover:text-gray-700 flex-shrink-0">✕</button>
             </div>
-            <div className="p-4 overflow-y-auto max-h-[60vh]">
+            <div className="p-4 overflow-y-auto flex-1">
               <div className="mb-4 p-3 rounded" style={{ background: colors.lightBlue }}>
                 <p className="text-sm" style={{ color: colors.primaryBlue }}>
                   <strong>{totalCitations} Citations</strong> from evidence-based rehabilitation certification research.
@@ -887,18 +886,18 @@ const CertificationsMatrix = () => {
           onClick={() => setShowMethodology(false)}
         >
           <div
-            className="bg-white rounded-lg shadow-xl max-w-4xl max-h-[90vh] overflow-hidden"
+            className="bg-white rounded-lg shadow-xl max-w-4xl flex flex-col"
             onClick={(e) => e.stopPropagation()}
-            style={{ width: '90%' }}
+            style={{ width: '90%', maxHeight: '90vh' }}
           >
-            <div className="p-4 border-b flex justify-between items-center">
+            <div className="p-4 border-b flex justify-between items-center flex-shrink-0">
               <div>
-                <h3 className="text-lg font-semibold" style={{ color: colors.textDark }}>{METHODOLOGY_CONTENT.title}</h3>
+                <h3 className="text-base sm:text-lg font-semibold" style={{ color: colors.textDark }}>{METHODOLOGY_CONTENT.title}</h3>
                 <p className="text-xs mt-1" style={{ color: colors.textGray }}>{METHODOLOGY_CONTENT.version}</p>
               </div>
-              <button onClick={() => setShowMethodology(false)} className="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+              <button onClick={() => setShowMethodology(false)} className="p-2 text-gray-500 hover:text-gray-700 text-xl flex-shrink-0">✕</button>
             </div>
-            <div className="p-6 overflow-y-auto max-h-[75vh]">
+            <div className="p-4 sm:p-6 overflow-y-auto flex-1">
               <div className="mb-6">
                 <p className="text-sm leading-relaxed" style={{ color: colors.textGray }}>{METHODOLOGY_CONTENT.overview}</p>
               </div>

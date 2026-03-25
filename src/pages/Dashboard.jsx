@@ -58,31 +58,32 @@ const Dashboard = ({ authUser, onSignOut }) => {
       <div className="max-w-7xl mx-auto p-4">
         {/* Header */}
         <div className="mb-6" style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
-          <div className="flex justify-between items-start">
-            <div>
+          <div className="flex flex-wrap justify-between items-start gap-3">
+            <div className="min-w-0">
               <CEShieldLogo showTagline={true} size="medium" />
-              <p className="mt-2 text-xs" style={{ color: colors.textGray, fontSize: '0.75rem' }}>
+              <p className="mt-2 text-xs truncate" style={{ color: colors.textGray, fontSize: '0.75rem' }}>
                 {user.name} • {user.state} {user.licenseType} License #{user.licenseNumber}
               </p>
             </div>
-            <div className="flex items-start gap-4">
+            <div className="flex items-center gap-2 flex-shrink-0">
+              {daysUntilRenewal !== null && (
+                <div className="text-right mr-1">
+                  <div className="text-sm sm:text-lg font-semibold" style={{ color: daysUntilRenewal < 90 ? '#dc2626' : colors.textDark }}>
+                    <Clock className="inline-block w-4 h-4 sm:w-5 sm:h-5 mr-1" />
+                    <span className="hidden sm:inline">{daysUntilRenewal} days until renewal</span>
+                    <span className="sm:hidden">{daysUntilRenewal}d</span>
+                  </div>
+                  <p className="text-xs" style={{ color: colors.textGray }}>
+                    Renewal: {new Date(user.renewalDate).toLocaleDateString()}
+                  </p>
+                </div>
+              )}
               <button onClick={() => setShowSettings(true)} style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' }} title="Settings">
                 <Settings className="w-5 h-5" />
               </button>
               <button onClick={onSignOut} style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem' }} title="Sign Out">
                 <LogOut className="w-5 h-5" />
               </button>
-              <div className="text-right">
-                {daysUntilRenewal !== null && (
-                  <div className="text-lg font-semibold" style={{ color: daysUntilRenewal < 90 ? '#dc2626' : colors.textDark }}>
-                    <Clock className="inline-block w-5 h-5 mr-1" />
-                    {daysUntilRenewal} days until renewal
-                  </div>
-                )}
-                <p className="text-sm" style={{ color: colors.textGray }}>
-                  Renewal: {new Date(user.renewalDate).toLocaleDateString()}
-                </p>
-              </div>
             </div>
           </div>
         </div>
