@@ -1,3 +1,10 @@
-# https://www.robotstxt.org/robotstxt.html
+# Allow all crawlers, but keep the authenticated app surface out of the index.
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /sign-in
+Disallow: /explore
+Disallow: /compliance
+Disallow: /courses
+Disallow: /profile
+
+Sitemap: https://ceshield.com/sitemap.xml

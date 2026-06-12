@@ -1,37 +1,68 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { colors } from '../../utils/constants';
 import Modal from '../common/Modal';
+import ConfirmDialog from '../ui/ConfirmDialog';
+import { SUPPORTED_STATES, getRulesFor } from '../../data/stateRules';
 
 const SettingsModal = ({ user, onSave, onClose, courses }) => {
   const [localUser, setLocalUser] = useState({...user});
   const [saving, setSaving] = useState(false);
-  
+  const [pendingLicenseChange, setPendingLicenseChange] = useState(null);
+
   const handleSave = async () => {
     setSaving(true);
     const saved = await onSave(localUser);
     setSaving(false);
-    
+
     if (saved) {
       onClose();
-      alert('Settings saved successfully!');
     }
   };
 
-  const LicenseButton = ({ type, selected, onClick }) => (
-    <button
-      onClick={onClick}
-      className="p-3"
-      style={{
-        border: `2px solid ${selected ? colors.primaryBlue : colors.slateLight}`,
-        background: selected ? colors.lightBlue : 'white', cursor: 'pointer'
-      }}
-    >
-      <div className="font-semibold">{type}</div>
-      <div className="text-xs" style={{ color: colors.textGray }}>
-        {localUser.state === 'IL' ? (type === 'PT' ? '40 hours/2 years' : '24 hours/2 years') : 'Requirements vary'}
-      </div>
-    </button>
+  const requestLicenseChange = (nextType) => {
+    if (localUser.licenseType === nextType) return;
+    if (courses.length > 0) {
+      setPendingLicenseChange(nextType);
+    } else {
+      setLocalUser((u) => ({ ...u, licenseType: nextType }));
+    }
+  };
+
+  // Pull live total-hours from the rules registry so the buttons stay accurate
+  // even as we add states. PT/OT buttons show "{N} hours/{cycle} years".
+  const ptRules = useMemo(() => getRulesFor(localUser.state, 'PT'), [localUser.state]);
+  const otRules = useMemo(() => getRulesFor(localUser.state, 'OT'), [localUser.state]);
+  const selectedRules = useMemo(
+    () => getRulesFor(localUser.state, localUser.licenseType),
+    [localUser.state, localUser.licenseType],
   );
+
+  const LicenseButton = ({ type, selected, onClick }) => {
+    const r = type === 'PT' ? ptRules : otRules;
+    const summary = r
+      ? `${r.totalHours} hours/${r.cycleYears} years`
+      : 'Requirements unavailable';
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        className="p-3"
+        style={{
+          border: `2px solid ${selected ? colors.primaryBlue : colors.slateLight}`,
+          background: selected ? colors.lightBlue : 'white', cursor: 'pointer',
+          borderRadius: 8,
+        }}
+      >
+        <div className="font-semibold">{type}</div>
+        <div className="text-xs" style={{ color: colors.textGray }}>{summary}</div>
+        {r && r.verified === false && (
+          <div className="text-xs mt-1" style={{ color: '#92400e', fontWeight: 600 }}>
+            DRAFT
+          </div>
+        )}
+      </button>
+    );
+  };
   
   return (
     <Modal onClose={onClose}>
@@ -42,45 +73,54 @@ const SettingsModal = ({ user, onSave, onClose, courses }) => {
           <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>State</label>
           <select
             value={localUser.state || 'IL'}
-            onChange={(e) => setLocalUser({...localUser, state: e.target.value})}
+            onChange={(e) => setLocalUser({ ...localUser, state: e.target.value })}
             className="w-full px-3 py-2"
-            style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+            style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight, borderRadius: 6 }}
           >
-            <option value="IL">Illinois</option>
+            {SUPPORTED_STATES.map((s) => {
+              const r = getRulesFor(s, 'PT') || getRulesFor(s, 'OT');
+              const name = r ? r.jurisdictionName : s;
+              return (
+                <option key={s} value={s}>
+                  {name}{r && r.verified === false ? ' (draft)' : ''}
+                </option>
+              );
+            })}
           </select>
-          <p className="text-xs mt-1" style={{ color: colors.textGray }}>
-            Currently supporting Illinois. More states coming soon!
-          </p>
+          {selectedRules && selectedRules.verified === false && (
+            <p className="text-xs mt-1" style={{ color: '#92400e' }}>
+              {selectedRules.jurisdictionName} rules are <strong>draft</strong> —
+              verify against{' '}
+              <a
+                href={selectedRules.boardUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'underline' }}
+              >
+                {selectedRules.citation}
+              </a>
+              {' '}before relying on totals.
+            </p>
+          )}
+          {selectedRules && selectedRules.verified !== false && (
+            <p className="text-xs mt-1" style={{ color: colors.textGray }}>
+              Verified against {selectedRules.citation} (last reviewed {selectedRules.lastReviewed}).
+            </p>
+          )}
         </div>
 
         <div>
           <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>License Type</label>
           <div className="grid grid-cols-2 gap-4">
-            <LicenseButton 
-              type="PT" 
-              selected={localUser.licenseType === 'PT'} 
-              onClick={() => {
-                if (localUser.licenseType !== 'PT' && courses.length > 0) {
-                  if (window.confirm('Changing license type will update all requirements. Continue?')) {
-                    setLocalUser({...localUser, licenseType: 'PT'});
-                  }
-                } else {
-                  setLocalUser({...localUser, licenseType: 'PT'});
-                }
-              }}
+            <LicenseButton
+              type="PT"
+              selected={localUser.licenseType === 'PT'}
+              onClick={() => requestLicenseChange('PT')}
             />
-            <LicenseButton 
-              type="OT" 
-              selected={localUser.licenseType === 'OT'} 
-              onClick={() => {
-                if (localUser.licenseType !== 'OT' && courses.length > 0) {
-                  if (window.confirm('Changing license type will update all requirements. Continue?')) {
-                    setLocalUser({...localUser, licenseType: 'OT'});
-                  }
-                } else {
-                  setLocalUser({...localUser, licenseType: 'OT'});
-                }
-              }}
+            <LicenseButton
+              type="OT"
+              selected={localUser.licenseType === 'OT'}
+              onClick={() => requestLicenseChange('OT')}
             />
           </div>
         </div>
@@ -136,6 +176,18 @@ const SettingsModal = ({ user, onSave, onClose, courses }) => {
           </button>
         </div>
       </div>
+      <ConfirmDialog
+        open={!!pendingLicenseChange}
+        title="Change license type?"
+        description="Changing license type will update all requirements (PT 40h ↔ OT 24h, different mandatory categories). Your logged courses stay — only the targets change."
+        confirmLabel="Yes, change"
+        cancelLabel="Keep current"
+        onConfirm={() => {
+          setLocalUser((u) => ({ ...u, licenseType: pendingLicenseChange }));
+          setPendingLicenseChange(null);
+        }}
+        onCancel={() => setPendingLicenseChange(null)}
+      />
     </Modal>
   );
 };

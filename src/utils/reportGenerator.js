@@ -1,6 +1,20 @@
 import { colors } from './constants';
 import { getRequirements, calculateHours } from './calculations';
 import { createZip } from './zipCreator';
+import { getCertificateUrl } from '../services/certificateStorage';
+
+// HTML-escape user-supplied strings before they're interpolated into the report.
+// Without this, a course title like `<script>...</script>` runs when the report
+// is opened in a browser.
+const esc = (v) => {
+  if (v === null || v === undefined) return '';
+  return String(v)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+};
 
 // Report Generation
 export const generateReport = async (user, courses, certificatesOnly = false) => {
@@ -20,26 +34,44 @@ export const generateReport = async (user, courses, certificatesOnly = false) =>
     try {
       const files = [];
       let certificateCount = 0;
-      
-      courses.forEach((course) => {
-        if (course.certificate) {
-          certificateCount++;
+
+      // Two storage shapes coexist during the migration:
+      //   1) Legacy: course.certificate = { name, data: 'data:...;base64,...' }
+      //   2) New:    course.certificate_storage = { path, name, mime, size }
+      // Walk sequentially because new-path certs need awaited signed URL fetches.
+      for (const course of courses) {
+        const courseTitle = (course.title || 'course').replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
+        const courseDate = new Date(course.date).toISOString().split('T')[0];
+
+        if (course.certificate_storage?.path) {
+          const url = await getCertificateUrl(course.certificate_storage);
+          if (!url) continue;
+          const res = await fetch(url);
+          if (!res.ok) continue;
+          const buf = new Uint8Array(await res.arrayBuffer());
+          const extension =
+            (course.certificate_storage.name || '').split('.').pop() ||
+            (course.certificate_storage.mime || 'application/pdf').split('/').pop();
+          files.push({
+            name: `${courseDate}_${courseTitle}.${extension}`,
+            content: buf,
+          });
+          certificateCount += 1;
+        } else if (course.certificate?.data) {
           const base64Data = course.certificate.data.split(',')[1];
           const binaryData = atob(base64Data);
           const bytes = new Uint8Array(binaryData.length);
           for (let i = 0; i < binaryData.length; i++) {
             bytes[i] = binaryData.charCodeAt(i);
           }
-          
           const extension = course.certificate.name.split('.').pop();
-          const courseTitle = course.title.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
-          const courseDate = new Date(course.date).toISOString().split('T')[0];
           files.push({
             name: `${courseDate}_${courseTitle}.${extension}`,
-            content: bytes
+            content: bytes,
           });
+          certificateCount += 1;
         }
-      });
+      }
 
       if (certificateCount === 0) {
         alert('No certificates or documentation found to export.');
@@ -70,7 +102,7 @@ export const generateReport = async (user, courses, certificatesOnly = false) =>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CE Hours Report - ${user.name}</title>
+  <title>CE Hours Report - ${esc(user.name)}</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
@@ -167,26 +199,26 @@ export const generateReport = async (user, courses, certificatesOnly = false) =>
         </div>
         <div class="tagline">TRACK EDUCATION. PROTECT YOUR LICENSE.</div>
       </div>
-      <h1>${user.state} ${user.licenseType} Continuing Education Report</h1>
+      <h1>${esc(user.state)} ${esc(user.licenseType)} Continuing Education Report</h1>
       <p style="color: ${colors.textGray}; margin-top: 10px;">Generated on ${reportDate}</p>
     </div>
 
     <div class="info-grid">
       <div class="info-item">
         <span class="info-label">Name</span>
-        <span class="info-value">${user.name}</span>
+        <span class="info-value">${esc(user.name)}</span>
       </div>
       <div class="info-item">
         <span class="info-label">State</span>
-        <span class="info-value">${user.state === 'IL' ? 'Illinois' : user.state}</span>
+        <span class="info-value">${esc(user.state === 'IL' ? 'Illinois' : user.state)}</span>
       </div>
       <div class="info-item">
         <span class="info-label">License Type</span>
-        <span class="info-value">${user.licenseType === 'PT' ? 'Physical Therapist' : 'Occupational Therapist'}</span>
+        <span class="info-value">${esc(user.licenseType === 'PT' ? 'Physical Therapist' : 'Occupational Therapist')}</span>
       </div>
       <div class="info-item">
         <span class="info-label">License Number</span>
-        <span class="info-value">${user.licenseNumber}</span>
+        <span class="info-value">${esc(user.licenseNumber)}</span>
       </div>
       <div class="info-item">
         <span class="info-label">Renewal Date</span>
@@ -237,7 +269,7 @@ export const generateReport = async (user, courses, certificatesOnly = false) =>
           const isComplete = completed >= required;
           return `
             <div class="requirement-item ${isComplete ? 'requirement-complete' : 'requirement-incomplete'}">
-              <strong>${key.replace(/([A-Z])/g, ' $1').trim()}</strong><br>
+              <strong>${esc(key.replace(/([A-Z])/g, ' $1').trim())}</strong><br>
               <span style="font-size: 20px; font-weight: bold;">${completed}/${required}</span> hours
               ${key === 'culturalCompetency' ? '<br><small>(NEW 2025)</small>' : ''}
             </div>
@@ -262,12 +294,12 @@ export const generateReport = async (user, courses, certificatesOnly = false) =>
         <tbody>
           ${courses.sort((a, b) => new Date(b.date) - new Date(a.date)).map(course => `
             <tr>
-              <td>${new Date(course.date).toLocaleDateString()}</td>
-              <td>${course.title}</td>
-              <td>${course.provider}</td>
-              <td>${course.category.replace(/([A-Z])/g, ' $1').trim()}</td>
-              <td style="text-align: center;">${course.hours}</td>
-              <td>${course.certificate ? '<span class="certificate-badge">✓ On File</span>' : '-'}</td>
+              <td>${esc(new Date(course.date).toLocaleDateString())}</td>
+              <td>${esc(course.title)}</td>
+              <td>${esc(course.provider)}</td>
+              <td>${esc((course.category || '').replace(/([A-Z])/g, ' $1').trim())}</td>
+              <td style="text-align: center;">${esc(course.hours)}</td>
+              <td>${(course.certificate || course.certificate_storage) ? '<span class="certificate-badge">&#10003; On File</span>' : '-'}</td>
             </tr>
           `).join('')}
         </tbody>

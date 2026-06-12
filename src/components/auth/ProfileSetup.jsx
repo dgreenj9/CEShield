@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { LogOut, User, ChevronDown } from 'lucide-react';
 import { supabase } from '../../services/supabaseClient';
 import { colors } from '../../utils/constants';
 import CEShieldLogo from '../common/CEShieldLogo';
+import { SUPPORTED_STATES, getRulesFor } from '../../data/stateRules';
 
 // Profile Setup Component
 const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
@@ -38,24 +39,42 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
     }
   };
 
-  const LicenseButton = ({ type, selected, onClick }) => (
-    <button
-      onClick={onClick}
-      className="p-4 transition-all"
-      style={{
-        border: `2px solid ${selected ? colors.primaryBlue : colors.slateLight}`,
-        background: selected ? colors.lightBlue : 'white', cursor: 'pointer'
-      }}
-    >
-      <div className="font-semibold">{type}</div>
-      <div className="text-sm" style={{ color: colors.textGray }}>
-        {type === 'PT' ? 'Physical Therapist' : 'Occupational Therapist'}
-      </div>
-      <div className="text-xs mt-1" style={{ color: colors.textGray }}>
-        {user.state === 'IL' ? (type === 'PT' ? '40 hours/2 years' : '24 hours/2 years') : 'Requirements vary'}
-      </div>
-    </button>
+  const ptRules = useMemo(() => getRulesFor(user.state, 'PT'), [user.state]);
+  const otRules = useMemo(() => getRulesFor(user.state, 'OT'), [user.state]);
+  const selectedRules = useMemo(
+    () => getRulesFor(user.state, user.licenseType),
+    [user.state, user.licenseType],
   );
+
+  const LicenseButton = ({ type, selected, onClick }) => {
+    const r = type === 'PT' ? ptRules : otRules;
+    const summary = r
+      ? `${r.totalHours} hours/${r.cycleYears} years`
+      : 'Pick a state first';
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        className="p-4 transition-all"
+        style={{
+          border: `2px solid ${selected ? colors.primaryBlue : colors.slateLight}`,
+          background: selected ? colors.lightBlue : 'white', cursor: 'pointer',
+          borderRadius: 8,
+        }}
+      >
+        <div className="font-semibold">{type}</div>
+        <div className="text-sm" style={{ color: colors.textGray }}>
+          {type === 'PT' ? 'Physical Therapist' : 'Occupational Therapist'}
+        </div>
+        <div className="text-xs mt-1" style={{ color: colors.textGray }}>{summary}</div>
+        {r && r.verified === false && (
+          <div className="text-xs mt-1" style={{ color: '#92400e', fontWeight: 600 }}>
+            DRAFT
+          </div>
+        )}
+      </button>
+    );
+  };
 
   return (
     <div className="min-h-screen p-4" style={{ background: colors.grayLight }}>
@@ -83,20 +102,35 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
               <div className="relative">
                 <select
                   value={user.state}
-                  onChange={(e) => setUser({...user, state: e.target.value})}
+                  onChange={(e) => setUser({ ...user, state: e.target.value })}
                   className="w-full px-3 py-2 appearance-none focus:outline-none focus:ring-2"
-                  style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                  style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight, borderRadius: 6 }}
                 >
                   <option value="">Choose a state</option>
-                  <option value="IL">Illinois</option>
+                  {SUPPORTED_STATES.map((s) => {
+                    const r = getRulesFor(s, 'PT') || getRulesFor(s, 'OT');
+                    const name = r ? r.jurisdictionName : s;
+                    return (
+                      <option key={s} value={s}>
+                        {name}{r && r.verified === false ? ' (draft)' : ''}
+                      </option>
+                    );
+                  })}
                 </select>
                 <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                  <ChevronDown className="w-5 h-5" style={{ color: colors.textGray }} />
+                  <ChevronDown className="w-5 h-5" style={{ color: colors.textGray }} aria-hidden="true" />
                 </div>
               </div>
-              <p className="text-xs mt-1" style={{ color: colors.textGray }}>
-                Currently supporting Illinois. More states coming soon!
-              </p>
+              {selectedRules && selectedRules.verified === false ? (
+                <p className="text-xs mt-1" style={{ color: '#92400e' }}>
+                  {selectedRules.jurisdictionName} rules are <strong>draft</strong> —
+                  verify with your licensing board before relying on totals.
+                </p>
+              ) : (
+                <p className="text-xs mt-1" style={{ color: colors.textGray }}>
+                  More states rolling out monthly. Don&rsquo;t see yours? Email us.
+                </p>
+              )}
             </div>
 
             {user.state && (

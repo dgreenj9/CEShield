@@ -9,7 +9,10 @@ export const colors = {
   slateLight: '#f1f5f9',
   grayLight: '#f9fafb',
   textDark: '#111827',
-  textGray: '#6b7280'
+  textGray: '#6b7280',
+  sage: '#2F6B4D',
+  ochre: '#A87B3F',
 };
 
-export const GOOGLE_VISION_API_KEY = process.env.REACT_APP_GOOGLE_VISION_KEY || '';
+// Google Vision key moved server-side (Supabase Edge Function: parse-certificate).
+// Never re-export this to the client — the key now lives in Supabase secrets only.

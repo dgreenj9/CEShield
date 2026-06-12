@@ -1,397 +1,246 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { ChevronDown, BookOpen, ExternalLink, Info, SlidersHorizontal, Search, X } from 'lucide-react';
+import { ChevronDown, Info, SlidersHorizontal, Search, X } from 'lucide-react';
 import { colors } from '../../utils/constants';
-import { formatCitation, citationsData } from '../../utils/citationsDataFinal';
-import { CERTIFICATION_TO_CITATION_MAP, METHODOLOGY_CONTENT } from '../../utils/certificationCitationMap';
+import { getTotalCitationsCount } from '../../utils/citationsLibrary';
+import { METHODOLOGY_CONTENT } from '../../utils/certificationCitationMap';
 import {
   certifications as certData,
-  DEFAULT_WEIGHTS,
-  DIMENSION_LABELS,
-  DIMENSION_DESCRIPTIONS,
   ALL_DISCIPLINES,
 } from '../../utils/certificationData';
+import useCertFilters from '../../hooks/useCertFilters';
+import {
+  PATHS,
+  PATH_ORDER,
+  PATH_DIMENSIONS,
+  getPathDefaultWeights,
+} from '../../utils/careerPaths';
+import CertificationListItem from './CertificationListItem';
+import CertificationDetail from './CertificationDetail';
+import {
+  getLibraryMetaForCertification,
+  citationLibrary,
+} from '../../utils/citationsLibrary';
+import { useSearchParam, setSearchParam } from '../../router';
+import { usePreference } from '../../utils/userPreferences';
 
-const computeScore = (subScores, weights) => {
-  const total = Object.keys(weights).reduce((sum, key) => {
-    return sum + (subScores[key] || 0) * (weights[key] / 100);
-  }, 0);
-  return Math.round(total * 10) / 10;
+// Slug helpers for URL deep-linking. The slug is stored on each cert's
+// metadata entry; reverse lookup goes through citationLibrary.
+const slugFor = (certName) => getLibraryMetaForCertification(certName).slug;
+const certNameFromSlug = (slug) => {
+  if (!slug) return null;
+  for (const [name, entry] of Object.entries(citationLibrary)) {
+    if (entry.slug === slug) return name;
+  }
+  return null;
+};
+
+// `Are current weights the path default?` — used to surface "Custom weights"
+// when the user has tuned away from the preset.
+const weightsAreDefault = (weights, pathKey) => {
+  const def = getPathDefaultWeights(pathKey);
+  if (!def) return false;
+  return Object.keys(def).every((k) => def[k] === weights?.[k]);
 };
 
 const CertificationsMatrix = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState('strong');
-  const [selectedDiscipline, setSelectedDiscipline] = useState('All');
-  const [searchTerm, setSearchTerm] = useState('');
+  // Persistent matrix state — see hooks/useCertFilters.js. Pure scoring/
+  // filter math lives in utils/certScoring.js. This component now only
+  // wires top-level controls + the master-detail layout.
+  const { state, dispatch, filtered: rankedFiltered, tierCounts } = useCertFilters();
+  const weights = state.weights;
+  const selectedFilter = state.tier;
+  const selectedDiscipline = state.discipline;
+  const selectedType = state.type;
+  const searchTerm = state.searchTerm;
+
+  const setSelectedFilter = (v) => dispatch({ type: 'SET_TIER', value: v });
+  const setSelectedDiscipline = (v) => dispatch({ type: 'SET_DISCIPLINE', value: v });
+  const setSelectedType = (v) => dispatch({ type: 'SET_TYPE', value: v });
+  const setSearchTerm = (v) => dispatch({ type: 'SET_SEARCH', value: v });
+  const handleWeightChange = (key, value) =>
+    dispatch({ type: 'SET_WEIGHT', key, value });
+  const resetWeights = () => dispatch({ type: 'RESET_WEIGHTS' });
+
+  // Local-only UI state.
   const [showMethodology, setShowMethodology] = useState(false);
-  const [showCitations, setShowCitations] = useState(false);
-  const [showWeights, setShowWeights] = useState(true);
-  const [expandedCitations, setExpandedCitations] = useState({});
-  const [expandedSubScores, setExpandedSubScores] = useState({});
-  const [expandedROI, setExpandedROI] = useState({});
-  const [expandedInvestment, setExpandedInvestment] = useState({});
-  const [selectedType, setSelectedType] = useState('All');
-  const [weights, setWeights] = useState(DEFAULT_WEIGHTS);
+  const [showWeights, setShowWeights] = useState(false);
+  // Master-detail selection lives in the URL (?cert=<slug>) so links are
+  // shareable. Reading the slug is reactive — back/forward and external
+  // links propagate to the matrix without an extra state mirror.
+  const selectedSlug = useSearchParam('cert');
+  const selectedCertName = certNameFromSlug(selectedSlug);
+  // Mobile-only: when the user taps a cert we hide the list and show the
+  // detail panel full-width. Desktop ignores this and always shows both.
+  const [showingDetailMobile, setShowingDetailMobile] = useState(false);
 
+  // Active path (lens) drives both which dims show in the customizer and
+  // which certs appear in the list. The path lives in the reducer state;
+  // a localStorage-backed preference seeds it on first mount.
+  const activePath = state.path;
+  const dimsForActivePath = PATH_DIMENSIONS[activePath] || {};
+  const dimensionKeys = Object.keys(dimsForActivePath);
+
+  const [preferredPath, setPreferredPath] = usePreference('careerPath');
+  const appliedInitialPathRef = React.useRef(false);
   useEffect(() => {
-    const handler = () => setExpandedROI({});
-    document.addEventListener('click', handler);
-    return () => document.removeEventListener('click', handler);
-  }, []);
-
-  // Compute dynamic scores and ranks
-  const rankedCerts = useMemo(() => {
-    const scored = certData.map(cert => ({
-      ...cert,
-      computedScore: computeScore(cert.subScores, weights),
-    }));
-    scored.sort((a, b) => b.computedScore - a.computedScore);
-    return scored.map((cert, i) => ({ ...cert, rank: i + 1 }));
-  }, [weights]);
-
-  const totalCitations = useMemo(
-    () => Object.values(citationsData).reduce((sum, arr) => sum + arr.length, 0),
-    []
-  );
-
-  const handleWeightChange = (changedKey, newValue) => {
-    const clamped = Math.max(0, Math.min(100, newValue));
-    const otherKeys = Object.keys(weights).filter(k => k !== changedKey);
-    const remaining = 100 - clamped;
-    const currentOtherTotal = otherKeys.reduce((s, k) => s + weights[k], 0);
-
-    let newWeights = { ...weights, [changedKey]: clamped };
-    if (currentOtherTotal === 0) {
-      const share = remaining / otherKeys.length;
-      otherKeys.forEach(k => { newWeights[k] = Math.round(share); });
-    } else {
-      let distributed = 0;
-      otherKeys.forEach((k, idx) => {
-        if (idx === otherKeys.length - 1) {
-          newWeights[k] = remaining - distributed;
-        } else {
-          const share = Math.round((weights[k] / currentOtherTotal) * remaining);
-          newWeights[k] = share;
-          distributed += share;
-        }
-      });
-    }
-    // Ensure sum is exactly 100
-    const sum = Object.values(newWeights).reduce((s, v) => s + v, 0);
-    if (sum !== 100) {
-      const firstOther = otherKeys[0];
-      newWeights[firstOther] += 100 - sum;
-    }
-    setWeights(newWeights);
-  };
-
-  const getFilteredCerts = () => {
-    let filtered = rankedCerts;
-
-    if (selectedFilter === 'strong') filtered = filtered.filter(c => c.computedScore >= 70);
-    else if (selectedFilter === 'good') filtered = filtered.filter(c => c.computedScore >= 50 && c.computedScore < 70);
-    else if (selectedFilter === 'moderate') filtered = filtered.filter(c => c.computedScore >= 30 && c.computedScore < 50);
-    else if (selectedFilter === 'limited') filtered = filtered.filter(c => c.computedScore < 30);
-
-    if (selectedDiscipline !== 'All') {
-      filtered = filtered.filter(c => c.disciplines && c.disciplines.includes(selectedDiscipline));
-    }
-
-    if (selectedType !== 'All') {
-      filtered = filtered.filter(c => c.type === selectedType);
-    }
-
-    if (searchTerm) {
-      const term = searchTerm.toLowerCase();
-      filtered = filtered.filter(c =>
-        c.name.toLowerCase().includes(term) ||
-        c.discipline.toLowerCase().includes(term) ||
-        c.evidence.toLowerCase().includes(term)
-      );
-    }
-
-    return isExpanded ? filtered : filtered.slice(0, 5);
-  };
-
-  const tierCounts = useMemo(() => {
-    const disc = selectedDiscipline === 'All'
-      ? rankedCerts
-      : rankedCerts.filter(c => c.disciplines && c.disciplines.includes(selectedDiscipline));
-    return {
-      all: disc.length,
-      strong: disc.filter(c => c.computedScore >= 70).length,
-      good: disc.filter(c => c.computedScore >= 50 && c.computedScore < 70).length,
-      moderate: disc.filter(c => c.computedScore >= 30 && c.computedScore < 50).length,
-      limited: disc.filter(c => c.computedScore < 30).length,
-    };
-  }, [rankedCerts, selectedDiscipline]);
-
-  const getScoreStyle = (score) => {
-    if (score >= 70) return { background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)', color: 'white' };
-    if (score >= 50) return { background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)', color: 'white' };
-    if (score >= 30) return { background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)', color: 'white' };
-    return { background: 'linear-gradient(135deg, #94a3b8 0%, #64748b 100%)', color: 'white' };
-  };
-
-  const getBorderColor = (score) => {
-    if (score >= 70) return '#22c55e';
-    if (score >= 50) return colors.primaryBlue;
-    if (score >= 30) return '#f59e0b';
-    return '#94a3b8';
-  };
-
-  const getTypeStyle = (type) => {
-    const styles = {
-      'Certification': { background: colors.lightBlue, color: colors.primaryBlue },
-      'Program': { background: colors.mutedTeal, color: '#0891b2' },
-      'Technology': { background: colors.mutedPurple, color: colors.primaryPurple },
-      'Fellowship': { background: '#fef3c7', color: '#d97706' },
-      'Training': { background: '#fce7f3', color: '#be185d' },
-      'Board Cert': { background: '#fee2e2', color: '#dc2626' },
-      'Protocol': { background: colors.mutedTeal, color: '#0891b2' },
-      'Specialty': { background: colors.lightBlue, color: colors.primaryBlue },
-      'Equipment': { background: colors.mutedPurple, color: colors.primaryPurple },
-      'Degree': { background: '#f3e8ff', color: '#7c3aed' },
-    };
-    return styles[type] || styles['Certification'];
-  };
-
-  const getCitationsForCertification = (certificationName) => {
-    const mappedCategory = CERTIFICATION_TO_CITATION_MAP[certificationName];
-    if (mappedCategory && citationsData[mappedCategory]) return citationsData[mappedCategory];
-    if (citationsData[certificationName]) return citationsData[certificationName];
-    const keys = Object.keys(citationsData);
-    for (const key of keys) {
-      if (key.toLowerCase().includes(certificationName.toLowerCase()) ||
-          certificationName.toLowerCase().includes(key.toLowerCase())) {
-        return citationsData[key];
+    if (appliedInitialPathRef.current) return;
+    // URL params win over localStorage. If the URL specifies a lens (or
+    // weights), useCertFilters has already hydrated from it; don't clobber.
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      if (url.searchParams.has('lens') || url.searchParams.has('w')) {
+        appliedInitialPathRef.current = true;
+        return;
       }
     }
-    return [];
-  };
+    if (!preferredPath) return;
+    if (!PATHS[preferredPath]) return;
+    dispatch({ type: 'SET_PATH', value: preferredPath });
+    appliedInitialPathRef.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [preferredPath]);
 
-  const toggleCitationsForCert = (certName) => {
-    setExpandedCitations(prev => ({ ...prev, [certName]: !prev[certName] }));
-  };
+  const totalCitations = useMemo(() => getTotalCitationsCount(), []);
 
-  const toggleSubScores = (certName) => {
-    setExpandedSubScores(prev => ({ ...prev, [certName]: !prev[certName] }));
-  };
-
-  const toggleInvestment = (certName) => {
-    setExpandedInvestment(prev => ({ ...prev, [certName]: !prev[certName] }));
-  };
-
-  const filteredCerts = getFilteredCerts();
-
-  const DIMENSION_KEYS = Object.keys(DEFAULT_WEIGHTS);
-
-  const DIMENSION_BAR_COLORS = {
-    clinicalOutcomes: '#22c55e',
-    efficiency: '#3b82f6',
-    caseloadApplicability: '#f59e0b',
-    reimbursement: '#8b5cf6',
-    marketDemand: '#ef4444',
-    patientSatisfaction: '#ec4899',
-    privatePractice: '#0ea5e9',
-    academic: '#a855f7',
-  };
-
-  // Three-path Career ROI
-  // Weights sum to 100 within each path.
-  // 'privatePractice' and 'academic' come from cert.roiSignals (supplemental, not in main ranking).
-  const ROI_PATH_WEIGHTS = {
-    Clinical:  { clinicalOutcomes: 30, efficiency: 10, caseloadApplicability: 20, reimbursement: 20, marketDemand: 15, patientSatisfaction: 5 },
-    Business:  { clinicalOutcomes: 20, efficiency: 20, caseloadApplicability: 10, reimbursement: 10, marketDemand: 15, patientSatisfaction: 5, privatePractice: 20 },
-    Academic:  { clinicalOutcomes: 20, efficiency: 5,  caseloadApplicability: 5,  reimbursement: 5,  marketDemand: 15, patientSatisfaction: 5, academic: 45 },
-  };
-
-  const computeAllPathROI = (subScores, roiSignals) => {
-    const allScores = { ...subScores, ...(roiSignals || {}) };
-    return Object.fromEntries(
-      Object.entries(ROI_PATH_WEIGHTS).map(([path, weights]) => {
-        const score = Object.entries(weights).reduce((sum, [key, w]) => sum + (allScores[key] ?? 0) * (w / 100), 0);
-        return [path, Math.round(score)];
-      })
-    );
-  };
-
-  const roiScoreColor = (score) => {
-    if (score >= 70) return '#22c55e';
-    if (score >= 55) return '#84cc16';
-    if (score >= 40) return '#f59e0b';
-    if (score >= 25) return '#f97316';
-    return '#94a3b8';
-  };
-
-  const getPathNarrative = (path, score, subScores, roiSignals) => {
-    const pp  = roiSignals?.privatePractice ?? 0;
-    const aca = roiSignals?.academic ?? 0;
-    const { caseloadApplicability: caseload = 0, reimbursement: billing = 0, marketDemand: demand = 0 } = subScores;
-
-    if (path === 'Clinical') {
-      if (score >= 65) {
-        if (billing >= 70) return 'Strong clinical ROI — broad caseload fit with meaningful billing and reimbursement impact.';
-        if (demand >= 65)  return 'Strong clinical ROI — high employer demand and wide applicability across patient populations.';
-        return 'Strong clinical practice ROI — high caseload fit and solid market recognition.';
-      }
-      if (score >= 45) {
-        if (caseload <= 35) return 'Good clinical evidence, but limited caseload fit reduces day-to-day practice ROI.';
-        if (billing <= 25)  return 'Solid clinical and caseload value; minimal billing differentiation.';
-        return 'Moderate clinical ROI — solid across caseload, employer demand, and billing dimensions.';
-      }
-      if (caseload <= 25) return 'Highly specialized — limited applicability outside a narrow patient population.';
-      return 'Limited clinical practice ROI; low market demand or narrow billing impact.';
+  // If the URL points at a cert that's been filtered out, drop the param so
+  // the URL reflects what's actually visible. Browser back still navigates
+  // back to the previous state.
+  useEffect(() => {
+    if (!selectedSlug) return;
+    if (!selectedCertName) return;
+    const inFilter = rankedFiltered.some((c) => c.name === selectedCertName);
+    if (!inFilter && rankedFiltered.length > 0) {
+      setSearchParam('cert', null, { replace: true });
     }
+  }, [selectedSlug, selectedCertName, rankedFiltered]);
 
-    if (path === 'Business') {
-      if (pp >= 75) return 'Strong business potential — high consumer demand and premium cash-pay pricing viability.';
-      if (pp >= 55) return 'Good private practice opportunity — established cash-pay market with meaningful pricing leverage.';
-      if (pp >= 35) return 'Moderate business value — some differentiation in direct-pay or entrepreneurial settings.';
-      return 'Limited business differentiation; primarily suited to institutional or insurance-based settings.';
-    }
-
-    if (path === 'Academic') {
-      if (aca >= 80) return 'Exceptional academic value — widely recognized across research, teaching, and health technology roles.';
-      if (aca >= 60) return 'Strong academic pathway — credential transfers well to research, teaching, and industry positions.';
-      if (aca >= 40) return 'Moderate academic value — some research or industry relevance alongside its clinical applications.';
-      return 'Limited academic or industry pathway; credential value is concentrated in direct clinical practice.';
-    }
-
-    return '';
-  };
-
-  const CitationSection = ({ certName }) => {
-    const citations = getCitationsForCertification(certName);
-    const isExp = expandedCitations[certName];
-    if (citations.length === 0) return null;
-    return (
-      <div className="mt-2 pt-2" style={{ borderTop: `1px solid ${colors.slateLight}` }}>
-        <button
-          onClick={() => toggleCitationsForCert(certName)}
-          className="flex items-center gap-2 text-xs hover:bg-gray-100 px-2 py-1 rounded transition-colors"
-          style={{ color: colors.primaryBlue }}
-        >
-          <BookOpen className="w-3 h-3" />
-          {isExp ? 'Hide' : 'View'} Citations ({citations.length})
-          <ChevronDown className={`w-3 h-3 transition-transform ${isExp ? 'rotate-180' : ''}`} />
-        </button>
-        {isExp && (
-          <div className="mt-2 space-y-1">
-            {citations.map((citation, index) => (
-              <div
-                key={citation.id || index}
-                className="text-xs p-2 rounded"
-                style={{ background: colors.grayLight, color: colors.textGray, borderLeft: `2px solid ${colors.primaryBlue}` }}
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <div className="flex-1">
-                    <div className="font-medium mb-1" style={{ color: colors.textDark }}>{citation.title}</div>
-                    <div className="text-xs space-y-1">
-                      {citation.authors && <div><strong>Authors:</strong> {citation.authors}</div>}
-                      {citation.journal && <div><strong>Journal:</strong> {citation.journal}</div>}
-                      {citation.year && <div><strong>Year:</strong> {citation.year}</div>}
-                      {citation.type && (
-                        <span className="inline-block px-1.5 py-0.5 rounded text-xs" style={{ background: colors.lightBlue, color: colors.primaryBlue, fontSize: '0.7rem' }}>
-                          {citation.type}
-                        </span>
-                      )}
-                      {citation.pmcId && <div className="mt-1"><strong>PMC:</strong> {citation.pmcId}</div>}
-                      {citation.pubmedId && <div><strong>PubMed ID:</strong> {citation.pubmedId}</div>}
-                      {citation.doi && <div><strong>DOI:</strong> {citation.doi}</div>}
-                    </div>
-                  </div>
-                  {citation.url && (
-                    <a href={citation.url} target="_blank" rel="noopener noreferrer"
-                      className="flex-shrink-0 p-1 hover:bg-white rounded transition-colors"
-                      style={{ color: colors.primaryBlue }} title="Open citation link">
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  };
-
-  const SubScoreSection = ({ cert }) => {
-    const isExp = expandedSubScores[cert.name];
-    return (
-      <div className="mt-2 pt-2" style={{ borderTop: `1px solid ${colors.slateLight}` }}>
-        <button
-          onClick={() => toggleSubScores(cert.name)}
-          className="flex items-center gap-2 text-xs hover:bg-gray-100 px-2 py-1 rounded transition-colors"
-          style={{ color: colors.textGray }}
-        >
-          <SlidersHorizontal className="w-3 h-3" />
-          {isExp ? 'Hide' : 'Show'} Score Breakdown
-          <ChevronDown className={`w-3 h-3 transition-transform ${isExp ? 'rotate-180' : ''}`} />
-        </button>
-        {isExp && (
-          <div className="mt-3 space-y-3">
-            {DIMENSION_KEYS.map(key => {
-              const val = cert.subScores[key] || 0;
-              const barColor = DIMENSION_BAR_COLORS[key];
-              const justification = cert.justifications && cert.justifications[key];
-              return (
-                <div key={key}>
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs font-medium" style={{ color: colors.textDark }}>
-                      {DIMENSION_LABELS[key]}
-                      <span className="ml-1 font-normal text-xs" style={{ color: colors.textGray }}>
-                        (weight: {weights[key]}%)
-                      </span>
-                    </span>
-                    <span className="text-xs font-semibold" style={{ color: colors.textDark }}>{val}/100</span>
-                  </div>
-                  <div className="w-full rounded-full h-2 mb-1" style={{ background: colors.slateLight }}>
-                    <div
-                      className="h-2 rounded-full transition-all"
-                      style={{ width: `${val}%`, background: barColor }}
-                    />
-                  </div>
-                  {justification && (
-                    <p className="text-xs mt-1" style={{ color: colors.textGray, lineHeight: '1.4' }}>
-                      {justification}
-                    </p>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
-    );
-  };
+  // Deep-link on mobile: if the URL arrives with ?cert=<slug>, jump straight
+  // into the detail view instead of the list.
+  useEffect(() => {
+    if (!selectedCertName) return;
+    setShowingDetailMobile(true);
+  }, [selectedCertName]);
 
   return (
-    <div className="mb-6" style={{ background: 'white', padding: '1.5rem', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)', border: `1px solid ${colors.slateLight}` }}>
+    <div className="mb-6" style={{ background: 'white', padding: '1.5rem', boxShadow: '0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.06)', border: `1px solid ${colors.slateLight}`, borderRadius: '12px' }}>
       {/* Header */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 mb-4">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
           <h2 className="text-base md:text-lg font-semibold" style={{ color: colors.textDark }}>
             Evidence-Based Certification Rankings
           </h2>
-          <span className="text-xs px-2 py-1" style={{ background: colors.lightBlue, color: colors.primaryBlue, borderRadius: '4px' }}>
+          <span className="text-xs px-2 py-1" style={{ background: colors.lightBlue, color: colors.primaryBlue, borderRadius: '6px' }}>
             {certData.length} Ranked
           </span>
         </div>
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-2 px-3 py-1.5 text-sm transition-all w-full sm:w-auto justify-center"
-          style={{
-            background: isExpanded ? colors.primaryBlue : 'white',
-            color: isExpanded ? 'white' : colors.primaryBlue,
-            border: `1px solid ${colors.primaryBlue}`,
-            cursor: 'pointer',
-          }}
-        >
-          {isExpanded ? 'Collapse' : 'Expand'}
-          <ChevronDown className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
-        </button>
+      </div>
+
+      {/* Career-path lens selector. Five lenses, each with its own native
+          dimensions + ranking. Switching lens swaps both the dim set in the
+          customizer and the eligible cert pool. */}
+      <div className="mb-4" role="group" aria-label="Career path lens">
+        <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
+          <div className="text-xs font-semibold" style={{ color: colors.textGray, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            Career path lens
+          </div>
+          <a
+            href="/career-paths"
+            style={{ fontSize: '0.78rem', color: colors.primaryBlue, textDecoration: 'underline' }}
+          >
+            What are the paths?
+          </a>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          {PATH_ORDER.map((key) => {
+            const path = PATHS[key];
+            const active = activePath === key;
+            return (
+              <button
+                key={key}
+                type="button"
+                onClick={() => dispatch({ type: 'SET_PATH', value: key })}
+                aria-pressed={active}
+                title={path.description}
+                style={{
+                  padding: '0.5rem 0.9rem',
+                  fontSize: '0.85rem',
+                  fontWeight: 500,
+                  borderRadius: 9999,
+                  background: active ? colors.primaryBlue : 'white',
+                  color: active ? 'white' : colors.slateMedium,
+                  border: `1px solid ${active ? colors.primaryBlue : colors.slateLight}`,
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                {path.label}
+              </button>
+            );
+          })}
+          {!weightsAreDefault(weights, activePath) && (
+            <span
+              style={{
+                alignSelf: 'center',
+                fontSize: '0.78rem',
+                color: colors.textGray,
+                fontStyle: 'italic',
+              }}
+            >
+              Custom weights
+            </span>
+          )}
+        </div>
+        {/* "Save this lens as your default" — only when the active lens
+            isn't already the saved preference. */}
+        <div className="mt-2 flex items-center gap-2 flex-wrap" style={{ fontSize: '0.75rem' }}>
+          {preferredPath === activePath ? (
+            <span style={{ color: colors.textGray }}>
+              Your default lens:{' '}
+              <strong style={{ color: colors.textDark }}>{PATHS[activePath].label}</strong>
+            </span>
+          ) : (
+            <>
+              <span style={{ color: colors.textGray }}>
+                Use{' '}
+                <strong style={{ color: colors.textDark }}>{PATHS[activePath].label}</strong>{' '}
+                as your default lens?
+              </span>
+              <button
+                type="button"
+                onClick={() => setPreferredPath(activePath)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: colors.primaryBlue,
+                  cursor: 'pointer',
+                  padding: 0,
+                  fontSize: '0.75rem',
+                  fontWeight: 600,
+                  textDecoration: 'underline',
+                }}
+              >
+                Save as default
+              </button>
+            </>
+          )}
+          {preferredPath && preferredPath !== activePath && (
+            <button
+              type="button"
+              onClick={() => setPreferredPath(null)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: colors.textGray,
+                cursor: 'pointer',
+                padding: 0,
+                fontSize: '0.75rem',
+                textDecoration: 'underline',
+              }}
+            >
+              clear saved default ({PATHS[preferredPath]?.label})
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Weight Sliders */}
@@ -404,7 +253,7 @@ const CertificationsMatrix = () => {
               color: showWeights ? colors.primaryBlue : colors.textGray,
               border: `1px solid ${showWeights ? colors.primaryBlue : colors.slateLight}`,
               cursor: 'pointer',
-              borderRadius: '4px',
+              borderRadius: '6px',
             }}
           >
             <SlidersHorizontal className="w-4 h-4" />
@@ -412,56 +261,153 @@ const CertificationsMatrix = () => {
             <ChevronDown className={`w-3 h-3 transition-transform ${showWeights ? 'rotate-180' : ''}`} />
           </button>
 
-          {showWeights && (
-            <div className="p-4 mb-4 rounded" style={{ background: colors.grayLight, border: `1px solid ${colors.slateLight}` }}>
-              <p className="text-xs mb-3" style={{ color: colors.textGray }}>
-                Drag sliders to adjust how each dimension is weighted. Weights must sum to 100% — other dimensions adjust proportionally.
-              </p>
-              <div className="space-y-4">
-                {DIMENSION_KEYS.map(key => (
-                  <div key={key}>
-                    <div className="flex items-center justify-between mb-1">
-                      <div>
-                        <span className="text-sm font-medium" style={{ color: colors.textDark }}>
-                          {DIMENSION_LABELS[key]}
-                        </span>
-                        <p className="hidden sm:block text-xs mt-0.5" style={{ color: colors.textGray }}>
-                          {DIMENSION_DESCRIPTIONS[key]}
-                        </p>
-                      </div>
-                      <span
-                        className="text-sm font-bold ml-4 px-2 py-0.5 rounded"
-                        style={{ background: DIMENSION_BAR_COLORS[key], color: 'white', minWidth: '44px', textAlign: 'center' }}
-                      >
-                        {weights[key]}%
-                      </span>
-                    </div>
-                    <input
-                      type="range"
-                      min={0}
-                      max={100}
-                      value={weights[key]}
-                      onChange={e => handleWeightChange(key, parseInt(e.target.value, 10))}
-                      className="w-full"
-                      style={{ accentColor: DIMENSION_BAR_COLORS[key] }}
-                    />
+          {showWeights && (() => {
+            const weightLabel = (n) => {
+              if (n === 0) return 'Off';
+              if (n < 10) return 'Low';
+              if (n < 20) return 'Moderate';
+              if (n < 30) return 'High';
+              if (n < 45) return 'Heavy';
+              return 'Dominant';
+            };
+            const total = Object.values(weights).reduce((s, v) => s + v, 0);
+            return (
+            <div
+              style={{
+                padding: '1.25rem',
+                marginBottom: '1rem',
+                background: 'white',
+                border: `1px solid ${colors.slateLight}`,
+                borderRadius: 12,
+              }}
+            >
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '0.75rem',
+                flexWrap: 'wrap',
+                marginBottom: '1rem',
+                paddingBottom: '0.875rem',
+                borderBottom: `1px solid ${colors.slateLight}`,
+              }}>
+                <div>
+                  <div style={{ fontWeight: 600, color: colors.textDark, fontSize: '0.95rem' }}>
+                    How much should each dimension matter?
                   </div>
-                ))}
+                  <div style={{ fontSize: '0.8rem', color: colors.textGray, marginTop: 2 }}>
+                    Dragging one slider rebalances the others so the total stays at 100.
+                  </div>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span
+                    style={{
+                      fontSize: '0.75rem',
+                      padding: '4px 8px',
+                      borderRadius: 999,
+                      background: total === 100 ? '#dcfce7' : '#fef3c7',
+                      color: total === 100 ? '#166534' : '#92400e',
+                      fontWeight: 600,
+                    }}
+                  >
+                    Total {total}%
+                  </span>
+                  <button
+                    type="button"
+                    onClick={resetWeights}
+                    style={{
+                      fontSize: '0.78rem',
+                      padding: '0.4rem 0.75rem',
+                      background: 'white',
+                      color: colors.primaryBlue,
+                      border: `1px solid ${colors.primaryBlue}`,
+                      borderRadius: 6,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Reset
+                  </button>
+                </div>
               </div>
-              <div className="mt-3 flex justify-between items-center">
-                <span className="text-xs" style={{ color: colors.textGray }}>
-                  Total: {Object.values(weights).reduce((s, v) => s + v, 0)}%
-                </span>
-                <button
-                  onClick={() => setWeights(DEFAULT_WEIGHTS)}
-                  className="text-xs px-2 py-1 rounded"
-                  style={{ background: 'white', color: colors.primaryBlue, border: `1px solid ${colors.primaryBlue}`, cursor: 'pointer' }}
-                >
-                  Reset to defaults
-                </button>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gap: '0.875rem',
+                }}
+              >
+                {dimensionKeys.map((key) => {
+                  const value = weights[key];
+                  const fillPct = value;  // 0–100 ⇒ background fill width
+                  return (
+                    <div
+                      key={key}
+                      style={{
+                        position: 'relative',
+                        padding: '0.875rem 1rem',
+                        background: colors.grayLight,
+                        border: `1px solid ${colors.slateLight}`,
+                        borderRadius: 10,
+                        overflow: 'hidden',
+                      }}
+                    >
+                      <div
+                        aria-hidden="true"
+                        style={{
+                          position: 'absolute', inset: 0, width: `${fillPct}%`,
+                          background: `${colors.primaryBlue}14`,
+                          transition: 'width 0.18s ease',
+                          pointerEvents: 'none',
+                        }}
+                      />
+                      <div style={{ position: 'relative' }}>
+                        <div style={{
+                          display: 'flex', alignItems: 'baseline',
+                          justifyContent: 'space-between', gap: 8,
+                        }}>
+                          <div style={{ fontWeight: 600, color: colors.textDark, fontSize: '0.9rem' }}>
+                            {(dimsForActivePath[key]?.label || key)}
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+                            <span className="font-mono tabular-nums" style={{ fontWeight: 600, color: colors.primaryBlue, fontSize: '1.15rem', letterSpacing: '-0.01em' }}>
+                              {value}
+                            </span>
+                            <span className="font-mono" style={{ fontSize: '0.7rem', color: colors.textGray }}>/100</span>
+                          </div>
+                        </div>
+                        <p style={{
+                          fontSize: '0.78rem', color: colors.textGray,
+                          margin: '4px 0 10px', lineHeight: 1.4,
+                        }}>
+                          {(dimsForActivePath[key]?.description || '')}
+                        </p>
+                        <input
+                          type="range"
+                          min={0}
+                          max={100}
+                          value={value}
+                          onChange={(e) => handleWeightChange(key, parseInt(e.target.value, 10))}
+                          aria-label={`${(dimsForActivePath[key]?.label || key)} weight`}
+                          style={{ width: '100%', accentColor: colors.primaryBlue }}
+                        />
+                        <div style={{
+                          display: 'flex', justifyContent: 'space-between',
+                          marginTop: 4, fontSize: '0.68rem', color: colors.textGray,
+                        }}>
+                          <span>{weightLabel(value)}</span>
+                          <span className="font-mono">
+                            0 · 25 · 50 · 75 · 100
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-          )}
+            );
+          })()}
         </div>
 
       {/* Search */}
@@ -478,7 +424,7 @@ const CertificationsMatrix = () => {
           <Search className="w-4 h-4 flex-shrink-0" style={{ color: searchTerm ? colors.primaryBlue : colors.textGray }} />
           <input
             type="text"
-            placeholder="Search certifications by name, discipline, or evidence type…"
+            placeholder="Search by certification, discipline, or technique…"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="flex-1 bg-transparent outline-none text-sm"
@@ -551,6 +497,7 @@ const CertificationsMatrix = () => {
                   color: selectedFilter === filter.value ? 'white' : colors.textGray,
                   border: `1px solid ${selectedFilter === filter.value ? colors.primaryBlue : colors.slateLight}`,
                   cursor: 'pointer',
+                  borderRadius: '9999px',
                 }}
               >
                 <span className="hidden sm:inline">{filter.label}</span>
@@ -563,321 +510,119 @@ const CertificationsMatrix = () => {
           </div>
         </div>
 
-      {/* Certification List */}
-      <div className="space-y-2">
-        {filteredCerts.map((cert) => (
-          <div
-            key={cert.name}
-            className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3 p-3 transition-all hover:bg-gray-50"
-            style={{
-              background: colors.grayLight,
-              borderLeft: `3px solid ${getBorderColor(cert.computedScore)}`,
-            }}
-          >
-            {/* Rank + Score (mobile: side by side) */}
-            <div className="flex items-center justify-between sm:contents">
-              <div className="text-center" style={{ minWidth: '40px' }}>
-                <div className="text-xs" style={{ color: colors.textGray }}>Rank</div>
-                <div className="font-semibold" style={{ color: colors.textDark }}>#{cert.rank}</div>
-              </div>
-              <div className="sm:hidden">
-                <div
-                  className="px-3 py-1 font-semibold text-center"
-                  style={{ ...getScoreStyle(cert.computedScore), borderRadius: '4px', fontSize: '0.875rem', minWidth: '52px' }}
-                >
-                  {cert.computedScore}
-                </div>
-                <div className="text-center text-xs mt-0.5" style={{ color: colors.textGray }}>/ 100</div>
-              </div>
-            </div>
+      {/* Master-detail */}
+      {(() => {
+        // The detail pane defaults to the top-ranked filtered cert if the
+        // user hasn't picked one, or if their pick fell out of the filter.
+        const inFilter = selectedCertName
+          ? rankedFiltered.find((c) => c.name === selectedCertName)
+          : null;
+        const effectiveSelected = inFilter || rankedFiltered[0] || null;
+        const handleSelect = (name) => {
+          const slug = slugFor(name);
+          if (slug) setSearchParam('cert', slug, { replace: true });
+          setShowingDetailMobile(true);
+        };
+        const handleBack = () => setShowingDetailMobile(false);
 
-            {/* Content */}
-            <div className="flex-1 min-w-0">
-              <div className="flex flex-wrap items-center gap-2 mb-1">
-                <span className="font-medium text-sm sm:text-base" style={{ color: colors.textDark }}>
-                  {cert.name}
-                </span>
-                <button
-                  onClick={e => { e.stopPropagation(); setSelectedType(prev => prev === cert.type ? 'All' : cert.type); }}
-                  title={selectedType === cert.type ? 'Clear type filter' : `Filter by: ${cert.type}`}
-                  className="text-xs px-2 py-0.5"
-                  style={{
-                    ...getTypeStyle(cert.type),
-                    borderRadius: '3px',
-                    fontWeight: '500',
-                    cursor: 'pointer',
-                    outline: selectedType === cert.type ? '2px solid currentColor' : 'none',
-                    outlineOffset: '1px',
-                  }}
-                >
-                  {cert.type}
-                </button>
-                <span className="flex flex-wrap gap-1">
-                  {(cert.disciplines || [cert.discipline]).map(d => (
-                    <button
-                      key={d}
-                      onClick={e => { e.stopPropagation(); setSelectedDiscipline(prev => prev === d ? 'All' : d); }}
-                      title={selectedDiscipline === d ? 'Clear discipline filter' : `Filter by: ${d}`}
-                      className="text-xs px-1.5 py-0.5 rounded transition-colors"
-                      style={{
-                        background: selectedDiscipline === d ? colors.textDark : 'transparent',
-                        color: selectedDiscipline === d ? 'white' : colors.textGray,
-                        border: `1px solid ${selectedDiscipline === d ? colors.textDark : colors.slateLight}`,
-                        cursor: 'pointer',
-                      }}
-                    >
-                      {d}
-                    </button>
-                  ))}
-                </span>
-                {(() => {
-                  const pathScores = computeAllPathROI(cert.subScores, cert.roiSignals);
-                  return (
-                    <span style={{ position: 'relative', display: 'inline-block' }}>
-                      <button
-                        onClick={e => { e.stopPropagation(); setExpandedROI(prev => ({ ...prev, [cert.name]: !prev[cert.name] })); }}
-                        title="Career ROI — click to expand"
-                        style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'flex-end', gap: '5px' }}
-                      >
-                        {Object.entries(pathScores).map(([path, score]) => {
-                          const c = roiScoreColor(score);
-                          return (
-                            <span key={path} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1px' }}>
-                              <span style={{ fontSize: '0.6rem', color: colors.textGray, lineHeight: 1, whiteSpace: 'nowrap' }}>{path}</span>
-                              <span style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
-                                <span style={{ width: '28px', height: '5px', borderRadius: '2px', background: colors.slateLight, overflow: 'hidden', display: 'block' }}>
-                                  <span style={{ display: 'block', height: '100%', width: `${score}%`, background: c, borderRadius: '2px' }} />
-                                </span>
-                                <span style={{ fontSize: '0.6rem', color: c, fontWeight: 600, lineHeight: 1 }}>{score}</span>
-                              </span>
-                            </span>
-                          );
-                        })}
-                      </button>
-                      {expandedROI[cert.name] && (
-                        <div
-                          className="absolute z-10 rounded shadow-lg"
-                          onClick={e => e.stopPropagation()}
-                          style={{
-                            top: '100%',
-                            left: 0,
-                            marginTop: '4px',
-                            background: 'white',
-                            border: `1px solid ${colors.slateLight}`,
-                            width: 'min(320px, calc(100vw - 1rem))',
-                            color: colors.textGray,
-                            lineHeight: '1.5',
-                            fontSize: '0.72rem',
-                          }}
-                        >
-                          <div style={{ padding: '8px 10px 4px', fontWeight: 600, fontSize: '0.75rem', color: colors.textDark, borderBottom: `1px solid ${colors.slateLight}` }}>
-                            Career ROI
-                          </div>
-                          {Object.entries(pathScores).map(([path, score]) => {
-                            const c = roiScoreColor(score);
-                            const narrative = getPathNarrative(path, score, cert.subScores, cert.roiSignals);
-                            return (
-                              <div key={path} style={{ padding: '7px 10px', borderBottom: `1px solid ${colors.slateLight}` }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3px' }}>
-                                  <span style={{ fontWeight: 600, color: colors.textDark }}>{path}</span>
-                                  <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                                    <span style={{ width: '50px', height: '5px', borderRadius: '2px', background: colors.slateLight, overflow: 'hidden', display: 'inline-block' }}>
-                                      <span style={{ display: 'block', height: '100%', width: `${score}%`, background: c, borderRadius: '2px' }} />
-                                    </span>
-                                    <span style={{ fontWeight: 700, color: c, minWidth: '22px', textAlign: 'right' }}>{score}</span>
-                                  </span>
-                                </div>
-                                <div style={{ color: colors.textGray }}>{narrative}</div>
-                                {path === 'Business' && cert.roiSignals?.privatePracticeNote && (
-                                  <div style={{ color: '#3b82f6', fontSize: '0.65rem', marginTop: '4px' }}>
-                                    ℹ️ {cert.roiSignals.privatePracticeNote}
-                                  </div>
-                                )}
-                              </div>
-                            );
-                          })}
-                          <div style={{ padding: '4px 10px', fontSize: '0.63rem', fontStyle: 'italic', color: colors.textGray }}>
-                            Speculative — based on publicly available market and evidence data.
-                          </div>
-                        </div>
-                      )}
-                    </span>
-                  );
-                })()}
-              </div>
-              <div className="text-xs sm:text-sm mb-1 flex items-start gap-2 flex-wrap">
-                <span style={{ color: colors.textGray }}>{cert.evidence}</span>
-                {getCitationsForCertification(cert.name).length > 0 && (
-                  <button
-                    onClick={e => { e.stopPropagation(); toggleCitationsForCert(cert.name); }}
-                    className="flex items-center gap-1 flex-shrink-0 text-xs px-1.5 py-0.5 rounded transition-colors hover:bg-blue-50"
-                    style={{ color: colors.primaryBlue, background: colors.lightBlue, border: `1px solid ${colors.primaryBlue}30`, cursor: 'pointer', whiteSpace: 'nowrap' }}
-                  >
-                    <BookOpen className="w-3 h-3" />
-                    {getCitationsForCertification(cert.name).length} citations
-                  </button>
+        return (
+          <div className="ceshield-matrix-split">
+            {/* List column */}
+            <div
+              className="ceshield-matrix-list"
+              style={{
+                display: showingDetailMobile ? 'none' : 'block',
+              }}
+            >
+              <div
+                style={{
+                  border: `1px solid ${colors.slateLight}`,
+                  borderRadius: 12,
+                  overflow: 'hidden',
+                  maxHeight: 640,
+                  overflowY: 'auto',
+                  background: 'white',
+                }}
+              >
+                {rankedFiltered.length === 0 ? (
+                  <div style={{ padding: '2rem', textAlign: 'center', color: colors.textGray, fontSize: '0.9rem' }}>
+                    No certifications match these filters.
+                  </div>
+                ) : (
+                  rankedFiltered.map((cert) => (
+                    <CertificationListItem
+                      key={cert.name}
+                      cert={cert}
+                      active={effectiveSelected && effectiveSelected.name === cert.name}
+                      onSelect={handleSelect}
+                    />
+                  ))
                 )}
               </div>
-              {cert.justifications?.efficiency && (
-                <div className="mt-1 mb-1">
-                  <button
-                    onClick={e => { e.stopPropagation(); toggleInvestment(cert.name); }}
-                    className="flex items-center gap-1.5 text-xs px-2 py-1 rounded hover:bg-gray-100 transition-colors"
-                    style={{ color: DIMENSION_BAR_COLORS.efficiency, background: 'none', border: 'none', cursor: 'pointer' }}
-                  >
-                    <SlidersHorizontal className="w-3 h-3" />
-                    {expandedInvestment[cert.name] ? 'Hide' : 'Cert Investment'}
-                    <ChevronDown className={`w-3 h-3 transition-transform ${expandedInvestment[cert.name] ? 'rotate-180' : ''}`} />
-                  </button>
-                  {expandedInvestment[cert.name] && (
-                    <div
-                      className="mt-1 text-xs px-3 py-2 rounded"
-                      style={{
-                        background: '#eff6ff',
-                        borderLeft: `3px solid ${DIMENSION_BAR_COLORS.efficiency}`,
-                        color: colors.textGray,
-                        lineHeight: '1.5',
-                      }}
-                    >
-                      {cert.justifications.efficiency}
-                    </div>
-                  )}
+              <p style={{ marginTop: 8, fontSize: '0.78rem', color: colors.textGray, textAlign: 'center' }}>
+                {rankedFiltered.length} of {certData.length} certifications shown
+              </p>
+            </div>
+
+            {/* Detail column. Mobile shows the detail only after an explicit
+                cert tap (showingDetailMobile=true); desktop CSS forces it
+                visible regardless via !important. Auto-defaulting to the
+                top-ranked cert on mobile created a stacked list+detail UX
+                with no way to get back to the list. */}
+            <div
+              className="ceshield-matrix-detail"
+              style={{
+                display: showingDetailMobile ? 'block' : 'none',
+              }}
+            >
+              {effectiveSelected ? (
+                <CertificationDetail
+                  certName={effectiveSelected.name}
+                  weights={weights}
+                  path={activePath}
+                  onBack={showingDetailMobile ? handleBack : undefined}
+                />
+              ) : (
+                <div
+                  style={{
+                    padding: '3rem 1.5rem',
+                    textAlign: 'center',
+                    background: colors.grayLight,
+                    border: `1px dashed ${colors.slateLight}`,
+                    borderRadius: 12,
+                    color: colors.textGray,
+                  }}
+                >
+                  Pick a certification on the left to see its evidence base
+                  and score breakdown.
                 </div>
               )}
-              <SubScoreSection cert={cert} />
-              <CitationSection certName={cert.name} />
-            </div>
-
-            {/* Score (desktop) */}
-            <div className="hidden sm:block text-center flex-shrink-0" style={{ minWidth: '64px' }}>
-              <div
-                className="px-3 py-1 font-semibold"
-                style={{ ...getScoreStyle(cert.computedScore), borderRadius: '4px', fontSize: '0.875rem' }}
-              >
-                {cert.computedScore}
-              </div>
-              <div className="text-xs mt-0.5" style={{ color: colors.textGray }}>/ 100</div>
             </div>
           </div>
-        ))}
-      </div>
+        );
+      })()}
 
-      {!isExpanded && (
-        <div className="mt-3 pt-3 text-center" style={{ borderTop: `1px solid ${colors.slateLight}` }}>
-          <p className="text-sm" style={{ color: colors.textGray }}>
-            Showing top 5 certifications. Click expand to view all {certData.length} ranked certifications.
-          </p>
-        </div>
-      )}
+      {/* Old per-cert card rendering — disabled by short-circuit below */}
 
-      {/* Footer info */}
-      {isExpanded && (
-        <div className="mt-4 pt-4" style={{ borderTop: `1px solid ${colors.slateLight}` }}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-            <div>
-              <h4 className="font-medium mb-2" style={{ color: colors.textDark }}>About This Matrix</h4>
-              <p style={{ color: colors.textGray, fontSize: '0.813rem', lineHeight: '1.5' }}>
-                Evidence-based rankings of {certData.length} rehabilitation certifications scored across {DIMENSION_KEYS.length} dimensions. Adjust the weights above to personalize rankings to your priorities — scores and ranks update live.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-medium mb-2" style={{ color: colors.textDark }}>Scoring Methodology</h4>
-              <p style={{ color: colors.textGray, fontSize: '0.813rem', lineHeight: '1.5' }}>
-                {Object.entries(weights).map(([k, v]) => `${DIMENSION_LABELS[k]} ${v}%`).join(' • ')}
-              </p>
-              <button
-                onClick={() => setShowMethodology(true)}
-                className="text-xs mt-2 flex items-center gap-1 hover:underline"
-                style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-              >
-                <Info className="w-3 h-3" />
-                View Full Methodology →
-              </button>
-            </div>
-            <div>
-              <h4 className="font-medium mb-2" style={{ color: colors.textDark }}>Key Finding</h4>
-              <p style={{ color: colors.textGray, fontSize: '0.813rem', lineHeight: '1.5' }}>
-                Most certifications lack credential-specific outcome studies — scores reflect evidence for the intervention, not the credential itself. Open Score Breakdown on any row to see the full rationale.
-              </p>
-              <button
-                onClick={() => setShowCitations(!showCitations)}
-                className="text-xs mt-2"
-                style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-              >
-                View All {totalCitations} Citations →
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Citations Modal */}
-      {showCitations && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          onClick={() => setShowCitations(false)}
-        >
-          <div
-            className="bg-white rounded-lg shadow-xl max-w-4xl flex flex-col"
-            onClick={(e) => e.stopPropagation()}
-            style={{ width: '90%', maxHeight: '90vh' }}
+      {/* Footer — methodology link. The global citations modal was removed
+          when we moved to master-detail; per-cert citations now live in the
+          detail pane. */}
+      <div className="mt-4 pt-4" style={{ borderTop: `1px solid ${colors.slateLight}` }}>
+        <div className="flex flex-wrap items-center gap-4 text-sm">
+          <button
+            type="button"
+            onClick={() => setShowMethodology(true)}
+            className="flex items-center gap-1 hover:underline"
+            style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
           >
-            <div className="p-4 border-b flex justify-between items-center flex-shrink-0">
-              <h3 className="text-base sm:text-lg font-semibold" style={{ color: colors.textDark }}>
-                Complete Evidence-Based Certification Research Citations
-              </h3>
-              <button onClick={() => setShowCitations(false)} className="p-2 text-gray-500 hover:text-gray-700 flex-shrink-0">✕</button>
-            </div>
-            <div className="p-4 overflow-y-auto flex-1">
-              <div className="mb-4 p-3 rounded" style={{ background: colors.lightBlue }}>
-                <p className="text-sm" style={{ color: colors.primaryBlue }}>
-                  <strong>{totalCitations} Citations</strong> from evidence-based rehabilitation certification research.
-                  Citations are organized by certification type and include peer-reviewed studies, systematic reviews,
-                  meta-analyses, and professional guidelines.
-                </p>
-              </div>
-              <div className="space-y-6">
-                {Object.entries(citationsData).map(([certName, citations]) => (
-                  <div key={certName} className="border-l-4 pl-4" style={{ borderColor: colors.primaryBlue }}>
-                    <h4 className="font-medium mb-2" style={{ color: colors.textDark }}>
-                      {certName} ({citations.length} citations)
-                    </h4>
-                    <div className="space-y-2">
-                      {citations.map((citation, index) => (
-                        <div key={citation.id || index} className="text-sm p-2 rounded" style={{ background: colors.grayLight }}>
-                          <div className="flex justify-between items-start gap-2">
-                            <div className="flex-1">
-                              <div className="font-medium mb-1" style={{ color: colors.textDark }}>{citation.title}</div>
-                              <div className="text-xs" style={{ color: colors.textGray }}>{formatCitation(citation)}</div>
-                              {citation.type && (
-                                <span className="inline-block px-2 py-0.5 rounded text-xs mt-1" style={{ background: colors.mutedTeal, color: '#0891b2', fontSize: '0.7rem' }}>
-                                  {citation.type}
-                                </span>
-                              )}
-                            </div>
-                            {citation.url && (
-                              <a href={citation.url} target="_blank" rel="noopener noreferrer"
-                                className="flex-shrink-0 p-1 hover:bg-white rounded transition-colors"
-                                style={{ color: colors.primaryBlue }} title="Open citation link">
-                                <ExternalLink className="w-4 h-4" />
-                              </a>
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="p-4 border-t text-center">
-              <p className="text-xs" style={{ color: colors.textGray }}>
-                Citations compiled from multiple evidence-based rehabilitation certification analysis reports
-              </p>
-            </div>
-          </div>
+            <Info className="w-4 h-4" aria-hidden="true" />
+            Full methodology
+          </button>
+          <span style={{ color: colors.textGray }}>
+            {totalCitations.toLocaleString()} citations across {certData.length} certifications
+          </span>
         </div>
-      )}
+      </div>
 
       {/* Methodology Modal */}
       {showMethodology && (

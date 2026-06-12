@@ -7,7 +7,14 @@ import Modal from '../common/Modal';
 const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
   const [course, setCourse] = useState({
     title: '', provider: '', date: '', hours: '', category: 'general',
-    format: 'live', hasTest: false, certificate: null
+    format: 'live', hasTest: false,
+    // Track three certificate states:
+    //   certificateFile     — newly picked File, pending upload (server-side)
+    //   certificate_storage — existing Storage descriptor on an edited course
+    //   certificate         — legacy base64 blob on an unmigrated course
+    certificateFile: null,
+    certificate_storage: null,
+    certificate: null,
   });
   const [isParsing, setIsParsing] = useState(false);
 
@@ -21,7 +28,9 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
         category: editingCourse.category,
         format: editingCourse.format,
         hasTest: editingCourse.has_test || false,
-        certificate: editingCourse.certificate
+        certificateFile: null,
+        certificate_storage: editingCourse.certificate_storage || null,
+        certificate: editingCourse.certificate || null,
       });
     }
   }, [editingCourse]);
@@ -35,41 +44,44 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
       e.target.value = '';
       return;
     }
-    
-    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'];
+
+    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
     if (!allowedTypes.includes(file.type)) {
-      alert('Please upload a PDF or image file (JPG, PNG)');
+      alert('Please upload a PDF or image file (JPG, PNG, WEBP)');
       e.target.value = '';
       return;
     }
-    
-    const reader = new FileReader();
-    reader.onloadend = async () => {
-      setCourse(prev => ({
-        ...prev,
-        certificate: { name: file.name, type: file.type, data: reader.result }
-      }));
 
-      if (!editingCourse && file.type !== 'application/pdf') {
-        if (window.confirm('Would you like to scan this certificate to auto-fill the form fields?')) {
-          setIsParsing(true);
-          const parsedData = await parseCertificate(file);
-          setIsParsing(false);
-          
-          if (parsedData) {
-            setCourse(prev => ({
-              ...prev,
-              title: parsedData.title || prev.title,
-              provider: parsedData.provider || prev.provider,
-              date: parsedData.date || prev.date,
-              hours: parsedData.hours || prev.hours,
-              category: parsedData.category || prev.category
-            }));
-          }
+    // Hold the raw File. Upload happens in saveCourse so the storage path
+    // can include the course id (or 'pending' for new courses).
+    setCourse((prev) => ({
+      ...prev,
+      certificateFile: file,
+      // Clear legacy/old descriptors so the save handler knows we want the
+      // new file to win.
+      certificate: null,
+      certificate_storage: null,
+    }));
+
+    if (!editingCourse && file.type !== 'application/pdf') {
+      // Skip the confirm dialog — auto-scan is cheap and the user can edit.
+      setIsParsing(true);
+      try {
+        const parsedData = await parseCertificate(file);
+        if (parsedData) {
+          setCourse((prev) => ({
+            ...prev,
+            title: parsedData.title || prev.title,
+            provider: parsedData.provider || prev.provider,
+            date: parsedData.date || prev.date,
+            hours: parsedData.hours || prev.hours,
+            category: parsedData.category || prev.category,
+          }));
         }
+      } finally {
+        setIsParsing(false);
       }
-    };
-    reader.readAsDataURL(file);
+    }
     e.target.value = '';
   };
 
@@ -91,11 +103,18 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
     if (success) {
       setCourse({
         title: '', provider: '', date: '', hours: '', category: 'general',
-        format: 'live', hasTest: false, certificate: null
+        format: 'live', hasTest: false,
+        certificateFile: null, certificate_storage: null, certificate: null,
       });
       onClose();
     }
   };
+
+  const displayedCertificateName =
+    course.certificateFile?.name ||
+    course.certificate_storage?.name ||
+    course.certificate?.name ||
+    null;
 
   return (
     <Modal onClose={onClose}>
@@ -127,17 +146,23 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
                 </div>
               )}
             </div>
-            {course.certificate && (
+            {displayedCertificateName && (
               <div className="flex items-center justify-between p-2" style={{ background: colors.grayLight }}>
                 <span className="text-sm truncate" style={{ color: colors.textGray }}>
-                  <FileText className="inline w-4 h-4 mr-1" />
-                  {course.certificate.name}
+                  <FileText className="inline w-4 h-4 mr-1" aria-hidden="true" />
+                  {displayedCertificateName}
                 </span>
                 <button
                   type="button"
-                  onClick={() => setCourse(prev => ({...prev, certificate: null}))}
+                  onClick={() => setCourse((prev) => ({
+                    ...prev,
+                    certificateFile: null,
+                    certificate: null,
+                    certificate_storage: null,
+                  }))}
                   className="text-sm"
                   style={{ color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer' }}
+                  aria-label={`Remove ${displayedCertificateName}`}
                 >
                   Remove
                 </button>

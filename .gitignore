@@ -22,3 +22,18 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .vercel
+
+# env files — never commit any variant
+.env
+.env.*
+!.env.example
+
+# Next.js
+/.next/
+/out/
+
+# Agent / worktree scratch
+/.claude/
+
+# Test coverage
+/coverage

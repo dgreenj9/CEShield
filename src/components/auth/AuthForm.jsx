@@ -3,6 +3,7 @@ import { CheckCircle, Loader2, Mail, Eye, EyeOff, Lock } from 'lucide-react';
 import { supabase } from '../../services/supabaseClient';
 import { colors } from '../../utils/constants';
 import CEShieldLogo from '../common/CEShieldLogo';
+import siteStats from '../../data/siteStats.json';
 
 // Auth Form Component
 const AuthForm = ({ onSuccess }) => {
@@ -14,11 +15,12 @@ const AuthForm = ({ onSuccess }) => {
   const [error, setError] = useState('');
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [resetEmailSent, setResetEmailSent] = useState(false);
+  const [confirmEmailSent, setConfirmEmailSent] = useState(false);
 
   const handleSubmit = async (e) => {
     e?.preventDefault?.();
     if (!email || !password) return;
-    
+
     setLoading(true);
     setError('');
 
@@ -26,9 +28,17 @@ const AuthForm = ({ onSuccess }) => {
       const { data, error } = await supabase.auth[isSignUp ? 'signUp' : 'signInWithPassword']({
         email, password
       });
-      
+
       if (error) throw error;
-      if (data.user) onSuccess(data.user);
+      // Signup with email-confirmation enabled returns a user but NO
+      // session — the account isn't usable until the email link is
+      // clicked. Without this branch the app would bounce the user to
+      // /explore and straight back here with no explanation.
+      if (isSignUp && data.user && !data.session) {
+        setConfirmEmailSent(true);
+        return;
+      }
+      if (data.session) onSuccess(data.user);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -48,9 +58,11 @@ const AuthForm = ({ onSuccess }) => {
 
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/`,
+        // Lands on the dedicated set-new-password page, which handles the
+        // PASSWORD_RECOVERY session from the email link.
+        redirectTo: `${window.location.origin}/update-password`,
       });
-      
+
       if (error) throw error;
       setResetEmailSent(true);
     } catch (error) {
@@ -70,7 +82,30 @@ const AuthForm = ({ onSuccess }) => {
           <CEShieldLogo showTagline={true} centered={true} size="xlarge" />
         </div>
 
-        {resetEmailSent ? (
+        {confirmEmailSent ? (
+          <div className="space-y-4">
+            <div className="text-center p-4" style={{ background: '#f0fdf4', border: '1px solid #86efac' }}>
+              <CheckCircle className="w-8 h-8 mx-auto mb-2" style={{ color: '#10b981' }} />
+              <h3 className="font-semibold mb-2" style={{ color: '#166534' }}>Check your email!</h3>
+              <p className="text-sm" style={{ color: '#166534' }}>
+                We&rsquo;ve sent a confirmation link to <strong>{email}</strong>.
+                Click it to activate your account, then sign in here.
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                setConfirmEmailSent(false);
+                setIsSignUp(false);
+                setPassword('');
+                setError('');
+              }}
+              className="w-full py-2 px-4 transition-all"
+              style={{ background: colors.primaryBlue, color: 'white', border: 'none', fontWeight: 500, cursor: 'pointer' }}
+            >
+              Back to Sign In
+            </button>
+          </div>
+        ) : resetEmailSent ? (
           <div className="space-y-4">
             <div className="text-center p-4" style={{ background: '#f0fdf4', border: '1px solid #86efac' }}>
               <CheckCircle className="w-8 h-8 mx-auto mb-2" style={{ color: '#10b981' }} />
@@ -166,6 +201,14 @@ const AuthForm = ({ onSuccess }) => {
               <p className="text-center" style={{ color: colors.textGray }}>
                 {isSignUp ? 'Create your account' : 'Sign in to your account'}
               </p>
+              {isSignUp && (
+                <p className="text-center text-sm mt-2" style={{ color: colors.textGray }}>
+                  Free during beta &mdash; the full matrix ({siteStats.certCount} credentials,{' '}
+                  {siteStats.citationTotal.toLocaleString()} citations), five career-path lenses, and your CE
+                  compliance tracked in one place. Students: CE Shield is
+                  free for you, always.
+                </p>
+              )}
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -199,15 +242,16 @@ const AuthForm = ({ onSuccess }) => {
                     className="w-full px-3 py-2 pr-10 focus:outline-none focus:ring-2"
                     style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
                     required
-                    minLength={6}
+                    minLength={8}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
                     className="absolute right-2 top-2.5"
                     style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer' }}
                   >
-                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    {showPassword ? <EyeOff className="w-5 h-5" aria-hidden="true" /> : <Eye className="w-5 h-5" aria-hidden="true" />}
                   </button>
                 </div>
               </div>
@@ -263,7 +307,7 @@ const AuthForm = ({ onSuccess }) => {
 
         <div className="mt-6 pt-6" style={{ borderTop: `1px solid ${colors.slateLight}` }}>
           <p className="text-xs text-center" style={{ color: colors.textGray }}>
-            Your data is securely stored and encrypted. We never share your information.
+            Stored securely. We never share your information.
           </p>
         </div>
       </div>

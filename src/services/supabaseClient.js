@@ -1,9 +1,16 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js';
 
-// Temporarily hardcode to test
-const supabaseUrl = 'https://zozkkwxynqmtpvisdfyl.supabase.co'
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpvemtrd3h5bnFtdHB2aXNkZnlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0MzU3OTQsImV4cCI6MjA3MDAxMTc5NH0.5PhqG2yp4_BkkoO7pYCfC4PvZ2uHhQIBcA1uDW3Wre0'
+// Reads from either env-var prefix so the same module works under both CRA
+// (REACT_APP_*) and Next.js (NEXT_PUBLIC_*) during the migration.
+const supabaseUrl =
+  process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.REACT_APP_SUPABASE_URL;
+const supabaseAnonKey =
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.REACT_APP_SUPABASE_ANON_KEY;
 
-console.log('Using URL:', supabaseUrl);
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error(
+    'Missing Supabase env vars. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local',
+  );
+}
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);

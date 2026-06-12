@@ -1,2015 +1,5077 @@
-// Certification scoring data with sub-scores and justifications
-// Dimensions: clinicalOutcomes, efficiency, caseloadApplicability, reimbursement, marketDemand, patientSatisfaction
-// All scores 0-100. Weighted score = Σ(subScore_i × weight_i / 100)
+// Per-path certification scoring data.
+//
+// Each certification carries one or more `pathScores` blocks keyed by path
+// (clinical / business / academicClinical / research / healthTech). The
+// matrix filters certs to those that have a pathScores block for the
+// active lens, then ranks them by the lens-specific weighted sum.
+//
+// Path dimensions + default weights are defined in utils/careerPaths.js.
+//
+// NOTE: per-dimension justification strings live in
+// public/justifications/<slug>.json (lazy-loaded client-side, fs-read at
+// build time by the SSG credential pages). Keeping them out of this module
+// keeps ~282KB out of the client bundle. See scripts/split_justifications.mjs.
 
-export const DEFAULT_WEIGHTS = {
-  clinicalOutcomes: 35,
-  efficiency: 20,
-  caseloadApplicability: 15,
-  reimbursement: 15,
-  marketDemand: 10,
-  patientSatisfaction: 5,
-};
-
-export const DIMENSION_LABELS = {
-  clinicalOutcomes: 'Clinical Outcomes',
-  efficiency: 'Certification Investment',
-  caseloadApplicability: 'Caseload Applicability',
-  reimbursement: 'Billing & Reimbursement',
-  marketDemand: 'Market Demand',
-  patientSatisfaction: 'Patient Satisfaction',
-};
-
-export const DIMENSION_DESCRIPTIONS = {
-  clinicalOutcomes: 'Magnitude and durability of functional improvements in patients',
-  efficiency: 'Clinician investment to obtain the certification: cost, time, and accessibility of training',
-  caseloadApplicability: 'What proportion of a typical clinical caseload benefits directly from this certification',
-  marketDemand: 'Clinician adoption rates and employer demand: how widely held and how often required by employers',
-  reimbursement: 'Billing impact: whether certification unlocks codes or strengthens payer authorization; breadth of payer coverage',
-  patientSatisfaction: 'Patient-reported experience, adherence, and engagement',
-};
-
-export const ALL_DISCIPLINES = ['PT', 'OT', 'SLP', 'AT', 'EP', 'RT', 'RN', 'MT', 'Audiology'];
+export const ALL_DISCIPLINES = ['PT', 'OT', 'SLP', 'AT', 'EP', 'RT', 'RN', 'MT', 'Audiology', 'Informatics', 'IT', 'HIM', 'QA', 'PM', 'Researcher'];
 
 export const certifications = [
   {
-    name: 'Pulmonary Rehabilitation',
-    type: 'Program',
-    discipline: 'PT/OT/RT',
-    disciplines: ['PT', 'OT', 'RT'],
-    evidence: 'Cochrane meta-analysis: 6MWD +49m, HRQL improvement, 68% fewer exacerbation hospitalizations. 5-year sustained benefit. Medicare-covered. CMS reimburses certified programs.',
-    subScores: { clinicalOutcomes: 90, efficiency: 42, caseloadApplicability: 35, reimbursement: 90, marketDemand: 48, patientSatisfaction: 80 },
-    justifications: {
-      clinicalOutcomes: 'Strongest dyspnea reduction of any intervention in COPD; sustained 5-year gains in 6MWD and HRQL across multiple Cochrane reviews.',
-      efficiency: 'AACVPR certification requires significant clinical experience documentation plus exam; moderate cost.',
-      caseloadApplicability: 'Applicable only in dedicated pulmonary rehab programs; very limited in general outpatient or acute care settings.',
-      reimbursement: 'CMS requires AACVPR-aligned program standards for pulmonary rehab Medicare billing (CPT 94625/94626); direct reimbursement gating.',
-      marketDemand: 'High demand within pulmonary rehab programs; narrow employer base limits overall demand score.',
-      patientSatisfaction: 'High adherence when transportation addressed; group format improves social engagement and self-efficacy.',
-    },
-    roiSignals: { privatePractice: 30, academic: 42 },
-
-  },
-  {
-    name: 'AACVPR Cardiac Rehabilitation',
-    type: 'Certification',
-    discipline: 'PT/OT/RN',
-    disciplines: ['PT', 'OT', 'RN'],
-    evidence: 'Cochrane: 26% cardiovascular mortality reduction. AACVPR-certified programs show 13-15% lower 1-year mortality vs non-certified. Medicare Phase II/III covered.',
-    subScores: { clinicalOutcomes: 88, efficiency: 40, caseloadApplicability: 35, reimbursement: 92, marketDemand: 55, patientSatisfaction: 78 },
-    justifications: {
-      clinicalOutcomes: 'Mortality reduction is among the strongest of any rehab credential. LVEF improvements, VO2 max gains, and lipid improvements documented.',
-      efficiency: 'Application-based certification requiring significant program documentation; moderate exam cost.',
-      caseloadApplicability: 'Applicable only within dedicated cardiac rehab programs; zero applicability in general outpatient or acute care.',
-      reimbursement: 'CMS requires AACVPR-recognized program standards for cardiac rehab Medicare billing (CPT 93797/93798); strongest billing gating of any rehab cert.',
-      marketDemand: 'Required or strongly preferred for cardiac rehab program leadership; high demand within narrow field.',
-      patientSatisfaction: 'Patient-reported quality of life improves significantly; depression reduction is a secondary benefit.',
-    },
-    roiSignals: { privatePractice: 22, academic: 52 },
-
-  },
-  {
-    name: 'Otago Exercise Programme',
-    type: 'Program',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: '35-40% fall reduction in RCTs. Medicare covers delivery. $938 cost savings per participant. Campbell et al meta-analysis: NNT=11 to prevent one fall.',
-    subScores: { clinicalOutcomes: 87, efficiency: 70, caseloadApplicability: 62, reimbursement: 62, marketDemand: 58, patientSatisfaction: 68 },
-    justifications: {
-      clinicalOutcomes: '35-40% fall reduction replicated across 5 RCTs and validated meta-analyses. Mortality benefit in 80+ demonstrated.',
-      efficiency: '2-3 day in-person training; moderate cost ~$300-500; widely available through PT schools.',
-      caseloadApplicability: 'Applicable to any clinician treating older adults; broad in geriatric PT/OT but limited in pediatric or acute care.',
-      reimbursement: 'Standard PT billing; Otago documentation supports fall prevention medical necessity across Medicare and commercial payers.',
-      marketDemand: 'Growing employer demand in skilled nursing, home health, and geriatric outpatient; increasingly listed in fall prevention roles.',
-      patientSatisfaction: 'Acceptable to older adults but motivation to sustain exercise without accountability can wane; lower than group-based programs.',
-    },
-    roiSignals: { privatePractice: 55, academic: 40 },
-
-  },
-  {
-    name: 'LSVT LOUD',
-    type: 'Certification',
-    discipline: 'SLP',
-    disciplines: ['SLP'],
-    evidence: '50+ peer-reviewed studies. 5.05-point UPDRS-III motor improvement. Voice amplitude gains maintained at 2 years. ASHA-recognized evidence-based practice.',
-    subScores: { clinicalOutcomes: 80, efficiency: 48, caseloadApplicability: 55, reimbursement: 52, marketDemand: 82, patientSatisfaction: 76 },
-    justifications: {
-      clinicalOutcomes: 'Robust voice amplitude and intelligibility gains in PD; neuroimaging shows cortical reorganization. 2-year maintenance documented.',
-      efficiency: '4-day intensive course required; ~$500-600 fee; biennial recertification adds ongoing cost.',
-      caseloadApplicability: 'High value for SLPs treating Parkinson disease; limited applicability outside neuro-specific caseloads.',
-      reimbursement: 'Billed under speech therapy codes; Medicare and commercial cover; LSVT documentation supports medical necessity for voice treatment.',
-      marketDemand: 'Among the most employer-demanded SLP certifications for neuro outpatient; frequently required or preferred in job listings.',
-      patientSatisfaction: 'Patients report meaningful communication improvement; family-reported quality of life gains significant in PD.',
-    },
-    roiSignals: { privatePractice: 72, academic: 45 },
-
-  },
-  {
-    name: 'ACRM Cognitive Rehabilitation',
-    type: 'Certification',
-    discipline: 'OT/PT/SLP',
-    disciplines: ['OT', 'PT', 'SLP'],
-    evidence: '258 studies reviewed. 78.7% of comparisons favor structured cognitive rehab. ACRM Practice Standards. Gains in memory, attention, and executive function post-ABI.',
-    subScores: { clinicalOutcomes: 72, efficiency: 45, caseloadApplicability: 55, reimbursement: 52, marketDemand: 42, patientSatisfaction: 65 },
-    justifications: {
-      clinicalOutcomes: 'Memory and attention retraining show consistent gains in TBI/stroke populations. Generalization to daily function is moderate.',
-      efficiency: 'Multi-day seminar series; moderate cost; limited course locations; requires annual recertification.',
-      caseloadApplicability: 'Applicable for OT/SLP in TBI, stroke, and acquired brain injury programs; limited outside cognitive rehab settings.',
-      reimbursement: 'Cognitive rehab billed under OT/SLP codes; some commercial payers reference ACRM guidelines for authorization; no dedicated code.',
-      marketDemand: 'Moderate demand in inpatient rehab and TBI programs; not widely listed in general OT/SLP postings.',
-      patientSatisfaction: 'Engagement is high when goals are meaningful; fatigue is a limiting factor in early post-injury phases.',
-    },
-    roiSignals: { privatePractice: 42, academic: 55 },
-
-  },
-  {
-    name: 'ACLM Lifestyle Medicine',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: '6-pillar framework (nutrition, activity, sleep, stress, substance, relationships). 6,700+ certified practitioners. Type 2 DM remission documented with intensive lifestyle.',
-    subScores: { clinicalOutcomes: 75, efficiency: 55, caseloadApplicability: 60, reimbursement: 50, marketDemand: 38, patientSatisfaction: 75 },
-    justifications: {
-      clinicalOutcomes: 'Lifestyle medicine produces measurable HbA1c reduction, weight loss, and cardiovascular risk reduction. DPP-based programs show 58% T2DM prevention.',
-      efficiency: 'Board exam plus CME requirements; ~$500+ exam fee; significant study time investment.',
-      caseloadApplicability: 'Applicable across chronic disease populations; relevant in primary care, cardiac, pulmonary, and diabetes rehab settings.',
-      reimbursement: 'Some preventive care and chronic disease management codes apply; commercial coverage for lifestyle medicine counseling inconsistent.',
-      marketDemand: 'Emerging demand as health systems adopt lifestyle medicine programs; not yet widely listed in rehab job postings.',
-      patientSatisfaction: 'Patient empowerment and self-management are core; high engagement when social support is built in.',
-    },
-    roiSignals: { privatePractice: 65, academic: 62 },
-
-  },
-  {
-    name: 'HABIT/HABIT-ILE',
-    type: 'Program',
-    discipline: 'OT/PT',
-    disciplines: ['OT', 'PT'],
-    evidence: 'Superior to conventional therapy for bilateral CP in RCTs. 60-90 hour intensive format. HABIT-ILE adds lower extremity to original hand-arm protocol.',
-    subScores: { clinicalOutcomes: 78, efficiency: 35, caseloadApplicability: 25, reimbursement: 50, marketDemand: 25, patientSatisfaction: 72 },
-    justifications: {
-      clinicalOutcomes: 'RCT evidence shows superiority over dose-matched conventional therapy for bimanual hand function in children with unilateral CP.',
-      efficiency: 'Specialized 2-week training program; limited sites; significant time and travel commitment.',
-      caseloadApplicability: 'Highly specialized for children with unilateral cerebral palsy; very limited outside pediatric neuro intensive programs.',
-      reimbursement: 'Billed as intensive OT/PT; no certification-specific code; coverage variable; many families self-pay.',
-      marketDemand: 'Limited employer demand; niche pediatric neuro cert primarily at academic medical centers.',
-      patientSatisfaction: 'Children and families report high engagement and meaningful functional gains; peer interaction adds social benefit.',
-    },
-    roiSignals: { privatePractice: 45, academic: 55 },
-
-  },
-  {
-    name: 'MBSR (Mindfulness-Based Stress Reduction)',
-    type: 'Certification',
-    discipline: 'All',
-    disciplines: ['PT', 'OT', 'SLP', 'AT', 'EP', 'RT', 'RN', 'MT', 'Audiology'],
-    evidence: 'Neuroplasticity evidence; fMRI shows amygdala volume reduction after 8 weeks. JAMA meta-analysis: moderate effect on anxiety, depression, pain.',
-    subScores: { clinicalOutcomes: 73, efficiency: 52, caseloadApplicability: 72, reimbursement: 45, marketDemand: 52, patientSatisfaction: 78 },
-    justifications: {
-      clinicalOutcomes: 'Consistent moderate effects on pain, anxiety, depression across chronic conditions. Neuroimaging validation is robust.',
-      efficiency: '8-week practitioner training plus 5-7 day silent retreat required; high time and cost investment.',
-      caseloadApplicability: 'Applicable to almost any patient with chronic pain, stress, or lifestyle factors; cross-cutting clinical utility.',
-      reimbursement: 'Covered by some commercial payers under behavioral health or chronic disease codes; no dedicated rehab billing code.',
-      marketDemand: 'Growing demand in integrative health and behavioral health programs; increasingly listed in wellness-focused roles.',
-      patientSatisfaction: 'High satisfaction; mindfulness-based skills perceived as empowering and applicable to daily life.',
-    },
-    roiSignals: { privatePractice: 75, academic: 60, privatePracticeNote: 'Group delivery enables scalable private revenue; retreats and multi-week programs command significant fees.' },
-
-  },
-  {
-    name: 'Matter of Balance',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: '$938 annual medical cost reduction per participant. Group-based, lay-leader delivery model. CDC-endorsed. Fear of falling and activity restriction reduced.',
-    subScores: { clinicalOutcomes: 70, efficiency: 85, caseloadApplicability: 52, reimbursement: 52, marketDemand: 38, patientSatisfaction: 72 },
-    justifications: {
-      clinicalOutcomes: 'Reduces fear of falling and improves balance confidence; fall rate reduction is secondary and modest compared to Otago.',
-      efficiency: '1-2 day facilitator training; low cost; widely available; easy to implement in community settings.',
-      caseloadApplicability: 'Applicable in community and geriatric settings; group format limits individual PT caseload application.',
-      reimbursement: 'Medicare Advantage plans cover in some markets; state fall prevention funding available; standard PT billing applies for clinical delivery.',
-      marketDemand: 'Primarily sought for community fall prevention programs; limited clinical employer demand.',
-      patientSatisfaction: 'Group social aspect highly valued; peer modeling of activity reduces fear.',
-    },
-    roiSignals: { privatePractice: 42, academic: 35 },
-
-  },
-  {
-    name: 'Telehealth Cardiac/Pulmonary',
-    type: 'Technology',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: '30-50% cost reduction vs in-person; maintained clinical effectiveness in RCTs. Wearable integration enables remote monitoring. Post-COVID access expansion.',
-    subScores: { clinicalOutcomes: 74, efficiency: 65, caseloadApplicability: 45, reimbursement: 72, marketDemand: 52, patientSatisfaction: 80 },
-    justifications: {
-      clinicalOutcomes: 'Non-inferior to in-person cardiac/pulmonary rehab in multiple RCTs. Adherence rates comparable when tech support provided.',
-      efficiency: 'Online modules plus supervised hours; moderate time investment; growing provider availability.',
-      caseloadApplicability: 'Applicable specifically to cardiac and pulmonary rehab delivery via telehealth; limited outside these programs.',
-      reimbursement: 'Cardiac and pulmonary rehab CPT codes applicable via telehealth; CMS telehealth expansion supports billing; commercial coverage broad.',
-      marketDemand: 'Growing demand in cardiac and pulmonary rehab programs with telehealth delivery models.',
-      patientSatisfaction: 'Convenience strongly preferred by patients with transportation barriers; technology literacy barrier for some older adults.',
-    },
-    roiSignals: { privatePractice: 45, academic: 45 },
-
-  },
-  {
-    name: 'Motivational Interviewing',
-    type: 'Certification',
-    discipline: 'All',
-    disciplines: ['PT', 'OT', 'SLP', 'AT', 'EP', 'RT', 'RN', 'MT', 'Audiology'],
-    evidence: '1,800+ RCTs across health behaviors. Improves adherence 1.5-2x in physical rehab when integrated. MINT certification widely recognized.',
-    subScores: { clinicalOutcomes: 68, efficiency: 72, caseloadApplicability: 90, reimbursement: 52, marketDemand: 62, patientSatisfaction: 72 },
-    justifications: {
-      clinicalOutcomes: 'Adherence improvement translates to better functional outcomes; direct MI-on-clinical-outcomes evidence is indirect but consistent.',
-      efficiency: '2-3 day workshop standard; low-moderate cost; widely available online and in-person.',
-      caseloadApplicability: 'Applicable to virtually every patient encounter; behavior change is relevant across all diagnoses and settings.',
-      reimbursement: 'No MI-specific billing code; billed as component of counseling or health coaching services; billing value is incidental.',
-      marketDemand: 'Frequently valued in behavioral health, primary care rehab, and chronic disease settings; growing recognition in PT/OT.',
-      patientSatisfaction: 'Patients report feeling heard and autonomous; reduces resistance to therapy.',
-    },
-    roiSignals: { privatePractice: 65, academic: 55 },
-
-  },
-  {
-    name: 'CIMT (Constraint-Induced Movement)',
-    type: 'Certification',
-    discipline: 'OT/PT',
-    disciplines: ['OT', 'PT'],
-    evidence: 'EXCITE trial: 14-point Wolf Motor Function Test improvement sustained 2 years. Pediatric CIMT superior for hemiplegia. Neuroplasticity mechanism established.',
-    subScores: { clinicalOutcomes: 83, efficiency: 38, caseloadApplicability: 32, reimbursement: 52, marketDemand: 48, patientSatisfaction: 68 },
-    justifications: {
-      clinicalOutcomes: 'Among the best-evidenced upper extremity rehab interventions post-stroke and for pediatric hemiplegia. EXCITE trial landmark.',
-      efficiency: 'Multi-day CIMT training plus constrained practice requires dedicated equipment and space; moderate investment.',
-      caseloadApplicability: 'Limited to stroke patients with residual upper limb function; requires intensive format not feasible in most settings.',
-      reimbursement: 'Billed as intensive OT/PT; commercial payers cover at standard therapy rates; frequency justification often required.',
-      marketDemand: 'Moderate demand in neuro specialty programs and stroke rehabilitation centers.',
-      patientSatisfaction: 'Restraint tolerated when motivation high; pediatric populations show high family engagement.',
-    },
-    roiSignals: { privatePractice: 38, academic: 52 },
-
-  },
-  {
-    name: 'Health Coaching',
-    type: 'Certification',
-    discipline: 'All',
-    disciplines: ['PT', 'OT', 'SLP', 'AT', 'EP', 'RT', 'RN', 'MT', 'Audiology'],
-    evidence: 'New CPT codes 99401-99404 enable billing. Growing insurance recognition. Behavior change theory base; outcomes strongest for chronic disease management.',
-    subScores: { clinicalOutcomes: 65, efficiency: 68, caseloadApplicability: 75, reimbursement: 62, marketDemand: 62, patientSatisfaction: 68 },
-    justifications: {
-      clinicalOutcomes: 'Chronic disease management outcomes (HbA1c, weight, BP) show consistent modest improvements when coaching integrated.',
-      efficiency: 'Variable pathways (NBC-HWC, ACE); 1-2 day to multi-month programs; moderate total cost.',
-      caseloadApplicability: 'Broadly applicable across chronic disease management, wellness, and prevention; growing applicability in clinical PT/OT.',
-      reimbursement: 'NBC-HWC holders bill under some preventive and wellness codes; Medicare Advantage and Medicaid coverage expanding.',
-      marketDemand: 'Growing employer demand in integrated care, wellness programs, and health system population health roles.',
-      patientSatisfaction: 'Patient empowerment is central; self-efficacy gains reported across studies.',
-    },
-    roiSignals: { privatePractice: 80, academic: 55, privatePracticeNote: 'Multiple private practice models including NBC-HWC corporate wellness contracts and group coaching revenue streams.' },
-
-  },
-  {
-    name: 'Athletic Training BOC',
-    type: 'Certification',
-    discipline: 'AT',
-    disciplines: ['AT'],
-    evidence: '22% injury reduction with AT presence. 50% reduction in school injury costs. 92% diagnostic accuracy. NATA consensus: AT reduces catastrophic injury risk.',
-    subScores: { clinicalOutcomes: 70, efficiency: 22, caseloadApplicability: 85, reimbursement: 52, marketDemand: 88, patientSatisfaction: 72 },
-    justifications: {
-      clinicalOutcomes: '22% injury reduction is a meaningful population-level effect. Secondary injury prevention (return-to-play decisions) well-documented.',
-      efficiency: 'Bachelor\'s/master\'s degree program (4+ years) plus extensive clinical hours; major educational investment.',
-      caseloadApplicability: 'Core credential for athletic training; applicable to entire AT scope of practice across all settings.',
-      reimbursement: 'BOC required for AT licensure in most states; enables direct billing where AT services are recognized by state Medicaid and commercial.',
-      marketDemand: 'Required by law or employer in most AT positions; universally demanded for athletic training roles.',
-      patientSatisfaction: 'Athlete trust in AT relationship is high; immediate access improves experience vs delayed care.',
-    },
-    roiSignals: { privatePractice: 42, academic: 38 },
-
-  },
-  {
-    name: 'CDC STEADI Fall Prevention',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'Addresses $31B Medicare fall injury spend. EHR-integrated screening. Trifecta approach: screen, assess, intervene. CDC-backed algorithm.',
-    subScores: { clinicalOutcomes: 72, efficiency: 95, caseloadApplicability: 70, reimbursement: 55, marketDemand: 45, patientSatisfaction: 65 },
-    justifications: {
-      clinicalOutcomes: 'STEADI translates evidence-based fall prevention into clinical workflow; population-level fall reduction supported.',
-      efficiency: 'Free online training modules; approximately 1-2 hours; no cost; immediate access; zero barrier.',
-      caseloadApplicability: 'Applicable to any clinician treating older adults; fall risk tools usable in outpatient, home health, and primary care.',
-      reimbursement: 'STEADI tools referenced in CMS fall prevention quality measures; supports documentation for Medicare fall risk billing codes.',
-      marketDemand: 'Valued in geriatric programs and quality improvement roles; not commonly listed as required in job postings.',
-      patientSatisfaction: 'Systematic screening normalizes fall risk conversation; patients appreciate structured approach.',
-    },
-    roiSignals: { privatePractice: 48, academic: 45 },
-
-  },
-  {
-    name: 'Physical Therapy Fellowship',
-    type: 'Fellowship',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'Superior patient outcomes vs residency-trained (25,843-patient study). ABPTRFE-accredited. Fastest pathway to clinical expert performance.',
-    subScores: { clinicalOutcomes: 68, efficiency: 18, caseloadApplicability: 62, reimbursement: 52, marketDemand: 52, patientSatisfaction: 68 },
-    justifications: {
-      clinicalOutcomes: 'Fellowship-trained PTs show superior outcomes over residency in large comparative study; diagnostic accuracy and fewer visits.',
-      efficiency: '1-year post-residency fellowship; unpaid or low-paid position; major opportunity cost.',
-      caseloadApplicability: 'Fellowship training in ortho, neuro, or manual therapy; broadly applicable within chosen specialty area.',
-      reimbursement: 'No fellowship-specific billing premium; fellowship training does not unlock new CPT codes or payer categories.',
-      marketDemand: 'Increasingly valued in academic medical centers and residency program faculty roles.',
-      patientSatisfaction: 'Expert-level care correlates with patient confidence and engagement.',
-    },
-    roiSignals: { privatePractice: 30, academic: 75 },
-
-  },
-  {
-    name: 'Pilates Rehabilitation',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'Network meta-analysis: superior to other exercise for chronic LBP. Gains in core strength, posture, and flexibility. Polestar/STOTT certifications most recognized.',
-    subScores: { clinicalOutcomes: 65, efficiency: 58, caseloadApplicability: 55, reimbursement: 52, marketDemand: 42, patientSatisfaction: 68 },
-    justifications: {
-      clinicalOutcomes: 'Network meta-analysis shows superiority for chronic LBP vs general exercise; pain and disability improvements consistent.',
-      efficiency: '200+ hour training programs; significant time and cost (~$2,000-4,000); multiple provider options.',
-      caseloadApplicability: 'Applicable to musculoskeletal and postural conditions; practical in clinics with Pilates equipment integration.',
-      reimbursement: 'Billed as therapeutic exercise under PT codes; no Pilates-specific billing code; self-pay Pilates studio revenue possible.',
-      marketDemand: 'Growing demand in boutique PT practices and wellness-integrated clinics; not widely listed in standard PT postings.',
-      patientSatisfaction: 'High patient engagement; mind-body connection aspect appeals to chronic pain population.',
-    },
-    roiSignals: { privatePractice: 88, academic: 28, privatePracticeNote: 'Enables hybrid PT/Pilates studio model; $150-300/session is standard in wellness markets.' },
-
-  },
-  {
-    name: 'AI + Wearable Sensors',
-    type: 'Technology',
-    discipline: 'All',
-    disciplines: ['PT', 'OT', 'SLP', 'AT', 'EP', 'RT', 'RN', 'MT', 'Audiology'],
-    evidence: '89% ROM accuracy vs goniometry. 98% gait pattern recognition. Remote monitoring enables between-session feedback. FDA Class II cleared devices available.',
-    subScores: { clinicalOutcomes: 62, efficiency: 65, caseloadApplicability: 55, reimbursement: 52, marketDemand: 38, patientSatisfaction: 62 },
-    justifications: {
-      clinicalOutcomes: 'Measurement accuracy is high; whether AI-guided feedback improves clinical outcomes vs standard care is still under study.',
-      efficiency: 'Emerging programs; variable length; moderate cost; growing online options.',
-      caseloadApplicability: 'Growing applicability in remote monitoring, home health, and chronic disease management; limited by technology access.',
-      reimbursement: 'Remote patient monitoring billing (CPT 99453-99458) applicable; limited current payer coverage but growing; mostly standard PT rates.',
-      marketDemand: 'Emerging demand in digital health and health system innovation roles; not yet mainstream in clinical job postings.',
-      patientSatisfaction: 'Gamification and real-time feedback increase engagement; tech literacy barrier exists.',
-    },
-    roiSignals: { privatePractice: 55, academic: 78 },
-
-  },
-  {
-    name: 'ABCDEF ICU Bundle',
-    type: 'Protocol',
-    discipline: 'PT/OT/RT',
-    disciplines: ['PT', 'OT', 'RT'],
-    evidence: '68% mortality reduction when fully implemented. Reduced ICU-acquired weakness, delirium, and ventilator days. SCCM-endorsed. Strong implementation science base.',
-    subScores: { clinicalOutcomes: 78, efficiency: 78, caseloadApplicability: 55, reimbursement: 52, marketDemand: 55, patientSatisfaction: 65 },
-    justifications: {
-      clinicalOutcomes: '68% mortality reduction is striking; ICU-acquired weakness reduction is durable. Delirium days reduced meaningfully.',
-      efficiency: 'Institutional in-service training; low to no cost; can be completed quickly; widely available.',
-      caseloadApplicability: 'Applicable specifically in ICU and acute care settings; zero applicability in outpatient or community care.',
-      reimbursement: 'ICU care quality measure support; early mobility billed under acute care codes; no specific CPT but supports documentation.',
-      marketDemand: 'Strong demand in ICU and acute care PT/OT roles; standard expectation in Level I trauma and medical ICU positions.',
-      patientSatisfaction: 'ICU population limited in self-report; family-reported experience improved; PTSD reduction documented.',
-    },
-    roiSignals: { privatePractice: 10, academic: 48 },
-
-  },
-  {
-    name: 'LSVT BIG',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'Parkinson\'s mobility and gait improvement. Amplitude-based training; complements LSVT LOUD. 4x/week × 4 weeks protocol. UPDRS motor score improvements.',
-    subScores: { clinicalOutcomes: 72, efficiency: 48, caseloadApplicability: 52, reimbursement: 52, marketDemand: 78, patientSatisfaction: 73 },
-    justifications: {
-      clinicalOutcomes: 'UPDRS-III motor improvements consistent; gait speed and stride length gains documented. Long-term maintenance variable.',
-      efficiency: '2-day training course; ~$500+ fee; biennial recertification required.',
-      caseloadApplicability: 'High value for PTs treating Parkinson disease; limited applicability outside neuro-specific settings.',
-      reimbursement: 'Billed under PT codes; Medicare and commercial cover as standard PT; LSVT documentation supports Parkinson disease medical necessity.',
-      marketDemand: 'Among the most employer-demanded PT certifications for neuro outpatient; frequently paired with LSVT LOUD.',
-      patientSatisfaction: 'Parkinson\'s patients value functional independence improvements; family engagement is high.',
-    },
-    roiSignals: { privatePractice: 72, academic: 45 },
-
-  },
-  {
-    name: 'IAYT Yoga Therapy',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: '800-hour training standard. Growing evidence for chronic pain, anxiety, and cancer fatigue. IAYT accreditation establishes minimum training floor.',
-    subScores: { clinicalOutcomes: 60, efficiency: 42, caseloadApplicability: 55, reimbursement: 40, marketDemand: 28, patientSatisfaction: 72 },
-    justifications: {
-      clinicalOutcomes: 'Chronic pain and anxiety reduction consistent across studies; cancer fatigue and LBP best-evidenced conditions.',
-      efficiency: '800-hour training program required; multi-year commitment; significant time and cost.',
-      caseloadApplicability: 'Applicable to chronic pain, stress, and movement disorders; growing in integrative health settings.',
-      reimbursement: 'Very limited insurance coverage; primarily self-pay; some integrative health and wellness policies offer partial coverage.',
-      marketDemand: 'Limited employer demand in clinical settings; primarily self-employed or integrative wellness practice.',
-      patientSatisfaction: 'Very high; mind-body approach appeals to patients seeking holistic care.',
-    },
-    roiSignals: { privatePractice: 72, academic: 32, privatePracticeNote: 'Established consumer wellness market with multiple revenue models including group sessions and retreats.' },
-
-  },
-  {
-    name: 'Alexander Technique',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'ATEAM trial (BMJ): 24-lesson AT superior to massage for chronic LBP at 1 year. Limited evidence outside musculoskeletal. 1,600-hour training requirement.',
-    subScores: { clinicalOutcomes: 58, efficiency: 12, caseloadApplicability: 30, reimbursement: 35, marketDemand: 12, patientSatisfaction: 62 },
-    justifications: {
-      clinicalOutcomes: 'Strong for chronic LBP; ATEAM RCT is high quality. Evidence outside MSK is sparse.',
-      efficiency: '1,600-hour training program over 3 years; among the highest investment per hours in allied health.',
-      caseloadApplicability: 'Applicable to chronic pain and movement dysfunction; very limited practitioner base reduces setting availability.',
-      reimbursement: 'Minimal third-party coverage; primarily self-pay; some private pay integrative health practices offer it.',
-      marketDemand: 'Very limited employer demand in clinical settings; primarily private practice and performing arts.',
-      patientSatisfaction: 'Patients who engage report transformative experience; requires significant commitment.',
-    },
-    roiSignals: { privatePractice: 72, academic: 32, privatePracticeNote: 'Professional musicians, dancers, and athletes pay premium rates ($150-250/session); strong performing arts market.' },
-
-  },
-  {
-    name: 'IMOT Intensive Therapy',
-    type: 'Program',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: '94% of children achieve motor improvements in camp format. 60-120 hour intensive delivery. Emerging evidence for CP and ABI populations.',
-    subScores: { clinicalOutcomes: 65, efficiency: 32, caseloadApplicability: 22, reimbursement: 52, marketDemand: 18, patientSatisfaction: 68 },
-    justifications: {
-      clinicalOutcomes: '94% improvement rate is promising; comparison to dose-matched conventional therapy is the key test and evidence is emerging.',
-      efficiency: 'Specialized intensive program training; limited sites; significant time commitment; international origins.',
-      caseloadApplicability: 'Very specialized for children with neurological conditions in intensive therapy settings; limited US availability.',
-      reimbursement: 'Billed as intensive PT/OT; variable US payer coverage; international origins limit domestic payer recognition.',
-      marketDemand: 'Limited US employer demand; primarily academic pediatric centers.',
-      patientSatisfaction: 'Children and families report high satisfaction; peer social environment adds value.',
-    },
-    roiSignals: { privatePractice: 38, academic: 35 },
-
-  },
-  {
-    name: 'Blood Flow Restriction (BFR)',
-    type: 'Technology',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'Equal strength gains to high-load resistance at 20-50% 1RM loads. Zero serious adverse events in systematic reviews. Post-surgical and elderly applications strongest.',
-    subScores: { clinicalOutcomes: 68, efficiency: 78, caseloadApplicability: 72, reimbursement: 52, marketDemand: 75, patientSatisfaction: 58 },
-    justifications: {
-      clinicalOutcomes: 'Equivalent hypertrophy and strength to high-load training; enables progressive loading when high loads are contraindicated.',
-      efficiency: '1-2 day course; ~$300-500 fee; multiple providers available; equipment cost is separate.',
-      caseloadApplicability: 'Broad applicability: post-surgical, athletic, geriatric, and joint replacement; usable across outpatient ortho and sports.',
-      reimbursement: 'Billed as therapeutic exercise and resistance training under standard PT codes; covered at standard rates; no BFR-specific premium code.',
-      marketDemand: 'Rapidly growing employer demand; increasingly listed in outpatient orthopedic PT postings.',
-      patientSatisfaction: 'Discomfort from cuff pressure is the main barrier; patients motivated by ability to exercise sooner post-surgery.',
-    },
-    roiSignals: { privatePractice: 75, academic: 42, privatePracticeNote: 'Adds a premium cash-pay offering in direct-pay orthopedic practices; strong patient interest and willingness to pay.' },
-
-  },
-  {
-    name: 'Ergonomic Assessment',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'OSHA compliance standard. Work-related MSK injury prevention evidence consistent. Return-to-work facilitation reduces indemnity costs.',
-    subScores: { clinicalOutcomes: 55, efficiency: 65, caseloadApplicability: 55, reimbursement: 55, marketDemand: 52, patientSatisfaction: 58 },
-    justifications: {
-      clinicalOutcomes: 'Injury prevention and symptom reduction at the workstation well-documented; RTW facilitation reduces disability duration.',
-      efficiency: 'Variable certification (CEAS, CPE); online to multi-day formats; moderate cost.',
-      caseloadApplicability: 'Applicable in occupational health, work injury, and disability settings; limited in traditional clinical rehab.',
-      reimbursement: 'Ergonomic and FCE assessment codes exist; workers compensation is primary payer; significant WC billing opportunity.',
-      marketDemand: 'Steady demand in occupational health, corporate wellness, and workers compensation settings.',
-      patientSatisfaction: 'Workers value intervention that targets their specific job demands; employer-funded model reduces patient burden.',
-    },
-    roiSignals: { privatePractice: 58, academic: 40 },
-
-  },
-  {
-    name: 'Vestibular Rehabilitation',
-    type: 'Training',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'Strong CPG support from AAN and AAO-HNS. 6-week median treatment. Canalith repositioning >90% effective for BPPV. Cochrane support for chronic vestibular dysfunction.',
-    subScores: { clinicalOutcomes: 72, efficiency: 62, caseloadApplicability: 70, reimbursement: 52, marketDemand: 78, patientSatisfaction: 68 },
-    justifications: {
-      clinicalOutcomes: '>90% BPPV resolution with CRP; chronic vestibular dysfunction shows consistent improvement in dizziness and balance.',
-      efficiency: '2-day course standard; multiple providers; moderate cost ~$300-600; widely accessible.',
-      caseloadApplicability: 'Very common referral pattern; vestibular dysfunction seen across general outpatient, neuro, and geriatric caseloads.',
-      reimbursement: 'Billed under balance training and therapeutic exercise PT codes; Medicare and commercial coverage standard; ENT referral pathway strong.',
-      marketDemand: 'High employer demand in outpatient PT and neuro specialty; vestibular training frequently listed as preferred or required.',
-      patientSatisfaction: 'High when BPPV resolved in 1-2 visits; dramatic symptom relief creates strong satisfaction.',
-    },
-    roiSignals: { privatePractice: 75, academic: 38 },
-
-  },
-  {
-    name: 'VR (Medical-Grade)',
-    type: 'Technology',
-    discipline: 'All',
-    disciplines: ['PT', 'OT', 'SLP', 'AT', 'EP', 'RT', 'RN', 'MT', 'Audiology'],
-    evidence: 'Engagement tool with comparable outcomes to conventional rehab for UE stroke and pain management. FDA-cleared products (MindMaze, XRHealth) available.',
-    subScores: { clinicalOutcomes: 58, efficiency: 45, caseloadApplicability: 40, reimbursement: 52, marketDemand: 32, patientSatisfaction: 65 },
-    justifications: {
-      clinicalOutcomes: 'Non-inferior to conventional therapy for UE stroke; pain reduction in acute and chronic pain; not clearly superior in most meta-analyses.',
-      efficiency: 'Device-specific manufacturer training; varies by manufacturer; moderate time; ongoing technology updates.',
-      caseloadApplicability: 'Applicable in neuro, vestibular, and pain settings; current barrier is equipment cost and institutional access.',
-      reimbursement: 'Limited dedicated CPT codes; mostly billed under existing PT/OT therapeutic activity codes; coverage emerging.',
-      marketDemand: 'Limited current employer demand; growing in academic medical centers and technology-forward practices.',
-      patientSatisfaction: 'High engagement, especially in pediatric populations; gamification increases intrinsic motivation.',
-    },
-    roiSignals: { privatePractice: 38, academic: 65 },
-
-  },
-  {
-    name: 'NIDCAP Neonatal',
-    type: 'Certification',
-    discipline: 'OT/PT/SLP',
-    disciplines: ['OT', 'PT', 'SLP'],
-    evidence: '2.32-week reduced NICU LOS. $50K savings per 6 infants. Neurobehavioral outcomes improved at 9 months. NIDCAP Federation International certification.',
-    subScores: { clinicalOutcomes: 68, efficiency: 25, caseloadApplicability: 15, reimbursement: 52, marketDemand: 30, patientSatisfaction: 62 },
-    justifications: {
-      clinicalOutcomes: 'Reduced LOS and improved neurodevelopmental outcomes at follow-up; brain maturation on MRI documented in some studies.',
-      efficiency: 'Intensive mentored training over 6-18 months; limited training sites; high time and travel commitment.',
-      caseloadApplicability: 'Applicable exclusively in Level III/IV NICUs; essentially zero relevance outside neonatal intensive care.',
-      reimbursement: 'NICU care funded through DRG or per-diem; NIDCAP supports quality documentation; no separate billing code for certification.',
-      marketDemand: 'Required or strongly preferred in academic NICU programs; very limited but highly valued within that niche.',
-      patientSatisfaction: 'Family-centered care is central; parental stress reduction and bonding improvement documented.',
-    },
-    roiSignals: { privatePractice: 8, academic: 62 },
-
-  },
-  {
-    name: 'Neonatal Therapy Certification',
-    type: 'Certification',
-    discipline: 'PT/OT/SLP',
-    disciplines: ['PT', 'OT', 'SLP'],
-    evidence: 'NTCB certification. Standardized NICU competency framework. Feeding, positioning, and developmental outcomes in premature infants.',
-    subScores: { clinicalOutcomes: 62, efficiency: 30, caseloadApplicability: 20, reimbursement: 52, marketDemand: 42, patientSatisfaction: 62 },
-    justifications: {
-      clinicalOutcomes: 'NICU therapy outcomes (feeding, positioning, development) supported; NTCB certification-specific comparative studies absent.',
-      efficiency: 'National exam plus 3 years experience and continuing education requirements; moderate cost.',
-      caseloadApplicability: 'Applicable only in NICU settings; very narrow patient population scope.',
-      reimbursement: 'NICU therapy billed as OT/PT; specialty certification supports neonatal program documentation and payer authorization.',
-      marketDemand: 'Valued in NICU therapy positions; moderate demand in academic medical centers with established NICU programs.',
-      patientSatisfaction: 'Family satisfaction with specialized NICU team is high; parental education component valued.',
-    },
-    roiSignals: { privatePractice: 30, academic: 48 },
-
-  },
-  {
-    name: 'Exoskeleton Training',
-    type: 'Technology',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'FDA-approved (Ekso, ReWalk, Indego). Enables stepping in complete SCI. No superiority over intensive conventional gait training in ambulatory populations.',
-    subScores: { clinicalOutcomes: 55, efficiency: 28, caseloadApplicability: 12, reimbursement: 42, marketDemand: 22, patientSatisfaction: 52 },
-    justifications: {
-      clinicalOutcomes: 'Enables upright mobility and stepping in complete SCI; for ambulatory patients with partial injury, not superior to conventional.',
-      efficiency: 'Device-specific manufacturer training; requires institutional access to exoskeleton system.',
-      caseloadApplicability: 'Extremely limited by equipment access and patient eligibility; applicable mainly in research or SCI/stroke centers.',
-      reimbursement: 'Very limited insurance coverage; some workers comp and select commercial beginning to cover; primarily research or cash-pay settings.',
-      marketDemand: 'Growing interest but very limited current employer demand; primarily research hospitals and specialized centers.',
-      patientSatisfaction: 'High psychological value of upright posture for wheelchair users; fatigue and safety concerns limit enthusiasm.',
-    },
-    roiSignals: { privatePractice: 12, academic: 65 },
-
-  },
-  {
-    name: 'Transplant Rehabilitation',
-    type: 'Specialty',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: '15-20% mortality reduction with ERAS protocols incorporating rehabilitation. Pre-habilitation before transplant reduces post-operative complications.',
-    subScores: { clinicalOutcomes: 62, efficiency: 45, caseloadApplicability: 20, reimbursement: 52, marketDemand: 35, patientSatisfaction: 60 },
-    justifications: {
-      clinicalOutcomes: 'Pre-habilitation and post-transplant rehab reduce complications, ICU time, and improve functional recovery.',
-      efficiency: 'Specialized fellowship or institutional training; limited formal certification pathways.',
-      caseloadApplicability: 'Applicable exclusively at solid organ transplant centers; not relevant outside this narrow setting.',
-      reimbursement: 'Covered under standard PT/OT codes in transplant centers; no certification-specific billing premium.',
-      marketDemand: 'Demand limited to transplant centers; valued by UNOS-affiliated programs.',
-      patientSatisfaction: 'Transplant patients highly motivated; functional recovery goal is personally meaningful.',
-    },
-    roiSignals: { privatePractice: 15, academic: 38 },
-
-  },
-  {
-    name: 'Robotic Devices (Lokomat)',
-    type: 'Technology',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'Safe; FDA-cleared. Cochrane: no superiority over intensive conventional gait training. Best evidence for high-dose repetitions in early stroke.',
-    subScores: { clinicalOutcomes: 52, efficiency: 28, caseloadApplicability: 15, reimbursement: 42, marketDemand: 22, patientSatisfaction: 55 },
-    justifications: {
-      clinicalOutcomes: 'Enables high-repetition stepping; not superior to dose-matched conventional in Cochrane review. May benefit very early, low-function stroke.',
-      efficiency: 'Device-specific manufacturer training; requires institutional access to robotic gait system.',
-      caseloadApplicability: 'Limited by expensive equipment; applicable in neuro gait training at select academic or research centers only.',
-      reimbursement: 'Very limited insurance coverage; mostly research settings; some WC; primarily institutional or self-pay.',
-      marketDemand: 'Very limited employer demand; primarily research centers and specialized neuro rehabilitation hospitals.',
-      patientSatisfaction: 'Novel technology appeals; some patients prefer robotic to manual assistance.',
-    },
-    roiSignals: { privatePractice: 15, academic: 65 },
-
-  },
-  {
-    name: 'Feldenkrais Method',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'Balance improvement in elderly consistent. MS and chronic pain applications emerging. 4-year practitioner training. Limited RCT quality.',
-    subScores: { clinicalOutcomes: 50, efficiency: 15, caseloadApplicability: 38, reimbursement: 35, marketDemand: 15, patientSatisfaction: 58 },
-    justifications: {
-      clinicalOutcomes: 'Consistent balance and mobility improvements in elderly; mechanism (sensorimotor learning) plausible. Effect sizes modest.',
-      efficiency: '800-1,000 hour training over 4 years; among highest total time investments in allied health.',
-      caseloadApplicability: 'Applicable to chronic pain, movement re-education, and neurological conditions; limited by narrow practitioner base.',
-      reimbursement: 'Almost no third-party coverage; self-pay only; occasionally covered under integrative health or wellness benefit policies.',
-      marketDemand: 'Very limited employer demand in clinical settings; primarily private practice and performing arts.',
-      patientSatisfaction: 'Gentle, non-invasive approach appreciated by chronic pain and elderly populations.',
-    },
-    roiSignals: { privatePractice: 68, academic: 30, privatePracticeNote: 'Movement re-education for performing arts and chronic pain; premium cash-pay pricing ($120-200/session).' },
-
-  },
-  {
-    name: 'SOS Feeding Approach',
-    type: 'Certification',
-    discipline: 'OT/SLP',
-    disciplines: ['OT', 'SLP'],
-    evidence: 'Sequential-Oral-Sensory approach for pediatric feeding disorders. Feasibility studies positive. Lacks RCT evidence; widely used in pediatric feeding clinics.',
-    subScores: { clinicalOutcomes: 48, efficiency: 52, caseloadApplicability: 45, reimbursement: 52, marketDemand: 52, patientSatisfaction: 55 },
-    justifications: {
-      clinicalOutcomes: 'Clinical practice reports positive; formal comparative studies vs standard feeding therapy absent.',
-      efficiency: '2-day workshop; moderate cost; accessible to SLP and OT practitioners.',
-      caseloadApplicability: 'Applicable in pediatric feeding programs; relevant for SLP and OT in pediatric medical and school settings.',
-      reimbursement: 'Billed under feeding therapy SLP/OT codes; certification supports medical necessity documentation; commercial and Medicaid coverage apply.',
-      marketDemand: 'Moderate employer demand in pediatric feeding programs and feeding specialty clinics.',
-      patientSatisfaction: 'Family-centered, non-coercive approach reduces mealtime anxiety for families.',
-    },
-    roiSignals: { privatePractice: 65, academic: 40 },
-
-  },
-  {
-    name: 'COMT/Manual Therapy Certification',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'NAIOMT COMT certification. Manual therapy benefits for LBP, neck pain, and headache documented across multiple meta-analyses. Certification-specific outcomes limited.',
-    subScores: { clinicalOutcomes: 58, efficiency: 45, caseloadApplicability: 70, reimbursement: 52, marketDemand: 68, patientSatisfaction: 60 },
-    justifications: {
-      clinicalOutcomes: 'Manual therapy for MSK conditions has consistent short-term benefit; durability and superiority over other PT approaches less clear.',
-      efficiency: 'Orthopaedic Manual PT programs require significant coursework (60+ hours); moderate total cost.',
-      caseloadApplicability: 'Applicable to the majority of outpatient orthopedic and musculoskeletal caseloads; broadly useful in general PT.',
-      reimbursement: 'Billed under manual therapy CPT 97140; Medicare and commercial coverage standard; no COMT-specific billing premium over general manual therapy.',
-      marketDemand: 'Consistently sought in outpatient orthopedic PT postings; manual therapy proficiency widely valued.',
-      patientSatisfaction: 'Hands-on care is highly valued; patients often prefer manual therapy.',
-    },
-    roiSignals: { privatePractice: 75, academic: 38 },
-
-  },
-  {
-    name: 'McKenzie Method (MDT)',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'Directional preference classification guides treatment. Cochrane: moderate evidence for acute/subacute LBP. Classification reliability good when trained. Widely available globally.',
-    subScores: { clinicalOutcomes: 63, efficiency: 62, caseloadApplicability: 70, reimbursement: 52, marketDemand: 72, patientSatisfaction: 62 },
-    justifications: {
-      clinicalOutcomes: 'Directional preference subgroup shows superior outcomes when correctly classified; general LBP evidence is moderate.',
-      efficiency: 'Part A through D course progression; four courses total; significant cumulative time and cost.',
-      caseloadApplicability: 'Applicable across spinal and extremity mechanical diagnoses; broadly useful in outpatient ortho and spine PT.',
-      reimbursement: 'Standard PT billing; MDT supports mechanical diagnosis documentation for payer justification of musculoskeletal care.',
-      marketDemand: 'Among the most widely adopted PT specialty training approaches; frequently listed in spine and outpatient PT postings.',
-      patientSatisfaction: 'Patients value self-management skills and understanding of their condition.',
-    },
-    roiSignals: { privatePractice: 72, academic: 38 },
-
-  },
-  {
-    name: 'Pain Neuroscience Education',
-    type: 'Training',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'Moderate effects on pain catastrophizing, disability, and pain intensity when combined with other interventions. Most effective as adjunct, not standalone.',
-    subScores: { clinicalOutcomes: 58, efficiency: 72, caseloadApplicability: 85, reimbursement: 52, marketDemand: 62, patientSatisfaction: 60 },
-    justifications: {
-      clinicalOutcomes: 'Pain education reduces catastrophizing and fear-avoidance; functional outcomes moderate when combined with movement.',
-      efficiency: '1-2 day workshop; low-moderate cost; multiple providers available; very accessible.',
-      caseloadApplicability: 'Applicable to virtually any patient with pain; cross-cutting utility across outpatient ortho, neuro, and chronic care.',
-      reimbursement: 'Billed as therapeutic education; supports patient education CPT codes; no dedicated pain neuroscience billing code.',
-      marketDemand: 'Growing employer interest; increasingly listed in chronic pain, outpatient ortho, and behavioral health rehab postings.',
-      patientSatisfaction: 'Patients report relief from understanding their pain; reduces helplessness and catastrophizing.',
-    },
-    roiSignals: { privatePractice: 68, academic: 58 },
-
-  },
-  {
-    name: 'FCE (Functional Capacity Eval)',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'Workers\' comp standard for RTW decision-making. Isernhagen, EPIC, and Blankenship systems most validated. Reliability moderate; predictive validity for RTW is limited.',
-    subScores: { clinicalOutcomes: 52, efficiency: 55, caseloadApplicability: 48, reimbursement: 68, marketDemand: 48, patientSatisfaction: 52 },
-    justifications: {
-      clinicalOutcomes: 'Objective functional baseline; RTW prediction is the primary goal but predictive validity studies show modest accuracy.',
-      efficiency: '1-2 day training program; ~$300-500; several proprietary systems available.',
-      caseloadApplicability: 'Applicable primarily in occupational health, workers compensation, and disability evaluation settings.',
-      reimbursement: 'FCE has dedicated billing codes; workers compensation is primary payer; disability evaluation referrals are a significant revenue stream.',
-      marketDemand: 'Steady demand in workers compensation and disability evaluation; specialized but consistent hiring.',
-      patientSatisfaction: 'Patients with valid effort appreciate objectivity; secondary gain situations reduce trust.',
-    },
-    roiSignals: { privatePractice: 62, academic: 35 },
-
-  },
-  {
-    name: 'Certified Hand Therapist (CHT)',
-    type: 'Certification',
-    discipline: 'OT/PT',
-    disciplines: ['OT', 'PT'],
-    evidence: 'Improved outcomes for complex hand conditions and post-surgical recovery. HTCC certification requires 3 years experience + 4000 hours. Insurance-recognized specialty.',
-    subScores: { clinicalOutcomes: 55, efficiency: 28, caseloadApplicability: 62, reimbursement: 72, marketDemand: 88, patientSatisfaction: 60 },
-    justifications: {
-      clinicalOutcomes: 'Outcomes for complex hand conditions (replantation, tendon repair) improved with CHT involvement; general hand conditions less clear.',
-      efficiency: 'Requires 3+ years post-licensure hand therapy experience plus exam; significant experiential investment.',
-      caseloadApplicability: 'Applicable to upper extremity and hand caseloads; essential in hand therapy settings and outpatient ortho.',
-      reimbursement: 'Some payers and facilities give CHT preference or require it for hand therapy authorization; differential access is documented in hand surgery referral networks.',
-      marketDemand: 'Required or strongly preferred at most hand therapy centers; among the most employer-demanded therapy certifications.',
-      patientSatisfaction: 'Patients with complex hand injuries appreciate specialized expertise.',
-    },
-    roiSignals: { privatePractice: 75, academic: 42 },
-
-  },
-  {
-    name: 'Early Intervention Specialist',
-    type: 'Certification',
-    discipline: 'PT/OT/SLP',
-    disciplines: ['PT', 'OT', 'SLP'],
-    evidence: 'IDEA Part C federally mandated. 1/3 of EI graduates need no additional support at school age. £2.40 ROI per £1 invested (UK data). Brain plasticity window maximized.',
-    subScores: { clinicalOutcomes: 60, efficiency: 52, caseloadApplicability: 62, reimbursement: 65, marketDemand: 65, patientSatisfaction: 62 },
-    justifications: {
-      clinicalOutcomes: 'Developmental gains in motor, language, and cognitive domains; long-term school readiness outcomes supported.',
-      efficiency: 'State-specific credential; variable requirements; typically 1-3 days training plus documentation.',
-      caseloadApplicability: 'Applicable to any PT/OT/SLP working in early intervention; high within-setting applicability, narrow setting scope.',
-      reimbursement: 'Early intervention funded through Part C IDEA as state-funded entitlement; certification required for provider enrollment and billing.',
-      marketDemand: 'Required for billing in Part C programs; strong employer demand in state-funded early intervention settings.',
-      patientSatisfaction: 'Family empowerment through coaching model is highly valued; parents report reduced stress.',
-    },
-    roiSignals: { privatePractice: 55, academic: 50 },
-
-  },
-  {
-    name: 'Multiple Sclerosis Certified Specialist',
-    type: 'Certification',
-    discipline: 'PT/OT/SLP',
-    disciplines: ['PT', 'OT', 'SLP'],
-    evidence: 'CMSC certification with MS-specific protocols. Fatigue management, mobility, and cognition outcomes documented in MS populations.',
-    subScores: { clinicalOutcomes: 52, efficiency: 38, caseloadApplicability: 42, reimbursement: 52, marketDemand: 45, patientSatisfaction: 55 },
-    justifications: {
-      clinicalOutcomes: 'MS-specific rehab (fatigue management, aquatic, exercise) shows meaningful functional gains; certification vs non-certification comparison absent.',
-      efficiency: 'MSCS exam plus experience requirements; moderate cost; annual CE required.',
-      caseloadApplicability: 'Applicable to clinicians in MS specialty programs or neuro practices with significant MS caseload.',
-      reimbursement: 'MS rehab billed under standard PT/OT codes; MSCS supports specialty MS clinic billing and program recognition in some health systems.',
-      marketDemand: 'Valued in MS specialty clinics and neuro rehab programs; limited demand outside these settings.',
-      patientSatisfaction: 'MS patients value clinicians who understand disease trajectory and variability.',
-    },
-    roiSignals: { privatePractice: 45, academic: 50 },
-
-  },
-  {
-    name: 'Neurodevelopmental Treatment (NDT)',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'Positive outcomes for CP and stroke. Systematic reviews: beneficial but not superior to other approaches when dose-matched. No certified vs non-certified studies.',
-    subScores: { clinicalOutcomes: 50, efficiency: 32, caseloadApplicability: 65, reimbursement: 52, marketDemand: 72, patientSatisfaction: 55 },
-    justifications: {
-      clinicalOutcomes: 'Positive effects for CP and adult neurological conditions; comparative superiority vs dose-matched alternatives not demonstrated.',
-      efficiency: '8-day basic course; significant cost (~$2,000+); advanced courses add further investment.',
-      caseloadApplicability: 'Applicable in pediatric and adult neurological rehabilitation; broadly used in both peds and neuro settings.',
-      reimbursement: 'Billed under therapeutic activities and neuro re-education codes; no NDT-specific code; standard commercial and Medicare coverage.',
-      marketDemand: 'Frequently listed as required or preferred in pediatric and neuro PT/OT postings; strong institutional adoption.',
-      patientSatisfaction: 'Hands-on facilitation approach well-tolerated; neuro population engagement is complex.',
-    },
-    roiSignals: { privatePractice: 55, academic: 42 },
-
-  },
-  {
-    name: 'Orthopedic Clinical Specialist (OCS)',
-    type: 'Board Cert',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'ABPTS board certification. No demonstrated effectiveness difference vs non-certified. Evidence suggests better value per dollar for MSK care.',
-    subScores: { clinicalOutcomes: 52, efficiency: 22, caseloadApplicability: 82, reimbursement: 52, marketDemand: 92, patientSatisfaction: 55 },
-    justifications: {
-      clinicalOutcomes: 'No RCT evidence of superior patient outcomes; diagnostic accuracy advantage possible but not well-studied.',
-      efficiency: 'ABPTS exam plus 2,000 hours clinical experience requirement; major career investment.',
-      caseloadApplicability: 'Applicable to the broadest rehabilitation caseload; outpatient orthopedics is the most common PT setting.',
-      reimbursement: 'No OCS-specific billing premium in most payer contracts; some health systems offer differential pay or referral preference.',
-      marketDemand: 'Most-held ABPTS certification (~40,000 holders); frequently required or preferred in outpatient PT postings.',
-      patientSatisfaction: 'Patients may prefer credentialed clinicians; confidence in expert care is meaningful.',
-    },
-    roiSignals: { privatePractice: 58, academic: 40 },
-
-  },
-  {
-    name: 'BOC-Orthopedic Specialty',
-    type: 'Board Cert',
-    discipline: 'AT',
-    disciplines: ['AT'],
-    evidence: 'Athletic training orthopedic specialization. NATA-aligned certification. Limited comparative outcome studies vs generalist AT.',
-    subScores: { clinicalOutcomes: 48, efficiency: 25, caseloadApplicability: 72, reimbursement: 52, marketDemand: 42, patientSatisfaction: 52 },
-    justifications: {
-      clinicalOutcomes: 'Specialized MSK knowledge for AT population; comparative outcome studies vs general BOC not available.',
-      efficiency: 'Significant experience requirements plus exam; comparable investment to ABPTS board certification.',
-      caseloadApplicability: 'Applicable to orthopedic PT and AT caseloads; somewhat narrower than OCS but still broadly applicable.',
-      reimbursement: 'No specific billing premium; credential demonstrates orthopedic competency for facility credentialing and referral networks.',
-      marketDemand: 'Less employer recognition than ABPTS OCS; moderate demand in orthopedic athletic training settings.',
-      patientSatisfaction: 'Athletes may prefer specialist-trained AT for complex injuries.',
-    },
-    roiSignals: { privatePractice: 50, academic: 32 },
-
-  },
-  {
-    name: 'Sports Clinical Specialist (SCS)',
-    type: 'Board Cert',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'ABPTS board certification. Limited evidence of outcome differences. Efficiency gains from advanced sports medicine knowledge possible.',
-    subScores: { clinicalOutcomes: 48, efficiency: 22, caseloadApplicability: 60, reimbursement: 52, marketDemand: 65, patientSatisfaction: 52 },
-    justifications: {
-      clinicalOutcomes: 'No comparative RCTs of SCS vs non-SCS outcomes; sports injury management knowledge advanced.',
-      efficiency: 'ABPTS exam plus 2,000 hours sports clinical experience; major career investment.',
-      caseloadApplicability: 'Applicable to sports medicine, athletic training, and injury prevention settings; limited outside sports contexts.',
-      reimbursement: 'No SCS-specific billing premium; sports medicine PT billed under standard codes.',
-      marketDemand: 'Steady employer demand in sports medicine, collegiate athletic, and professional sports settings.',
-      patientSatisfaction: 'Athletes value working with sports-specialized clinicians.',
-    },
-    roiSignals: { privatePractice: 58, academic: 38 },
-
-  },
-  {
-    name: 'Telehealth/Digital Health',
-    type: 'Training',
-    discipline: 'All',
-    disciplines: ['PT', 'OT', 'SLP', 'AT', 'EP', 'RT', 'RN', 'MT', 'Audiology'],
-    evidence: 'Effective for musculoskeletal, mental health, and chronic disease management. No certification-specific outcomes; skills-based training is primary value.',
-    subScores: { clinicalOutcomes: 50, efficiency: 65, caseloadApplicability: 85, reimbursement: 55, marketDemand: 58, patientSatisfaction: 55 },
-    justifications: {
-      clinicalOutcomes: 'Telehealth delivery is non-inferior to in-person for most rehab conditions; training improves platform proficiency.',
-      efficiency: 'Variable; online modules common; low-moderate cost and time investment; growing provider options.',
-      caseloadApplicability: 'Applicable to virtually any clinical setting; telehealth delivery model is cross-cutting across specialties.',
-      reimbursement: 'Telehealth CPT codes 98970-98972 and audio-only codes support digital PT delivery; commercial and Medicare coverage expanding post-pandemic.',
-      marketDemand: 'Growing demand post-pandemic; increasingly listed in virtual care, digital health, and home-based PT/OT roles.',
-      patientSatisfaction: 'Convenience is highly valued; technology and privacy concerns exist.',
-    },
-    roiSignals: { privatePractice: 60, academic: 70 },
-
-  },
-  {
-    name: 'Wound Care Specialist',
-    type: 'Certification',
-    discipline: 'PT/OT/RN',
-    disciplines: ['PT', 'OT', 'RN'],
-    evidence: '40-60% amputation reduction in certified wound centers. ANCC/WOCN certification. Limited PT/OT-specific outcome data vs RN/MD wound specialists.',
-    subScores: { clinicalOutcomes: 55, efficiency: 45, caseloadApplicability: 52, reimbursement: 65, marketDemand: 72, patientSatisfaction: 52 },
-    justifications: {
-      clinicalOutcomes: 'Wound center certification linked to limb salvage outcomes; PT/OT wound care certification-specific comparison not available.',
-      efficiency: 'Multi-day wound care course plus exam (CWS/CWOCN); moderate time and cost.',
-      caseloadApplicability: 'Applicable in wound care centers, home health, and long-term care; limited in outpatient ortho or neuro settings.',
-      reimbursement: 'Wound care has significant billing codes; CWS supports documentation for wound debridement and management; commercial and Medicare cover.',
-      marketDemand: 'High employer demand in wound care centers, home health, and SNF settings; frequently listed as required.',
-      patientSatisfaction: 'Patients with chronic wounds value specialized care; healing progress is motivating.',
-    },
-    roiSignals: { privatePractice: 52, academic: 32 },
-
-  },
-  {
-    name: 'Certified Aging in Place Specialist (CAPS)',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'NAHB certification. Home modification planning for aging adults. Limited outcome data on falls prevented or ADL maintained post-modification.',
-    subScores: { clinicalOutcomes: 45, efficiency: 68, caseloadApplicability: 58, reimbursement: 52, marketDemand: 42, patientSatisfaction: 55 },
-    justifications: {
-      clinicalOutcomes: 'Home modifications reduce fall risk and extend independent living; CAPS certification-specific outcome studies absent.',
-      efficiency: '2-3 day NAHB course; moderate cost; accessible to OT and allied health professionals.',
-      caseloadApplicability: 'Applicable in home health, geriatric OT, and community practice settings; limited in acute or outpatient clinical.',
-      reimbursement: 'Home modification consulting is primarily self-pay; CAPS enables assessments reimbursable under some long-term care and home health policies.',
-      marketDemand: 'Growing demand in home modification consulting and aging-in-place services; moderate clinical employer demand.',
-      patientSatisfaction: 'Aging in place is strongly preferred; successful modification is highly valued by older adults.',
-    },
-    roiSignals: { privatePractice: 62, academic: 32 },
-
-  },
-  {
-    name: 'ACSM Clinical Exercise Physiologist',
-    type: 'Certification',
-    discipline: 'EP',
-    disciplines: ['EP'],
-    evidence: 'ACSM-CEP credential. Exercise testing and prescription in clinical populations. Limited comparison to non-certified EP outcomes.',
-    subScores: { clinicalOutcomes: 50, efficiency: 42, caseloadApplicability: 58, reimbursement: 52, marketDemand: 52, patientSatisfaction: 52 },
-    justifications: {
-      clinicalOutcomes: 'Clinical exercise physiology delivers measurable fitness and cardiovascular risk improvements; CEP vs non-CEP outcomes not studied.',
-      efficiency: 'ACSM exam plus degree and supervised experience requirements; moderate cost.',
-      caseloadApplicability: 'Applicable in cardiac rehab, diabetes management, and chronic disease programs; limited in standard PT/OT.',
-      reimbursement: 'EP billing limited in most settings; some cardiac rehab programs bill EP services; primarily institutional salary-based.',
-      marketDemand: 'Moderate demand in hospital-based fitness, cardiac rehab support, and employee wellness programs.',
-      patientSatisfaction: 'Patients value structured, science-based exercise prescription.',
-    },
-    roiSignals: { privatePractice: 55, academic: 48 },
-
-  },
-  {
-    name: 'Certified Strength & Conditioning (CSCS)',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'NSCA credential for athletic performance. Not rehabilitation-specific. Limited evidence of superiority over standard PT for clinical outcomes.',
-    subScores: { clinicalOutcomes: 45, efficiency: 52, caseloadApplicability: 45, reimbursement: 52, marketDemand: 58, patientSatisfaction: 50 },
-    justifications: {
-      clinicalOutcomes: 'Athletic performance gains well-documented; application to clinical rehab population is indirect.',
-      efficiency: 'NSCA exam; bachelor\'s degree required; moderate cost ~$300-500 exam fee.',
-      caseloadApplicability: 'Applicable in sports performance, athletic training, and athlete rehabilitation; limited in general clinical settings.',
-      reimbursement: 'No CSCS-specific billing in healthcare settings; used in athletic and corporate wellness where direct cash billing applies.',
-      marketDemand: 'Valued in sports performance, collegiate strength staff, and athletic rehab settings; moderate clinical demand.',
-      patientSatisfaction: 'Athletes appreciate evidence-based strength programming; general rehab patients less influenced by credential.',
-    },
-    roiSignals: { privatePractice: 62, academic: 42 },
-
-  },
-  {
-    name: 'Certified Brain Injury Specialist',
-    type: 'Certification',
-    discipline: 'PT/OT/SLP',
-    disciplines: ['PT', 'OT', 'SLP'],
-    evidence: 'BIAA CBIS certification. Standardized care protocols for TBI populations. No comparative outcome studies vs non-certified clinicians.',
-    subScores: { clinicalOutcomes: 48, efficiency: 55, caseloadApplicability: 50, reimbursement: 55, marketDemand: 48, patientSatisfaction: 50 },
-    justifications: {
-      clinicalOutcomes: 'TBI rehabilitation evidence supports specialized, coordinated care; CBIS-specific outcomes not studied.',
-      efficiency: 'Online modules plus CBIS exam; moderate cost and time; accessible pathway.',
-      caseloadApplicability: 'Applicable in TBI and acquired brain injury programs; moderate applicability in neuro and acute care settings.',
-      reimbursement: 'TBI rehab billed under standard PT/OT/SLP codes; CBIS supports brain injury program authorization and quality documentation in some health systems.',
-      marketDemand: 'Moderate demand in TBI programs, inpatient rehab, and brain injury specialty clinics.',
-      patientSatisfaction: 'TBI patients and families value clinicians who understand the unique challenges of brain injury.',
-    },
-    roiSignals: { privatePractice: 40, academic: 42 },
-
-  },
-  {
-    name: 'Certified Stroke Rehabilitation Specialist',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'CSRS certification. Stroke-specific rehabilitation protocols. No comparative outcome data vs non-certified stroke rehab.',
-    subScores: { clinicalOutcomes: 48, efficiency: 58, caseloadApplicability: 55, reimbursement: 52, marketDemand: 45, patientSatisfaction: 52 },
-    justifications: {
-      clinicalOutcomes: 'Stroke rehabilitation evidence is extensive; CSRS certification-specific comparative outcomes not published.',
-      efficiency: 'Online course plus exam; moderate cost; accessible and self-directed pathway.',
-      caseloadApplicability: 'Applicable in stroke rehabilitation and neuro PT/OT settings; moderate population scope.',
-      reimbursement: 'Stroke rehab billed under standard codes; CSRS supports specialty program documentation and may strengthen payer authorization.',
-      marketDemand: 'Moderate demand in stroke rehabilitation units and neuro specialty programs.',
-      patientSatisfaction: 'Stroke survivors and families value specialized knowledge of stroke recovery trajectory.',
-    },
-    roiSignals: { privatePractice: 40, academic: 38 },
-
-  },
-  {
-    name: 'Hippotherapy',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'AHA-PATH certification. High patient satisfaction but small effect sizes in RCTs. Beneficial for CP, MS, and ASD in feasibility studies.',
-    subScores: { clinicalOutcomes: 40, efficiency: 22, caseloadApplicability: 10, reimbursement: 40, marketDemand: 18, patientSatisfaction: 68 },
-    justifications: {
-      clinicalOutcomes: 'Systematic reviews show small positive effects on balance and motor function; effect sizes modest vs dose-matched alternatives.',
-      efficiency: 'PATH International certification; equine-assisted therapy requires horse facility access; significant logistics.',
-      caseloadApplicability: 'Extremely limited by requirement for horse facility and trained animal; applicable only in equine therapy settings.',
-      reimbursement: 'Very limited coverage; PATH certification required by the few payers that cover; mostly self-pay or disability grants.',
-      marketDemand: 'Very limited employer demand; primarily nonprofit equine therapy centers and adaptive sports programs.',
-      patientSatisfaction: 'Exceptional; children and adults with disabilities report transformative experience. Motivation to attend is unmatched.',
-    },
-    roiSignals: { privatePractice: 72, academic: 35, privatePracticeNote: 'Equine therapy centers charge $150-250/session; parental willingness to pay is high; nonprofit and grant-funded models also viable.' },
-
-  },
-  {
-    name: 'Robotic Upper Limb',
-    type: 'Technology',
-    discipline: 'OT',
-    disciplines: ['OT'],
-    evidence: 'Cochrane: no superiority over dose-matched conventional OT for upper limb stroke. High repetition capacity. FDA-cleared devices (InMotion ARM, Amadeo).',
-    subScores: { clinicalOutcomes: 42, efficiency: 28, caseloadApplicability: 12, reimbursement: 45, marketDemand: 20, patientSatisfaction: 48 },
-    justifications: {
-      clinicalOutcomes: 'High-repetition training enabled; not superior to matched conventional OT in Cochrane review.',
-      efficiency: 'Device-specific manufacturer training; requires institutional access to robotic upper limb system.',
-      caseloadApplicability: 'Limited by expensive robotic equipment access; applicable only at select research or specialty centers.',
-      reimbursement: 'Very limited insurance coverage; mostly research or cash-pay; some commercial payers beginning to consider coverage.',
-      marketDemand: 'Limited employer demand; primarily academic stroke centers and research hospitals.',
-      patientSatisfaction: 'Novel technology appeals; some prefer conventional hands-on OT.',
-    },
-    roiSignals: { privatePractice: 15, academic: 62 },
-
-  },
-  {
-    name: 'Certified Mulligan Practitioner',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'Mobilization with movement (MWM) technique. Immediate pain relief documented for shoulder, ankle, knee, and cervical spine in RCTs. Long-term superiority not established.',
-    subScores: { clinicalOutcomes: 45, efficiency: 55, caseloadApplicability: 70, reimbursement: 52, marketDemand: 52, patientSatisfaction: 50 },
-    justifications: {
-      clinicalOutcomes: 'Immediate pain and ROM improvement documented in multiple RCTs; long-term benefit over other manual therapy not established.',
-      efficiency: '5 courses required for full CMP; significant cumulative time and cost commitment.',
-      caseloadApplicability: 'Applicable to musculoskeletal and orthopedic caseloads; MWM techniques usable with most ortho patients.',
-      reimbursement: 'Standard manual therapy billing; no Mulligan-specific code; covered at standard PT rates.',
-      marketDemand: 'Moderate employer demand as a manual therapy subspecialization; valued in orthopedic PT practices.',
-      patientSatisfaction: 'Immediate pain relief during session is impressive to patients.',
-    },
-    roiSignals: { privatePractice: 68, academic: 30 },
-
-  },
-  {
-    name: 'Pelvic Floor Rehabilitation (PRPC)',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'APTA PRPC certification. Cochrane: pelvic floor PT superior to watchful waiting for stress/urge urinary incontinence. Large underserved population.',
-    subScores: { clinicalOutcomes: 50, efficiency: 35, caseloadApplicability: 45, reimbursement: 55, marketDemand: 72, patientSatisfaction: 55 },
-    justifications: {
-      clinicalOutcomes: 'Pelvic floor PT produces meaningful incontinence reduction; PRPC certification vs non-certified comparison not studied.',
-      efficiency: 'Multi-course PRPC pathway requires significant clinical experience plus exam; major investment.',
-      caseloadApplicability: 'Applicable to pelvic health specialty practice; growing population but requires specialized equipment and setting.',
-      reimbursement: 'Pelvic floor PT billed under standard PT codes; growing commercial coverage; PRPC supports women\'s health and pelvic health program billing.',
-      marketDemand: 'Rapidly growing employer demand as pelvic health PT becomes mainstream; increasingly listed in women\'s health postings.',
-      patientSatisfaction: 'High when outcomes achieved; significant stigma around seeking care is barrier.',
-    },
-    roiSignals: { privatePractice: 82, academic: 45 },
-
-  },
-  {
-    name: 'Women\'s Health Clinical Specialist',
-    type: 'Board Cert',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'ABPTS WCS board certification. Pelvic floor, obstetric, and oncology rehabilitation. Limited outcome research for certification specifically; evidence base for interventions growing.',
-    subScores: { clinicalOutcomes: 55, efficiency: 38, caseloadApplicability: 50, reimbursement: 52, marketDemand: 55, patientSatisfaction: 58 },
-    justifications: {
-      clinicalOutcomes: 'Women\'s health PT (pelvic floor, prenatal/postnatal, lymphedema) has strong intervention evidence; WCS-specific outcomes not published.',
-      efficiency: 'ABPTS WHC certification with experience requirements plus exam; significant investment.',
-      caseloadApplicability: 'Applicable in women\'s health, obstetric, and pelvic health PT settings; moderate breadth within specialty.',
-      reimbursement: 'Women\'s health PT billed under standard codes; WHC supports specialty program documentation.',
-      marketDemand: 'Growing demand in women\'s health clinics and pelvic health PT programs.',
-      patientSatisfaction: 'Women strongly prefer specialized, knowledgeable clinicians for pelvic health; privacy and safety valued.',
-    },
-    roiSignals: { privatePractice: 60, academic: 42 },
-
-  },
-  {
-    name: 'Certified Driver Rehabilitation Specialist',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'CDRS certification. Driving evaluation and adaptive equipment prescription. Functional independence outcome (return to driving) is meaningful for patient autonomy.',
-    subScores: { clinicalOutcomes: 42, efficiency: 45, caseloadApplicability: 18, reimbursement: 55, marketDemand: 38, patientSatisfaction: 48 },
-    justifications: {
-      clinicalOutcomes: 'Return-to-driving rates and accident prevention outcomes documented; CDRS vs non-certified comparison absent.',
-      efficiency: 'ADED CDRS requires significant experience plus exam; specialized vehicle access needed for practice.',
-      caseloadApplicability: 'Applicable exclusively to driver rehabilitation and adaptive vehicle modification; very niche population.',
-      reimbursement: 'CDRS enables billing for driver evaluation and adaptive vehicle training; Medicare and some commercial cover; unique billing niche.',
-      marketDemand: 'Consistent demand in driver rehabilitation centers and adaptive technology programs; very specialized.',
-      patientSatisfaction: 'Driving independence is highly valued; emotional significance is substantial.',
-    },
-    roiSignals: { privatePractice: 50, academic: 30 },
-
-  },
-  {
-    name: 'Pediatric Clinical Specialist (PCS)',
-    type: 'Board Cert',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'ABPTS board certification. No comparative outcome studies vs non-PCS-certified pediatric PT. Expertise signal for employers.',
-    subScores: { clinicalOutcomes: 40, efficiency: 25, caseloadApplicability: 72, reimbursement: 52, marketDemand: 55, patientSatisfaction: 45 },
-    justifications: {
-      clinicalOutcomes: 'No RCTs comparing PCS vs non-PCS outcomes in pediatric PT.',
-      efficiency: 'ABPTS exam plus 2,000 hours pediatric PT experience; major career investment.',
-      caseloadApplicability: 'Applicable to any pediatric PT caseload; broadly useful in children\'s hospitals, schools, and pediatric outpatient.',
-      reimbursement: 'Pediatric PT billed under standard codes; PCS does not unlock new billing codes or payer categories.',
-      marketDemand: 'Valued in children\'s hospital and pediatric outpatient settings; moderate employer demand.',
-      patientSatisfaction: 'Families may prefer credentialed pediatric specialists.',
-    },
-    roiSignals: { privatePractice: 52, academic: 38 },
-
-  },
-  {
-    name: 'Board Certification in Pediatrics',
-    type: 'Board Cert',
-    discipline: 'OT',
-    disciplines: ['OT'],
-    evidence: 'AOTA certification. Pediatric OT specialty credential. No comparative outcome studies vs non-certified pediatric OT.',
-    subScores: { clinicalOutcomes: 38, efficiency: 28, caseloadApplicability: 72, reimbursement: 52, marketDemand: 52, patientSatisfaction: 45 },
-    justifications: {
-      clinicalOutcomes: 'No outcome studies comparing certified vs non-certified pediatric OT.',
-      efficiency: 'AOTA BCP exam plus experience documentation; significant investment comparable to ABPTS board cert.',
-      caseloadApplicability: 'Applicable to any pediatric OT caseload; useful in school-based, early intervention, and peds outpatient settings.',
-      reimbursement: 'Pediatric OT billing standard; BCP does not provide a billing premium in most payer contracts.',
-      marketDemand: 'Valued in pediatric OT settings; moderate employer demand in children\'s hospitals and school-based programs.',
-      patientSatisfaction: 'Families value credentialed specialists for children with complex needs.',
-    },
-    roiSignals: { privatePractice: 50, academic: 35 },
-
-  },
-  {
-    name: 'Virtual/Augmented Reality',
-    type: 'Training',
-    discipline: 'All',
-    disciplines: ['PT', 'OT', 'SLP', 'AT', 'EP', 'RT', 'RN', 'MT', 'Audiology'],
-    evidence: 'Emerging technology. VR training certifications are largely vendor-specific. Insufficient peer-reviewed evidence for training certification outcomes.',
-    subScores: { clinicalOutcomes: 42, efficiency: 48, caseloadApplicability: 42, reimbursement: 52, marketDemand: 30, patientSatisfaction: 50 },
-    justifications: {
-      clinicalOutcomes: 'VR delivery evidence growing; training certification as distinct predictor of patient outcomes not studied.',
-      efficiency: 'Device and platform-specific training; growing availability; moderate cost; hardware investment separate.',
-      caseloadApplicability: 'Growing applicability in neuro, vestibular, and pain rehabilitation; limited by equipment access.',
-      reimbursement: 'Remote patient monitoring and therapeutic activity codes applicable; some coverage for VR-based vestibular and pain management emerging.',
-      marketDemand: 'Limited current employer demand; growing in technology-forward neuro and pain programs.',
-      patientSatisfaction: 'VR engagement is high when technology is implemented smoothly.',
-    },
-    roiSignals: { privatePractice: 38, academic: 62 },
-
-  },
-  {
-    name: 'Ventilator Weaning',
-    type: 'Protocol',
-    discipline: 'RT/PT',
-    disciplines: ['RT', 'PT'],
-    evidence: 'RT-led protocolized weaning reduces ventilator days. PT/OT early mobility integration reduces ICU-acquired weakness. PT-specific weaning certification role limited.',
-    subScores: { clinicalOutcomes: 40, efficiency: 35, caseloadApplicability: 35, reimbursement: 52, marketDemand: 50, patientSatisfaction: 35 },
-    justifications: {
-      clinicalOutcomes: 'Protocolized weaning reduces ventilator days; PT/OT role in weaning team improves functional outcomes.',
-      efficiency: 'ICU-specific training; institutional credentialing common; moderate time.',
-      caseloadApplicability: 'Applicable specifically in ICU and acute care with ventilated patients; very narrow population.',
-      reimbursement: 'Acute care respiratory therapy and early mobility billed through hospital DRG; no standalone PT code but supports ICU PT billing.',
-      marketDemand: 'Valued in ICU and acute care PT/OT positions; expected competency in critical care specialty.',
-      patientSatisfaction: 'Patients cannot self-report during ventilation; family reports reduced anxiety with active weaning plan.',
-    },
-    roiSignals: { privatePractice: 10, academic: 38 },
-
-  },
-  {
-    name: 'Lymphedema (CLT/LANA)',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'LANA examination. Complete Decongestive Therapy (CDT) shows consistent volume reduction in systematic reviews. 200-hour training standard. Insurance-recognized.',
-    subScores: { clinicalOutcomes: 45, efficiency: 38, caseloadApplicability: 45, reimbursement: 70, marketDemand: 72, patientSatisfaction: 45 },
-    justifications: {
-      clinicalOutcomes: 'CDT produces consistent lymphedema volume reduction; maintenance management requires patient education.',
-      efficiency: '135-hour minimum training requirement; multiple providers; significant time and cost investment.',
-      caseloadApplicability: 'Applicable in lymphedema clinics, oncology rehab, and home health settings; requires specific manual technique.',
-      reimbursement: 'Lymphedema Treatment Act (2024) mandates Medicare coverage; CLT/LANA required by many payers; among the most direct billing impact of any PT cert.',
-      marketDemand: 'Significantly increased demand post-Lymphedema Treatment Act 2024; CLT/LANA increasingly required in lymphedema programs.',
-      patientSatisfaction: 'Lymphedema causes significant QoL impairment; effective treatment is highly valued.',
-    },
-    roiSignals: { privatePractice: 70, academic: 42 },
-
-  },
-  {
-    name: 'Seating and Mobility Specialist',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'SMS certification from RESNA. Complex wheelchair and seating prescription. Reduces pressure injuries and improves participation.',
-    subScores: { clinicalOutcomes: 40, efficiency: 38, caseloadApplicability: 40, reimbursement: 58, marketDemand: 55, patientSatisfaction: 42 },
-    justifications: {
-      clinicalOutcomes: 'Appropriate seating reduces pressure injury risk and improves function; SMS-specific comparative outcomes not available.',
-      efficiency: 'SMS certification requires significant experience; multiple training pathway options available.',
-      caseloadApplicability: 'Applicable in seating clinics, SCI programs, and CRT specialty practices; limited in general outpatient.',
-      reimbursement: 'SMS supports complex rehab technology (CRT) billing; CMS requires qualified supplier documentation for power wheelchair codes; significant Medicare impact.',
-      marketDemand: 'Consistent demand in CRT clinics and SCI centers; required by some CRT suppliers for billing eligibility.',
-      patientSatisfaction: 'Wheelchair users value clinicians who understand their mobility needs.',
-    },
-    roiSignals: { privatePractice: 42, academic: 45 },
-
-  },
-  {
-    name: 'Dry Needling',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'Mixed systematic review evidence. Most effective for trigger point pain short-term. State-dependent practice. IL permits PT dry needling with training.',
-    subScores: { clinicalOutcomes: 40, efficiency: 68, caseloadApplicability: 72, reimbursement: 55, marketDemand: 88, patientSatisfaction: 42 },
-    justifications: {
-      clinicalOutcomes: 'Short-term trigger point pain reduction consistent; superiority over other manual techniques not established.',
-      efficiency: '1-2 day introductory course; ~$400-600; multiple providers; accessible; advanced courses optional.',
-      caseloadApplicability: 'Applicable to musculoskeletal and chronic pain caseloads; very useful in outpatient ortho and sports settings.',
-      reimbursement: 'Billed as therapeutic procedure; covered by some commercial payers; growing acceptance; some states restrict PT dry needling scope.',
-      marketDemand: 'Among the most employer-demanded PT certifications in outpatient ortho; listed in ~30% of outpatient PT postings in permitted states.',
-      patientSatisfaction: 'Patient response variable; immediate relief creates strong positive impression when it occurs.',
-    },
-    roiSignals: { privatePractice: 90, academic: 35, privatePracticeNote: 'Consumer demand is strong; frequently used to justify direct-pay pricing in cash-pay ortho PT clinics.' },
-
-  },
-  {
-    name: 'TPI Golf Certification',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'Titleist Performance Institute credential. Sport-specific movement screening for golf. Limited peer-reviewed clinical outcome data for rehabilitation context.',
-    subScores: { clinicalOutcomes: 35, efficiency: 78, caseloadApplicability: 18, reimbursement: 35, marketDemand: 28, patientSatisfaction: 40 },
-    justifications: {
-      clinicalOutcomes: 'Golf-specific movement assessment may improve return-to-sport outcomes; clinical rehab outcome data limited.',
-      efficiency: 'Online course plus in-person component; moderate cost; accessible to athletic trainers and PTs.',
-      caseloadApplicability: 'Applicable only in golf performance, sports medicine with golf caseload, or sports PT with golf-playing patients.',
-      reimbursement: 'No insurance billing applicable; primarily cash-pay sports performance and golf fitness setting.',
-      marketDemand: 'Limited employer demand; primarily cash-pay sports performance and golf fitness settings.',
-      patientSatisfaction: 'Golf patients appreciate sport-specific expertise.',
-    },
-    roiSignals: { privatePractice: 88, academic: 15, privatePracticeNote: 'Golf performance clients pay $200-400/session; primarily cash-pay sports performance market with premium clientele.' },
-
-  },
-  {
-    name: 'ASTYM Therapy',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'Soft tissue mobilization technique. Limited comparative evidence vs IASTM or standard manual therapy. Training required for certification.',
-    subScores: { clinicalOutcomes: 36, efficiency: 62, caseloadApplicability: 65, reimbursement: 52, marketDemand: 52, patientSatisfaction: 40 },
-    justifications: {
-      clinicalOutcomes: 'Tendinopathy and scar tissue outcomes modest; not clearly superior to other soft tissue techniques.',
-      efficiency: '2-day training course; moderate cost; requires ASTYM tool purchase; moderately accessible.',
-      caseloadApplicability: 'Applicable to soft tissue and musculoskeletal caseloads; useful in outpatient ortho and sports settings.',
-      reimbursement: 'Billed under manual therapy CPT codes; standard commercial and Medicare coverage at manual therapy rates.',
-      marketDemand: 'Moderate employer demand as IASTM approach; valued in orthopedic PT practices using soft tissue techniques.',
-      patientSatisfaction: 'Some patients respond well; discomfort during treatment is a barrier.',
-    },
-    roiSignals: { privatePractice: 60, academic: 25 },
-
-  },
-  {
-    name: 'Rolfing/Structural Integration',
-    type: 'Certification',
-    discipline: 'MT',
-    disciplines: ['MT'],
-    evidence: 'Systematic reviews find insufficient evidence. Small studies suggest postural and pain benefits. 700-hour training. Not covered by most payers.',
-    subScores: { clinicalOutcomes: 32, efficiency: 22, caseloadApplicability: 35, reimbursement: 35, marketDemand: 10, patientSatisfaction: 42 },
-    justifications: {
-      clinicalOutcomes: 'Small studies positive for posture and pain; effect sizes modest. No high-quality RCTs.',
-      efficiency: '760+ hour training over 1-2 years; significant time and cost investment.',
-      caseloadApplicability: 'Applicable to posture, movement dysfunction, and chronic pain; limited practitioner base reduces setting availability.',
-      reimbursement: 'Almost exclusively self-pay; minimal third-party coverage; HSA/FSA may apply in some cases.',
-      marketDemand: 'Virtually no employer demand in clinical settings; primarily private practice and wellness settings.',
-      patientSatisfaction: 'Clients who complete series report meaningful subjective change.',
-    },
-    roiSignals: { privatePractice: 68, academic: 22, privatePracticeNote: 'Established wellness market with premium pricing ($150-250/session); strong consumer recognition outside healthcare.' },
-
-  },
-  {
-    name: 'Therapeutic Pain Specialist',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'TPS certification. Pain neuroscience education advanced application. Limited outcome studies specific to this credential.',
-    subScores: { clinicalOutcomes: 36, efficiency: 55, caseloadApplicability: 80, reimbursement: 52, marketDemand: 55, patientSatisfaction: 38 },
-    justifications: {
-      clinicalOutcomes: 'Advanced pain science application has theoretical basis; TPS-specific outcome studies not available.',
-      efficiency: 'Multi-module certificate program; moderate cost and time; several providers offer online options.',
-      caseloadApplicability: 'Applicable to any patient with chronic or persistent pain; cross-cutting across outpatient, neuro, and behavioral settings.',
-      reimbursement: 'Pain management billed under standard PT codes; no TPS-specific code; billing value is incidental to clinical training.',
-      marketDemand: 'Growing demand in pain management and chronic pain rehabilitation settings.',
-      patientSatisfaction: 'Chronic pain patients value comprehensive understanding of their experience.',
-    },
-    roiSignals: { privatePractice: 65, academic: 52 },
-
-  },
-  {
-    name: 'Craniosacral Therapy/Upledger',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'Systematic reviews find insufficient evidence. CSF rhythm detection reliability very low in blinded studies. Theoretical mechanism lacks anatomical support.',
-    subScores: { clinicalOutcomes: 14, efficiency: 35, caseloadApplicability: 40, reimbursement: 35, marketDemand: 18, patientSatisfaction: 28 },
-    justifications: {
-      clinicalOutcomes: 'Systematic reviews consistently find no evidence of clinical benefit beyond placebo. No high-quality positive RCTs.',
-      efficiency: '4-8 day introductory course; multiple levels required for full certification; significant cumulative cost.',
-      caseloadApplicability: 'Applicable to chronic pain, headache, TMJ, and pediatric populations; limited by evidence concerns.',
-      reimbursement: 'Very limited to no third-party coverage; self-pay; HSA eligible in some cases.',
-      marketDemand: 'Low employer demand in evidence-based clinical settings; primarily private practice and integrative wellness.',
-      patientSatisfaction: 'Some patients report subjective benefit, consistent with placebo response.',
-    },
-    roiSignals: { privatePractice: 65, academic: 18, privatePracticeNote: 'Established integrative wellness consumer market; $120-200/session common in wellness and integrative health settings.' },
-
-  },
-  {
-    name: 'Certified Low Vision Therapist',
-    type: 'Certification',
-    discipline: 'OT',
-    disciplines: ['OT'],
-    evidence: 'CLVT certification from Academy for Certification of Vision Rehabilitation. Vision rehabilitation functional outcomes documented. Limited comparative studies.',
-    subScores: { clinicalOutcomes: 32, efficiency: 42, caseloadApplicability: 22, reimbursement: 52, marketDemand: 42, patientSatisfaction: 38 },
-    justifications: {
-      clinicalOutcomes: 'Low vision rehabilitation improves ADL performance and reading for patients with visual impairment.',
-      efficiency: 'ACVREP CLVT requires experience plus exam; moderate investment.',
-      caseloadApplicability: 'Applicable exclusively to low vision rehabilitation and vision impairment populations; very narrow clinical scope.',
-      reimbursement: 'CLVT enables billing for low vision rehabilitation under vision rehab CPT codes; Medicare Part B and some commercial cover.',
-      marketDemand: 'Consistent demand in low vision programs and vision rehabilitation centers; specialized but stable.',
-      patientSatisfaction: 'Visual impairment significantly impacts QoL; effective rehabilitation is highly meaningful.',
-    },
-    roiSignals: { privatePractice: 35, academic: 35 },
-
-  },
-  {
-    name: 'Suit Therapy',
-    type: 'Equipment',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'TheraSuit/Adeli suit. Multiple studies: no additional benefit over control PT when dose-matched. High family interest but evidence does not support premium use.',
-    subScores: { clinicalOutcomes: 28, efficiency: 38, caseloadApplicability: 15, reimbursement: 40, marketDemand: 12, patientSatisfaction: 35 },
-    justifications: {
-      clinicalOutcomes: 'Systematic reviews: no benefit over dose-matched conventional PT. Proprioceptive loading hypothesis not confirmed.',
-      efficiency: 'Facility-based training; requires specialized suit and clinic access; significant equipment cost barrier.',
-      caseloadApplicability: 'Applicable to pediatric neurological populations with specific suit therapy facilities; very limited scope.',
-      reimbursement: 'Almost exclusively self-pay; not covered by major payers; intensive billing as PT possible but payer denial common.',
-      marketDemand: 'Very limited employer demand; primarily specialized pediatric neuro therapy centers.',
-      patientSatisfaction: 'Families invest significantly; expectation-outcome gap can be disappointing.',
-    },
-    roiSignals: { privatePractice: 42, academic: 18 },
-
-  },
-  {
-    name: 'Advanced Competency in Home Health',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'ACHH certification from APTA. Home health specialty competency. No comparative outcome studies vs non-certified home health PT/OT.',
-    subScores: { clinicalOutcomes: 28, efficiency: 58, caseloadApplicability: 62, reimbursement: 52, marketDemand: 42, patientSatisfaction: 32 },
-    justifications: {
-      clinicalOutcomes: 'Home health PT/OT effectiveness is supported; ACHH certification-specific outcomes not studied.',
-      efficiency: 'APTA ACHH online self-assessment plus documentation; relatively accessible; moderate cost.',
-      caseloadApplicability: 'Applicable to any home health clinician; home health is a major and growing PT/OT employment setting.',
-      reimbursement: 'Home health services billed through Medicare OASIS per-visit; ACHH does not specifically unlock new codes but supports program quality.',
-      marketDemand: 'Moderate demand in home health agencies; ACHH credential valued but not yet widely required.',
-      patientSatisfaction: 'Patients prefer receiving care at home; specialized home health clinicians improve confidence.',
-    },
-    roiSignals: { privatePractice: 48, academic: 30 },
-
-  },
-  {
-    name: 'Barral Institute Certification',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'Visceral and neural manipulation. Systematic reviews find insufficient evidence. Detection reliability unstudied. Theoretical mechanisms not supported by anatomy.',
-    subScores: { clinicalOutcomes: 16, efficiency: 18, caseloadApplicability: 32, reimbursement: 32, marketDemand: 8, patientSatisfaction: 25 },
-    justifications: {
-      clinicalOutcomes: 'No RCTs supporting visceral manipulation for any condition. Case reports and small studies dominate.',
-      efficiency: 'Multiple 5-day modules; years to complete full pathway; very high cumulative time and cost.',
-      caseloadApplicability: 'Applicable to chronic pain and visceral dysfunction; very limited evidence base restricts clinical acceptance.',
-      reimbursement: 'No third-party coverage; self-pay only; no insurance billing pathway.',
-      marketDemand: 'Minimal employer demand; primarily private practice with specific manual therapy focus.',
-      patientSatisfaction: 'Some patients report benefit, consistent with non-specific and placebo effects.',
-    },
-    roiSignals: { privatePractice: 62, academic: 18 },
-
-  },
-  {
-    name: 'Transitional DPT (tDPT)',
-    type: 'Degree',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'No outcome improvements documented vs MPT graduates. Primarily credential equivalency degree. Administrative/career value without clinical outcome benefit.',
-    subScores: { clinicalOutcomes: 25, efficiency: 22, caseloadApplicability: 50, reimbursement: 52, marketDemand: 30, patientSatisfaction: 28 },
-    justifications: {
-      clinicalOutcomes: 'No studies demonstrate patient outcome differences between tDPT and MPT graduates.',
-      efficiency: '18-24 month post-professional degree program; significant tuition cost.',
-      caseloadApplicability: 'Credential equivalency degree; no specific caseload benefit beyond existing MPT training.',
-      reimbursement: 'No billing benefit; credential equivalency has no payer impact; does not unlock new CPT codes or billing categories.',
-      marketDemand: 'Limited employer differentiation from DPT; minimal demand advantage over clinical doctorate.',
-      patientSatisfaction: 'Patients do not distinguish tDPT from DPT or MPT.',
-    },
-    roiSignals: { privatePractice: 20, academic: 52 },
-
-  },
-  {
-    name: 'Physical Therapy Residency',
-    type: 'Training',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'ABPTRFE-accredited. Surprising finding: worse efficiency than entry-level in large comparative study (25,843 patients). Fellowship outperforms residency. May reflect case complexity.',
-    subScores: { clinicalOutcomes: 28, efficiency: 18, caseloadApplicability: 65, reimbursement: 52, marketDemand: 58, patientSatisfaction: 28 },
-    justifications: {
-      clinicalOutcomes: 'Large comparative study shows residency-trained PTs do not outperform entry-level on outcomes; fellowship does.',
-      efficiency: '12-month post-graduation residency; stipend-based but significant opportunity cost relative to clinical salary.',
-      caseloadApplicability: 'Residency training adds clinical depth applicable across the chosen specialty caseload.',
-      reimbursement: 'No residency-specific billing premium in most payer contracts; does not unlock new billing codes.',
-      marketDemand: 'Growing employer demand in academic medical centers, VA system, and specialty PT programs.',
-      patientSatisfaction: 'No difference in patient satisfaction vs entry-level in available studies.',
-    },
-    roiSignals: { privatePractice: 32, academic: 68 },
-
-  },
-  {
-    name: 'Certified Exercise Expert for Aging Adults',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'CEEAA certification from APTA. Exercise prescription for older adults. No comparative outcome studies vs non-certified.',
-    subScores: { clinicalOutcomes: 22, efficiency: 75, caseloadApplicability: 68, reimbursement: 52, marketDemand: 35, patientSatisfaction: 28 },
-    justifications: {
-      clinicalOutcomes: 'Exercise for aging adults is well-evidenced; CEEAA-specific outcomes not studied.',
-      efficiency: 'CEEAA online coursework plus field experience; moderate cost; accessible self-directed pathway.',
-      caseloadApplicability: 'Applicable to any clinician working with older adults on exercise prescription; broad geriatric caseload utility.',
-      reimbursement: 'Exercise for aging adults billed under standard PT codes; no CEEAA billing premium in current payer contracts.',
-      marketDemand: 'Moderate awareness in geriatric PT/OT; not widely listed as required but growing recognition.',
-      patientSatisfaction: 'Older adults value clinicians knowledgeable about age-specific exercise.',
-    },
-    roiSignals: { privatePractice: 48, academic: 32 },
-
-  },
-  {
-    name: 'Geriatric Clinical Specialist (GCS)',
-    type: 'Board Cert',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'ABPTS board certification. No comparative outcome studies despite relevance to aging population. Signals geriatric expertise.',
-    subScores: { clinicalOutcomes: 28, efficiency: 28, caseloadApplicability: 72, reimbursement: 52, marketDemand: 65, patientSatisfaction: 32 },
-    justifications: {
-      clinicalOutcomes: 'Geriatric PT is high-need; GCS-specific outcome comparison vs non-GCS not available.',
-      efficiency: 'ABPTS exam plus 2,000 hours geriatric clinical experience; major career investment.',
-      caseloadApplicability: 'Applicable to any geriatric PT caseload; broadly useful in SNF, home health, acute care, and geriatric outpatient.',
-      reimbursement: 'No GCS-specific billing premium in most contracts; some health systems offer differential pay or referral preference.',
-      marketDemand: 'Valued in geriatric, SNF, and home health PT settings; ~6,000 holders; moderate to high employer demand.',
-      patientSatisfaction: 'Older patients may prefer credentialed geriatric specialists.',
-    },
-    roiSignals: { privatePractice: 50, academic: 42 },
-
-  },
-  {
-    name: 'Neurologic Clinical Specialist (NCS)',
-    type: 'Board Cert',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'ABPTS board certification. No outcome data despite high-need neurological population. Signals specialty expertise.',
-    subScores: { clinicalOutcomes: 30, efficiency: 28, caseloadApplicability: 70, reimbursement: 52, marketDemand: 72, patientSatisfaction: 35 },
-    justifications: {
-      clinicalOutcomes: 'Neurological rehab evidence base is strong; NCS-specific comparative outcomes absent.',
-      efficiency: 'ABPTS exam plus 2,000 hours neurologic clinical experience; major career investment.',
-      caseloadApplicability: 'Applicable to any neurological PT caseload; broadly useful across stroke, TBI, MS, and Parkinson programs.',
-      reimbursement: 'No NCS-specific billing premium; some specialty neuro programs recognize it for program credentialing.',
-      marketDemand: 'High demand in inpatient rehab and neuro specialty PT; ~10,000 holders; among more sought-after ABPTS certs.',
-      patientSatisfaction: 'Neurological patients and families value specialist expertise.',
-    },
-    roiSignals: { privatePractice: 52, academic: 48 },
-
-  },
-  {
-    name: 'Board Certification in Gerontology',
-    type: 'Board Cert',
-    discipline: 'OT',
-    disciplines: ['OT'],
-    evidence: 'BCG certification from AOTA. Geriatric OT specialty. No comparative outcome studies.',
-    subScores: { clinicalOutcomes: 22, efficiency: 28, caseloadApplicability: 70, reimbursement: 52, marketDemand: 48, patientSatisfaction: 28 },
-    justifications: {
-      clinicalOutcomes: 'No outcome studies comparing BCG vs non-certified geriatric OT.',
-      efficiency: 'AOTA BCG exam plus experience requirements; significant investment.',
-      caseloadApplicability: 'Applicable to any geriatric OT caseload; SNF, home health, acute care, and geriatric outpatient.',
-      reimbursement: 'No BCG billing premium; professional credential only; no payer impact.',
-      marketDemand: 'Moderate employer demand in geriatric and SNF OT settings.',
-      patientSatisfaction: 'Older adults value geriatric OT expertise.',
-    },
-    roiSignals: { privatePractice: 48, academic: 38 },
-
-  },
-  {
-    name: 'AOTA Board Certifications (Physical Rehab)',
-    type: 'Board Cert',
-    discipline: 'OT',
-    disciplines: ['OT'],
-    evidence: 'AOTA BCPR. Zero comparative outcome studies identified across systematic searches. Professional signaling credential.',
-    subScores: { clinicalOutcomes: 20, efficiency: 30, caseloadApplicability: 60, reimbursement: 52, marketDemand: 35, patientSatisfaction: 25 },
-    justifications: {
-      clinicalOutcomes: 'No published RCTs or comparative studies of BCPR vs non-certified OT outcomes.',
-      efficiency: 'Portfolio plus exam process; significant documentation and time requirements.',
-      caseloadApplicability: 'Applicable to OT in physical rehabilitation settings; moderately broad within hospital and outpatient rehab.',
-      reimbursement: 'No BCPR billing impact; professional signaling credential only.',
-      marketDemand: 'Limited employer recognition outside OT professional community; lower demand than ABPTS board certs.',
-      patientSatisfaction: 'Credential recognition limited outside OT professional community.',
-    },
-    roiSignals: { privatePractice: 35, academic: 32 },
-
-  },
-  {
-    name: 'AOTA Specialty Certifications',
-    type: 'Board Cert',
-    discipline: 'OT',
-    disciplines: ['OT'],
-    evidence: 'Driving, Environmental Mod, Feeding, Low Vision, School. No outcome studies across any of these specialty certifications.',
-    subScores: { clinicalOutcomes: 18, efficiency: 32, caseloadApplicability: 45, reimbursement: 52, marketDemand: 30, patientSatisfaction: 22 },
-    justifications: {
-      clinicalOutcomes: 'No outcome studies for any AOTA specialty certification vs non-certified.',
-      efficiency: 'Portfolio and exam process; significant documentation and experience requirements.',
-      caseloadApplicability: 'Applicability varies by specialty (driving, feeding, low vision, school); each narrow but meaningful within its domain.',
-      reimbursement: 'No billing impact for any AOTA specialty certification; professional signaling only.',
-      marketDemand: 'Limited employer recognition; specialty areas have consistent but narrow demand.',
-      patientSatisfaction: 'Patients may prefer certified specialists in specific domains.',
-    },
-    roiSignals: { privatePractice: 38, academic: 28 },
-
-  },
-  {
-    name: 'Cardiovascular/Pulmonary Specialist',
-    type: 'Board Cert',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'ABPTS CCS board certification. No certification-specific outcome studies despite high-need population.',
-    subScores: { clinicalOutcomes: 22, efficiency: 28, caseloadApplicability: 42, reimbursement: 52, marketDemand: 48, patientSatisfaction: 25 },
-    justifications: {
-      clinicalOutcomes: 'Cardiopulmonary PT interventions are well-evidenced; CCS-specific outcomes not studied.',
-      efficiency: 'ABPTS CCS exam plus 2,000 hours experience; major career investment.',
-      caseloadApplicability: 'Applicable in cardiopulmonary and ICU PT settings; limited outside these specialized environments.',
-      reimbursement: 'No CCS billing premium; standard cardiopulmonary PT billing applies.',
-      marketDemand: 'Moderate demand in cardiac rehab support and cardiopulmonary PT roles.',
-      patientSatisfaction: 'Patients with heart/lung conditions value specialized PT.',
-    },
-    roiSignals: { privatePractice: 35, academic: 40 },
-
-  },
-  {
-    name: 'Certified Spinal Manipulative Therapy',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'Spinal manipulation evidence supports benefit for LBP and neck pain; no specific certification comparison to non-certified manipulators.',
-    subScores: { clinicalOutcomes: 24, efficiency: 55, caseloadApplicability: 68, reimbursement: 52, marketDemand: 58, patientSatisfaction: 25 },
-    justifications: {
-      clinicalOutcomes: 'Manipulation benefits well-documented for LBP; certification-specific outcomes not studied.',
-      efficiency: 'Advanced manual therapy coursework plus competency exam; moderate investment.',
-      caseloadApplicability: 'Applicable to spinal and musculoskeletal caseloads; useful in outpatient ortho and spine specialty settings.',
-      reimbursement: 'Billed under manual therapy codes; no certification-specific premium over general manual therapy billing.',
-      marketDemand: 'Moderate employer demand in orthopedic PT; valued alongside COMT and MDT training.',
-      patientSatisfaction: 'Rapid pain relief from manipulation creates high immediate satisfaction.',
-    },
-    roiSignals: { privatePractice: 68, academic: 32 },
-
-  },
-  {
-    name: 'Clinical Doctorate (DPT/OTD) vs Masters',
-    type: 'Degree',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'No measurable patient outcome differences between DPT and MPT graduates in multiple studies. Credential equivalency; clinical performance is equivalent.',
-    subScores: { clinicalOutcomes: 18, efficiency: 15, caseloadApplicability: 55, reimbursement: 52, marketDemand: 65, patientSatisfaction: 22 },
-    justifications: {
-      clinicalOutcomes: 'Consistent finding: no patient outcome difference between DPT and MPT graduates.',
-      efficiency: 'Post-professional DPT or OTD programs typically 18-36 months; significant tuition cost.',
-      caseloadApplicability: 'Credential equivalency; no specific caseload benefit over clinical master\'s training.',
-      reimbursement: 'No billing difference between DPT and MPT graduates in most payer contracts; credential equivalency only.',
-      marketDemand: 'DPT now considered standard entry-level credential; widely required by employers even without outcome advantage.',
-      patientSatisfaction: 'Patients do not distinguish degree level in satisfaction surveys.',
-    },
-    roiSignals: { privatePractice: 22, academic: 55 },
-
-  },
-  {
-    name: 'Sensory Integration (SIPT)',
-    type: 'Certification',
-    discipline: 'OT',
-    disciplines: ['OT'],
-    evidence: 'SIPT certification widely used in pediatric OT. Limited evidence in systematic reviews despite widespread use. Bundy & Lane systematic review: inconclusive.',
-    subScores: { clinicalOutcomes: 18, efficiency: 25, caseloadApplicability: 52, reimbursement: 52, marketDemand: 58, patientSatisfaction: 22 },
-    justifications: {
-      clinicalOutcomes: 'Systematic reviews inconclusive; studies methodologically limited. Widespread use in ASD and developmental delay not matched by outcome evidence.',
-      efficiency: 'WPS test publisher certification plus supervised training; significant time and cost.',
-      caseloadApplicability: 'Applicable to pediatric OT with sensory processing disorder focus; common in pediatric outpatient and school-based OT.',
-      reimbursement: 'Sensory integration therapy billed under OT codes; variable commercial coverage; Medicaid coverage inconsistent.',
-      marketDemand: 'Widely sought in pediatric OT positions; strong adoption in school-based and outpatient pediatric OT settings.',
-      patientSatisfaction: 'Families of sensory-sensitive children report perceived improvement.',
-    },
-    roiSignals: { privatePractice: 60, academic: 42 },
-
-  },
-  {
-    name: 'Modern Management of Older Adult',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'CERT-MMOA course from Duke. Geriatric exercise and function focus. Limited comparative outcome data for certified vs non-certified clinicians.',
-    subScores: { clinicalOutcomes: 20, efficiency: 72, caseloadApplicability: 65, reimbursement: 52, marketDemand: 32, patientSatisfaction: 24 },
-    justifications: {
-      clinicalOutcomes: 'Course content evidence-based; certification-specific outcome comparison absent.',
-      efficiency: 'Duke CERT-MMOA online course; relatively low cost and time; accessible self-directed format.',
-      caseloadApplicability: 'Applicable to any clinician working with older adults; evidence-based geriatric exercise focus broadly useful.',
-      reimbursement: 'No billing premium; course adds clinical knowledge but does not impact payer reimbursement.',
-      marketDemand: 'Growing recognition in geriatric PT programs; not yet widely listed in job postings.',
-      patientSatisfaction: 'Older adults value geriatric-focused care approach.',
-    },
-    roiSignals: { privatePractice: 45, academic: 35 },
-
-  },
-  {
-    name: 'Assistive Technology Professional (ATP)',
-    type: 'Certification',
-    discipline: 'OT/PT',
-    disciplines: ['OT', 'PT'],
-    evidence: 'RESNA ATP credential. AT device selection and application. Technology-focused; no comparative outcome studies for ATP vs non-certified AT provision.',
-    subScores: { clinicalOutcomes: 18, efficiency: 45, caseloadApplicability: 42, reimbursement: 52, marketDemand: 52, patientSatisfaction: 22 },
-    justifications: {
-      clinicalOutcomes: 'Appropriate AT selection improves function and participation; ATP-specific outcome comparison not studied.',
-      efficiency: 'RESNA ATP exam plus 1,500 hours experience; moderate cost and time.',
-      caseloadApplicability: 'Applicable in assistive technology clinics, seating programs, and SCI/neuro specialty settings.',
-      reimbursement: 'ATP supports complex rehab technology documentation; CMS recognizes ATP for equipment prescription; reduces inappropriate device denials.',
-      marketDemand: 'Consistent demand in AT clinics and CRT programs; required by some equipment suppliers.',
-      patientSatisfaction: 'Patients with AT needs value expert device matching.',
-    },
-    roiSignals: { privatePractice: 42, academic: 42 },
-
-  },
-  {
-    name: 'VitalStim',
-    type: 'Certification',
-    discipline: 'SLP',
-    disciplines: ['SLP'],
-    evidence: 'FDA-cleared for dysphagia. Systematic reviews: insufficient evidence of superiority over standard dysphagia therapy. Sham-controlled RCTs show mixed results.',
-    subScores: { clinicalOutcomes: 14, efficiency: 62, caseloadApplicability: 45, reimbursement: 52, marketDemand: 48, patientSatisfaction: 16 },
-    justifications: {
-      clinicalOutcomes: 'Sham-controlled RCTs show no consistent benefit over standard swallowing therapy.',
-      efficiency: '1-2 day course; moderate cost; multiple training centers available.',
-      caseloadApplicability: 'Applicable to SLPs treating dysphagia; limited to this population and requires specific device.',
-      reimbursement: 'Billed under electrical stimulation and dysphagia CPT codes; standard commercial and Medicare coverage at standard SLP rates.',
-      marketDemand: 'Moderate employer demand in acute care and outpatient SLP dysphagia programs.',
-      patientSatisfaction: 'Some patients prefer active treatment over exercises alone.',
-    },
-    roiSignals: { privatePractice: 38, academic: 28 },
-
-  },
-  {
-    name: 'Board Certified Specialist in Swallowing',
-    type: 'Board Cert',
-    discipline: 'SLP',
-    disciplines: ['SLP'],
-    evidence: 'BCS-S credential from ASHA. Dysphagia specialty certification. No comparative outcome studies vs non-certified SLP dysphagia management.',
-    subScores: { clinicalOutcomes: 14, efficiency: 30, caseloadApplicability: 45, reimbursement: 52, marketDemand: 48, patientSatisfaction: 16 },
-    justifications: {
-      clinicalOutcomes: 'Dysphagia management evidence base exists; BCS-S vs non-certified comparison not available.',
-      efficiency: 'ASHA BCS-S portfolio plus exam; significant documentation requirements.',
-      caseloadApplicability: 'Applicable to SLPs specializing in dysphagia and swallowing disorders.',
-      reimbursement: 'No BCS-S billing premium; standard SLP dysphagia billing applies.',
-      marketDemand: 'Moderate demand in acute care, inpatient rehab, and SNF SLP positions with dysphagia focus.',
-      patientSatisfaction: 'Patients with dysphagia value specialized SLP expertise.',
-    },
-    roiSignals: { privatePractice: 35, academic: 40 },
-
-  },
-  {
-    name: 'Graston/IASTM',
-    type: 'Certification',
-    discipline: 'PT/OT',
-    disciplines: ['PT', 'OT'],
-    evidence: 'Instrument-Assisted Soft Tissue Mobilization. Systematic reviews: weak evidence, inconsistent protocols. Similar to standard manual therapy when dose-matched.',
-    subScores: { clinicalOutcomes: 16, efficiency: 68, caseloadApplicability: 65, reimbursement: 52, marketDemand: 58, patientSatisfaction: 18 },
-    justifications: {
-      clinicalOutcomes: 'Small positive effects for tendinopathy; not superior to other manual techniques when controlled.',
-      efficiency: '1-2 day GTOM course; ~$500-800 plus tool purchase; moderately accessible.',
-      caseloadApplicability: 'Applicable to soft tissue and musculoskeletal caseloads; usable in outpatient ortho and sports settings.',
-      reimbursement: 'Billed under manual therapy codes; no Graston-specific billing premium over standard manual therapy.',
-      marketDemand: 'Widely adopted technique; moderate employer demand in outpatient PT and sports medicine.',
-      patientSatisfaction: 'Novel technique can enhance perceived treatment intensity.',
-    },
-    roiSignals: { privatePractice: 58, academic: 25 },
-
-  },
-  {
-    name: 'Emergency Medical Response',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'Sports venue first responder role. No rehabilitation outcome data. Safety and preparedness value for sideline coverage. Primarily a liability/access credential.',
-    subScores: { clinicalOutcomes: 8, efficiency: 88, caseloadApplicability: 22, reimbursement: 38, marketDemand: 45, patientSatisfaction: 5 },
-    justifications: {
-      clinicalOutcomes: 'No rehabilitation outcome data; value is emergency preparedness not functional improvement.',
-      efficiency: '2-day first responder course; low cost; widely available; quick to obtain.',
-      caseloadApplicability: 'Applicable specifically in sideline sports coverage and event medical response; not relevant in clinical settings.',
-      reimbursement: 'Enables sports venue coverage contracts; sideline work is fee-for-service or contract-based; not standard insurance billing.',
-      marketDemand: 'Required for most sideline coverage positions in sports medicine and athletic training contexts.',
-      patientSatisfaction: 'Athlete confidence in sideline coverage is meaningful but not a clinical outcome.',
-    },
-    roiSignals: { privatePractice: 45, academic: 32 },
-
-  },
-  {
-    name: 'Oncology Clinical Specialist',
-    type: 'Board Cert',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'ABPTS OncPT board certification. Growing field with emerging evidence. No comparative outcome studies yet between certified and non-certified oncology PT.',
-    subScores: { clinicalOutcomes: 12, efficiency: 32, caseloadApplicability: 40, reimbursement: 52, marketDemand: 38, patientSatisfaction: 14 },
-    justifications: {
-      clinicalOutcomes: 'Oncology rehab is a growing field with positive evidence; OncPT certification-specific outcomes not yet published.',
-      efficiency: 'ABPTS OncPT certification; experience requirements plus exam; moderate to significant investment.',
-      caseloadApplicability: 'Applicable in oncology rehabilitation and cancer survivorship programs; limited outside these specialty settings.',
-      reimbursement: 'Oncology rehab billed under standard PT codes; OncPT does not unlock new billing codes.',
-      marketDemand: 'Growing demand as oncology rehab becomes established; limited current employer base but strong trajectory.',
-      patientSatisfaction: 'Cancer patients value specialized PT who understands treatment side effects.',
-    },
-    roiSignals: { privatePractice: 42, academic: 48 },
-
-  },
-  {
-    name: 'Board Certified Specialist Child Language',
-    type: 'Board Cert',
-    discipline: 'SLP',
-    disciplines: ['SLP'],
-    evidence: 'BCS-CL from ASHA. No comparative outcome studies vs non-certified SLP for child language disorders.',
-    subScores: { clinicalOutcomes: 10, efficiency: 28, caseloadApplicability: 55, reimbursement: 52, marketDemand: 38, patientSatisfaction: 12 },
-    justifications: {
-      clinicalOutcomes: 'No outcome comparison studies.',
-      efficiency: 'ASHA BCS-CL portfolio plus exam; significant documentation requirements.',
-      caseloadApplicability: 'Applicable to SLPs specializing in child language disorders; broad within pediatric SLP settings.',
-      reimbursement: 'No BCS-CL billing premium; standard SLP billing applies for child language services.',
-      marketDemand: 'Limited employer recognition; ASHA BCS credentials have low market differentiation.',
-      patientSatisfaction: 'Families may prefer credentialed language specialists.',
-    },
-    roiSignals: { privatePractice: 38, academic: 42 },
-
-  },
-  {
-    name: 'Board Certified Specialist Fluency',
-    type: 'Board Cert',
-    discipline: 'SLP',
-    disciplines: ['SLP'],
-    evidence: 'BCS-F from ASHA. Stuttering specialty. No comparative outcome studies vs non-certified SLP for fluency disorders.',
-    subScores: { clinicalOutcomes: 10, efficiency: 28, caseloadApplicability: 35, reimbursement: 52, marketDemand: 35, patientSatisfaction: 12 },
-    justifications: {
-      clinicalOutcomes: 'No outcome comparison studies for BCS-F credential.',
-      efficiency: 'ASHA BCS-F portfolio plus exam; significant documentation requirements.',
-      caseloadApplicability: 'Applicable to fluency disorder specialty practice; narrow clinical population.',
-      reimbursement: 'No BCS-F billing premium; standard SLP fluency billing applies.',
-      marketDemand: 'Limited employer demand; fluency specialty is a narrow SLP subspecialty.',
-      patientSatisfaction: 'Adults who stutter value specialized SLPs.',
-    },
-    roiSignals: { privatePractice: 42, academic: 40 },
-
-  },
-  {
-    name: 'BC-ANCDS Neurologic Communication',
-    type: 'Board Cert',
-    discipline: 'SLP',
-    disciplines: ['SLP'],
-    evidence: 'Academy of Neurologic Communication Disorders certification. No comparative outcome studies for aphasia/dysarthria management vs non-certified SLP.',
-    subScores: { clinicalOutcomes: 10, efficiency: 28, caseloadApplicability: 55, reimbursement: 52, marketDemand: 35, patientSatisfaction: 12 },
-    justifications: {
-      clinicalOutcomes: 'Neurological communication disorder evidence base strong; BC-ANCDS certification-specific outcomes not studied.',
-      efficiency: 'Academy of Neurologic Communication Disorders exam; significant documentation requirements.',
-      caseloadApplicability: 'Applicable to SLPs treating neurological communication disorders in neuro and acute care settings.',
-      reimbursement: 'No BC-ANCDS billing premium; standard SLP neurological communication billing applies.',
-      marketDemand: 'Limited employer recognition; BC-ANCDS credential not widely listed in job postings.',
-      patientSatisfaction: 'Neurological patients value specialized communication expertise.',
-    },
-    roiSignals: { privatePractice: 38, academic: 45 },
-
-  },
-  {
-    name: 'Clinical Electrophysiology Specialist',
-    type: 'Board Cert',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'ABPTS ECS board certification. Narrow scope (EMG, NCS, E-stim). No outcome studies. Very small number of active certifications.',
-    subScores: { clinicalOutcomes: 10, efficiency: 32, caseloadApplicability: 18, reimbursement: 42, marketDemand: 15, patientSatisfaction: 10 },
-    justifications: {
-      clinicalOutcomes: 'No comparative outcome studies.',
-      efficiency: 'ABPTS ECS exam; experience requirements; niche and significant investment.',
-      caseloadApplicability: 'Very narrow applicability; EMG and NCS services restricted to specific scope in most states.',
-      reimbursement: 'EMG and NCS have CPT codes; PT billing for these is restricted in most states; scope issues limit billing value.',
-      marketDemand: 'Very limited employer demand; one of the least-held ABPTS certifications.',
-      patientSatisfaction: 'Niche credential; patient impact minimal.',
-    },
-    roiSignals: { privatePractice: 22, academic: 38 },
-
-  },
-  {
-    name: 'Board Certification Intraoperative Monitoring',
-    type: 'Board Cert',
-    discipline: 'Audiology',
-    disciplines: ['Audiology'],
-    evidence: 'BCS-IOM. Intraoperative neurophysiological monitoring specialty. Audiology-adjacent; no comparative outcome studies in rehabilitation context.',
-    subScores: { clinicalOutcomes: 8, efficiency: 28, caseloadApplicability: 8, reimbursement: 52, marketDemand: 28, patientSatisfaction: 10 },
-    justifications: {
-      clinicalOutcomes: 'IONM reduces intraoperative nerve injury; audiology role is specialized monitoring not rehab.',
-      efficiency: 'ABRET or ASET BCS-IOM; significant specialized training and experience requirements.',
-      caseloadApplicability: 'Applicable exclusively in intraoperative neurophysiological monitoring; zero relevance in rehabilitation settings.',
-      reimbursement: 'IONM has CPT codes; ABRET certification required by some facilities for billing eligibility in intraoperative monitoring.',
-      marketDemand: 'Consistent demand in IONM programs; required by some facilities but very narrow clinical setting.',
-      patientSatisfaction: 'Intraoperative patient cannot report; surgical team satisfaction relevant.',
-    },
-    roiSignals: { privatePractice: 12, academic: 42 },
-
-  },
-  {
-    name: 'Cochlear Implant Specialty',
-    type: 'Certification',
-    discipline: 'Audiology',
-    disciplines: ['Audiology'],
-    evidence: 'CISC certification. Cochlear implant programming and auditory rehabilitation. Device-specific expertise; limited comparative outcome studies.',
-    subScores: { clinicalOutcomes: 10, efficiency: 45, caseloadApplicability: 20, reimbursement: 60, marketDemand: 45, patientSatisfaction: 12 },
-    justifications: {
-      clinicalOutcomes: 'CI auditory rehabilitation outcomes are significant for deaf populations; CISC vs non-certified comparison not available.',
-      efficiency: 'CISC certification requires significant supervised clinical experience in CI programming.',
-      caseloadApplicability: 'Applicable exclusively in cochlear implant programs and audiology CI specialty practices.',
-      reimbursement: 'CI programming and aural rehabilitation billable; CISC supports documentation for CI services; some commercial payer recognition.',
-      marketDemand: 'Required or preferred at cochlear implant centers; limited but consistently valued.',
-      patientSatisfaction: 'CI recipients highly value specialized programming expertise.',
-    },
-    roiSignals: { privatePractice: 35, academic: 45 },
-
-  },
-  {
-    name: 'CBIT for Tics',
-    type: 'Certification',
-    discipline: 'OT',
-    disciplines: ['OT'],
-    evidence: 'Comprehensive Behavioral Intervention for Tics. RCT evidence supports CBIT for Tourette syndrome. Very specialized population; OT role emerging.',
-    subScores: { clinicalOutcomes: 12, efficiency: 60, caseloadApplicability: 20, reimbursement: 42, marketDemand: 28, patientSatisfaction: 14 },
-    justifications: {
-      clinicalOutcomes: 'RCT evidence supports CBIT efficacy for tic reduction; OT-specific certification outcomes not studied.',
-      efficiency: '2-day CBIT workshop; moderate cost; training is accessible for OT and psychology providers.',
-      caseloadApplicability: 'Applicable to the narrow population with tic disorders and Tourette syndrome; very limited scope.',
-      reimbursement: 'Limited commercial coverage for behavioral tic intervention; mostly self-pay or EAP; no dedicated CPT code.',
-      marketDemand: 'Limited employer demand; niche behavioral intervention for specific OT and behavioral health roles.',
-      patientSatisfaction: 'Tic reduction has substantial QoL impact for patients and families.',
-    },
-    roiSignals: { privatePractice: 50, academic: 42 },
-
-  },
-  {
-    name: 'Schroth Therapist',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'Scoliosis-specific exercise. Cochrane under review. Several RCTs show Cobb angle improvement. Barcelona Scoliosis Physical Therapy School certification.',
-    subScores: { clinicalOutcomes: 12, efficiency: 42, caseloadApplicability: 25, reimbursement: 52, marketDemand: 38, patientSatisfaction: 14 },
-    justifications: {
-      clinicalOutcomes: 'Multiple RCTs show Cobb angle improvement with Schroth; effect sizes moderate. Long-term vs brace comparison ongoing.',
-      efficiency: 'BSPTS or SOSORT-affiliated training; multi-day course; moderate cost.',
-      caseloadApplicability: 'Applicable specifically to adolescent and adult scoliosis patients; very limited population scope.',
-      reimbursement: 'Standard PT billing; no Schroth-specific code; commercial coverage for scoliosis PT varies.',
-      marketDemand: 'Growing demand in scoliosis specialty clinics and pediatric ortho settings.',
-      patientSatisfaction: 'Scoliosis patients value non-brace exercise alternatives.',
-    },
-    roiSignals: { privatePractice: 68, academic: 40, privatePracticeNote: 'Scoliosis niche with strong parental willingness to pay; niche practice building with premium pricing potential.' },
-
-  },
-  {
-    name: 'Craniomandibular/TMJ Certification',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'TMD specialty training. PT outcomes for TMD documented in systematic reviews. Certification-specific outcomes not studied.',
-    subScores: { clinicalOutcomes: 12, efficiency: 52, caseloadApplicability: 32, reimbursement: 52, marketDemand: 38, patientSatisfaction: 14 },
-    justifications: {
-      clinicalOutcomes: 'PT for TMD shows consistent pain and function improvement; specialty certification vs general PT comparison absent.',
-      efficiency: 'Course-based certification; variable length; moderate cost and time investment.',
-      caseloadApplicability: 'Applicable to TMD and craniomandibular dysfunction patients; limited scope in general PT settings.',
-      reimbursement: 'TMD PT billed under standard codes; some dental-medical crossover billing; no TMJ cert-specific premium.',
-      marketDemand: 'Moderate demand in craniomandibular and facial pain specialty settings.',
-      patientSatisfaction: 'TMD patients with chronic jaw pain value specialized treatment.',
-    },
-    roiSignals: { privatePractice: 65, academic: 38 },
-
-  },
-  {
-    name: 'Advanced Vestibular PT',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'University of Pittsburgh advanced vestibular program. Builds on basic vestibular training. No comparative outcome data beyond standard vestibular certification.',
-    subScores: { clinicalOutcomes: 15, efficiency: 45, caseloadApplicability: 65, reimbursement: 52, marketDemand: 48, patientSatisfaction: 16 },
-    justifications: {
-      clinicalOutcomes: 'Advanced training for complex vestibular cases; no comparative data vs standard vestibular PT.',
-      efficiency: 'University of Pittsburgh 3-week intensive program; significant time and travel commitment.',
-      caseloadApplicability: 'Applicable to complex vestibular and balance cases; useful in vestibular specialty and ENT-affiliated practices.',
-      reimbursement: 'Standard vestibular PT billing; no premium for advanced certification over standard vestibular cert.',
-      marketDemand: 'Valued in vestibular specialty clinics; moderate employer demand above standard vestibular certification.',
-      patientSatisfaction: 'Complex vestibular patients benefit from advanced expertise.',
-    },
-    roiSignals: { privatePractice: 72, academic: 40 },
-
-  },
-  {
-    name: 'Vestibular AIB Certifications',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'AIB-VAM/VRII/VR/VRC certification series. Vestibular specialty training pathway. No comparative outcome studies.',
-    subScores: { clinicalOutcomes: 12, efficiency: 48, caseloadApplicability: 65, reimbursement: 52, marketDemand: 52, patientSatisfaction: 14 },
-    justifications: {
-      clinicalOutcomes: 'Vestibular training at any level improves clinical skill; AIB-specific certification outcomes not compared to other programs.',
-      efficiency: 'Multi-level course series (VAM, VRII, VR, VRC); cumulative cost and time across levels.',
-      caseloadApplicability: 'Applicable in vestibular and balance specialty settings; common referral from ENT.',
-      reimbursement: 'Standard vestibular billing; no AIB certification billing premium over standard vestibular PT billing.',
-      marketDemand: 'Moderate employer demand in vestibular specialty; AIB pathway is a recognized training route.',
-      patientSatisfaction: 'Vestibular patients value any specialized expertise.',
-    },
-    roiSignals: { privatePractice: 68, academic: 35 },
-
-  },
-  {
-    name: 'Vestibular VCC Certification',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'IAMT vestibular certification. Vestibular specialty credential. No comparative outcome studies.',
-    subScores: { clinicalOutcomes: 12, efficiency: 48, caseloadApplicability: 62, reimbursement: 52, marketDemand: 40, patientSatisfaction: 14 },
-    justifications: {
-      clinicalOutcomes: 'Vestibular training improves outcomes; IAMT VCC-specific comparison not available.',
-      efficiency: 'IAMT certification; multi-day coursework; moderate cost.',
-      caseloadApplicability: 'Applicable in vestibular specialty settings; IAMT certification pathway.',
-      reimbursement: 'Standard vestibular billing; no VCC certification billing premium.',
-      marketDemand: 'Lower employer recognition than AIB vestibular certifications; growing awareness.',
-      patientSatisfaction: 'Vestibular patients benefit from any specialized training.',
-    },
-    roiSignals: { privatePractice: 62, academic: 32 },
-
-  },
-  {
-    name: 'Occupro Certification',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'Work health and ergonomics platform certification. No clinical outcome data published.',
-    subScores: { clinicalOutcomes: 8, efficiency: 75, caseloadApplicability: 35, reimbursement: 52, marketDemand: 12, patientSatisfaction: 10 },
-    justifications: {
-      clinicalOutcomes: 'Platform-specific training; no clinical outcome studies.',
-      efficiency: 'Platform-specific online training; low cost and time; quick to obtain.',
-      caseloadApplicability: 'Applicable in occupational health and work injury settings; limited to Occupro platform users.',
-      reimbursement: 'Work health assessments billable under ergonomic and FCE codes; platform-based billing modest.',
-      marketDemand: 'Very limited employer demand; proprietary platform certification with niche recognition.',
-      patientSatisfaction: 'Worker satisfaction with platform-delivered assessments not studied.',
-    },
-    roiSignals: { privatePractice: 28, academic: 15 },
-
-  },
-  {
-    name: 'The Back School',
-    type: 'Certification',
-    discipline: 'PT',
-    disciplines: ['PT'],
-    evidence: 'Online back pain education and movement certification. No comparative outcome studies vs standard LBP education.',
-    subScores: { clinicalOutcomes: 12, efficiency: 80, caseloadApplicability: 72, reimbursement: 52, marketDemand: 25, patientSatisfaction: 12 },
-    justifications: {
-      clinicalOutcomes: 'Back education programs have moderate evidence for pain and disability; this specific certification not outcome-validated.',
-      efficiency: 'Online certification course; low cost; quick to complete; self-directed.',
-      caseloadApplicability: 'LBP is among the most common conditions in PT; back education applicable across outpatient, occupational, and community.',
-      reimbursement: 'Back school group education programs have modest billing codes; commercial coverage variable; low overall billing impact.',
-      marketDemand: 'Limited employer recognition as distinct certification; LBP education is expected baseline competency.',
-      patientSatisfaction: 'Patients value understanding their back pain; education reduces fear.',
-    },
-    roiSignals: { privatePractice: 48, academic: 30 },
-
-  },
-  {
-    name: 'Kinesio Taping (CKTP)',
-    type: 'Certification',
-    discipline: 'PT/OT/AT',
-    disciplines: ['PT', 'OT', 'AT'],
-    evidence: 'Multiple systematic reviews find insufficient evidence over sham taping. CKTP certification widely held. Pain reduction small and short-term.',
-    subScores: { clinicalOutcomes: 20, efficiency: 82, caseloadApplicability: 70, reimbursement: 52, marketDemand: 60, patientSatisfaction: 22 },
-    justifications: {
-      clinicalOutcomes: 'Systematic reviews consistently show minimal benefit over sham taping; any pain effect is small and short-term.',
-      efficiency: '2-day KT1/KT2 courses; ~$400-600 total; widely available; one of the most accessible certs.',
-      caseloadApplicability: 'Applicable across outpatient ortho, sports, and neuro caseloads; taping applicable to a wide range of conditions.',
-      reimbursement: 'Tape application billed under procedure codes; standard PT coverage; no CKTP billing premium over standard therapeutic procedure.',
-      marketDemand: 'Widely held and moderately demanded; taping certification commonly listed as preferred in sports and outpatient roles.',
-      patientSatisfaction: 'Patients like the colorful tape and perceive it as active treatment; expectation effects likely.',
-    },
-    roiSignals: { privatePractice: 55, academic: 22 },
-
-  },
-  {
-    name: 'ASHA Board Certified Specialists',
-    type: 'Board Cert',
-    discipline: 'SLP',
-    disciplines: ['SLP'],
-    evidence: 'ASHA BCS portfolio of specialty certifications. Limited research across all SLP specialties on certification-specific outcomes.',
-    subScores: { clinicalOutcomes: 8, efficiency: 30, caseloadApplicability: 45, reimbursement: 52, marketDemand: 28, patientSatisfaction: 10 },
-    justifications: {
-      clinicalOutcomes: 'Across ASHA BCS specialties, no comparative outcome studies vs non-certified SLPs.',
-      efficiency: 'ASHA BCS portfolio plus exam across specialties; significant documentation requirements.',
-      caseloadApplicability: 'Applicability varies by SLP specialty area; each specialty has moderate breadth within its domain.',
-      reimbursement: 'No billing premium across any ASHA BCS specialty; professional signaling credential only.',
-      marketDemand: 'Limited employer recognition across ASHA BCS portfolio; low differentiation from standard SLP credentials.',
-      patientSatisfaction: 'Specialty credentialing signals expertise to patients and referrers.',
-    },
-    roiSignals: { privatePractice: 32, academic: 38 },
-
-  },
-  {
-    name: 'Research Doctorates (PhD/ScD)',
-    type: 'Degree',
-    discipline: 'All',
-    disciplines: ['PT', 'OT', 'SLP', 'AT', 'EP', 'RT', 'RN', 'MT', 'Audiology'],
-    evidence: 'Academic and research value is substantial. No clinical patient outcome benefit in clinical practice settings. Negative for clinical caseload metrics.',
-    subScores: { clinicalOutcomes: 5, efficiency: 10, caseloadApplicability: 5, reimbursement: 32, marketDemand: 38, patientSatisfaction: 6 },
-    justifications: {
-      clinicalOutcomes: 'No patient outcome benefit from PhD vs clinical doctorate in clinical practice.',
-      efficiency: '4-7 year doctoral program; eliminates clinical FTE during training; maximum time investment in allied health.',
-      caseloadApplicability: 'Zero clinical caseload applicability; relevant only in academic and research settings.',
-      reimbursement: 'No clinical billing value; academic and research salary only; no CPT code or payer benefit.',
-      marketDemand: 'Demanded in academic faculty, research scientist, and academic health system leadership roles; not clinical demand.',
-      patientSatisfaction: 'Patients do not differentiate PhD from clinical doctoral clinicians.',
-    },
-    roiSignals: { privatePractice: 22, academic: 98 },
-
-  },
+    "name": "Pulmonary Rehabilitation",
+    "type": "Program",
+    "discipline": "PT/OT/RT",
+    "disciplines": [
+      "PT",
+      "OT",
+      "RT"
+    ],
+    "evidence": "Cochrane meta-analysis: 6MWD +49m, HRQL improvement, 68% fewer exacerbation hospitalizations. 5-year sustained benefit. Medicare-covered. CMS reimburses certified programs.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 90,
+        "efficiency": 42,
+        "caseloadApplicability": 35,
+        "reimbursement": 90,
+        "marketDemand": 48,
+        "patientSatisfaction": 80
+      },
+      "business": {
+        "cashPayViability": 15,
+        "pricingLeverage": 20,
+        "marketDifferentiation": 30,
+        "ownerLeverage": 25,
+        "marketDemand": 20,
+        "efficiency": 45
+      },
+      "academicClinical": {
+        "facultyRecognition": 55,
+        "scholarship": 70,
+        "teachingValue": 65,
+        "evidenceDepth": 80,
+        "facultyDemand": 40,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "AACVPR Cardiac Rehabilitation",
+    "type": "Certification",
+    "discipline": "PT/OT/RN",
+    "disciplines": [
+      "PT",
+      "OT",
+      "RN"
+    ],
+    "evidence": "Cochrane: 26% cardiovascular mortality reduction. AACVPR-certified programs show 13-15% lower 1-year mortality vs non-certified. Medicare Phase II/III covered.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 88,
+        "efficiency": 40,
+        "caseloadApplicability": 35,
+        "reimbursement": 92,
+        "marketDemand": 55,
+        "patientSatisfaction": 78
+      },
+      "business": {
+        "cashPayViability": 15,
+        "pricingLeverage": 20,
+        "marketDifferentiation": 30,
+        "ownerLeverage": 25,
+        "marketDemand": 20,
+        "efficiency": 45
+      },
+      "academicClinical": {
+        "facultyRecognition": 60,
+        "scholarship": 72,
+        "teachingValue": 68,
+        "evidenceDepth": 82,
+        "facultyDemand": 42,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "Otago Exercise Programme",
+    "type": "Program",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "35-40% fall reduction in RCTs. Medicare covers delivery. $938 cost savings per participant. Campbell et al meta-analysis: NNT=11 to prevent one fall.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 87,
+        "efficiency": 70,
+        "caseloadApplicability": 62,
+        "reimbursement": 62,
+        "marketDemand": 58,
+        "patientSatisfaction": 68
+      },
+      "business": {
+        "cashPayViability": 35,
+        "pricingLeverage": 25,
+        "marketDifferentiation": 30,
+        "ownerLeverage": 55,
+        "marketDemand": 25,
+        "efficiency": 80
+      },
+      "academicClinical": {
+        "facultyRecognition": 50,
+        "scholarship": 70,
+        "teachingValue": 65,
+        "evidenceDepth": 85,
+        "facultyDemand": 35,
+        "efficiency": 80
+      }
+    }
+  },
+  {
+    "name": "LSVT LOUD",
+    "type": "Certification",
+    "discipline": "SLP",
+    "disciplines": [
+      "SLP"
+    ],
+    "evidence": "50+ peer-reviewed studies. 5.05-point UPDRS-III motor improvement. Voice amplitude gains maintained at 2 years. ASHA-recognized evidence-based practice.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 80,
+        "efficiency": 48,
+        "caseloadApplicability": 55,
+        "reimbursement": 52,
+        "marketDemand": 82,
+        "patientSatisfaction": 76
+      },
+      "business": {
+        "cashPayViability": 55,
+        "pricingLeverage": 60,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 65,
+        "marketDemand": 55,
+        "efficiency": 50
+      },
+      "academicClinical": {
+        "facultyRecognition": 60,
+        "scholarship": 75,
+        "teachingValue": 70,
+        "evidenceDepth": 75,
+        "facultyDemand": 50,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "ACRM Cognitive Rehabilitation",
+    "type": "Certification",
+    "discipline": "OT/PT/SLP",
+    "disciplines": [
+      "OT",
+      "PT",
+      "SLP"
+    ],
+    "evidence": "258 studies reviewed. 78.7% of comparisons favor structured cognitive rehab. ACRM Practice Standards. Gains in memory, attention, and executive function post-ABI.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 72,
+        "efficiency": 45,
+        "caseloadApplicability": 55,
+        "reimbursement": 52,
+        "marketDemand": 42,
+        "patientSatisfaction": 65
+      },
+      "business": {
+        "cashPayViability": 40,
+        "pricingLeverage": 50,
+        "marketDifferentiation": 65,
+        "ownerLeverage": 55,
+        "marketDemand": 35,
+        "efficiency": 45
+      },
+      "academicClinical": {
+        "facultyRecognition": 70,
+        "scholarship": 80,
+        "teachingValue": 72,
+        "evidenceDepth": 75,
+        "facultyDemand": 50,
+        "efficiency": 50
+      }
+    }
+  },
+  {
+    "name": "ACLM Lifestyle Medicine",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "6-pillar framework (nutrition, activity, sleep, stress, substance, relationships). 6,700+ certified practitioners. Type 2 DM remission documented with intensive lifestyle.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 75,
+        "efficiency": 55,
+        "caseloadApplicability": 60,
+        "reimbursement": 50,
+        "marketDemand": 38,
+        "patientSatisfaction": 75
+      },
+      "business": {
+        "cashPayViability": 75,
+        "pricingLeverage": 65,
+        "marketDifferentiation": 65,
+        "ownerLeverage": 70,
+        "marketDemand": 60,
+        "efficiency": 45
+      },
+      "academicClinical": {
+        "facultyRecognition": 45,
+        "scholarship": 55,
+        "teachingValue": 55,
+        "evidenceDepth": 60,
+        "facultyDemand": 25,
+        "efficiency": 45
+      }
+    }
+  },
+  {
+    "name": "HABIT/HABIT-ILE",
+    "type": "Program",
+    "discipline": "OT/PT",
+    "disciplines": [
+      "OT",
+      "PT"
+    ],
+    "evidence": "Superior to conventional therapy for bilateral CP in RCTs. 60-90 hour intensive format. HABIT-ILE adds lower extremity to original hand-arm protocol.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 78,
+        "efficiency": 35,
+        "caseloadApplicability": 25,
+        "reimbursement": 50,
+        "marketDemand": 25,
+        "patientSatisfaction": 72
+      },
+      "business": {
+        "cashPayViability": 60,
+        "pricingLeverage": 65,
+        "marketDifferentiation": 75,
+        "ownerLeverage": 40,
+        "marketDemand": 45,
+        "efficiency": 35
+      },
+      "academicClinical": {
+        "facultyRecognition": 65,
+        "scholarship": 78,
+        "teachingValue": 65,
+        "evidenceDepth": 78,
+        "facultyDemand": 35,
+        "efficiency": 40
+      }
+    }
+  },
+  {
+    "name": "MBSR (Mindfulness-Based Stress Reduction)",
+    "type": "Certification",
+    "discipline": "All",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "AT",
+      "EP",
+      "RT",
+      "RN",
+      "MT",
+      "Audiology"
+    ],
+    "evidence": "Neuroplasticity evidence; fMRI shows amygdala volume reduction after 8 weeks. JAMA meta-analysis: moderate effect on anxiety, depression, pain.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 73,
+        "efficiency": 52,
+        "caseloadApplicability": 72,
+        "reimbursement": 45,
+        "marketDemand": 52,
+        "patientSatisfaction": 78
+      },
+      "business": {
+        "cashPayViability": 70,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 45,
+        "ownerLeverage": 75,
+        "marketDemand": 70,
+        "efficiency": 25
+      },
+      "academicClinical": {
+        "facultyRecognition": 35,
+        "scholarship": 55,
+        "teachingValue": 50,
+        "evidenceDepth": 60,
+        "facultyDemand": 20,
+        "efficiency": 30
+      }
+    }
+  },
+  {
+    "name": "Matter of Balance",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "$938 annual medical cost reduction per participant. Group-based, lay-leader delivery model. CDC-endorsed. Fear of falling and activity restriction reduced.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 70,
+        "efficiency": 85,
+        "caseloadApplicability": 52,
+        "reimbursement": 52,
+        "marketDemand": 38,
+        "patientSatisfaction": 72
+      },
+      "business": {
+        "cashPayViability": 15,
+        "pricingLeverage": 15,
+        "marketDifferentiation": 20,
+        "ownerLeverage": 45,
+        "marketDemand": 15,
+        "efficiency": 85
+      },
+      "academicClinical": {
+        "facultyRecognition": 30,
+        "scholarship": 50,
+        "teachingValue": 45,
+        "evidenceDepth": 60,
+        "facultyDemand": 20,
+        "efficiency": 85
+      }
+    }
+  },
+  {
+    "name": "Telehealth Cardiac/Pulmonary",
+    "type": "Technology",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "30-50% cost reduction vs in-person; maintained clinical effectiveness in RCTs. Wearable integration enables remote monitoring. Post-COVID access expansion.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 74,
+        "efficiency": 65,
+        "caseloadApplicability": 45,
+        "reimbursement": 72,
+        "marketDemand": 52,
+        "patientSatisfaction": 80
+      },
+      "business": {
+        "cashPayViability": 50,
+        "pricingLeverage": 45,
+        "marketDifferentiation": 55,
+        "ownerLeverage": 75,
+        "marketDemand": 45,
+        "efficiency": 70
+      },
+      "academicClinical": {
+        "facultyRecognition": 40,
+        "scholarship": 55,
+        "teachingValue": 55,
+        "evidenceDepth": 50,
+        "facultyDemand": 30,
+        "efficiency": 65
+      },
+      "healthTech": {
+        "industryPlacement": 58,
+        "vendorDemand": 60,
+        "salaryPremium": 48,
+        "technicalSkillDepth": 50,
+        "transitionFit": 60,
+        "efficiency": 60
+      }
+    }
+  },
+  {
+    "name": "Motivational Interviewing",
+    "type": "Certification",
+    "discipline": "All",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "AT",
+      "EP",
+      "RT",
+      "RN",
+      "MT",
+      "Audiology"
+    ],
+    "evidence": "1,800+ RCTs across health behaviors. Improves adherence 1.5-2x in physical rehab when integrated. MINT certification widely recognized.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 68,
+        "efficiency": 72,
+        "caseloadApplicability": 90,
+        "reimbursement": 52,
+        "marketDemand": 62,
+        "patientSatisfaction": 72
+      },
+      "business": {
+        "cashPayViability": 30,
+        "pricingLeverage": 20,
+        "marketDifferentiation": 25,
+        "ownerLeverage": 55,
+        "marketDemand": 25,
+        "efficiency": 75
+      },
+      "academicClinical": {
+        "facultyRecognition": 45,
+        "scholarship": 70,
+        "teachingValue": 70,
+        "evidenceDepth": 80,
+        "facultyDemand": 40,
+        "efficiency": 75
+      }
+    }
+  },
+  {
+    "name": "CIMT (Constraint-Induced Movement)",
+    "type": "Certification",
+    "discipline": "OT/PT",
+    "disciplines": [
+      "OT",
+      "PT"
+    ],
+    "evidence": "EXCITE trial: 14-point Wolf Motor Function Test improvement sustained 2 years. Pediatric CIMT superior for hemiplegia. Neuroplasticity mechanism established.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 83,
+        "efficiency": 38,
+        "caseloadApplicability": 32,
+        "reimbursement": 52,
+        "marketDemand": 48,
+        "patientSatisfaction": 68
+      },
+      "business": {
+        "cashPayViability": 35,
+        "pricingLeverage": 40,
+        "marketDifferentiation": 55,
+        "ownerLeverage": 45,
+        "marketDemand": 30,
+        "efficiency": 35
+      },
+      "academicClinical": {
+        "facultyRecognition": 65,
+        "scholarship": 80,
+        "teachingValue": 75,
+        "evidenceDepth": 85,
+        "facultyDemand": 45,
+        "efficiency": 40
+      }
+    }
+  },
+  {
+    "name": "Health Coaching",
+    "type": "Certification",
+    "discipline": "All",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "AT",
+      "EP",
+      "RT",
+      "RN",
+      "MT",
+      "Audiology"
+    ],
+    "evidence": "New CPT codes 99401-99404 enable billing. Growing insurance recognition. Behavior change theory base; outcomes strongest for chronic disease management.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 65,
+        "efficiency": 68,
+        "caseloadApplicability": 75,
+        "reimbursement": 62,
+        "marketDemand": 62,
+        "patientSatisfaction": 68
+      },
+      "business": {
+        "cashPayViability": 70,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 40,
+        "ownerLeverage": 75,
+        "marketDemand": 65,
+        "efficiency": 65
+      },
+      "academicClinical": {
+        "facultyRecognition": 30,
+        "scholarship": 50,
+        "teachingValue": 55,
+        "evidenceDepth": 55,
+        "facultyDemand": 25,
+        "efficiency": 60
+      }
+    }
+  },
+  {
+    "name": "Athletic Training BOC",
+    "type": "Certification",
+    "discipline": "AT",
+    "disciplines": [
+      "AT"
+    ],
+    "evidence": "22% injury reduction with AT presence. 50% reduction in school injury costs. 92% diagnostic accuracy. NATA consensus: AT reduces catastrophic injury risk.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 70,
+        "efficiency": 22,
+        "caseloadApplicability": 85,
+        "reimbursement": 52,
+        "marketDemand": 88,
+        "patientSatisfaction": 72
+      },
+      "business": {
+        "cashPayViability": 60,
+        "pricingLeverage": 50,
+        "marketDifferentiation": 55,
+        "ownerLeverage": 65,
+        "marketDemand": 55,
+        "efficiency": 30
+      },
+      "academicClinical": {
+        "facultyRecognition": 70,
+        "scholarship": 70,
+        "teachingValue": 75,
+        "evidenceDepth": 70,
+        "facultyDemand": 65,
+        "efficiency": 25
+      }
+    }
+  },
+  {
+    "name": "CDC STEADI Fall Prevention",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "Addresses $31B Medicare fall injury spend. EHR-integrated screening. Trifecta approach: screen, assess, intervene. CDC-backed algorithm.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 72,
+        "efficiency": 95,
+        "caseloadApplicability": 70,
+        "reimbursement": 55,
+        "marketDemand": 45,
+        "patientSatisfaction": 65
+      },
+      "business": {
+        "cashPayViability": 25,
+        "pricingLeverage": 20,
+        "marketDifferentiation": 20,
+        "ownerLeverage": 45,
+        "marketDemand": 25,
+        "efficiency": 90
+      },
+      "academicClinical": {
+        "facultyRecognition": 40,
+        "scholarship": 60,
+        "teachingValue": 70,
+        "evidenceDepth": 65,
+        "facultyDemand": 35,
+        "efficiency": 90
+      }
+    }
+  },
+  {
+    "name": "Physical Therapy Fellowship",
+    "type": "Fellowship",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "Superior patient outcomes vs residency-trained (25,843-patient study). ABPTRFE-accredited. Fastest pathway to clinical expert performance.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 68,
+        "efficiency": 18,
+        "caseloadApplicability": 62,
+        "reimbursement": 52,
+        "marketDemand": 52,
+        "patientSatisfaction": 68
+      },
+      "business": {
+        "cashPayViability": 75,
+        "pricingLeverage": 80,
+        "marketDifferentiation": 85,
+        "ownerLeverage": 40,
+        "marketDemand": 50,
+        "efficiency": 15
+      },
+      "academicClinical": {
+        "facultyRecognition": 95,
+        "scholarship": 85,
+        "teachingValue": 90,
+        "evidenceDepth": 75,
+        "facultyDemand": 80,
+        "efficiency": 20
+      }
+    }
+  },
+  {
+    "name": "Pilates Rehabilitation",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "Network meta-analysis: superior to other exercise for chronic LBP. Gains in core strength, posture, and flexibility. Polestar/STOTT certifications most recognized.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 65,
+        "efficiency": 58,
+        "caseloadApplicability": 55,
+        "reimbursement": 52,
+        "marketDemand": 42,
+        "patientSatisfaction": 68
+      },
+      "business": {
+        "cashPayViability": 80,
+        "pricingLeverage": 65,
+        "marketDifferentiation": 50,
+        "ownerLeverage": 70,
+        "marketDemand": 75,
+        "efficiency": 30
+      },
+      "academicClinical": {
+        "facultyRecognition": 20,
+        "scholarship": 35,
+        "teachingValue": 35,
+        "evidenceDepth": 35,
+        "facultyDemand": 15,
+        "efficiency": 30
+      }
+    }
+  },
+  {
+    "name": "AI + Wearable Sensors",
+    "type": "Technology",
+    "discipline": "All",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "AT",
+      "EP",
+      "RT",
+      "RN",
+      "MT",
+      "Audiology"
+    ],
+    "evidence": "89% ROM accuracy vs goniometry. 98% gait pattern recognition. Remote monitoring enables between-session feedback. FDA Class II cleared devices available.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 62,
+        "efficiency": 65,
+        "caseloadApplicability": 55,
+        "reimbursement": 52,
+        "marketDemand": 38,
+        "patientSatisfaction": 62
+      },
+      "business": {
+        "cashPayViability": 65,
+        "pricingLeverage": 70,
+        "marketDifferentiation": 80,
+        "ownerLeverage": 75,
+        "marketDemand": 60,
+        "efficiency": 55
+      },
+      "academicClinical": {
+        "facultyRecognition": 70,
+        "scholarship": 90,
+        "teachingValue": 75,
+        "evidenceDepth": 60,
+        "facultyDemand": 55,
+        "efficiency": 50
+      },
+      "healthTech": {
+        "industryPlacement": 70,
+        "vendorDemand": 72,
+        "salaryPremium": 58,
+        "technicalSkillDepth": 68,
+        "transitionFit": 75,
+        "efficiency": 62
+      },
+      "research": {
+        "methodologyDepth": 45,
+        "publicationTrack": 50,
+        "grantReadiness": 48,
+        "pathwayToIndependence": 35,
+        "interdisciplinaryFit": 70,
+        "efficiency": 60
+      }
+    }
+  },
+  {
+    "name": "ABCDEF ICU Bundle",
+    "type": "Protocol",
+    "discipline": "PT/OT/RT",
+    "disciplines": [
+      "PT",
+      "OT",
+      "RT"
+    ],
+    "evidence": "68% mortality reduction when fully implemented. Reduced ICU-acquired weakness, delirium, and ventilator days. SCCM-endorsed. Strong implementation science base.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 78,
+        "efficiency": 78,
+        "caseloadApplicability": 55,
+        "reimbursement": 52,
+        "marketDemand": 55,
+        "patientSatisfaction": 65
+      },
+      "business": {
+        "cashPayViability": 10,
+        "pricingLeverage": 10,
+        "marketDifferentiation": 15,
+        "ownerLeverage": 15,
+        "marketDemand": 10,
+        "efficiency": 85
+      },
+      "academicClinical": {
+        "facultyRecognition": 55,
+        "scholarship": 80,
+        "teachingValue": 75,
+        "evidenceDepth": 85,
+        "facultyDemand": 45,
+        "efficiency": 85
+      },
+      "research": {
+        "methodologyDepth": 50,
+        "publicationTrack": 55,
+        "grantReadiness": 48,
+        "pathwayToIndependence": 32,
+        "interdisciplinaryFit": 65,
+        "efficiency": 60
+      }
+    }
+  },
+  {
+    "name": "LSVT BIG",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "Parkinson's mobility and gait improvement. Amplitude-based training; complements LSVT LOUD. 4x/week × 4 weeks protocol. UPDRS motor score improvements.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 72,
+        "efficiency": 48,
+        "caseloadApplicability": 52,
+        "reimbursement": 52,
+        "marketDemand": 78,
+        "patientSatisfaction": 73
+      },
+      "business": {
+        "cashPayViability": 45,
+        "pricingLeverage": 50,
+        "marketDifferentiation": 65,
+        "ownerLeverage": 60,
+        "marketDemand": 55,
+        "efficiency": 45
+      },
+      "academicClinical": {
+        "facultyRecognition": 50,
+        "scholarship": 70,
+        "teachingValue": 70,
+        "evidenceDepth": 65,
+        "facultyDemand": 45,
+        "efficiency": 45
+      }
+    }
+  },
+  {
+    "name": "IAYT Yoga Therapy",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "800-hour training standard. Growing evidence for chronic pain, anxiety, and cancer fatigue. IAYT accreditation establishes minimum training floor.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 60,
+        "efficiency": 42,
+        "caseloadApplicability": 55,
+        "reimbursement": 40,
+        "marketDemand": 28,
+        "patientSatisfaction": 72
+      },
+      "business": {
+        "cashPayViability": 72,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 60,
+        "ownerLeverage": 45,
+        "marketDemand": 58,
+        "efficiency": 25
+      },
+      "academicClinical": {
+        "facultyRecognition": 25,
+        "scholarship": 35,
+        "teachingValue": 30,
+        "evidenceDepth": 35,
+        "facultyDemand": 15,
+        "efficiency": 20
+      }
+    }
+  },
+  {
+    "name": "Alexander Technique",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "ATEAM trial (BMJ): 24-lesson AT superior to massage for chronic LBP at 1 year. Limited evidence outside musculoskeletal. 1,600-hour training requirement.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 58,
+        "efficiency": 12,
+        "caseloadApplicability": 30,
+        "reimbursement": 35,
+        "marketDemand": 12,
+        "patientSatisfaction": 62
+      },
+      "business": {
+        "cashPayViability": 65,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 25,
+        "marketDemand": 40,
+        "efficiency": 15
+      },
+      "academicClinical": {
+        "facultyRecognition": 20,
+        "scholarship": 30,
+        "teachingValue": 25,
+        "evidenceDepth": 40,
+        "facultyDemand": 10,
+        "efficiency": 15
+      }
+    }
+  },
+  {
+    "name": "IMOT Intensive Therapy",
+    "type": "Program",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "94% of children achieve motor improvements in camp format. 60-120 hour intensive delivery. Emerging evidence for CP and ABI populations.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 65,
+        "efficiency": 32,
+        "caseloadApplicability": 22,
+        "reimbursement": 52,
+        "marketDemand": 18,
+        "patientSatisfaction": 68
+      },
+      "business": {
+        "cashPayViability": 80,
+        "pricingLeverage": 70,
+        "marketDifferentiation": 65,
+        "ownerLeverage": 60,
+        "marketDemand": 55,
+        "efficiency": 40
+      },
+      "academicClinical": {
+        "facultyRecognition": 25,
+        "scholarship": 25,
+        "teachingValue": 30,
+        "evidenceDepth": 30,
+        "facultyDemand": 15,
+        "efficiency": 35
+      }
+    }
+  },
+  {
+    "name": "Blood Flow Restriction (BFR)",
+    "type": "Technology",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "Equal strength gains to high-load resistance at 20-50% 1RM loads. Zero serious adverse events in systematic reviews. Post-surgical and elderly applications strongest.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 68,
+        "efficiency": 78,
+        "caseloadApplicability": 72,
+        "reimbursement": 52,
+        "marketDemand": 75,
+        "patientSatisfaction": 58
+      },
+      "business": {
+        "cashPayViability": 70,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 50,
+        "ownerLeverage": 70,
+        "marketDemand": 60,
+        "efficiency": 80
+      },
+      "academicClinical": {
+        "facultyRecognition": 50,
+        "scholarship": 70,
+        "teachingValue": 70,
+        "evidenceDepth": 75,
+        "facultyDemand": 35,
+        "efficiency": 75
+      }
+    }
+  },
+  {
+    "name": "Ergonomic Assessment",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "OSHA compliance standard. Work-related MSK injury prevention evidence consistent. Return-to-work facilitation reduces indemnity costs.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 55,
+        "efficiency": 65,
+        "caseloadApplicability": 55,
+        "reimbursement": 55,
+        "marketDemand": 52,
+        "patientSatisfaction": 58
+      },
+      "business": {
+        "cashPayViability": 55,
+        "pricingLeverage": 50,
+        "marketDifferentiation": 35,
+        "ownerLeverage": 75,
+        "marketDemand": 45,
+        "efficiency": 70
+      },
+      "academicClinical": {
+        "facultyRecognition": 30,
+        "scholarship": 45,
+        "teachingValue": 50,
+        "evidenceDepth": 50,
+        "facultyDemand": 20,
+        "efficiency": 65
+      }
+    }
+  },
+  {
+    "name": "Vestibular Rehabilitation",
+    "type": "Training",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "Strong CPG support from AAN and AAO-HNS. 6-week median treatment. Canalith repositioning >90% effective for BPPV. Cochrane support for chronic vestibular dysfunction.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 72,
+        "efficiency": 62,
+        "caseloadApplicability": 70,
+        "reimbursement": 52,
+        "marketDemand": 78,
+        "patientSatisfaction": 68
+      },
+      "business": {
+        "cashPayViability": 50,
+        "pricingLeverage": 60,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 75,
+        "marketDemand": 55,
+        "efficiency": 60
+      },
+      "academicClinical": {
+        "facultyRecognition": 70,
+        "scholarship": 80,
+        "teachingValue": 80,
+        "evidenceDepth": 85,
+        "facultyDemand": 55,
+        "efficiency": 60
+      }
+    }
+  },
+  {
+    "name": "VR (Medical-Grade)",
+    "type": "Technology",
+    "discipline": "All",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "AT",
+      "EP",
+      "RT",
+      "RN",
+      "MT",
+      "Audiology"
+    ],
+    "evidence": "Engagement tool with comparable outcomes to conventional rehab for UE stroke and pain management. FDA-cleared products (MindMaze, XRHealth) available.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 58,
+        "efficiency": 45,
+        "caseloadApplicability": 40,
+        "reimbursement": 52,
+        "marketDemand": 32,
+        "patientSatisfaction": 65
+      },
+      "business": {
+        "cashPayViability": 55,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 70,
+        "marketDemand": 50,
+        "efficiency": 50
+      },
+      "academicClinical": {
+        "facultyRecognition": 40,
+        "scholarship": 65,
+        "teachingValue": 65,
+        "evidenceDepth": 55,
+        "facultyDemand": 25,
+        "efficiency": 55
+      },
+      "healthTech": {
+        "industryPlacement": 60,
+        "vendorDemand": 58,
+        "salaryPremium": 45,
+        "technicalSkillDepth": 55,
+        "transitionFit": 62,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "NIDCAP Neonatal",
+    "type": "Certification",
+    "discipline": "OT/PT/SLP",
+    "disciplines": [
+      "OT",
+      "PT",
+      "SLP"
+    ],
+    "evidence": "2.32-week reduced NICU LOS. $50K savings per 6 infants. Neurobehavioral outcomes improved at 9 months. NIDCAP Federation International certification.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 68,
+        "efficiency": 25,
+        "caseloadApplicability": 15,
+        "reimbursement": 52,
+        "marketDemand": 30,
+        "patientSatisfaction": 62
+      },
+      "business": {
+        "cashPayViability": 10,
+        "pricingLeverage": 15,
+        "marketDifferentiation": 40,
+        "ownerLeverage": 10,
+        "marketDemand": 10,
+        "efficiency": 10
+      },
+      "academicClinical": {
+        "facultyRecognition": 75,
+        "scholarship": 80,
+        "teachingValue": 60,
+        "evidenceDepth": 70,
+        "facultyDemand": 35,
+        "efficiency": 20
+      }
+    }
+  },
+  {
+    "name": "Neonatal Therapy Certification",
+    "type": "Certification",
+    "discipline": "PT/OT/SLP",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP"
+    ],
+    "evidence": "NTCB certification. Standardized NICU competency framework. Feeding, positioning, and developmental outcomes in premature infants.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 62,
+        "efficiency": 30,
+        "caseloadApplicability": 20,
+        "reimbursement": 52,
+        "marketDemand": 42,
+        "patientSatisfaction": 62
+      },
+      "business": {
+        "cashPayViability": 10,
+        "pricingLeverage": 15,
+        "marketDifferentiation": 35,
+        "ownerLeverage": 10,
+        "marketDemand": 10,
+        "efficiency": 35
+      },
+      "academicClinical": {
+        "facultyRecognition": 65,
+        "scholarship": 60,
+        "teachingValue": 60,
+        "evidenceDepth": 60,
+        "facultyDemand": 35,
+        "efficiency": 45
+      }
+    }
+  },
+  {
+    "name": "Exoskeleton Training",
+    "type": "Technology",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "FDA-approved (Ekso, ReWalk, Indego). Enables stepping in complete SCI. No superiority over intensive conventional gait training in ambulatory populations.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 55,
+        "efficiency": 28,
+        "caseloadApplicability": 12,
+        "reimbursement": 42,
+        "marketDemand": 22,
+        "patientSatisfaction": 52
+      },
+      "business": {
+        "cashPayViability": 45,
+        "pricingLeverage": 60,
+        "marketDifferentiation": 75,
+        "ownerLeverage": 55,
+        "marketDemand": 40,
+        "efficiency": 30
+      },
+      "academicClinical": {
+        "facultyRecognition": 40,
+        "scholarship": 60,
+        "teachingValue": 60,
+        "evidenceDepth": 50,
+        "facultyDemand": 25,
+        "efficiency": 40
+      },
+      "healthTech": {
+        "industryPlacement": 55,
+        "vendorDemand": 50,
+        "salaryPremium": 50,
+        "technicalSkillDepth": 60,
+        "transitionFit": 55,
+        "efficiency": 38
+      }
+    }
+  },
+  {
+    "name": "Transplant Rehabilitation",
+    "type": "Specialty",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "15-20% mortality reduction with ERAS protocols incorporating rehabilitation. Pre-habilitation before transplant reduces post-operative complications.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 62,
+        "efficiency": 45,
+        "caseloadApplicability": 20,
+        "reimbursement": 52,
+        "marketDemand": 35,
+        "patientSatisfaction": 60
+      },
+      "business": {
+        "cashPayViability": 8,
+        "pricingLeverage": 15,
+        "marketDifferentiation": 35,
+        "ownerLeverage": 10,
+        "marketDemand": 8,
+        "efficiency": 40
+      },
+      "academicClinical": {
+        "facultyRecognition": 30,
+        "scholarship": 35,
+        "teachingValue": 30,
+        "evidenceDepth": 45,
+        "facultyDemand": 20,
+        "efficiency": 45
+      }
+    }
+  },
+  {
+    "name": "Robotic Devices (Lokomat)",
+    "type": "Technology",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "Safe; FDA-cleared. Cochrane: no superiority over intensive conventional gait training. Best evidence for high-dose repetitions in early stroke.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 52,
+        "efficiency": 28,
+        "caseloadApplicability": 15,
+        "reimbursement": 42,
+        "marketDemand": 22,
+        "patientSatisfaction": 55
+      },
+      "business": {
+        "cashPayViability": 35,
+        "pricingLeverage": 30,
+        "marketDifferentiation": 55,
+        "ownerLeverage": 45,
+        "marketDemand": 30,
+        "efficiency": 10
+      },
+      "academicClinical": {
+        "facultyRecognition": 40,
+        "scholarship": 60,
+        "teachingValue": 55,
+        "evidenceDepth": 55,
+        "facultyDemand": 25,
+        "efficiency": 15
+      },
+      "healthTech": {
+        "industryPlacement": 50,
+        "vendorDemand": 45,
+        "salaryPremium": 45,
+        "technicalSkillDepth": 58,
+        "transitionFit": 50,
+        "efficiency": 35
+      }
+    }
+  },
+  {
+    "name": "Feldenkrais Method",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "Balance improvement in elderly consistent. MS and chronic pain applications emerging. 4-year practitioner training. Limited RCT quality.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 50,
+        "efficiency": 15,
+        "caseloadApplicability": 38,
+        "reimbursement": 35,
+        "marketDemand": 15,
+        "patientSatisfaction": 58
+      },
+      "business": {
+        "cashPayViability": 65,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 60,
+        "ownerLeverage": 15,
+        "marketDemand": 35,
+        "efficiency": 10
+      },
+      "academicClinical": {
+        "facultyRecognition": 20,
+        "scholarship": 20,
+        "teachingValue": 25,
+        "evidenceDepth": 25,
+        "facultyDemand": 10,
+        "efficiency": 10
+      }
+    }
+  },
+  {
+    "name": "SOS Feeding Approach",
+    "type": "Certification",
+    "discipline": "OT/SLP",
+    "disciplines": [
+      "OT",
+      "SLP"
+    ],
+    "evidence": "Sequential-Oral-Sensory approach for pediatric feeding disorders. Feasibility studies positive. Lacks RCT evidence; widely used in pediatric feeding clinics.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 48,
+        "efficiency": 52,
+        "caseloadApplicability": 45,
+        "reimbursement": 52,
+        "marketDemand": 52,
+        "patientSatisfaction": 55
+      },
+      "business": {
+        "cashPayViability": 70,
+        "pricingLeverage": 60,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 55,
+        "marketDemand": 45,
+        "efficiency": 55
+      },
+      "academicClinical": {
+        "facultyRecognition": 45,
+        "scholarship": 40,
+        "teachingValue": 55,
+        "evidenceDepth": 40,
+        "facultyDemand": 35,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "COMT/Manual Therapy Certification",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "NAIOMT COMT certification. Manual therapy benefits for LBP, neck pain, and headache documented across multiple meta-analyses. Certification-specific outcomes limited.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 58,
+        "efficiency": 45,
+        "caseloadApplicability": 70,
+        "reimbursement": 52,
+        "marketDemand": 68,
+        "patientSatisfaction": 60
+      },
+      "business": {
+        "cashPayViability": 75,
+        "pricingLeverage": 65,
+        "marketDifferentiation": 45,
+        "ownerLeverage": 25,
+        "marketDemand": 55,
+        "efficiency": 35
+      },
+      "academicClinical": {
+        "facultyRecognition": 55,
+        "scholarship": 50,
+        "teachingValue": 70,
+        "evidenceDepth": 55,
+        "facultyDemand": 45,
+        "efficiency": 40
+      }
+    }
+  },
+  {
+    "name": "McKenzie Method (MDT)",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "Directional preference classification guides treatment. Cochrane: moderate evidence for acute/subacute LBP. Classification reliability good when trained. Widely available globally.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 63,
+        "efficiency": 62,
+        "caseloadApplicability": 70,
+        "reimbursement": 52,
+        "marketDemand": 72,
+        "patientSatisfaction": 62
+      },
+      "business": {
+        "cashPayViability": 55,
+        "pricingLeverage": 50,
+        "marketDifferentiation": 50,
+        "ownerLeverage": 35,
+        "marketDemand": 45,
+        "efficiency": 40
+      },
+      "academicClinical": {
+        "facultyRecognition": 50,
+        "scholarship": 60,
+        "teachingValue": 65,
+        "evidenceDepth": 65,
+        "facultyDemand": 35,
+        "efficiency": 45
+      }
+    }
+  },
+  {
+    "name": "Pain Neuroscience Education",
+    "type": "Training",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "Moderate effects on pain catastrophizing, disability, and pain intensity when combined with other interventions. Most effective as adjunct, not standalone.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 58,
+        "efficiency": 72,
+        "caseloadApplicability": 85,
+        "reimbursement": 52,
+        "marketDemand": 62,
+        "patientSatisfaction": 60
+      },
+      "business": {
+        "cashPayViability": 40,
+        "pricingLeverage": 35,
+        "marketDifferentiation": 30,
+        "ownerLeverage": 50,
+        "marketDemand": 25,
+        "efficiency": 70
+      },
+      "academicClinical": {
+        "facultyRecognition": 50,
+        "scholarship": 70,
+        "teachingValue": 75,
+        "evidenceDepth": 70,
+        "facultyDemand": 40,
+        "efficiency": 75
+      }
+    }
+  },
+  {
+    "name": "FCE (Functional Capacity Eval)",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "Workers' comp standard for RTW decision-making. Isernhagen, EPIC, and Blankenship systems most validated. Reliability moderate; predictive validity for RTW is limited.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 52,
+        "efficiency": 55,
+        "caseloadApplicability": 48,
+        "reimbursement": 68,
+        "marketDemand": 48,
+        "patientSatisfaction": 52
+      },
+      "business": {
+        "cashPayViability": 30,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 50,
+        "ownerLeverage": 65,
+        "marketDemand": 30,
+        "efficiency": 60
+      },
+      "academicClinical": {
+        "facultyRecognition": 25,
+        "scholarship": 25,
+        "teachingValue": 35,
+        "evidenceDepth": 35,
+        "facultyDemand": 15,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "Certified Hand Therapist (CHT)",
+    "type": "Certification",
+    "discipline": "OT/PT",
+    "disciplines": [
+      "OT",
+      "PT"
+    ],
+    "evidence": "Improved outcomes for complex hand conditions and post-surgical recovery. HTCC certification requires 3 years experience + 4000 hours. Insurance-recognized specialty.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 55,
+        "efficiency": 28,
+        "caseloadApplicability": 62,
+        "reimbursement": 72,
+        "marketDemand": 88,
+        "patientSatisfaction": 60
+      },
+      "business": {
+        "cashPayViability": 45,
+        "pricingLeverage": 75,
+        "marketDifferentiation": 85,
+        "ownerLeverage": 60,
+        "marketDemand": 55,
+        "efficiency": 15
+      },
+      "academicClinical": {
+        "facultyRecognition": 75,
+        "scholarship": 65,
+        "teachingValue": 70,
+        "evidenceDepth": 70,
+        "facultyDemand": 55,
+        "efficiency": 20
+      }
+    }
+  },
+  {
+    "name": "Early Intervention Specialist",
+    "type": "Certification",
+    "discipline": "PT/OT/SLP",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP"
+    ],
+    "evidence": "IDEA Part C federally mandated. 1/3 of EI graduates need no additional support at school age. £2.40 ROI per £1 invested (UK data). Brain plasticity window maximized.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 60,
+        "efficiency": 52,
+        "caseloadApplicability": 62,
+        "reimbursement": 65,
+        "marketDemand": 65,
+        "patientSatisfaction": 62
+      },
+      "business": {
+        "cashPayViability": 25,
+        "pricingLeverage": 25,
+        "marketDifferentiation": 35,
+        "ownerLeverage": 55,
+        "marketDemand": 30,
+        "efficiency": 55
+      },
+      "academicClinical": {
+        "facultyRecognition": 50,
+        "scholarship": 55,
+        "teachingValue": 65,
+        "evidenceDepth": 60,
+        "facultyDemand": 45,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "Multiple Sclerosis Certified Specialist",
+    "type": "Certification",
+    "discipline": "PT/OT/SLP",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP"
+    ],
+    "evidence": "CMSC certification with MS-specific protocols. Fatigue management, mobility, and cognition outcomes documented in MS populations.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 52,
+        "efficiency": 38,
+        "caseloadApplicability": 42,
+        "reimbursement": 52,
+        "marketDemand": 45,
+        "patientSatisfaction": 55
+      },
+      "business": {
+        "cashPayViability": 20,
+        "pricingLeverage": 25,
+        "marketDifferentiation": 55,
+        "ownerLeverage": 25,
+        "marketDemand": 20,
+        "efficiency": 55
+      },
+      "academicClinical": {
+        "facultyRecognition": 55,
+        "scholarship": 50,
+        "teachingValue": 55,
+        "evidenceDepth": 55,
+        "facultyDemand": 30,
+        "efficiency": 60
+      }
+    }
+  },
+  {
+    "name": "Neurodevelopmental Treatment (NDT)",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "Positive outcomes for CP and stroke. Systematic reviews: beneficial but not superior to other approaches when dose-matched. No certified vs non-certified studies.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 50,
+        "efficiency": 32,
+        "caseloadApplicability": 65,
+        "reimbursement": 52,
+        "marketDemand": 72,
+        "patientSatisfaction": 55
+      },
+      "business": {
+        "cashPayViability": 35,
+        "pricingLeverage": 35,
+        "marketDifferentiation": 45,
+        "ownerLeverage": 20,
+        "marketDemand": 35,
+        "efficiency": 25
+      },
+      "academicClinical": {
+        "facultyRecognition": 30,
+        "scholarship": 25,
+        "teachingValue": 40,
+        "evidenceDepth": 25,
+        "facultyDemand": 25,
+        "efficiency": 30
+      }
+    }
+  },
+  {
+    "name": "Orthopedic Clinical Specialist (OCS)",
+    "type": "Board Cert",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "ABPTS board certification. No demonstrated effectiveness difference vs non-certified. Evidence suggests better value per dollar for MSK care.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 52,
+        "efficiency": 22,
+        "caseloadApplicability": 82,
+        "reimbursement": 52,
+        "marketDemand": 92,
+        "patientSatisfaction": 55
+      },
+      "business": {
+        "cashPayViability": 55,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 50,
+        "ownerLeverage": 60,
+        "marketDemand": 40,
+        "efficiency": 45
+      },
+      "academicClinical": {
+        "facultyRecognition": 92,
+        "scholarship": 75,
+        "teachingValue": 90,
+        "evidenceDepth": 80,
+        "facultyDemand": 88,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "BOC-Orthopedic Specialty",
+    "type": "Board Cert",
+    "discipline": "AT",
+    "disciplines": [
+      "AT"
+    ],
+    "evidence": "Athletic training orthopedic specialization. NATA-aligned certification. Limited comparative outcome studies vs generalist AT.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 48,
+        "efficiency": 25,
+        "caseloadApplicability": 72,
+        "reimbursement": 52,
+        "marketDemand": 42,
+        "patientSatisfaction": 52
+      },
+      "business": {
+        "cashPayViability": 45,
+        "pricingLeverage": 40,
+        "marketDifferentiation": 55,
+        "ownerLeverage": 45,
+        "marketDemand": 25,
+        "efficiency": 50
+      },
+      "academicClinical": {
+        "facultyRecognition": 45,
+        "scholarship": 40,
+        "teachingValue": 55,
+        "evidenceDepth": 65,
+        "facultyDemand": 35,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "Sports Clinical Specialist (SCS)",
+    "type": "Board Cert",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "ABPTS board certification. Limited evidence of outcome differences. Efficiency gains from advanced sports medicine knowledge possible.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 48,
+        "efficiency": 22,
+        "caseloadApplicability": 60,
+        "reimbursement": 52,
+        "marketDemand": 65,
+        "patientSatisfaction": 52
+      },
+      "business": {
+        "cashPayViability": 80,
+        "pricingLeverage": 75,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 70,
+        "marketDemand": 60,
+        "efficiency": 40
+      },
+      "academicClinical": {
+        "facultyRecognition": 85,
+        "scholarship": 72,
+        "teachingValue": 80,
+        "evidenceDepth": 75,
+        "facultyDemand": 70,
+        "efficiency": 45
+      }
+    }
+  },
+  {
+    "name": "Telehealth/Digital Health",
+    "type": "Training",
+    "discipline": "All",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "AT",
+      "EP",
+      "RT",
+      "RN",
+      "MT",
+      "Audiology"
+    ],
+    "evidence": "Effective for musculoskeletal, mental health, and chronic disease management. No certification-specific outcomes; skills-based training is primary value.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 50,
+        "efficiency": 65,
+        "caseloadApplicability": 85,
+        "reimbursement": 55,
+        "marketDemand": 58,
+        "patientSatisfaction": 55
+      },
+      "business": {
+        "cashPayViability": 65,
+        "pricingLeverage": 35,
+        "marketDifferentiation": 30,
+        "ownerLeverage": 75,
+        "marketDemand": 55,
+        "efficiency": 85
+      },
+      "academicClinical": {
+        "facultyRecognition": 35,
+        "scholarship": 45,
+        "teachingValue": 60,
+        "evidenceDepth": 50,
+        "facultyDemand": 40,
+        "efficiency": 80
+      },
+      "healthTech": {
+        "industryPlacement": 65,
+        "vendorDemand": 68,
+        "salaryPremium": 50,
+        "technicalSkillDepth": 48,
+        "transitionFit": 70,
+        "efficiency": 72
+      }
+    }
+  },
+  {
+    "name": "Wound Care Specialist",
+    "type": "Certification",
+    "discipline": "PT/OT/RN",
+    "disciplines": [
+      "PT",
+      "OT",
+      "RN"
+    ],
+    "evidence": "40-60% amputation reduction in certified wound centers. ANCC/WOCN certification. Limited PT/OT-specific outcome data vs RN/MD wound specialists.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 55,
+        "efficiency": 45,
+        "caseloadApplicability": 52,
+        "reimbursement": 65,
+        "marketDemand": 72,
+        "patientSatisfaction": 52
+      },
+      "business": {
+        "cashPayViability": 15,
+        "pricingLeverage": 25,
+        "marketDifferentiation": 50,
+        "ownerLeverage": 30,
+        "marketDemand": 15,
+        "efficiency": 50
+      },
+      "academicClinical": {
+        "facultyRecognition": 50,
+        "scholarship": 50,
+        "teachingValue": 55,
+        "evidenceDepth": 65,
+        "facultyDemand": 30,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "Certified Aging in Place Specialist (CAPS)",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "NAHB certification. Home modification planning for aging adults. Limited outcome data on falls prevented or ADL maintained post-modification.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 45,
+        "efficiency": 68,
+        "caseloadApplicability": 58,
+        "reimbursement": 52,
+        "marketDemand": 42,
+        "patientSatisfaction": 55
+      },
+      "business": {
+        "cashPayViability": 70,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 65,
+        "ownerLeverage": 70,
+        "marketDemand": 55,
+        "efficiency": 80
+      },
+      "academicClinical": {
+        "facultyRecognition": 30,
+        "scholarship": 25,
+        "teachingValue": 45,
+        "evidenceDepth": 35,
+        "facultyDemand": 20,
+        "efficiency": 70
+      }
+    }
+  },
+  {
+    "name": "ACSM Clinical Exercise Physiologist",
+    "type": "Certification",
+    "discipline": "EP",
+    "disciplines": [
+      "EP"
+    ],
+    "evidence": "ACSM-CEP credential. Exercise testing and prescription in clinical populations. Limited comparison to non-certified EP outcomes.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 50,
+        "efficiency": 42,
+        "caseloadApplicability": 58,
+        "reimbursement": 52,
+        "marketDemand": 52,
+        "patientSatisfaction": 52
+      },
+      "business": {
+        "cashPayViability": 55,
+        "pricingLeverage": 45,
+        "marketDifferentiation": 55,
+        "ownerLeverage": 60,
+        "marketDemand": 35,
+        "efficiency": 50
+      },
+      "academicClinical": {
+        "facultyRecognition": 60,
+        "scholarship": 65,
+        "teachingValue": 70,
+        "evidenceDepth": 80,
+        "facultyDemand": 45,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "Certified Strength & Conditioning (CSCS)",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "NSCA credential for athletic performance. Not rehabilitation-specific. Limited evidence of superiority over standard PT for clinical outcomes.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 45,
+        "efficiency": 52,
+        "caseloadApplicability": 45,
+        "reimbursement": 52,
+        "marketDemand": 58,
+        "patientSatisfaction": 50
+      },
+      "business": {
+        "cashPayViability": 75,
+        "pricingLeverage": 50,
+        "marketDifferentiation": 30,
+        "ownerLeverage": 75,
+        "marketDemand": 65,
+        "efficiency": 80
+      },
+      "academicClinical": {
+        "facultyRecognition": 45,
+        "scholarship": 55,
+        "teachingValue": 65,
+        "evidenceDepth": 75,
+        "facultyDemand": 35,
+        "efficiency": 75
+      }
+    }
+  },
+  {
+    "name": "Certified Brain Injury Specialist",
+    "type": "Certification",
+    "discipline": "PT/OT/SLP",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP"
+    ],
+    "evidence": "BIAA CBIS certification. Standardized care protocols for TBI populations. No comparative outcome studies vs non-certified clinicians.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 48,
+        "efficiency": 55,
+        "caseloadApplicability": 50,
+        "reimbursement": 55,
+        "marketDemand": 48,
+        "patientSatisfaction": 50
+      },
+      "business": {
+        "cashPayViability": 15,
+        "pricingLeverage": 20,
+        "marketDifferentiation": 30,
+        "ownerLeverage": 25,
+        "marketDemand": 15,
+        "efficiency": 65
+      },
+      "academicClinical": {
+        "facultyRecognition": 35,
+        "scholarship": 40,
+        "teachingValue": 55,
+        "evidenceDepth": 55,
+        "facultyDemand": 30,
+        "efficiency": 70
+      }
+    }
+  },
+  {
+    "name": "Certified Stroke Rehabilitation Specialist",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "CSRS certification. Stroke-specific rehabilitation protocols. No comparative outcome data vs non-certified stroke rehab.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 48,
+        "efficiency": 58,
+        "caseloadApplicability": 55,
+        "reimbursement": 52,
+        "marketDemand": 45,
+        "patientSatisfaction": 52
+      },
+      "business": {
+        "cashPayViability": 18,
+        "pricingLeverage": 25,
+        "marketDifferentiation": 35,
+        "ownerLeverage": 25,
+        "marketDemand": 18,
+        "efficiency": 55
+      },
+      "academicClinical": {
+        "facultyRecognition": 45,
+        "scholarship": 50,
+        "teachingValue": 65,
+        "evidenceDepth": 70,
+        "facultyDemand": 35,
+        "efficiency": 60
+      }
+    }
+  },
+  {
+    "name": "Hippotherapy",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "AHA-PATH certification. High patient satisfaction but small effect sizes in RCTs. Beneficial for CP, MS, and ASD in feasibility studies.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 40,
+        "efficiency": 22,
+        "caseloadApplicability": 10,
+        "reimbursement": 40,
+        "marketDemand": 18,
+        "patientSatisfaction": 68
+      },
+      "business": {
+        "cashPayViability": 60,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 80,
+        "ownerLeverage": 25,
+        "marketDemand": 45,
+        "efficiency": 20
+      },
+      "academicClinical": {
+        "facultyRecognition": 25,
+        "scholarship": 30,
+        "teachingValue": 30,
+        "evidenceDepth": 35,
+        "facultyDemand": 15,
+        "efficiency": 25
+      }
+    }
+  },
+  {
+    "name": "Robotic Upper Limb",
+    "type": "Technology",
+    "discipline": "OT",
+    "disciplines": [
+      "OT"
+    ],
+    "evidence": "Cochrane: no superiority over dose-matched conventional OT for upper limb stroke. High repetition capacity. FDA-cleared devices (InMotion ARM, Amadeo).",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 42,
+        "efficiency": 28,
+        "caseloadApplicability": 12,
+        "reimbursement": 45,
+        "marketDemand": 20,
+        "patientSatisfaction": 48
+      },
+      "business": {
+        "cashPayViability": 55,
+        "pricingLeverage": 60,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 50,
+        "marketDemand": 40,
+        "efficiency": 25
+      },
+      "academicClinical": {
+        "facultyRecognition": 35,
+        "scholarship": 55,
+        "teachingValue": 50,
+        "evidenceDepth": 50,
+        "facultyDemand": 20,
+        "efficiency": 30
+      },
+      "healthTech": {
+        "industryPlacement": 48,
+        "vendorDemand": 42,
+        "salaryPremium": 42,
+        "technicalSkillDepth": 55,
+        "transitionFit": 48,
+        "efficiency": 35
+      }
+    }
+  },
+  {
+    "name": "Certified Mulligan Practitioner",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "Mobilization with movement (MWM) technique. Immediate pain relief documented for shoulder, ankle, knee, and cervical spine in RCTs. Long-term superiority not established.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 45,
+        "efficiency": 55,
+        "caseloadApplicability": 70,
+        "reimbursement": 52,
+        "marketDemand": 52,
+        "patientSatisfaction": 50
+      },
+      "business": {
+        "cashPayViability": 60,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 50,
+        "ownerLeverage": 30,
+        "marketDemand": 30,
+        "efficiency": 55
+      },
+      "academicClinical": {
+        "facultyRecognition": 25,
+        "scholarship": 35,
+        "teachingValue": 45,
+        "evidenceDepth": 45,
+        "facultyDemand": 15,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "Pelvic Floor Rehabilitation (PRPC)",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "APTA PRPC certification. Cochrane: pelvic floor PT superior to watchful waiting for stress/urge urinary incontinence. Large underserved population.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 50,
+        "efficiency": 35,
+        "caseloadApplicability": 45,
+        "reimbursement": 55,
+        "marketDemand": 72,
+        "patientSatisfaction": 55
+      },
+      "business": {
+        "cashPayViability": 92,
+        "pricingLeverage": 85,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 70,
+        "marketDemand": 80,
+        "efficiency": 55
+      },
+      "academicClinical": {
+        "facultyRecognition": 45,
+        "scholarship": 45,
+        "teachingValue": 60,
+        "evidenceDepth": 55,
+        "facultyDemand": 35,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "Women's Health Clinical Specialist",
+    "type": "Board Specialty",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "The clinical DOMAIN this credential attests to has strong, high-quality evidence: Cochrane reviews establish pelvic floor muscle training as first-line care for female urinary incontinence (Dumoulin 2018), with good RCT/SR support for pelvic organ prolapse, peripartum lumbopelvic pain, fecal incontinence, and provoked vestibulodynia/dyspareunia, and weaker evidence for diastasis recti. Evidence about the CREDENTIAL ITSELF is genuinely thin: there are no published outcome studies comparing WCS-certified pelvic PTs to non-certified pelvic PTs, and the broader literature on ABPTS board specialization shows mixed results (employer-perceived value and a modest salary premium, but a 2025 survey found no difference in guideline adherence by specialization). Note the credential was formally renamed Pelvic and Women's Health Clinical Specialist (PWCS) by ABPTS in September 2025; ~954 specialists were certified as of July 2025.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 60,
+        "efficiency": 38,
+        "caseloadApplicability": 52,
+        "reimbursement": 52,
+        "marketDemand": 60,
+        "patientSatisfaction": 60
+      },
+      "business": {
+        "cashPayViability": 90,
+        "pricingLeverage": 86,
+        "marketDifferentiation": 85,
+        "ownerLeverage": 70,
+        "marketDemand": 72,
+        "efficiency": 20
+      },
+      "academicClinical": {
+        "facultyRecognition": 88,
+        "scholarship": 70,
+        "teachingValue": 78,
+        "evidenceDepth": 62,
+        "facultyDemand": 62,
+        "efficiency": 25
+      }
+    }
+  },
+  {
+    "name": "Certified Driver Rehabilitation Specialist",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "CDRS certification. Driving evaluation and adaptive equipment prescription. Functional independence outcome (return to driving) is meaningful for patient autonomy.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 42,
+        "efficiency": 45,
+        "caseloadApplicability": 18,
+        "reimbursement": 55,
+        "marketDemand": 38,
+        "patientSatisfaction": 48
+      },
+      "business": {
+        "cashPayViability": 75,
+        "pricingLeverage": 70,
+        "marketDifferentiation": 90,
+        "ownerLeverage": 55,
+        "marketDemand": 55,
+        "efficiency": 20
+      },
+      "academicClinical": {
+        "facultyRecognition": 25,
+        "scholarship": 25,
+        "teachingValue": 30,
+        "evidenceDepth": 30,
+        "facultyDemand": 15,
+        "efficiency": 25
+      }
+    }
+  },
+  {
+    "name": "Pediatric Clinical Specialist (PCS)",
+    "type": "Board Cert",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "ABPTS board certification. No comparative outcome studies vs non-PCS-certified pediatric PT. Expertise signal for employers.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 40,
+        "efficiency": 25,
+        "caseloadApplicability": 72,
+        "reimbursement": 52,
+        "marketDemand": 55,
+        "patientSatisfaction": 45
+      },
+      "business": {
+        "cashPayViability": 55,
+        "pricingLeverage": 60,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 50,
+        "marketDemand": 50,
+        "efficiency": 20
+      },
+      "academicClinical": {
+        "facultyRecognition": 92,
+        "scholarship": 75,
+        "teachingValue": 85,
+        "evidenceDepth": 65,
+        "facultyDemand": 70,
+        "efficiency": 25
+      }
+    }
+  },
+  {
+    "name": "Board Certification in Pediatrics",
+    "type": "Board Cert",
+    "discipline": "OT",
+    "disciplines": [
+      "OT"
+    ],
+    "evidence": "AOTA certification. Pediatric OT specialty credential. No comparative outcome studies vs non-certified pediatric OT.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 38,
+        "efficiency": 28,
+        "caseloadApplicability": 72,
+        "reimbursement": 52,
+        "marketDemand": 52,
+        "patientSatisfaction": 45
+      },
+      "business": {
+        "cashPayViability": 55,
+        "pricingLeverage": 60,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 50,
+        "marketDemand": 50,
+        "efficiency": 25
+      },
+      "academicClinical": {
+        "facultyRecognition": 90,
+        "scholarship": 70,
+        "teachingValue": 85,
+        "evidenceDepth": 60,
+        "facultyDemand": 70,
+        "efficiency": 30
+      }
+    }
+  },
+  {
+    "name": "Virtual/Augmented Reality",
+    "type": "Training",
+    "discipline": "All",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "AT",
+      "EP",
+      "RT",
+      "RN",
+      "MT",
+      "Audiology"
+    ],
+    "evidence": "Emerging technology. VR training certifications are largely vendor-specific. Insufficient peer-reviewed evidence for training certification outcomes.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 42,
+        "efficiency": 48,
+        "caseloadApplicability": 42,
+        "reimbursement": 52,
+        "marketDemand": 30,
+        "patientSatisfaction": 50
+      },
+      "business": {
+        "cashPayViability": 35,
+        "pricingLeverage": 40,
+        "marketDifferentiation": 55,
+        "ownerLeverage": 50,
+        "marketDemand": 30,
+        "efficiency": 35
+      },
+      "academicClinical": {
+        "facultyRecognition": 35,
+        "scholarship": 55,
+        "teachingValue": 45,
+        "evidenceDepth": 40,
+        "facultyDemand": 20,
+        "efficiency": 40
+      },
+      "healthTech": {
+        "industryPlacement": 50,
+        "vendorDemand": 50,
+        "salaryPremium": 42,
+        "technicalSkillDepth": 50,
+        "transitionFit": 55,
+        "efficiency": 52
+      }
+    }
+  },
+  {
+    "name": "Ventilator Weaning",
+    "type": "Protocol",
+    "discipline": "RT/PT",
+    "disciplines": [
+      "RT",
+      "PT"
+    ],
+    "evidence": "RT-led protocolized weaning reduces ventilator days. PT/OT early mobility integration reduces ICU-acquired weakness. PT-specific weaning certification role limited.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 40,
+        "efficiency": 35,
+        "caseloadApplicability": 35,
+        "reimbursement": 52,
+        "marketDemand": 50,
+        "patientSatisfaction": 35
+      },
+      "business": {
+        "cashPayViability": 5,
+        "pricingLeverage": 10,
+        "marketDifferentiation": 20,
+        "ownerLeverage": 10,
+        "marketDemand": 5,
+        "efficiency": 30
+      },
+      "academicClinical": {
+        "facultyRecognition": 40,
+        "scholarship": 55,
+        "teachingValue": 55,
+        "evidenceDepth": 65,
+        "facultyDemand": 25,
+        "efficiency": 45
+      }
+    }
+  },
+  {
+    "name": "Lymphedema (CLT/LANA)",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "LANA examination. Complete Decongestive Therapy (CDT) shows consistent volume reduction in systematic reviews. 200-hour training standard. Insurance-recognized.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 45,
+        "efficiency": 38,
+        "caseloadApplicability": 45,
+        "reimbursement": 70,
+        "marketDemand": 72,
+        "patientSatisfaction": 45
+      },
+      "business": {
+        "cashPayViability": 45,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 65,
+        "marketDemand": 55,
+        "efficiency": 35
+      },
+      "academicClinical": {
+        "facultyRecognition": 55,
+        "scholarship": 60,
+        "teachingValue": 60,
+        "evidenceDepth": 70,
+        "facultyDemand": 40,
+        "efficiency": 35
+      }
+    }
+  },
+  {
+    "name": "Seating and Mobility Specialist",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "SMS certification from RESNA. Complex wheelchair and seating prescription. Reduces pressure injuries and improves participation.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 40,
+        "efficiency": 38,
+        "caseloadApplicability": 40,
+        "reimbursement": 58,
+        "marketDemand": 55,
+        "patientSatisfaction": 42
+      },
+      "business": {
+        "cashPayViability": 15,
+        "pricingLeverage": 35,
+        "marketDifferentiation": 60,
+        "ownerLeverage": 40,
+        "marketDemand": 25,
+        "efficiency": 40
+      },
+      "academicClinical": {
+        "facultyRecognition": 50,
+        "scholarship": 45,
+        "teachingValue": 60,
+        "evidenceDepth": 50,
+        "facultyDemand": 35,
+        "efficiency": 50
+      },
+      "healthTech": {
+        "industryPlacement": 48,
+        "vendorDemand": 50,
+        "salaryPremium": 42,
+        "technicalSkillDepth": 48,
+        "transitionFit": 52,
+        "efficiency": 42
+      }
+    }
+  },
+  {
+    "name": "Dry Needling",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "Mixed systematic review evidence. Most effective for trigger point pain short-term. State-dependent practice. IL permits PT dry needling with training.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 40,
+        "efficiency": 68,
+        "caseloadApplicability": 72,
+        "reimbursement": 55,
+        "marketDemand": 88,
+        "patientSatisfaction": 42
+      },
+      "business": {
+        "cashPayViability": 85,
+        "pricingLeverage": 75,
+        "marketDifferentiation": 60,
+        "ownerLeverage": 55,
+        "marketDemand": 75,
+        "efficiency": 65
+      },
+      "academicClinical": {
+        "facultyRecognition": 35,
+        "scholarship": 50,
+        "teachingValue": 45,
+        "evidenceDepth": 45,
+        "facultyDemand": 20,
+        "efficiency": 60
+      }
+    }
+  },
+  {
+    "name": "TPI Golf Certification",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "Titleist Performance Institute credential. Sport-specific movement screening for golf. Limited peer-reviewed clinical outcome data for rehabilitation context.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 35,
+        "efficiency": 78,
+        "caseloadApplicability": 18,
+        "reimbursement": 35,
+        "marketDemand": 28,
+        "patientSatisfaction": 40
+      },
+      "business": {
+        "cashPayViability": 90,
+        "pricingLeverage": 80,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 50,
+        "marketDemand": 70,
+        "efficiency": 70
+      },
+      "academicClinical": {
+        "facultyRecognition": 15,
+        "scholarship": 25,
+        "teachingValue": 25,
+        "evidenceDepth": 25,
+        "facultyDemand": 10,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "ASTYM Therapy",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "Soft tissue mobilization technique. Limited comparative evidence vs IASTM or standard manual therapy. Training required for certification.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 36,
+        "efficiency": 62,
+        "caseloadApplicability": 65,
+        "reimbursement": 52,
+        "marketDemand": 52,
+        "patientSatisfaction": 40
+      },
+      "business": {
+        "cashPayViability": 50,
+        "pricingLeverage": 45,
+        "marketDifferentiation": 40,
+        "ownerLeverage": 55,
+        "marketDemand": 35,
+        "efficiency": 50
+      },
+      "academicClinical": {
+        "facultyRecognition": 20,
+        "scholarship": 30,
+        "teachingValue": 30,
+        "evidenceDepth": 30,
+        "facultyDemand": 10,
+        "efficiency": 50
+      }
+    }
+  },
+  {
+    "name": "Rolfing/Structural Integration",
+    "type": "Certification",
+    "discipline": "MT",
+    "disciplines": [
+      "MT"
+    ],
+    "evidence": "Systematic reviews find insufficient evidence. Small studies suggest postural and pain benefits. 700-hour training. Not covered by most payers.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 32,
+        "efficiency": 22,
+        "caseloadApplicability": 35,
+        "reimbursement": 35,
+        "marketDemand": 10,
+        "patientSatisfaction": 42
+      },
+      "business": {
+        "cashPayViability": 80,
+        "pricingLeverage": 70,
+        "marketDifferentiation": 75,
+        "ownerLeverage": 25,
+        "marketDemand": 55,
+        "efficiency": 15
+      },
+      "academicClinical": {
+        "facultyRecognition": 10,
+        "scholarship": 15,
+        "teachingValue": 15,
+        "evidenceDepth": 20,
+        "facultyDemand": 5,
+        "efficiency": 15
+      }
+    }
+  },
+  {
+    "name": "Therapeutic Pain Specialist",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "TPS certification. Pain neuroscience education advanced application. Limited outcome studies specific to this credential.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 36,
+        "efficiency": 55,
+        "caseloadApplicability": 80,
+        "reimbursement": 52,
+        "marketDemand": 55,
+        "patientSatisfaction": 38
+      },
+      "business": {
+        "cashPayViability": 55,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 60,
+        "ownerLeverage": 60,
+        "marketDemand": 40,
+        "efficiency": 50
+      },
+      "academicClinical": {
+        "facultyRecognition": 55,
+        "scholarship": 75,
+        "teachingValue": 70,
+        "evidenceDepth": 75,
+        "facultyDemand": 35,
+        "efficiency": 50
+      }
+    }
+  },
+  {
+    "name": "Craniosacral Therapy/Upledger",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "Systematic reviews find insufficient evidence. CSF rhythm detection reliability very low in blinded studies. Theoretical mechanism lacks anatomical support.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 14,
+        "efficiency": 35,
+        "caseloadApplicability": 40,
+        "reimbursement": 35,
+        "marketDemand": 18,
+        "patientSatisfaction": 28
+      },
+      "business": {
+        "cashPayViability": 70,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 55,
+        "ownerLeverage": 30,
+        "marketDemand": 45,
+        "efficiency": 25
+      },
+      "academicClinical": {
+        "facultyRecognition": 10,
+        "scholarship": 15,
+        "teachingValue": 15,
+        "evidenceDepth": 15,
+        "facultyDemand": 5,
+        "efficiency": 25
+      }
+    }
+  },
+  {
+    "name": "Certified Low Vision Therapist",
+    "type": "Certification",
+    "discipline": "OT",
+    "disciplines": [
+      "OT"
+    ],
+    "evidence": "CLVT certification from Academy for Certification of Vision Rehabilitation. Vision rehabilitation functional outcomes documented. Limited comparative studies.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 32,
+        "efficiency": 42,
+        "caseloadApplicability": 22,
+        "reimbursement": 52,
+        "marketDemand": 42,
+        "patientSatisfaction": 38
+      },
+      "business": {
+        "cashPayViability": 25,
+        "pricingLeverage": 40,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 45,
+        "marketDemand": 20,
+        "efficiency": 35
+      },
+      "academicClinical": {
+        "facultyRecognition": 45,
+        "scholarship": 40,
+        "teachingValue": 55,
+        "evidenceDepth": 50,
+        "facultyDemand": 30,
+        "efficiency": 35
+      }
+    }
+  },
+  {
+    "name": "Suit Therapy",
+    "type": "Equipment",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "TheraSuit/Adeli suit. Multiple studies: no additional benefit over control PT when dose-matched. High family interest but evidence does not support premium use.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 28,
+        "efficiency": 38,
+        "caseloadApplicability": 15,
+        "reimbursement": 40,
+        "marketDemand": 12,
+        "patientSatisfaction": 35
+      },
+      "business": {
+        "cashPayViability": 75,
+        "pricingLeverage": 70,
+        "marketDifferentiation": 65,
+        "ownerLeverage": 60,
+        "marketDemand": 55,
+        "efficiency": 25
+      },
+      "academicClinical": {
+        "facultyRecognition": 15,
+        "scholarship": 25,
+        "teachingValue": 25,
+        "evidenceDepth": 25,
+        "facultyDemand": 10,
+        "efficiency": 20
+      }
+    }
+  },
+  {
+    "name": "Advanced Competency in Home Health",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "ACHH certification from APTA. Home health specialty competency. No comparative outcome studies vs non-certified home health PT/OT.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 28,
+        "efficiency": 58,
+        "caseloadApplicability": 62,
+        "reimbursement": 52,
+        "marketDemand": 42,
+        "patientSatisfaction": 32
+      },
+      "business": {
+        "cashPayViability": 15,
+        "pricingLeverage": 25,
+        "marketDifferentiation": 30,
+        "ownerLeverage": 40,
+        "marketDemand": 20,
+        "efficiency": 70
+      },
+      "academicClinical": {
+        "facultyRecognition": 35,
+        "scholarship": 30,
+        "teachingValue": 45,
+        "evidenceDepth": 40,
+        "facultyDemand": 25,
+        "efficiency": 65
+      }
+    }
+  },
+  {
+    "name": "Barral Institute Certification",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "Visceral and neural manipulation. Systematic reviews find insufficient evidence. Detection reliability unstudied. Theoretical mechanisms not supported by anatomy.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 16,
+        "efficiency": 18,
+        "caseloadApplicability": 32,
+        "reimbursement": 32,
+        "marketDemand": 8,
+        "patientSatisfaction": 25
+      },
+      "business": {
+        "cashPayViability": 80,
+        "pricingLeverage": 75,
+        "marketDifferentiation": 75,
+        "ownerLeverage": 25,
+        "marketDemand": 50,
+        "efficiency": 20
+      },
+      "academicClinical": {
+        "facultyRecognition": 15,
+        "scholarship": 20,
+        "teachingValue": 25,
+        "evidenceDepth": 20,
+        "facultyDemand": 10,
+        "efficiency": 15
+      }
+    }
+  },
+  {
+    "name": "Transitional DPT (tDPT)",
+    "type": "Degree",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "No outcome improvements documented vs MPT graduates. Primarily credential equivalency degree. Administrative/career value without clinical outcome benefit.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 25,
+        "efficiency": 22,
+        "caseloadApplicability": 50,
+        "reimbursement": 52,
+        "marketDemand": 30,
+        "patientSatisfaction": 28
+      },
+      "business": {
+        "cashPayViability": 20,
+        "pricingLeverage": 25,
+        "marketDifferentiation": 20,
+        "ownerLeverage": 30,
+        "marketDemand": 30,
+        "efficiency": 35
+      },
+      "academicClinical": {
+        "facultyRecognition": 55,
+        "scholarship": 35,
+        "teachingValue": 50,
+        "evidenceDepth": 40,
+        "facultyDemand": 50,
+        "efficiency": 40
+      },
+      "research": {
+        "methodologyDepth": 35,
+        "publicationTrack": 25,
+        "grantReadiness": 22,
+        "pathwayToIndependence": 28,
+        "interdisciplinaryFit": 35,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "Physical Therapy Residency",
+    "type": "Training",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "ABPTRFE-accredited. Surprising finding: worse efficiency than entry-level in large comparative study (25,843 patients). Fellowship outperforms residency. May reflect case complexity.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 28,
+        "efficiency": 18,
+        "caseloadApplicability": 65,
+        "reimbursement": 52,
+        "marketDemand": 58,
+        "patientSatisfaction": 28
+      },
+      "business": {
+        "cashPayViability": 55,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 65,
+        "ownerLeverage": 50,
+        "marketDemand": 35,
+        "efficiency": 25
+      },
+      "academicClinical": {
+        "facultyRecognition": 90,
+        "scholarship": 75,
+        "teachingValue": 85,
+        "evidenceDepth": 75,
+        "facultyDemand": 80,
+        "efficiency": 30
+      }
+    }
+  },
+  {
+    "name": "Certified Exercise Expert for Aging Adults",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "CEEAA certification from APTA. Exercise prescription for older adults. No comparative outcome studies vs non-certified.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 22,
+        "efficiency": 75,
+        "caseloadApplicability": 68,
+        "reimbursement": 52,
+        "marketDemand": 35,
+        "patientSatisfaction": 28
+      },
+      "business": {
+        "cashPayViability": 60,
+        "pricingLeverage": 45,
+        "marketDifferentiation": 45,
+        "ownerLeverage": 60,
+        "marketDemand": 40,
+        "efficiency": 70
+      },
+      "academicClinical": {
+        "facultyRecognition": 35,
+        "scholarship": 35,
+        "teachingValue": 55,
+        "evidenceDepth": 55,
+        "facultyDemand": 25,
+        "efficiency": 65
+      }
+    }
+  },
+  {
+    "name": "Geriatric Clinical Specialist (GCS)",
+    "type": "Board Cert",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "ABPTS board certification. No comparative outcome studies despite relevance to aging population. Signals geriatric expertise.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 28,
+        "efficiency": 28,
+        "caseloadApplicability": 72,
+        "reimbursement": 52,
+        "marketDemand": 65,
+        "patientSatisfaction": 32
+      },
+      "business": {
+        "cashPayViability": 45,
+        "pricingLeverage": 50,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 55,
+        "marketDemand": 30,
+        "efficiency": 35
+      },
+      "academicClinical": {
+        "facultyRecognition": 90,
+        "scholarship": 70,
+        "teachingValue": 85,
+        "evidenceDepth": 75,
+        "facultyDemand": 80,
+        "efficiency": 50
+      }
+    }
+  },
+  {
+    "name": "Neurologic Clinical Specialist (NCS)",
+    "type": "Board Cert",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "ABPTS board certification. No outcome data despite high-need neurological population. Signals specialty expertise.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 30,
+        "efficiency": 28,
+        "caseloadApplicability": 70,
+        "reimbursement": 52,
+        "marketDemand": 72,
+        "patientSatisfaction": 35
+      },
+      "business": {
+        "cashPayViability": 60,
+        "pricingLeverage": 65,
+        "marketDifferentiation": 80,
+        "ownerLeverage": 55,
+        "marketDemand": 40,
+        "efficiency": 30
+      },
+      "academicClinical": {
+        "facultyRecognition": 92,
+        "scholarship": 80,
+        "teachingValue": 90,
+        "evidenceDepth": 80,
+        "facultyDemand": 85,
+        "efficiency": 45
+      }
+    }
+  },
+  {
+    "name": "Board Certification in Gerontology",
+    "type": "Board Cert",
+    "discipline": "OT",
+    "disciplines": [
+      "OT"
+    ],
+    "evidence": "BCG certification from AOTA. Geriatric OT specialty. No comparative outcome studies.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 22,
+        "efficiency": 28,
+        "caseloadApplicability": 70,
+        "reimbursement": 52,
+        "marketDemand": 48,
+        "patientSatisfaction": 28
+      },
+      "business": {
+        "cashPayViability": 45,
+        "pricingLeverage": 50,
+        "marketDifferentiation": 65,
+        "ownerLeverage": 55,
+        "marketDemand": 30,
+        "efficiency": 40
+      },
+      "academicClinical": {
+        "facultyRecognition": 85,
+        "scholarship": 65,
+        "teachingValue": 85,
+        "evidenceDepth": 70,
+        "facultyDemand": 75,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "AOTA Board Certifications (Physical Rehab)",
+    "type": "Board Cert",
+    "discipline": "OT",
+    "disciplines": [
+      "OT"
+    ],
+    "evidence": "AOTA BCPR. Zero comparative outcome studies identified across systematic searches. Professional signaling credential.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 20,
+        "efficiency": 30,
+        "caseloadApplicability": 60,
+        "reimbursement": 52,
+        "marketDemand": 35,
+        "patientSatisfaction": 25
+      },
+      "business": {
+        "cashPayViability": 22,
+        "pricingLeverage": 28,
+        "marketDifferentiation": 35,
+        "ownerLeverage": 30,
+        "marketDemand": 18,
+        "efficiency": 25
+      },
+      "academicClinical": {
+        "facultyRecognition": 78,
+        "scholarship": 60,
+        "teachingValue": 72,
+        "evidenceDepth": 58,
+        "facultyDemand": 62,
+        "efficiency": 40
+      }
+    }
+  },
+  {
+    "name": "AOTA Specialty Certifications",
+    "type": "Board Cert",
+    "discipline": "OT",
+    "disciplines": [
+      "OT"
+    ],
+    "evidence": "Driving, Environmental Mod, Feeding, Low Vision, School. No outcome studies across any of these specialty certifications.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 18,
+        "efficiency": 32,
+        "caseloadApplicability": 45,
+        "reimbursement": 52,
+        "marketDemand": 30,
+        "patientSatisfaction": 22
+      },
+      "business": {
+        "cashPayViability": 30,
+        "pricingLeverage": 30,
+        "marketDifferentiation": 35,
+        "ownerLeverage": 32,
+        "marketDemand": 20,
+        "efficiency": 28
+      },
+      "academicClinical": {
+        "facultyRecognition": 60,
+        "scholarship": 50,
+        "teachingValue": 65,
+        "evidenceDepth": 55,
+        "facultyDemand": 50,
+        "efficiency": 42
+      }
+    }
+  },
+  {
+    "name": "Cardiovascular/Pulmonary Specialist",
+    "type": "Board Specialty",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "This record covers the ABPTS Cardiovascular & Pulmonary Clinical Specialist (CCS) board certification, and the evidence must be read in two layers. The CLINICAL DOMAIN it attests competence in is among the best-evidenced in all of physical therapy: exercise-based cardiac rehabilitation reduces cardiovascular mortality and hospitalization (Cochrane Anderson 2016 / Dibben 2021), pulmonary rehabilitation improves dyspnea, exercise capacity and quality of life in COPD (Cochrane McCarthy 2015), and early ICU mobilization improves functional outcomes (Schweickert 2009 Lancet; Tipping 2017). Evidence ABOUT THE CREDENTIAL itself is thin — only one directly relevant study (Prince 2024) shows CCS-eligible specialists educate heart-failure patients more in line with clinical-practice guidelines than experienced nonspecialists, and the broader ABPTS-specialization literature shows only a modest salary premium. Critically, CCS is one of the SMALLEST ABPTS specialties (~591 certified as of July 2025) and is concentrated in hospital/acute-care/ICU/cardiac-rehab settings that are insurance- and Medicare-funded and salaried — the near-inverse of the cash-pay business profile seen in pelvic/women's-health credentials.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 88,
+        "caseloadApplicability": 60,
+        "reimbursement": 45,
+        "efficiency": 40,
+        "marketDemand": 62,
+        "patientSatisfaction": 78
+      },
+      "business": {
+        "cashPayViability": 12,
+        "pricingLeverage": 18,
+        "marketDifferentiation": 35,
+        "ownerLeverage": 15,
+        "marketDemand": 22,
+        "efficiency": 30
+      },
+      "academicClinical": {
+        "facultyRecognition": 90,
+        "scholarship": 78,
+        "teachingValue": 88,
+        "evidenceDepth": 80,
+        "facultyDemand": 85,
+        "efficiency": 58
+      }
+    }
+  },
+  {
+    "name": "Certified Spinal Manipulative Therapy",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "Spinal manipulation evidence supports benefit for LBP and neck pain; no specific certification comparison to non-certified manipulators.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 24,
+        "efficiency": 55,
+        "caseloadApplicability": 68,
+        "reimbursement": 52,
+        "marketDemand": 58,
+        "patientSatisfaction": 25
+      },
+      "business": {
+        "cashPayViability": 70,
+        "pricingLeverage": 62,
+        "marketDifferentiation": 45,
+        "ownerLeverage": 35,
+        "marketDemand": 55,
+        "efficiency": 65
+      },
+      "academicClinical": {
+        "facultyRecognition": 35,
+        "scholarship": 38,
+        "teachingValue": 55,
+        "evidenceDepth": 50,
+        "facultyDemand": 25,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "Clinical Doctorate (DPT/OTD) vs Masters",
+    "type": "Degree",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "No measurable patient outcome differences between DPT and MPT graduates in multiple studies. Credential equivalency; clinical performance is equivalent.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 18,
+        "efficiency": 15,
+        "caseloadApplicability": 55,
+        "reimbursement": 52,
+        "marketDemand": 65,
+        "patientSatisfaction": 22
+      },
+      "business": {
+        "cashPayViability": 45,
+        "pricingLeverage": 40,
+        "marketDifferentiation": 25,
+        "ownerLeverage": 55,
+        "marketDemand": 50,
+        "efficiency": 20
+      },
+      "academicClinical": {
+        "facultyRecognition": 80,
+        "scholarship": 55,
+        "teachingValue": 70,
+        "evidenceDepth": 50,
+        "facultyDemand": 85,
+        "efficiency": 25
+      }
+    }
+  },
+  {
+    "name": "Sensory Integration (SIPT)",
+    "type": "Certification",
+    "discipline": "OT",
+    "disciplines": [
+      "OT"
+    ],
+    "evidence": "SIPT certification widely used in pediatric OT. Limited evidence in systematic reviews despite widespread use. Bundy & Lane systematic review: inconclusive.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 18,
+        "efficiency": 25,
+        "caseloadApplicability": 52,
+        "reimbursement": 52,
+        "marketDemand": 58,
+        "patientSatisfaction": 22
+      },
+      "business": {
+        "cashPayViability": 72,
+        "pricingLeverage": 65,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 60,
+        "marketDemand": 62,
+        "efficiency": 30
+      },
+      "academicClinical": {
+        "facultyRecognition": 55,
+        "scholarship": 50,
+        "teachingValue": 68,
+        "evidenceDepth": 38,
+        "facultyDemand": 45,
+        "efficiency": 28
+      }
+    }
+  },
+  {
+    "name": "Modern Management of Older Adult",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "CERT-MMOA course from Duke. Geriatric exercise and function focus. Limited comparative outcome data for certified vs non-certified clinicians.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 20,
+        "efficiency": 72,
+        "caseloadApplicability": 65,
+        "reimbursement": 52,
+        "marketDemand": 32,
+        "patientSatisfaction": 24
+      },
+      "business": {
+        "cashPayViability": 40,
+        "pricingLeverage": 35,
+        "marketDifferentiation": 28,
+        "ownerLeverage": 45,
+        "marketDemand": 30,
+        "efficiency": 70
+      },
+      "academicClinical": {
+        "facultyRecognition": 45,
+        "scholarship": 40,
+        "teachingValue": 65,
+        "evidenceDepth": 60,
+        "facultyDemand": 35,
+        "efficiency": 65
+      }
+    }
+  },
+  {
+    "name": "Assistive Technology Professional (ATP)",
+    "type": "Certification",
+    "discipline": "OT/PT",
+    "disciplines": [
+      "OT",
+      "PT"
+    ],
+    "evidence": "RESNA ATP credential. AT device selection and application. Technology-focused; no comparative outcome studies for ATP vs non-certified AT provision.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 18,
+        "efficiency": 45,
+        "caseloadApplicability": 42,
+        "reimbursement": 52,
+        "marketDemand": 52,
+        "patientSatisfaction": 22
+      },
+      "business": {
+        "cashPayViability": 18,
+        "pricingLeverage": 30,
+        "marketDifferentiation": 55,
+        "ownerLeverage": 30,
+        "marketDemand": 20,
+        "efficiency": 55
+      },
+      "academicClinical": {
+        "facultyRecognition": 55,
+        "scholarship": 45,
+        "teachingValue": 60,
+        "evidenceDepth": 55,
+        "facultyDemand": 40,
+        "efficiency": 55
+      },
+      "healthTech": {
+        "industryPlacement": 55,
+        "vendorDemand": 58,
+        "salaryPremium": 45,
+        "technicalSkillDepth": 52,
+        "transitionFit": 60,
+        "efficiency": 48
+      }
+    }
+  },
+  {
+    "name": "VitalStim",
+    "type": "Certification",
+    "discipline": "SLP",
+    "disciplines": [
+      "SLP"
+    ],
+    "evidence": "FDA-cleared for dysphagia. Systematic reviews: insufficient evidence of superiority over standard dysphagia therapy. Sham-controlled RCTs show mixed results.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 14,
+        "efficiency": 62,
+        "caseloadApplicability": 45,
+        "reimbursement": 52,
+        "marketDemand": 48,
+        "patientSatisfaction": 16
+      },
+      "business": {
+        "cashPayViability": 25,
+        "pricingLeverage": 30,
+        "marketDifferentiation": 35,
+        "ownerLeverage": 40,
+        "marketDemand": 18,
+        "efficiency": 70
+      },
+      "academicClinical": {
+        "facultyRecognition": 30,
+        "scholarship": 28,
+        "teachingValue": 45,
+        "evidenceDepth": 30,
+        "facultyDemand": 25,
+        "efficiency": 60
+      }
+    }
+  },
+  {
+    "name": "Board Certified Specialist in Swallowing",
+    "type": "Board Cert",
+    "discipline": "SLP",
+    "disciplines": [
+      "SLP"
+    ],
+    "evidence": "BCS-S credential from ASHA. Dysphagia specialty certification. No comparative outcome studies vs non-certified SLP dysphagia management.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 14,
+        "efficiency": 30,
+        "caseloadApplicability": 45,
+        "reimbursement": 52,
+        "marketDemand": 48,
+        "patientSatisfaction": 16
+      },
+      "business": {
+        "cashPayViability": 22,
+        "pricingLeverage": 35,
+        "marketDifferentiation": 60,
+        "ownerLeverage": 25,
+        "marketDemand": 15,
+        "efficiency": 20
+      },
+      "academicClinical": {
+        "facultyRecognition": 88,
+        "scholarship": 78,
+        "teachingValue": 82,
+        "evidenceDepth": 72,
+        "facultyDemand": 70,
+        "efficiency": 30
+      }
+    }
+  },
+  {
+    "name": "Graston/IASTM",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "Instrument-Assisted Soft Tissue Mobilization. Systematic reviews: weak evidence, inconsistent protocols. Similar to standard manual therapy when dose-matched.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 16,
+        "efficiency": 68,
+        "caseloadApplicability": 65,
+        "reimbursement": 52,
+        "marketDemand": 58,
+        "patientSatisfaction": 18
+      },
+      "business": {
+        "cashPayViability": 65,
+        "pricingLeverage": 45,
+        "marketDifferentiation": 30,
+        "ownerLeverage": 55,
+        "marketDemand": 55,
+        "efficiency": 70
+      },
+      "academicClinical": {
+        "facultyRecognition": 20,
+        "scholarship": 30,
+        "teachingValue": 35,
+        "evidenceDepth": 30,
+        "facultyDemand": 15,
+        "efficiency": 65
+      }
+    }
+  },
+  {
+    "name": "Emergency Medical Response",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "Sports venue first responder role. No rehabilitation outcome data. Safety and preparedness value for sideline coverage. Primarily a liability/access credential.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 8,
+        "efficiency": 88,
+        "caseloadApplicability": 22,
+        "reimbursement": 38,
+        "marketDemand": 45,
+        "patientSatisfaction": 5
+      },
+      "business": {
+        "cashPayViability": 10,
+        "pricingLeverage": 10,
+        "marketDifferentiation": 10,
+        "ownerLeverage": 15,
+        "marketDemand": 10,
+        "efficiency": 75
+      },
+      "academicClinical": {
+        "facultyRecognition": 15,
+        "scholarship": 10,
+        "teachingValue": 25,
+        "evidenceDepth": 30,
+        "facultyDemand": 20,
+        "efficiency": 70
+      }
+    }
+  },
+  {
+    "name": "Oncology Clinical Specialist",
+    "type": "Board Cert",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "ABPTS OncPT board certification. Growing field with emerging evidence. No comparative outcome studies yet between certified and non-certified oncology PT.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 12,
+        "efficiency": 32,
+        "caseloadApplicability": 40,
+        "reimbursement": 52,
+        "marketDemand": 38,
+        "patientSatisfaction": 14
+      },
+      "business": {
+        "cashPayViability": 30,
+        "pricingLeverage": 40,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 25,
+        "marketDemand": 30,
+        "efficiency": 20
+      },
+      "academicClinical": {
+        "facultyRecognition": 92,
+        "scholarship": 75,
+        "teachingValue": 75,
+        "evidenceDepth": 75,
+        "facultyDemand": 60,
+        "efficiency": 30
+      }
+    }
+  },
+  {
+    "name": "Board Certified Specialist Child Language",
+    "type": "Board Cert",
+    "discipline": "SLP",
+    "disciplines": [
+      "SLP"
+    ],
+    "evidence": "BCS-CL from ASHA. No comparative outcome studies vs non-certified SLP for child language disorders.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 10,
+        "efficiency": 28,
+        "caseloadApplicability": 55,
+        "reimbursement": 52,
+        "marketDemand": 38,
+        "patientSatisfaction": 12
+      },
+      "business": {
+        "cashPayViability": 55,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 50,
+        "marketDemand": 40,
+        "efficiency": 25
+      },
+      "academicClinical": {
+        "facultyRecognition": 88,
+        "scholarship": 70,
+        "teachingValue": 80,
+        "evidenceDepth": 75,
+        "facultyDemand": 55,
+        "efficiency": 30
+      }
+    }
+  },
+  {
+    "name": "Board Certified Specialist Fluency",
+    "type": "Board Cert",
+    "discipline": "SLP",
+    "disciplines": [
+      "SLP"
+    ],
+    "evidence": "BCS-F from ASHA. Stuttering specialty. No comparative outcome studies vs non-certified SLP for fluency disorders.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 10,
+        "efficiency": 28,
+        "caseloadApplicability": 35,
+        "reimbursement": 52,
+        "marketDemand": 35,
+        "patientSatisfaction": 12
+      },
+      "business": {
+        "cashPayViability": 80,
+        "pricingLeverage": 75,
+        "marketDifferentiation": 85,
+        "ownerLeverage": 45,
+        "marketDemand": 60,
+        "efficiency": 25
+      },
+      "academicClinical": {
+        "facultyRecognition": 88,
+        "scholarship": 70,
+        "teachingValue": 75,
+        "evidenceDepth": 70,
+        "facultyDemand": 65,
+        "efficiency": 30
+      }
+    }
+  },
+  {
+    "name": "BC-ANCDS Neurologic Communication",
+    "type": "Board Cert",
+    "discipline": "SLP",
+    "disciplines": [
+      "SLP"
+    ],
+    "evidence": "Academy of Neurologic Communication Disorders certification. No comparative outcome studies for aphasia/dysarthria management vs non-certified SLP.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 10,
+        "efficiency": 28,
+        "caseloadApplicability": 55,
+        "reimbursement": 52,
+        "marketDemand": 35,
+        "patientSatisfaction": 12
+      },
+      "business": {
+        "cashPayViability": 35,
+        "pricingLeverage": 50,
+        "marketDifferentiation": 75,
+        "ownerLeverage": 35,
+        "marketDemand": 30,
+        "efficiency": 25
+      },
+      "academicClinical": {
+        "facultyRecognition": 85,
+        "scholarship": 80,
+        "teachingValue": 80,
+        "evidenceDepth": 80,
+        "facultyDemand": 55,
+        "efficiency": 30
+      }
+    }
+  },
+  {
+    "name": "Clinical Electrophysiology Specialist",
+    "type": "Board Cert",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "ABPTS ECS board certification. Narrow scope (EMG, NCS, E-stim). No outcome studies. Very small number of active certifications.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 10,
+        "efficiency": 32,
+        "caseloadApplicability": 18,
+        "reimbursement": 42,
+        "marketDemand": 15,
+        "patientSatisfaction": 10
+      },
+      "business": {
+        "cashPayViability": 15,
+        "pricingLeverage": 35,
+        "marketDifferentiation": 80,
+        "ownerLeverage": 20,
+        "marketDemand": 15,
+        "efficiency": 15
+      },
+      "academicClinical": {
+        "facultyRecognition": 85,
+        "scholarship": 60,
+        "teachingValue": 65,
+        "evidenceDepth": 60,
+        "facultyDemand": 35,
+        "efficiency": 25
+      }
+    }
+  },
+  {
+    "name": "Board Certification Intraoperative Monitoring",
+    "type": "Board Cert",
+    "discipline": "Audiology",
+    "disciplines": [
+      "Audiology"
+    ],
+    "evidence": "BCS-IOM. Intraoperative neurophysiological monitoring specialty. Audiology-adjacent; no comparative outcome studies in rehabilitation context.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 8,
+        "efficiency": 28,
+        "caseloadApplicability": 8,
+        "reimbursement": 52,
+        "marketDemand": 28,
+        "patientSatisfaction": 10
+      },
+      "business": {
+        "cashPayViability": 10,
+        "pricingLeverage": 60,
+        "marketDifferentiation": 85,
+        "ownerLeverage": 50,
+        "marketDemand": 15,
+        "efficiency": 20
+      },
+      "academicClinical": {
+        "facultyRecognition": 60,
+        "scholarship": 55,
+        "teachingValue": 55,
+        "evidenceDepth": 65,
+        "facultyDemand": 30,
+        "efficiency": 25
+      }
+    }
+  },
+  {
+    "name": "Cochlear Implant Specialty",
+    "type": "Certification",
+    "discipline": "Audiology",
+    "disciplines": [
+      "Audiology"
+    ],
+    "evidence": "CISC certification. Cochlear implant programming and auditory rehabilitation. Device-specific expertise; limited comparative outcome studies.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 10,
+        "efficiency": 45,
+        "caseloadApplicability": 20,
+        "reimbursement": 60,
+        "marketDemand": 45,
+        "patientSatisfaction": 12
+      },
+      "business": {
+        "cashPayViability": 25,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 40,
+        "marketDemand": 35,
+        "efficiency": 40
+      },
+      "academicClinical": {
+        "facultyRecognition": 70,
+        "scholarship": 65,
+        "teachingValue": 75,
+        "evidenceDepth": 80,
+        "facultyDemand": 50,
+        "efficiency": 45
+      }
+    }
+  },
+  {
+    "name": "CBIT for Tics",
+    "type": "Certification",
+    "discipline": "OT",
+    "disciplines": [
+      "OT"
+    ],
+    "evidence": "Comprehensive Behavioral Intervention for Tics. RCT evidence supports CBIT for Tourette syndrome. Very specialized population; OT role emerging.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 12,
+        "efficiency": 60,
+        "caseloadApplicability": 20,
+        "reimbursement": 42,
+        "marketDemand": 28,
+        "patientSatisfaction": 14
+      },
+      "business": {
+        "cashPayViability": 80,
+        "pricingLeverage": 70,
+        "marketDifferentiation": 85,
+        "ownerLeverage": 55,
+        "marketDemand": 55,
+        "efficiency": 70
+      },
+      "academicClinical": {
+        "facultyRecognition": 50,
+        "scholarship": 60,
+        "teachingValue": 55,
+        "evidenceDepth": 80,
+        "facultyDemand": 25,
+        "efficiency": 65
+      }
+    }
+  },
+  {
+    "name": "Schroth Therapist",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "Scoliosis-specific exercise. Cochrane under review. Several RCTs show Cobb angle improvement. Barcelona Scoliosis Physical Therapy School certification.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 12,
+        "efficiency": 42,
+        "caseloadApplicability": 25,
+        "reimbursement": 52,
+        "marketDemand": 38,
+        "patientSatisfaction": 14
+      },
+      "business": {
+        "cashPayViability": 70,
+        "pricingLeverage": 65,
+        "marketDifferentiation": 75,
+        "ownerLeverage": 55,
+        "marketDemand": 50,
+        "efficiency": 35
+      },
+      "academicClinical": {
+        "facultyRecognition": 40,
+        "scholarship": 50,
+        "teachingValue": 55,
+        "evidenceDepth": 60,
+        "facultyDemand": 25,
+        "efficiency": 30
+      }
+    }
+  },
+  {
+    "name": "Craniomandibular/TMJ Certification",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "TMD specialty training. PT outcomes for TMD documented in systematic reviews. Certification-specific outcomes not studied.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 12,
+        "efficiency": 52,
+        "caseloadApplicability": 32,
+        "reimbursement": 52,
+        "marketDemand": 38,
+        "patientSatisfaction": 14
+      },
+      "business": {
+        "cashPayViability": 75,
+        "pricingLeverage": 65,
+        "marketDifferentiation": 70,
+        "ownerLeverage": 50,
+        "marketDemand": 55,
+        "efficiency": 50
+      },
+      "academicClinical": {
+        "facultyRecognition": 30,
+        "scholarship": 35,
+        "teachingValue": 45,
+        "evidenceDepth": 40,
+        "facultyDemand": 20,
+        "efficiency": 50
+      }
+    }
+  },
+  {
+    "name": "Advanced Vestibular PT",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "University of Pittsburgh advanced vestibular program. Builds on basic vestibular training. No comparative outcome data beyond standard vestibular certification.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 15,
+        "efficiency": 45,
+        "caseloadApplicability": 65,
+        "reimbursement": 52,
+        "marketDemand": 48,
+        "patientSatisfaction": 16
+      },
+      "business": {
+        "cashPayViability": 55,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 65,
+        "ownerLeverage": 60,
+        "marketDemand": 45,
+        "efficiency": 45
+      },
+      "academicClinical": {
+        "facultyRecognition": 60,
+        "scholarship": 65,
+        "teachingValue": 75,
+        "evidenceDepth": 75,
+        "facultyDemand": 50,
+        "efficiency": 45
+      }
+    }
+  },
+  {
+    "name": "Vestibular AIB Certifications",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "AIB-VAM/VRII/VR/VRC certification series. Vestibular specialty training pathway. No comparative outcome studies.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 12,
+        "efficiency": 48,
+        "caseloadApplicability": 65,
+        "reimbursement": 52,
+        "marketDemand": 52,
+        "patientSatisfaction": 14
+      },
+      "business": {
+        "cashPayViability": 50,
+        "pricingLeverage": 50,
+        "marketDifferentiation": 55,
+        "ownerLeverage": 55,
+        "marketDemand": 40,
+        "efficiency": 55
+      },
+      "academicClinical": {
+        "facultyRecognition": 40,
+        "scholarship": 45,
+        "teachingValue": 60,
+        "evidenceDepth": 55,
+        "facultyDemand": 30,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "Vestibular VCC Certification",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "IAMT vestibular certification. Vestibular specialty credential. No comparative outcome studies.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 12,
+        "efficiency": 48,
+        "caseloadApplicability": 62,
+        "reimbursement": 52,
+        "marketDemand": 40,
+        "patientSatisfaction": 14
+      },
+      "business": {
+        "cashPayViability": 50,
+        "pricingLeverage": 55,
+        "marketDifferentiation": 60,
+        "ownerLeverage": 55,
+        "marketDemand": 40,
+        "efficiency": 45
+      },
+      "academicClinical": {
+        "facultyRecognition": 55,
+        "scholarship": 60,
+        "teachingValue": 70,
+        "evidenceDepth": 70,
+        "facultyDemand": 40,
+        "efficiency": 40
+      }
+    }
+  },
+  {
+    "name": "Occupro Certification",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "Work health and ergonomics platform certification. No clinical outcome data published.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 8,
+        "efficiency": 75,
+        "caseloadApplicability": 35,
+        "reimbursement": 52,
+        "marketDemand": 12,
+        "patientSatisfaction": 10
+      },
+      "business": {
+        "cashPayViability": 25,
+        "pricingLeverage": 35,
+        "marketDifferentiation": 40,
+        "ownerLeverage": 65,
+        "marketDemand": 30,
+        "efficiency": 60
+      },
+      "academicClinical": {
+        "facultyRecognition": 20,
+        "scholarship": 20,
+        "teachingValue": 30,
+        "evidenceDepth": 35,
+        "facultyDemand": 15,
+        "efficiency": 55
+      }
+    }
+  },
+  {
+    "name": "The Back School",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "Online back pain education and movement certification. No comparative outcome studies vs standard LBP education.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 12,
+        "efficiency": 80,
+        "caseloadApplicability": 72,
+        "reimbursement": 52,
+        "marketDemand": 25,
+        "patientSatisfaction": 12
+      },
+      "business": {
+        "cashPayViability": 25,
+        "pricingLeverage": 25,
+        "marketDifferentiation": 25,
+        "ownerLeverage": 55,
+        "marketDemand": 20,
+        "efficiency": 65
+      },
+      "academicClinical": {
+        "facultyRecognition": 15,
+        "scholarship": 20,
+        "teachingValue": 30,
+        "evidenceDepth": 25,
+        "facultyDemand": 10,
+        "efficiency": 60
+      }
+    }
+  },
+  {
+    "name": "Kinesio Taping (CKTP)",
+    "type": "Certification",
+    "discipline": "PT/OT/AT",
+    "disciplines": [
+      "PT",
+      "OT",
+      "AT"
+    ],
+    "evidence": "Multiple systematic reviews find insufficient evidence over sham taping. CKTP certification widely held. Pain reduction small and short-term.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 20,
+        "efficiency": 82,
+        "caseloadApplicability": 70,
+        "reimbursement": 52,
+        "marketDemand": 60,
+        "patientSatisfaction": 22
+      },
+      "business": {
+        "cashPayViability": 45,
+        "pricingLeverage": 25,
+        "marketDifferentiation": 20,
+        "ownerLeverage": 70,
+        "marketDemand": 55,
+        "efficiency": 80
+      },
+      "academicClinical": {
+        "facultyRecognition": 15,
+        "scholarship": 25,
+        "teachingValue": 30,
+        "evidenceDepth": 25,
+        "facultyDemand": 10,
+        "efficiency": 75
+      }
+    }
+  },
+  {
+    "name": "ASHA Board Certified Specialists",
+    "type": "Board Cert",
+    "discipline": "SLP",
+    "disciplines": [
+      "SLP"
+    ],
+    "evidence": "ASHA BCS portfolio of specialty certifications. Limited research across all SLP specialties on certification-specific outcomes.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 8,
+        "efficiency": 30,
+        "caseloadApplicability": 45,
+        "reimbursement": 52,
+        "marketDemand": 28,
+        "patientSatisfaction": 10
+      },
+      "business": {
+        "cashPayViability": 65,
+        "pricingLeverage": 70,
+        "marketDifferentiation": 80,
+        "ownerLeverage": 60,
+        "marketDemand": 50,
+        "efficiency": 30
+      },
+      "academicClinical": {
+        "facultyRecognition": 85,
+        "scholarship": 80,
+        "teachingValue": 85,
+        "evidenceDepth": 75,
+        "facultyDemand": 75,
+        "efficiency": 35
+      }
+    }
+  },
+  {
+    "name": "Research Doctorates (PhD/ScD)",
+    "type": "Degree",
+    "discipline": "All",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "AT",
+      "EP",
+      "RT",
+      "RN",
+      "MT",
+      "Audiology",
+      "Researcher"
+    ],
+    "evidence": "The research doctorate (PhD/ScD) is the dominant credential for rehabilitation-science PIs, with NIH K12 and K-award data showing PhD holders achieve subsequent R01 funding at rates above 35-40% and producing the majority of NIH-funded rehab investigators. Programs at Pitt, USC, Northwestern, BU run 4-6 years with rigorous biostatistics, study design, and grant-writing training. Cost and time are high (efficiency low), but pathway to PI status and publication output are the strongest of any rehab credential.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 5,
+        "efficiency": 10,
+        "caseloadApplicability": 5,
+        "reimbursement": 32,
+        "marketDemand": 38,
+        "patientSatisfaction": 6
+      },
+      "business": {
+        "cashPayViability": 30,
+        "pricingLeverage": 50,
+        "marketDifferentiation": 60,
+        "ownerLeverage": 50,
+        "marketDemand": 30,
+        "efficiency": 10
+      },
+      "academicClinical": {
+        "facultyRecognition": 98,
+        "scholarship": 98,
+        "teachingValue": 90,
+        "evidenceDepth": 95,
+        "facultyDemand": 95,
+        "efficiency": 15
+      },
+      "research": {
+        "methodologyDepth": 95,
+        "publicationTrack": 90,
+        "grantReadiness": 92,
+        "pathwayToIndependence": 95,
+        "interdisciplinaryFit": 85,
+        "efficiency": 12
+      }
+    }
+  },
+  {
+    "name": "Postdoctoral Research Fellowship (T32/F32)",
+    "type": "Fellowship",
+    "discipline": "PT/OT/SLP/Researcher",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "Researcher"
+    ],
+    "evidence": "T32/F32 postdoctoral fellowships are the dominant NIH-funded pathway to independent rehabilitation research careers. NIH outcome data and peer-reviewed analyses show F32/T32 alumni achieve K-award rates of roughly 40-55% and subsequent R01 conversion rates 2-3x higher than non-fellowship postdocs, with median time-to-faculty of 3-4 years post-PhD. For DPT-PhDs and rehab scientists specifically, T32 training is the single strongest predictor of subsequent independent NIH funding (Field-Fote & Boninger, 2018).",
+    "pathScores": {
+      "research": {
+        "methodologyDepth": 88,
+        "publicationTrack": 85,
+        "grantReadiness": 92,
+        "pathwayToIndependence": 95,
+        "interdisciplinaryFit": 85,
+        "efficiency": 18
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "NIH K Award (K01/K12/K23)",
+    "type": "Fellowship",
+    "discipline": "PT/OT/SLP/Researcher",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "Researcher"
+    ],
+    "evidence": "NIH Mentored Career Development (K) awards are the gold-standard bridge from postdoc to independent investigator: NIH career-outcome analyses show K23 recipients convert to R01 funding at roughly 30-40% within 10 years (vs. ~15-20% for non-K-funded peers), and K awardees publish at 2-3x the rate of comparable early-career faculty. For rehab scientists (PT/OT/SLP), K awards are the dominant pathway to R-level independence, with multi-year protected research time (≥75% effort), structured mentorship, and explicit didactic methods training. Time investment is substantial (3-5 years post-PhD) and award rates are competitive (~25-30%), making this a high-impact, low-efficiency credential.",
+    "pathScores": {
+      "research": {
+        "methodologyDepth": 88,
+        "publicationTrack": 90,
+        "grantReadiness": 95,
+        "pathwayToIndependence": 95,
+        "interdisciplinaryFit": 85,
+        "efficiency": 15
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "MS in Biostatistics",
+    "type": "Degree",
+    "discipline": "PT/OT/SLP/Researcher",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "Researcher"
+    ],
+    "evidence": "An MS in Biostatistics provides 1.5-2 years of rigorous quantitative training (regression, survival analysis, clinical trials, causal inference) and is the standard credential for academic statisticians per BLS. For rehab clinician-scientists, it functions as a methods bridge: Rubio et al. (2011) and Meyers et al. (2012) show K-scholars and clinical-research MS graduates with formal biostats training have measurably higher R-series conversion and publication rates. It does not by itself confer PI status — a clinical doctorate or PhD typically remains required — but it substantially strengthens grant readiness and interdisciplinary placement.",
+    "pathScores": {
+      "research": {
+        "methodologyDepth": 88,
+        "publicationTrack": 70,
+        "grantReadiness": 78,
+        "pathwayToIndependence": 55,
+        "interdisciplinaryFit": 90,
+        "efficiency": 35
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "MS in Clinical Research / Translational Science",
+    "type": "Degree",
+    "discipline": "PT/OT/SLP/Researcher",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "AT",
+      "Researcher"
+    ],
+    "evidence": "CTSA-affiliated MS in Clinical Research / Translational Science programs show K-award conversion rates of roughly 30-40% and federal grant application rates above 60% among graduates (Rubio 2011; Meagher 2021). Graduates demonstrate increased publication productivity and accelerated time-to-first-grant compared to clinically-trained-only peers, and the NIH explicitly identifies CRTPs as a core pipeline intervention. Cost is moderate (typically 2 years, often tuition-subsidized via CTSA KL2/TL1 mechanisms), making it markedly more efficient than a PhD while delivering most methodological core skills.",
+    "pathScores": {
+      "research": {
+        "methodologyDepth": 78,
+        "publicationTrack": 65,
+        "grantReadiness": 80,
+        "pathwayToIndependence": 68,
+        "interdisciplinaryFit": 82,
+        "efficiency": 45
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "ACRP Certified Clinical Research Coordinator (CCRC)",
+    "type": "Certification",
+    "discipline": "Researcher/RN/PT/OT",
+    "disciplines": [
+      "Researcher",
+      "RN",
+      "PT",
+      "OT"
+    ],
+    "evidence": "CCRC is the standard operational credential for clinical trial coordinators, requiring ~3,000 hours of CRC experience plus exam. Evidence (Sonstein & Jones 2018; Stroo 2020) shows it standardizes GCP/regulatory competency and is increasingly required for AMC coordinator hiring, with ~5-10% salary premium (Freel 2017). However, career trajectories lead to senior coordinator/CRA/project manager roles — not PI status — without an additional doctoral degree (Behar-Horenstein 2018).",
+    "pathScores": {
+      "research": {
+        "methodologyDepth": 30,
+        "publicationTrack": 20,
+        "grantReadiness": 15,
+        "pathwayToIndependence": 15,
+        "interdisciplinaryFit": 60,
+        "efficiency": 70
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "SOCRA Certified Clinical Research Professional (CCRP)",
+    "type": "Certification",
+    "discipline": "PT/OT/SLP/RN/Researcher",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "RN",
+      "Researcher"
+    ],
+    "evidence": "SOCRA CCRP is a globally recognized clinical research workforce credential held by ~25,000+ professionals; it is frequently listed as preferred/required for clinical research coordinator (CRC) and research associate roles at AMCs and industry sponsors, with BLS/industry surveys showing CRC salaries ~$60-85K and meaningful wage premiums (~5-15%) for certified vs non-certified coordinators. It is a coordinator-level credential — not a PI pathway — with no direct linkage to K/R-series independent funding and minimal methodology depth (GCP, ICH, regulatory focus rather than study design or biostatistics). Holders work primarily in trial operations rather than as first/last-author investigators.",
+    "pathScores": {
+      "research": {
+        "methodologyDepth": 25,
+        "publicationTrack": 20,
+        "grantReadiness": 15,
+        "pathwayToIndependence": 10,
+        "interdisciplinaryFit": 60,
+        "efficiency": 80
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "Cochrane / JBI Systematic Review Training",
+    "type": "Training",
+    "discipline": "PT/OT/SLP/AT/EP/RT/RN/MT/Audiology/Researcher",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "AT",
+      "EP",
+      "RT",
+      "RN",
+      "MT",
+      "Audiology",
+      "Researcher"
+    ],
+    "evidence": "Cochrane/JBI training is a low-cost, high-leverage credential for evidence-synthesis careers: Cochrane reviews are cited 2-3x more than non-Cochrane reviews (Bunn 2015) and AMSTAR-quality scores are significantly higher among Cochrane-trained teams (Useem 2015). However, the training is narrow (synthesis methods only, not primary biostatistics or trial design), and rehab-clinician studies (Maher 2008; Scurlock-Evans 2014) show it accelerates publication output and PhD entry but does not on its own confer PI independence or major NIH funding.",
+    "pathScores": {
+      "research": {
+        "methodologyDepth": 55,
+        "publicationTrack": 72,
+        "grantReadiness": 40,
+        "pathwayToIndependence": 28,
+        "interdisciplinaryFit": 75,
+        "efficiency": 82
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "Epic Certification (Build & Configuration)",
+    "type": "Certification",
+    "discipline": "Informatics/IT",
+    "disciplines": [
+      "Informatics",
+      "IT",
+      "PT",
+      "OT",
+      "SLP",
+      "RN"
+    ],
+    "evidence": "Epic-certified analysts/builders command $85K-$135K base salaries (HIMSS 2024 compensation survey), with senior application analysts and Epic consultants commonly exceeding $150K — a 30-60% premium over staff PT/OT compensation (BLS OES 2024 median PT $99K, OT $96K). Demand is durable: Epic holds roughly 36% of U.S. acute-care EHR market share and 54% of large-hospital deployments (KLAS 2024), and Epic certifications appear in tens of thousands of postings annually on Indeed/LinkedIn. The credential's main constraint is access — Epic training is gated to employees of Epic-using organizations or Epic itself, making the initial \"informatics analyst\" hire the true bottleneck rather than the cert.",
+    "pathScores": {
+      "healthTech": {
+        "industryPlacement": 88,
+        "vendorDemand": 95,
+        "salaryPremium": 78,
+        "technicalSkillDepth": 72,
+        "transitionFit": 80,
+        "efficiency": 30
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "Cerner / Oracle Health Certification",
+    "type": "Certification",
+    "discipline": "Informatics/IT",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "RN",
+      "Informatics",
+      "IT",
+      "HIM"
+    ],
+    "evidence": "Cerner/Oracle Health certified analysts typically earn $75K-$110K, with senior consultants reaching $120K-$140K — a meaningful premium over bedside PT/OT median (~$95K) but generally below Epic-certified peers due to smaller install base (~25% US hospital market vs Epic ~40%+). Most certifications are gated: candidates must be sponsored by a Cerner/Oracle Health client organization or join Oracle Health consulting, limiting open-market accessibility. Demand persists but is concentrating in DoD/VA (Oracle Health's federal EHR contract) and community/critical-access hospitals.",
+    "pathScores": {
+      "healthTech": {
+        "industryPlacement": 70,
+        "vendorDemand": 55,
+        "salaryPremium": 60,
+        "technicalSkillDepth": 70,
+        "transitionFit": 72,
+        "efficiency": 30
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "AMIA Clinical Informatics Board Certification",
+    "type": "Board Cert",
+    "discipline": "PT/OT/SLP/Informatics",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "Informatics",
+      "HIM"
+    ],
+    "evidence": "For PTs/OTs the practical pathway is AHIC (not the ABMS physician-only board cert), which is increasingly required for senior informatics analyst, clinical product manager, and EHR vendor consultant roles paying $110-160K — a 25-40% premium over bedside (HIMSS 2023). Holders cluster in CMIO-office, vendor (Epic, Oracle Health), and payer informatics teams, with BLS projecting 28% growth in health informatics management through 2032. The credential is strong on signaling but moderate on hands-on technical depth (SQL, build, data science still required).",
+    "pathScores": {
+      "healthTech": {
+        "industryPlacement": 80,
+        "vendorDemand": 78,
+        "salaryPremium": 75,
+        "technicalSkillDepth": 55,
+        "transitionFit": 82,
+        "efficiency": 45
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "AHIMA RHIA (Registered Health Information Administrator)",
+    "type": "Certification",
+    "discipline": "HIM/Informatics",
+    "disciplines": [
+      "HIM",
+      "Informatics",
+      "IT"
+    ],
+    "evidence": "RHIA holders cluster in HIM director, data integrity, and revenue-cycle informatics roles with AHIMA-reported median salaries of $75K-$95K and director-level pay exceeding $110K, generally above bedside PT/OT base. However, the credential requires a CAHIIM-accredited bachelor's in HIM, so transition fit for rehab clinicians is poor without a second degree. Vendor demand exists primarily at payers, hospital HIM departments, and CDI/coding vendors rather than Epic/Oracle build teams, which prefer clinical-background analysts.",
+    "pathScores": {
+      "healthTech": {
+        "industryPlacement": 70,
+        "vendorDemand": 55,
+        "salaryPremium": 40,
+        "technicalSkillDepth": 55,
+        "transitionFit": 20,
+        "efficiency": 15
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "AHIMA RHIT (Registered Health Information Technician)",
+    "type": "Certification",
+    "discipline": "HIM/Informatics",
+    "disciplines": [
+      "HIM",
+      "Informatics",
+      "IT"
+    ],
+    "evidence": "RHIT is an associate-degree-level HIM credential geared toward coding, registry, and documentation roles; BLS reports median pay for medical records specialists around $48,780 (2023), well below PT/OT clinical wages. Holders typically land in hospital HIM departments or payer coding roles rather than EHR vendor or digital-health product roles, so industry placement for clinicians pivoting to tech is limited. It is rarely listed as a preferred credential at Epic, Oracle Health, or digital-health startups, where RHIA, CPHIMS, or clinical informatics experience dominate.",
+    "pathScores": {
+      "healthTech": {
+        "industryPlacement": 35,
+        "vendorDemand": 25,
+        "salaryPremium": 15,
+        "technicalSkillDepth": 35,
+        "transitionFit": 30,
+        "efficiency": 45
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "AHIMA CHDA (Certified Health Data Analyst)",
+    "type": "Certification",
+    "discipline": "HIM/Informatics",
+    "disciplines": [
+      "HIM",
+      "Informatics",
+      "QA"
+    ],
+    "evidence": "CHDA holders work predominantly in healthcare data analyst roles with BLS reporting median wages around $104,830 for medical and health services managers and $87,000+ for health data analysts (2024). AHIMA's 2023 workforce survey indicates CHDA-credentialed analysts earn a 10-18% premium over RHIA-only peers, with placement concentrated at payers, hospital systems, and HIM vendors. However, the prerequisite stack (RHIA/RHIT + bachelor's) creates a high barrier for clinicians without HIM background, limiting direct PT/OT transition utility.",
+    "pathScores": {
+      "healthTech": {
+        "industryPlacement": 60,
+        "vendorDemand": 45,
+        "salaryPremium": 55,
+        "technicalSkillDepth": 55,
+        "transitionFit": 30,
+        "efficiency": 35
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "HIMSS CPHIMS (Certified Professional in Healthcare Information & Management Systems)",
+    "type": "Certification",
+    "discipline": "Informatics/IT/HIM",
+    "disciplines": [
+      "Informatics",
+      "IT",
+      "HIM",
+      "PM"
+    ],
+    "evidence": "CPHIMS holders report a median compensation of approximately $115,000-$130,000 per HIMSS compensation surveys, roughly 15-25% above non-certified peers in equivalent health IT roles. The credential appears in roughly 5-10% of senior health IT consultant, implementation manager, and clinical systems analyst postings, with stronger recognition at HIMSS-member integrators (Deloitte, Huron, Chartis) than at Epic/Oracle Health (which prefer their own build certs). Eligibility requires a bachelor's plus 5 years health IT experience (or graduate degree plus 3), which gates clinicians without prior IT exposure.",
+    "pathScores": {
+      "healthTech": {
+        "industryPlacement": 62,
+        "vendorDemand": 55,
+        "salaryPremium": 60,
+        "technicalSkillDepth": 50,
+        "transitionFit": 45,
+        "efficiency": 55
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "HL7 FHIR Proficiency",
+    "type": "Certification",
+    "discipline": "Informatics/IT/HIM",
+    "disciplines": [
+      "PT",
+      "OT",
+      "Informatics",
+      "IT",
+      "HIM"
+    ],
+    "evidence": "HL7 FHIR Proficiency is a low-cost (~$200) self-study credential aligned with ONC Cures Act mandates requiring FHIR R4 APIs in all certified EHRs, driving demand at Epic, Oracle Health, and payers. HIMSS 2023 workforce data lists interoperability among the fastest-growing informatics niches, with FHIR-skilled integration analysts earning $85k-$130k versus typical staff PT salaries of $75k-$95k. The credential alone rarely closes a hire — clinicians typically pair it with SQL/API project work to land roles.",
+    "pathScores": {
+      "healthTech": {
+        "industryPlacement": 55,
+        "vendorDemand": 78,
+        "salaryPremium": 60,
+        "technicalSkillDepth": 55,
+        "transitionFit": 65,
+        "efficiency": 88
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "Lean Six Sigma in Healthcare (Green/Black Belt)",
+    "type": "Certification",
+    "discipline": "PT/OT/QA/Operations",
+    "disciplines": [
+      "PT",
+      "OT",
+      "QA",
+      "Informatics",
+      "PM"
+    ],
+    "evidence": "Lean Six Sigma (LSS) Green Belt and Black Belt holders in healthcare command roles such as performance improvement consultant, clinical operations manager, and payer operations lead, with BLS medical/health services manager median wages of $110,680 (2024) and LSS-tagged postings showing a 10-20% premium over non-certified peers. Hospital ops and payer postings on Indeed/LinkedIn list LSS as preferred or required in roughly a third of clinical operations and quality leadership roles, providing PTs/OTs a recognized bridge from bedside to process improvement, though the credential itself is generalist rather than clinical-tech specific.",
+    "pathScores": {
+      "healthTech": {
+        "industryPlacement": 60,
+        "vendorDemand": 55,
+        "salaryPremium": 55,
+        "technicalSkillDepth": 45,
+        "transitionFit": 65,
+        "efficiency": 70
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "NAHQ CPHQ (Certified Professional in Healthcare Quality)",
+    "type": "Certification",
+    "discipline": "QA/Informatics/PT/OT",
+    "disciplines": [
+      "QA",
+      "Informatics",
+      "PT",
+      "OT",
+      "RN",
+      "HIM"
+    ],
+    "evidence": "NAHQ's 2024 Healthcare Quality Workforce Report documents CPHQ holders earning a median of $97,000-$115,000, roughly 15-25% above non-certified peers in equivalent quality/safety roles, with 87% of healthcare quality leaders endorsing CPHQ as the field's standard credential. Hospital/health-system quality and patient-safety departments are the dominant employers, with smaller but growing demand from payers (HEDIS/Stars), ACOs, and accreditation/consulting firms (Joint Commission, Press Ganey, Vizient); EHR-vendor and pure digital-health postings rarely list CPHQ as preferred. Exam cost is ~$499 (member) with no formal prerequisite, making it efficient relative to PMP or informatics master's pathways, though clinicians without prior PI exposure typically need 3-6 months of self-study.",
+    "pathScores": {
+      "healthTech": {
+        "industryPlacement": 45,
+        "vendorDemand": 38,
+        "salaryPremium": 50,
+        "technicalSkillDepth": 55,
+        "transitionFit": 62,
+        "efficiency": 78
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "PMP (Project Management Professional)",
+    "type": "Certification",
+    "discipline": "PT/OT/SLP/Informatics",
+    "disciplines": [
+      "PT",
+      "OT",
+      "SLP",
+      "Informatics",
+      "IT",
+      "PM"
+    ],
+    "evidence": "PMP holders earn a median 33% salary premium globally and 16% in the US versus non-certified peers per PMI's Earning Power Survey (2023), with US median salaries around $123,000. In healthcare IT and digital health, PMP is named in 25-40% of senior PM and consulting job postings (HIMSS workforce data), and Epic/Oracle Health implementation consulting firms (Nordic, Impact Advisors) routinely list PMP as preferred. For clinicians, PMP signals process discipline but does not by itself open clinical-domain doors — it is a force multiplier paired with clinical credentials.",
+    "pathScores": {
+      "healthTech": {
+        "industryPlacement": 70,
+        "vendorDemand": 72,
+        "salaryPremium": 75,
+        "technicalSkillDepth": 45,
+        "transitionFit": 65,
+        "efficiency": 55
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "ISO 13485 / Medical Device QMS Training",
+    "type": "Certification",
+    "discipline": "QA/Informatics",
+    "disciplines": [
+      "QA",
+      "PT",
+      "OT",
+      "Informatics"
+    ],
+    "evidence": "ISO 13485 Lead Auditor and Internal Auditor certificates (BSI, SGS, ASQ, Exemplar Global) are commonly listed as required/preferred in MedTech QA/RA postings at Stryker, Medtronic, J&J MedTech, and Boston Scientific, where QA Engineer I/II salaries range $75K–$110K and Senior QA/RA Specialist roles reach $110K–$150K per BLS OES data for QA roles in medical-device manufacturing (NAICS 3391). Short courses run $1,500–$3,000 and 2–5 days, but PTs/OTs rarely list 13485 alone; it is most effective when paired with prior MedTech exposure (clinical specialist, field rep) since the standard is process/audit-focused rather than clinical.",
+    "pathScores": {
+      "healthTech": {
+        "industryPlacement": 55,
+        "vendorDemand": 60,
+        "salaryPremium": 50,
+        "technicalSkillDepth": 55,
+        "transitionFit": 35,
+        "efficiency": 80
+      }
+    },
+    "legacyRoiSignals": null
+  },
+  {
+    "name": "Lower Limb Amputee Rehabilitation (Physiopedia/ICRC Certificate)",
+    "type": "Training",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "No US board certification exists for amputee rehabilitation — the most established openly available credential is the ~24-contact-hour Lower Limb Amputee Rehabilitation Programme from Physiopedia Plus in partnership with the ICRC, covering post-op/pre-prosthetic management, prosthetic gait training, and outcome measures. Underlying care evidence is moderate-strong: meta-analyses show exercise and gait training improve prosthetic gait and balance, and acute post-op rehab is associated with 1-year survival and prosthetic procurement — though only ~7% of guideline recommendations derive from RCTs/SRs. Although acute/inpatient pre-prosthetic care is the entry point, the bulk of prosthetic gait, balance, and return-to-activity training occurs across outpatient, home-health, and community settings, where PT–prosthetist collaboration is ongoing — so applicability is not confined to IRF/VA/acute.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 70,
+        "caseloadApplicability": 42,
+        "reimbursement": 40,
+        "efficiency": 75,
+        "marketDemand": 38,
+        "patientSatisfaction": 72
+      },
+      "business": {
+        "cashPayViability": 35,
+        "pricingLeverage": 30,
+        "marketDifferentiation": 55,
+        "ownerLeverage": 45,
+        "marketDemand": 32,
+        "efficiency": 70
+      },
+      "academicClinical": {
+        "facultyRecognition": 45,
+        "scholarship": 60,
+        "teachingValue": 70,
+        "evidenceDepth": 55,
+        "facultyDemand": 42,
+        "efficiency": 70
+      }
+    }
+  },
+  {
+    "name": "Aquatic Therapeutic Exercise Certification (ATRIC)",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT",
+      "AT",
+      "EP"
+    ],
+    "evidence": "Granted by the Aquatic Therapy & Rehab Institute: 15 hours of aquatic education plus a 75-question proctored exam ($255-675 all-in), open to PTs, OTs, ATs, EPs, and other rehab professionals. The underlying intervention is well evidenced — Cochrane reviews support aquatic exercise for knee/hip OA, fibromyalgia, and post-stroke ADLs; meta-analyses support benefits in Parkinson's, MS, low back pain (including a 2022 JAMA Network Open RCT), and pediatric CP. Effects are generally comparable to land-based exercise; the key practical constraint is therapy-pool access.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 62,
+        "caseloadApplicability": 35,
+        "reimbursement": 55,
+        "efficiency": 42,
+        "marketDemand": 45,
+        "patientSatisfaction": 75
+      },
+      "business": {
+        "cashPayViability": 55,
+        "pricingLeverage": 45,
+        "marketDifferentiation": 62,
+        "ownerLeverage": 28,
+        "marketDemand": 45,
+        "efficiency": 48
+      },
+      "academicClinical": {
+        "facultyRecognition": 35,
+        "scholarship": 45,
+        "teachingValue": 50,
+        "evidenceDepth": 65,
+        "facultyDemand": 30,
+        "efficiency": 60
+      }
+    }
+  },
+  {
+    "name": "ImPACT Trained Physical Therapist (ITPT)",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "$349, ~7.25 contact-hour online credential from ImPACT Applications Inc. covering concussion clinical trajectories, vestibular therapy, cervical spine rehab, vision therapy, and return-to-activity; graduates are listed in ImPACT's provider directory. Evidence is split: concussion rehabilitation itself has strong support (cervicovestibular rehab RCT, two Buffalo-protocol aerobic exercise RCTs, Amsterdam 2022 consensus), while ImPACT-the-test's psychometrics are contested in independent reliability studies. Concussion-rehabilitation evidence extends to non-athlete adults (Langevin 2022, J Neurotrauma RCT in persistent mTBI), so the credential’s clinical value is not limited to sports return-to-play despite ImPACT-the-test’s sports-baseline orientation.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 68,
+        "caseloadApplicability": 60,
+        "reimbursement": 40,
+        "efficiency": 85,
+        "marketDemand": 66,
+        "patientSatisfaction": 70
+      },
+      "business": {
+        "cashPayViability": 72,
+        "pricingLeverage": 58,
+        "marketDifferentiation": 65,
+        "ownerLeverage": 68,
+        "marketDemand": 62,
+        "efficiency": 88
+      },
+      "academicClinical": {
+        "facultyRecognition": 30,
+        "scholarship": 38,
+        "teachingValue": 50,
+        "evidenceDepth": 55,
+        "facultyDemand": 30,
+        "efficiency": 70
+      }
+    }
+  },
+  {
+    "name": "Musculoskeletal Ultrasound (RMSK)",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT",
+      "AT"
+    ],
+    "evidence": "RMSK (Registered in Musculoskeletal sonography, APCA/Inteleos) is the established credential for PTs, backed by a formal APTA-AIUM-Inteleos education pathway; eligibility requires a valid PT license plus 150 MSK ultrasound studies in 36 months and a 4-hour exam ($600). Diagnostic accuracy of MSK ultrasound rivals MRI for common pathologies, and PT-performed scanning shows moderate-to-substantial agreement with radiologists — but Medicare considers diagnostic ultrasound codes non-covered when performed by PTs, confining billing to cash-pay and select private payers.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 58,
+        "caseloadApplicability": 76,
+        "reimbursement": 20,
+        "efficiency": 42,
+        "marketDemand": 55,
+        "patientSatisfaction": 70
+      },
+      "business": {
+        "cashPayViability": 75,
+        "pricingLeverage": 68,
+        "marketDifferentiation": 85,
+        "ownerLeverage": 58,
+        "marketDemand": 52,
+        "efficiency": 42
+      },
+      "academicClinical": {
+        "facultyRecognition": 72,
+        "scholarship": 70,
+        "teachingValue": 75,
+        "evidenceDepth": 62,
+        "facultyDemand": 62,
+        "efficiency": 52
+      },
+      "research": {
+        "methodologyDepth": 75,
+        "publicationTrack": 70,
+        "grantReadiness": 52,
+        "pathwayToIndependence": 58,
+        "interdisciplinaryFit": 80,
+        "efficiency": 48
+      }
+    }
+  },
+  {
+    "name": "Postural Restoration Certified (PRC)",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT",
+      "AT"
+    ],
+    "evidence": "Postural Restoration Institute credential (est. 2004) requiring four primary courses (~75 contact hours), case-study application, and an annual in-person exam; only ~267 clinicians have ever earned it. Evidence base is thin — small RCTs show parity with conventional exercise, supported indirectly by stronger basic-science work on diaphragm postural-respiratory function.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 35,
+        "caseloadApplicability": 55,
+        "reimbursement": 52,
+        "efficiency": 45,
+        "marketDemand": 50,
+        "patientSatisfaction": 70
+      },
+      "business": {
+        "cashPayViability": 76,
+        "pricingLeverage": 72,
+        "marketDifferentiation": 82,
+        "ownerLeverage": 60,
+        "marketDemand": 55,
+        "efficiency": 45
+      },
+      "academicClinical": {
+        "facultyRecognition": 30,
+        "scholarship": 24,
+        "teachingValue": 44,
+        "evidenceDepth": 22,
+        "facultyDemand": 26,
+        "efficiency": 40
+      }
+    }
+  },
+  {
+    "name": "PWR!Moves Certified Therapist (Parkinson Wellness Recovery)",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "disciplines": [
+      "PT",
+      "OT"
+    ],
+    "evidence": "15-17.5 contact-hour workshop from Parkinson Wellness Recovery (founded 2010 by Dr. Becky Farley, co-author of the original amplitude-based training research that also underpins LSVT BIG). Trains PD-specific functional and group exercise; valid 3 years. Shares the amplitude/neuroplasticity lineage with LSVT BIG but uses a flexible, multi-stage, group- and community-oriented model. PWR!-specific trial evidence is sparse; the credible base is the broader PD-exercise literature (SPARX, Corcos, Petzinger).",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 67,
+        "caseloadApplicability": 72,
+        "reimbursement": 58,
+        "efficiency": 71,
+        "marketDemand": 71,
+        "patientSatisfaction": 78
+      },
+      "business": {
+        "cashPayViability": 76,
+        "pricingLeverage": 62,
+        "marketDifferentiation": 65,
+        "ownerLeverage": 73,
+        "marketDemand": 71,
+        "efficiency": 73
+      },
+      "academicClinical": {
+        "facultyRecognition": 57,
+        "scholarship": 54,
+        "teachingValue": 66,
+        "evidenceDepth": 60,
+        "facultyDemand": 52,
+        "efficiency": 60
+      }
+    }
+  },
+  {
+    "name": "Selective Functional Movement Assessment (SFMA)",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT",
+      "AT"
+    ],
+    "evidence": "Clinician-facing sibling of the FMS for patients WITH pain, reserved for licensed providers. Level 1 (~$799, diagnostic algorithm) and Level 2 (treatment model) with exam. Inter-rater reliability among certified raters is fair-to-moderate (ICC 0.61-0.72); predictive validity of the parent FMS framework is contested-to-negative in multiple meta-analyses, and no RCT shows SFMA-guided care outperforms standard examination.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 45,
+        "caseloadApplicability": 72,
+        "reimbursement": 32,
+        "efficiency": 58,
+        "marketDemand": 58,
+        "patientSatisfaction": 56
+      },
+      "business": {
+        "cashPayViability": 66,
+        "pricingLeverage": 48,
+        "marketDifferentiation": 52,
+        "ownerLeverage": 55,
+        "marketDemand": 56,
+        "efficiency": 64
+      },
+      "academicClinical": {
+        "facultyRecognition": 40,
+        "scholarship": 46,
+        "teachingValue": 56,
+        "evidenceDepth": 38,
+        "facultyDemand": 32,
+        "efficiency": 60
+      }
+    }
+  },
+  {
+    "name": "Acute Care POCUS — Lung & Diaphragm Ultrasound",
+    "type": "Certification",
+    "discipline": "PT/RT",
+    "disciplines": [
+      "PT",
+      "RT"
+    ],
+    "evidence": "Lung and diaphragm point-of-care ultrasound is an established, evidence-supported bedside assessment for ICU/acute-care physiotherapists and respiratory therapists, with substantial interrater reliability and demonstrated influence on respiratory-physiotherapy decisions (atelectasis vs effusion vs consolidation, airway-clearance targeting, mobilization safety, ventilator weaning readiness). The accurate credential path is a focused POCUS Certificate/Certification track (e.g., Inteleos POCUS Certification Academy Lung and Critical Care offerings) layered on POCUS Fundamentals — distinct from the outpatient RMSK pathway.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 68,
+        "caseloadApplicability": 72,
+        "reimbursement": 22,
+        "efficiency": 74,
+        "marketDemand": 55,
+        "patientSatisfaction": 48
+      },
+      "business": {
+        "cashPayViability": 14,
+        "pricingLeverage": 30,
+        "marketDifferentiation": 66,
+        "ownerLeverage": 24,
+        "marketDemand": 52,
+        "efficiency": 70
+      },
+      "academicClinical": {
+        "facultyRecognition": 60,
+        "scholarship": 72,
+        "teachingValue": 70,
+        "evidenceDepth": 74,
+        "facultyDemand": 50,
+        "efficiency": 64
+      },
+      "research": {
+        "methodologyDepth": 76,
+        "publicationTrack": 80,
+        "grantReadiness": 60,
+        "pathwayToIndependence": 58,
+        "interdisciplinaryFit": 84,
+        "efficiency": 66
+      }
+    }
+  },
+  {
+    "name": "CAPP-OB (Certificate of Advanced Practice in Physical Therapy in Obstetric Health)",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "The CAPP-OB (Certificate of Advanced Practice in Physical Therapy in Obstetric Health) is the APTA Academy of Pelvic Health Physical Therapy's advanced obstetric credential, requiring licensed PTs/PTAs to complete all levels of the Pregnancy & Postpartum track (restructured in 2025 into three webinars — Fundamental, Intrapartum, and Advanced topics, ~48 contact hours), pass each Post-Course Exam at 80% or higher with scenario testing, and submit a reviewed PT case reflection, all within a 5-year window. It is a respected, focused academy certificate for obstetric/peripartum PT rather than an ABPTS board certification.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 76,
+        "efficiency": 72,
+        "caseloadApplicability": 74,
+        "reimbursement": 68,
+        "marketDemand": 86,
+        "patientSatisfaction": 84
+      },
+      "business": {
+        "cashPayViability": 92,
+        "pricingLeverage": 88,
+        "marketDifferentiation": 80,
+        "ownerLeverage": 74,
+        "marketDemand": 90,
+        "efficiency": 78
+      },
+      "academicClinical": {
+        "facultyRecognition": 72,
+        "scholarship": 62,
+        "teachingValue": 80,
+        "evidenceDepth": 84,
+        "facultyDemand": 70,
+        "efficiency": 72
+      }
+    }
+  },
+  {
+    "name": "CAPP-Pelvic (Certificate of Advanced Practice in Physical Therapy in Pelvic Health)",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "The CAPP-Pelvic (formerly 'Certificate of Achievement,' now 'Certificate of Advanced Practice in Physical Therapy in Pelvic Health') is awarded by the APTA Academy of Pelvic Health Physical Therapy to licensed PTs/PTAs who complete all three levels of its Pelvic Health track (~87 contact hours covering pelvic floor evaluation, bowel dysfunction, pelvic pain, and a specialty option), pass course testing at 80% or higher, and submit a reviewed PT case reflection. Coursework must be completed within 5 years with at least 6 months post-licensure experience. It is a respected, structured academy certificate rather than an ABPTS board certification (the board credential being the ABPTS Women's Health Clinical Specialist, WCS).",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 78,
+        "efficiency": 70,
+        "caseloadApplicability": 80,
+        "reimbursement": 70,
+        "marketDemand": 88,
+        "patientSatisfaction": 82
+      },
+      "business": {
+        "cashPayViability": 95,
+        "pricingLeverage": 90,
+        "marketDifferentiation": 82,
+        "ownerLeverage": 76,
+        "marketDemand": 90,
+        "efficiency": 78
+      },
+      "academicClinical": {
+        "facultyRecognition": 74,
+        "scholarship": 62,
+        "teachingValue": 82,
+        "evidenceDepth": 85,
+        "facultyDemand": 72,
+        "efficiency": 70
+      }
+    }
+  },
+  {
+    "name": "EIM Pelvic Health Specialist Certification",
+    "type": "Certification",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "Evidence In Motion's Pelvic Health Specialist Certification is a hybrid (online didactic plus in-person/virtual lab) post-professional program of roughly 7-9 months, comprising 7 required courses plus 2 electives, including in-depth internal (intravaginal/intrarectal) and external evaluation and treatment, therapeutic neuroscience education, and capstone examinations. Base tuition is approximately $4,950 (with an optional post-professional DPT add-on of ~$6,300), and it is open to PT, PTA, OT, and OTA. It is a rigorous certificate of competency rather than an ABPTRFE-accredited fellowship or ABPTS board certification; the strongest accredited pathways remain ABPTRFE pelvic/women's-health residencies and the ABPTS Women's Health (WCS) board certification.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 78,
+        "efficiency": 62,
+        "caseloadApplicability": 80,
+        "reimbursement": 70,
+        "marketDemand": 90,
+        "patientSatisfaction": 82
+      },
+      "business": {
+        "cashPayViability": 95,
+        "pricingLeverage": 92,
+        "marketDifferentiation": 80,
+        "ownerLeverage": 78,
+        "marketDemand": 92,
+        "efficiency": 72
+      },
+      "academicClinical": {
+        "facultyRecognition": 68,
+        "scholarship": 60,
+        "teachingValue": 80,
+        "evidenceDepth": 85,
+        "facultyDemand": 70,
+        "efficiency": 65
+      }
+    }
+  },
+  {
+    "name": "AACVPR Certified Cardiac Rehabilitation Professional (CCRP)",
+    "type": "Certification",
+    "discipline": "PT/RN/RT",
+    "disciplines": [
+      "PT",
+      "RN",
+      "RT",
+      "EP"
+    ],
+    "evidence": "The CCRP is the individual professional credential aligned with the AACVPR/AHA core competencies for cardiac rehabilitation and secondary prevention — distinct from AACVPR program/facility certification. Open to the interdisciplinary CR team (PT, RN, RT, exercise physiologist), it requires ~1,200 documented clinical hours and a 140-item proctored exam (3-year recert). The clinical domain has tier-1 mortality and rehospitalization evidence (Cochrane cardiac rehab, HF-ACTION, Medicare registry studies); credential-specific outcome studies are essentially absent.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 80,
+        "caseloadApplicability": 55,
+        "reimbursement": 58,
+        "efficiency": 50,
+        "marketDemand": 68,
+        "patientSatisfaction": 72
+      },
+      "business": {
+        "cashPayViability": 12,
+        "pricingLeverage": 15,
+        "marketDifferentiation": 50,
+        "ownerLeverage": 18,
+        "marketDemand": 22,
+        "efficiency": 32
+      },
+      "academicClinical": {
+        "facultyRecognition": 60,
+        "scholarship": 66,
+        "teachingValue": 60,
+        "evidenceDepth": 84,
+        "facultyDemand": 55,
+        "efficiency": 50
+      }
+    }
+  },
+  {
+    "name": "Advanced Cardiovascular Life Support (ACLS)",
+    "type": "Certification",
+    "discipline": "PT/RN/RT",
+    "disciplines": [
+      "PT",
+      "RN",
+      "RT"
+    ],
+    "evidence": "ACLS is the American Heart Association's provider credential in advanced management of cardiac arrest, peri-arrest arrhythmias, and acute cardiopulmonary emergencies (valid 2 years). Not universally required of PTs, but commonly an employer competency requirement for therapists in ICU, acute cardiac care, and cardiac-rehab settings where they monitor telemetry and risk-stratified exercise. It is a low-cost, broad safety/competency credential rather than a scope-expanding specialty.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 55,
+        "caseloadApplicability": 42,
+        "reimbursement": 15,
+        "efficiency": 85,
+        "marketDemand": 62,
+        "patientSatisfaction": 45
+      },
+      "business": {
+        "cashPayViability": 5,
+        "pricingLeverage": 8,
+        "marketDifferentiation": 22,
+        "ownerLeverage": 10,
+        "marketDemand": 15,
+        "efficiency": 82
+      },
+      "academicClinical": {
+        "facultyRecognition": 28,
+        "scholarship": 42,
+        "teachingValue": 38,
+        "evidenceDepth": 70,
+        "facultyDemand": 28,
+        "efficiency": 80
+      }
+    }
+  },
+  {
+    "name": "Cardiovascular & Pulmonary PT Residency (ABPTRFE)",
+    "type": "Residency",
+    "discipline": "PT",
+    "disciplines": [
+      "PT"
+    ],
+    "evidence": "A ~12-month post-professional clinical residency accredited by ABPTRFE, with 150+ hours of 1:1 mentoring by a board-certified Cardiovascular & Pulmonary Clinical Specialist and structured didactics across acute care, ICU, and outpatient cardiac/pulmonary rehab. Distinct from the CCS board certification but a recognized high-signal pathway that prepares residents to sit for the CCS exam. Programs run at academic medical centers and VA systems. The underlying clinical domain (cardiac rehab, COPD pulmonary rehab, ICU early mobilization) has tier-1 evidence; credential-specific outcome data are sparse.",
+    "pathScores": {
+      "clinical": {
+        "clinicalOutcomes": 80,
+        "caseloadApplicability": 60,
+        "reimbursement": 50,
+        "efficiency": 35,
+        "marketDemand": 64,
+        "patientSatisfaction": 75
+      },
+      "business": {
+        "cashPayViability": 10,
+        "pricingLeverage": 15,
+        "marketDifferentiation": 55,
+        "ownerLeverage": 12,
+        "marketDemand": 22,
+        "efficiency": 28
+      },
+      "academicClinical": {
+        "facultyRecognition": 88,
+        "scholarship": 80,
+        "teachingValue": 85,
+        "evidenceDepth": 82,
+        "facultyDemand": 80,
+        "efficiency": 40
+      }
+    }
+  }
 ];

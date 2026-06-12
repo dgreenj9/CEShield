@@ -1,52 +1,51 @@
-import { GOOGLE_VISION_API_KEY } from './constants';
+import { supabase } from '../services/supabaseClient';
 
-// Certificate parsing utility
+// Parses a certificate image via the parse-certificate Supabase Edge Function.
+// The Google Vision key lives server-side as a Supabase secret — it never
+// ships to the browser. The user's auth JWT is attached automatically by
+// supabase.functions.invoke().
 export const parseCertificate = async (file) => {
-  if (!GOOGLE_VISION_API_KEY) {
-    alert('Google Vision API key is not configured. Please set the REACT_APP_GOOGLE_VISION_KEY environment variable.');
-    return null;
-  }
-
+  if (!file) return null;
   try {
-    const reader = new FileReader();
-    const base64 = await new Promise((resolve) => {
-      reader.onloadend = () => resolve(reader.result.split(',')[1]);
+    const base64 = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result || '';
+        const comma = result.indexOf(',');
+        resolve(comma >= 0 ? result.slice(comma + 1) : result);
+      };
+      reader.onerror = () => reject(reader.error);
       reader.readAsDataURL(file);
     });
 
-    const response = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${GOOGLE_VISION_API_KEY}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        requests: [{
-          image: { content: base64 },
-          features: [{ type: 'TEXT_DETECTION', maxResults: 1 }]
-        }]
-      })
+    const { data, error } = await supabase.functions.invoke('parse-certificate', {
+      body: { imageBase64: base64, mimeType: file.type },
     });
 
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.error?.message || 'Failed to call Google Vision API');
+    if (error) {
+      console.error('parse-certificate error:', error);
+      alert(`Error scanning certificate: ${error.message || 'unknown error'}`);
+      return null;
     }
+    if (data?.error) {
+      console.error('parse-certificate returned error:', data.error);
+      alert(`Error scanning certificate: ${data.error}`);
+      return null;
+    }
+    if (!data) return null;
 
-    const result = await response.json();
-    const extractedText = result.responses?.[0]?.fullTextAnnotation?.text || '';
-
-    if (!extractedText) throw new Error('No text found in image');
-
-    const parsedData = { title: '', provider: '', date: '', hours: '', category: 'general' };
-
-    const titleMatch = extractedText.match(/(?:has\s+)?(?:successfully\s+)?completed:?\s*(?:the\s+)?(?:course\s+)?(?:entitled\s+)?["']?([^"'\n]{5,100})["']?/i);
-    if (titleMatch) parsedData.title = titleMatch[1].trim();
-
-    const hoursMatch = extractedText.match(/(\d+\.?\d*)\s*(?:hours?|ceus?|ce\s*hours?)/i);
-    if (hoursMatch) parsedData.hours = hoursMatch[1];
-
-    return parsedData;
-  } catch (error) {
-    console.error('Error parsing certificate:', error);
-    alert(`Error scanning certificate: ${error.message}`);
+    // Function returns { title, provider, date, hours, category, raw }.
+    // The caller in AddCourseModal only uses the first 5 fields.
+    return {
+      title: data.title || '',
+      provider: data.provider || '',
+      date: data.date || '',
+      hours: data.hours || '',
+      category: data.category || 'general',
+    };
+  } catch (err) {
+    console.error('parseCertificate exception:', err);
+    alert(`Error scanning certificate: ${err.message}`);
     return null;
   }
 };

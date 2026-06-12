@@ -205,7 +205,7 @@ export const METHODOLOGY_CONTENT = {
     {
       tier: "Strong Evidence",
       range: "70-100",
-      color: "#22c55e",
+      color: "#2F6B4D",
       description: "Strong evidence of meaningful patient benefit across multiple outcome domains",
       count: 9
     },
@@ -219,7 +219,7 @@ export const METHODOLOGY_CONTENT = {
     {
       tier: "Moderate Evidence",
       range: "30-49",
-      color: "#fbbf24",
+      color: "#A87B3F",
       description: "Moderate or emerging evidence; benefits present but effect sizes modest or populations narrow",
       count: 27
     },
