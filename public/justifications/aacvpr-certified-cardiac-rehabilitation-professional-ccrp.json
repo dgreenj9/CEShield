@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Cardiac rehab reduces cardiovascular mortality and readmissions (Cochrane Anderson 2016/Dibben 2021; Medicare registry Suaya 2009, Hammill 2010). The credential validates competency in delivering that intervention — outcomes are attributable to the program, not the credential itself.",
+    "clinical.caseloadApplicability": "Applies across post-MI, post-CABG, heart-failure, and post-transplant CR populations, but is confined to cardiac-rehab and acute-cardiac settings rather than general practice.",
+    "clinical.reimbursement": "CR is a covered Medicare benefit with established program codes (93797/93798); the credential supports program quality and value-based documentation but unlocks no individual billing premium.",
+    "clinical.efficiency": "~1,200 clinical hours plus a 140-item proctored exam — a meaningful but mid-tier investment, well below board-specialist or residency level.",
+    "clinical.marketDemand": "Increasingly preferred or required by accredited CR programs and valued for AACVPR program-certification staffing — a genuine employer-recognized signal.",
+    "clinical.patientSatisfaction": "CR reliably improves symptoms, function, and quality of life, though care is institutionally referred rather than chosen by credential.",
+    "business.cashPayViability": "Near-zero — cardiac rehab is hospital-based and insurance/Medicare-funded, with no direct-to-consumer cash market.",
+    "business.pricingLeverage": "None for the individual clinician; reimbursement is set by CR program codes, not by who holds the credential.",
+    "business.marketDifferentiation": "Differentiates within the CR job market and program-staffing requirements, but is invisible to consumers.",
+    "business.ownerLeverage": "Low — CR programs are hospital service lines, not clinician-owned private practices.",
+    "business.marketDemand": "Almost no direct-to-consumer demand; demand is institutional and salaried.",
+    "business.efficiency": "Moderate clinical-hour and exam investment for essentially no cash-pay or pricing return.",
+    "academicClinical.facultyRecognition": "A well-recognized professional credential across cardiology, nursing, and rehab, but not a degree or board specialty — moderate academic weight.",
+    "academicClinical.scholarship": "Sits atop a deep evidence base (Cochrane, JAMA, AHA guidelines) that supports evidence-based practice and scholarship.",
+    "academicClinical.teachingValue": "Supports clinical-educator roles within CR programs and maps to cardiopulmonary curricular content.",
+    "academicClinical.evidenceDepth": "The clinical domain has top-tier evidence; the credential-specific evidence is thin — no certified-vs-noncertified CR outcome studies exist.",
+    "academicClinical.facultyDemand": "Useful for cardiopulmonary teaching coverage, though programs prefer CCS/residency-trained faculty when available.",
+    "academicClinical.efficiency": "A reasonable route to CR teaching credibility relative to full board or residency pathways."
+  }
+}

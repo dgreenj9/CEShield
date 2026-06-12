@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "CI auditory rehabilitation outcomes are significant for deaf populations; CISC vs non-certified comparison not available.",
+    "clinical.efficiency": "CISC certification requires significant supervised clinical experience in CI programming.",
+    "clinical.caseloadApplicability": "Applicable exclusively in cochlear implant programs and audiology CI specialty practices.",
+    "clinical.reimbursement": "CI programming and aural rehabilitation billable; CISC supports documentation for CI services; some commercial payer recognition.",
+    "clinical.marketDemand": "Required or preferred at cochlear implant centers; limited but consistently valued.",
+    "clinical.patientSatisfaction": "CI recipients highly value specialized programming expertise.",
+    "business.cashPayViability": "CI mapping and rehab are largely insurance/Medicare-covered; limited cash-pay channels.",
+    "business.pricingLeverage": "Specialty supports stronger contracts with CI centers and manufacturers.",
+    "business.marketDifferentiation": "Distinguishes audiologists/SLPs in a small, technical niche.",
+    "business.ownerLeverage": "CI programs can employ multiple clinicians under credentialed leadership — moderate scalability.",
+    "business.marketDemand": "CI families search for experienced providers but not the specific cert by name.",
+    "business.efficiency": "Specialty certification is achievable with focused clinical hours and CEUs — moderate lift.",
+    "academicClinical.facultyRecognition": "Valued in AuD/CSD programs with CI tracks; recognized but less universal than ASHA board specialties.",
+    "academicClinical.scholarship": "Active research domain — outcomes, candidacy, pediatric CI literature.",
+    "academicClinical.teachingValue": "Directly supports CI, aural rehab, and pediatric audiology coursework.",
+    "academicClinical.evidenceDepth": "Strong evidence base — CI is one of the most-studied interventions in audiology.",
+    "academicClinical.facultyDemand": "Programs with CI tracks specifically seek this expertise.",
+    "academicClinical.efficiency": "Moderate cost; reasonable academic ROI in CI-focused programs."
+  }
+}

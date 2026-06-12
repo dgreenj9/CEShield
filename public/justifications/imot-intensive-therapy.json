@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "94% improvement rate is promising; comparison to dose-matched conventional therapy is the key test and evidence is emerging.",
+    "clinical.efficiency": "Specialized intensive program training; limited sites; significant time commitment; international origins.",
+    "clinical.caseloadApplicability": "Very specialized for children with neurological conditions in intensive therapy settings; limited US availability.",
+    "clinical.reimbursement": "Billed as intensive PT/OT; variable US payer coverage; international origins limit domestic payer recognition.",
+    "clinical.marketDemand": "Limited US employer demand; primarily academic pediatric centers.",
+    "clinical.patientSatisfaction": "Children and families report high satisfaction; peer social environment adds value.",
+    "business.cashPayViability": "Pediatric intensive model is overwhelmingly cash-pay; parents of children with CP/neuro conditions readily pay.",
+    "business.pricingLeverage": "Burst-care model commands premium block pricing (often $3-8K per intensive).",
+    "business.marketDifferentiation": "Distinctive service model that stands out from traditional outpatient peds.",
+    "business.ownerLeverage": "Other trained clinicians can deliver intensives; model scales with staff and facility.",
+    "business.marketDemand": "Strong within pediatric neuro parent communities; modest broader awareness.",
+    "business.efficiency": "Moderate training cost; profitable model once operational.",
+    "academicClinical.facultyRecognition": "Not a recognized credential for academic promotion.",
+    "academicClinical.scholarship": "Limited peer-reviewed literature specific to IMOT branding.",
+    "academicClinical.teachingValue": "Relevant to peds neuro instruction as a service-delivery model.",
+    "academicClinical.evidenceDepth": "Intensive model has some support (HABIT, CIMT literature) but IMOT-specific evidence is thin.",
+    "academicClinical.facultyDemand": "Rarely if ever named in faculty postings.",
+    "academicClinical.efficiency": "Short course relative to academic return, but academic return is low."
+  }
+}

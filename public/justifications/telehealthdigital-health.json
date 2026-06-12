@@ -1,0 +1,28 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Telehealth delivery is non-inferior to in-person for most rehab conditions; training improves platform proficiency.",
+    "clinical.efficiency": "Variable; online modules common; low-moderate cost and time investment; growing provider options.",
+    "clinical.caseloadApplicability": "Applicable to virtually any clinical setting; telehealth delivery model is cross-cutting across specialties.",
+    "clinical.reimbursement": "Telehealth CPT codes 98970-98972 and audio-only codes support digital PT delivery; commercial and Medicare coverage expanding post-pandemic.",
+    "clinical.marketDemand": "Growing demand post-pandemic; increasingly listed in virtual care, digital health, and home-based PT/OT roles.",
+    "clinical.patientSatisfaction": "Convenience is highly valued; technology and privacy concerns exist.",
+    "healthTech.industryPlacement": "Telehealth and digital health platforms (Hinge, SWORD, Omada, Kaia) actively hire clinicians with digital delivery experience.",
+    "healthTech.vendorDemand": "Strong and sustained demand from virtual-first MSK and chronic-disease companies.",
+    "healthTech.salaryPremium": "Moderate premium for clinical leadership in digital-first care.",
+    "healthTech.technicalSkillDepth": "Skills are more workflow/platform than engineering; depth is moderate at best.",
+    "healthTech.transitionFit": "One of the most direct on-ramps from clinic to digital health employer.",
+    "healthTech.efficiency": "Skills-based training is low-cost relative to career mobility gained.",
+    "business.cashPayViability": "Telehealth pairs naturally with cash-pay models (no insurance friction, geographic reach).",
+    "business.pricingLeverage": "Telehealth tends to compress pricing rather than expand it; commodity pressure.",
+    "business.marketDifferentiation": "Now table-stakes; few patients select a clinician because they're 'telehealth certified.'",
+    "business.ownerLeverage": "Enables scalable, location-independent practice models — strong owner leverage.",
+    "business.marketDemand": "Consumer demand for virtual care is real and growing post-pandemic.",
+    "business.efficiency": "Short, inexpensive trainings — high efficiency.",
+    "academicClinical.facultyRecognition": "Not a major hiring criterion but increasingly relevant as programs add digital health content.",
+    "academicClinical.scholarship": "Growing literature on telerehab effectiveness and implementation.",
+    "academicClinical.teachingValue": "Increasingly important for modern DPT/MOT curricula and clinical education.",
+    "academicClinical.evidenceDepth": "Moderate — evidence is expanding but still mixed across conditions.",
+    "academicClinical.facultyDemand": "Occasionally listed as 'preferred' for innovative or hybrid programs.",
+    "academicClinical.efficiency": "Low-cost, fast credentialing — efficient academic add-on."
+  }
+}

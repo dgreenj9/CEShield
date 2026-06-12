@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Platform-specific training; no clinical outcome studies.",
+    "clinical.efficiency": "Platform-specific online training; low cost and time; quick to obtain.",
+    "clinical.caseloadApplicability": "Applicable in occupational health and work injury settings; limited to Occupro platform users.",
+    "clinical.reimbursement": "Work health assessments billable under ergonomic and FCE codes; platform-based billing modest.",
+    "clinical.marketDemand": "Very limited employer demand; proprietary platform certification with niche recognition.",
+    "clinical.patientSatisfaction": "Worker satisfaction with platform-delivered assessments not studied.",
+    "business.cashPayViability": "Industrial/work comp/FCE is paid by employers and carriers, not consumers; near-zero cash-pay.",
+    "business.pricingLeverage": "Contracted rates with employers, with modest premiums for FCE/work-conditioning services.",
+    "business.marketDifferentiation": "Differentiates from generic outpatient PT in industrial markets but is one of several brands.",
+    "business.ownerLeverage": "Excellent — service is protocolized, B2B contracts scale, and clinicians are interchangeable.",
+    "business.marketDemand": "Recognized by HR/safety/employer buyers, not consumers.",
+    "business.efficiency": "Relatively accessible cost/time with quick deployability into a clinic.",
+    "academicClinical.facultyRecognition": "Commercial vendor credential; carries little academic weight.",
+    "academicClinical.scholarship": "Minimal scholarly footprint.",
+    "academicClinical.teachingValue": "Some relevance in industrial/ergonomics electives, otherwise narrow.",
+    "academicClinical.evidenceDepth": "FCE literature is mixed with significant reliability/validity concerns.",
+    "academicClinical.facultyDemand": "Essentially never listed in faculty postings.",
+    "academicClinical.efficiency": "Cheap/fast relative to academic alternatives but low academic return."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Immediate pain and ROM improvement documented in multiple RCTs; long-term benefit over other manual therapy not established.",
+    "clinical.efficiency": "5 courses required for full CMP; significant cumulative time and cost commitment.",
+    "clinical.caseloadApplicability": "Applicable to musculoskeletal and orthopedic caseloads; MWM techniques usable with most ortho patients.",
+    "clinical.reimbursement": "Standard manual therapy billing; no Mulligan-specific code; covered at standard PT rates.",
+    "clinical.marketDemand": "Moderate employer demand as a manual therapy subspecialization; valued in orthopedic PT practices.",
+    "clinical.patientSatisfaction": "Immediate pain relief during session is impressive to patients.",
+    "business.cashPayViability": "Manual therapy is one of the strongest cash-pay categories in outpatient ortho, and Mulligan fits that bucket.",
+    "business.pricingLeverage": "Supports a slight premium versus generic manual therapy but is less brand-powerful than McKenzie or FAAOMPT.",
+    "business.marketDifferentiation": "Recognizable to ortho-savvy referrers but not strongly distinctive among manual therapy options.",
+    "business.ownerLeverage": "Like most manual creds, value travels with the clinician — hard to build a scalable franchise around it.",
+    "business.marketDemand": "Almost no consumer awareness of the Mulligan brand specifically.",
+    "business.efficiency": "Course-based pathway is moderately priced and achievable within a year or two.",
+    "academicClinical.facultyRecognition": "Commercial manual therapy brand with little academic weight beyond fellowship-trained faculty.",
+    "academicClinical.scholarship": "Some RCTs on MWM and SNAGs exist, mostly small and authored by a tight community.",
+    "academicClinical.teachingValue": "Useful in ortho lab courses as one of several mobilization-with-movement techniques.",
+    "academicClinical.evidenceDepth": "Evidence base is modest — several small trials and reviews with mixed effect sizes.",
+    "academicClinical.facultyDemand": "Rarely if ever listed in faculty postings, which prefer OCS or FAAOMPT.",
+    "academicClinical.efficiency": "Cheaper and faster than a fellowship but offers correspondingly less academic credit."
+  }
+}

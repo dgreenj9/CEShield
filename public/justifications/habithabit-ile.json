@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "RCT evidence shows superiority over dose-matched conventional therapy for bimanual hand function in children with unilateral CP.",
+    "clinical.efficiency": "Specialized 2-week training program; limited sites; significant time and travel commitment.",
+    "clinical.caseloadApplicability": "Highly specialized for children with unilateral cerebral palsy; very limited outside pediatric neuro intensive programs.",
+    "clinical.reimbursement": "Billed as intensive OT/PT; no certification-specific code; coverage variable; many families self-pay.",
+    "clinical.marketDemand": "Limited employer demand; niche pediatric neuro cert primarily at academic medical centers.",
+    "clinical.patientSatisfaction": "Children and families report high engagement and meaningful functional gains; peer interaction adds social benefit.",
+    "business.cashPayViability": "CP families routinely pay cash for intensive camps; strong out-of-pocket model.",
+    "business.pricingLeverage": "Intensive camp model supports $3-8K per child packages.",
+    "business.marketDifferentiation": "Very rare among pediatric clinicians; HABIT-ILE providers are sought out nationally.",
+    "business.ownerLeverage": "Intensive model is staff-heavy but staff must be trained; bottleneck is camp-based not scalable like franchise.",
+    "business.marketDemand": "CP parent communities know HABIT/CIMT by name; moderate-to-high niche demand.",
+    "business.efficiency": "Training is expensive and time-intensive; not a quick add.",
+    "academicClinical.facultyRecognition": "Strong recognition in pediatric academic circles, especially CP research.",
+    "academicClinical.scholarship": "Active RCT pipeline from Charles/Gordon and Belgian groups.",
+    "academicClinical.teachingValue": "Excellent exemplar for motor learning and intensive practice principles in peds coursework.",
+    "academicClinical.evidenceDepth": "Multiple RCTs supporting HABIT and HABIT-ILE for bilateral CP.",
+    "academicClinical.facultyDemand": "Rarely required in postings but valued for peds faculty lines.",
+    "academicClinical.efficiency": "High cost/time relative to academic-line ROI."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "justifications": {
+    "healthTech.industryPlacement": "Held predominantly by people already in health IT; modest lift for new entrants but a useful signal for consulting and PM roles.",
+    "healthTech.vendorDemand": "Cited in HIMSS-member consultancy and IDN postings but rarely required at Epic/Oracle Health, who prioritize their own application certs.",
+    "healthTech.salaryPremium": "HIMSS compensation surveys show a consistent 15-25% premium over non-certified peers at similar experience.",
+    "healthTech.technicalSkillDepth": "Breadth-oriented (governance, workflow, privacy, management) rather than deep technical build/config skill.",
+    "healthTech.transitionFit": "Eligibility requires 3-5 years prior health IT experience, so most bedside PT/OTs cannot sit for it without first working in informatics.",
+    "healthTech.efficiency": "Single exam (~$500 member fee) with self-study prep is cheap and fast once eligibility is met, but the experience gate lowers accessibility."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "IONM reduces intraoperative nerve injury; audiology role is specialized monitoring not rehab.",
+    "clinical.efficiency": "ABRET or ASET BCS-IOM; significant specialized training and experience requirements.",
+    "clinical.caseloadApplicability": "Applicable exclusively in intraoperative neurophysiological monitoring; zero relevance in rehabilitation settings.",
+    "clinical.reimbursement": "IONM has CPT codes; ABRET certification required by some facilities for billing eligibility in intraoperative monitoring.",
+    "clinical.marketDemand": "Consistent demand in IONM programs; required by some facilities but very narrow clinical setting.",
+    "clinical.patientSatisfaction": "Intraoperative patient cannot report; surgical team satisfaction relevant.",
+    "business.cashPayViability": "IONM is delivered in ORs under hospital/surgeon contracts — no consumer cash-pay model.",
+    "business.pricingLeverage": "High-revenue B2B service billed to hospitals/insurers; per-case rates are strong.",
+    "business.marketDifferentiation": "Very rare credential; defines a small, lucrative niche of contracted IONM providers.",
+    "business.ownerLeverage": "IONM groups scale via employed technologists with supervising boarded providers — genuinely scalable.",
+    "business.marketDemand": "Zero direct-to-consumer demand; demand is surgical/hospital-driven.",
+    "business.efficiency": "Specialized fellowship-style training and exam; long runway.",
+    "academicClinical.facultyRecognition": "Recognized in audiology academia but narrower than ABA-clinical certs; modest faculty impact.",
+    "academicClinical.scholarship": "Active but small research community in IONM efficacy and methodology.",
+    "academicClinical.teachingValue": "Adds depth to AuD neurodiagnostics/evoked potentials coursework.",
+    "academicClinical.evidenceDepth": "Solid evidence supporting IONM in specific surgical procedures.",
+    "academicClinical.facultyDemand": "Rarely required in AuD faculty postings.",
+    "academicClinical.efficiency": "High training cost relative to direct academic payoff."
+  }
+}

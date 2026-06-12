@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "No RCTs supporting visceral manipulation for any condition. Case reports and small studies dominate.",
+    "clinical.efficiency": "Multiple 5-day modules; years to complete full pathway; very high cumulative time and cost.",
+    "clinical.caseloadApplicability": "Applicable to chronic pain and visceral dysfunction; very limited evidence base restricts clinical acceptance.",
+    "clinical.reimbursement": "No third-party coverage; self-pay only; no insurance billing pathway.",
+    "clinical.marketDemand": "Minimal employer demand; primarily private practice with specific manual therapy focus.",
+    "clinical.patientSatisfaction": "Some patients report benefit, consistent with non-specific and placebo effects.",
+    "business.cashPayViability": "Visceral manipulation is a quintessential cash-pay manual therapy niche with motivated self-pay clientele.",
+    "business.pricingLeverage": "Practitioners routinely charge $200-300+/hr out of network.",
+    "business.marketDifferentiation": "Rare, distinctive brand — strong differentiation in a manual therapy market.",
+    "business.ownerLeverage": "Highly personality- and hands-driven; very hard to scale beyond the owner-clinician.",
+    "business.marketDemand": "Niche but devoted consumer following, especially in wellness-oriented markets.",
+    "business.efficiency": "Long, expensive multi-course pathway with international seminars.",
+    "academicClinical.facultyRecognition": "Viewed skeptically by academic PT; commercial brand with no ABPTRFE standing.",
+    "academicClinical.scholarship": "Minimal high-quality peer-reviewed literature.",
+    "academicClinical.teachingValue": "Limited curricular fit; not part of standard DPT manual therapy content.",
+    "academicClinical.evidenceDepth": "Evidence base is weak and contested.",
+    "academicClinical.facultyDemand": "Essentially never preferred in faculty hiring.",
+    "academicClinical.efficiency": "Expensive and slow for negligible academic payoff."
+  }
+}

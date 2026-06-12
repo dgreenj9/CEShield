@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Systematic reviews consistently show minimal benefit over sham taping; any pain effect is small and short-term.",
+    "clinical.efficiency": "2-day KT1/KT2 courses; ~$400-600 total; widely available; one of the most accessible certs.",
+    "clinical.caseloadApplicability": "Applicable across outpatient ortho, sports, and neuro caseloads; taping applicable to a wide range of conditions.",
+    "clinical.reimbursement": "Tape application billed under procedure codes; standard PT coverage; no CKTP billing premium over standard therapeutic procedure.",
+    "clinical.marketDemand": "Widely held and moderately demanded; taping certification commonly listed as preferred in sports and outpatient roles.",
+    "clinical.patientSatisfaction": "Patients like the colorful tape and perceive it as active treatment; expectation effects likely.",
+    "business.cashPayViability": "Consumers will pay small add-on fees for tape, but it doesn't anchor a cash-pay practice.",
+    "business.pricingLeverage": "Highly commoditized — nearly every athletic trainer and many PTs are familiar with taping.",
+    "business.marketDifferentiation": "Saturated; CKTP letters add little defensibility.",
+    "business.ownerLeverage": "Easy to train staff and integrate as an upsell across a practice.",
+    "business.marketDemand": "Strong consumer recognition thanks to Olympic exposure.",
+    "business.efficiency": "Cheap, fast, accessible weekend certification.",
+    "academicClinical.facultyRecognition": "Commercial brand credential with negligible academic standing.",
+    "academicClinical.scholarship": "Modest publication base, largely small studies and reviews.",
+    "academicClinical.teachingValue": "Marginal — covered briefly in modalities or sports content.",
+    "academicClinical.evidenceDepth": "Systematic reviews consistently show small to negligible clinical effects.",
+    "academicClinical.facultyDemand": "Never required or preferred for faculty roles.",
+    "academicClinical.efficiency": "Cheap and quick but with minimal academic payoff."
+  }
+}

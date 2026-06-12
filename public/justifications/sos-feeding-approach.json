@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Clinical practice reports positive; formal comparative studies vs standard feeding therapy absent.",
+    "clinical.efficiency": "2-day workshop; moderate cost; accessible to SLP and OT practitioners.",
+    "clinical.caseloadApplicability": "Applicable in pediatric feeding programs; relevant for SLP and OT in pediatric medical and school settings.",
+    "clinical.reimbursement": "Billed under feeding therapy SLP/OT codes; certification supports medical necessity documentation; commercial and Medicaid coverage apply.",
+    "clinical.marketDemand": "Moderate employer demand in pediatric feeding programs and feeding specialty clinics.",
+    "clinical.patientSatisfaction": "Family-centered, non-coercive approach reduces mealtime anxiety for families.",
+    "business.cashPayViability": "Parents of picky/ARFID kids routinely pay cash when insurance won't cover feeding therapy; strong direct-pay market.",
+    "business.pricingLeverage": "Specialized feeding clinics command premium rates and often have waitlists.",
+    "business.marketDifferentiation": "Named brand approach with limited certified provider pool — strong differentiation in pediatric markets.",
+    "business.ownerLeverage": "Multiple trained SLPs/OTs can deliver SOS within a clinic — genuinely scalable to a multi-clinician practice.",
+    "business.marketDemand": "Growing parent awareness via social media and pediatrician referrals, though still niche.",
+    "business.efficiency": "Reasonable course-based training (8-day conference + mentorship); accessible compared to multi-year credentials.",
+    "academicClinical.facultyRecognition": "Recognized in pediatric SLP/OT academic circles but not a board specialty; moderate hiring signal for peds faculty.",
+    "academicClinical.scholarship": "Some published outcomes work but evidence base is debated; modest scholarly output.",
+    "academicClinical.teachingValue": "Directly applicable to pediatric feeding coursework in SLP and OT programs.",
+    "academicClinical.evidenceDepth": "Evidence is largely program-developer driven with limited independent RCTs.",
+    "academicClinical.facultyDemand": "Occasionally preferred for pediatric SLP/OT faculty positions, especially with feeding clinic affiliations.",
+    "academicClinical.efficiency": "Relatively quick to obtain compared to residencies, with decent academic payoff in peds programs."
+  }
+}

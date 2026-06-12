@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "No comparative outcome studies.",
+    "clinical.efficiency": "ABPTS ECS exam; experience requirements; niche and significant investment.",
+    "clinical.caseloadApplicability": "Very narrow applicability; EMG and NCS services restricted to specific scope in most states.",
+    "clinical.reimbursement": "EMG and NCS have CPT codes; PT billing for these is restricted in most states; scope issues limit billing value.",
+    "clinical.marketDemand": "Very limited employer demand; one of the least-held ABPTS certifications.",
+    "clinical.patientSatisfaction": "Niche credential; patient impact minimal.",
+    "business.cashPayViability": "EMG/NCS and wound electrotherapy are hospital/physician-referred — almost no cash-pay pathway.",
+    "business.pricingLeverage": "Hospital contracts may pay well, but private-practice pricing power is minimal.",
+    "business.marketDifferentiation": "Extremely rare credential (smallest ABPTS specialty), so highly differentiated — but in a narrow market.",
+    "business.ownerLeverage": "Hard to scale; services tied tightly to the credentialed clinician and medical referral chain.",
+    "business.marketDemand": "Negligible consumer recognition; referrals are physician-driven.",
+    "business.efficiency": "Steep prerequisites, exam difficulty, and limited residency pathways make this very costly.",
+    "academicClinical.facultyRecognition": "ABPTS board cert — strong faculty credential, especially for modalities/neuro-rehab content.",
+    "academicClinical.scholarship": "Smaller research community than OCS/NCS but recognized within rehab science.",
+    "academicClinical.teachingValue": "Anchors EMG/NCS, modalities, and integumentary content in DPT curricula.",
+    "academicClinical.evidenceDepth": "Reasonable evidence for diagnostic EMG; e-stim/wound evidence is mixed.",
+    "academicClinical.facultyDemand": "Rarely listed in postings; programs cover this content with generalists.",
+    "academicClinical.efficiency": "High effort, narrow academic payoff."
+  }
+}

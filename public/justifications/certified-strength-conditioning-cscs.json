@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Athletic performance gains well-documented; application to clinical rehab population is indirect.",
+    "clinical.efficiency": "NSCA exam; bachelor's degree required; moderate cost ~$300-500 exam fee.",
+    "clinical.caseloadApplicability": "Applicable in sports performance, athletic training, and athlete rehabilitation; limited in general clinical settings.",
+    "clinical.reimbursement": "No CSCS-specific billing in healthcare settings; used in athletic and corporate wellness where direct cash billing applies.",
+    "clinical.marketDemand": "Valued in sports performance, collegiate strength staff, and athletic rehab settings; moderate clinical demand.",
+    "clinical.patientSatisfaction": "Athletes appreciate evidence-based strength programming; general rehab patients less influenced by credential.",
+    "business.cashPayViability": "Performance and fitness-adjacent services are core cash-pay territory.",
+    "business.pricingLeverage": "Common credential — modest pricing power, more of a baseline than a premium.",
+    "business.marketDifferentiation": "Very common among PTs and trainers; weak differentiator.",
+    "business.ownerLeverage": "Easy to scale a performance-PT hybrid model with multiple CSCS staff.",
+    "business.marketDemand": "Strong consumer recognition in athletic and gym communities.",
+    "business.efficiency": "Single exam, modest cost, fast to obtain — efficient.",
+    "academicClinical.facultyRecognition": "Useful supporting credential for sports tracks, not a primary hiring criterion.",
+    "academicClinical.scholarship": "NSCA publishes substantial research on resistance training and performance.",
+    "academicClinical.teachingValue": "Helpful for sports, exercise prescription, and performance content in DPT programs.",
+    "academicClinical.evidenceDepth": "Resistance training and performance literature is robust and growing.",
+    "academicClinical.facultyDemand": "Occasionally listed as 'preferred' for sports-track faculty roles.",
+    "academicClinical.efficiency": "Cheap and fast — high efficiency for the academic value it contributes."
+  }
+}

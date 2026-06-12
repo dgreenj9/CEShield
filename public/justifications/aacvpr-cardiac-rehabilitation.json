@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Mortality reduction is among the strongest of any rehab credential. LVEF improvements, VO2 max gains, and lipid improvements documented.",
+    "clinical.efficiency": "Application-based certification requiring significant program documentation; moderate exam cost.",
+    "clinical.caseloadApplicability": "Applicable only within dedicated cardiac rehab programs; zero applicability in general outpatient or acute care.",
+    "clinical.reimbursement": "CMS requires AACVPR-recognized program standards for cardiac rehab Medicare billing (CPT 93797/93798); strongest billing gating of any rehab cert.",
+    "clinical.marketDemand": "Required or strongly preferred for cardiac rehab program leadership; high demand within narrow field.",
+    "clinical.patientSatisfaction": "Patient-reported quality of life improves significantly; depression reduction is a secondary benefit.",
+    "business.cashPayViability": "Post-MI/CABG patients use insurance-covered Phase II cardiac rehab; cash-pay market is essentially nonexistent.",
+    "business.pricingLeverage": "Reimbursement-rate constrained; no premium positioning available.",
+    "business.marketDifferentiation": "AACVPR brand has facility-level recognition but not consumer-facing differentiation.",
+    "business.ownerLeverage": "Program model is staffable but requires hospital infrastructure and physician medical director.",
+    "business.marketDemand": "Consumers don't shop for AACVPR-branded providers; cardiologist drives referral.",
+    "business.efficiency": "Modest cost but ROI for private practice is weak.",
+    "academicClinical.facultyRecognition": "Well-regarded for cardiopulm faculty lines and recognized as the gold-standard professional organization in the space.",
+    "academicClinical.scholarship": "Strong publication and conference ecosystem via JCRP and AACVPR annual meeting.",
+    "academicClinical.teachingValue": "Directly relevant to cardiopulm content in DPT/MOT curricula.",
+    "academicClinical.evidenceDepth": "Decades of high-quality RCT and meta-analytic support for cardiac rehab.",
+    "academicClinical.facultyDemand": "Listed as preferred in cardiopulm faculty postings, though CCS board specialty is usually preferred over it.",
+    "academicClinical.efficiency": "Reasonable cost/time relative to the academic credibility it confers."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "NICU therapy outcomes (feeding, positioning, development) supported; NTCB certification-specific comparative studies absent.",
+    "clinical.efficiency": "National exam plus 3 years experience and continuing education requirements; moderate cost.",
+    "clinical.caseloadApplicability": "Applicable only in NICU settings; very narrow patient population scope.",
+    "clinical.reimbursement": "NICU therapy billed as OT/PT; specialty certification supports neonatal program documentation and payer authorization.",
+    "clinical.marketDemand": "Valued in NICU therapy positions; moderate demand in academic medical centers with established NICU programs.",
+    "clinical.patientSatisfaction": "Family satisfaction with specialized NICU team is high; parental education component valued.",
+    "business.cashPayViability": "NICU work is hospital-based; no meaningful cash-pay market.",
+    "business.pricingLeverage": "Not applicable to private practice.",
+    "business.marketDifferentiation": "CNT is uncommon but only matters within hospital employers.",
+    "business.ownerLeverage": "Not applicable to a private-practice owner model.",
+    "business.marketDemand": "Direct consumer demand essentially zero.",
+    "business.efficiency": "CNT requires 3,500+ NICU hours plus exam — slow accumulation.",
+    "academicClinical.facultyRecognition": "Respected credential for neonatal faculty/clinical-educator roles.",
+    "academicClinical.scholarship": "Solid neonatal therapy literature; less methodologically dense than NIDCAP.",
+    "academicClinical.teachingValue": "Strong fit for NICU content in peds curricula.",
+    "academicClinical.evidenceDepth": "Reasonable evidence base spanning feeding, positioning, and developmental care.",
+    "academicClinical.facultyDemand": "Preferred for neonatal-focused faculty positions, which are limited.",
+    "academicClinical.efficiency": "Long clinical-hour requirement, but exam itself is efficient."
+  }
+}

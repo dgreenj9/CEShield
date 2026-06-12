@@ -1,0 +1,28 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "No patient outcome benefit from PhD vs clinical doctorate in clinical practice.",
+    "clinical.efficiency": "4-7 year doctoral program; eliminates clinical FTE during training; maximum time investment in allied health.",
+    "clinical.caseloadApplicability": "Zero clinical caseload applicability; relevant only in academic and research settings.",
+    "clinical.reimbursement": "No clinical billing value; academic and research salary only; no CPT code or payer benefit.",
+    "clinical.marketDemand": "Demanded in academic faculty, research scientist, and academic health system leadership roles; not clinical demand.",
+    "clinical.patientSatisfaction": "Patients do not differentiate PhD from clinical doctoral clinicians.",
+    "research.methodologyDepth": "PhD curricula include multi-year coursework in biostatistics, study design, qualitative methods, and mentored independent research culminating in a dissertation.",
+    "research.publicationTrack": "PhD-credentialed PT/OT faculty publish substantially more peer-reviewed papers than clinical-doctorate-only peers (Richter 2008; Jette 2014).",
+    "research.grantReadiness": "Directly prepares trainees to write and win F31/F32, K01/K23, and R-series awards; most NIH rehab K-awardees hold a research doctorate.",
+    "research.pathwayToIndependence": "Near-universal prerequisite for tenure-track PI positions and R01 eligibility in rehab science.",
+    "research.interdisciplinaryFit": "Rehab Science PhDs commonly collaborate across PM&R, bioengineering, neuroscience, public health, and data science.",
+    "research.efficiency": "4-6 years full-time with stipend-level pay; highest opportunity cost of any rehab credential.",
+    "business.cashPayViability": "Consumers rarely choose a clinician because of a PhD; not a cash-pay driver outside niche thought-leader practices.",
+    "business.pricingLeverage": "Can support premium positioning when paired with a clinical brand, but on its own is modest.",
+    "business.marketDifferentiation": "Rare among practicing clinicians, which provides some defensibility.",
+    "business.ownerLeverage": "Doesn't inherently make a practice scalable; depends entirely on the business model built around it.",
+    "business.marketDemand": "Most consumers don't distinguish PhD from DPT.",
+    "business.efficiency": "4-6+ years and major opportunity cost — extremely inefficient for business goals.",
+    "academicClinical.facultyRecognition": "The defining credential for tenure-track faculty roles and the standard for CAPTE/ACOTE programs.",
+    "academicClinical.scholarship": "Built explicitly around producing scholarship; the highest possible score.",
+    "academicClinical.teachingValue": "Anchors curricula, doctoral mentorship, and research methods instruction.",
+    "academicClinical.evidenceDepth": "Holders generate the evidence base itself.",
+    "academicClinical.facultyDemand": "Required or strongly preferred for almost all tenure-track lines.",
+    "academicClinical.efficiency": "Slowest and most expensive pathway, but the necessary one for the tenure track."
+  }
+}

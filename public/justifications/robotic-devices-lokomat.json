@@ -1,0 +1,28 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Enables high-repetition stepping; not superior to dose-matched conventional in Cochrane review. May benefit very early, low-function stroke.",
+    "clinical.efficiency": "Device-specific manufacturer training; requires institutional access to robotic gait system.",
+    "clinical.caseloadApplicability": "Limited by expensive equipment; applicable in neuro gait training at select academic or research centers only.",
+    "clinical.reimbursement": "Very limited insurance coverage; mostly research settings; some WC; primarily institutional or self-pay.",
+    "clinical.marketDemand": "Very limited employer demand; primarily research centers and specialized neuro rehabilitation hospitals.",
+    "clinical.patientSatisfaction": "Novel technology appeals; some patients prefer robotic to manual assistance.",
+    "healthTech.industryPlacement": "Hocoma and similar robotics vendors employ clinical specialists for deployment and training.",
+    "healthTech.vendorDemand": "Narrow but consistent vendor demand for trained clinicians.",
+    "healthTech.salaryPremium": "Modest premium for robotics vendor clinical roles.",
+    "healthTech.technicalSkillDepth": "Hands-on with complex robotic gait systems builds technical literacy.",
+    "healthTech.transitionFit": "Targeted bridge into rehab-robotics industry.",
+    "healthTech.efficiency": "High capital/time cost limits efficiency.",
+    "business.cashPayViability": "Some neuro/SCI families will pay cash for robotic gait training, but the population is small and competing with research centers offering it free.",
+    "business.pricingLeverage": "Premium pricing is possible per session, but the device cost destroys margins unless you have high volume.",
+    "business.marketDifferentiation": "Owning a Lokomat or similar is genuinely differentiating in a regional market — few clinics have one.",
+    "business.ownerLeverage": "Technicians and assistants can deliver robotic gait training under supervision, making this more scalable than personality-based methods.",
+    "business.marketDemand": "Awareness is rising in SCI/stroke communities but still niche; demand is concentrated, not broad.",
+    "business.efficiency": "Capital cost ($300K+) and training time make this one of the least efficient credentials to acquire.",
+    "academicClinical.facultyRecognition": "Not a formal credential but signals neuro-tech expertise; helpful but not decisive for hiring/promotion.",
+    "academicClinical.scholarship": "Robotic gait training has a substantial and growing publication record — strong vehicle for faculty research.",
+    "academicClinical.teachingValue": "Directly relevant to neuro curriculum, lab demonstrations, and emerging tech content in DPT programs.",
+    "academicClinical.evidenceDepth": "Multiple RCTs and systematic reviews exist; evidence is mixed but the literature base is solid.",
+    "academicClinical.facultyDemand": "Occasionally preferred at programs with neuro-tech labs, but not a common job-posting requirement.",
+    "academicClinical.efficiency": "Requires institutional access to expensive equipment — very poor on a time/cost basis for individuals."
+  }
+}

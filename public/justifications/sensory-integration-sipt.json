@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Systematic reviews inconclusive; studies methodologically limited. Widespread use in ASD and developmental delay not matched by outcome evidence.",
+    "clinical.efficiency": "WPS test publisher certification plus supervised training; significant time and cost.",
+    "clinical.caseloadApplicability": "Applicable to pediatric OT with sensory processing disorder focus; common in pediatric outpatient and school-based OT.",
+    "clinical.reimbursement": "Sensory integration therapy billed under OT codes; variable commercial coverage; Medicaid coverage inconsistent.",
+    "clinical.marketDemand": "Widely sought in pediatric OT positions; strong adoption in school-based and outpatient pediatric OT settings.",
+    "clinical.patientSatisfaction": "Families of sensory-sensitive children report perceived improvement.",
+    "business.cashPayViability": "Pediatric SI clinics are a well-established cash-pay model; parents pay out-of-pocket when insurance denies.",
+    "business.pricingLeverage": "Specialized peds SI clinics command premium rates and waitlists.",
+    "business.marketDifferentiation": "SIPT/CLASI credentialing is recognizable within the peds parent community; meaningful differentiation.",
+    "business.ownerLeverage": "Scalable — multi-therapist SI clinics are a proven model; you can hire and credential staff.",
+    "business.marketDemand": "Strong parent-driven demand, especially in autism and SPD communities.",
+    "business.efficiency": "Expensive multi-module training (USC/CLASI) and equipment-heavy clinic build-out reduce efficiency.",
+    "academicClinical.facultyRecognition": "Respected in OT academia, particularly peds tracks, though not a board-level credential.",
+    "academicClinical.scholarship": "Active research community (Ayres Sensory Integration fidelity studies), but uneven publication output.",
+    "academicClinical.teachingValue": "Core for peds OT faculty teaching SI and developmental coursework.",
+    "academicClinical.evidenceDepth": "Evidence remains contested; mixed systematic reviews limit academic weight.",
+    "academicClinical.facultyDemand": "Listed in peds-focused OT faculty postings but not universal.",
+    "academicClinical.efficiency": "High cost and time investment for moderate academic recognition."
+  }
+}

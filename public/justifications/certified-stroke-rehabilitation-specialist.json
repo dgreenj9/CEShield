@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Stroke rehabilitation evidence is extensive; CSRS certification-specific comparative outcomes not published.",
+    "clinical.efficiency": "Online course plus exam; moderate cost; accessible and self-directed pathway.",
+    "clinical.caseloadApplicability": "Applicable in stroke rehabilitation and neuro PT/OT settings; moderate population scope.",
+    "clinical.reimbursement": "Stroke rehab billed under standard codes; CSRS supports specialty program documentation and may strengthen payer authorization.",
+    "clinical.marketDemand": "Moderate demand in stroke rehabilitation units and neuro specialty programs.",
+    "clinical.patientSatisfaction": "Stroke survivors and families value specialized knowledge of stroke recovery trajectory.",
+    "business.cashPayViability": "Stroke survivors are typically Medicare and rarely pay cash outside of niche intensive neuro-recovery programs.",
+    "business.pricingLeverage": "Some intensive neuro-recovery cash programs use CSRS holders to justify premium pricing, but the credential alone doesn't move the price.",
+    "business.marketDifferentiation": "Less common than CBIS in outpatient and signals neuro depth, but still not a household name to referrers or patients.",
+    "business.ownerLeverage": "Intensive stroke recovery clinics can scale with CSRS-trained staff, though insurance dynamics and clinician scarcity cap growth.",
+    "business.marketDemand": "Consumers know 'stroke rehab' but not the certification; demand is provider-driven, not credential-driven.",
+    "business.efficiency": "ASNR's CSRS is moderately priced and exam-based with prep coursework — reasonable but not cheap.",
+    "academicClinical.facultyRecognition": "Carries some weight in neuro faculty hiring as a focused signal, though NCS remains the gold standard.",
+    "academicClinical.scholarship": "Stroke is one of the most published neuro topics and CSRS holders frequently contribute to that literature.",
+    "academicClinical.teachingValue": "Directly enhances neuro curriculum content — stroke is a major DPT/MOT teaching block.",
+    "academicClinical.evidenceDepth": "Stroke rehab has the deepest RCT and systematic-review base in neurorehab (CIMT, task-specific training, etc.).",
+    "academicClinical.facultyDemand": "Occasionally preferred in neuro faculty postings but not commonly required.",
+    "academicClinical.efficiency": "Less time-intensive than a neuro residency while still signaling subject-matter expertise."
+  }
+}

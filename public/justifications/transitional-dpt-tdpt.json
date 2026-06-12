@@ -1,0 +1,28 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "No studies demonstrate patient outcome differences between tDPT and MPT graduates.",
+    "clinical.efficiency": "18-24 month post-professional degree program; significant tuition cost.",
+    "clinical.caseloadApplicability": "Credential equivalency degree; no specific caseload benefit beyond existing MPT training.",
+    "clinical.reimbursement": "No billing benefit; credential equivalency has no payer impact; does not unlock new CPT codes or billing categories.",
+    "clinical.marketDemand": "Limited employer differentiation from DPT; minimal demand advantage over clinical doctorate.",
+    "clinical.patientSatisfaction": "Patients do not distinguish tDPT from DPT or MPT.",
+    "research.methodologyDepth": "Most tDPT programs include EBP and research-methods coursework, but at a lighter level than a research doctorate.",
+    "research.publicationTrack": "Some capstone work is publishable but the degree is not designed to produce a publication record.",
+    "research.grantReadiness": "Limited grant training; insufficient on its own to lead funded research.",
+    "research.pathwayToIndependence": "Acts as a credential bridge, not an independent-researcher pipeline; PhD/DSc is the real path.",
+    "research.interdisciplinaryFit": "Coursework exposes clinicians to evidence synthesis across disciplines.",
+    "research.efficiency": "Online, part-time format makes it relatively low-cost as a stepping stone.",
+    "business.cashPayViability": "Adds 'DPT' to your name but doesn't create any cash-pay service line.",
+    "business.pricingLeverage": "Doesn't change payer rates; modest title benefit only.",
+    "business.marketDifferentiation": "Now common among older PTs; minimal differentiation.",
+    "business.ownerLeverage": "Doesn't enable a scalable practice model.",
+    "business.marketDemand": "Consumers don't distinguish DPT from MPT.",
+    "business.efficiency": "Moderate tuition and 1-2 years of part-time study for limited business return.",
+    "academicClinical.facultyRecognition": "Useful entry credential for clinical-track or adjunct faculty roles where a DPT is required, though tenure-track typically needs a PhD/EdD.",
+    "academicClinical.scholarship": "Some programs include a capstone but scholarship output is modest.",
+    "academicClinical.teachingValue": "Closes the credential gap to teach in DPT programs.",
+    "academicClinical.evidenceDepth": "EBP coursework typical but variable across programs.",
+    "academicClinical.facultyDemand": "Frequently required or preferred for clinical faculty positions.",
+    "academicClinical.efficiency": "Tuition and time are nontrivial relative to a PhD-track alternative."
+  }
+}

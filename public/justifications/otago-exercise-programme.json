@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "35-40% fall reduction replicated across 5 RCTs and validated meta-analyses. Mortality benefit in 80+ demonstrated.",
+    "clinical.efficiency": "2-3 day in-person training; moderate cost ~$300-500; widely available through PT schools.",
+    "clinical.caseloadApplicability": "Applicable to any clinician treating older adults; broad in geriatric PT/OT but limited in pediatric or acute care.",
+    "clinical.reimbursement": "Standard PT billing; Otago documentation supports fall prevention medical necessity across Medicare and commercial payers.",
+    "clinical.marketDemand": "Growing employer demand in skilled nursing, home health, and geriatric outpatient; increasingly listed in fall prevention roles.",
+    "clinical.patientSatisfaction": "Acceptable to older adults but motivation to sustain exercise without accountability can wane; lower than group-based programs.",
+    "business.cashPayViability": "Some adult-children-of-aging-parents will pay for fall prevention, but most demand routes through Medicare home health/outpatient.",
+    "business.pricingLeverage": "Generic evidence-based protocol with no proprietary moat; doesn't command premium rates.",
+    "business.marketDifferentiation": "Common in geriatric circles; widely available and not particularly defensible.",
+    "business.ownerLeverage": "Highly protocol-based and staff-deliverable — good leverage for a falls-prevention program model.",
+    "business.marketDemand": "Consumers ask for 'balance training,' not Otago by name.",
+    "business.efficiency": "Free/low-cost online training; very high efficiency.",
+    "academicClinical.facultyRecognition": "Known and respected in geriatric academic circles but not a CV centerpiece.",
+    "academicClinical.scholarship": "Robust implementation science and effectiveness literature.",
+    "academicClinical.teachingValue": "Excellent teaching exemplar for evidence-based falls prevention in geriatric coursework.",
+    "academicClinical.evidenceDepth": "Multiple RCTs and Cochrane-level support for falls reduction.",
+    "academicClinical.facultyDemand": "Rarely listed as required/preferred in postings.",
+    "academicClinical.efficiency": "Free, fast — strong ROI for academic CV padding in geriatrics."
+  }
+}

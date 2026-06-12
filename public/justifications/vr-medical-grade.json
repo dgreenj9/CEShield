@@ -1,0 +1,28 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Non-inferior to conventional therapy for UE stroke; pain reduction in acute and chronic pain; not clearly superior in most meta-analyses.",
+    "clinical.efficiency": "Device-specific manufacturer training; varies by manufacturer; moderate time; ongoing technology updates.",
+    "clinical.caseloadApplicability": "Applicable in neuro, vestibular, and pain settings; current barrier is equipment cost and institutional access.",
+    "clinical.reimbursement": "Limited dedicated CPT codes; mostly billed under existing PT/OT therapeutic activity codes; coverage emerging.",
+    "clinical.marketDemand": "Limited current employer demand; growing in academic medical centers and technology-forward practices.",
+    "clinical.patientSatisfaction": "High engagement, especially in pediatric populations; gamification increases intrinsic motivation.",
+    "healthTech.industryPlacement": "FDA-cleared VR rehab vendors (MindMaze, XRHealth, AppliedVR) hire clinical specialists for deployment and content development.",
+    "healthTech.vendorDemand": "Growing but still niche demand from a small set of VR therapeutics companies.",
+    "healthTech.salaryPremium": "Modest premium; most roles are clinical-specialist tier rather than engineering.",
+    "healthTech.technicalSkillDepth": "Builds familiarity with XR platforms, content design, and outcome measurement but limited true engineering depth.",
+    "healthTech.transitionFit": "Reasonable bridge for clinicians wanting to enter digital therapeutics.",
+    "healthTech.efficiency": "Vendor-specific training is relatively short for the door it opens.",
+    "business.cashPayViability": "Novelty draws cash-pay interest in pain, neuro recovery, and pediatrics; not yet mainstream.",
+    "business.pricingLeverage": "Tech-forward positioning supports premium framing in concierge/cash settings.",
+    "business.marketDifferentiation": "Few clinics offer medical-grade VR; strong current differentiator.",
+    "business.ownerLeverage": "Equipment-driven service; staff can deliver once trained.",
+    "business.marketDemand": "Consumer curiosity is high but conversion to paying patients is moderate.",
+    "business.efficiency": "Hardware/software costs are significant; training itself is fast.",
+    "academicClinical.facultyRecognition": "Emerging area; research-active faculty value it but it's not a promotion criterion.",
+    "academicClinical.scholarship": "Rapidly growing publication base in neuro rehab, pain, and pediatrics.",
+    "academicClinical.teachingValue": "Useful for technology/innovation electives and neuro labs.",
+    "academicClinical.evidenceDepth": "Moderate evidence — promising in stroke, pain distraction, balance.",
+    "academicClinical.facultyDemand": "Not yet a common posting requirement.",
+    "academicClinical.efficiency": "Modest time investment with rising academic value."
+  }
+}

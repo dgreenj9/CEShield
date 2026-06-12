@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Small studies positive for posture and pain; effect sizes modest. No high-quality RCTs.",
+    "clinical.efficiency": "760+ hour training over 1-2 years; significant time and cost investment.",
+    "clinical.caseloadApplicability": "Applicable to posture, movement dysfunction, and chronic pain; limited practitioner base reduces setting availability.",
+    "clinical.reimbursement": "Almost exclusively self-pay; minimal third-party coverage; HSA/FSA may apply in some cases.",
+    "clinical.marketDemand": "Virtually no employer demand in clinical settings; primarily private practice and wellness settings.",
+    "clinical.patientSatisfaction": "Clients who complete series report meaningful subjective change.",
+    "business.cashPayViability": "Almost entirely cash-pay clientele willing to pay premium for sessions.",
+    "business.pricingLeverage": "Established premium brand; $150-250+ per session common.",
+    "business.marketDifferentiation": "Distinctive credential, relatively rare, defensible brand identity.",
+    "business.ownerLeverage": "Highly practitioner-dependent; difficult to scale beyond the owner.",
+    "business.marketDemand": "Strong in wellness-oriented markets but niche overall.",
+    "business.efficiency": "Training is multi-year and expensive — poor efficiency.",
+    "academicClinical.facultyRecognition": "Not recognized in PT/OT academia; viewed as alternative bodywork.",
+    "academicClinical.scholarship": "Very limited peer-reviewed scholarship.",
+    "academicClinical.teachingValue": "Not integrated into mainstream DPT/MOT curricula.",
+    "academicClinical.evidenceDepth": "Sparse evidence, mostly small case series.",
+    "academicClinical.facultyDemand": "Effectively never required or preferred.",
+    "academicClinical.efficiency": "Years of training for minimal academic return."
+  }
+}

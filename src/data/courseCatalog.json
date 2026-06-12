@@ -1,0 +1,17 @@
+{
+  "_schema": {
+    "_comment": "CE course catalog for compliance-gap recommendations. Add entries as affiliate deals are signed (or as plain vetted links — set sponsored:false). Empty catalog renders nothing anywhere.",
+    "id": "unique slug, e.g. 'medbridge-implicit-bias-2hr'",
+    "title": "course title as the provider lists it",
+    "provider": "provider name, e.g. 'MedBridge'",
+    "url": "the link — your affiliate/tracking URL once a deal exists",
+    "sponsored": "true if the url earns a referral fee (renders disclosure + rel=sponsored)",
+    "hours": "CE hours the course grants (number)",
+    "category": "mandatory-category key it satisfies — must match stateRules category keys, e.g. 'implicitBias', 'culturalCompetency', 'alzheimers', 'ethics', or 'general'",
+    "states": "array of state codes where accepted, e.g. ['IL','WI'] — or ['*'] for all covered states",
+    "licenseTypes": "array, e.g. ['PT','OT'] — or ['*']",
+    "format": "online | live | hybrid",
+    "priceUsd": "number or null if variable"
+  },
+  "courses": []
+}

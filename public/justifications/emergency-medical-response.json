@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "No rehabilitation outcome data; value is emergency preparedness not functional improvement.",
+    "clinical.efficiency": "2-day first responder course; low cost; widely available; quick to obtain.",
+    "clinical.caseloadApplicability": "Applicable specifically in sideline sports coverage and event medical response; not relevant in clinical settings.",
+    "clinical.reimbursement": "Enables sports venue coverage contracts; sideline work is fee-for-service or contract-based; not standard insurance billing.",
+    "clinical.marketDemand": "Required for most sideline coverage positions in sports medicine and athletic training contexts.",
+    "clinical.patientSatisfaction": "Athlete confidence in sideline coverage is meaningful but not a clinical outcome.",
+    "business.cashPayViability": "Consumers don't pay PTs for emergency response skills; not a billable or marketable service.",
+    "business.pricingLeverage": "No pricing power — it's a safety credential, not a revenue driver.",
+    "business.marketDifferentiation": "Common safety cert; offers zero brand differentiation in private practice.",
+    "business.ownerLeverage": "Doesn't generate services others can deliver; purely a compliance/safety layer.",
+    "business.marketDemand": "Patients don't seek out PTs for EMR credentials.",
+    "business.efficiency": "Short and cheap to obtain, so the small value it does provide comes at low cost.",
+    "academicClinical.facultyRecognition": "Not a faculty credential; doesn't appear on promotion files in any meaningful way.",
+    "academicClinical.scholarship": "No scholarly footprint associated with holders.",
+    "academicClinical.teachingValue": "Useful for clinical-site safety roles, sports residency oversight, or on-field coverage instruction.",
+    "academicClinical.evidenceDepth": "Underlying BLS/first-aid protocols are evidence-based but the cert itself isn't a research domain.",
+    "academicClinical.facultyDemand": "Occasionally required for faculty supervising sports/athletic settings but not broadly demanded.",
+    "academicClinical.efficiency": "Cheap, fast, and easy to renew — efficient for the narrow value it provides."
+  }
+}

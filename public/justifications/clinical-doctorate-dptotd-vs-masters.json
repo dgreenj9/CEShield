@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Consistent finding: no patient outcome difference between DPT and MPT graduates.",
+    "clinical.efficiency": "Post-professional DPT or OTD programs typically 18-36 months; significant tuition cost.",
+    "clinical.caseloadApplicability": "Credential equivalency; no specific caseload benefit over clinical master's training.",
+    "clinical.reimbursement": "No billing difference between DPT and MPT graduates in most payer contracts; credential equivalency only.",
+    "clinical.marketDemand": "DPT now considered standard entry-level credential; widely required by employers even without outcome advantage.",
+    "clinical.patientSatisfaction": "Patients do not distinguish degree level in satisfaction surveys.",
+    "business.cashPayViability": "'Doctor' title supports direct-access cash-pay branding, but doesn't itself drive willingness to pay.",
+    "business.pricingLeverage": "Modest pricing lift from doctoral title in some markets; largely commoditized since DPT is now entry-level.",
+    "business.marketDifferentiation": "Now the entry-level standard for PT, so it differentiates only against legacy MPTs.",
+    "business.ownerLeverage": "Doctoral framing supports brand authority and direct-access positioning for a clinic.",
+    "business.marketDemand": "Consumers respond to 'doctor' framing in marketing, though they often conflate with MD.",
+    "business.efficiency": "3+ years and $100K+ — extremely inefficient if the only goal is business leverage.",
+    "academicClinical.facultyRecognition": "Terminal clinical doctorate is the minimum credential for most tenure-track clinical faculty lines; OTD increasingly preferred for OT faculty.",
+    "academicClinical.scholarship": "Doctoral capstones produce some scholarship, but DPT/OTD are clinical, not research, doctorates.",
+    "academicClinical.teachingValue": "Required to teach in most CAPTE/ACOTE programs and signals clinical depth.",
+    "academicClinical.evidenceDepth": "Curricula vary widely; not itself a marker of evidence-based depth.",
+    "academicClinical.facultyDemand": "Explicitly required or strongly preferred in nearly all PT/OT faculty postings.",
+    "academicClinical.efficiency": "Time and cost are high, but it is a prerequisite, not optional — efficiency framing barely applies."
+  }
+}

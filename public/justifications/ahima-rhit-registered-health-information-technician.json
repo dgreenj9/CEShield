@@ -1,0 +1,10 @@
+{
+  "justifications": {
+    "healthTech.industryPlacement": "RHIT holders concentrate in hospital HIM and payer coding departments; movement into EHR vendor or digital-health product roles is uncommon without additional credentials.",
+    "healthTech.vendorDemand": "Epic, Oracle Health, and digital-health employers rarely list RHIT in postings, preferring RHIA, CPHIMS, or clinical informatics backgrounds.",
+    "healthTech.salaryPremium": "Median medical records specialist pay (~$48K) is materially below experienced PT/OT clinical wages, producing a negative premium for rehab clinicians.",
+    "healthTech.technicalSkillDepth": "Curriculum covers ICD-10/CPT coding, data integrity, and HIM workflows but lacks SQL, data science, or build-level EHR configuration depth.",
+    "healthTech.transitionFit": "Provides HIM/coding vocabulary useful for documentation and revenue-cycle roles, but does not leverage rehab clinical expertise as a differentiator.",
+    "healthTech.efficiency": "Requires an accredited associate degree or equivalent HIM coursework plus exam fee — moderate time/cost burden, higher than a short course but lower than a master's."
+  }
+}

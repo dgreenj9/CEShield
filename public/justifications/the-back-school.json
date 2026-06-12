@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Back education programs have moderate evidence for pain and disability; this specific certification not outcome-validated.",
+    "clinical.efficiency": "Online certification course; low cost; quick to complete; self-directed.",
+    "clinical.caseloadApplicability": "LBP is among the most common conditions in PT; back education applicable across outpatient, occupational, and community.",
+    "clinical.reimbursement": "Back school group education programs have modest billing codes; commercial coverage variable; low overall billing impact.",
+    "clinical.marketDemand": "Limited employer recognition as distinct certification; LBP education is expected baseline competency.",
+    "clinical.patientSatisfaction": "Patients value understanding their back pain; education reduces fear.",
+    "business.cashPayViability": "Back school content is largely employer/insurer-funded ergonomics and education, not cash pay.",
+    "business.pricingLeverage": "Generic content with little brand pull; commoditized.",
+    "business.marketDifferentiation": "Dated brand with limited differentiation from any outpatient PT offering education.",
+    "business.ownerLeverage": "Protocolized education scales reasonably across staff and employer contracts.",
+    "business.marketDemand": "Low consumer recognition.",
+    "business.efficiency": "Inexpensive and quick to obtain.",
+    "academicClinical.facultyRecognition": "Not viewed as a scholarly or faculty-relevant credential.",
+    "academicClinical.scholarship": "Generic 'back school' literature has largely been superseded by modern pain science and exercise evidence.",
+    "academicClinical.teachingValue": "Minor — modern curricula teach pain neuroscience and biopsychosocial models instead.",
+    "academicClinical.evidenceDepth": "Traditional back school education shows weak to modest effects in current systematic reviews.",
+    "academicClinical.facultyDemand": "Effectively never required or preferred.",
+    "academicClinical.efficiency": "Cheap and fast but with low academic relevance."
+  }
+}

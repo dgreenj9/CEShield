@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Adherence improvement translates to better functional outcomes; direct MI-on-clinical-outcomes evidence is indirect but consistent.",
+    "clinical.efficiency": "2-3 day workshop standard; low-moderate cost; widely available online and in-person.",
+    "clinical.caseloadApplicability": "Applicable to virtually every patient encounter; behavior change is relevant across all diagnoses and settings.",
+    "clinical.reimbursement": "No MI-specific billing code; billed as component of counseling or health coaching services; billing value is incidental.",
+    "clinical.marketDemand": "Frequently valued in behavioral health, primary care rehab, and chronic disease settings; growing recognition in PT/OT.",
+    "clinical.patientSatisfaction": "Patients report feeling heard and autonomous; reduces resistance to therapy.",
+    "business.cashPayViability": "Consumers don't seek out an MI-certified provider; it's a communication skill, not a sellable service line.",
+    "business.pricingLeverage": "No premium pricing — invisible to patients and won't justify higher rates.",
+    "business.marketDifferentiation": "Common across behavioral health and increasingly rehab; minimal defensibility.",
+    "business.ownerLeverage": "Can train staff to deliver consistent patient engagement, improving adherence and outcomes — modest systems value.",
+    "business.marketDemand": "Low DTC recognition; patients don't search for MI.",
+    "business.efficiency": "Short courses widely available, often under $500 and a weekend.",
+    "academicClinical.facultyRecognition": "Valued as a teachable competency aligned with biopsychosocial care, but not a tenure-mover.",
+    "academicClinical.scholarship": "Robust literature in behavior change, adherence, chronic disease; supports research lines.",
+    "academicClinical.teachingValue": "Highly relevant to DPT/OT curricula on patient communication, behavior change, chronic care.",
+    "academicClinical.evidenceDepth": "Decades of RCT and meta-analytic evidence across substance use, chronic disease, rehab adherence.",
+    "academicClinical.facultyDemand": "Occasionally listed as preferred for behavioral/health-promotion teaching lines.",
+    "academicClinical.efficiency": "Cheap, fast, easily embedded into faculty development."
+  }
+}

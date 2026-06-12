@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "MS-specific rehab (fatigue management, aquatic, exercise) shows meaningful functional gains; certification vs non-certification comparison absent.",
+    "clinical.efficiency": "MSCS exam plus experience requirements; moderate cost; annual CE required.",
+    "clinical.caseloadApplicability": "Applicable to clinicians in MS specialty programs or neuro practices with significant MS caseload.",
+    "clinical.reimbursement": "MS rehab billed under standard PT/OT codes; MSCS supports specialty MS clinic billing and program recognition in some health systems.",
+    "clinical.marketDemand": "Valued in MS specialty clinics and neuro rehab programs; limited demand outside these settings.",
+    "clinical.patientSatisfaction": "MS patients value clinicians who understand disease trajectory and variability.",
+    "business.cashPayViability": "MS patients are typically insurance-covered with chronic, complex needs; out-of-pocket spend on a niche specialist is rare.",
+    "business.pricingLeverage": "Low consumer awareness of the credential limits ability to charge premium rates above standard neuro PT.",
+    "business.marketDifferentiation": "Genuinely rare credential — few clinicians hold it, so it differentiates within neuro niches.",
+    "business.ownerLeverage": "Hard to scale a practice around MS care; patient volume is limited and reimbursement-bound.",
+    "business.marketDemand": "Consumers don't search for 'MSCS' — they search for neurologists and MS centers.",
+    "business.efficiency": "Moderate cost and exam-based; reasonable time investment relative to specialty depth.",
+    "academicClinical.facultyRecognition": "Recognized specialty credential signaling neuro expertise, useful for neuro faculty hires though not as weighty as NCS.",
+    "academicClinical.scholarship": "Holders often publish in MS rehab; modest but real scholarly footprint.",
+    "academicClinical.teachingValue": "Adds depth to neuro curriculum modules on progressive disease and disability management.",
+    "academicClinical.evidenceDepth": "MS rehab literature is solid with multiple RCTs on exercise and fatigue management.",
+    "academicClinical.facultyDemand": "Rarely listed as preferred in job postings — NCS is far more commonly cited.",
+    "academicClinical.efficiency": "Cheaper and faster than a neuro residency; reasonable path to documented specialty."
+  }
+}

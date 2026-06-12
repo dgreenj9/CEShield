@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Manipulation benefits well-documented for LBP; certification-specific outcomes not studied.",
+    "clinical.efficiency": "Advanced manual therapy coursework plus competency exam; moderate investment.",
+    "clinical.caseloadApplicability": "Applicable to spinal and musculoskeletal caseloads; useful in outpatient ortho and spine specialty settings.",
+    "clinical.reimbursement": "Billed under manual therapy codes; no certification-specific premium over general manual therapy billing.",
+    "clinical.marketDemand": "Moderate employer demand in orthopedic PT; valued alongside COMT and MDT training.",
+    "clinical.patientSatisfaction": "Rapid pain relief from manipulation creates high immediate satisfaction.",
+    "business.cashPayViability": "Spinal manipulation is a marquee cash-pay manual therapy service; consumers actively seek it out.",
+    "business.pricingLeverage": "Supports premium per-visit rates in manual therapy and sports practices.",
+    "business.marketDifferentiation": "Differentiates a PT from generalist competitors, though OCS/FAAOMPT clinicians offer overlapping skills.",
+    "business.ownerLeverage": "Skill is clinician-dependent; hard to staff other therapists at the same level, limiting owner leverage.",
+    "business.marketDemand": "Patients shop for 'PT who adjusts' — meaningful direct consumer demand, especially competing with chiro.",
+    "business.efficiency": "Weekend-course format with reasonable cost — high return per hour invested.",
+    "academicClinical.facultyRecognition": "Continuing-ed certificate; not weighted for tenure beyond general manual-therapy competence.",
+    "academicClinical.scholarship": "Manipulation has a literature base, but the cert itself isn't tied to scholarly output.",
+    "academicClinical.teachingValue": "Useful for teaching ortho/manual labs in DPT programs.",
+    "academicClinical.evidenceDepth": "Spinal manipulation for LBP/neck pain has decent RCT evidence, though mechanism debate continues.",
+    "academicClinical.facultyDemand": "Rarely listed in faculty postings — programs prefer OCS or FAAOMPT.",
+    "academicClinical.efficiency": "Cheap and fast, but limited academic currency reduces the efficiency-to-payoff ratio."
+  }
+}

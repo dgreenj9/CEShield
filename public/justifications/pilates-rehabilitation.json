@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Network meta-analysis shows superiority for chronic LBP vs general exercise; pain and disability improvements consistent.",
+    "clinical.efficiency": "200+ hour training programs; significant time and cost (~$2,000-4,000); multiple provider options.",
+    "clinical.caseloadApplicability": "Applicable to musculoskeletal and postural conditions; practical in clinics with Pilates equipment integration.",
+    "clinical.reimbursement": "Billed as therapeutic exercise under PT codes; no Pilates-specific billing code; self-pay Pilates studio revenue possible.",
+    "clinical.marketDemand": "Growing demand in boutique PT practices and wellness-integrated clinics; not widely listed in standard PT postings.",
+    "clinical.patientSatisfaction": "High patient engagement; mind-body connection aspect appeals to chronic pain population.",
+    "business.cashPayViability": "Pilates clients reliably pay cash; established premium wellness market.",
+    "business.pricingLeverage": "Equipment-based sessions command $80–150+ cash; rehab-credentialed instructors charge more.",
+    "business.marketDifferentiation": "PT + Pilates rehab is a recognized hybrid niche, though instructor supply is growing.",
+    "business.ownerLeverage": "Studio model lets you hire instructors and scale beyond owner-delivered care.",
+    "business.marketDemand": "Very strong DTC awareness — clients seek out Pilates explicitly.",
+    "business.efficiency": "Comprehensive certifications are expensive and lengthy (hundreds of hours).",
+    "academicClinical.facultyRecognition": "Commercial wellness credential — minimal academic weight.",
+    "academicClinical.scholarship": "Limited high-quality literature; mostly small trials.",
+    "academicClinical.teachingValue": "Could enrich an elective but not core curriculum.",
+    "academicClinical.evidenceDepth": "Mixed — some support for low back pain, otherwise modest.",
+    "academicClinical.facultyDemand": "Essentially never required for academic positions.",
+    "academicClinical.efficiency": "High time cost with little academic return."
+  }
+}

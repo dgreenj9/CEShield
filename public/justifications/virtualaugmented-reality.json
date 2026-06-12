@@ -1,0 +1,28 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "VR delivery evidence growing; training certification as distinct predictor of patient outcomes not studied.",
+    "clinical.efficiency": "Device and platform-specific training; growing availability; moderate cost; hardware investment separate.",
+    "clinical.caseloadApplicability": "Growing applicability in neuro, vestibular, and pain rehabilitation; limited by equipment access.",
+    "clinical.reimbursement": "Remote patient monitoring and therapeutic activity codes applicable; some coverage for VR-based vestibular and pain management emerging.",
+    "clinical.marketDemand": "Limited current employer demand; growing in technology-forward neuro and pain programs.",
+    "clinical.patientSatisfaction": "VR engagement is high when technology is implemented smoothly.",
+    "healthTech.industryPlacement": "Vendor-specific XR training feeds into a small but expanding set of digital therapeutic companies.",
+    "healthTech.vendorDemand": "Demand exists but is fragmented across vendors and still maturing.",
+    "healthTech.salaryPremium": "Limited premium given thin evidence base and immature reimbursement.",
+    "healthTech.technicalSkillDepth": "Exposure to XR development concepts without core engineering skill.",
+    "healthTech.transitionFit": "Provides a credible entry signal for clinicians moving into XR product/clinical roles.",
+    "healthTech.efficiency": "Short vendor courses relative to optionality created.",
+    "business.cashPayViability": "Consumers don't seek 'VR therapy' by name; it's a delivery tool, not a service patients pay premium for directly.",
+    "business.pricingLeverage": "Novelty allows modest premium in niches (peds, neuro, pain) but tech depreciates fast and no strong consumer brand.",
+    "business.marketDifferentiation": "Still uncommon in clinics, gives a marketing angle, but no protected credential and easily copied by buying hardware.",
+    "business.ownerLeverage": "Tech-based, so other clinicians can deliver once trained — scales reasonably across staff.",
+    "business.marketDemand": "Low direct consumer recognition; patients don't search for VR-certified PTs.",
+    "business.efficiency": "Training is short but hardware/software costs and content curation are ongoing — moderate-to-poor ROI for small practice.",
+    "academicClinical.facultyRecognition": "Emerging area of interest but not a recognized credential for promotion or hiring; viewed as a research/teaching interest.",
+    "academicClinical.scholarship": "Growing publication base in neuro/peds/pain rehab; good vehicle for grants and presentations.",
+    "academicClinical.teachingValue": "Useful for tech-in-rehab and neuro modules but peripheral to core DPT curriculum.",
+    "academicClinical.evidenceDepth": "Mixed — some RCTs in stroke/pain but heterogeneous interventions and small samples limit strength.",
+    "academicClinical.facultyDemand": "Rarely listed in faculty job postings; not a required or strongly preferred qualification.",
+    "academicClinical.efficiency": "No standardized cert path; time investment is mostly self-directed and variable."
+  }
+}

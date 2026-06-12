@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "The interventions ITPT teaches — cervicovestibular rehab, graded sub-threshold aerobic exercise, trajectory-targeted treatment — have genuine RCT support (Schneider 2014; Leddy 2019, 2021) and Amsterdam consensus endorsement; tempered because the credential is only ~7.25 hours and leans on the contested ImPACT test.",
+    "clinical.caseloadApplicability": "Concussion is a meaningful but narrow slice of outpatient practice, concentrated in sports/ortho/neuro clinics serving adolescent and collegiate athletes.",
+    "clinical.reimbursement": "No payer recognizes ITPT with enhanced rates; concussion rehab bills under standard vestibular/therapeutic exercise codes, and ImPACT test administration is often non-reimbursable for PTs.",
+    "clinical.efficiency": "At $349 and ~7.25 contact hours fully online with CE credit in select states, one of the cheapest, fastest niche credentials available.",
+    "clinical.marketDemand": "All 50 states have youth concussion return-to-play laws and physician networks increasingly route persistent-symptom patients to vestibular-trained PTs; demand is real but regionally concentrated.",
+    "clinical.patientSatisfaction": "Anxious athletes and parents value visible concussion credentials and a structured return-to-play pathway; active rehab also returns athletes faster than rest-based care.",
+    "business.cashPayViability": "Concussion is a legitimate cash and contract niche: baseline testing packages for schools and clubs, plus cash-pay return-to-play programs insurance handles poorly.",
+    "business.pricingLeverage": "Specialized concussion programs command modest premiums in cash markets, but ITPT itself has little consumer recognition — leverage comes from the program built around it.",
+    "business.marketDifferentiation": "Directory listing plus alignment with the physician/AT networks already using ImPACT (the dominant baseline-testing platform) is a concrete referral differentiator in sports-heavy markets.",
+    "business.ownerLeverage": "School and team testing contracts are recurring, delegable revenue; at $349 per clinician an owner can credential an entire staff cheaply and brand a concussion service line.",
+    "business.marketDemand": "Mandatory return-to-play legislation and rising youth-sport concussion awareness sustain steady niche demand, though volume depends on local sports density.",
+    "business.efficiency": "Minimal cost and one weekend of effort to unlock a marketable service line — among the highest effort-to-payoff ratios in the matrix.",
+    "academicClinical.facultyRecognition": "A low-hour vendor credential, not an ABPTS specialization; ImPACT's commercial nature and contested test psychometrics limit academic cachet.",
+    "academicClinical.scholarship": "Concussion is a hot research area with abundant funding, but ITPT confers no research training — at best an entry point into a productive niche.",
+    "academicClinical.teachingValue": "The clinical-trajectories framework, VOMS-style screening, and graded-exertion content map onto DPT neuro/vestibular and sports curricula.",
+    "academicClinical.evidenceDepth": "Split: concussion rehab rests on solid RCTs and the Amsterdam 2022 consensus, but the ImPACT test shows unstable test-retest reliability (Broglio 2007; Resch 2013) and inconsistent validity (Alsalaheen 2016).",
+    "academicClinical.facultyDemand": "DPT programs hire for board certifications, PhDs, and funded research — not vendor concussion credentials.",
+    "academicClinical.efficiency": "Cheap and fast enough to add for curricular credibility without meaningful opportunity cost."
+  }
+}

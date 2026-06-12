@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Home health PT/OT effectiveness is supported; ACHH certification-specific outcomes not studied.",
+    "clinical.efficiency": "APTA ACHH online self-assessment plus documentation; relatively accessible; moderate cost.",
+    "clinical.caseloadApplicability": "Applicable to any home health clinician; home health is a major and growing PT/OT employment setting.",
+    "clinical.reimbursement": "Home health services billed through Medicare OASIS per-visit; ACHH does not specifically unlock new codes but supports program quality.",
+    "clinical.marketDemand": "Moderate demand in home health agencies; ACHH credential valued but not yet widely required.",
+    "clinical.patientSatisfaction": "Patients prefer receiving care at home; specialized home health clinicians improve confidence.",
+    "business.cashPayViability": "Home health is a Medicare-dominated, episodic-payment world — essentially no cash-pay consumer market.",
+    "business.pricingLeverage": "Rates are dictated by PDGM and agency contracts; little room for premium pricing.",
+    "business.marketDifferentiation": "Modest signal in HH hiring but invisible to consumers.",
+    "business.ownerLeverage": "Could support a home-health agency model, but regulatory barriers and reimbursement constrain scaling.",
+    "business.marketDemand": "Patients don't ask for it by name; referrals come through discharge planners.",
+    "business.efficiency": "Relatively short APTA-style competency course at modest cost.",
+    "academicClinical.facultyRecognition": "Recognized within geriatric/HH-focused programs but not a major promotion credential.",
+    "academicClinical.scholarship": "Some applied literature on HH outcomes but not a hot scholarship area.",
+    "academicClinical.teachingValue": "Useful for DPT instructors covering geriatrics, HH, and post-acute content.",
+    "academicClinical.evidenceDepth": "Underlying HH interventions have moderate evidence base.",
+    "academicClinical.facultyDemand": "Rarely listed as preferred in faculty postings.",
+    "academicClinical.efficiency": "Quick and affordable for what it offers."
+  }
+}

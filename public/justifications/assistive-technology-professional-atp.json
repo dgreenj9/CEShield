@@ -1,0 +1,28 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Appropriate AT selection improves function and participation; ATP-specific outcome comparison not studied.",
+    "clinical.efficiency": "RESNA ATP exam plus 1,500 hours experience; moderate cost and time.",
+    "clinical.caseloadApplicability": "Applicable in assistive technology clinics, seating programs, and SCI/neuro specialty settings.",
+    "clinical.reimbursement": "ATP supports complex rehab technology documentation; CMS recognizes ATP for equipment prescription; reduces inappropriate device denials.",
+    "clinical.marketDemand": "Consistent demand in AT clinics and CRT programs; required by some equipment suppliers.",
+    "clinical.patientSatisfaction": "Patients with AT needs value expert device matching.",
+    "healthTech.industryPlacement": "RESNA ATP is the standard credential for AT vendors (Permobil, Sunrise, Tobii Dynavox) hiring clinical reps.",
+    "healthTech.vendorDemand": "Consistent demand from complex rehab and AAC manufacturers.",
+    "healthTech.salaryPremium": "Modest premium; ATP is often a requirement for industry roles rather than a bonus.",
+    "healthTech.technicalSkillDepth": "Develops practical fluency across mobility, AAC, EADL, and sensor-based AT.",
+    "healthTech.transitionFit": "One of the most established clinical-to-industry credentials in AT/medtech.",
+    "healthTech.efficiency": "Reasonable cost relative to industry recognition.",
+    "business.cashPayViability": "Complex rehab tech (wheelchairs, AT) is overwhelmingly insurance/Medicaid-funded; minimal cash-pay.",
+    "business.pricingLeverage": "ATP is required for supplier billing in many states — leverage is regulatory, not premium-pricing.",
+    "business.marketDifferentiation": "RESNA ATP is distinctive among clinicians and is a gatekeeper credential for seating clinics.",
+    "business.ownerLeverage": "Seating clinic model exists but is supplier-dependent and margin-thin.",
+    "business.marketDemand": "Consumers don't seek ATPs directly; referrals flow through physicians and case managers.",
+    "business.efficiency": "Single exam, modest cost — efficient to obtain.",
+    "academicClinical.facultyRecognition": "Recognized in OT/PT academia for AT/seating coursework, particularly in OT programs.",
+    "academicClinical.scholarship": "RESNA conference community produces some scholarship; not a major research engine.",
+    "academicClinical.teachingValue": "Valuable for teaching wheelchair seating, AT, and accessibility content.",
+    "academicClinical.evidenceDepth": "Seating/AT evidence is moderate, with growing outcomes literature.",
+    "academicClinical.facultyDemand": "Occasionally preferred for AT-focused faculty lines, especially OT.",
+    "academicClinical.efficiency": "Single exam path makes it an efficient academic credential add-on."
+  }
+}

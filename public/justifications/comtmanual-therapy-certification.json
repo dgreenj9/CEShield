@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Manual therapy for MSK conditions has consistent short-term benefit; durability and superiority over other PT approaches less clear.",
+    "clinical.efficiency": "Orthopaedic Manual PT programs require significant coursework (60+ hours); moderate total cost.",
+    "clinical.caseloadApplicability": "Applicable to the majority of outpatient orthopedic and musculoskeletal caseloads; broadly useful in general PT.",
+    "clinical.reimbursement": "Billed under manual therapy CPT 97140; Medicare and commercial coverage standard; no COMT-specific billing premium over general manual therapy.",
+    "clinical.marketDemand": "Consistently sought in outpatient orthopedic PT postings; manual therapy proficiency widely valued.",
+    "clinical.patientSatisfaction": "Hands-on care is highly valued; patients often prefer manual therapy.",
+    "business.cashPayViability": "Manual therapy is a flagship cash-pay offering — patients regularly pay out of pocket for hands-on care.",
+    "business.pricingLeverage": "COMT supports premium hourly rates and is widely marketed to consumers seeking 'expert' manual care.",
+    "business.marketDifferentiation": "Common enough among orthopedic PTs that it differentiates less than it used to; FAAOMPT is the higher-tier signal.",
+    "business.ownerLeverage": "Manual therapy practices tend to be personality-driven; hard to scale because patients book the clinician, not the brand.",
+    "business.marketDemand": "Consumers recognize 'manual therapy' broadly even if not the COMT acronym specifically.",
+    "business.efficiency": "Substantial time and cost (often 150-300 hours plus exams), moderate efficiency.",
+    "academicClinical.facultyRecognition": "Respected, especially when paired with OCS or FAAOMPT; stronger than commercial brand certs but below board specialties.",
+    "academicClinical.scholarship": "Manual therapy has a robust research literature; faculty with this credential publish actively.",
+    "academicClinical.teachingValue": "Highly relevant for orthopedic and musculoskeletal coursework — core curricular content.",
+    "academicClinical.evidenceDepth": "Solid evidence base with many RCTs and systematic reviews, though effect sizes are often modest.",
+    "academicClinical.facultyDemand": "Commonly listed as preferred for ortho faculty roles, particularly when paired with OCS.",
+    "academicClinical.efficiency": "Moderate time investment; less efficient than OCS alone but stackable with it."
+  }
+}

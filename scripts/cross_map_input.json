@@ -1,0 +1,874 @@
+[
+  {
+    "name": "Pulmonary Rehabilitation",
+    "type": "Program",
+    "discipline": "PT/OT/RT",
+    "evidence": "Cochrane meta-analysis: 6MWD +49m, HRQL improvement, 68% fewer exacerbation hospitalizations. 5-year sustained benefit. Medicare-covered. CMS reimburses certified programs.",
+    "clinicalOutcomes": 90,
+    "efficiency": 42
+  },
+  {
+    "name": "AACVPR Cardiac Rehabilitation",
+    "type": "Certification",
+    "discipline": "PT/OT/RN",
+    "evidence": "Cochrane: 26% cardiovascular mortality reduction. AACVPR-certified programs show 13-15% lower 1-year mortality vs non-certified. Medicare Phase II/III covered.",
+    "clinicalOutcomes": 88,
+    "efficiency": 40
+  },
+  {
+    "name": "Otago Exercise Programme",
+    "type": "Program",
+    "discipline": "PT",
+    "evidence": "35-40% fall reduction in RCTs. Medicare covers delivery. $938 cost savings per participant. Campbell et al meta-analysis: NNT=11 to prevent one fall.",
+    "clinicalOutcomes": 87,
+    "efficiency": 70
+  },
+  {
+    "name": "LSVT LOUD",
+    "type": "Certification",
+    "discipline": "SLP",
+    "evidence": "50+ peer-reviewed studies. 5.05-point UPDRS-III motor improvement. Voice amplitude gains maintained at 2 years. ASHA-recognized evidence-based practice.",
+    "clinicalOutcomes": 80,
+    "efficiency": 48
+  },
+  {
+    "name": "ACRM Cognitive Rehabilitation",
+    "type": "Certification",
+    "discipline": "OT/PT/SLP",
+    "evidence": "258 studies reviewed. 78.7% of comparisons favor structured cognitive rehab. ACRM Practice Standards. Gains in memory, attention, and executive function post-ABI.",
+    "clinicalOutcomes": 72,
+    "efficiency": 45
+  },
+  {
+    "name": "ACLM Lifestyle Medicine",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "6-pillar framework (nutrition, activity, sleep, stress, substance, relationships). 6,700+ certified practitioners. Type 2 DM remission documented with intensive lifestyle.",
+    "clinicalOutcomes": 75,
+    "efficiency": 55
+  },
+  {
+    "name": "HABIT/HABIT-ILE",
+    "type": "Program",
+    "discipline": "OT/PT",
+    "evidence": "Superior to conventional therapy for bilateral CP in RCTs. 60-90 hour intensive format. HABIT-ILE adds lower extremity to original hand-arm protocol.",
+    "clinicalOutcomes": 78,
+    "efficiency": 35
+  },
+  {
+    "name": "MBSR (Mindfulness-Based Stress Reduction)",
+    "type": "Certification",
+    "discipline": "All",
+    "evidence": "Neuroplasticity evidence; fMRI shows amygdala volume reduction after 8 weeks. JAMA meta-analysis: moderate effect on anxiety, depression, pain.",
+    "clinicalOutcomes": 73,
+    "efficiency": 52
+  },
+  {
+    "name": "Matter of Balance",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "$938 annual medical cost reduction per participant. Group-based, lay-leader delivery model. CDC-endorsed. Fear of falling and activity restriction reduced.",
+    "clinicalOutcomes": 70,
+    "efficiency": 85
+  },
+  {
+    "name": "Telehealth Cardiac/Pulmonary",
+    "type": "Technology",
+    "discipline": "PT/OT",
+    "evidence": "30-50% cost reduction vs in-person; maintained clinical effectiveness in RCTs. Wearable integration enables remote monitoring. Post-COVID access expansion.",
+    "clinicalOutcomes": 74,
+    "efficiency": 65
+  },
+  {
+    "name": "Motivational Interviewing",
+    "type": "Certification",
+    "discipline": "All",
+    "evidence": "1,800+ RCTs across health behaviors. Improves adherence 1.5-2x in physical rehab when integrated. MINT certification widely recognized.",
+    "clinicalOutcomes": 68,
+    "efficiency": 72
+  },
+  {
+    "name": "CIMT (Constraint-Induced Movement)",
+    "type": "Certification",
+    "discipline": "OT/PT",
+    "evidence": "EXCITE trial: 14-point Wolf Motor Function Test improvement sustained 2 years. Pediatric CIMT superior for hemiplegia. Neuroplasticity mechanism established.",
+    "clinicalOutcomes": 83,
+    "efficiency": 38
+  },
+  {
+    "name": "Health Coaching",
+    "type": "Certification",
+    "discipline": "All",
+    "evidence": "New CPT codes 99401-99404 enable billing. Growing insurance recognition. Behavior change theory base; outcomes strongest for chronic disease management.",
+    "clinicalOutcomes": 65,
+    "efficiency": 68
+  },
+  {
+    "name": "Athletic Training BOC",
+    "type": "Certification",
+    "discipline": "AT",
+    "evidence": "22% injury reduction with AT presence. 50% reduction in school injury costs. 92% diagnostic accuracy. NATA consensus: AT reduces catastrophic injury risk.",
+    "clinicalOutcomes": 70,
+    "efficiency": 22
+  },
+  {
+    "name": "CDC STEADI Fall Prevention",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "Addresses $31B Medicare fall injury spend. EHR-integrated screening. Trifecta approach: screen, assess, intervene. CDC-backed algorithm.",
+    "clinicalOutcomes": 72,
+    "efficiency": 95
+  },
+  {
+    "name": "Physical Therapy Fellowship",
+    "type": "Fellowship",
+    "discipline": "PT",
+    "evidence": "Superior patient outcomes vs residency-trained (25,843-patient study). ABPTRFE-accredited. Fastest pathway to clinical expert performance.",
+    "clinicalOutcomes": 68,
+    "efficiency": 18
+  },
+  {
+    "name": "Pilates Rehabilitation",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "Network meta-analysis: superior to other exercise for chronic LBP. Gains in core strength, posture, and flexibility. Polestar/STOTT certifications most recognized.",
+    "clinicalOutcomes": 65,
+    "efficiency": 58
+  },
+  {
+    "name": "AI + Wearable Sensors",
+    "type": "Technology",
+    "discipline": "All",
+    "evidence": "89% ROM accuracy vs goniometry. 98% gait pattern recognition. Remote monitoring enables between-session feedback. FDA Class II cleared devices available.",
+    "clinicalOutcomes": 62,
+    "efficiency": 65
+  },
+  {
+    "name": "ABCDEF ICU Bundle",
+    "type": "Protocol",
+    "discipline": "PT/OT/RT",
+    "evidence": "68% mortality reduction when fully implemented. Reduced ICU-acquired weakness, delirium, and ventilator days. SCCM-endorsed. Strong implementation science base.",
+    "clinicalOutcomes": 78,
+    "efficiency": 78
+  },
+  {
+    "name": "LSVT BIG",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "Parkinson's mobility and gait improvement. Amplitude-based training; complements LSVT LOUD. 4x/week \u00d7 4 weeks protocol. UPDRS motor score improvements.",
+    "clinicalOutcomes": 72,
+    "efficiency": 48
+  },
+  {
+    "name": "IAYT Yoga Therapy",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "800-hour training standard. Growing evidence for chronic pain, anxiety, and cancer fatigue. IAYT accreditation establishes minimum training floor.",
+    "clinicalOutcomes": 60,
+    "efficiency": 42
+  },
+  {
+    "name": "Alexander Technique",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "ATEAM trial (BMJ): 24-lesson AT superior to massage for chronic LBP at 1 year. Limited evidence outside musculoskeletal. 1,600-hour training requirement.",
+    "clinicalOutcomes": 58,
+    "efficiency": 12
+  },
+  {
+    "name": "IMOT Intensive Therapy",
+    "type": "Program",
+    "discipline": "PT/OT",
+    "evidence": "94% of children achieve motor improvements in camp format. 60-120 hour intensive delivery. Emerging evidence for CP and ABI populations.",
+    "clinicalOutcomes": 65,
+    "efficiency": 32
+  },
+  {
+    "name": "Blood Flow Restriction (BFR)",
+    "type": "Technology",
+    "discipline": "PT",
+    "evidence": "Equal strength gains to high-load resistance at 20-50% 1RM loads. Zero serious adverse events in systematic reviews. Post-surgical and elderly applications strongest.",
+    "clinicalOutcomes": 68,
+    "efficiency": 78
+  },
+  {
+    "name": "Ergonomic Assessment",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "OSHA compliance standard. Work-related MSK injury prevention evidence consistent. Return-to-work facilitation reduces indemnity costs.",
+    "clinicalOutcomes": 55,
+    "efficiency": 65
+  },
+  {
+    "name": "Vestibular Rehabilitation",
+    "type": "Training",
+    "discipline": "PT",
+    "evidence": "Strong CPG support from AAN and AAO-HNS. 6-week median treatment. Canalith repositioning >90% effective for BPPV. Cochrane support for chronic vestibular dysfunction.",
+    "clinicalOutcomes": 72,
+    "efficiency": 62
+  },
+  {
+    "name": "VR (Medical-Grade)",
+    "type": "Technology",
+    "discipline": "All",
+    "evidence": "Engagement tool with comparable outcomes to conventional rehab for UE stroke and pain management. FDA-cleared products (MindMaze, XRHealth) available.",
+    "clinicalOutcomes": 58,
+    "efficiency": 45
+  },
+  {
+    "name": "NIDCAP Neonatal",
+    "type": "Certification",
+    "discipline": "OT/PT/SLP",
+    "evidence": "2.32-week reduced NICU LOS. $50K savings per 6 infants. Neurobehavioral outcomes improved at 9 months. NIDCAP Federation International certification.",
+    "clinicalOutcomes": 68,
+    "efficiency": 25
+  },
+  {
+    "name": "Neonatal Therapy Certification",
+    "type": "Certification",
+    "discipline": "PT/OT/SLP",
+    "evidence": "NTCB certification. Standardized NICU competency framework. Feeding, positioning, and developmental outcomes in premature infants.",
+    "clinicalOutcomes": 62,
+    "efficiency": 30
+  },
+  {
+    "name": "Exoskeleton Training",
+    "type": "Technology",
+    "discipline": "PT",
+    "evidence": "FDA-approved (Ekso, ReWalk, Indego). Enables stepping in complete SCI. No superiority over intensive conventional gait training in ambulatory populations.",
+    "clinicalOutcomes": 55,
+    "efficiency": 28
+  },
+  {
+    "name": "Transplant Rehabilitation",
+    "type": "Specialty",
+    "discipline": "PT/OT",
+    "evidence": "15-20% mortality reduction with ERAS protocols incorporating rehabilitation. Pre-habilitation before transplant reduces post-operative complications.",
+    "clinicalOutcomes": 62,
+    "efficiency": 45
+  },
+  {
+    "name": "Robotic Devices (Lokomat)",
+    "type": "Technology",
+    "discipline": "PT",
+    "evidence": "Safe; FDA-cleared. Cochrane: no superiority over intensive conventional gait training. Best evidence for high-dose repetitions in early stroke.",
+    "clinicalOutcomes": 52,
+    "efficiency": 28
+  },
+  {
+    "name": "Feldenkrais Method",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "Balance improvement in elderly consistent. MS and chronic pain applications emerging. 4-year practitioner training. Limited RCT quality.",
+    "clinicalOutcomes": 50,
+    "efficiency": 15
+  },
+  {
+    "name": "SOS Feeding Approach",
+    "type": "Certification",
+    "discipline": "OT/SLP",
+    "evidence": "Sequential-Oral-Sensory approach for pediatric feeding disorders. Feasibility studies positive. Lacks RCT evidence; widely used in pediatric feeding clinics.",
+    "clinicalOutcomes": 48,
+    "efficiency": 52
+  },
+  {
+    "name": "COMT/Manual Therapy Certification",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "NAIOMT COMT certification. Manual therapy benefits for LBP, neck pain, and headache documented across multiple meta-analyses. Certification-specific outcomes limited.",
+    "clinicalOutcomes": 58,
+    "efficiency": 45
+  },
+  {
+    "name": "McKenzie Method (MDT)",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "Directional preference classification guides treatment. Cochrane: moderate evidence for acute/subacute LBP. Classification reliability good when trained. Widely available globally.",
+    "clinicalOutcomes": 63,
+    "efficiency": 62
+  },
+  {
+    "name": "Pain Neuroscience Education",
+    "type": "Training",
+    "discipline": "PT/OT",
+    "evidence": "Moderate effects on pain catastrophizing, disability, and pain intensity when combined with other interventions. Most effective as adjunct, not standalone.",
+    "clinicalOutcomes": 58,
+    "efficiency": 72
+  },
+  {
+    "name": "FCE (Functional Capacity Eval)",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "Workers' comp standard for RTW decision-making. Isernhagen, EPIC, and Blankenship systems most validated. Reliability moderate; predictive validity for RTW is limited.",
+    "clinicalOutcomes": 52,
+    "efficiency": 55
+  },
+  {
+    "name": "Certified Hand Therapist (CHT)",
+    "type": "Certification",
+    "discipline": "OT/PT",
+    "evidence": "Improved outcomes for complex hand conditions and post-surgical recovery. HTCC certification requires 3 years experience + 4000 hours. Insurance-recognized specialty.",
+    "clinicalOutcomes": 55,
+    "efficiency": 28
+  },
+  {
+    "name": "Early Intervention Specialist",
+    "type": "Certification",
+    "discipline": "PT/OT/SLP",
+    "evidence": "IDEA Part C federally mandated. 1/3 of EI graduates need no additional support at school age. \u00a32.40 ROI per \u00a31 invested (UK data). Brain plasticity window maximized.",
+    "clinicalOutcomes": 60,
+    "efficiency": 52
+  },
+  {
+    "name": "Multiple Sclerosis Certified Specialist",
+    "type": "Certification",
+    "discipline": "PT/OT/SLP",
+    "evidence": "CMSC certification with MS-specific protocols. Fatigue management, mobility, and cognition outcomes documented in MS populations.",
+    "clinicalOutcomes": 52,
+    "efficiency": 38
+  },
+  {
+    "name": "Neurodevelopmental Treatment (NDT)",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "Positive outcomes for CP and stroke. Systematic reviews: beneficial but not superior to other approaches when dose-matched. No certified vs non-certified studies.",
+    "clinicalOutcomes": 50,
+    "efficiency": 32
+  },
+  {
+    "name": "Orthopedic Clinical Specialist (OCS)",
+    "type": "Board Cert",
+    "discipline": "PT",
+    "evidence": "ABPTS board certification. No demonstrated effectiveness difference vs non-certified. Evidence suggests better value per dollar for MSK care.",
+    "clinicalOutcomes": 52,
+    "efficiency": 22
+  },
+  {
+    "name": "BOC-Orthopedic Specialty",
+    "type": "Board Cert",
+    "discipline": "AT",
+    "evidence": "Athletic training orthopedic specialization. NATA-aligned certification. Limited comparative outcome studies vs generalist AT.",
+    "clinicalOutcomes": 48,
+    "efficiency": 25
+  },
+  {
+    "name": "Sports Clinical Specialist (SCS)",
+    "type": "Board Cert",
+    "discipline": "PT",
+    "evidence": "ABPTS board certification. Limited evidence of outcome differences. Efficiency gains from advanced sports medicine knowledge possible.",
+    "clinicalOutcomes": 48,
+    "efficiency": 22
+  },
+  {
+    "name": "Telehealth/Digital Health",
+    "type": "Training",
+    "discipline": "All",
+    "evidence": "Effective for musculoskeletal, mental health, and chronic disease management. No certification-specific outcomes; skills-based training is primary value.",
+    "clinicalOutcomes": 50,
+    "efficiency": 65
+  },
+  {
+    "name": "Wound Care Specialist",
+    "type": "Certification",
+    "discipline": "PT/OT/RN",
+    "evidence": "40-60% amputation reduction in certified wound centers. ANCC/WOCN certification. Limited PT/OT-specific outcome data vs RN/MD wound specialists.",
+    "clinicalOutcomes": 55,
+    "efficiency": 45
+  },
+  {
+    "name": "Certified Aging in Place Specialist (CAPS)",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "NAHB certification. Home modification planning for aging adults. Limited outcome data on falls prevented or ADL maintained post-modification.",
+    "clinicalOutcomes": 45,
+    "efficiency": 68
+  },
+  {
+    "name": "ACSM Clinical Exercise Physiologist",
+    "type": "Certification",
+    "discipline": "EP",
+    "evidence": "ACSM-CEP credential. Exercise testing and prescription in clinical populations. Limited comparison to non-certified EP outcomes.",
+    "clinicalOutcomes": 50,
+    "efficiency": 42
+  },
+  {
+    "name": "Certified Strength & Conditioning (CSCS)",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "NSCA credential for athletic performance. Not rehabilitation-specific. Limited evidence of superiority over standard PT for clinical outcomes.",
+    "clinicalOutcomes": 45,
+    "efficiency": 52
+  },
+  {
+    "name": "Certified Brain Injury Specialist",
+    "type": "Certification",
+    "discipline": "PT/OT/SLP",
+    "evidence": "BIAA CBIS certification. Standardized care protocols for TBI populations. No comparative outcome studies vs non-certified clinicians.",
+    "clinicalOutcomes": 48,
+    "efficiency": 55
+  },
+  {
+    "name": "Certified Stroke Rehabilitation Specialist",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "CSRS certification. Stroke-specific rehabilitation protocols. No comparative outcome data vs non-certified stroke rehab.",
+    "clinicalOutcomes": 48,
+    "efficiency": 58
+  },
+  {
+    "name": "Hippotherapy",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "AHA-PATH certification. High patient satisfaction but small effect sizes in RCTs. Beneficial for CP, MS, and ASD in feasibility studies.",
+    "clinicalOutcomes": 40,
+    "efficiency": 22
+  },
+  {
+    "name": "Robotic Upper Limb",
+    "type": "Technology",
+    "discipline": "OT",
+    "evidence": "Cochrane: no superiority over dose-matched conventional OT for upper limb stroke. High repetition capacity. FDA-cleared devices (InMotion ARM, Amadeo).",
+    "clinicalOutcomes": 42,
+    "efficiency": 28
+  },
+  {
+    "name": "Certified Mulligan Practitioner",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "Mobilization with movement (MWM) technique. Immediate pain relief documented for shoulder, ankle, knee, and cervical spine in RCTs. Long-term superiority not established.",
+    "clinicalOutcomes": 45,
+    "efficiency": 55
+  },
+  {
+    "name": "Pelvic Floor Rehabilitation (PRPC)",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "APTA PRPC certification. Cochrane: pelvic floor PT superior to watchful waiting for stress/urge urinary incontinence. Large underserved population.",
+    "clinicalOutcomes": 50,
+    "efficiency": 35
+  },
+  {
+    "name": "Women's Health Clinical Specialist",
+    "type": "Board Cert",
+    "discipline": "PT",
+    "evidence": "ABPTS WCS board certification. Pelvic floor, obstetric, and oncology rehabilitation. Limited outcome research for certification specifically; evidence base for interventions growing.",
+    "clinicalOutcomes": 55,
+    "efficiency": 38
+  },
+  {
+    "name": "Certified Driver Rehabilitation Specialist",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "CDRS certification. Driving evaluation and adaptive equipment prescription. Functional independence outcome (return to driving) is meaningful for patient autonomy.",
+    "clinicalOutcomes": 42,
+    "efficiency": 45
+  },
+  {
+    "name": "Pediatric Clinical Specialist (PCS)",
+    "type": "Board Cert",
+    "discipline": "PT",
+    "evidence": "ABPTS board certification. No comparative outcome studies vs non-PCS-certified pediatric PT. Expertise signal for employers.",
+    "clinicalOutcomes": 40,
+    "efficiency": 25
+  },
+  {
+    "name": "Board Certification in Pediatrics",
+    "type": "Board Cert",
+    "discipline": "OT",
+    "evidence": "AOTA certification. Pediatric OT specialty credential. No comparative outcome studies vs non-certified pediatric OT.",
+    "clinicalOutcomes": 38,
+    "efficiency": 28
+  },
+  {
+    "name": "Virtual/Augmented Reality",
+    "type": "Training",
+    "discipline": "All",
+    "evidence": "Emerging technology. VR training certifications are largely vendor-specific. Insufficient peer-reviewed evidence for training certification outcomes.",
+    "clinicalOutcomes": 42,
+    "efficiency": 48
+  },
+  {
+    "name": "Ventilator Weaning",
+    "type": "Protocol",
+    "discipline": "RT/PT",
+    "evidence": "RT-led protocolized weaning reduces ventilator days. PT/OT early mobility integration reduces ICU-acquired weakness. PT-specific weaning certification role limited.",
+    "clinicalOutcomes": 40,
+    "efficiency": 35
+  },
+  {
+    "name": "Lymphedema (CLT/LANA)",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "LANA examination. Complete Decongestive Therapy (CDT) shows consistent volume reduction in systematic reviews. 200-hour training standard. Insurance-recognized.",
+    "clinicalOutcomes": 45,
+    "efficiency": 38
+  },
+  {
+    "name": "Seating and Mobility Specialist",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "SMS certification from RESNA. Complex wheelchair and seating prescription. Reduces pressure injuries and improves participation.",
+    "clinicalOutcomes": 40,
+    "efficiency": 38
+  },
+  {
+    "name": "Dry Needling",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "Mixed systematic review evidence. Most effective for trigger point pain short-term. State-dependent practice. IL permits PT dry needling with training.",
+    "clinicalOutcomes": 40,
+    "efficiency": 68
+  },
+  {
+    "name": "TPI Golf Certification",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "Titleist Performance Institute credential. Sport-specific movement screening for golf. Limited peer-reviewed clinical outcome data for rehabilitation context.",
+    "clinicalOutcomes": 35,
+    "efficiency": 78
+  },
+  {
+    "name": "ASTYM Therapy",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "Soft tissue mobilization technique. Limited comparative evidence vs IASTM or standard manual therapy. Training required for certification.",
+    "clinicalOutcomes": 36,
+    "efficiency": 62
+  },
+  {
+    "name": "Rolfing/Structural Integration",
+    "type": "Certification",
+    "discipline": "MT",
+    "evidence": "Systematic reviews find insufficient evidence. Small studies suggest postural and pain benefits. 700-hour training. Not covered by most payers.",
+    "clinicalOutcomes": 32,
+    "efficiency": 22
+  },
+  {
+    "name": "Therapeutic Pain Specialist",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "TPS certification. Pain neuroscience education advanced application. Limited outcome studies specific to this credential.",
+    "clinicalOutcomes": 36,
+    "efficiency": 55
+  },
+  {
+    "name": "Craniosacral Therapy/Upledger",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "Systematic reviews find insufficient evidence. CSF rhythm detection reliability very low in blinded studies. Theoretical mechanism lacks anatomical support.",
+    "clinicalOutcomes": 14,
+    "efficiency": 35
+  },
+  {
+    "name": "Certified Low Vision Therapist",
+    "type": "Certification",
+    "discipline": "OT",
+    "evidence": "CLVT certification from Academy for Certification of Vision Rehabilitation. Vision rehabilitation functional outcomes documented. Limited comparative studies.",
+    "clinicalOutcomes": 32,
+    "efficiency": 42
+  },
+  {
+    "name": "Suit Therapy",
+    "type": "Equipment",
+    "discipline": "PT/OT",
+    "evidence": "TheraSuit/Adeli suit. Multiple studies: no additional benefit over control PT when dose-matched. High family interest but evidence does not support premium use.",
+    "clinicalOutcomes": 28,
+    "efficiency": 38
+  },
+  {
+    "name": "Advanced Competency in Home Health",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "ACHH certification from APTA. Home health specialty competency. No comparative outcome studies vs non-certified home health PT/OT.",
+    "clinicalOutcomes": 28,
+    "efficiency": 58
+  },
+  {
+    "name": "Barral Institute Certification",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "Visceral and neural manipulation. Systematic reviews find insufficient evidence. Detection reliability unstudied. Theoretical mechanisms not supported by anatomy.",
+    "clinicalOutcomes": 16,
+    "efficiency": 18
+  },
+  {
+    "name": "Transitional DPT (tDPT)",
+    "type": "Degree",
+    "discipline": "PT",
+    "evidence": "No outcome improvements documented vs MPT graduates. Primarily credential equivalency degree. Administrative/career value without clinical outcome benefit.",
+    "clinicalOutcomes": 25,
+    "efficiency": 22
+  },
+  {
+    "name": "Physical Therapy Residency",
+    "type": "Training",
+    "discipline": "PT",
+    "evidence": "ABPTRFE-accredited. Surprising finding: worse efficiency than entry-level in large comparative study (25,843 patients). Fellowship outperforms residency. May reflect case complexity.",
+    "clinicalOutcomes": 28,
+    "efficiency": 18
+  },
+  {
+    "name": "Certified Exercise Expert for Aging Adults",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "CEEAA certification from APTA. Exercise prescription for older adults. No comparative outcome studies vs non-certified.",
+    "clinicalOutcomes": 22,
+    "efficiency": 75
+  },
+  {
+    "name": "Geriatric Clinical Specialist (GCS)",
+    "type": "Board Cert",
+    "discipline": "PT",
+    "evidence": "ABPTS board certification. No comparative outcome studies despite relevance to aging population. Signals geriatric expertise.",
+    "clinicalOutcomes": 28,
+    "efficiency": 28
+  },
+  {
+    "name": "Neurologic Clinical Specialist (NCS)",
+    "type": "Board Cert",
+    "discipline": "PT",
+    "evidence": "ABPTS board certification. No outcome data despite high-need neurological population. Signals specialty expertise.",
+    "clinicalOutcomes": 30,
+    "efficiency": 28
+  },
+  {
+    "name": "Board Certification in Gerontology",
+    "type": "Board Cert",
+    "discipline": "OT",
+    "evidence": "BCG certification from AOTA. Geriatric OT specialty. No comparative outcome studies.",
+    "clinicalOutcomes": 22,
+    "efficiency": 28
+  },
+  {
+    "name": "AOTA Board Certifications (Physical Rehab)",
+    "type": "Board Cert",
+    "discipline": "OT",
+    "evidence": "AOTA BCPR. Zero comparative outcome studies identified across systematic searches. Professional signaling credential.",
+    "clinicalOutcomes": 20,
+    "efficiency": 30
+  },
+  {
+    "name": "AOTA Specialty Certifications",
+    "type": "Board Cert",
+    "discipline": "OT",
+    "evidence": "Driving, Environmental Mod, Feeding, Low Vision, School. No outcome studies across any of these specialty certifications.",
+    "clinicalOutcomes": 18,
+    "efficiency": 32
+  },
+  {
+    "name": "Cardiovascular/Pulmonary Specialist",
+    "type": "Board Cert",
+    "discipline": "PT",
+    "evidence": "ABPTS CCS board certification. No certification-specific outcome studies despite high-need population.",
+    "clinicalOutcomes": 22,
+    "efficiency": 28
+  },
+  {
+    "name": "Certified Spinal Manipulative Therapy",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "Spinal manipulation evidence supports benefit for LBP and neck pain; no specific certification comparison to non-certified manipulators.",
+    "clinicalOutcomes": 24,
+    "efficiency": 55
+  },
+  {
+    "name": "Clinical Doctorate (DPT/OTD) vs Masters",
+    "type": "Degree",
+    "discipline": "PT/OT",
+    "evidence": "No measurable patient outcome differences between DPT and MPT graduates in multiple studies. Credential equivalency; clinical performance is equivalent.",
+    "clinicalOutcomes": 18,
+    "efficiency": 15
+  },
+  {
+    "name": "Sensory Integration (SIPT)",
+    "type": "Certification",
+    "discipline": "OT",
+    "evidence": "SIPT certification widely used in pediatric OT. Limited evidence in systematic reviews despite widespread use. Bundy & Lane systematic review: inconclusive.",
+    "clinicalOutcomes": 18,
+    "efficiency": 25
+  },
+  {
+    "name": "Modern Management of Older Adult",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "CERT-MMOA course from Duke. Geriatric exercise and function focus. Limited comparative outcome data for certified vs non-certified clinicians.",
+    "clinicalOutcomes": 20,
+    "efficiency": 72
+  },
+  {
+    "name": "Assistive Technology Professional (ATP)",
+    "type": "Certification",
+    "discipline": "OT/PT",
+    "evidence": "RESNA ATP credential. AT device selection and application. Technology-focused; no comparative outcome studies for ATP vs non-certified AT provision.",
+    "clinicalOutcomes": 18,
+    "efficiency": 45
+  },
+  {
+    "name": "VitalStim",
+    "type": "Certification",
+    "discipline": "SLP",
+    "evidence": "FDA-cleared for dysphagia. Systematic reviews: insufficient evidence of superiority over standard dysphagia therapy. Sham-controlled RCTs show mixed results.",
+    "clinicalOutcomes": 14,
+    "efficiency": 62
+  },
+  {
+    "name": "Board Certified Specialist in Swallowing",
+    "type": "Board Cert",
+    "discipline": "SLP",
+    "evidence": "BCS-S credential from ASHA. Dysphagia specialty certification. No comparative outcome studies vs non-certified SLP dysphagia management.",
+    "clinicalOutcomes": 14,
+    "efficiency": 30
+  },
+  {
+    "name": "Graston/IASTM",
+    "type": "Certification",
+    "discipline": "PT/OT",
+    "evidence": "Instrument-Assisted Soft Tissue Mobilization. Systematic reviews: weak evidence, inconsistent protocols. Similar to standard manual therapy when dose-matched.",
+    "clinicalOutcomes": 16,
+    "efficiency": 68
+  },
+  {
+    "name": "Emergency Medical Response",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "Sports venue first responder role. No rehabilitation outcome data. Safety and preparedness value for sideline coverage. Primarily a liability/access credential.",
+    "clinicalOutcomes": 8,
+    "efficiency": 88
+  },
+  {
+    "name": "Oncology Clinical Specialist",
+    "type": "Board Cert",
+    "discipline": "PT",
+    "evidence": "ABPTS OncPT board certification. Growing field with emerging evidence. No comparative outcome studies yet between certified and non-certified oncology PT.",
+    "clinicalOutcomes": 12,
+    "efficiency": 32
+  },
+  {
+    "name": "Board Certified Specialist Child Language",
+    "type": "Board Cert",
+    "discipline": "SLP",
+    "evidence": "BCS-CL from ASHA. No comparative outcome studies vs non-certified SLP for child language disorders.",
+    "clinicalOutcomes": 10,
+    "efficiency": 28
+  },
+  {
+    "name": "Board Certified Specialist Fluency",
+    "type": "Board Cert",
+    "discipline": "SLP",
+    "evidence": "BCS-F from ASHA. Stuttering specialty. No comparative outcome studies vs non-certified SLP for fluency disorders.",
+    "clinicalOutcomes": 10,
+    "efficiency": 28
+  },
+  {
+    "name": "BC-ANCDS Neurologic Communication",
+    "type": "Board Cert",
+    "discipline": "SLP",
+    "evidence": "Academy of Neurologic Communication Disorders certification. No comparative outcome studies for aphasia/dysarthria management vs non-certified SLP.",
+    "clinicalOutcomes": 10,
+    "efficiency": 28
+  },
+  {
+    "name": "Clinical Electrophysiology Specialist",
+    "type": "Board Cert",
+    "discipline": "PT",
+    "evidence": "ABPTS ECS board certification. Narrow scope (EMG, NCS, E-stim). No outcome studies. Very small number of active certifications.",
+    "clinicalOutcomes": 10,
+    "efficiency": 32
+  },
+  {
+    "name": "Board Certification Intraoperative Monitoring",
+    "type": "Board Cert",
+    "discipline": "Audiology",
+    "evidence": "BCS-IOM. Intraoperative neurophysiological monitoring specialty. Audiology-adjacent; no comparative outcome studies in rehabilitation context.",
+    "clinicalOutcomes": 8,
+    "efficiency": 28
+  },
+  {
+    "name": "Cochlear Implant Specialty",
+    "type": "Certification",
+    "discipline": "Audiology",
+    "evidence": "CISC certification. Cochlear implant programming and auditory rehabilitation. Device-specific expertise; limited comparative outcome studies.",
+    "clinicalOutcomes": 10,
+    "efficiency": 45
+  },
+  {
+    "name": "CBIT for Tics",
+    "type": "Certification",
+    "discipline": "OT",
+    "evidence": "Comprehensive Behavioral Intervention for Tics. RCT evidence supports CBIT for Tourette syndrome. Very specialized population; OT role emerging.",
+    "clinicalOutcomes": 12,
+    "efficiency": 60
+  },
+  {
+    "name": "Schroth Therapist",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "Scoliosis-specific exercise. Cochrane under review. Several RCTs show Cobb angle improvement. Barcelona Scoliosis Physical Therapy School certification.",
+    "clinicalOutcomes": 12,
+    "efficiency": 42
+  },
+  {
+    "name": "Craniomandibular/TMJ Certification",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "TMD specialty training. PT outcomes for TMD documented in systematic reviews. Certification-specific outcomes not studied.",
+    "clinicalOutcomes": 12,
+    "efficiency": 52
+  },
+  {
+    "name": "Advanced Vestibular PT",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "University of Pittsburgh advanced vestibular program. Builds on basic vestibular training. No comparative outcome data beyond standard vestibular certification.",
+    "clinicalOutcomes": 15,
+    "efficiency": 45
+  },
+  {
+    "name": "Vestibular AIB Certifications",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "AIB-VAM/VRII/VR/VRC certification series. Vestibular specialty training pathway. No comparative outcome studies.",
+    "clinicalOutcomes": 12,
+    "efficiency": 48
+  },
+  {
+    "name": "Vestibular VCC Certification",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "IAMT vestibular certification. Vestibular specialty credential. No comparative outcome studies.",
+    "clinicalOutcomes": 12,
+    "efficiency": 48
+  },
+  {
+    "name": "Occupro Certification",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "Work health and ergonomics platform certification. No clinical outcome data published.",
+    "clinicalOutcomes": 8,
+    "efficiency": 75
+  },
+  {
+    "name": "The Back School",
+    "type": "Certification",
+    "discipline": "PT",
+    "evidence": "Online back pain education and movement certification. No comparative outcome studies vs standard LBP education.",
+    "clinicalOutcomes": 12,
+    "efficiency": 80
+  },
+  {
+    "name": "Kinesio Taping (CKTP)",
+    "type": "Certification",
+    "discipline": "PT/OT/AT",
+    "evidence": "Multiple systematic reviews find insufficient evidence over sham taping. CKTP certification widely held. Pain reduction small and short-term.",
+    "clinicalOutcomes": 20,
+    "efficiency": 82
+  },
+  {
+    "name": "ASHA Board Certified Specialists",
+    "type": "Board Cert",
+    "discipline": "SLP",
+    "evidence": "ASHA BCS portfolio of specialty certifications. Limited research across all SLP specialties on certification-specific outcomes.",
+    "clinicalOutcomes": 8,
+    "efficiency": 30
+  }
+]

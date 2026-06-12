@@ -1,0 +1,28 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "High-repetition training enabled; not superior to matched conventional OT in Cochrane review.",
+    "clinical.efficiency": "Device-specific manufacturer training; requires institutional access to robotic upper limb system.",
+    "clinical.caseloadApplicability": "Limited by expensive robotic equipment access; applicable only at select research or specialty centers.",
+    "clinical.reimbursement": "Very limited insurance coverage; mostly research or cash-pay; some commercial payers beginning to consider coverage.",
+    "clinical.marketDemand": "Limited employer demand; primarily academic stroke centers and research hospitals.",
+    "clinical.patientSatisfaction": "Novel technology appeals; some prefer conventional hands-on OT.",
+    "healthTech.industryPlacement": "Bionik (InMotion), Tyromotion, and Kinarm hire clinical specialists.",
+    "healthTech.vendorDemand": "Small vendor ecosystem with steady clinical-specialist demand.",
+    "healthTech.salaryPremium": "Modest premium aligned with rehab robotics roles.",
+    "healthTech.technicalSkillDepth": "Direct work with sensor-instrumented robotic devices builds device literacy.",
+    "healthTech.transitionFit": "Defined pathway into upper-limb robotics vendor roles.",
+    "healthTech.efficiency": "Costly training; narrow market.",
+    "business.cashPayViability": "Intensive neuro-recovery and stroke programs successfully sell robotic UE training as cash-pay packages.",
+    "business.pricingLeverage": "Tech novelty and visible equipment support premium pricing in neuro-recovery clinics.",
+    "business.marketDifferentiation": "Few clinics own UE robotics, creating clear visual and marketing differentiation.",
+    "business.ownerLeverage": "Once equipment is in place, mid-level clinicians can deliver protocols — moderately scalable beyond the owner.",
+    "business.marketDemand": "Stroke and SCI consumers searching for 'robotic therapy' is a growing but still small segment.",
+    "business.efficiency": "Capital cost of robots ($50k-$300k) is the big barrier; the training itself is brief.",
+    "academicClinical.facultyRecognition": "Useful signal of tech-forward neuro expertise but not a recognized credential for promotion.",
+    "academicClinical.scholarship": "Robotic rehab is an active research area with NIH funding and many publications.",
+    "academicClinical.teachingValue": "Increasingly relevant in neuro curricula as students expect exposure to rehab technology.",
+    "academicClinical.evidenceDepth": "Multiple RCTs and meta-analyses exist; effect sizes are modest but the literature is solid.",
+    "academicClinical.facultyDemand": "Not commonly required in faculty job ads outside research-intensive programs.",
+    "academicClinical.efficiency": "Vendor training is short and cheap relative to traditional credentialing pathways."
+  }
+}

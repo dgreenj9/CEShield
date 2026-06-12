@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Clinical exercise physiology delivers measurable fitness and cardiovascular risk improvements; CEP vs non-CEP outcomes not studied.",
+    "clinical.efficiency": "ACSM exam plus degree and supervised experience requirements; moderate cost.",
+    "clinical.caseloadApplicability": "Applicable in cardiac rehab, diabetes management, and chronic disease programs; limited in standard PT/OT.",
+    "clinical.reimbursement": "EP billing limited in most settings; some cardiac rehab programs bill EP services; primarily institutional salary-based.",
+    "clinical.marketDemand": "Moderate demand in hospital-based fitness, cardiac rehab support, and employee wellness programs.",
+    "clinical.patientSatisfaction": "Patients value structured, science-based exercise prescription.",
+    "business.cashPayViability": "Cardiac/metabolic and longevity-oriented clients increasingly pay cash for clinical exercise programming.",
+    "business.pricingLeverage": "Supports moderate premium in performance/longevity niches, though EP brand is less consumer-known.",
+    "business.marketDifferentiation": "Uncommon credential among PTs; differentiates in cardiopulm/metabolic markets.",
+    "business.ownerLeverage": "Programs can be templated and delivered by staff EPs — decent leverage.",
+    "business.marketDemand": "Limited direct consumer recognition outside cardiac-rehab world.",
+    "business.efficiency": "Requires graduate-level coursework and clinical hours — non-trivial path.",
+    "academicClinical.facultyRecognition": "Respected for cardiopulm content; useful adjunct credential for PT faculty.",
+    "academicClinical.scholarship": "ACSM ecosystem is publication-rich, especially in exercise physiology and cardiometabolic disease.",
+    "academicClinical.teachingValue": "Directly relevant to cardiopulm and exercise prescription curricula.",
+    "academicClinical.evidenceDepth": "Underlying exercise physiology literature is among the strongest in health science.",
+    "academicClinical.facultyDemand": "Occasionally preferred in cardiopulm faculty roles but not commonly required.",
+    "academicClinical.efficiency": "Reasonable cost; meaningful time investment for the academic credit it provides."
+  }
+}

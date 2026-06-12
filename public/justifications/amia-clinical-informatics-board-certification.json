@@ -1,0 +1,10 @@
+{
+  "justifications": {
+    "healthTech.industryPlacement": "AHIC/AMIA-credentialed clinicians are heavily represented in industry informatics, vendor, and payer roles per HIMSS workforce data.",
+    "healthTech.vendorDemand": "Epic, Oracle Health, and major payers list AMIA/AHIC credentialing as preferred in clinical-informatics and product-consultant postings.",
+    "healthTech.salaryPremium": "Credentialed informaticists earn 25-40% above same-experience bedside clinicians, with CMIO/director tracks well above that.",
+    "healthTech.technicalSkillDepth": "The exam validates informatics concepts and governance but does not by itself build deep SQL, build, or data-science skills.",
+    "healthTech.transitionFit": "Explicitly designed to bridge practicing clinicians into informatics leadership, making it one of the cleanest clinical-to-industry credentials.",
+    "healthTech.efficiency": "Requires substantial experience hours, a multi-hundred-dollar exam, and ongoing CE, and the ABMS subspecialty path is closed to non-physicians, lowering accessibility for PT/OT."
+  }
+}

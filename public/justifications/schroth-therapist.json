@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Multiple RCTs show Cobb angle improvement with Schroth; effect sizes moderate. Long-term vs brace comparison ongoing.",
+    "clinical.efficiency": "BSPTS or SOSORT-affiliated training; multi-day course; moderate cost.",
+    "clinical.caseloadApplicability": "Applicable specifically to adolescent and adult scoliosis patients; very limited population scope.",
+    "clinical.reimbursement": "Standard PT billing; no Schroth-specific code; commercial coverage for scoliosis PT varies.",
+    "clinical.marketDemand": "Growing demand in scoliosis specialty clinics and pediatric ortho settings.",
+    "clinical.patientSatisfaction": "Scoliosis patients value non-brace exercise alternatives.",
+    "business.cashPayViability": "Scoliosis families actively seek Schroth and frequently pay cash when insurance won't cover the intensive 1:1 sessions required.",
+    "business.pricingLeverage": "Rarity of certified providers in most US markets supports premium pricing well above standard PT rates.",
+    "business.marketDifferentiation": "Few certified Schroth therapists per metro area; parents search by name for this method, creating real defensibility.",
+    "business.ownerLeverage": "Other certified clinicians can deliver it, but the long certification pathway limits how quickly you can scale a team.",
+    "business.marketDemand": "Strong within scoliosis niche and growing via parent networks, but invisible to the general consumer.",
+    "business.efficiency": "Multi-course pathway (BSPTS/ISST) is expensive and time-intensive, with travel often required.",
+    "academicClinical.facultyRecognition": "Recognized in pediatric/orthopedic niches but not a tenure-track credential; counts as continuing education more than scholarly credential.",
+    "academicClinical.scholarship": "Modest but real literature base; certified clinicians do publish case series and trials on PSSE.",
+    "academicClinical.teachingValue": "Useful for pediatric or spine modules in DPT curricula, particularly orthopedic electives.",
+    "academicClinical.evidenceDepth": "Moderate — several RCTs and systematic reviews support PSSE/Schroth for AIS, though methodological limitations remain.",
+    "academicClinical.facultyDemand": "Rarely listed as preferred in faculty postings; niche enough that programs don't require it.",
+    "academicClinical.efficiency": "Significant time/cost investment relative to academic payoff."
+  }
+}

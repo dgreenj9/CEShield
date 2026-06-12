@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Strongest dyspnea reduction of any intervention in COPD; sustained 5-year gains in 6MWD and HRQL across multiple Cochrane reviews.",
+    "clinical.efficiency": "AACVPR certification requires significant clinical experience documentation plus exam; moderate cost.",
+    "clinical.caseloadApplicability": "Applicable only in dedicated pulmonary rehab programs; very limited in general outpatient or acute care settings.",
+    "clinical.reimbursement": "CMS requires AACVPR-aligned program standards for pulmonary rehab Medicare billing (CPT 94625/94626); direct reimbursement gating.",
+    "clinical.marketDemand": "High demand within pulmonary rehab programs; narrow employer base limits overall demand score.",
+    "clinical.patientSatisfaction": "High adherence when transportation addressed; group format improves social engagement and self-efficacy.",
+    "business.cashPayViability": "COPD/pulmonary patients are overwhelmingly Medicare and insurance-driven; almost no cash-pay market for pulmonary rehab.",
+    "business.pricingLeverage": "Hospital-based reimbursement model with capped rates; no premium pricing pathway.",
+    "business.marketDifferentiation": "Uncommon in private practice but rarely a differentiator that draws consumers in the door.",
+    "business.ownerLeverage": "Could theoretically train staff but the patient pipeline depends on physician referral, not branding.",
+    "business.marketDemand": "Patients seek pulmonologists, not pulm rehab brands; low DTC recognition.",
+    "business.efficiency": "Program training is moderate cost/time but ROI in cash-pay context is poor.",
+    "academicClinical.facultyRecognition": "Recognized as legitimate specialty content area, especially for cardiopulm faculty lines.",
+    "academicClinical.scholarship": "Strong literature base, active research community, AACVPR-affiliated publications.",
+    "academicClinical.teachingValue": "Directly maps to cardiopulm curricular threads in DPT programs.",
+    "academicClinical.evidenceDepth": "Robust RCT and systematic review evidence base for exercise in COPD.",
+    "academicClinical.facultyDemand": "Helpful for cardiopulm faculty posts but most programs hire CCS-credentialed faculty preferentially.",
+    "academicClinical.efficiency": "Reasonable time investment relative to CCS board specialty."
+  }
+}

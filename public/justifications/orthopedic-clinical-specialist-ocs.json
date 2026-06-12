@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "No RCT evidence of superior patient outcomes; diagnostic accuracy advantage possible but not well-studied.",
+    "clinical.efficiency": "ABPTS exam plus 2,000 hours clinical experience requirement; major career investment.",
+    "clinical.caseloadApplicability": "Applicable to the broadest rehabilitation caseload; outpatient orthopedics is the most common PT setting.",
+    "clinical.reimbursement": "No OCS-specific billing premium in most payer contracts; some health systems offer differential pay or referral preference.",
+    "clinical.marketDemand": "Most-held ABPTS certification (~40,000 holders); frequently required or preferred in outpatient PT postings.",
+    "clinical.patientSatisfaction": "Patients may prefer credentialed clinicians; confidence in expert care is meaningful.",
+    "business.cashPayViability": "Ortho cash-pay exists (manual therapy, performance), and OCS lends credibility, though it's not a consumer-facing brand.",
+    "business.pricingLeverage": "Allows modest premium positioning vs generalist PTs in ortho-heavy markets.",
+    "business.marketDifferentiation": "Common enough among ambitious ortho PTs that differentiation is moderate, not elite.",
+    "business.ownerLeverage": "Reproducible skillset — you can hire other OCSs and build an ortho cash-pay practice around it.",
+    "business.marketDemand": "Consumers don't ask for OCS, but referrers and savvy patients recognize it.",
+    "business.efficiency": "Requires either residency or significant clinical hours plus exam — meaningful time cost.",
+    "academicClinical.facultyRecognition": "Gold-standard credential for ortho faculty; heavily weighted in promotion and hiring.",
+    "academicClinical.scholarship": "OCS holders publish frequently in ortho/manual therapy journals.",
+    "academicClinical.teachingValue": "Directly aligned with core DPT ortho curriculum — extremely useful.",
+    "academicClinical.evidenceDepth": "Underlying ortho PT literature is among the deepest in the profession.",
+    "academicClinical.facultyDemand": "Routinely listed as required or strongly preferred in ortho faculty postings.",
+    "academicClinical.efficiency": "ABPTS process is rigorous but well-established; reasonable cost relative to academic payoff."
+  }
+}

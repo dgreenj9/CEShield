@@ -1,0 +1,10 @@
+{
+  "justifications": {
+    "healthTech.industryPlacement": "Cerner/Oracle-certified analysts routinely land vendor, consulting, and provider-side informatics roles, though the pool of hiring orgs is smaller than Epic's.",
+    "healthTech.vendorDemand": "Job-board scans show Cerner/Oracle Health requirements in roughly a quarter of EHR analyst postings, concentrated in federal (VA/DoD) and community hospital systems.",
+    "healthTech.salaryPremium": "Analyst salaries ($75K-$110K) exceed median PT/OT pay but typically trail Epic-certified peers by 5-15% due to smaller market and weaker bidding pressure.",
+    "healthTech.technicalSkillDepth": "Builds substantive technical skill in Millennium architecture, CCL reporting, PowerChart workflows, and HL7/FHIR interfacing comparable to Epic build depth.",
+    "healthTech.transitionFit": "Clinicians moving into Cerner/Oracle analyst roles leverage workflow expertise directly, and Oracle Health actively recruits clinical-background consultants for its federal EHR rollout.",
+    "healthTech.efficiency": "Certification is gated by employer sponsorship (Cerner Learning Services or Oracle Health partner status), making it largely inaccessible without first securing an analyst hire."
+  }
+}

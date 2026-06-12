@@ -1,0 +1,10 @@
+{
+  "justifications": {
+    "healthTech.industryPlacement": "AHIMA workforce data shows most CHDA holders are already employed in HIM/analytics roles and use it for vertical promotion rather than entry, yielding solid but not exceptional new-industry placement.",
+    "healthTech.vendorDemand": "CHDA appears in payer and provider analyst postings but is rarely listed at Epic/Oracle Health where Epic certification or SQL/Python skills dominate requirements.",
+    "healthTech.salaryPremium": "AHIMA salary surveys and BLS data indicate a modest 10-18% premium over base HIM roles, smaller than Epic-certified analyst premiums.",
+    "healthTech.technicalSkillDepth": "Curriculum covers SQL basics, statistics, data visualization, and healthcare data governance but is shallower than a formal analytics bootcamp or MS in Health Informatics.",
+    "healthTech.transitionFit": "Prerequisite of RHIA/RHIT plus bachelor's makes this a poor direct bridge for PT/OT clinicians who would first need an HIM credential.",
+    "healthTech.efficiency": "Exam fee is moderate (~$299 member) but the RHIA/RHIT prerequisite pathway adds 1-2+ years and significant cost, lowering overall accessibility."
+  }
+}

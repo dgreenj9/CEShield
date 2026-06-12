@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Systematic reviews show small positive effects on balance and motor function; effect sizes modest vs dose-matched alternatives.",
+    "clinical.efficiency": "PATH International certification; equine-assisted therapy requires horse facility access; significant logistics.",
+    "clinical.caseloadApplicability": "Extremely limited by requirement for horse facility and trained animal; applicable only in equine therapy settings.",
+    "clinical.reimbursement": "Very limited coverage; PATH certification required by the few payers that cover; mostly self-pay or disability grants.",
+    "clinical.marketDemand": "Very limited employer demand; primarily nonprofit equine therapy centers and adaptive sports programs.",
+    "clinical.patientSatisfaction": "Exceptional; children and adults with disabilities report transformative experience. Motivation to attend is unmatched.",
+    "business.cashPayViability": "Families of pediatric clients with disabilities frequently pay cash or use grants when insurance won't cover equine-assisted therapy.",
+    "business.pricingLeverage": "Scarcity and experiential value support premium per-session pricing, though overhead eats much of the margin.",
+    "business.marketDifferentiation": "Highly distinctive — very few clinicians offer it in any given region, creating a near-monopoly niche.",
+    "business.ownerLeverage": "Hard to scale: requires horses, land, certified clinicians, and PATH-credentialed staff — labor and capital intensive.",
+    "business.marketDemand": "Parents in special-needs communities actively seek it out, but absolute demand volume is small.",
+    "business.efficiency": "Expensive and slow to implement — facility, livestock, and credentialing costs are substantial relative to revenue.",
+    "academicClinical.facultyRecognition": "Niche modality with minimal weight in faculty promotion or hiring outside a few specialized programs.",
+    "academicClinical.scholarship": "Some peer-reviewed work exists but the field is small and methodologically limited.",
+    "academicClinical.teachingValue": "Tangential to core PT/OT curricula; appears at most as a brief elective topic.",
+    "academicClinical.evidenceDepth": "Evidence is growing but consists largely of small studies; RCTs are limited and heterogeneous.",
+    "academicClinical.facultyDemand": "Virtually never listed as a desired credential in faculty job postings.",
+    "academicClinical.efficiency": "Substantial time and money to credential with little return in academic currency."
+  }
+}

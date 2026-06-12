@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Reduced LOS and improved neurodevelopmental outcomes at follow-up; brain maturation on MRI documented in some studies.",
+    "clinical.efficiency": "Intensive mentored training over 6-18 months; limited training sites; high time and travel commitment.",
+    "clinical.caseloadApplicability": "Applicable exclusively in Level III/IV NICUs; essentially zero relevance outside neonatal intensive care.",
+    "clinical.reimbursement": "NICU care funded through DRG or per-diem; NIDCAP supports quality documentation; no separate billing code for certification.",
+    "clinical.marketDemand": "Required or strongly preferred in academic NICU programs; very limited but highly valued within that niche.",
+    "clinical.patientSatisfaction": "Family-centered care is central; parental stress reduction and bonding improvement documented.",
+    "business.cashPayViability": "NICU care is hospital-based and insurance/government funded; essentially zero cash-pay market.",
+    "business.pricingLeverage": "No private-practice pricing context.",
+    "business.marketDifferentiation": "Rare credential but irrelevant outside NICU settings.",
+    "business.ownerLeverage": "Not applicable to private practice model.",
+    "business.marketDemand": "Consumers don't seek NIDCAP providers directly.",
+    "business.efficiency": "Multi-year, expensive, mentor-supervised — extremely slow.",
+    "academicClinical.facultyRecognition": "Highly respected in neonatal/peds academic circles; signals deep specialization.",
+    "academicClinical.scholarship": "Strong NIDCAP and developmental care research base.",
+    "academicClinical.teachingValue": "Valuable in peds DPT/OT content focused on NICU and developmental care.",
+    "academicClinical.evidenceDepth": "Reasonable evidence for developmental outcomes in preterm infants, some debate.",
+    "academicClinical.facultyDemand": "Preferred for niche neonatal faculty roles; limited number of positions.",
+    "academicClinical.efficiency": "Very long training pathway for a narrow academic niche."
+  }
+}

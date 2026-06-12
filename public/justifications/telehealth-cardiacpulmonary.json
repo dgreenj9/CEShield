@@ -1,0 +1,28 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Non-inferior to in-person cardiac/pulmonary rehab in multiple RCTs. Adherence rates comparable when tech support provided.",
+    "clinical.efficiency": "Online modules plus supervised hours; moderate time investment; growing provider availability.",
+    "clinical.caseloadApplicability": "Applicable specifically to cardiac and pulmonary rehab delivery via telehealth; limited outside these programs.",
+    "clinical.reimbursement": "Cardiac and pulmonary rehab CPT codes applicable via telehealth; CMS telehealth expansion supports billing; commercial coverage broad.",
+    "clinical.marketDemand": "Growing demand in cardiac and pulmonary rehab programs with telehealth delivery models.",
+    "clinical.patientSatisfaction": "Convenience strongly preferred by patients with transportation barriers; technology literacy barrier for some older adults.",
+    "healthTech.industryPlacement": "Remote cardiac/pulmonary monitoring vendors (BioIntelliSense, Cleerly, Recora) hire clinicians for program design.",
+    "healthTech.vendorDemand": "Steady demand driven by Medicare RPM/RTM reimbursement expansion.",
+    "healthTech.salaryPremium": "Modest premium for niche clinical expertise on RPM teams.",
+    "healthTech.technicalSkillDepth": "Combines clinical protocol design with wearable/RPM integration knowledge.",
+    "healthTech.transitionFit": "Clear pathway into virtual cardiac/pulmonary rehab companies.",
+    "healthTech.efficiency": "Moderate-cost training with reasonable career payoff.",
+    "business.cashPayViability": "Remote cardiopulm coaching has real cash-pay potential for tech-comfortable post-cardiac patients and concierge models.",
+    "business.pricingLeverage": "Subscription/membership models possible; pricing moderate.",
+    "business.marketDifferentiation": "Still uncommon among rehab clinicians; reasonable differentiator.",
+    "business.ownerLeverage": "Telehealth platforms scale exceptionally well across trained staff.",
+    "business.marketDemand": "Growing post-COVID acceptance but cardiopulm-specific consumer demand is modest.",
+    "business.efficiency": "Generally short, low-cost training programs.",
+    "academicClinical.facultyRecognition": "Telehealth competency increasingly valued but no single credential is canonical.",
+    "academicClinical.scholarship": "Active and growing literature, especially post-2020.",
+    "academicClinical.teachingValue": "Relevant to telehealth/digital health threads being added to DPT/MOT curricula.",
+    "academicClinical.evidenceDepth": "Evidence base is moderate and still maturing.",
+    "academicClinical.facultyDemand": "Occasionally listed as a 'preferred' competency, rarely required.",
+    "academicClinical.efficiency": "Low cost/time; reasonable academic ROI for emerging-area credibility."
+  }
+}

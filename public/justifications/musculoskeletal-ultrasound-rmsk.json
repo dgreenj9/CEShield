@@ -1,0 +1,28 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Ultrasound has MRI-comparable accuracy for rotator cuff and tendon pathology (Roy 2015), and RMSK-certified PTs report it refines diagnosis in ~28% of caseload (Markowski 2024); direct trial evidence that PT-performed imaging changes patient outcomes remains thin.",
+    "clinical.caseloadApplicability": "Shoulder, knee, wrist, and tendon disorders dominate outpatient ortho/sports caseloads and are exactly what MSK ultrasound visualizes best.",
+    "clinical.reimbursement": "Medicare classifies diagnostic ultrasound codes (76881/76882) as non-covered when furnished by PTs; only some private payers in permissive states pay.",
+    "clinical.efficiency": "Substantial total cost: $600 exam plus $2,000-5,000 pathway coursework, 150 logged studies within 36 months, and a $5,000-25,000 machine.",
+    "clinical.marketDemand": "Growing in sports medicine, military, and hybrid ortho settings with APTA endorsement, but few employers currently require or pay extra for it.",
+    "clinical.patientSatisfaction": "Real-time imaging is a strong patient-education tool — qualitative work shows it verifies findings for patients and supports biopsychosocial communication.",
+    "business.cashPayViability": "Because insurance largely won't pay anyway, MSK ultrasound fits naturally into cash-pay practice as a premium evaluation/monitoring add-on with no payer friction.",
+    "business.pricingLeverage": "Imaging-informed evals and serial tendon-healing scans justify premium rates and packages in cash practices.",
+    "business.marketDifferentiation": "Extremely rare — a 2022 study identified only 23 RMSK-certified PTs using MSK-US clinically in the US — one of the strongest differentiators available.",
+    "business.ownerLeverage": "Enables new service lines (athlete screening, physician partnerships) but is hard to scale: the skill is clinician-bound and each operator needs extensive scan volume.",
+    "business.marketDemand": "Consumer awareness of PT-performed ultrasound is low; demand concentrates in sports/performance niches where marketing educates.",
+    "business.efficiency": "Equipment capex plus training and the 150-study prerequisite mean slow payback relative to lower-cost differentiators like dry needling.",
+    "academicClinical.facultyRecognition": "Carries weight as the credential jointly promoted by APTA, AIUM, and Inteleos; imaging is a named priority of the AOPT Imaging SIG.",
+    "academicClinical.scholarship": "Active publication territory — BJSM consensus papers, JOSPT RUSI literature, and recent integration studies give faculty clear scholarly entry points.",
+    "academicClinical.teachingValue": "Ultrasound is a powerful living-anatomy and clinical-reasoning teaching tool increasingly woven into DPT curricula.",
+    "academicClinical.evidenceDepth": "Decades of RUSI literature plus strong diagnostic-accuracy meta-analyses; PT-specific outcome and implementation evidence is still maturing.",
+    "academicClinical.facultyDemand": "DPT programs expanding imaging content need credentialed instructors and few PTs hold RMSK — a modest but real hiring edge.",
+    "academicClinical.efficiency": "Significant cost/time burden, though university ultrasound access and teaching labs partially offset the 150-study requirement.",
+    "research.methodologyDepth": "Ultrasound provides quantitative, reliable outcome measures (muscle thickness, CSA, tendon morphology, activation biofeedback) with established reliability protocols.",
+    "research.publicationTrack": "RUSI and PT-performed diagnostic ultrasound have a sustained publication record across JOSPT, BJSM, and MSK Science and Practice.",
+    "research.grantReadiness": "Strengthens grant applications as an objective measurement modality, but RUSI alone is rarely the funded question — it rides inside larger rehab grants.",
+    "research.pathwayToIndependence": "Can anchor an independent line of inquiry (tendon adaptation, muscle morphology) for an early-career researcher, though competition from radiology labs caps the niche.",
+    "research.interdisciplinaryFit": "Excellent bridge discipline — connects PT with radiology, rheumatology, orthopedics, and sports medicine.",
+    "research.efficiency": "Research-grade systems and operator-reliability training are costly and time-intensive before usable data can be collected."
+  }
+}

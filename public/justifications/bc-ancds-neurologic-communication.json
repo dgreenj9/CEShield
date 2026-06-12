@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Neurological communication disorder evidence base strong; BC-ANCDS certification-specific outcomes not studied.",
+    "clinical.efficiency": "Academy of Neurologic Communication Disorders exam; significant documentation requirements.",
+    "clinical.caseloadApplicability": "Applicable to SLPs treating neurological communication disorders in neuro and acute care settings.",
+    "clinical.reimbursement": "No BC-ANCDS billing premium; standard SLP neurological communication billing applies.",
+    "clinical.marketDemand": "Limited employer recognition; BC-ANCDS credential not widely listed in job postings.",
+    "clinical.patientSatisfaction": "Neurological patients value specialized communication expertise.",
+    "business.cashPayViability": "Aphasia/cognitive-communication cash-pay exists (intensive aphasia programs) but most care is insurance-based.",
+    "business.pricingLeverage": "Niche specialty supports premium for intensive programs; broader market limited by payer mix.",
+    "business.marketDifferentiation": "ANCDS board certification is rare and clearly signals neurogenic expertise.",
+    "business.ownerLeverage": "Programs (e.g., aphasia camps) can scale, but credentialed clinicians are scarce to hire.",
+    "business.marketDemand": "Families of stroke/TBI survivors don't search by ANCDS, though SLPs and physicians recognize it.",
+    "business.efficiency": "Portfolio + exam process is substantial; not a quick credential.",
+    "academicClinical.facultyRecognition": "Top-tier credential in CSD faculty hiring for neurogenic communication lines.",
+    "academicClinical.scholarship": "ANCDS membership overlaps heavily with the neurogenic-comm research community.",
+    "academicClinical.teachingValue": "Maps directly to required aphasia/cognitive-communication/motor-speech coursework.",
+    "academicClinical.evidenceDepth": "Strong evidence base across aphasia, motor speech, TBI cognitive-communication intervention.",
+    "academicClinical.facultyDemand": "Frequently preferred for neurogenic faculty positions.",
+    "academicClinical.efficiency": "Heavy lift but high academic return."
+  }
+}

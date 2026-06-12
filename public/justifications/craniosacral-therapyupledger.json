@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Systematic reviews consistently find no evidence of clinical benefit beyond placebo. No high-quality positive RCTs.",
+    "clinical.efficiency": "4-8 day introductory course; multiple levels required for full certification; significant cumulative cost.",
+    "clinical.caseloadApplicability": "Applicable to chronic pain, headache, TMJ, and pediatric populations; limited by evidence concerns.",
+    "clinical.reimbursement": "Very limited to no third-party coverage; self-pay; HSA eligible in some cases.",
+    "clinical.marketDemand": "Low employer demand in evidence-based clinical settings; primarily private practice and integrative wellness.",
+    "clinical.patientSatisfaction": "Some patients report subjective benefit, consistent with placebo response.",
+    "business.cashPayViability": "Predominantly cash-pay wellness clientele, particularly in peds and chronic pain niches.",
+    "business.pricingLeverage": "Allows premium session pricing in wellness markets.",
+    "business.marketDifferentiation": "Distinctive but controversial; differentiates among holistic clientele.",
+    "business.ownerLeverage": "Highly practitioner-dependent style; hard to scale across staff.",
+    "business.marketDemand": "Steady niche demand in wellness/peds communities but not mainstream.",
+    "business.efficiency": "Multi-level Upledger curriculum is lengthy and expensive.",
+    "academicClinical.facultyRecognition": "Viewed skeptically in academic PT/OT; can be a liability for credibility.",
+    "academicClinical.scholarship": "Minimal credible scholarship; most published work is from advocates.",
+    "academicClinical.teachingValue": "Not part of mainstream curricula; conflicts with evidence-based teaching.",
+    "academicClinical.evidenceDepth": "Evidence is weak; systematic reviews are generally negative or inconclusive.",
+    "academicClinical.facultyDemand": "Not listed in faculty postings.",
+    "academicClinical.efficiency": "Significant time/cost with little to no academic return."
+  }
+}

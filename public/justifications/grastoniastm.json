@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Small positive effects for tendinopathy; not superior to other manual techniques when controlled.",
+    "clinical.efficiency": "1-2 day GTOM course; ~$500-800 plus tool purchase; moderately accessible.",
+    "clinical.caseloadApplicability": "Applicable to soft tissue and musculoskeletal caseloads; usable in outpatient ortho and sports settings.",
+    "clinical.reimbursement": "Billed under manual therapy codes; no Graston-specific billing premium over standard manual therapy.",
+    "clinical.marketDemand": "Widely adopted technique; moderate employer demand in outpatient PT and sports medicine.",
+    "clinical.patientSatisfaction": "Novel technique can enhance perceived treatment intensity.",
+    "business.cashPayViability": "Patients will pay cash for hands-on soft-tissue work, especially in sports/ortho settings. Tool-based delivery feels tangible and 'premium' to consumers.",
+    "business.pricingLeverage": "Supports modest upcharges but Graston is widely held and increasingly commoditized by competing IASTM brands (HawkGrips, RockBlades).",
+    "business.marketDifferentiation": "Too common among ortho/sports PTs to be a true differentiator anymore; expected baseline rather than standout.",
+    "business.ownerLeverage": "Protocol-based and trainable — other clinicians in a practice can deliver it, which is good for scaling beyond the owner.",
+    "business.marketDemand": "Decent consumer recognition via athletes/social media, though most patients don't seek it by name.",
+    "business.efficiency": "Short weekend course, relatively cheap, immediate clinic application — high ROI on time.",
+    "academicClinical.facultyRecognition": "Commercial brand cert with minimal weight in faculty hiring or promotion files.",
+    "academicClinical.scholarship": "Some studies exist but quality is mixed and largely industry-adjacent; not a scholarship engine.",
+    "academicClinical.teachingValue": "Can be mentioned in musculoskeletal modules but most DPT programs treat IASTM as one option among many.",
+    "academicClinical.evidenceDepth": "Evidence is equivocal — small RCTs, modest effects, debated mechanism vs sham.",
+    "academicClinical.facultyDemand": "Rarely listed as preferred in academic job postings.",
+    "academicClinical.efficiency": "Cheap and quick, but the academic payoff is small so efficiency is moderate at best."
+  }
+}

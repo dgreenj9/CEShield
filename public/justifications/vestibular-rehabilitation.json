@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": ">90% BPPV resolution with CRP; chronic vestibular dysfunction shows consistent improvement in dizziness and balance.",
+    "clinical.efficiency": "2-day course standard; multiple providers; moderate cost ~$300-600; widely accessible.",
+    "clinical.caseloadApplicability": "Very common referral pattern; vestibular dysfunction seen across general outpatient, neuro, and geriatric caseloads.",
+    "clinical.reimbursement": "Billed under balance training and therapeutic exercise PT codes; Medicare and commercial coverage standard; ENT referral pathway strong.",
+    "clinical.marketDemand": "High employer demand in outpatient PT and neuro specialty; vestibular training frequently listed as preferred or required.",
+    "clinical.patientSatisfaction": "High when BPPV resolved in 1-2 visits; dramatic symptom relief creates strong satisfaction.",
+    "business.cashPayViability": "Mostly insurance-reimbursed via referrals; cash-pay niche exists but is secondary.",
+    "business.pricingLeverage": "Specialty status supports premium positioning and strong referral networks.",
+    "business.marketDifferentiation": "Relatively few certified vestibular PTs in most markets; meaningful differentiation.",
+    "business.ownerLeverage": "Other clinicians can be trained and certified; scales well within a practice.",
+    "business.marketDemand": "Patients seek out vestibular specialists; ENTs and neurologists drive referrals.",
+    "business.efficiency": "APTA/Emory/Duke courses are moderate cost and time; efficient credential.",
+    "academicClinical.facultyRecognition": "Highly respected; pairs naturally with NCS board specialty.",
+    "academicClinical.scholarship": "Strong, mature literature including Cochrane reviews.",
+    "academicClinical.teachingValue": "Core content in DPT neuro curricula.",
+    "academicClinical.evidenceDepth": "Excellent — BPPV and unilateral hypofunction treatments are evidence-based standards.",
+    "academicClinical.facultyDemand": "Commonly preferred for neuro faculty positions.",
+    "academicClinical.efficiency": "Reasonable time investment for high academic return."
+  }
+}

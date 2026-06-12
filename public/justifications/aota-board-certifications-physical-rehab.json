@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "No published RCTs or comparative studies of BCPR vs non-certified OT outcomes.",
+    "clinical.efficiency": "Portfolio plus exam process; significant documentation and time requirements.",
+    "clinical.caseloadApplicability": "Applicable to OT in physical rehabilitation settings; moderately broad within hospital and outpatient rehab.",
+    "clinical.reimbursement": "No BCPR billing impact; professional signaling credential only.",
+    "clinical.marketDemand": "Limited employer recognition outside OT professional community; lower demand than ABPTS board certs.",
+    "clinical.patientSatisfaction": "Credential recognition limited outside OT professional community.",
+    "business.cashPayViability": "Physical rehab OT board cert addresses populations (stroke, ortho, neuro) typically funded by insurance/Medicare, not cash-pay consumers.",
+    "business.pricingLeverage": "No direct consumer brand recognition; doesn't justify premium cash rates in a private practice.",
+    "business.marketDifferentiation": "Rare among OTs (under 1% hold AOTA board certs) but consumers don't recognize it, so differentiation is professional, not commercial.",
+    "business.ownerLeverage": "Tied to individual clinician credential; can support a niche program but staffing other BCPRs is hard given small pool.",
+    "business.marketDemand": "Virtually unknown to direct consumers; demand exists only in institutional hiring.",
+    "business.efficiency": "Requires portfolio submission, years of practice, and significant cost — slow path to a credential with low cash-pay ROI.",
+    "academicClinical.facultyRecognition": "AOTA board certification is the OT analog to ABPTS specialties and is explicitly valued for OT faculty promotion and tenure files.",
+    "academicClinical.scholarship": "Portfolio process requires scholarly reflection; holders often publish, though not at the volume of residency-trained PTs.",
+    "academicClinical.teachingValue": "Directly maps to physical-disabilities curricular content in MOT/OTD programs.",
+    "academicClinical.evidenceDepth": "Underlying interventions (neurorehab, ortho OT) have a solid but mixed evidence base.",
+    "academicClinical.facultyDemand": "Frequently listed as preferred in OT faculty postings, particularly for phys-dys course leads.",
+    "academicClinical.efficiency": "Multi-year portfolio process is moderately burdensome relative to academic payoff."
+  }
+}

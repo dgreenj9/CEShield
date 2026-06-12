@@ -1,0 +1,3233 @@
+{
+  "Pulmonary Rehabilitation": {
+    "slug": "pulmonary-rehabilitation",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 130,
+    "evidence_mix": {
+      "rct": 62,
+      "meta_analysis": 14,
+      "unknown": 33,
+      "qualitative": 2,
+      "systematic_review": 8,
+      "cohort": 6,
+      "pilot": 3,
+      "case_series": 1,
+      "narrative": 1
+    },
+    "year_dist": {
+      "2020": 3,
+      "2021": 24,
+      "2022": 20,
+      "2023": 23,
+      "2024": 29,
+      "2025": 31
+    }
+  },
+  "AACVPR Cardiac Rehabilitation": {
+    "slug": "aacvpr-cardiac-rehabilitation",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 74,
+    "evidence_mix": {
+      "unknown": 44,
+      "meta_analysis": 13,
+      "systematic_review": 5,
+      "rct": 6,
+      "narrative": 1,
+      "cross_sectional": 2,
+      "cohort": 1,
+      "case_series": 1,
+      "qualitative": 1
+    },
+    "year_dist": {
+      "2020": 4,
+      "2021": 12,
+      "2022": 15,
+      "2023": 8,
+      "2024": 16,
+      "2025": 19
+    }
+  },
+  "Otago Exercise Programme": {
+    "slug": "otago-exercise-programme",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 98,
+    "evidence_mix": {
+      "systematic_review": 4,
+      "meta_analysis": 8,
+      "unknown": 46,
+      "rct": 24,
+      "case_series": 3,
+      "pilot": 6,
+      "qualitative": 5,
+      "cohort": 2
+    },
+    "year_dist": {
+      "2015": 3,
+      "2016": 7,
+      "2017": 4,
+      "2018": 9,
+      "2019": 13,
+      "2020": 10,
+      "2021": 10,
+      "2022": 19,
+      "2023": 12,
+      "2024": 7,
+      "2025": 4
+    }
+  },
+  "LSVT LOUD": {
+    "slug": "lsvt-loud",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 47,
+    "evidence_mix": {
+      "unknown": 20,
+      "rct": 13,
+      "case_series": 4,
+      "systematic_review": 2,
+      "narrative": 1,
+      "pilot": 3,
+      "cohort": 1,
+      "protocol": 1,
+      "meta_analysis": 2
+    },
+    "year_dist": {
+      "2020": 3,
+      "2021": 7,
+      "2022": 13,
+      "2023": 7,
+      "2024": 13,
+      "2025": 4
+    }
+  },
+  "ACRM Cognitive Rehabilitation": {
+    "slug": "acrm-cognitive-rehabilitation",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 72,
+    "evidence_mix": {
+      "protocol": 4,
+      "systematic_review": 8,
+      "meta_analysis": 6,
+      "unknown": 43,
+      "rct": 4,
+      "narrative": 1,
+      "pilot": 3,
+      "cohort": 1,
+      "cross_sectional": 2
+    },
+    "year_dist": {
+      "2020": 4,
+      "2021": 16,
+      "2022": 12,
+      "2023": 17,
+      "2024": 11,
+      "2025": 12
+    }
+  },
+  "ACLM Lifestyle Medicine": {
+    "slug": "aclm-lifestyle-medicine",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 60,
+    "evidence_mix": {
+      "cross_sectional": 2,
+      "unknown": 42,
+      "systematic_review": 3,
+      "meta_analysis": 1,
+      "rct": 2,
+      "narrative": 1,
+      "qualitative": 1,
+      "guideline": 3,
+      "pilot": 4,
+      "case_series": 1
+    },
+    "year_dist": {
+      "2017": 1,
+      "2019": 1,
+      "2020": 5,
+      "2021": 3,
+      "2022": 6,
+      "2023": 11,
+      "2024": 16,
+      "2025": 17
+    }
+  },
+  "HABIT/HABIT-ILE": {
+    "slug": "habithabit-ile",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 34,
+    "evidence_mix": {
+      "rct": 19,
+      "systematic_review": 4,
+      "unknown": 9,
+      "pilot": 1,
+      "meta_analysis": 1
+    },
+    "year_dist": {
+      "2019": 3,
+      "2020": 4,
+      "2021": 5,
+      "2022": 2,
+      "2023": 4,
+      "2024": 8,
+      "2025": 8
+    }
+  },
+  "MBSR (Mindfulness-Based Stress Reduction)": {
+    "slug": "mbsr-mindfulness-based-stress-reduction",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 72,
+    "evidence_mix": {
+      "rct": 31,
+      "meta_analysis": 7,
+      "unknown": 27,
+      "qualitative": 2,
+      "systematic_review": 3,
+      "pilot": 1,
+      "protocol": 1
+    },
+    "year_dist": {
+      "2020": 5,
+      "2021": 5,
+      "2022": 9,
+      "2023": 11,
+      "2024": 23,
+      "2025": 19
+    }
+  },
+  "Matter of Balance": {
+    "slug": "matter-of-balance",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 34,
+    "evidence_mix": {
+      "unknown": 28,
+      "case_series": 1,
+      "rct": 1,
+      "cross_sectional": 1,
+      "meta_analysis": 1,
+      "case_control": 1,
+      "qualitative": 1
+    },
+    "year_dist": {
+      "2015": 4,
+      "2016": 1,
+      "2017": 3,
+      "2018": 4,
+      "2019": 5,
+      "2020": 4,
+      "2021": 4,
+      "2022": 3,
+      "2023": 2,
+      "2024": 2,
+      "2025": 2
+    }
+  },
+  "Telehealth Cardiac/Pulmonary": {
+    "slug": "telehealth-cardiacpulmonary",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 124,
+    "evidence_mix": {
+      "rct": 17,
+      "pilot": 2,
+      "unknown": 41,
+      "qualitative": 7,
+      "meta_analysis": 25,
+      "narrative": 3,
+      "systematic_review": 22,
+      "protocol": 1,
+      "cohort": 1
+    },
+    "year_dist": {
+      "2020": 5,
+      "2021": 24,
+      "2022": 17,
+      "2023": 20,
+      "2024": 29,
+      "2025": 24
+    }
+  },
+  "Motivational Interviewing": {
+    "slug": "motivational-interviewing",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 111,
+    "evidence_mix": {
+      "rct": 39,
+      "unknown": 33,
+      "narrative": 1,
+      "pilot": 10,
+      "systematic_review": 13,
+      "qualitative": 8,
+      "meta_analysis": 4,
+      "cross_sectional": 1,
+      "protocol": 2
+    },
+    "year_dist": {
+      "2020": 15,
+      "2021": 20,
+      "2022": 9,
+      "2023": 25,
+      "2024": 24,
+      "2025": 18
+    }
+  },
+  "CIMT (Constraint-Induced Movement)": {
+    "slug": "cimt-constraint-induced-movement",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 150,
+    "evidence_mix": {
+      "rct": 47,
+      "systematic_review": 8,
+      "cohort": 3,
+      "unknown": 50,
+      "meta_analysis": 26,
+      "qualitative": 2,
+      "pilot": 7,
+      "case_series": 3,
+      "guideline": 1,
+      "cross_sectional": 2,
+      "narrative": 1
+    },
+    "year_dist": {
+      "2020": 8,
+      "2021": 27,
+      "2022": 36,
+      "2023": 23,
+      "2024": 25,
+      "2025": 31
+    }
+  },
+  "Health Coaching": {
+    "slug": "health-coaching",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 78,
+    "evidence_mix": {
+      "rct": 39,
+      "cohort": 2,
+      "unknown": 23,
+      "systematic_review": 2,
+      "protocol": 4,
+      "qualitative": 4,
+      "meta_analysis": 3,
+      "pilot": 1
+    },
+    "year_dist": {
+      "2020": 5,
+      "2021": 18,
+      "2022": 15,
+      "2023": 11,
+      "2024": 22,
+      "2025": 7
+    }
+  },
+  "Athletic Training BOC": {
+    "slug": "athletic-training-boc",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 48,
+    "evidence_mix": {
+      "qualitative": 3,
+      "unknown": 36,
+      "cross_sectional": 5,
+      "systematic_review": 2,
+      "cohort": 2
+    },
+    "year_dist": {
+      "2020": 1,
+      "2021": 17,
+      "2022": 8,
+      "2023": 5,
+      "2024": 9,
+      "2025": 8
+    }
+  },
+  "CDC STEADI Fall Prevention": {
+    "slug": "cdc-steadi-fall-prevention",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 25,
+    "evidence_mix": {
+      "unknown": 20,
+      "cohort": 2,
+      "pilot": 2,
+      "rct": 1
+    },
+    "year_dist": {
+      "2019": 3,
+      "2020": 2,
+      "2021": 3,
+      "2022": 4,
+      "2024": 6,
+      "2025": 7
+    }
+  },
+  "Physical Therapy Fellowship": {
+    "slug": "physical-therapy-fellowship",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 47,
+    "evidence_mix": {
+      "unknown": 29,
+      "pilot": 3,
+      "rct": 1,
+      "cross_sectional": 4,
+      "qualitative": 2,
+      "systematic_review": 4,
+      "meta_analysis": 3,
+      "case_series": 1
+    },
+    "year_dist": {
+      "2010": 2,
+      "2013": 1,
+      "2016": 1,
+      "2017": 1,
+      "2018": 2,
+      "2019": 5,
+      "2020": 5,
+      "2021": 3,
+      "2022": 3,
+      "2023": 4,
+      "2024": 12,
+      "2025": 8
+    }
+  },
+  "Pilates Rehabilitation": {
+    "slug": "pilates-rehabilitation",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 75,
+    "evidence_mix": {
+      "rct": 35,
+      "systematic_review": 10,
+      "unknown": 13,
+      "pilot": 3,
+      "case_series": 1,
+      "meta_analysis": 13
+    },
+    "year_dist": {
+      "2018": 1,
+      "2020": 2,
+      "2021": 14,
+      "2022": 9,
+      "2023": 17,
+      "2024": 21,
+      "2025": 11
+    }
+  },
+  "AI + Wearable Sensors": {
+    "slug": "ai-wearable-sensors",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 192,
+    "evidence_mix": {
+      "unknown": 92,
+      "narrative": 11,
+      "rct": 29,
+      "systematic_review": 23,
+      "pilot": 7,
+      "case_series": 5,
+      "meta_analysis": 8,
+      "cohort": 2,
+      "cross_sectional": 2,
+      "case_control": 1,
+      "qualitative": 2
+    },
+    "year_dist": {
+      "2020": 2,
+      "2021": 23,
+      "2022": 18,
+      "2023": 34,
+      "2024": 57,
+      "2025": 48
+    }
+  },
+  "ABCDEF ICU Bundle": {
+    "slug": "abcdef-icu-bundle",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 39,
+    "evidence_mix": {
+      "unknown": 21,
+      "rct": 2,
+      "narrative": 1,
+      "meta_analysis": 5,
+      "cross_sectional": 2,
+      "systematic_review": 2,
+      "cohort": 1
+    },
+    "year_dist": {
+      "2020": 5,
+      "2021": 8,
+      "2022": 14,
+      "2023": 7
+    }
+  },
+  "LSVT BIG": {
+    "slug": "lsvt-big",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 25,
+    "evidence_mix": {
+      "systematic_review": 1,
+      "cohort": 1,
+      "unknown": 8,
+      "rct": 4,
+      "meta_analysis": 3,
+      "case_series": 7,
+      "pilot": 1
+    },
+    "year_dist": {
+      "2020": 4,
+      "2021": 5,
+      "2022": 4,
+      "2023": 3,
+      "2024": 5,
+      "2025": 4
+    }
+  },
+  "IAYT Yoga Therapy": {
+    "slug": "iayt-yoga-therapy",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 170,
+    "evidence_mix": {
+      "unknown": 60,
+      "rct": 57,
+      "systematic_review": 12,
+      "pilot": 16,
+      "cohort": 3,
+      "qualitative": 3,
+      "protocol": 1,
+      "meta_analysis": 11,
+      "narrative": 4,
+      "case_series": 2,
+      "cross_sectional": 1
+    },
+    "year_dist": {
+      "2020": 14,
+      "2021": 46,
+      "2022": 31,
+      "2023": 35,
+      "2024": 28,
+      "2025": 16
+    }
+  },
+  "Alexander Technique": {
+    "slug": "alexander-technique",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 15,
+    "evidence_mix": {
+      "meta_analysis": 4,
+      "rct": 6,
+      "cohort": 1,
+      "unknown": 4
+    },
+    "year_dist": {
+      "2015": 2,
+      "2016": 3,
+      "2017": 4,
+      "2018": 3,
+      "2020": 1,
+      "2022": 1,
+      "2024": 1
+    }
+  },
+  "IMOT Intensive Therapy": {
+    "slug": "imot-intensive-therapy",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 2,
+    "evidence_mix": {
+      "case_series": 2
+    },
+    "year_dist": {}
+  },
+  "Blood Flow Restriction (BFR)": {
+    "slug": "blood-flow-restriction-bfr",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 223,
+    "evidence_mix": {
+      "rct": 49,
+      "systematic_review": 20,
+      "unknown": 114,
+      "meta_analysis": 37,
+      "narrative": 1,
+      "pilot": 1,
+      "cross_sectional": 1
+    },
+    "year_dist": {
+      "2020": 2,
+      "2021": 36,
+      "2022": 45,
+      "2023": 35,
+      "2024": 41,
+      "2025": 64
+    }
+  },
+  "Ergonomic Assessment": {
+    "slug": "ergonomic-assessment",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 53,
+    "evidence_mix": {
+      "case_series": 1,
+      "rct": 15,
+      "unknown": 21,
+      "meta_analysis": 2,
+      "pilot": 4,
+      "cohort": 2,
+      "qualitative": 4,
+      "cross_sectional": 1,
+      "systematic_review": 3
+    },
+    "year_dist": {
+      "2020": 1,
+      "2021": 10,
+      "2022": 9,
+      "2023": 4,
+      "2024": 18,
+      "2025": 11
+    }
+  },
+  "Vestibular Rehabilitation": {
+    "slug": "vestibular-rehabilitation",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 126,
+    "evidence_mix": {
+      "rct": 54,
+      "unknown": 43,
+      "cohort": 4,
+      "case_series": 3,
+      "systematic_review": 10,
+      "meta_analysis": 4,
+      "protocol": 3,
+      "pilot": 4,
+      "guideline": 1
+    },
+    "year_dist": {
+      "2020": 10,
+      "2021": 25,
+      "2022": 28,
+      "2023": 16,
+      "2024": 20,
+      "2025": 27
+    }
+  },
+  "VR (Medical-Grade)": {
+    "slug": "vr-medical-grade",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 190,
+    "evidence_mix": {
+      "unknown": 33,
+      "meta_analysis": 56,
+      "rct": 62,
+      "systematic_review": 24,
+      "case_series": 1,
+      "narrative": 6,
+      "protocol": 1,
+      "pilot": 1
+    },
+    "year_dist": {
+      "2020": 1,
+      "2021": 31,
+      "2022": 42,
+      "2023": 37,
+      "2024": 38,
+      "2025": 35
+    }
+  },
+  "NIDCAP Neonatal": {
+    "slug": "nidcap-neonatal",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 36,
+    "evidence_mix": {
+      "meta_analysis": 2,
+      "unknown": 24,
+      "systematic_review": 2,
+      "rct": 5,
+      "qualitative": 1,
+      "cohort": 2
+    },
+    "year_dist": {
+      "2016": 6,
+      "2017": 5,
+      "2018": 3,
+      "2019": 3,
+      "2020": 5,
+      "2021": 3,
+      "2022": 3,
+      "2023": 2,
+      "2025": 6
+    }
+  },
+  "Neonatal Therapy Certification": {
+    "slug": "neonatal-therapy-certification",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 10,
+    "evidence_mix": {
+      "unknown": 6,
+      "qualitative": 2,
+      "cross_sectional": 1,
+      "pilot": 1
+    },
+    "year_dist": {
+      "2016": 1,
+      "2017": 1,
+      "2019": 1,
+      "2020": 3,
+      "2021": 1,
+      "2022": 1,
+      "2023": 2
+    }
+  },
+  "Exoskeleton Training": {
+    "slug": "exoskeleton-training",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 248,
+    "evidence_mix": {
+      "rct": 109,
+      "unknown": 83,
+      "cohort": 4,
+      "case_series": 4,
+      "systematic_review": 10,
+      "qualitative": 4,
+      "meta_analysis": 11,
+      "pilot": 12,
+      "narrative": 2,
+      "protocol": 2,
+      "case_control": 1,
+      "cross_sectional": 1
+    },
+    "year_dist": {
+      "2020": 10,
+      "2021": 38,
+      "2022": 41,
+      "2023": 32,
+      "2024": 63,
+      "2025": 59
+    }
+  },
+  "Transplant Rehabilitation": {
+    "slug": "transplant-rehabilitation",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 52,
+    "evidence_mix": {
+      "rct": 8,
+      "cohort": 1,
+      "unknown": 25,
+      "pilot": 3,
+      "cross_sectional": 3,
+      "systematic_review": 5,
+      "narrative": 1,
+      "qualitative": 1,
+      "meta_analysis": 2,
+      "protocol": 2,
+      "case_series": 1
+    },
+    "year_dist": {
+      "2021": 4,
+      "2022": 9,
+      "2023": 10,
+      "2024": 9,
+      "2025": 15,
+      "2026": 5
+    }
+  },
+  "Robotic Devices (Lokomat)": {
+    "slug": "robotic-devices-lokomat",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 78,
+    "evidence_mix": {
+      "unknown": 36,
+      "systematic_review": 9,
+      "rct": 7,
+      "case_series": 5,
+      "cohort": 3,
+      "pilot": 5,
+      "narrative": 2,
+      "meta_analysis": 3,
+      "qualitative": 1,
+      "case_control": 1,
+      "cross_sectional": 1
+    },
+    "year_dist": {
+      "2020": 3,
+      "2021": 17,
+      "2022": 9,
+      "2023": 16,
+      "2024": 14,
+      "2025": 14
+    }
+  },
+  "Feldenkrais Method": {
+    "slug": "feldenkrais-method",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 20,
+    "evidence_mix": {
+      "rct": 6,
+      "unknown": 9,
+      "meta_analysis": 1,
+      "systematic_review": 1,
+      "narrative": 1,
+      "case_series": 2
+    },
+    "year_dist": {
+      "2016": 3,
+      "2017": 2,
+      "2019": 2,
+      "2020": 4,
+      "2022": 3,
+      "2023": 1,
+      "2024": 4,
+      "2025": 1
+    }
+  },
+  "SOS Feeding Approach": {
+    "slug": "sos-feeding-approach",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 11,
+    "evidence_mix": {
+      "pilot": 1,
+      "unknown": 7,
+      "narrative": 1,
+      "rct": 1,
+      "systematic_review": 1
+    },
+    "year_dist": {
+      "2016": 1,
+      "2018": 1,
+      "2019": 1,
+      "2020": 1,
+      "2021": 4,
+      "2023": 1,
+      "2025": 2
+    }
+  },
+  "COMT/Manual Therapy Certification": {
+    "slug": "comtmanual-therapy-certification",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 16,
+    "evidence_mix": {
+      "pilot": 2,
+      "unknown": 10,
+      "cross_sectional": 3,
+      "rct": 1
+    },
+    "year_dist": {
+      "2016": 1,
+      "2017": 1,
+      "2018": 2,
+      "2019": 1,
+      "2020": 1,
+      "2021": 1,
+      "2022": 3,
+      "2023": 3,
+      "2024": 2,
+      "2025": 1
+    }
+  },
+  "McKenzie Method (MDT)": {
+    "slug": "mckenzie-method-mdt",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 62,
+    "evidence_mix": {
+      "unknown": 29,
+      "systematic_review": 3,
+      "meta_analysis": 10,
+      "case_series": 5,
+      "rct": 11,
+      "narrative": 1,
+      "cross_sectional": 1,
+      "cohort": 2
+    },
+    "year_dist": {
+      "2020": 3,
+      "2021": 6,
+      "2022": 9,
+      "2023": 11,
+      "2024": 24,
+      "2025": 9
+    }
+  },
+  "Pain Neuroscience Education": {
+    "slug": "pain-neuroscience-education",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 108,
+    "evidence_mix": {
+      "meta_analysis": 8,
+      "rct": 57,
+      "unknown": 19,
+      "qualitative": 6,
+      "systematic_review": 7,
+      "pilot": 4,
+      "case_series": 6,
+      "cohort": 1
+    },
+    "year_dist": {
+      "2020": 3,
+      "2021": 12,
+      "2022": 18,
+      "2023": 21,
+      "2024": 34,
+      "2025": 20
+    }
+  },
+  "FCE (Functional Capacity Eval)": {
+    "slug": "fce-functional-capacity-eval",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 20,
+    "evidence_mix": {
+      "unknown": 13,
+      "rct": 5,
+      "cohort": 1,
+      "systematic_review": 1
+    },
+    "year_dist": {
+      "2017": 3,
+      "2018": 2,
+      "2019": 4,
+      "2020": 1,
+      "2021": 1,
+      "2022": 4,
+      "2023": 2,
+      "2025": 3
+    }
+  },
+  "Certified Hand Therapist (CHT)": {
+    "slug": "certified-hand-therapist-cht",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 76,
+    "evidence_mix": {
+      "cross_sectional": 10,
+      "rct": 5,
+      "unknown": 47,
+      "protocol": 1,
+      "qualitative": 1,
+      "pilot": 1,
+      "case_series": 4,
+      "cohort": 1,
+      "systematic_review": 2,
+      "narrative": 2,
+      "meta_analysis": 1,
+      "case_control": 1
+    },
+    "year_dist": {
+      "2020": 1,
+      "2021": 8,
+      "2022": 13,
+      "2023": 12,
+      "2024": 22,
+      "2025": 20
+    }
+  },
+  "Early Intervention Specialist": {
+    "slug": "early-intervention-specialist",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 57,
+    "evidence_mix": {
+      "cross_sectional": 1,
+      "rct": 10,
+      "unknown": 36,
+      "qualitative": 2,
+      "meta_analysis": 1,
+      "systematic_review": 3,
+      "pilot": 2,
+      "case_series": 1,
+      "narrative": 1
+    },
+    "year_dist": {
+      "2016": 2,
+      "2017": 1,
+      "2018": 1,
+      "2019": 1,
+      "2020": 4,
+      "2021": 8,
+      "2022": 12,
+      "2023": 8,
+      "2024": 8,
+      "2025": 12
+    }
+  },
+  "Multiple Sclerosis Certified Specialist": {
+    "slug": "multiple-sclerosis-certified-specialist",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 6,
+    "evidence_mix": {
+      "unknown": 5,
+      "narrative": 1
+    },
+    "year_dist": {
+      "2014": 1,
+      "2015": 1,
+      "2017": 1,
+      "2019": 1,
+      "2020": 2
+    }
+  },
+  "Neurodevelopmental Treatment (NDT)": {
+    "slug": "neurodevelopmental-treatment-ndt",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 101,
+    "evidence_mix": {
+      "rct": 38,
+      "unknown": 35,
+      "case_control": 1,
+      "qualitative": 2,
+      "systematic_review": 8,
+      "case_series": 6,
+      "meta_analysis": 3,
+      "cross_sectional": 2,
+      "pilot": 5,
+      "cohort": 1
+    },
+    "year_dist": {
+      "2020": 1,
+      "2021": 17,
+      "2022": 21,
+      "2023": 24,
+      "2024": 20,
+      "2025": 18
+    }
+  },
+  "Orthopedic Clinical Specialist (OCS)": {
+    "slug": "orthopedic-clinical-specialist-ocs",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 27,
+    "evidence_mix": {
+      "unknown": 17,
+      "cross_sectional": 6,
+      "pilot": 1,
+      "guideline": 2,
+      "cohort": 1
+    },
+    "year_dist": {
+      "2016": 2,
+      "2017": 4,
+      "2018": 2,
+      "2019": 2,
+      "2020": 2,
+      "2021": 1,
+      "2022": 3,
+      "2023": 1,
+      "2024": 3,
+      "2025": 7
+    }
+  },
+  "BOC-Orthopedic Specialty": {
+    "slug": "boc-orthopedic-specialty",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 33,
+    "evidence_mix": {
+      "unknown": 31,
+      "cross_sectional": 2
+    },
+    "year_dist": {
+      "2000": 1,
+      "2015": 1,
+      "2016": 3,
+      "2017": 3,
+      "2018": 4,
+      "2019": 5,
+      "2020": 4,
+      "2021": 1,
+      "2022": 2,
+      "2023": 4,
+      "2024": 1,
+      "2025": 4
+    }
+  },
+  "Sports Clinical Specialist (SCS)": {
+    "slug": "sports-clinical-specialist-scs",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 7,
+    "evidence_mix": {
+      "rct": 1,
+      "pilot": 1,
+      "cross_sectional": 1,
+      "unknown": 4
+    },
+    "year_dist": {
+      "2016": 1,
+      "2017": 1,
+      "2018": 1,
+      "2019": 1,
+      "2022": 1,
+      "2025": 2
+    }
+  },
+  "Telehealth/Digital Health": {
+    "slug": "telehealthdigital-health",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 478,
+    "evidence_mix": {
+      "rct": 271,
+      "unknown": 119,
+      "qualitative": 7,
+      "pilot": 29,
+      "systematic_review": 16,
+      "meta_analysis": 19,
+      "cohort": 7,
+      "case_control": 1,
+      "narrative": 2,
+      "protocol": 1,
+      "cross_sectional": 1
+    },
+    "year_dist": {
+      "2020": 1,
+      "2021": 54,
+      "2022": 68,
+      "2023": 85,
+      "2024": 126,
+      "2025": 139
+    }
+  },
+  "Wound Care Specialist": {
+    "slug": "wound-care-specialist",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 22,
+    "evidence_mix": {
+      "unknown": 17,
+      "narrative": 3,
+      "meta_analysis": 1,
+      "rct": 1
+    },
+    "year_dist": {
+      "2015": 1,
+      "2016": 1,
+      "2018": 2,
+      "2019": 2,
+      "2020": 2,
+      "2022": 3,
+      "2023": 3,
+      "2024": 5,
+      "2025": 3
+    }
+  },
+  "Certified Aging in Place Specialist (CAPS)": {
+    "slug": "certified-aging-in-place-specialist-caps",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 34,
+    "evidence_mix": {
+      "narrative": 2,
+      "unknown": 18,
+      "systematic_review": 4,
+      "pilot": 2,
+      "case_series": 1,
+      "rct": 2,
+      "qualitative": 2,
+      "protocol": 1,
+      "cross_sectional": 2
+    },
+    "year_dist": {
+      "2011": 1,
+      "2021": 2,
+      "2022": 9,
+      "2023": 8,
+      "2024": 5,
+      "2025": 9
+    }
+  },
+  "ACSM Clinical Exercise Physiologist": {
+    "slug": "acsm-clinical-exercise-physiologist",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 52,
+    "evidence_mix": {
+      "unknown": 37,
+      "rct": 2,
+      "pilot": 3,
+      "qualitative": 2,
+      "protocol": 2,
+      "narrative": 2,
+      "systematic_review": 2,
+      "guideline": 1,
+      "case_series": 1
+    },
+    "year_dist": {
+      "2021": 7,
+      "2022": 10,
+      "2023": 13,
+      "2024": 12,
+      "2025": 10
+    }
+  },
+  "Certified Strength & Conditioning (CSCS)": {
+    "slug": "certified-strength-conditioning-cscs",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 41,
+    "evidence_mix": {
+      "meta_analysis": 4,
+      "narrative": 1,
+      "systematic_review": 6,
+      "unknown": 26,
+      "cross_sectional": 1,
+      "rct": 3
+    },
+    "year_dist": {
+      "2016": 3,
+      "2017": 5,
+      "2018": 5,
+      "2019": 4,
+      "2020": 3,
+      "2021": 5,
+      "2022": 3,
+      "2023": 4,
+      "2024": 5,
+      "2025": 4
+    }
+  },
+  "Certified Brain Injury Specialist": {
+    "slug": "certified-brain-injury-specialist",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 41,
+    "evidence_mix": {
+      "unknown": 16,
+      "meta_analysis": 3,
+      "narrative": 4,
+      "systematic_review": 9,
+      "rct": 4,
+      "cross_sectional": 3,
+      "pilot": 2
+    },
+    "year_dist": {
+      "2020": 1,
+      "2021": 5,
+      "2022": 7,
+      "2023": 12,
+      "2024": 6,
+      "2025": 10
+    }
+  },
+  "Certified Stroke Rehabilitation Specialist": {
+    "slug": "certified-stroke-rehabilitation-specialist",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 70,
+    "evidence_mix": {
+      "unknown": 33,
+      "meta_analysis": 16,
+      "protocol": 2,
+      "rct": 5,
+      "systematic_review": 10,
+      "qualitative": 1,
+      "pilot": 3
+    },
+    "year_dist": {
+      "2016": 2,
+      "2017": 2,
+      "2018": 7,
+      "2019": 6,
+      "2020": 8,
+      "2021": 6,
+      "2022": 9,
+      "2023": 10,
+      "2024": 12,
+      "2025": 8
+    }
+  },
+  "Hippotherapy": {
+    "slug": "hippotherapy",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 73,
+    "evidence_mix": {
+      "unknown": 32,
+      "meta_analysis": 8,
+      "systematic_review": 14,
+      "rct": 12,
+      "pilot": 3,
+      "qualitative": 1,
+      "narrative": 2,
+      "cross_sectional": 1
+    },
+    "year_dist": {
+      "2021": 14,
+      "2022": 18,
+      "2023": 11,
+      "2024": 16,
+      "2025": 14
+    }
+  },
+  "Robotic Upper Limb": {
+    "slug": "robotic-upper-limb",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 127,
+    "evidence_mix": {
+      "unknown": 26,
+      "systematic_review": 29,
+      "rct": 34,
+      "meta_analysis": 24,
+      "narrative": 4,
+      "pilot": 4,
+      "cross_sectional": 1
+    },
+    "year_dist": {
+      "2020": 1,
+      "2021": 25,
+      "2022": 25,
+      "2023": 23,
+      "2024": 21,
+      "2025": 27
+    }
+  },
+  "Certified Mulligan Practitioner": {
+    "slug": "certified-mulligan-practitioner",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 64,
+    "evidence_mix": {
+      "meta_analysis": 6,
+      "rct": 32,
+      "systematic_review": 4,
+      "unknown": 20,
+      "pilot": 1,
+      "narrative": 1
+    },
+    "year_dist": {
+      "2021": 11,
+      "2022": 11,
+      "2023": 7,
+      "2024": 18,
+      "2025": 17
+    }
+  },
+  "Pelvic Floor Rehabilitation (PRPC)": {
+    "slug": "pelvic-floor-rehabilitation-prpc",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 162,
+    "evidence_mix": {
+      "rct": 47,
+      "systematic_review": 25,
+      "unknown": 45,
+      "meta_analysis": 30,
+      "case_series": 1,
+      "cohort": 6,
+      "pilot": 3,
+      "narrative": 4,
+      "protocol": 1
+    },
+    "year_dist": {
+      "2021": 17,
+      "2022": 32,
+      "2023": 26,
+      "2024": 43,
+      "2025": 43,
+      "2026": 1
+    }
+  },
+  "Women's Health Clinical Specialist": {
+    "slug": "womens-health-clinical-specialist",
+    "source": "librarian",
+    "last_reviewed": "2026-06",
+    "count": 90,
+    "evidence_mix": {
+      "unknown": 22,
+      "meta_analysis": 23,
+      "rct": 17,
+      "qualitative": 1,
+      "narrative": 2,
+      "systematic_review": 20,
+      "cohort": 1,
+      "cross_sectional": 3,
+      "guideline": 1
+    },
+    "year_dist": {
+      "2012": 1,
+      "2014": 1,
+      "2015": 1,
+      "2017": 1,
+      "2018": 3,
+      "2019": 1,
+      "2021": 7,
+      "2022": 11,
+      "2023": 23,
+      "2024": 20,
+      "2025": 18,
+      "2026": 3
+    }
+  },
+  "Certified Driver Rehabilitation Specialist": {
+    "slug": "certified-driver-rehabilitation-specialist",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 27,
+    "evidence_mix": {
+      "unknown": 23,
+      "meta_analysis": 1,
+      "cross_sectional": 2,
+      "rct": 1
+    },
+    "year_dist": {
+      "2012": 1,
+      "2016": 3,
+      "2017": 2,
+      "2018": 2,
+      "2019": 4,
+      "2020": 1,
+      "2021": 4,
+      "2022": 4,
+      "2023": 3,
+      "2024": 1,
+      "2025": 2
+    }
+  },
+  "Pediatric Clinical Specialist (PCS)": {
+    "slug": "pediatric-clinical-specialist-pcs",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 74,
+    "evidence_mix": {
+      "unknown": 38,
+      "qualitative": 5,
+      "cross_sectional": 6,
+      "systematic_review": 14,
+      "meta_analysis": 2,
+      "guideline": 3,
+      "rct": 4,
+      "narrative": 1,
+      "case_series": 1
+    },
+    "year_dist": {
+      "2016": 3,
+      "2017": 2,
+      "2018": 7,
+      "2019": 4,
+      "2020": 7,
+      "2021": 6,
+      "2022": 7,
+      "2023": 4,
+      "2024": 15,
+      "2025": 18,
+      "2026": 1
+    }
+  },
+  "Board Certification in Pediatrics": {
+    "slug": "board-certification-in-pediatrics",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 19,
+    "evidence_mix": {
+      "pilot": 2,
+      "meta_analysis": 1,
+      "unknown": 6,
+      "qualitative": 2,
+      "narrative": 1,
+      "systematic_review": 7
+    },
+    "year_dist": {
+      "2017": 1,
+      "2019": 1,
+      "2020": 4,
+      "2021": 2,
+      "2022": 1,
+      "2023": 2,
+      "2024": 3,
+      "2025": 5
+    }
+  },
+  "Virtual/Augmented Reality": {
+    "slug": "virtualaugmented-reality",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 183,
+    "evidence_mix": {
+      "systematic_review": 57,
+      "unknown": 19,
+      "meta_analysis": 84,
+      "rct": 11,
+      "narrative": 5,
+      "cross_sectional": 1,
+      "pilot": 1
+    },
+    "year_dist": {
+      "2021": 21,
+      "2022": 36,
+      "2023": 39,
+      "2024": 36,
+      "2025": 46
+    }
+  },
+  "Ventilator Weaning": {
+    "slug": "ventilator-weaning",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 31,
+    "evidence_mix": {
+      "rct": 4,
+      "narrative": 1,
+      "unknown": 16,
+      "cohort": 1,
+      "meta_analysis": 2,
+      "protocol": 4,
+      "systematic_review": 1,
+      "case_series": 1,
+      "cross_sectional": 1
+    },
+    "year_dist": {
+      "2016": 2,
+      "2017": 3,
+      "2018": 4,
+      "2019": 4,
+      "2020": 1,
+      "2021": 4,
+      "2022": 3,
+      "2023": 4,
+      "2024": 3,
+      "2025": 3
+    }
+  },
+  "Lymphedema (CLT/LANA)": {
+    "slug": "lymphedema-cltlana",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 100,
+    "evidence_mix": {
+      "unknown": 47,
+      "systematic_review": 7,
+      "rct": 22,
+      "meta_analysis": 8,
+      "narrative": 2,
+      "protocol": 1,
+      "case_series": 6,
+      "pilot": 3,
+      "cross_sectional": 4
+    },
+    "year_dist": {
+      "2020": 2,
+      "2021": 18,
+      "2022": 15,
+      "2023": 22,
+      "2024": 20,
+      "2025": 23
+    }
+  },
+  "Seating and Mobility Specialist": {
+    "slug": "seating-and-mobility-specialist",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 16,
+    "evidence_mix": {
+      "unknown": 8,
+      "systematic_review": 2,
+      "protocol": 1
+    },
+    "year_dist": {
+      "2015": 1,
+      "2020": 2,
+      "2022": 3,
+      "2023": 3,
+      "2024": 1,
+      "2025": 1
+    }
+  },
+  "Dry Needling": {
+    "slug": "dry-needling",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 189,
+    "evidence_mix": {
+      "unknown": 46,
+      "rct": 87,
+      "meta_analysis": 28,
+      "systematic_review": 20,
+      "case_series": 1,
+      "cohort": 3,
+      "pilot": 2,
+      "protocol": 1,
+      "cross_sectional": 1
+    },
+    "year_dist": {
+      "2020": 3,
+      "2021": 41,
+      "2022": 33,
+      "2023": 20,
+      "2024": 58,
+      "2025": 32,
+      "2026": 2
+    }
+  },
+  "TPI Golf Certification": {
+    "slug": "tpi-golf-certification",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 6,
+    "evidence_mix": {
+      "unknown": 5,
+      "case_series": 1
+    },
+    "year_dist": {
+      "2020": 1,
+      "2022": 1,
+      "2024": 2,
+      "2025": 2
+    }
+  },
+  "ASTYM Therapy": {
+    "slug": "astym-therapy",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 108,
+    "evidence_mix": {
+      "rct": 35,
+      "meta_analysis": 9,
+      "unknown": 50,
+      "narrative": 1,
+      "systematic_review": 9,
+      "pilot": 3,
+      "case_series": 1
+    },
+    "year_dist": {
+      "2016": 8,
+      "2017": 2,
+      "2018": 6,
+      "2019": 13,
+      "2020": 6,
+      "2021": 10,
+      "2022": 5,
+      "2023": 13,
+      "2024": 20,
+      "2025": 22,
+      "2026": 3
+    }
+  },
+  "Rolfing/Structural Integration": {
+    "slug": "rolfingstructural-integration",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 5,
+    "evidence_mix": {
+      "cohort": 3,
+      "rct": 1,
+      "unknown": 1
+    },
+    "year_dist": {
+      "2017": 1,
+      "2020": 2,
+      "2022": 1,
+      "2025": 1
+    }
+  },
+  "Therapeutic Pain Specialist": {
+    "slug": "therapeutic-pain-specialist",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 73,
+    "evidence_mix": {
+      "unknown": 29,
+      "qualitative": 1,
+      "narrative": 6,
+      "meta_analysis": 13,
+      "rct": 5,
+      "cross_sectional": 7,
+      "pilot": 1,
+      "systematic_review": 9,
+      "cohort": 1,
+      "case_series": 1
+    },
+    "year_dist": {
+      "2015": 3,
+      "2016": 7,
+      "2017": 5,
+      "2018": 3,
+      "2019": 3,
+      "2020": 2,
+      "2021": 8,
+      "2022": 7,
+      "2023": 10,
+      "2024": 10,
+      "2025": 15
+    }
+  },
+  "Craniosacral Therapy/Upledger": {
+    "slug": "craniosacral-therapyupledger",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 35,
+    "evidence_mix": {
+      "systematic_review": 3,
+      "case_series": 2,
+      "cohort": 2,
+      "unknown": 10,
+      "meta_analysis": 6,
+      "rct": 8,
+      "pilot": 2,
+      "narrative": 2
+    },
+    "year_dist": {
+      "2016": 5,
+      "2017": 5,
+      "2019": 2,
+      "2021": 4,
+      "2022": 3,
+      "2023": 5,
+      "2024": 7,
+      "2025": 3,
+      "2026": 1
+    }
+  },
+  "Certified Low Vision Therapist": {
+    "slug": "certified-low-vision-therapist",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 50,
+    "evidence_mix": {
+      "unknown": 35,
+      "systematic_review": 7,
+      "cross_sectional": 1,
+      "pilot": 1,
+      "qualitative": 1,
+      "rct": 4,
+      "protocol": 1
+    },
+    "year_dist": {
+      "2016": 4,
+      "2017": 4,
+      "2018": 2,
+      "2019": 4,
+      "2020": 9,
+      "2021": 4,
+      "2022": 9,
+      "2023": 8,
+      "2024": 2,
+      "2025": 4
+    }
+  },
+  "Suit Therapy": {
+    "slug": "suit-therapy",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 19,
+    "evidence_mix": {
+      "rct": 3,
+      "unknown": 7,
+      "pilot": 1,
+      "case_series": 2,
+      "systematic_review": 4,
+      "cohort": 1,
+      "meta_analysis": 1
+    },
+    "year_dist": {
+      "2016": 4,
+      "2017": 1,
+      "2018": 1,
+      "2019": 2,
+      "2020": 1,
+      "2021": 3,
+      "2022": 1,
+      "2023": 1,
+      "2024": 1,
+      "2025": 4
+    }
+  },
+  "Advanced Competency in Home Health": {
+    "slug": "advanced-competency-in-home-health",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 97,
+    "evidence_mix": {
+      "systematic_review": 14,
+      "cross_sectional": 1,
+      "rct": 38,
+      "meta_analysis": 14,
+      "unknown": 19,
+      "qualitative": 4,
+      "narrative": 4,
+      "case_series": 1,
+      "pilot": 2
+    },
+    "year_dist": {
+      "2014": 1,
+      "2020": 1,
+      "2021": 12,
+      "2022": 16,
+      "2023": 15,
+      "2024": 17,
+      "2025": 30,
+      "2026": 5
+    }
+  },
+  "Barral Institute Certification": {
+    "slug": "barral-institute-certification",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 60,
+    "evidence_mix": {
+      "systematic_review": 3,
+      "unknown": 26,
+      "rct": 18,
+      "case_series": 8,
+      "meta_analysis": 4,
+      "pilot": 1
+    },
+    "year_dist": {
+      "2016": 5,
+      "2017": 8,
+      "2018": 3,
+      "2019": 7,
+      "2020": 4,
+      "2021": 7,
+      "2022": 5,
+      "2023": 5,
+      "2024": 9,
+      "2025": 7
+    }
+  },
+  "Transitional DPT (tDPT)": {
+    "slug": "transitional-dpt-tdpt",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 7,
+    "evidence_mix": {
+      "unknown": 2
+    },
+    "year_dist": {
+      "2017": 1,
+      "2022": 1
+    }
+  },
+  "Physical Therapy Residency": {
+    "slug": "physical-therapy-residency",
+    "source": "librarian",
+    "last_reviewed": "2025-12",
+    "count": 27,
+    "evidence_mix": {
+      "unknown": 21,
+      "pilot": 1,
+      "rct": 1,
+      "cross_sectional": 2,
+      "systematic_review": 1,
+      "meta_analysis": 1
+    },
+    "year_dist": {
+      "2016": 1,
+      "2017": 1,
+      "2018": 1,
+      "2019": 5,
+      "2020": 4,
+      "2021": 3,
+      "2022": 1,
+      "2023": 3,
+      "2024": 4,
+      "2025": 4
+    }
+  },
+  "Certified Exercise Expert for Aging Adults": {
+    "slug": "certified-exercise-expert-for-aging-adults",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 0,
+    "evidence_mix": {},
+    "year_dist": {}
+  },
+  "Geriatric Clinical Specialist (GCS)": {
+    "slug": "geriatric-clinical-specialist-gcs",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 2,
+    "evidence_mix": {
+      "unknown": 1,
+      "cross_sectional": 1
+    },
+    "year_dist": {
+      "2025": 2
+    }
+  },
+  "Neurologic Clinical Specialist (NCS)": {
+    "slug": "neurologic-clinical-specialist-ncs",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 3,
+    "evidence_mix": {
+      "unknown": 1,
+      "pilot": 2
+    },
+    "year_dist": {
+      "2019": 1,
+      "2020": 1,
+      "2022": 1
+    }
+  },
+  "Board Certification in Gerontology": {
+    "slug": "board-certification-in-gerontology",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 1,
+    "evidence_mix": {
+      "unknown": 1
+    },
+    "year_dist": {
+      "2017": 1
+    }
+  },
+  "AOTA Board Certifications (Physical Rehab)": {
+    "slug": "aota-board-certifications-physical-rehab",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 2,
+    "evidence_mix": {
+      "unknown": 2
+    },
+    "year_dist": {
+      "2020": 1,
+      "2022": 1
+    }
+  },
+  "AOTA Specialty Certifications": {
+    "slug": "aota-specialty-certifications",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 14,
+    "evidence_mix": {
+      "unknown": 14
+    },
+    "year_dist": {
+      "2016": 1,
+      "2017": 2,
+      "2018": 3,
+      "2019": 1,
+      "2020": 3,
+      "2022": 3,
+      "2023": 1
+    }
+  },
+  "Cardiovascular/Pulmonary Specialist": {
+    "slug": "cardiovascularpulmonary-specialist",
+    "source": "librarian",
+    "last_reviewed": "2026-06",
+    "count": 81,
+    "evidence_mix": {
+      "qualitative": 2,
+      "unknown": 36,
+      "meta_analysis": 17,
+      "cross_sectional": 3,
+      "rct": 10,
+      "case_series": 1,
+      "systematic_review": 3,
+      "narrative": 7,
+      "guideline": 1,
+      "cohort": 1
+    },
+    "year_dist": {
+      "2008": 1,
+      "2009": 2,
+      "2015": 1,
+      "2016": 6,
+      "2017": 6,
+      "2018": 9,
+      "2019": 5,
+      "2020": 6,
+      "2021": 4,
+      "2022": 8,
+      "2023": 7,
+      "2024": 13,
+      "2025": 11,
+      "2026": 2
+    }
+  },
+  "Certified Spinal Manipulative Therapy": {
+    "slug": "certified-spinal-manipulative-therapy",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 33,
+    "evidence_mix": {
+      "unknown": 20,
+      "case_series": 2,
+      "rct": 5,
+      "case_control": 1,
+      "meta_analysis": 2,
+      "systematic_review": 2,
+      "narrative": 1
+    },
+    "year_dist": {
+      "2016": 1,
+      "2017": 3,
+      "2018": 1,
+      "2019": 3,
+      "2020": 5,
+      "2021": 5,
+      "2023": 1,
+      "2024": 6,
+      "2025": 5,
+      "2026": 3
+    }
+  },
+  "Clinical Doctorate (DPT/OTD) vs Masters": {
+    "slug": "clinical-doctorate-dptotd-vs-masters",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 28,
+    "evidence_mix": {
+      "unknown": 20,
+      "pilot": 1,
+      "cross_sectional": 5,
+      "narrative": 1,
+      "systematic_review": 1
+    },
+    "year_dist": {
+      "2014": 2,
+      "2015": 4,
+      "2016": 1,
+      "2017": 1,
+      "2018": 1,
+      "2019": 1,
+      "2020": 3,
+      "2021": 1,
+      "2022": 2,
+      "2023": 2,
+      "2024": 5,
+      "2025": 5
+    }
+  },
+  "Sensory Integration (SIPT)": {
+    "slug": "sensory-integration-sipt",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 52,
+    "evidence_mix": {
+      "systematic_review": 6,
+      "rct": 13,
+      "unknown": 26,
+      "case_series": 2,
+      "cross_sectional": 3,
+      "pilot": 1,
+      "case_control": 1
+    },
+    "year_dist": {
+      "2016": 1,
+      "2017": 2,
+      "2018": 4,
+      "2019": 4,
+      "2021": 2,
+      "2022": 7,
+      "2023": 12,
+      "2024": 4,
+      "2025": 11,
+      "2026": 5
+    }
+  },
+  "Modern Management of Older Adult": {
+    "slug": "modern-management-of-older-adult",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 3,
+    "evidence_mix": {
+      "unknown": 3
+    },
+    "year_dist": {
+      "2025": 3
+    }
+  },
+  "Assistive Technology Professional (ATP)": {
+    "slug": "assistive-technology-professional-atp",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 11,
+    "evidence_mix": {
+      "cross_sectional": 1,
+      "unknown": 4
+    },
+    "year_dist": {
+      "2021": 3,
+      "2023": 2
+    }
+  },
+  "VitalStim": {
+    "slug": "vitalstim",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 10,
+    "evidence_mix": {
+      "rct": 3,
+      "case_series": 1,
+      "unknown": 5,
+      "cross_sectional": 1
+    },
+    "year_dist": {
+      "2016": 1,
+      "2018": 2,
+      "2019": 1,
+      "2020": 1,
+      "2021": 2,
+      "2023": 2,
+      "2025": 1
+    }
+  },
+  "Board Certified Specialist in Swallowing": {
+    "slug": "board-certified-specialist-in-swallowing",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 5,
+    "evidence_mix": {
+      "cohort": 1,
+      "cross_sectional": 1,
+      "unknown": 3
+    },
+    "year_dist": {
+      "2016": 2,
+      "2019": 1,
+      "2024": 1,
+      "2025": 1
+    }
+  },
+  "Graston/IASTM": {
+    "slug": "grastoniastm",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 74,
+    "evidence_mix": {
+      "rct": 34,
+      "meta_analysis": 7,
+      "unknown": 28,
+      "narrative": 1,
+      "pilot": 3,
+      "systematic_review": 1
+    },
+    "year_dist": {
+      "2020": 4,
+      "2021": 10,
+      "2022": 8,
+      "2023": 13,
+      "2024": 18,
+      "2025": 17,
+      "2026": 4
+    }
+  },
+  "Emergency Medical Response": {
+    "slug": "emergency-medical-response",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 17,
+    "evidence_mix": {
+      "unknown": 11,
+      "cross_sectional": 2,
+      "systematic_review": 2,
+      "narrative": 2
+    },
+    "year_dist": {
+      "2016": 3,
+      "2020": 1,
+      "2021": 3,
+      "2022": 2,
+      "2023": 1,
+      "2024": 2,
+      "2025": 4,
+      "2026": 1
+    }
+  },
+  "Oncology Clinical Specialist": {
+    "slug": "oncology-clinical-specialist",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 63,
+    "evidence_mix": {
+      "rct": 5,
+      "unknown": 34,
+      "pilot": 9,
+      "qualitative": 4,
+      "case_series": 3,
+      "systematic_review": 4,
+      "cross_sectional": 2,
+      "protocol": 1,
+      "cohort": 1
+    },
+    "year_dist": {
+      "2016": 1,
+      "2017": 6,
+      "2018": 6,
+      "2019": 7,
+      "2020": 5,
+      "2021": 11,
+      "2022": 6,
+      "2023": 7,
+      "2024": 6,
+      "2025": 7,
+      "2026": 1
+    }
+  },
+  "Board Certified Specialist Child Language": {
+    "slug": "board-certified-specialist-child-language",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 62,
+    "evidence_mix": {
+      "unknown": 38,
+      "systematic_review": 14,
+      "cross_sectional": 4,
+      "guideline": 1,
+      "rct": 2,
+      "narrative": 1,
+      "qualitative": 1,
+      "case_series": 1
+    },
+    "year_dist": {
+      "2016": 1,
+      "2017": 2,
+      "2018": 5,
+      "2019": 8,
+      "2020": 5,
+      "2021": 4,
+      "2022": 4,
+      "2023": 5,
+      "2024": 13,
+      "2025": 12,
+      "2026": 3
+    }
+  },
+  "Board Certified Specialist Fluency": {
+    "slug": "board-certified-specialist-fluency",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 62,
+    "evidence_mix": {
+      "unknown": 47,
+      "systematic_review": 10,
+      "rct": 1,
+      "meta_analysis": 2,
+      "pilot": 1,
+      "cross_sectional": 1
+    },
+    "year_dist": {
+      "2021": 7,
+      "2022": 8,
+      "2023": 10,
+      "2024": 17,
+      "2025": 17,
+      "2026": 3
+    }
+  },
+  "BC-ANCDS Neurologic Communication": {
+    "slug": "bc-ancds-neurologic-communication",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 3,
+    "evidence_mix": {
+      "systematic_review": 2,
+      "unknown": 1
+    },
+    "year_dist": {
+      "2022": 1,
+      "2024": 1,
+      "2025": 1
+    }
+  },
+  "Clinical Electrophysiology Specialist": {
+    "slug": "clinical-electrophysiology-specialist",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 17,
+    "evidence_mix": {
+      "unknown": 12,
+      "case_series": 2,
+      "systematic_review": 2,
+      "rct": 1
+    },
+    "year_dist": {
+      "2017": 1,
+      "2020": 3,
+      "2021": 2,
+      "2022": 1,
+      "2023": 4,
+      "2024": 3,
+      "2025": 3
+    }
+  },
+  "Board Certification Intraoperative Monitoring": {
+    "slug": "board-certification-intraoperative-monitoring",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 3,
+    "evidence_mix": {
+      "case_series": 1,
+      "unknown": 2
+    },
+    "year_dist": {
+      "2017": 1,
+      "2018": 1,
+      "2024": 1
+    }
+  },
+  "Cochlear Implant Specialty": {
+    "slug": "cochlear-implant-specialty",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 9,
+    "evidence_mix": {
+      "unknown": 7,
+      "cross_sectional": 1,
+      "systematic_review": 1
+    },
+    "year_dist": {
+      "2016": 1,
+      "2019": 1,
+      "2021": 3,
+      "2023": 3,
+      "2024": 1
+    }
+  },
+  "CBIT for Tics": {
+    "slug": "cbit-for-tics",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 31,
+    "evidence_mix": {
+      "unknown": 23,
+      "systematic_review": 3,
+      "cohort": 1,
+      "pilot": 2,
+      "meta_analysis": 2
+    },
+    "year_dist": {
+      "2016": 2,
+      "2017": 1,
+      "2018": 1,
+      "2019": 2,
+      "2020": 5,
+      "2021": 2,
+      "2022": 3,
+      "2023": 5,
+      "2024": 2,
+      "2025": 6,
+      "2026": 2
+    }
+  },
+  "Schroth Therapist": {
+    "slug": "schroth-therapist",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 42,
+    "evidence_mix": {
+      "unknown": 20,
+      "rct": 7,
+      "cohort": 2,
+      "cross_sectional": 2,
+      "narrative": 3,
+      "meta_analysis": 5,
+      "systematic_review": 2,
+      "case_series": 1
+    },
+    "year_dist": {
+      "2021": 2,
+      "2022": 6,
+      "2023": 8,
+      "2024": 10,
+      "2025": 11,
+      "2026": 5
+    }
+  },
+  "Craniomandibular/TMJ Certification": {
+    "slug": "craniomandibulartmj-certification",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 95,
+    "evidence_mix": {
+      "unknown": 40,
+      "case_series": 12,
+      "rct": 22,
+      "meta_analysis": 3,
+      "systematic_review": 8,
+      "narrative": 4,
+      "pilot": 1,
+      "cross_sectional": 2,
+      "cohort": 3
+    },
+    "year_dist": {
+      "2021": 8,
+      "2022": 21,
+      "2023": 15,
+      "2024": 26,
+      "2025": 23,
+      "2026": 2
+    }
+  },
+  "Advanced Vestibular PT": {
+    "slug": "advanced-vestibular-pt",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 33,
+    "evidence_mix": {
+      "unknown": 22,
+      "systematic_review": 2,
+      "pilot": 1,
+      "rct": 2,
+      "cohort": 2,
+      "case_series": 2,
+      "narrative": 2
+    },
+    "year_dist": {
+      "2016": 1,
+      "2018": 1,
+      "2019": 5,
+      "2020": 3,
+      "2021": 1,
+      "2022": 3,
+      "2023": 1,
+      "2024": 7,
+      "2025": 8,
+      "2026": 3
+    }
+  },
+  "Vestibular AIB Certifications": {
+    "slug": "vestibular-aib-certifications",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 4,
+    "evidence_mix": {
+      "cross_sectional": 2,
+      "unknown": 2
+    },
+    "year_dist": {
+      "2015": 1,
+      "2016": 1,
+      "2018": 1,
+      "2020": 1
+    }
+  },
+  "Vestibular VCC Certification": {
+    "slug": "vestibular-vcc-certification",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 4,
+    "evidence_mix": {
+      "cross_sectional": 2,
+      "unknown": 2
+    },
+    "year_dist": {
+      "2015": 1,
+      "2016": 1,
+      "2018": 1,
+      "2020": 1
+    }
+  },
+  "Occupro Certification": {
+    "slug": "occupro-certification",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 47,
+    "evidence_mix": {
+      "unknown": 28,
+      "rct": 10,
+      "protocol": 2,
+      "cross_sectional": 2,
+      "narrative": 1,
+      "systematic_review": 3,
+      "case_series": 1
+    },
+    "year_dist": {
+      "2016": 4,
+      "2017": 2,
+      "2018": 2,
+      "2019": 1,
+      "2020": 6,
+      "2021": 7,
+      "2022": 6,
+      "2023": 3,
+      "2024": 8,
+      "2025": 6,
+      "2026": 2
+    }
+  },
+  "The Back School": {
+    "slug": "the-back-school",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 36,
+    "evidence_mix": {
+      "rct": 14,
+      "systematic_review": 1,
+      "unknown": 19,
+      "meta_analysis": 2
+    },
+    "year_dist": {
+      "2016": 4,
+      "2017": 4,
+      "2018": 1,
+      "2019": 3,
+      "2020": 2,
+      "2021": 6,
+      "2022": 6,
+      "2023": 3,
+      "2024": 2,
+      "2025": 3,
+      "2026": 2
+    }
+  },
+  "Kinesio Taping (CKTP)": {
+    "slug": "kinesio-taping-cktp",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 141,
+    "evidence_mix": {
+      "systematic_review": 21,
+      "meta_analysis": 34,
+      "rct": 57,
+      "unknown": 26,
+      "protocol": 2,
+      "narrative": 1
+    },
+    "year_dist": {
+      "2021": 17,
+      "2022": 17,
+      "2023": 25,
+      "2024": 38,
+      "2025": 37,
+      "2026": 7
+    }
+  },
+  "ASHA Board Certified Specialists": {
+    "slug": "asha-board-certified-specialists",
+    "source": "librarian",
+    "last_reviewed": "2026-03",
+    "count": 55,
+    "evidence_mix": {
+      "systematic_review": 12,
+      "unknown": 33,
+      "cross_sectional": 1,
+      "narrative": 3,
+      "guideline": 2,
+      "meta_analysis": 3,
+      "protocol": 1
+    },
+    "year_dist": {
+      "2016": 2,
+      "2017": 5,
+      "2018": 11,
+      "2019": 7,
+      "2020": 2,
+      "2021": 6,
+      "2022": 6,
+      "2023": 4,
+      "2024": 4,
+      "2025": 8
+    }
+  },
+  "Research Doctorates (PhD/ScD)": {
+    "slug": "research-doctorates-phdscd",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 6,
+    "evidence_mix": {
+      "cross_sectional": 1,
+      "unknown": 5
+    },
+    "year_dist": {
+      "2008": 1,
+      "2014": 1,
+      "2017": 1,
+      "2019": 1,
+      "2020": 2
+    }
+  },
+  "Postdoctoral Research Fellowship (T32/F32)": {
+    "slug": "postdoctoral-research-fellowship-t32f32",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 7,
+    "evidence_mix": {
+      "cohort": 1,
+      "unknown": 6
+    },
+    "year_dist": {
+      "2013": 1,
+      "2017": 1,
+      "2018": 1,
+      "2019": 2,
+      "2020": 1,
+      "2021": 1
+    }
+  },
+  "NIH K Award (K01/K12/K23)": {
+    "slug": "nih-k-award-k01k12k23",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 7,
+    "evidence_mix": {
+      "unknown": 7
+    },
+    "year_dist": {
+      "2014": 2,
+      "2017": 2,
+      "2018": 1,
+      "2019": 1,
+      "2023": 1
+    }
+  },
+  "MS in Biostatistics": {
+    "slug": "ms-in-biostatistics",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 7,
+    "evidence_mix": {
+      "unknown": 3,
+      "cross_sectional": 1,
+      "cohort": 1,
+      "guideline": 2
+    },
+    "year_dist": {
+      "2006": 1,
+      "2011": 1,
+      "2012": 1,
+      "2016": 1,
+      "2018": 1,
+      "2019": 1,
+      "2024": 1
+    }
+  },
+  "MS in Clinical Research / Translational Science": {
+    "slug": "ms-in-clinical-research-translational-science",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 7,
+    "evidence_mix": {
+      "unknown": 5,
+      "cohort": 2
+    },
+    "year_dist": {
+      "2011": 2,
+      "2014": 1,
+      "2018": 1,
+      "2019": 1,
+      "2020": 1,
+      "2021": 1
+    }
+  },
+  "ACRP Certified Clinical Research Coordinator (CCRC)": {
+    "slug": "acrp-certified-clinical-research-coordinator-ccrc",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 6,
+    "evidence_mix": {
+      "unknown": 6
+    },
+    "year_dist": {
+      "2004": 1,
+      "2014": 1,
+      "2017": 1,
+      "2018": 2,
+      "2020": 1
+    }
+  },
+  "SOCRA Certified Clinical Research Professional (CCRP)": {
+    "slug": "socra-certified-clinical-research-professional-ccrp",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 6,
+    "evidence_mix": {
+      "unknown": 5,
+      "guideline": 1
+    },
+    "year_dist": {
+      "2014": 1,
+      "2017": 2,
+      "2018": 1,
+      "2023": 1,
+      "2024": 1
+    }
+  },
+  "Cochrane / JBI Systematic Review Training": {
+    "slug": "cochrane-jbi-systematic-review-training",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 7,
+    "evidence_mix": {
+      "unknown": 5,
+      "meta_analysis": 1,
+      "systematic_review": 1
+    },
+    "year_dist": {
+      "2008": 1,
+      "2014": 1,
+      "2015": 2,
+      "2019": 1,
+      "2020": 1,
+      "2021": 1
+    }
+  },
+  "Epic Certification (Build & Configuration)": {
+    "slug": "epic-certification-build-configuration",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 7,
+    "evidence_mix": {
+      "cross_sectional": 2,
+      "unknown": 5
+    },
+    "year_dist": {
+      "2017": 1,
+      "2019": 1,
+      "2020": 1,
+      "2023": 1,
+      "2024": 3
+    }
+  },
+  "Cerner / Oracle Health Certification": {
+    "slug": "cerner-oracle-health-certification",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 7,
+    "evidence_mix": {
+      "cross_sectional": 2,
+      "unknown": 3,
+      "guideline": 1,
+      "qualitative": 1
+    },
+    "year_dist": {
+      "2008": 1,
+      "2019": 1,
+      "2021": 1,
+      "2023": 1,
+      "2024": 3
+    }
+  },
+  "AMIA Clinical Informatics Board Certification": {
+    "slug": "amia-clinical-informatics-board-certification",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 6,
+    "evidence_mix": {
+      "cross_sectional": 2,
+      "unknown": 3,
+      "guideline": 1
+    },
+    "year_dist": {
+      "2014": 1,
+      "2019": 1,
+      "2020": 1,
+      "2021": 1,
+      "2023": 1,
+      "2024": 1
+    }
+  },
+  "AHIMA RHIA (Registered Health Information Administrator)": {
+    "slug": "ahima-rhia-registered-health-information-administrator",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 6,
+    "evidence_mix": {
+      "unknown": 5,
+      "guideline": 1
+    },
+    "year_dist": {
+      "2011": 1,
+      "2014": 1,
+      "2015": 1,
+      "2017": 1,
+      "2022": 1,
+      "2024": 1
+    }
+  },
+  "AHIMA RHIT (Registered Health Information Technician)": {
+    "slug": "ahima-rhit-registered-health-information-technician",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 6,
+    "evidence_mix": {
+      "guideline": 1,
+      "unknown": 4,
+      "cross_sectional": 1
+    },
+    "year_dist": {
+      "2015": 2,
+      "2017": 1,
+      "2020": 2,
+      "2024": 1
+    }
+  },
+  "AHIMA CHDA (Certified Health Data Analyst)": {
+    "slug": "ahima-chda-certified-health-data-analyst",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 7,
+    "evidence_mix": {
+      "unknown": 4,
+      "cross_sectional": 2,
+      "guideline": 1
+    },
+    "year_dist": {
+      "2015": 1,
+      "2018": 1,
+      "2019": 1,
+      "2020": 1,
+      "2021": 1,
+      "2022": 1,
+      "2024": 1
+    }
+  },
+  "HIMSS CPHIMS (Certified Professional in Healthcare Information & Management Systems)": {
+    "slug": "himss-cphims-certified-professional-in-healthcare-information-management-systems",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 6,
+    "evidence_mix": {
+      "unknown": 3,
+      "cross_sectional": 1,
+      "guideline": 2
+    },
+    "year_dist": {
+      "2014": 1,
+      "2019": 1,
+      "2022": 2,
+      "2023": 1,
+      "2024": 1
+    }
+  },
+  "HL7 FHIR Proficiency": {
+    "slug": "hl7-fhir-proficiency",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 6,
+    "evidence_mix": {
+      "systematic_review": 1,
+      "unknown": 3,
+      "cross_sectional": 1,
+      "narrative": 1
+    },
+    "year_dist": {
+      "2020": 2,
+      "2021": 1,
+      "2022": 1,
+      "2023": 1,
+      "2024": 1
+    }
+  },
+  "Lean Six Sigma in Healthcare (Green/Black Belt)": {
+    "slug": "lean-six-sigma-in-healthcare-greenblack-belt",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 6,
+    "evidence_mix": {
+      "systematic_review": 2,
+      "guideline": 1,
+      "unknown": 2,
+      "cross_sectional": 1
+    },
+    "year_dist": {
+      "2010": 1,
+      "2019": 2,
+      "2020": 1,
+      "2024": 1,
+      "2025": 1
+    }
+  },
+  "NAHQ CPHQ (Certified Professional in Healthcare Quality)": {
+    "slug": "nahq-cphq-certified-professional-in-healthcare-quality",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 7,
+    "evidence_mix": {
+      "guideline": 2,
+      "unknown": 4,
+      "cross_sectional": 1
+    },
+    "year_dist": {
+      "2018": 1,
+      "2020": 1,
+      "2021": 1,
+      "2022": 1,
+      "2024": 3
+    }
+  },
+  "PMP (Project Management Professional)": {
+    "slug": "pmp-project-management-professional",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 6,
+    "evidence_mix": {
+      "cross_sectional": 2,
+      "unknown": 2,
+      "narrative": 1,
+      "guideline": 1
+    },
+    "year_dist": {
+      "2018": 1,
+      "2020": 1,
+      "2023": 3,
+      "2024": 1
+    }
+  },
+  "ISO 13485 / Medical Device QMS Training": {
+    "slug": "iso-13485-medical-device-qms-training",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 6,
+    "evidence_mix": {
+      "unknown": 5,
+      "cross_sectional": 1
+    },
+    "year_dist": {
+      "2016": 1,
+      "2018": 1,
+      "2021": 1,
+      "2023": 1,
+      "2024": 2
+    }
+  },
+  "Lower Limb Amputee Rehabilitation (Physiopedia/ICRC Certificate)": {
+    "slug": "lower-limb-amputee-rehabilitation-physiopediaicrc-certificate",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 13,
+    "evidence_mix": {
+      "guideline": 1,
+      "systematic_review": 5,
+      "meta_analysis": 2,
+      "cohort": 2,
+      "cross_sectional": 2,
+      "rct": 1
+    },
+    "year_dist": {
+      "2000": 1,
+      "2002": 1,
+      "2006": 1,
+      "2008": 1,
+      "2009": 1,
+      "2016": 3,
+      "2018": 1,
+      "2019": 1,
+      "2020": 1,
+      "2021": 1,
+      "2022": 1
+    }
+  },
+  "Aquatic Therapeutic Exercise Certification (ATRIC)": {
+    "slug": "aquatic-therapeutic-exercise-certification-atric",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 13,
+    "evidence_mix": {
+      "systematic_review": 5,
+      "meta_analysis": 7,
+      "rct": 1
+    },
+    "year_dist": {
+      "2011": 2,
+      "2014": 2,
+      "2016": 2,
+      "2017": 1,
+      "2018": 1,
+      "2019": 1,
+      "2020": 3,
+      "2022": 1
+    }
+  },
+  "ImPACT Trained Physical Therapist (ITPT)": {
+    "slug": "impact-trained-physical-therapist-itpt",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 13,
+    "evidence_mix": {
+      "rct": 4,
+      "guideline": 1,
+      "systematic_review": 3,
+      "cross_sectional": 4,
+      "narrative": 1
+    },
+    "year_dist": {
+      "2006": 1,
+      "2007": 1,
+      "2013": 1,
+      "2014": 2,
+      "2016": 1,
+      "2017": 1,
+      "2019": 2,
+      "2021": 1,
+      "2022": 2,
+      "2023": 1
+    }
+  },
+  "Postural Restoration Certified (PRC)": {
+    "slug": "postural-restoration-certified-prc",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 10,
+    "evidence_mix": {
+      "narrative": 1,
+      "rct": 2,
+      "case_series": 2,
+      "cohort": 1,
+      "pilot": 1,
+      "cross_sectional": 3
+    },
+    "year_dist": {
+      "2010": 2,
+      "2014": 2,
+      "2019": 1,
+      "2020": 2,
+      "2021": 1,
+      "2022": 1,
+      "2024": 1
+    }
+  },
+  "PWR!Moves Certified Therapist (Parkinson Wellness Recovery)": {
+    "slug": "pwrmoves-certified-therapist-parkinson-wellness-recovery",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 10,
+    "evidence_mix": {
+      "cohort": 1,
+      "narrative": 3,
+      "rct": 4,
+      "systematic_review": 1,
+      "meta_analysis": 1
+    },
+    "year_dist": {
+      "2005": 1,
+      "2010": 1,
+      "2011": 1,
+      "2012": 1,
+      "2013": 4,
+      "2017": 1,
+      "2018": 1
+    }
+  },
+  "Selective Functional Movement Assessment (SFMA)": {
+    "slug": "selective-functional-movement-assessment-sfma",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 14,
+    "evidence_mix": {
+      "cross_sectional": 5,
+      "cohort": 1,
+      "pilot": 1,
+      "case_series": 1,
+      "narrative": 2,
+      "meta_analysis": 3,
+      "systematic_review": 1
+    },
+    "year_dist": {
+      "2014": 2,
+      "2015": 1,
+      "2016": 2,
+      "2017": 5,
+      "2019": 1,
+      "2020": 1,
+      "2023": 2
+    }
+  },
+  "Musculoskeletal Ultrasound (RMSK)": {
+    "slug": "musculoskeletal-ultrasound-rmsk",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 14,
+    "evidence_mix": {
+      "guideline": 4,
+      "meta_analysis": 1,
+      "cohort": 1,
+      "narrative": 2,
+      "cross_sectional": 4,
+      "rct": 2
+    },
+    "year_dist": {
+      "1996": 1,
+      "2005": 1,
+      "2007": 1,
+      "2012": 1,
+      "2014": 1,
+      "2015": 1,
+      "2019": 2,
+      "2021": 1,
+      "2023": 2,
+      "2024": 2,
+      "2025": 1
+    }
+  },
+  "Acute Care POCUS — Lung & Diaphragm Ultrasound": {
+    "slug": "acute-care-pocus-lung-diaphragm-ultrasound",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 14,
+    "evidence_mix": {
+      "cross_sectional": 3,
+      "narrative": 4,
+      "meta_analysis": 2,
+      "cohort": 4,
+      "guideline": 1
+    },
+    "year_dist": {
+      "2008": 1,
+      "2014": 3,
+      "2015": 2,
+      "2017": 1,
+      "2018": 1,
+      "2022": 1,
+      "2023": 3,
+      "2024": 2
+    }
+  },
+  "CAPP-OB (Certificate of Advanced Practice in Physical Therapy in Obstetric Health)": {
+    "slug": "capp-ob-certificate-of-advanced-practice-in-physical-therapy-in-obstetric-health",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 10,
+    "evidence_mix": {
+      "systematic_review": 5,
+      "rct": 3,
+      "meta_analysis": 2
+    },
+    "year_dist": {
+      "2003": 1,
+      "2011": 1,
+      "2012": 2,
+      "2013": 1,
+      "2015": 1,
+      "2018": 1,
+      "2020": 1,
+      "2021": 2
+    }
+  },
+  "CAPP-Pelvic (Certificate of Advanced Practice in Physical Therapy in Pelvic Health)": {
+    "slug": "capp-pelvic-certificate-of-advanced-practice-in-physical-therapy-in-pelvic-health",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 10,
+    "evidence_mix": {
+      "meta_analysis": 1,
+      "systematic_review": 6,
+      "rct": 3
+    },
+    "year_dist": {
+      "2003": 1,
+      "2011": 1,
+      "2012": 1,
+      "2013": 1,
+      "2014": 1,
+      "2015": 1,
+      "2018": 1,
+      "2019": 1,
+      "2020": 1,
+      "2021": 1
+    }
+  },
+  "EIM Pelvic Health Specialist Certification": {
+    "slug": "eim-pelvic-health-specialist-certification",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 11,
+    "evidence_mix": {
+      "meta_analysis": 1,
+      "systematic_review": 6,
+      "rct": 3,
+      "narrative": 1
+    },
+    "year_dist": {
+      "2003": 1,
+      "2004": 1,
+      "2011": 1,
+      "2012": 1,
+      "2013": 1,
+      "2014": 1,
+      "2015": 1,
+      "2018": 1,
+      "2019": 1,
+      "2020": 1,
+      "2021": 1
+    }
+  },
+  "AACVPR Certified Cardiac Rehabilitation Professional (CCRP)": {
+    "slug": "aacvpr-certified-cardiac-rehabilitation-professional-ccrp",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 12,
+    "evidence_mix": {
+      "meta_analysis": 4,
+      "rct": 1,
+      "cohort": 2,
+      "guideline": 2,
+      "unknown": 2,
+      "systematic_review": 1
+    },
+    "year_dist": {
+      "2007": 1,
+      "2009": 2,
+      "2010": 1,
+      "2015": 1,
+      "2016": 2,
+      "2017": 1,
+      "2019": 2,
+      "2021": 1,
+      "2022": 1
+    }
+  },
+  "Advanced Cardiovascular Life Support (ACLS)": {
+    "slug": "advanced-cardiovascular-life-support-acls",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 10,
+    "evidence_mix": {
+      "guideline": 4,
+      "narrative": 2,
+      "unknown": 2,
+      "systematic_review": 1,
+      "meta_analysis": 1
+    },
+    "year_dist": {
+      "2009": 1,
+      "2011": 1,
+      "2015": 1,
+      "2018": 1,
+      "2019": 3,
+      "2020": 3
+    }
+  },
+  "Cardiovascular & Pulmonary PT Residency (ABPTRFE)": {
+    "slug": "cardiovascular-pulmonary-pt-residency-abptrfe",
+    "source": "workflow-2026-06",
+    "last_reviewed": "2026-06",
+    "count": 12,
+    "evidence_mix": {
+      "rct": 2,
+      "meta_analysis": 5,
+      "guideline": 2,
+      "cohort": 1,
+      "systematic_review": 1,
+      "narrative": 1
+    },
+    "year_dist": {
+      "2008": 2,
+      "2009": 2,
+      "2012": 2,
+      "2013": 1,
+      "2015": 1,
+      "2016": 2,
+      "2017": 2
+    }
+  }
+}

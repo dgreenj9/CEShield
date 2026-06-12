@@ -1,0 +1,28 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "68% mortality reduction is striking; ICU-acquired weakness reduction is durable. Delirium days reduced meaningfully.",
+    "clinical.efficiency": "Institutional in-service training; low to no cost; can be completed quickly; widely available.",
+    "clinical.caseloadApplicability": "Applicable specifically in ICU and acute care settings; zero applicability in outpatient or community care.",
+    "clinical.reimbursement": "ICU care quality measure support; early mobility billed under acute care codes; no specific CPT but supports documentation.",
+    "clinical.marketDemand": "Strong demand in ICU and acute care PT/OT roles; standard expectation in Level I trauma and medical ICU positions.",
+    "clinical.patientSatisfaction": "ICU population limited in self-report; family-reported experience improved; PTSD reduction documented.",
+    "research.methodologyDepth": "Bundle training is grounded in implementation science methods and audit-and-feedback methodology.",
+    "research.publicationTrack": "Implementation outcomes in ICU bundles are an active, publishable research line.",
+    "research.grantReadiness": "Aligns with AHRQ and NHLBI implementation-science funding priorities.",
+    "research.pathwayToIndependence": "Useful domain but not a standalone path to PI status.",
+    "research.interdisciplinaryFit": "Inherently multi-professional (PT/OT/RT/RN/MD) and well-suited to team science.",
+    "research.efficiency": "Low training cost relative to research-domain entry it provides.",
+    "business.cashPayViability": "ICU patients don't pay cash for rehab; entirely hospital/insurance domain.",
+    "business.pricingLeverage": "No pricing leverage outside hospital employment.",
+    "business.marketDifferentiation": "Irrelevant to private-practice consumer market.",
+    "business.ownerLeverage": "Doesn't support a scalable private business.",
+    "business.marketDemand": "Zero consumer awareness.",
+    "business.efficiency": "Free protocol training widely available.",
+    "academicClinical.facultyRecognition": "Strong for acute care/CCS-aligned faculty; less weight outside acute tracks.",
+    "academicClinical.scholarship": "SCCM-backed with robust ICU liberation literature.",
+    "academicClinical.teachingValue": "Core content for acute care and cardiopulmonary curricula.",
+    "academicClinical.evidenceDepth": "Strong RCT and implementation-science evidence base.",
+    "academicClinical.facultyDemand": "Preferred for acute-care faculty lines; niche otherwise.",
+    "academicClinical.efficiency": "Cheap and fast to acquire."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Sham-controlled RCTs show no consistent benefit over standard swallowing therapy.",
+    "clinical.efficiency": "1-2 day course; moderate cost; multiple training centers available.",
+    "clinical.caseloadApplicability": "Applicable to SLPs treating dysphagia; limited to this population and requires specific device.",
+    "clinical.reimbursement": "Billed under electrical stimulation and dysphagia CPT codes; standard commercial and Medicare coverage at standard SLP rates.",
+    "clinical.marketDemand": "Moderate employer demand in acute care and outpatient SLP dysphagia programs.",
+    "clinical.patientSatisfaction": "Some patients prefer active treatment over exercises alone.",
+    "business.cashPayViability": "Dysphagia treatment is overwhelmingly insurance/Medicare-funded in SNF and acute settings.",
+    "business.pricingLeverage": "Branded modality with some billing leverage but no consumer premium-pricing power.",
+    "business.marketDifferentiation": "Common in SLP dysphagia practice; recognizable but not rare.",
+    "business.ownerLeverage": "SNF/home-health contracts can be built around dysphagia teams, but it's a commodity skill among SLPs.",
+    "business.marketDemand": "Patients and families don't shop for VitalStim; referrals are clinician-driven.",
+    "business.efficiency": "1-2 day course, moderate cost — quick to obtain.",
+    "academicClinical.facultyRecognition": "Commercial proprietary cert; minimal weight in SLP faculty hiring vs BCS-S.",
+    "academicClinical.scholarship": "Some industry-funded studies; broader academic community is skeptical.",
+    "academicClinical.teachingValue": "Useful for teaching e-stim modules within dysphagia coursework.",
+    "academicClinical.evidenceDepth": "Evidence for NMES in dysphagia is mixed and contested in systematic reviews.",
+    "academicClinical.facultyDemand": "Rarely listed in SLP faculty postings.",
+    "academicClinical.efficiency": "Quick to earn, but low academic payoff."
+  }
+}

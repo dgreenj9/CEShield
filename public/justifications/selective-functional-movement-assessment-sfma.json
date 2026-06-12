@@ -1,0 +1,22 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "No RCT shows SFMA-guided treatment outperforms standard PT examination; supporting evidence is case reports, a pilot study, and one exploratory validity study with mixed findings.",
+    "clinical.caseloadApplicability": "Applies broadly across outpatient orthopedic and sports caseloads since it is built for patients with pain, though it adds little in acute care, neuro, pelvic health, or geriatrics.",
+    "clinical.reimbursement": "Confers no billing privileges or payer advantage; movement assessment is bundled into standard PT evaluation codes.",
+    "clinical.efficiency": "The algorithmic top-tier-to-breakout structure systematizes whole-body examination, but the full breakout flowcharts are time-consuming to learn and apply initially.",
+    "clinical.marketDemand": "Well recognized in sports medicine and performance-PT postings as preferred, essentially never required.",
+    "clinical.patientSatisfaction": "The whole-body, regional-interdependence narrative resonates with active patients, but no published data link SFMA use to satisfaction.",
+    "business.cashPayViability": "Fits the cash-based sports/performance niche — movement assessments package naturally into athlete intake evaluations, and the FMS brand has consumer recognition in fitness circles.",
+    "business.pricingLeverage": "Supports modest premium positioning for athlete-focused evaluations, but the contested evidence base and ubiquity among sports clinicians limit defensible uplift.",
+    "business.marketDifferentiation": "Recognizable branding helps marketing, but SFMA certification is common enough among sports-focused clinicians that it differentiates only in generalist markets.",
+    "business.ownerLeverage": "A standardized, trainable system that scales across staff and integrates with the broader FMS ecosystem for referral pipelines.",
+    "business.marketDemand": "Steady demand in sports/performance segments; negligible pull in general orthopedic or Medicare-heavy markets.",
+    "business.efficiency": "Low cost (~$799 per level, online and self-paced with CEU approval) and fast to complete — low payback threshold.",
+    "academicClinical.facultyRecognition": "Viewed as a proprietary commercial product rather than an academic credential; the negative FMS predictive-validity literature has dented its scholarly standing.",
+    "academicClinical.scholarship": "A genuine publishable literature exists (multiple IJSPT reliability studies) and open validity questions offer research opportunities, but the contested evidence cuts both ways.",
+    "academicClinical.teachingValue": "The structured algorithm is a useful pedagogical scaffold for teaching systematic movement examination; novice-reliability studies show students learn it quickly.",
+    "academicClinical.evidenceDepth": "Reliability fair-to-moderate at best, SFMA-specific validity barely explored, and the parent FMS injury-prediction claims are contradicted by multiple meta-analyses.",
+    "academicClinical.facultyDemand": "Essentially never appears in faculty position requirements.",
+    "academicClinical.efficiency": "Cheap and quick relative to academic credentials, so time cost is trivial even if academic payoff is small."
+  }
+}

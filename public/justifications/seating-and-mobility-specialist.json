@@ -1,0 +1,28 @@
+{
+  "justifications": {
+    "clinical.clinicalOutcomes": "Appropriate seating reduces pressure injury risk and improves function; SMS-specific comparative outcomes not available.",
+    "clinical.efficiency": "SMS certification requires significant experience; multiple training pathway options available.",
+    "clinical.caseloadApplicability": "Applicable in seating clinics, SCI programs, and CRT specialty practices; limited in general outpatient.",
+    "clinical.reimbursement": "SMS supports complex rehab technology (CRT) billing; CMS requires qualified supplier documentation for power wheelchair codes; significant Medicare impact.",
+    "clinical.marketDemand": "Consistent demand in CRT clinics and SCI centers; required by some CRT suppliers for billing eligibility.",
+    "clinical.patientSatisfaction": "Wheelchair users value clinicians who understand their mobility needs.",
+    "healthTech.industryPlacement": "Complex rehab technology vendors (Permobil, Quantum, Ki Mobility) recruit SMS-credentialed clinicians.",
+    "healthTech.vendorDemand": "Steady demand within complex rehab manufacturers and dealers.",
+    "healthTech.salaryPremium": "Modest premium for vendor clinical-education roles.",
+    "healthTech.technicalSkillDepth": "Builds engineering-adjacent knowledge of seating systems, power components, and electronics.",
+    "healthTech.transitionFit": "Recognized pathway into complex rehab industry.",
+    "healthTech.efficiency": "Moderate training burden with defined industry pay-off.",
+    "business.cashPayViability": "Equipment is funded by insurance/Medicaid/VA — minimal cash-pay market.",
+    "business.pricingLeverage": "ATP/SMS holders can command consulting fees from DME vendors but limited private-pay leverage.",
+    "business.marketDifferentiation": "Few clinicians hold SMS; strong differentiation in complex rehab niche.",
+    "business.ownerLeverage": "Possible to build a wheelchair clinic but heavily tied to vendor partnerships and the credentialed clinician.",
+    "business.marketDemand": "Low consumer-facing demand; demand comes from referring providers and vendors.",
+    "business.efficiency": "Requires ATP first then SMS — multi-step path of moderate cost.",
+    "academicClinical.facultyRecognition": "Recognized specialty for neuro/peds faculty teaching assistive technology and complex rehab.",
+    "academicClinical.scholarship": "Modest but growing literature in seating, pressure injury, and wheeled mobility outcomes.",
+    "academicClinical.teachingValue": "Directly enhances neuro, peds, and assistive technology coursework.",
+    "academicClinical.evidenceDepth": "Reasonable evidence for pressure mapping and outcomes but smaller trial base.",
+    "academicClinical.facultyDemand": "Sometimes preferred for neuro/peds faculty lines but rarely required.",
+    "academicClinical.efficiency": "Moderate — RESNA exams and prerequisite hours are accessible."
+  }
+}
