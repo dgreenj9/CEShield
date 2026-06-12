@@ -587,7 +587,7 @@ const LandingPage = ({ onGetStarted }) => {
             </g>
           </svg>
           <h2 style={{ fontSize: '20px', lineHeight: '20px', color: 'white', marginLeft: '8px' }}>
-            <span style={{ fontWeight: 300 }}>CE</span><span style={{ fontWeight: 400 }}>Shield</span>
+            <span style={{ fontWeight: 200, letterSpacing: '0.03em' }}>CE</span><span style={{ fontFamily: "'Fraunces', ui-serif, Georgia, serif", fontWeight: 600 }}>Shield</span>
           </h2>
         </div>
         <div style={{
