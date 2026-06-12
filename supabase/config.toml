@@ -1,0 +1,7 @@
+# Supabase project config — pins function-level settings so a deploy can't
+# silently drop them.
+
+[functions.parse-certificate]
+# JWT verification MUST stay on: this function spends Google Vision quota.
+# A deploy with --no-verify-jwt would expose paid API calls to anyone.
+verify_jwt = true
