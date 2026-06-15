@@ -11,7 +11,8 @@ import LandingPage from '@/views/LandingPage';
 
 export default function LandingPageClient() {
   const router = useRouter();
-  // Marketing CTAs jump into the app. /explore is still served by the CRA
-  // build during the migration — Next will navigate there at the URL level.
-  return <LandingPage onGetStarted={() => router.push('/explore')} />;
+  // Send "Get Started" / "Explore the matrix" to the public matrix, not the
+  // sign-in wall — visitors should reach the tool first, then convert. The
+  // matrix page carries its own create-account CTA for the personal features.
+  return <LandingPage onGetStarted={() => router.push('/matrix')} />;
 }

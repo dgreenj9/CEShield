@@ -10,6 +10,7 @@ export default function sitemap() {
   const now = new Date().toISOString();
   const staticRoutes = [
     { url: SITE + '/',              priority: 1.0,  changeFrequency: 'weekly' },
+    { url: SITE + '/matrix',        priority: 0.9,  changeFrequency: 'monthly' },
     { url: SITE + '/career-paths',  priority: 0.9,  changeFrequency: 'monthly' },
     { url: SITE + '/methodology',   priority: 0.9,  changeFrequency: 'monthly' },
     { url: SITE + '/about',         priority: 0.6,  changeFrequency: 'yearly' },

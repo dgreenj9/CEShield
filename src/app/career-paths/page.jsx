@@ -173,7 +173,7 @@ export default function CareerPathsPage() {
             <li>Pick the path that matches where you actually want your career to go &mdash; not where credentialism says you should.</li>
             <li>
               Open the{' '}
-              <Link href="/explore" style={{ color: colors.primaryBlue }}>matrix</Link>{' '}
+              <Link href="/matrix" style={{ color: colors.primaryBlue }}>matrix</Link>{' '}
               and select that lens. The matrix re-ranks to show only credentials
               scored on that path.
             </li>

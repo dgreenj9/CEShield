@@ -11,6 +11,7 @@ import { colors } from '@/utils/constants';
 import LogoLink from '@/components/common/LogoLink';
 
 const SECONDARY_LINKS = [
+  { href: '/matrix', label: 'Matrix' },
   { href: '/credentials', label: 'Credentials' },
   { href: '/career-paths', label: 'Career Paths' },
   { href: '/methodology', label: 'Methodology' },
