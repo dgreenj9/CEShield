@@ -23,7 +23,7 @@ const CEShieldLogo = ({ showTagline = true, className = "", size = "large", cent
 
   const logoText = (
     <h1 style={{ fontSize: `${scale.text}px`, lineHeight: '1', color: colors.textDark }}>
-      <span style={{ fontWeight: 200, letterSpacing: '0.03em' }}>CE</span><span style={{ fontFamily: "'Fraunces', ui-serif, Georgia, serif", fontWeight: 600 }}>Shield</span>
+      <span style={{ fontWeight: 200, letterSpacing: '0.03em' }}>CE</span><span style={{ fontWeight: 700 }}>Shield</span>
     </h1>
   );
 
