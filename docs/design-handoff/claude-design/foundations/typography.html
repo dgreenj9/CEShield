@@ -1,0 +1,52 @@
+<!-- @dsCard group="Foundations" -->
+<meta charset="utf-8">
+<title>CE Shield — Typography</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@200;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+  body { margin: 0; padding: 28px; background: #FAFAF6; color: #111827;
+         font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 15px;
+         font-feature-settings: "tnum" 1, "ss01" 1; -webkit-font-smoothing: antialiased; }
+  h1 { font-size: 18px; margin: 0 0 4px; font-family: Inter; }
+  .sub { color: #6b7280; font-size: 12.5px; margin: 0 0 24px; max-width: 640px; line-height: 1.5; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #6b7280; margin: 26px 0 10px; }
+  .spec { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #94a3b8; margin-top: 4px; }
+  .display { font-family: 'Fraunces', ui-serif, Georgia, serif; font-optical-sizing: auto;
+             font-variation-settings: "opsz" 36, "SOFT" 30; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-feature-settings: "tnum" 1, "zero" 1, "ss02" 1; }
+  .block { background: #fff; border: 1px solid #E8E6DF; border-radius: 8px; padding: 18px 20px; margin-bottom: 10px; }
+  .rule { height: 1px; background: linear-gradient(to right, #E8E6DF 0%, #E8E6DF 80%, transparent 100%); border: none; margin: 8px 0 10px; }
+  .grad { background: linear-gradient(135deg, #3b82f6 0%, #1e40af 60%, #1e3a8a 100%);
+          -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+</style>
+<h1>Typography</h1>
+<p class="sub">Three families with strict roles. Inter (15px body, tabular numerals ON globally — scores, dates and hour counts align column-wise). Fraunces display serif for page titles, hero copy and big stat numbers — journal-editorial, not SaaS. JetBrains Mono for technical numerics (ranks, weights, DOIs, hour counts in tables).</p>
+
+<div class="block">
+  <div class="eyebrow" style="margin-top:0">Display — Fraunces (variable: opsz 36, SOFT 30)</div>
+  <div class="display" style="font-size:48px; line-height:1.15; font-weight:400;">Which credential is <span class="grad">worth it?</span></div>
+  <div class="spec">.font-display · 3rem/1.15 (text-5xl) · gradient-text on ≤1 word per hero</div>
+  <div class="display" style="font-size:30px; margin-top:14px;">Credential dossier</div>
+  <div class="spec">page title · text-3xl 1.875rem/2.25rem</div>
+  <div class="display" style="font-size:36px; margin-top:14px;" class="display">143 <span style="font-size:15px; font-family:Inter; color:#6b7280;">credentials scored</span></div>
+  <div class="spec">big stat numbers use the serif too</div>
+</div>
+
+<div class="block">
+  <div class="eyebrow" style="margin-top:0">Editorial section motif (repeated app-wide)</div>
+  <span class="eyebrow" style="margin:0">Scoring · Methodology</span>
+  <div class="rule"></div>
+  <div class="display" style="font-size:24px;">How scores are built</div>
+  <div class="spec">uppercase eyebrow (0.7rem, 600, tracking .14em, #6b7280) + gradient hairline + serif title — the "one product" signature</div>
+</div>
+
+<div class="block">
+  <div class="eyebrow" style="margin-top:0">Body — Inter</div>
+  <p style="margin:0 0 8px; line-height:1.6;">Body text is Inter 15px with tabular figures enabled globally. Secondary copy sits in slate.medium <span style="color:#475569">#475569</span>; muted labels in ink.gray <span style="color:#6b7280">#6b7280</span>.</p>
+  <div class="spec">15px base · scale: 2xs 11px / xs 12px / sm 14px / base 16px / lg 18px / xl 20px / 2xl 24px / 3xl 30px / 4xl 36px / 5xl 48px</div>
+</div>
+
+<div class="block">
+  <div class="eyebrow" style="margin-top:0">Mono — JetBrains Mono</div>
+  <div class="mono" style="font-size:13px;">RANK 07 · WEIGHT 25% · 30 CEU · doi:10.2522/ptj.2016.0374</div>
+  <div class="spec">.font-mono · features: tnum, slashed zero, ss02 · used for ranks, weight notation, DOIs, hour counts</div>
+</div>

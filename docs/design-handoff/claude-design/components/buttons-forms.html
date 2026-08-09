@@ -1,0 +1,100 @@
+<!-- @dsCard group="Components" -->
+<meta charset="utf-8">
+<title>CE Shield — Buttons & Forms</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+  body { margin: 0; padding: 28px; background: #FAFAF6; color: #111827;
+         font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 14px; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  .sub { color: #6b7280; font-size: 12.5px; margin: 0 0 24px; max-width: 640px; line-height: 1.5; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #6b7280; margin: 24px 0 10px; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .lbl { font-family: ui-monospace, monospace; font-size: 11px; color: #94a3b8; margin-top: 8px; }
+  button { font: inherit; cursor: pointer; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 500;
+         border-radius: 8px; transition: background-color 150ms, color 150ms; border: none;
+         font-size: 14px; padding: 8px 16px; }
+  .btn:focus-visible { outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #3b82f6; }
+  .btn-primary { background: #3b82f6; color: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+  .btn-primary:hover { background: #2563eb; }
+  .btn-secondary { background: #fff; color: #3b82f6; border: 1px solid #3b82f6; }
+  .btn-secondary:hover { background: #e0f2fe; }
+  .btn-ghost { background: transparent; color: #475569; }
+  .btn-ghost:hover { background: #f1f5f9; }
+  .btn-danger { background: #dc2626; color: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+  .btn-danger:hover { background: #b91c1c; }
+  .btn-sm { font-size: 14px; padding: 6px 12px; }
+  .btn-lg { font-size: 16px; padding: 10px 20px; }
+  .btn[disabled] { opacity: .5; cursor: not-allowed; }
+  .field { display: flex; flex-direction: column; gap: 6px; width: 260px; }
+  .field label { font-size: 14px; font-weight: 500; color: #1e293b; }
+  .field .req { color: #dc2626; margin-left: 2px; }
+  .field input { width: 100%; box-sizing: border-box; border-radius: 8px; border: 1px solid #f1f5f9;
+                 background: #fff; font-size: 14px; color: #111827; padding: 8px 12px; font-family: inherit; }
+  .field input::placeholder { color: #6b7280; }
+  .field input:focus { outline: none; box-shadow: 0 0 0 2px #3b82f6; border-color: transparent; }
+  .field .help { font-size: 12px; color: #6b7280; }
+  .field .err-input { border-color: #ef4444; }
+  .field .err-input:focus { box-shadow: 0 0 0 2px #ef4444; }
+  .field .err { font-size: 12px; color: #dc2626; }
+  .slider-card { position: relative; overflow: hidden; background: #f9fafb; border: 1px solid #f1f5f9;
+                 border-radius: 10px; padding: 14px 16px; width: 300px; }
+  .slider-fill { position: absolute; inset: 0 auto 0 0; width: 35%; background: rgba(59,130,246,.08); }
+  .slider-card * { position: relative; }
+  .slider-card .dim { font-size: 14.5px; font-weight: 600; }
+  .slider-card .val { font-family: ui-monospace, monospace; font-variant-numeric: tabular-nums;
+                      font-size: 18px; font-weight: 600; color: #3b82f6; float: right; }
+  .slider-card .val small { font-size: 11px; color: #6b7280; font-weight: 400; }
+  .slider-card .desc { font-size: 12.5px; color: #6b7280; margin: 4px 0 8px; clear: both; }
+  .slider-card input[type=range] { width: 100%; accent-color: #3b82f6; }
+  .slider-card .foot { display: flex; justify-content: space-between; font-size: 11px; color: #6b7280; }
+  .slider-card .foot .scale { font-family: ui-monospace, monospace; }
+</style>
+<h1>Buttons &amp; forms</h1>
+<p class="sub">From <code>ui/Button</code> and <code>ui/Input</code> — the Tailwind primitives. Note: the auth surfaces and course modals do NOT use these (they hand-roll square-cornered inputs) — a unification target for the redesign.</p>
+
+<div class="eyebrow">Button · 4 variants</div>
+<div class="row">
+  <button class="btn btn-primary">Add CE course</button>
+  <button class="btn btn-secondary">HTML report</button>
+  <button class="btn btn-ghost">Cancel</button>
+  <button class="btn btn-danger">Delete course</button>
+  <button class="btn btn-primary" disabled>Saving…</button>
+</div>
+<div class="lbl">primary #3b82f6 → hover #2563eb · secondary white/blue border · ghost slate · danger red-600 · disabled 50%</div>
+
+<div class="eyebrow">Sizes</div>
+<div class="row">
+  <button class="btn btn-primary btn-sm">Small</button>
+  <button class="btn btn-primary">Medium (default)</button>
+  <button class="btn btn-primary btn-lg">Large</button>
+</div>
+
+<div class="eyebrow">Input · default / helper / error</div>
+<div class="row" style="align-items: flex-start;">
+  <div class="field">
+    <label>Headline</label>
+    <input placeholder="e.g. Orthopedic PT · return-to-sport">
+  </div>
+  <div class="field">
+    <label>Handle <span class="req">*</span></label>
+    <input value="dan-green-dpt">
+    <span class="help">3–30 chars: lowercase letters, numbers, hyphens.</span>
+  </div>
+  <div class="field">
+    <label>Hours <span class="req">*</span></label>
+    <input class="err-input" value="0">
+    <span class="err">Enter a valid number of hours.</span>
+  </div>
+</div>
+
+<div class="eyebrow">Weight-slider card (matrix — the signature control)</div>
+<div class="slider-card">
+  <div class="slider-fill"></div>
+  <span class="val">35<small>/100</small></span>
+  <div class="dim">Clinical outcomes</div>
+  <div class="desc">Does the credential's underlying approach improve patient outcomes?</div>
+  <input type="range" min="0" max="100" value="35">
+  <div class="foot"><span>Heavy</span><span class="scale">0 · 25 · 50 · 75 · 100</span></div>
+</div>
+<div class="lbl">card fills with 8% blue proportional to value (180ms) · dragging one slider rebalances the others so the total stays exactly 100 · qualitative label: Off / Low / Moderate / High / Heavy / Dominant</div>

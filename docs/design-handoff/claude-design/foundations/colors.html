@@ -1,0 +1,61 @@
+<!-- @dsCard group="Foundations" -->
+<meta charset="utf-8">
+<title>CE Shield — Color Tokens</title>
+<style>
+  body { margin: 0; padding: 28px; background: #FAFAF6; color: #111827;
+         font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 14px; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  .sub { color: #6b7280; font-size: 12.5px; margin: 0 0 24px; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #6b7280; margin: 22px 0 10px; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .sw { width: 148px; border: 1px solid #E8E6DF; border-radius: 8px; overflow: hidden; background: #fff; }
+  .chip { height: 56px; }
+  .meta { padding: 8px 10px; }
+  .name { font-weight: 600; font-size: 12.5px; }
+  .hex { font-family: ui-monospace, 'JetBrains Mono', monospace; font-size: 11.5px; color: #6b7280; }
+  .use { font-size: 11px; color: #6b7280; margin-top: 2px; line-height: 1.4; }
+  .bordered { border: 1px dashed #cbd5e1; }
+</style>
+<h1>Color tokens</h1>
+<p class="sub">Source of truth: <code>tailwind.config.js</code> + <code>src/utils/constants.js</code> (duplicated — change both). Warm paper background, restrained blue brand, sage "evidence" accent, and a 4-tier evidence scale.</p>
+
+<div class="eyebrow">Paper (surfaces)</div>
+<div class="row">
+  <div class="sw"><div class="chip bordered" style="background:#FAFAF6"></div><div class="meta"><div class="name">paper.bg</div><div class="hex">#FAFAF6</div><div class="use">Page background — warm off-white, reads as paper not template</div></div></div>
+  <div class="sw"><div class="chip bordered" style="background:#FFFFFF"></div><div class="meta"><div class="name">paper.card</div><div class="hex">#FFFFFF</div><div class="use">Cards / panels — kept pure white for contrast against paper.bg</div></div></div>
+  <div class="sw"><div class="chip" style="background:#E8E6DF"></div><div class="meta"><div class="name">paper.rule</div><div class="hex">#E8E6DF</div><div class="use">Hairline dividers, section rules</div></div></div>
+  <div class="sw"><div class="chip bordered" style="background:#f9fafb"></div><div class="meta"><div class="name">gray-bg</div><div class="hex">#f9fafb</div><div class="use">Recessed panels, dimension cards</div></div></div>
+</div>
+
+<div class="eyebrow">Brand</div>
+<div class="row">
+  <div class="sw"><div class="chip" style="background:#3b82f6"></div><div class="meta"><div class="name">brand.blue</div><div class="hex">#3b82f6</div><div class="use">Primary actions, links, focus rings, active nav</div></div></div>
+  <div class="sw"><div class="chip" style="background:#2563eb"></div><div class="meta"><div class="name">brand.blue-strong</div><div class="hex">#2563eb</div><div class="use">Hover / pressed primary</div></div></div>
+  <div class="sw"><div class="chip" style="background:#8b5cf6"></div><div class="meta"><div class="name">brand.purple</div><div class="hex">#8b5cf6</div><div class="use">Secondary accent (sparing)</div></div></div>
+  <div class="sw"><div class="chip" style="background:#e0f2fe"></div><div class="meta"><div class="name">brand.light-blue</div><div class="hex">#e0f2fe</div><div class="use">Soft blue fills</div></div></div>
+  <div class="sw"><div class="chip" style="background:#e9d5ff"></div><div class="meta"><div class="name">brand.muted-purple</div><div class="hex">#e9d5ff</div><div class="use">Soft purple fills</div></div></div>
+  <div class="sw"><div class="chip" style="background:#cffafe"></div><div class="meta"><div class="name">brand.muted-teal</div><div class="hex">#cffafe</div><div class="use">Soft teal fills</div></div></div>
+</div>
+
+<div class="eyebrow">Evidence accent (editorial sage)</div>
+<div class="row">
+  <div class="sw"><div class="chip" style="background:#2F6B4D"></div><div class="meta"><div class="name">brand.evidence</div><div class="hex">#2F6B4D</div><div class="use">LIBRARIAN-REVIEWED / strong-evidence surfaces — "clinical, considered"</div></div></div>
+  <div class="sw"><div class="chip" style="background:#E8EFEA"></div><div class="meta"><div class="name">brand.evidence-soft</div><div class="hex">#E8EFEA</div><div class="use">Sage fill for evidence frames/callouts</div></div></div>
+</div>
+
+<div class="eyebrow">Evidence-tier scale (score chips, meters)</div>
+<div class="row">
+  <div class="sw"><div class="chip" style="background:#22c55e"></div><div class="meta"><div class="name">evidence.strong</div><div class="hex">#22c55e</div><div class="use">Tier: Strong (70–100)</div></div></div>
+  <div class="sw"><div class="chip" style="background:#3b82f6"></div><div class="meta"><div class="name">evidence.good</div><div class="hex">#3b82f6</div><div class="use">Tier: Good (50–69)</div></div></div>
+  <div class="sw"><div class="chip" style="background:#fbbf24"></div><div class="meta"><div class="name">evidence.moderate</div><div class="hex">#fbbf24</div><div class="use">Tier: Moderate (30–49)</div></div></div>
+  <div class="sw"><div class="chip" style="background:#94a3b8"></div><div class="meta"><div class="name">evidence.limited</div><div class="hex">#94a3b8</div><div class="use">Tier: Limited (0–29)</div></div></div>
+</div>
+
+<div class="eyebrow">Text / ink + slate</div>
+<div class="row">
+  <div class="sw"><div class="chip" style="background:#111827"></div><div class="meta"><div class="name">ink.dark</div><div class="hex">#111827</div><div class="use">Body text (global)</div></div></div>
+  <div class="sw"><div class="chip" style="background:#6b7280"></div><div class="meta"><div class="name">ink.gray</div><div class="hex">#6b7280</div><div class="use">Muted text, eyebrows</div></div></div>
+  <div class="sw"><div class="chip" style="background:#1e293b"></div><div class="meta"><div class="name">slate.dark</div><div class="hex">#1e293b</div><div class="use">Headings, strong labels</div></div></div>
+  <div class="sw"><div class="chip" style="background:#475569"></div><div class="meta"><div class="name">slate.medium</div><div class="hex">#475569</div><div class="use">Secondary body copy</div></div></div>
+  <div class="sw"><div class="chip" style="background:#f1f5f9"></div><div class="meta"><div class="name">slate.light</div><div class="hex">#f1f5f9</div><div class="use">Subtle borders, dividers</div></div></div>
+</div>

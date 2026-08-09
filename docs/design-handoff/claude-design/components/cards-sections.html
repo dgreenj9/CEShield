@@ -1,0 +1,83 @@
+<!-- @dsCard group="Components" -->
+<meta charset="utf-8">
+<title>CE Shield — Cards, Sections & Feedback</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
+  body { margin: 0; padding: 28px; background: #FAFAF6; color: #111827;
+         font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 14px;
+         font-feature-settings: "tnum" 1; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  .sub { color: #6b7280; font-size: 12.5px; margin: 0 0 24px; max-width: 660px; line-height: 1.5; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #6b7280; margin: 24px 0 10px; }
+  .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #94a3b8; margin-top: 8px; }
+  .display { font-family: 'Fraunces', ui-serif, Georgia, serif; font-variation-settings: "opsz" 36, "SOFT" 30; }
+  .rule { height: 1px; background: linear-gradient(to right, #E8E6DF 0%, #E8E6DF 80%, transparent 100%); border: none; flex: 1; margin: 0; }
+  .card { background: #fff; border: 1px solid #f1f5f9; border-radius: 12px; padding: 16px;
+          box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 1px 3px rgba(15,23,42,.06); }
+  .row { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-start; }
+  .sectionhead { display: flex; align-items: center; gap: 12px; }
+  .sectionhead .eb { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #6b7280; flex-shrink: 0; }
+  .stat { text-align: left; }
+  .stat .n { font-size: 30px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .stat .l { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #6b7280; margin-top: 4px; }
+  .grad-top { border-top: 2px solid transparent;
+              border-image: linear-gradient(90deg, #3b82f6, #8b5cf6) 1; }
+  .banner { display: flex; gap: 10px; align-items: flex-start; border-radius: 10px; border: 1px solid;
+            padding: 12px 16px; font-size: 13px; line-height: 1.5; max-width: 520px; }
+  .b-amber { background: #fef3c7; border-color: #fbbf24; color: #92400e; }
+  .b-green { background: #f0fdf4; border-color: #86efac; color: #166534; }
+  .b-blue  { background: #EFF6FF; border-color: #3b82f633; color: #475569; }
+  .b-red   { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+  .empty { border: 1px dashed #cbd5e1; background: #f9fafb; border-radius: 12px; padding: 32px 24px;
+           text-align: center; max-width: 380px; }
+  .empty .t { font-weight: 500; margin-bottom: 4px; }
+  .empty .d { font-size: 13px; color: #6b7280; line-height: 1.5; }
+  .progress { height: 8px; background: #f1f5f9; border-radius: 999px; overflow: hidden; }
+  .progress > div { height: 100%; }
+</style>
+<h1>Cards, sections &amp; feedback</h1>
+<p class="sub">The editorial section motif (eyebrow + fading hairline + serif title) is the "one product" signature — keep or consciously evolve it. Feedback today: designed banners exist, but most app feedback is native <code>alert()</code> — the redesign needs a real toast/inline-error system.</p>
+
+<div class="eyebrow">Page header + section motif</div>
+<div class="card" style="max-width:560px;">
+  <span style="font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:#6b7280;">Compliance</span>
+  <h2 style="font-size:24px; font-weight:600; margin:6px 0 4px; letter-spacing:-.01em;">Compliance</h2>
+  <p style="font-size:13.5px; color:#6b7280; margin:0 0 14px;">Illinois PT · 40 hours per 2-year cycle. <b style="color:#dc2626;">62 days</b> until renewal.</p>
+  <hr class="rule" style="display:block;">
+  <div class="sectionhead" style="margin-top:18px;">
+    <span class="eb">Score breakdown · Clinical</span>
+    <hr class="rule">
+  </div>
+</div>
+
+<div class="eyebrow">Stat tiles (Fraunces numerals · first tile gets the gradient edge)</div>
+<div class="row">
+  <div class="card grad-top stat" style="width:130px;"><div class="n display" style="color:#3b82f6;">28.5</div><div class="l">Hours completed</div></div>
+  <div class="card stat" style="width:130px;"><div class="n display">40</div><div class="l">Hours required</div></div>
+  <div class="card stat" style="width:130px;"><div class="n display">11.5</div><div class="l">Hours remaining</div></div>
+  <div class="card stat" style="width:130px;"><div class="n display">14</div><div class="l">Courses logged</div></div>
+</div>
+
+<div class="eyebrow">Progress (blue → flips green at 100%)</div>
+<div class="card" style="max-width:420px;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;">
+    <span style="font-weight:600; font-size:14px;">Overall progress</span>
+    <span style="font-size:13px;"><b>71%</b> <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#6b7280;">28.5 / 40</span> hours</span>
+  </div>
+  <div class="progress"><div style="width:71%; background:linear-gradient(90deg,#3b82f6,#2563eb);"></div></div>
+</div>
+
+<div class="eyebrow">Banners (draft-state trust mechanic, exemption, info, error)</div>
+<div class="row" style="flex-direction:column;">
+  <div class="banner b-amber">⚠ <span><b>Beta state (Wisconsin):</b> CE rules are unverified. Confirm against Wis. Admin. Code PT 9 before relying on totals.</span></div>
+  <div class="banner b-green">✓ <span><b>First renewal:</b> you're CE-exempt this cycle. We'll start counting next cycle.</span></div>
+  <div class="banner b-blue">ⓘ <span><b>New 2025 Illinois requirement:</b> Cultural competency training (1 hour) is now required. You can start now.</span></div>
+  <div class="banner b-red">✕ <span>We couldn't load your data. Check your connection and try again.</span></div>
+</div>
+
+<div class="eyebrow">Empty state (dashed variant)</div>
+<div class="empty">
+  <div style="opacity:.5; margin-bottom:8px;">📖</div>
+  <div class="t">Nothing logged yet</div>
+  <div class="d">Log your first CE course to start tracking hours, mandatory categories, and renewal status — all in one place.</div>
+</div>

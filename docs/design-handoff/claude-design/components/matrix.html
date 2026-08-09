@@ -1,0 +1,103 @@
+<!-- @dsCard group="Components" -->
+<meta charset="utf-8">
+<title>CE Shield — Matrix List & Detail (core surface)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  body { margin: 0; padding: 28px; background: #FAFAF6; color: #111827;
+         font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 14px;
+         font-feature-settings: "tnum" 1; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  .sub { color: #6b7280; font-size: 12.5px; margin: 0 0 24px; max-width: 660px; line-height: 1.5; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #6b7280; margin: 24px 0 10px; }
+  .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #94a3b8; margin-top: 8px; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .listwrap { border: 1px solid #f1f5f9; border-radius: 12px; overflow: hidden; background: #fff; max-width: 400px; }
+  .certrow { display: flex; align-items: flex-start; gap: 10px; padding: 12px; background: #fff;
+             border-bottom: 1px solid #f1f5f9; border-left: 3px solid; cursor: pointer;
+             transition: box-shadow 150ms ease; }
+  .certrow:hover { box-shadow: 0 4px 12px rgba(15,23,42,.06); }
+  .certrow.active { background: #e0f2fe; border-left-color: #3b82f6 !important; }
+  .certrow .rank { font-family: 'JetBrains Mono', monospace; width: 28px; text-align: right;
+                   font-size: 11px; font-weight: 500; color: #6b7280; padding-top: 2px; }
+  .certrow .name { font-size: 14.5px; font-weight: 500; line-height: 1.3; letter-spacing: -.01em; }
+  .certrow.active .name { font-weight: 600; }
+  .pills { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+  .pills span { font-size: 10.5px; padding: 1px 6px; border-radius: 999px; }
+  .p-type { color: #6b7280; background: #f1f5f9; }
+  .p-ev { color: #3b82f6; background: #e0f2fe; white-space: nowrap; }
+  .score { margin-left: auto; padding: 4px 9px; border-radius: 6px; font-weight: 600;
+           font-size: 14px; font-variant-numeric: tabular-nums; min-width: 40px; text-align: center;
+           background: #fff; flex-shrink: 0; }
+  .s-strong { color: #1F4D38; border: 1px solid #2F6B4D; box-shadow: inset 0 0 0 1px #E8EFEA; }
+  .s-good { color: #1D4ED8; border: 1px solid #3b82f6; box-shadow: inset 0 0 0 1px #EFF6FF; }
+  .s-moderate { color: #7A5A2F; border: 1px solid #A87B3F; box-shadow: inset 0 0 0 1px #F6F0E5; }
+  .crosscard { border-radius: 10px; padding: 12px; width: 130px; border: 1px solid #f1f5f9; background: #fff; }
+  .crosscard.on { border-color: #2F6B4D; background: #f9fafb; }
+  .crosscard .cl { font-size: 12.5px; font-weight: 600; margin-bottom: 4px; }
+  .crosscard .cs { font-family: 'JetBrains Mono', monospace; font-size: 21px; font-weight: 700; }
+  .crosscard .cb { height: 4px; border-radius: 999px; background: #f1f5f9; margin-top: 6px; overflow: hidden; }
+  .crosscard .cb > div { height: 100%; }
+  .zebra { border: 1px solid #f1f5f9; border-radius: 8px; overflow: hidden; max-width: 480px; }
+  .cit { padding: 12px; border-bottom: 1px solid #f1f5f9; }
+  .cit:nth-child(even) { background: #f9fafb; }
+  .cit:last-child { border-bottom: none; }
+  .cit .t { font-size: 14px; font-weight: 500; }
+  .cit .m { font-size: 12.5px; color: #6b7280; margin-top: 2px; }
+  .cit .chips { display: flex; gap: 6px; margin-top: 6px; align-items: center; }
+  .cit .chips .ev { font-size: 10.5px; padding: 1px 6px; border-radius: 999px; color: #3b82f6; background: #e0f2fe; }
+  .cit .chips .doi { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #6b7280; }
+</style>
+<h1>Matrix list &amp; detail — the core product surface</h1>
+<p class="sub">Master–detail split: ranked list (left, 280–380px, scrolls) + sticky detail pane (right). Rank numbers renumber live as weight sliders move; tier chips recolor mid-interaction. The tier-colored left rail is the row's evidence signal.</p>
+
+<div class="eyebrow">Ranked list rows (tier left-rail + score chip)</div>
+<div class="listwrap">
+  <div class="certrow active" style="border-left-color:#2F6B4D;">
+    <span class="rank">01</span>
+    <div><div class="name">Pulmonary Rehabilitation Certificate</div>
+      <div class="pills"><span class="p-type">Certification</span><span class="p-ev">14 Meta</span><span class="p-ev">22 RCT</span></div></div>
+    <span class="score s-strong">92</span>
+  </div>
+  <div class="certrow" style="border-left-color:#2F6B4D;">
+    <span class="rank">02</span>
+    <div><div class="name">AACVPR Cardiac Rehab Professional Certification</div>
+      <div class="pills"><span class="p-type">Board Cert</span><span class="p-ev">9 Meta</span></div></div>
+    <span class="score s-strong">89</span>
+  </div>
+  <div class="certrow" style="border-left-color:#3b82f6;">
+    <span class="rank">03</span>
+    <div><div class="name">LSVT LOUD Certification</div>
+      <div class="pills"><span class="p-type">Training</span><span class="p-ev">6 RCT</span></div></div>
+    <span class="score s-good">61</span>
+  </div>
+  <div class="certrow" style="border-left-color:#A87B3F; border-bottom:none;">
+    <span class="rank">04</span>
+    <div><div class="name">Dry Needling Certification</div>
+      <div class="pills"><span class="p-type">Certification</span><span class="p-ev">4 SR</span></div></div>
+    <span class="score s-moderate">44</span>
+  </div>
+</div>
+<div class="lbl">zero-padded mono rank · 2-line name clamp · max 2 evidence pills · active = light-blue bg + blue rail</div>
+
+<div class="eyebrow">Cross-lens comparison cards (default weights, not user weights)</div>
+<div style="display:flex; gap:10px; flex-wrap:wrap;">
+  <div class="crosscard on"><div class="cl">Clinical</div><div class="cs" style="color:#2F6B4D;">92</div><div class="cb"><div style="width:92%; background:#2F6B4D;"></div></div></div>
+  <div class="crosscard"><div class="cl">Business</div><div class="cs" style="color:#8A6332;">48</div><div class="cb"><div style="width:48%; background:#8A6332;"></div></div></div>
+  <div class="crosscard"><div class="cl">Academic</div><div class="cs" style="color:#2F6B4D;">71</div><div class="cb"><div style="width:71%; background:#2F6B4D;"></div></div></div>
+</div>
+<div class="lbl">⚠ these use scoreColor() thresholds (≥65 sage / ≥40 ochre) — different from the chip tiers (70/50/30)</div>
+
+<div class="eyebrow">Citation list (zebra — the only striped list in the app)</div>
+<div class="zebra">
+  <div class="cit">
+    <div class="t">Exercise-based cardiac rehabilitation for coronary heart disease</div>
+    <div class="m">Anderson L, Oldridge N, et al. · Cochrane Database Syst Rev <span class="mono">2016</span></div>
+    <div class="chips"><span class="ev">Meta-analysis</span><span class="doi">doi:10.1002/14651858</span></div>
+  </div>
+  <div class="cit">
+    <div class="t">Pulmonary rehabilitation for COPD: systematic review</div>
+    <div class="m">McCarthy B, Casey D, et al. · Cochrane Database Syst Rev <span class="mono">2015</span></div>
+    <div class="chips"><span class="ev">Systematic review</span><span class="doi">PMID 25705944</span></div>
+  </div>
+</div>
+<div class="lbl">lazy-loaded with skeleton shimmer rows · maxHeight 360 scroll · external-link icon per row</div>

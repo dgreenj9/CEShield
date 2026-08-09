@@ -1,0 +1,63 @@
+<!-- @dsCard group="Brand" -->
+<meta charset="utf-8">
+<title>CE Shield — Logo & Wordmark</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap');
+  body { margin: 0; padding: 28px; background: #FAFAF6; color: #111827;
+         font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 14px; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  .sub { color: #6b7280; font-size: 12.5px; margin: 0 0 24px; max-width: 620px; line-height: 1.5; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #6b7280; margin: 24px 0 10px; }
+  .stage { background: #fff; border: 1px solid #E8E6DF; border-radius: 8px; padding: 24px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+  .lockup { display: flex; align-items: center; gap: 8px; }
+  .wm { line-height: 1; color: #111827; margin: 0; }
+  .wm .ce { font-weight: 200; letter-spacing: .03em; }
+  .wm .shield { font-weight: 700; }
+  .tagline { text-transform: uppercase; letter-spacing: 1.5px; color: #6b7280; margin-top: 8px; text-align: center; }
+  .lbl { font-family: ui-monospace, monospace; font-size: 11px; color: #94a3b8; margin-top: 8px; }
+  .note { font-size: 12px; color: #475569; line-height: 1.55; max-width: 620px; }
+  .dont { color: #991b1b; }
+</style>
+<h1>Logo &amp; wordmark</h1>
+<p class="sub">Three overlapping translucent shields (light-blue → blue → purple, each offset 10 units) read as a gradient stack. Wordmark is a single word split by weight contrast only: <b style="font-weight:200">CE</b> Inter 200 tracked +0.03em, <b>Shield</b> Inter 700. No space between them. <span class="dont">No serif in the wordmark — tried and rejected.</span></p>
+
+<div class="eyebrow">Primary lockup (large · 54px mark / 30px text)</div>
+<div class="stage">
+  <div>
+    <div class="lockup">
+      <svg viewBox="0 0 60 40" width="54" height="36">
+        <g transform="translate(0,4)">
+          <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill="#e0f2fe"/>
+          <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill="#3b82f6" opacity="0.85"/>
+          <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="#8b5cf6" opacity="0.85"/>
+        </g>
+      </svg>
+      <div class="wm" style="font-size:30px;"><span class="ce">CE</span><span class="shield">Shield</span></div>
+    </div>
+  </div>
+  <div>
+    <div class="lockup" style="flex-direction:column;">
+      <div class="lockup">
+        <svg viewBox="0 0 60 40" width="48" height="32">
+          <g transform="translate(0,4)">
+            <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill="#e0f2fe"/>
+            <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill="#3b82f6" opacity="0.85"/>
+            <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="#8b5cf6" opacity="0.85"/>
+          </g>
+        </svg>
+        <div class="wm" style="font-size:32px;"><span class="ce">CE</span><span class="shield">Shield</span></div>
+      </div>
+      <div class="tagline" style="font-size:10px;">Track Education. Protect Your License.</div>
+    </div>
+  </div>
+</div>
+<div class="lbl">sizes: small 30/14 · medium 44/20 (SideNav) · large 54/30 (default) · xlarge 48/32 + tagline (auth)</div>
+
+<div class="eyebrow">Scale run</div>
+<div class="stage">
+  <div class="lockup"><svg viewBox="0 0 60 40" width="30" height="20"><g transform="translate(0,4)"><path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill="#e0f2fe"/><path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill="#3b82f6" opacity="0.85"/><path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="#8b5cf6" opacity="0.85"/></g></svg><div class="wm" style="font-size:14px;"><span class="ce">CE</span><span class="shield">Shield</span></div></div>
+  <div class="lockup"><svg viewBox="0 0 60 40" width="44" height="29"><g transform="translate(0,4)"><path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill="#e0f2fe"/><path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill="#3b82f6" opacity="0.85"/><path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="#8b5cf6" opacity="0.85"/></g></svg><div class="wm" style="font-size:20px;"><span class="ce">CE</span><span class="shield">Shield</span></div></div>
+</div>
+
+<div class="eyebrow">Notes for redesign</div>
+<p class="note">The SVG currently ships with no <code>role="img"</code>/<code>&lt;title&gt;</code>, and the wordmark renders as an <code>&lt;h1&gt;</code> everywhere it appears (multiple h1s per page) — fix in any rebuild. A layered 3-shield white variant exists in the landing footer on dark slate <code>#1e293b</code>.</p>

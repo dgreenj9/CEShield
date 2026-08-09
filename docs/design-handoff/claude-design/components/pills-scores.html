@@ -1,0 +1,98 @@
+<!-- @dsCard group="Components" -->
+<meta charset="utf-8">
+<title>CE Shield — Pills, Chips & Score System</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+  body { margin: 0; padding: 28px; background: #FAFAF6; color: #111827;
+         font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 14px;
+         font-feature-settings: "tnum" 1; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  .sub { color: #6b7280; font-size: 12.5px; margin: 0 0 24px; max-width: 660px; line-height: 1.5; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #6b7280; margin: 24px 0 10px; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #94a3b8; margin-top: 8px; }
+  .pill { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; font-weight: 500; }
+  .p-sm { font-size: 10.5px; padding: 1px 6px; }
+  .p-md { font-size: 11px; padding: 2px 8px; }
+  .info { background: #e0f2fe; color: #3b82f6; }
+  .warn { background: #fef3c7; color: #92400e; font-weight: 600; }
+  .prov { background: #e9d5ff; color: #8b5cf6; font-weight: 600; letter-spacing: .02em; }
+  .neutral { background: #f1f5f9; color: #6b7280; }
+  .ok { background: #dcfce7; color: #166534; font-weight: 600; }
+  .sage-p { background: #E8EFEA; color: #2F6B4D; font-weight: 600; }
+  .ochre-p { background: #F6F0E5; color: #8A6332; font-weight: 600; }
+  .chip { border-radius: 999px; font-size: 13px; padding: 8px 14px; border: 1px solid #f1f5f9;
+          background: #fff; color: #475569; font-weight: 500; cursor: pointer; font-family: inherit; }
+  .chip.on-blue { background: #3b82f6; border-color: #3b82f6; color: #fff; }
+  .chip.on-ink { background: #111827; border-color: #111827; color: #fff; font-weight: 600; }
+  .chip.off-gray { background: #f9fafb; }
+  .score { display: inline-flex; align-items: baseline; justify-content: center; min-width: 40px;
+           padding: 4px 9px; border-radius: 6px; font-weight: 600; font-size: 14px;
+           font-variant-numeric: tabular-nums; letter-spacing: -.01em; background: #fff; }
+  .s-strong  { color: #1F4D38; border: 1px solid #2F6B4D; box-shadow: inset 0 0 0 1px #E8EFEA; }
+  .s-good    { color: #1D4ED8; border: 1px solid #3b82f6; box-shadow: inset 0 0 0 1px #EFF6FF; }
+  .s-moderate{ color: #7A5A2F; border: 1px solid #A87B3F; box-shadow: inset 0 0 0 1px #F6F0E5; }
+  .s-limited { color: #475569; border: 1px solid #94a3b8; box-shadow: inset 0 0 0 1px #F8FAFC; }
+  .bar { height: 4px; background: #f1f5f9; border-radius: 999px; overflow: hidden; width: 220px; }
+  .bar > div { height: 100%; border-radius: 999px; }
+  .dimrow { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .dimrow .name { width: 190px; font-size: 13.5px; font-weight: 600; }
+  .dimrow .w { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6b7280; }
+  .dimrow .v { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; margin-left: auto; }
+  .dimrow .v small { font-size: 11px; color: #6b7280; font-weight: 400; }
+  .lens { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+</style>
+<h1>Pills, chips &amp; the score system</h1>
+<p class="sub">The product's core visual language. Score chips: white background, tier-colored text, 1px tier border + 1px inset tint ring, tabular numerals. ⚠ Two thresholds coexist today: chip tiers break at 70/50/30 while <code>scoreColor()</code> text breaks at 65/40 — unify in the redesign.</p>
+
+<div class="eyebrow">Score chips · 4 tiers (70/50/30 breakpoints)</div>
+<div class="row">
+  <span class="score s-strong">92</span><span class="lbl" style="margin:0 14px 0 2px">strong ≥70 · sage</span>
+  <span class="score s-good">61</span><span class="lbl" style="margin:0 14px 0 2px">good 50–69 · blue</span>
+  <span class="score s-moderate">44</span><span class="lbl" style="margin:0 14px 0 2px">moderate 30–49 · ochre</span>
+  <span class="score s-limited">23</span><span class="lbl" style="margin:0 0 0 2px">limited &lt;30 · slate</span>
+</div>
+
+<div class="eyebrow">Lens accents (5 career paths)</div>
+<div class="row" style="gap:18px;">
+  <span class="lens"><span class="dot" style="background:#3b82f6"></span>Clinical</span>
+  <span class="lens"><span class="dot" style="background:#A87B3F"></span>Business</span>
+  <span class="lens"><span class="dot" style="background:#2F6B4D"></span>Academic Clinical</span>
+  <span class="lens"><span class="dot" style="background:#8b5cf6"></span>Research</span>
+  <span class="lens"><span class="dot" style="background:#475569"></span>HealthTech &amp; Industry</span>
+</div>
+
+<div class="eyebrow">Dimension score rows (detail pane)</div>
+<div>
+  <div class="dimrow"><span class="name">Clinical outcomes <span class="w">×35%</span></span><div class="bar"><div style="width:88%;background:#3b82f6"></div></div><span class="v">88<small>/100</small></span></div>
+  <div class="dimrow"><span class="name">Billing &amp; reimbursement <span class="w">×15%</span></span><div class="bar"><div style="width:52%;background:#3b82f6"></div></div><span class="v">52<small>/100</small></span></div>
+  <div class="dimrow"><span class="name">Employer demand <span class="w">×10%</span></span><div class="bar"><div style="width:34%;background:#3b82f6"></div></div><span class="v">34<small>/100</small></span></div>
+</div>
+<div class="lbl">4px rail #f1f5f9 · radius 999 · fill transitions width 200ms ease</div>
+
+<div class="eyebrow">Semantic pills</div>
+<div class="row">
+  <span class="pill p-md info">12 meta-analyses</span>
+  <span class="pill p-md info">Board Cert</span>
+  <span class="pill p-md prov">LIBRARIAN-REVIEWED</span>
+  <span class="pill p-md warn">LEGACY CITATIONS</span>
+  <span class="pill p-md warn">DRAFT — VERIFY BEFORE USE</span>
+  <span class="pill p-md neutral">Self-study</span>
+  <span class="pill p-md ok">100</span>
+  <span class="pill p-md sage-p">Earned</span>
+  <span class="pill p-md ochre-p">In progress</span>
+  <span class="pill p-md info" style="font-weight:600;">Planned</span>
+</div>
+<div class="lbl">info #e0f2fe/#3b82f6 · warn #fef3c7/#92400e · provenance #e9d5ff/#8b5cf6 · success #dcfce7/#166534 · status: sage/ochre/blue</div>
+
+<div class="eyebrow">Filter chips — ⚠ three "selected" treatments coexist today</div>
+<div class="row">
+  <button class="chip on-blue">Clinical</button>
+  <button class="chip">Business</button>
+  <button class="chip on-blue" style="font-size:12px; padding:4px 12px;">Strong (70+) (38)</button>
+  <button class="chip off-gray" style="font-size:12px; padding:4px 12px;">Good (50-69) (61)</button>
+  <button class="chip on-ink" style="font-size:12px; padding:4px 10px; border-radius:20px;">PT</button>
+  <button class="chip off-gray" style="font-size:12px; padding:4px 10px; border-radius:20px;">OT</button>
+</div>
+<div class="lbl">lens + tier chips: blue fill when active · discipline chips: ink-dark fill · pick ONE treatment in the redesign</div>
