@@ -37,3 +37,10 @@ yarn-error.log*
 
 # Test coverage
 /coverage
+
+# Supabase CLI scratch state
+supabase/.temp/
+
+# Python
+__pycache__/
+*.pyc

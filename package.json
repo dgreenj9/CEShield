@@ -1,5 +1,6 @@
 {
-  "name": "il-ce-tracker",
+  "name": "ceshield",
+  "description": "Career intelligence + CE-compliance platform for rehabilitation clinicians",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

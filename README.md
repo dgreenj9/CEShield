@@ -126,3 +126,8 @@ every push and PR to `main`.
 
 Actively developed MVP. Roadmap: clinician directory (patient-side discovery),
 credential verification layer, and transactional renewal-reminder emails.
+
+## License
+
+Copyright © 2026 Daniel J. Green. All rights reserved. CE Shield is a commercial
+product; the source is public for review purposes only.
