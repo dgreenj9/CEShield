@@ -6,7 +6,7 @@
     "clinical.reimbursement": "No billing impact for any AOTA specialty certification; professional signaling only.",
     "clinical.marketDemand": "Limited employer recognition; specialty areas have consistent but narrow demand.",
     "clinical.patientSatisfaction": "Patients may prefer certified specialists in specific domains.",
-    "business.cashPayViability": "Specialty areas (driving, low vision, school-based, feeding) are mixed — driving/low-vision can be cash-pay; others rarely are.",
+    "business.cashPayViability": "Specialty areas (driving, low vision, school-based, feeding) are mixed; driving/low-vision can be cash-pay; others rarely are.",
     "business.pricingLeverage": "Modest leverage in niche cash markets (e.g., driving rehab) but no broad premium-pricing power.",
     "business.marketDifferentiation": "Recognizable within OT, but consumers don't shop by AOTA SCDCM/SCEM letters.",
     "business.ownerLeverage": "Could anchor a niche service line (driving rehab clinic) but the credential is individual, limiting scale.",
@@ -15,7 +15,7 @@
     "academicClinical.facultyRecognition": "Recognized by OT academia as legitimate specialty credentialing, though a tier below board certs.",
     "academicClinical.scholarship": "Some scholarly reflection required; holders contribute to niche specialty literature.",
     "academicClinical.teachingValue": "Strong for faculty teaching specialty electives (driving, low vision, feeding, school-based).",
-    "academicClinical.evidenceDepth": "Variable by specialty — feeding and low vision have moderate evidence; others thinner.",
+    "academicClinical.evidenceDepth": "Variable by specialty; feeding and low vision have moderate evidence; others thinner.",
     "academicClinical.facultyDemand": "Occasionally specified in OT faculty postings tied to specific curricular gaps.",
     "academicClinical.efficiency": "Portfolio process is moderate burden; efficiency depends on specialty alignment with faculty role."
   }

@@ -38,8 +38,9 @@ export default function StatesIndex() {
           </h1>
           <p style={{ marginTop: '0.75rem', color: A.inkBody, fontSize: 16.5, maxWidth: '38em' }}>
             Continuing-education rules for physical and occupational therapists,
-            broken out per state. Verified states are ready to rely on; draft
-            states are first-pass and need your verification before renewal.
+            broken out per state. Verified states are checked against the board
+            rule and cited. Draft states are first-pass: confirm against the
+            citation before you rely on them.
           </p>
         </header>
 
@@ -113,7 +114,7 @@ export default function StatesIndex() {
             <a href="mailto:hello@ceshield.com" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>
               Email us
             </a>{' '}
-            · we&rsquo;re adding states monthly.
+            and it goes on the coverage list.
           </p>
         </section>
       </main>

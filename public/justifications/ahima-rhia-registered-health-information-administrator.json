@@ -4,7 +4,7 @@
     "healthTech.vendorDemand": "Appears in HIM director and CDI postings at hospitals and payers but rarely at Epic/Oracle Health build teams that prefer clinical analysts.",
     "healthTech.salaryPremium": "Median RHIA pay ($75-95K) exceeds entry HIM but offers only modest premium over experienced PT/OT bedside salaries.",
     "healthTech.technicalSkillDepth": "Builds real depth in classification systems (ICD-10, SNOMED), data governance, and HIPAA but limited coding/analytics skill.",
-    "healthTech.transitionFit": "Poor bridge for PT/OT — requires a CAHIIM-accredited bachelor's in HIM, effectively a second degree.",
+    "healthTech.transitionFit": "Poor bridge for PT/OT; requires a CAHIIM-accredited bachelor's in HIM, effectively a second degree.",
     "healthTech.efficiency": "Low efficiency: bachelor's-degree gated credential with multi-year time and tuition cost before exam eligibility."
   }
 }

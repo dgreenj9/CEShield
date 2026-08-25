@@ -24,7 +24,7 @@ export const metadata = {
   description:
     `Rank ${siteStats.certCount} rehab credentials across five career-path lenses with ` +
     `adjustable weights and ${siteStats.citationTotal.toLocaleString()} curated citations. ` +
-    `Free to explore — no account required.`,
+    `Free to explore. No account required.`,
   alternates: { canonical: '/matrix' },
   openGraph: { title: 'The credential field, ranked · CE Shield', url: '/matrix' },
 };
@@ -70,8 +70,8 @@ export default function MatrixPage() {
         >
           <span style={{ fontSize: 14, color: '#45433C', maxWidth: '38em' }}>
             <strong style={{ color: '#1B1A17' }}>The personal layer.</strong>{' '}
-            Log CE hours against your renewal, claim credentials, export the
-            audit binder. Free for students, always.
+            Log hours against your renewal. Claim credentials. Export the
+            binder. Free for students, always.
           </span>
           <Link
             href="/sign-in"

@@ -6,17 +6,17 @@
     "clinical.reimbursement": "Wound care has significant billing codes; CWS supports documentation for wound debridement and management; commercial and Medicare cover.",
     "clinical.marketDemand": "High employer demand in wound care centers, home health, and SNF settings; frequently listed as required.",
     "clinical.patientSatisfaction": "Patients with chronic wounds value specialized care; healing progress is motivating.",
-    "business.cashPayViability": "Wound care patients are elderly, comorbid, and insurance/Medicare-dependent — essentially zero cash market.",
+    "business.cashPayViability": "Wound care patients are elderly, comorbid, and insurance/Medicare-dependent; essentially zero cash market.",
     "business.pricingLeverage": "Commodity reimbursement environment; little premium upside.",
     "business.marketDifferentiation": "Relatively rare PT subspecialty; differentiates within acute/SNF settings.",
     "business.ownerLeverage": "Hard to build a private practice around wound care; institutional setting required.",
-    "business.marketDemand": "No consumer-driven demand — strictly clinical referral.",
+    "business.marketDemand": "No consumer-driven demand; strictly clinical referral.",
     "business.efficiency": "Moderate cost and exam preparation time.",
     "academicClinical.facultyRecognition": "Recognized as legitimate specialty content area, useful for integumentary curriculum coverage.",
     "academicClinical.scholarship": "Steady literature on wound healing, lymphedema, and integumentary PT.",
     "academicClinical.teachingValue": "Covers a required CAPTE content area programs must staff.",
     "academicClinical.evidenceDepth": "Strong evidence base in wound healing and compression therapy.",
-    "academicClinical.facultyDemand": "Niche — only some programs actively seek wound expertise.",
+    "academicClinical.facultyDemand": "Niche; only some programs actively seek wound expertise.",
     "academicClinical.efficiency": "Reasonable cost relative to filling a curricular gap."
   }
 }

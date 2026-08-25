@@ -382,7 +382,7 @@ export default function AtlasMatrix() {
                     Sources · {citationsLoading ? det.meta.count : (det.visible.length || det.meta.count)} on file
                   </div>
                   {citationsLoading && (
-                    <p style={{ fontFamily: FIG, fontSize: 12.5, color: A.inkMuted, margin: 0 }}>pulling the citation library…</p>
+                    <p style={{ fontFamily: FIG, fontSize: 12.5, color: A.inkMuted, margin: 0 }}>Loading citations.</p>
                   )}
                   {!citationsLoading && det.visible.length > 0 && (
                     <div style={{ maxHeight: 260, overflowY: 'auto', border: `1px dashed ${A.ink}` }}>
@@ -397,7 +397,7 @@ export default function AtlasMatrix() {
                           <span style={{ flex: 1, minWidth: 0 }}>
                             <span style={{ display: 'block', fontSize: 13.5, fontWeight: 600, lineHeight: 1.4 }}>{c.title}</span>
                             <span style={{ display: 'block', fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, marginTop: 2 }}>
-                              {[c.authors, c.journal].filter(Boolean).join(' · ')} · {c.year || '—'} · {EVIDENCE_LABELS[c.evidence_type] || 'Other'}
+                              {[c.authors, c.journal].filter(Boolean).join(' · ')} · {c.year || 'n.d.'} · {EVIDENCE_LABELS[c.evidence_type] || 'Other'}
                             </span>
                           </span>
                           {citationUrl(c) && (
@@ -417,7 +417,7 @@ export default function AtlasMatrix() {
                   {!citationsLoading && det.visible.length === 0 && (
                     <p style={{ fontFamily: FIG, fontSize: 12.5, color: A.inkBody, margin: 0, lineHeight: 1.6 }}>
                       {det.meta.count
-                        ? `${det.meta.count} curated sources on file${det.meta.last_reviewed ? `, last reviewed ${det.meta.last_reviewed}` : ''} — ${det.evTop.map(([k, n]) => `${n} ${(EVIDENCE_LABELS[k] || k).toLowerCase()}`).join(', ')}.`
+                        ? `${det.meta.count} curated sources on file${det.meta.last_reviewed ? `, last reviewed ${det.meta.last_reviewed}` : ''}: ${det.evTop.map(([k, n]) => `${n} ${(EVIDENCE_LABELS[k] || k).toLowerCase()}`).join(', ')}.`
                         : 'No citations on file for this credential yet.'}
                     </p>
                   )}

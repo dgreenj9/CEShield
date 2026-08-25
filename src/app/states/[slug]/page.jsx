@@ -45,8 +45,8 @@ export async function generateMetadata({ params }) {
   const description =
     `Continuing-education requirements for ${r.jurisdictionName} ` +
     `${parsed.licenseType === 'PT' ? 'physical therapists' : 'occupational therapists'}: ` +
-    `${r.totalHours} hours every ${r.cycleYears} years${mandatoryClause}. ` +
-    `Track everything in one place with CE Shield.`;
+    `${r.totalHours} hours every ${r.cycleYears} years${mandatoryClause}, per ${r.citation}. ` +
+    `Tracked free with CE Shield.`;
   return {
     title,
     description,
@@ -122,9 +122,11 @@ export default async function Page({ params }) {
           </h1>
           <p style={{ color: A.inkBody, marginTop: '0.75rem', fontSize: 16.5, maxWidth: '40em' }}>
             {r.totalHours} hours of continuing education every {r.cycleYears}{' '}
-            years for {licenseLong.toLowerCase()} licensed in {r.jurisdictionName}.
-            Below: the full breakdown, the mandatory categories most CE platforms
-            miss, and a free tracker to keep you renewal-ready.
+            years for {licenseLong.toLowerCase()} licensed in {r.jurisdictionName},
+            per {r.citation}. Below: the full breakdown
+            {mandatoryEntries.length > 0
+              ? `, including ${mandatoryEntries.length} mandatory ${mandatoryEntries.length === 1 ? 'category' : 'categories'}`
+              : ''}, and a free Ledger that tracks each requirement.
           </p>
 
           {r.verified === false && (
@@ -258,8 +260,8 @@ export default async function Page({ params }) {
               Track {r.jurisdictionName} {parsed.licenseType} CE with CE Shield
             </h2>
             <p style={{ color: A.inkBody, lineHeight: 1.55, margin: '0.4rem 0 0', fontSize: 14 }}>
-              Hours, mandatory categories, and certificate uploads in one ledger,
-              plus an evidence-scored credential field. Free during beta.
+              Hours, mandatory categories, and certificate uploads in the Ledger,
+              plus 143 credentials scored and cited in the field. Free during beta.
             </p>
           </div>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>

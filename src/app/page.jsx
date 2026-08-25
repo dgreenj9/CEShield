@@ -8,9 +8,9 @@ import LandingPageClient from './_landing-client';
 import siteStats from '@/data/siteStats.json';
 
 export const metadata = {
-  title: { absolute: 'CE Shield — Rehab career intelligence + CE compliance' },
+  title: { absolute: 'CE Shield · Credential scores and CE compliance' },
   description:
-    `${siteStats.certCount} credentials scored across five career-path lenses — clinical, business, academic clinical, research, and healthtech. ${siteStats.citationTotal.toLocaleString()} curated citations. Built for physical and occupational therapists.`,
+    `${siteStats.certCount} rehab credentials scored across five career lenses with ${siteStats.citationTotal.toLocaleString()} curated citations. CE compliance tracked against your state's rule. Built by practicing PTs.`,
   alternates: { canonical: '/' },
 };
 

@@ -27,7 +27,7 @@ export default function Error({ error, reset }) {
           Something went wrong.
         </h1>
         <p style={{ color: A.inkBody, lineHeight: 1.6, marginTop: '0.75rem', fontSize: 15.5 }}>
-          The error has been logged. Try reloading. If it persists, email{' '}
+          Try reloading. If it persists, email{' '}
           <a href="mailto:hello@ceshield.com" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>
             hello@ceshield.com
           </a>.

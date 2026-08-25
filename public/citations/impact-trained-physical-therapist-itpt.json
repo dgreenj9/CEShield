@@ -62,7 +62,7 @@
       "library_link": "",
       "evidence_type": "guideline",
       "source_type": "peer-reviewed",
-      "what_it_says": "Amsterdam CISG consensus recommends early active rehabilitation, cervicovestibular rehab, and sub-symptom aerobic exercise — directly endorsing the interventions in PT concussion training."
+      "what_it_says": "Amsterdam CISG consensus recommends early active rehabilitation, cervicovestibular rehab, and sub-symptom aerobic exercise; directly endorsing the interventions in PT concussion training."
     },
     {
       "authors": "Schneider KJ, Leddy JJ, Guskiewicz KM, et al.",
@@ -78,7 +78,7 @@
       "library_link": "",
       "evidence_type": "systematic_review",
       "source_type": "peer-reviewed",
-      "what_it_says": "Strict rest is not beneficial beyond 24-48 hours; active rehabilitation including cervicovestibular therapy improves recovery — the pivot from 'cocoon rest' to PT-led active management."
+      "what_it_says": "Strict rest is not beneficial beyond 24-48 hours; active rehabilitation including cervicovestibular therapy improves recovery; the pivot from 'cocoon rest' to PT-led active management."
     },
     {
       "authors": "Galeno E, Pullano E, Mourad F, Galeoto G, Frontani F",
@@ -126,7 +126,7 @@
       "library_link": "",
       "evidence_type": "narrative",
       "source_type": "peer-reviewed",
-      "what_it_says": "Describes the six concussion clinical profiles and matched treatments — the 'clinical trajectories' framework forming ITPT's first curriculum module; evidence labeled preliminary by the authors."
+      "what_it_says": "Describes the six concussion clinical profiles and matched treatments; the 'clinical trajectories' framework forming ITPT's first curriculum module; evidence labeled preliminary by the authors."
     },
     {
       "authors": "Schatz P, Pardini JE, Lovell MR, Collins MW, Podell K",
@@ -142,7 +142,7 @@
       "library_link": "",
       "evidence_type": "cross_sectional",
       "source_type": "peer-reviewed",
-      "what_it_says": "Foundational (developer-affiliated) validation: 81.9% sensitivity and 89.4% specificity for ImPACT plus symptom scores — the most-cited supportive psychometric evidence."
+      "what_it_says": "Foundational (developer-affiliated) validation: 81.9% sensitivity and 89.4% specificity for ImPACT plus symptom scores; the most-cited supportive psychometric evidence."
     },
     {
       "authors": "Broglio SP, Ferrara MS, Macciocchi SN, Baumgartner TA, Elliott R",
@@ -174,7 +174,7 @@
       "library_link": "",
       "evidence_type": "cross_sectional",
       "source_type": "peer-reviewed",
-      "what_it_says": "CRITICAL: independent replication concluding clinicians should not rely on ImPACT scores in isolation — memory composites weakest."
+      "what_it_says": "CRITICAL: independent replication concluding clinicians should not rely on ImPACT scores in isolation; memory composites weakest."
     },
     {
       "authors": "Alsalaheen B, Stockdale K, Pechumer D, Broglio SP",
@@ -206,7 +206,7 @@
       "library_link": "",
       "evidence_type": "rct",
       "source_type": "peer-reviewed",
-      "what_it_says": "In 60 NON-athlete adults with persistent post-mTBI symptoms, cervicovestibular rehabilitation plus symptom-limited aerobic exercise improved post-concussion symptom severity — showing the rehab approach works beyond the athlete population."
+      "what_it_says": "In 60 NON-athlete adults with persistent post-mTBI symptoms, cervicovestibular rehabilitation plus symptom-limited aerobic exercise improved post-concussion symptom severity; showing the rehab approach works beyond the athlete population."
     }
   ]
 }

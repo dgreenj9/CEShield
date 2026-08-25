@@ -137,7 +137,7 @@ function FigureOne() {
     const dim = isTop ? 1 : lerp(1, pt.score >= 70 ? 1 : 0.26, callT);
     return {
       key: pt.name,
-      title: `${pt.name} — ${Math.round(pt.score)}`,
+      title: `${pt.name} · ${Math.round(pt.score)}`,
       style: {
         position: 'absolute',
         left: `${x}%`,
@@ -219,7 +219,7 @@ function FigureOne() {
             <div style={{ position: 'relative', height: 52, flex: 1, minWidth: 0 }}>
               {[
                 [1, 'Fig. 1a', 'The field, unmeasured.'],
-                [2, 'Fig. 1b', 'Weighed, it takes shape.'],
+                [2, 'Fig. 1b', 'Scored, the field settles.'],
                 [3, 'Fig. 1c', 'The strong few, named.'],
               ].map(([n, fig, caption]) => (
                 <div key={n} style={capStyle(n)}>
@@ -341,11 +341,11 @@ export default function LandingPageClient() {
       {/* Hero */}
       <header style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem 2rem 5.5rem' }}>
         <h1 style={{ fontFamily: INS, fontWeight: 600, fontSize: 'clamp(56px, 7.4vw, 96px)', lineHeight: 0.94, letterSpacing: '-0.045em', margin: 0, maxWidth: '11em', textWrap: 'balance' }}>
-          {siteStats.certCount} credentials, plotted honestly.
+          {siteStats.certCount} credentials, scored and cited.
         </h1>
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '3rem', marginTop: '2.5rem', flexWrap: 'wrap' }}>
           <p style={{ fontSize: 19, lineHeight: 1.55, color: A.inkBody, margin: 0, maxWidth: '24em', textWrap: 'pretty' }}>
-            Scored against {siteStats.citationTotal.toLocaleString()} citations, through five career lenses. Built by practicing PTs.
+            {siteStats.citationTotal.toLocaleString()} curated citations, five career lenses. Built by practicing PTs.
           </p>
           <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
             <Link href="/matrix" style={{ textDecoration: 'none', fontWeight: 600, fontSize: 15.5, background: A.accent, color: A.onAccent, padding: '15px 26px', whiteSpace: 'nowrap' }}>
@@ -420,7 +420,7 @@ export default function LandingPageClient() {
             {[
               ['a.', 'The Ledger', 'Compliance, computed live.', '/compliance'],
               ['b.', 'Dossiers', `${siteStats.certCount} published evidence pages.`, '/credentials'],
-              ['c.', 'The CV', 'Claims that cite themselves.', '/profile'],
+              ['c.', 'The CV', 'Your credentials, with evidence attached.', '/profile'],
               ['d.', 'Exports', 'The audit binder, one click.', '/compliance'],
             ].map(([index, title, copy, href]) => (
               <Link key={title} href={href} style={{ textDecoration: 'none', borderTop: `2px solid ${A.ink}`, paddingTop: 16, color: 'inherit' }}>

@@ -17,7 +17,7 @@ import siteStats from '@/data/siteStats.json';
 export const metadata = {
   title: 'Five career paths',
   description:
-    'Clinical, business, academic clinical, research, and healthtech & industry — five career trajectories for PTs and OTs, each with its own scoring rubric and evidence frame.',
+    'Five career lenses for PTs and OTs: clinical, business, academic clinical, research, and healthtech. Each scores six dimensions against its own evidence frame.',
   alternates: { canonical: '/career-paths' },
   openGraph: { title: 'Five career paths · CE Shield', url: '/career-paths' },
 };
@@ -72,11 +72,11 @@ export default function CareerPathsPage() {
               Five paths. Five different questions.
             </h1>
             <p style={{ fontSize: '1.08rem', marginTop: '1rem', color: A.inkBody, maxWidth: 640 }}>
-              A PhD is poor ROI for a clinician but transformative for a researcher.
-              An Epic build certification is irrelevant to most therapists but unlocks
-              the EHR-vendor career. CE Shield refuses to pretend one rubric fits
-              every trajectory: each path has its own dimensions and its own
-              evidence frame.
+              A PhD ranks low under the clinical lens and near the top
+              under research. An Epic build certification matters in health
+              IT and rarely elsewhere. Each lens scores its own six
+              dimensions against its own evidence frame, so the same
+              credential ranks differently under each.
             </p>
             <p style={{ color: A.inkMuted, marginTop: '0.75rem', fontSize: '0.9rem', maxWidth: 640 }}>
               Tap a path below to see its scoring rubric and top picks. Read the{' '}
@@ -126,7 +126,7 @@ export default function CareerPathsPage() {
         }}>
           <div style={{ ...eyebrow(12.5), marginBottom: 10 }}>Picking your lens</div>
           <ol style={{ marginTop: 0, paddingLeft: '1.25rem', color: A.inkBody, lineHeight: 1.7, maxWidth: 760 }}>
-            <li>Pick the path that matches where you actually want your career to go, not where credentialism says you should.</li>
+            <li>Pick the path that matches where you want your career to go.</li>
             <li>
               Open{' '}
               <Link href="/matrix" style={{ color: A.accent, textDecoration: 'underline', textUnderlineOffset: 2 }}>the field</Link>{' '}
@@ -134,8 +134,8 @@ export default function CareerPathsPage() {
               scored on that path.
             </li>
             <li>Adjust the weight sliders to emphasize the dimensions you care about most. Rankings update live.</li>
-            <li>Cross-check the evidence library on any cert before committing dollars and hours.</li>
-            <li>Track the CE hours those courses earn in the compliance tracker so you stay licensed while you specialize.</li>
+            <li>Read the dossier on any credential before committing dollars and hours.</li>
+            <li>Log the CE hours those courses earn in the Ledger.</li>
           </ol>
         </section>
       </main>

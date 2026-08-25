@@ -63,7 +63,7 @@ export const PATHS = {
   clinical: {
     key: 'clinical',
     label: 'Clinical',
-    description: 'Direct patient care, hospital and outpatient practice. Optimizes for credentials that move outcomes for a broad caseload and unlock billing.',
+    description: 'Direct patient care in hospital and outpatient settings. Weights patient outcomes, caseload breadth, and billing.',
     evidenceFrame: 'clinical-intervention',
     defaultWeights: {
       clinicalOutcomes: 35,
@@ -77,7 +77,7 @@ export const PATHS = {
   business: {
     key: 'business',
     label: 'Business',
-    description: 'Private practice, cash-pay, entrepreneurship. Optimizes for credentials that justify premium pricing and build a defensible niche.',
+    description: 'Private practice, cash-pay, entrepreneurship. Weights cash-pay viability, pricing leverage, and differentiation.',
     evidenceFrame: 'mixed',
     defaultWeights: {
       cashPayViability: 25,
@@ -91,7 +91,7 @@ export const PATHS = {
   academicClinical: {
     key: 'academicClinical',
     label: 'Academic Clinical',
-    description: 'Faculty roles at PT/OT programs, clinical instructor leadership, DCE positions. Optimizes for credentials recognized in academic clinical hiring.',
+    description: 'Faculty roles at PT/OT programs, clinical instructor leadership, DCE positions. Weights faculty recognition, scholarship, and evidence depth.',
     evidenceFrame: 'clinical-intervention',
     defaultWeights: {
       facultyRecognition: 25,
@@ -105,7 +105,7 @@ export const PATHS = {
   research: {
     key: 'research',
     label: 'Research',
-    description: 'PI track in academic medicine or industry R&D. Optimizes for credentials that develop research methodology, support grant capture, and accelerate the pathway to independent investigator.',
+    description: 'PI track in academic medicine or industry R&D. Weights methodology depth, publication track, and grant readiness.',
     evidenceFrame: 'career-outcome',
     defaultWeights: {
       methodologyDepth: 25,
@@ -119,7 +119,7 @@ export const PATHS = {
   healthTech: {
     key: 'healthTech',
     label: 'HealthTech & Industry',
-    description: 'Clinical informatics, EHR consulting, digital-health startups, payer-side roles, MedTech, AI/ML in healthcare. Optimizes for credentials with measurable industry placement and compensation impact.',
+    description: 'Clinical informatics, EHR consulting, digital-health startups, payer-side roles, MedTech. Weights industry placement, vendor demand, and salary premium.',
     evidenceFrame: 'career-outcome',
     defaultWeights: {
       industryPlacement: 25,

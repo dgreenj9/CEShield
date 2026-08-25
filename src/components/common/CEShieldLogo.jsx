@@ -61,7 +61,7 @@ const CEShieldLogo = ({ showTagline = true, className = '', size = 'large', cent
           className={`mt-2 ${centered ? 'text-center whitespace-nowrap' : ''}`}
           style={{ color: MUTED, fontSize: 11.5, letterSpacing: '0.02em', fontWeight: 600, margin: '8px 0 0' }}
         >
-          Track education. Protect your license.
+          Credential scores. CE compliance.
         </p>
       </div>
     );

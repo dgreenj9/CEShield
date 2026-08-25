@@ -162,8 +162,7 @@ export default function MethodologyPage() {
                 CE Shield&rsquo;s certification rankings are built on a curated
                 literature review conducted in collaboration with research
                 librarians. Below: the evidence-type composition of the
-                citation library, the kind of studies that sit behind the
-                scores.
+                citation library: the studies behind the scores.
               </p>
               <ul className="cs-bullet-list">
                 {evidenceBreakdown.map(([type, n]) => (
@@ -179,7 +178,7 @@ export default function MethodologyPage() {
               <p>
                 Every credential is scored 0&ndash;100 on six dimensions per
                 lens. A weighted sum produces the displayed score. Weights
-                are user-adjustable in the matrix; the values below are the
+                are adjustable in the field; the values below are the
                 defaults for the clinical lens.
               </p>
               <div className="cs-bleed cs-dim-list">
@@ -216,8 +215,8 @@ export default function MethodologyPage() {
               <p>
                 CE Shield uses two different evidence frames depending on
                 which career path you&rsquo;re evaluating a credential
-                against. Each is honest about what kind of evidence is
-                available and what it actually demonstrates.
+                against. Each states what kind of evidence is available and
+                what it demonstrates.
               </p>
               <div className="cs-bleed cs-frame-grid">
                 <div className="cs-frame cs-frame-blue">
@@ -248,14 +247,14 @@ export default function MethodologyPage() {
                 </div>
               </div>
               <p>
-                <strong>What this lets us do honestly:</strong> a PhD
-                scores poorly on the Clinical path (no patient-intervention
-                evidence for the credential itself) and excellently on the
+                <strong>What per-path scoring does:</strong> a PhD
+                scores low on the Clinical path (no patient-intervention
+                evidence for the credential itself) and high on the
                 Research path (K-to-R conversion data, publication output).
-                Epic certification inverts: poor on Clinical, strong on
-                HealthTech. Forcing both into one rubric would either
-                inflate the wrong cells or compress the right ones;
-                per-path scoring keeps the evaluation honest.
+                Epic certification inverts: low on Clinical, high on
+                HealthTech. One rubric for both would either inflate the
+                wrong cells or compress the right ones; per-path scoring
+                keeps each evaluation inside its evidence frame.
               </p>
               <p>
                 Citations are tagged by evidence type using a deterministic
@@ -332,8 +331,8 @@ export default function MethodologyPage() {
                 plans for clinics, and clearly labeled referral links on CE
                 <em> course</em> listings (never on credential rankings).
                 Referral relationships will be disclosed inline wherever they
-                exist. Credential scores are not for sale, and display
-                advertising is off the table.
+                exist. Credential scores are not for sale, and we do not run
+                display advertising.
               </p>
             </Section>
 
@@ -347,8 +346,8 @@ export default function MethodologyPage() {
               </p>
               <p style={{ color: A.inkMuted, fontSize: '0.92rem' }}>
                 Disagree with a score, find a missing citation, or spot an
-                error? Corrections welcome. This page versions on every
-                release.
+                error? Corrections are welcome. This page is versioned on
+                every release.
               </p>
             </Section>
 

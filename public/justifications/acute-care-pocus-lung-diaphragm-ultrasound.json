@@ -1,14 +1,14 @@
 {
   "justifications": {
-    "clinical.clinicalOutcomes": "In acute care, US findings directly change PT/RT decisions — distinguishing recruitable atelectasis from effusion/consolidation, targeting airway clearance, and informing weaning readiness via diaphragm thickening fraction. Direct PT-attributable outcome trials remain limited, capping the score below elite.",
-    "clinical.caseloadApplicability": "Highly applicable to the ICU/acute cardiopulmonary PT and RT caseload (ventilated, post-op, ARDS, difficult-to-wean), but near-zero relevance to general outpatient PT — high within its niche, narrow overall.",
+    "clinical.clinicalOutcomes": "In acute care, US findings directly change PT/RT decisions; distinguishing recruitable atelectasis from effusion/consolidation, targeting airway clearance, and informing weaning readiness via diaphragm thickening fraction. Direct PT-attributable outcome trials remain limited, capping the score below elite.",
+    "clinical.caseloadApplicability": "Highly applicable to the ICU/acute cardiopulmonary PT and RT caseload (ventilated, post-op, ARDS, difficult-to-wean), but near-zero relevance to general outpatient PT; high within its niche, narrow overall.",
     "clinical.reimbursement": "PTs/RTs generally cannot bill diagnostic ultrasound; value is realized as bedside decision support within salaried hospital roles, not as a billable procedure.",
-    "clinical.efficiency": "A rapid bedside scan can triage chest radiographs/CT, accelerate identification of treatable pathology, and avoid unsafe interventions — strong workflow efficiency once competency is achieved.",
+    "clinical.efficiency": "A rapid bedside scan can triage chest radiographs/CT, accelerate identification of treatable pathology, and avoid unsafe interventions; strong workflow efficiency once competency is achieved.",
     "clinical.marketDemand": "Real and growing in ICU/respiratory teams, but adoption is still early (surveys show ~30% of ICU therapists use lung US) and gated by training access and governance.",
     "clinical.patientSatisfaction": "Patients are typically critically ill/ventilated, so patient-perceived satisfaction is a minor factor; benefits accrue through safety and care quality.",
     "business.cashPayViability": "A hospital/inpatient competency, not a cash-pay outpatient service line; there is no direct consumer-pay model.",
     "business.pricingLeverage": "Limited ability to attach a premium price; value is captured by the employing institution and care team, not by the individual clinician.",
-    "business.marketDifferentiation": "Within acute-care/cardiopulmonary PT/RT it is a strong differentiator — few clinicians hold validated lung/diaphragm POCUS competency, making the holder distinctive in hiring.",
+    "business.marketDifferentiation": "Within acute-care/cardiopulmonary PT/RT it is a strong differentiator; few clinicians hold validated lung/diaphragm POCUS competency, making the holder distinctive in hiring.",
     "business.ownerLeverage": "Minimal practice-owner leverage; this is an employed-clinician skill in institutional settings, not a scalable private-practice revenue engine.",
     "business.marketDemand": "Hospitals and ICU teams increasingly value bedside US competency, but it is one competency among many and not yet a hiring requirement.",
     "business.efficiency": "Once trained, the clinician adds diagnostic value with no added equipment cost on units that already own ultrasound.",
@@ -17,12 +17,12 @@
     "academicClinical.teachingValue": "Highly teachable with clear image-acquisition, scoring (LUS score), and interpretation competencies; integrates into acute-care curricula and simulation labs.",
     "academicClinical.evidenceDepth": "The underlying evidence base (BLUE protocol, diaphragm thickening fraction for weaning, LUS reliability) is deep and well-cited.",
     "academicClinical.facultyDemand": "Programs need some faculty with this competency to teach modern acute-care assessment, but it is not yet a widespread hiring criterion.",
-    "academicClinical.efficiency": "Builds on existing cardiopulmonary teaching infrastructure and shared ultrasound equipment — a relatively efficient curricular addition.",
-    "research.methodologyDepth": "Supports rigorous designs — diagnostic accuracy vs CXR/CT, interrater-reliability studies, and treatment-effect monitoring.",
+    "academicClinical.efficiency": "Builds on existing cardiopulmonary teaching infrastructure and shared ultrasound equipment; a relatively efficient curricular addition.",
+    "research.methodologyDepth": "Supports rigorous designs; diagnostic accuracy vs CXR/CT, interrater-reliability studies, and treatment-effect monitoring.",
     "research.publicationTrack": "Robust, expanding literature in high-impact journals (Chest, AJRCCM, Intensive Care Medicine, Australian Critical Care).",
     "research.grantReadiness": "Fundable within weaning, ICU-acquired weakness, and rehab-outcome research, though PT/RT-led US is rarely the standalone funded aim.",
     "research.pathwayToIndependence": "A credible niche for an early-career researcher, but the field is competitive and physician/critical-care-led.",
-    "research.interdisciplinaryFit": "Excellent — intrinsically collaborative across intensivists, RTs, PTs, and nursing, aligning with weaning and mobilization research.",
+    "research.interdisciplinaryFit": "Excellent; intrinsically collaborative across intensivists, RTs, PTs, and nursing, aligning with weaning and mobilization research.",
     "research.efficiency": "Bedside, repeatable, radiation-free measurements enable longitudinal data capture at modest incremental cost."
   }
 }

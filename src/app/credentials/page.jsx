@@ -12,9 +12,9 @@ import CredentialsBrowser from './_CredentialsBrowser';
 import siteStats from '@/data/siteStats.json';
 
 export const metadata = {
-  title: `Credential library — ${siteStats.certCount} rehab certifications, scored and cited`,
+  title: `Credential library · ${siteStats.certCount} rehab certifications, scored and cited`,
   description:
-    `Every credential CE Shield scores: PT, OT, SLP, AT, and informatics certifications, residencies, and degrees — each one with a published evidence dossier across five career-path lenses and ${siteStats.citationTotal.toLocaleString()} curated citations.`,
+    `Every credential CE Shield scores: PT, OT, SLP, AT, and informatics certifications, residencies, and degrees. Each has a published evidence dossier across five career lenses and ${siteStats.citationTotal.toLocaleString()} curated citations.`,
   alternates: { canonical: '/credentials' },
 };
 

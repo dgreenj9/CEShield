@@ -89,12 +89,12 @@ export async function generateMetadata({ params }) {
   const lensList = PATH_ORDER.filter((p) => cert.pathScores?.[p]).map(
     (p) => PATHS[p]?.label || p,
   );
-  const title = `${cert.name} — career ROI across ${lensList.length} lenses`;
+  const title = `${cert.name} · evidence across ${lensList.length} lenses`;
   const description =
     `Evidence-backed analysis of ${cert.name} (${cert.type}) for ${(cert.disciplines || [cert.discipline]).join(', ')}. ` +
     `Scored across ${lensList.length} career lenses (${lensList.join(', ')}) ` +
     `with ${meta.count || 0} curated citations. ` +
-    `See whether this credential is worth the investment for your career path.`;
+    `Scores, dimension breakdowns, and the full citation list.`;
   return {
     title,
     description,

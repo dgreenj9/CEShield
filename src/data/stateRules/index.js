@@ -51,7 +51,7 @@ export const slugForStateLicense = (state, licenseType) => {
   return `${stateSlug}-${licenseType.toLowerCase()}-ce-requirements`;
 };
 
-// Inverse — given a URL slug, find the (state, licenseType) pair.
+// Inverse: given a URL slug, find the (state, licenseType) pair.
 export const parseStateLicenseSlug = (slug) => {
   if (!slug) return null;
   for (const state of SUPPORTED_STATES) {
@@ -64,7 +64,7 @@ export const parseStateLicenseSlug = (slug) => {
   return null;
 };
 
-// All (state, licenseType, slug, rules) combos — used by Next's
+// All (state, licenseType, slug, rules) combos: used by Next's
 // generateStaticParams for SSG and by the /states index page.
 export const allStateLicenseEntries = () =>
   SUPPORTED_STATES.flatMap((state) =>

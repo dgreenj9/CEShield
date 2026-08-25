@@ -14,7 +14,7 @@ import citationMeta from '@/data/citations_meta.json';
 export const metadata = {
   title: 'About',
   description:
-    'CE Shield is the Rehab Career OS — career intelligence, an evidence-backed certifications matrix, and CE compliance for physical and occupational therapists. Built by practicing PTs.',
+    'CE Shield scores 143 rehab credentials against 7,000 curated citations and tracks CE compliance for physical and occupational therapists. Built by practicing PTs. No sponsorship.',
   alternates: { canonical: '/about' },
   openGraph: { title: 'About CE Shield', url: '/about' },
 };
@@ -88,7 +88,7 @@ export default function AboutPage() {
           <h1 className="cs-h1-clamp" style={{
             fontFamily: INS, fontSize: '2.5rem', fontWeight: 600, margin: 0, letterSpacing: '-0.03em', lineHeight: 1.05, color: A.ink,
           }}>
-            The Rehab Career OS.
+            Credential decisions, run on evidence.
           </h1>
           <p style={{ marginTop: '1rem', color: A.inkBody, fontSize: '1.08rem', lineHeight: 1.6 }}>
             One product for compliance, credential intelligence, and career
@@ -114,7 +114,7 @@ export default function AboutPage() {
           </div>
         </header>
 
-        <AboutCard icon={Shield} label="The problem" title="The problem we're solving">
+        <AboutCard icon={Shield} label="The problem" title="CE spending runs on marketing.">
           <p>
             Rehabilitation professionals spend thousands of dollars and hundreds
             of hours each renewal cycle on continuing education, and most of
@@ -126,15 +126,15 @@ export default function AboutPage() {
           <p>
             CE Shield is built on the premise that those decisions deserve the
             same rigor a clinician would apply to a treatment plan: published
-            evidence, transparent methodology, and an honest accounting of
+            evidence, transparent methodology, and a plain accounting of
             trade-offs. The product has three pillars:{' '}
             <Link href="/career-paths" style={proseLink}>
               career-path intelligence
             </Link>,{' '}
-            <Link href="/methodology" style={proseLink}>
-              an evidence-backed certifications matrix
-            </Link>, and a CE compliance tracker that keeps you licensed while
-            you specialize.
+            <Link href="/matrix" style={proseLink}>
+              the ranked credential field
+            </Link>, and a CE Ledger that tracks your hours against your
+            state&rsquo;s rule.
           </p>
         </AboutCard>
 
@@ -151,7 +151,7 @@ export default function AboutPage() {
 
         <AboutCard icon={Shield} label="Independence" title="How we make money, and how we don't">
           <p>
-            <strong style={{ color: A.accent }}>Credential scores are not for sale. Full stop.</strong>{' '}
+            <strong style={{ color: A.accent }}>Credential scores are not for sale.</strong>{' '}
             We take no money from certification programs, training vendors, or
             sponsors for rankings, and we don&rsquo;t run display ads. The
             entire product is free during beta.
@@ -187,10 +187,9 @@ export default function AboutPage() {
 
         <AboutCard icon={Mail} label="Feedback" title="Get in touch">
           <p>
-            Found an error, disagree with a score, or have a certification you
-            think we should add? We treat the matrix as a living document and
-            re-publish on every revision. Reach out through the contact form
-            once you&rsquo;re signed in, or email{' '}
+            Found an error, disagree with a score, or have a certification we
+            should add? Scores are revised as the evidence changes, and each
+            dossier shows its last review. Email{' '}
             <a href="mailto:hello@ceshield.com" style={proseLink}>
               hello@ceshield.com
             </a>.

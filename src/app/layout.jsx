@@ -10,11 +10,11 @@ import siteStats from '@/data/siteStats.json';
 export const metadata = {
   metadataBase: new URL('https://ceshield.com'),
   title: {
-    default: 'CE Shield — Rehab career intelligence + CE compliance',
+    default: 'CE Shield · Credential scores and CE compliance',
     template: '%s · CE Shield',
   },
   description:
-    `${siteStats.certCount} rehab credentials scored across five career-path lenses — clinical, business, academic clinical, research, and healthtech — with ${siteStats.citationTotal.toLocaleString()} curated citations. Built for physical and occupational therapists.`,
+    `${siteStats.certCount} rehab credentials scored across five career lenses with ${siteStats.citationTotal.toLocaleString()} curated citations. CE compliance tracking for physical and occupational therapists.`,
   keywords: [
     'rehabilitation certifications',
     'evidence-based',
@@ -30,9 +30,9 @@ export const metadata = {
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
-    title: 'CE Shield — Rehab career intelligence + CE compliance',
+    title: 'CE Shield · Credential scores and CE compliance',
     description:
-      `${siteStats.certCount} rehab credentials scored across five career-path lenses, six adjustable dimensions per lens, with ${siteStats.citationTotal.toLocaleString()} curated citations.`,
+      `${siteStats.certCount} rehab credentials, five career lenses, six adjustable dimensions per lens, ${siteStats.citationTotal.toLocaleString()} curated citations.`,
     url: '/',
     siteName: 'CE Shield',
     images: [
@@ -46,9 +46,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CE Shield — Rehab career intelligence + CE compliance',
+    title: 'CE Shield · Credential scores and CE compliance',
     description:
-      `${siteStats.certCount} rehab credentials, ${siteStats.citationTotal.toLocaleString()} curated citations, five career-path lenses. Built by PTs for PTs and OTs.`,
+      `${siteStats.certCount} rehab credentials, ${siteStats.citationTotal.toLocaleString()} curated citations, five career lenses. Built by practicing PTs.`,
     images: ['/og-image.png'],
   },
   // Favicon + icon files are auto-detected by Next from the app/ directory

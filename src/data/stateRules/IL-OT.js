@@ -1,4 +1,4 @@
-// Illinois — Occupational Therapist CE rules.
+// Illinois: Occupational Therapist CE rules.
 // Source: 225 ILCS 75 (Illinois Occupational Therapy Practice Act)
 //         68 Ill. Adm. Code 1315.165 (Continuing Education)
 // Board:  https://idfpr.illinois.gov/profs/occther.html
@@ -18,7 +18,7 @@ const rules = {
   cycleEndsOnOddYear: null,
 
   mandatory: {
-    ethics: 1,                     // FLAG: prior review claimed IDFPR requires 3 — verify
+    ethics: 1,                     // FLAG: prior review claimed IDFPR requires 3: verify
     sexualHarassment: 1,           // PA 100-0762 (2018)
     culturalCompetency: 1,         // PA 102-1011 (effective 2023)
     implicitBias: 1,               // PA 102-0004 (2021)

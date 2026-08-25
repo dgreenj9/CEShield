@@ -1,9 +1,9 @@
-// Wisconsin — Occupational Therapist CE rules.
+// Wisconsin: Occupational Therapist CE rules.
 // Source: Wis. Stat. ch. 448 (Subch. VII, Occupational Therapy)
 //         Wis. Admin. Code OT 4 (Continuing Education)
 // Board:  https://dsps.wi.gov/Pages/Professions/OccupationalTherapist/Default.aspx
 //
-// ⚠️ DRAFT — values below require verification against the current WI DSPS OT
+// ⚠️ DRAFT: values below require verification against the current WI DSPS OT
 // renewal worksheet before this state goes live.
 
 const rules = {
@@ -35,7 +35,7 @@ const rules = {
   firstRenewalExempt: false,        // verify
 
   notes: [
-    '⚠️ DRAFT — verify totalHours, cycle dates, and Category A/B requirements against the current DSPS OT renewal worksheet before publishing.',
+    '⚠️ DRAFT: verify totalHours, cycle dates, and Category A/B requirements against the current DSPS OT renewal worksheet before publishing.',
     'WI distinguishes Category A (live, peer-reviewed: ≥12 hr) from Category B (other). Modeled here as a 12-hour cap on self-study.',
     'No state-specific mandatory training (ethics / cultural competency / implicit bias / dementia) known at draft time.',
   ],

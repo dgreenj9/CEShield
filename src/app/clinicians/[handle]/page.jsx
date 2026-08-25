@@ -64,7 +64,7 @@ export async function generateMetadata({ params }) {
   const data = await loadProfile(handle);
   if (!data) return { title: 'Clinician not found' };
   const { profile } = data;
-  const title = `${profile.name || handle}${profile.headline ? ' — ' + profile.headline : ''}`;
+  const title = `${profile.name || handle}${profile.headline ? ' · ' + profile.headline : ''}`;
   const description =
     `${profile.name || 'This clinician'}${profile.license_type ? `, ${profile.license_type}` : ''}` +
     `${profile.years_experience ? ` · ${profile.years_experience} yrs experience` : ''}` +

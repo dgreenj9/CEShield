@@ -1,9 +1,9 @@
-// Illinois — Physical Therapist CE rules.
+// Illinois: Physical Therapist CE rules.
 // Source: 225 ILCS 90 (Illinois Physical Therapy Act)
 //         68 Ill. Adm. Code 1340.40 (Continuing Education)
 // Board:  https://idfpr.illinois.gov/profs/physther.html
 //
-// Validated baseline — these values reflect what an IL-licensed physical
+// Validated baseline: these values reflect what an IL-licensed physical
 // therapist has been using in production.
 
 const rules = {
@@ -29,7 +29,7 @@ const rules = {
   },
 
   limits: {
-    selfStudy: 30,                 // TODO: confirm — some sources cite 20
+    selfStudy: 30,                 // TODO: confirm: some sources cite 20
     teaching: 20,
     clinicalInstructor: 10,
     journalClubs: 5,

@@ -235,7 +235,7 @@ export default function CompliancePage() {
                 {course.date
                   ? new Date(`${course.date}T12:00:00`)
                       .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' })
-                  : '—'}
+                  : '·'}
               </span>
               <span style={{ flex: 1, minWidth: 0 }}>
                 <span style={{ display: 'block', fontWeight: 600, fontSize: 14.5, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>

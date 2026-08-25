@@ -41,7 +41,7 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
       onComplete();
     } catch (error) {
       console.error('Error saving profile:', error);
-      alert('Error saving profile. Please try again.');
+      alert('Error saving profile. Try again.');
     } finally {
       setSaving(false);
     }
@@ -149,7 +149,7 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
                 </p>
               ) : (
                 <p className="text-xs mt-1" style={{ color: '#56544C' }}>
-                  More states rolling out monthly. Don&rsquo;t see yours? Email us.
+                  Don&rsquo;t see your state? Email us and it goes on the coverage list.
                 </p>
               )}
             </div>

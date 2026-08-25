@@ -85,7 +85,7 @@ export default function ProfilePage() {
       {/* Header */}
       <header style={{ marginBottom: '1.25rem' }}>
         <div style={{ ...eyebrow(), marginBottom: 8 }}>
-          The living CV · claims, specialties, licensing
+          Your credential record · claims, specialties, licensing
         </div>
         <h1 className="cs-h1-clamp" style={{ fontFamily: INS, fontWeight: 600, fontSize: 36, lineHeight: 1.02, letterSpacing: '-0.025em', margin: 0 }}>
           Your record, kept current.

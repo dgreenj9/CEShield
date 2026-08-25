@@ -205,7 +205,7 @@ export default function CredentialProfile() {
         )}
 
         <p style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, margin: '0.5rem 0 0', letterSpacing: '0.02em' }}>
-          Self-reported. Credential verification is coming; for now this is your private working CV.
+          Self-reported. Claims stay private unless you publish your profile.
         </p>
       </div>
     </div>

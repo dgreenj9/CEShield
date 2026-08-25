@@ -6,10 +6,10 @@
     "clinical.reimbursement": "Acute care respiratory therapy and early mobility billed through hospital DRG; no standalone PT code but supports ICU PT billing.",
     "clinical.marketDemand": "Valued in ICU and acute care PT/OT positions; expected competency in critical care specialty.",
     "clinical.patientSatisfaction": "Patients cannot self-report during ventilation; family reports reduced anxiety with active weaning plan.",
-    "business.cashPayViability": "Hospital/ICU procedure — zero cash-pay consumer market.",
+    "business.cashPayViability": "Hospital/ICU procedure; zero cash-pay consumer market.",
     "business.pricingLeverage": "Reimbursed inside facility per diems; no individual pricing leverage.",
     "business.marketDifferentiation": "Niche skill but only matters to acute-care employers, not consumers.",
-    "business.ownerLeverage": "Cannot build a private practice around vent weaning — wrong setting entirely.",
+    "business.ownerLeverage": "Cannot build a private practice around vent weaning; wrong setting entirely.",
     "business.marketDemand": "No direct-to-consumer demand exists.",
     "business.efficiency": "Protocol training is relatively short, but irrelevant to entrepreneurship.",
     "academicClinical.facultyRecognition": "Valued for acute-care/cardiopulm faculty lines and ACS-track instructors but not a formal credential itself.",
@@ -17,6 +17,6 @@
     "academicClinical.teachingValue": "Directly strengthens acute care and cardiopulm course content in DPT curricula.",
     "academicClinical.evidenceDepth": "Strong RCT base on early mobilization and weaning protocols in ICU populations.",
     "academicClinical.facultyDemand": "Occasionally preferred for acute-care faculty roles but rarely explicitly required.",
-    "academicClinical.efficiency": "Usually acquired through clinical experience rather than discrete cert — moderate efficiency."
+    "academicClinical.efficiency": "Usually acquired through clinical experience rather than discrete cert; moderate efficiency."
   }
 }

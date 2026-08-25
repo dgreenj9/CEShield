@@ -100,7 +100,7 @@ const AuthForm = ({ onSuccess }) => {
   const handlePasswordReset = async (e) => {
     e?.preventDefault?.();
     if (!email) {
-      setError('Please enter your email address');
+      setError('Enter your email address');
       return;
     }
 
@@ -237,8 +237,8 @@ const AuthForm = ({ onSuccess }) => {
               {isSignUp && (
                 <p className="text-center text-sm mt-2" style={{ color: '#56544C' }}>
                   Free during beta: the full field ({siteStats.certCount} credentials,{' '}
-                  {siteStats.citationTotal.toLocaleString()} citations), five career lenses, and your CE
-                  compliance tracked in one place.{' '}
+                  {siteStats.citationTotal.toLocaleString()} citations), five career lenses, and the CE
+                  Ledger.{' '}
                   <strong style={{ color: '#1B1A17' }}>
                     Students: CE Shield is free for you, always.
                   </strong>

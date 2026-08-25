@@ -1,9 +1,9 @@
-// North Carolina — Physical Therapist CE rules.
+// North Carolina: Physical Therapist CE rules.
 // Source: N.C. Gen. Stat. § 90, Article 18B (Physical Therapy Practice Act)
 //         21 NCAC 48G (Continuing Competence)
 // Board:  https://www.ncptboard.org
 //
-// ⚠️ DRAFT — verify against the current NCBPTE worksheet before this state
+// ⚠️ DRAFT: verify against the current NCBPTE worksheet before this state
 // goes live. NC has been actively updating its competence requirements.
 
 const rules = {
@@ -36,8 +36,8 @@ const rules = {
   firstRenewalExempt: false,        // verify
 
   notes: [
-    '⚠️ DRAFT — NCBPTE uses a points-based "Continuing Competence" model that does not map 1:1 to clock hours. Verify the conversion before launching.',
-    'Jurisprudence/ethics: NC requires periodic jurisprudence exam plus a small CE hour count — confirm current numbers.',
+    '⚠️ DRAFT: NCBPTE uses a points-based "Continuing Competence" model that does not map 1:1 to clock hours. Verify the conversion before launching.',
+    'Jurisprudence/ethics: NC requires periodic jurisprudence exam plus a small CE hour count: confirm current numbers.',
     'No implicit-bias / cultural-competency / dementia mandates known at draft time.',
   ],
 };

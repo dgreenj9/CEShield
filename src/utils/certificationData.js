@@ -3095,7 +3095,7 @@ export const certifications = [
     "disciplines": [
       "PT"
     ],
-    "evidence": "This record covers the ABPTS Cardiovascular & Pulmonary Clinical Specialist (CCS) board certification, and the evidence must be read in two layers. The CLINICAL DOMAIN it attests competence in is among the best-evidenced in all of physical therapy: exercise-based cardiac rehabilitation reduces cardiovascular mortality and hospitalization (Cochrane Anderson 2016 / Dibben 2021), pulmonary rehabilitation improves dyspnea, exercise capacity and quality of life in COPD (Cochrane McCarthy 2015), and early ICU mobilization improves functional outcomes (Schweickert 2009 Lancet; Tipping 2017). Evidence ABOUT THE CREDENTIAL itself is thin — only one directly relevant study (Prince 2024) shows CCS-eligible specialists educate heart-failure patients more in line with clinical-practice guidelines than experienced nonspecialists, and the broader ABPTS-specialization literature shows only a modest salary premium. Critically, CCS is one of the SMALLEST ABPTS specialties (~591 certified as of July 2025) and is concentrated in hospital/acute-care/ICU/cardiac-rehab settings that are insurance- and Medicare-funded and salaried — the near-inverse of the cash-pay business profile seen in pelvic/women's-health credentials.",
+    "evidence": "This record covers the ABPTS Cardiovascular & Pulmonary Clinical Specialist (CCS) board certification, and the evidence must be read in two layers. The CLINICAL DOMAIN it attests competence in is among the best-evidenced in all of physical therapy: exercise-based cardiac rehabilitation reduces cardiovascular mortality and hospitalization (Cochrane Anderson 2016 / Dibben 2021), pulmonary rehabilitation improves dyspnea, exercise capacity and quality of life in COPD (Cochrane McCarthy 2015), and early ICU mobilization improves functional outcomes (Schweickert 2009 Lancet; Tipping 2017). Evidence ABOUT THE CREDENTIAL itself is thin; only one directly relevant study (Prince 2024) shows CCS-eligible specialists educate heart-failure patients more in line with clinical-practice guidelines than experienced nonspecialists, and the broader ABPTS-specialization literature shows only a modest salary premium. Critically, CCS is one of the SMALLEST ABPTS specialties (~591 certified as of July 2025) and is concentrated in hospital/acute-care/ICU/cardiac-rehab settings that are insurance- and Medicare-funded and salaried; the near-inverse of the cash-pay business profile seen in pelvic/women's-health credentials.",
     "pathScores": {
       "clinical": {
         "clinicalOutcomes": 88,
@@ -4155,7 +4155,7 @@ export const certifications = [
       "SLP",
       "Researcher"
     ],
-    "evidence": "An MS in Biostatistics provides 1.5-2 years of rigorous quantitative training (regression, survival analysis, clinical trials, causal inference) and is the standard credential for academic statisticians per BLS. For rehab clinician-scientists, it functions as a methods bridge: Rubio et al. (2011) and Meyers et al. (2012) show K-scholars and clinical-research MS graduates with formal biostats training have measurably higher R-series conversion and publication rates. It does not by itself confer PI status — a clinical doctorate or PhD typically remains required — but it substantially strengthens grant readiness and interdisciplinary placement.",
+    "evidence": "An MS in Biostatistics provides 1.5-2 years of rigorous quantitative training (regression, survival analysis, clinical trials, causal inference) and is the standard credential for academic statisticians per BLS. For rehab clinician-scientists, it functions as a methods bridge: Rubio et al. (2011) and Meyers et al. (2012) show K-scholars and clinical-research MS graduates with formal biostats training have measurably higher R-series conversion and publication rates. It does not by itself confer PI status; a clinical doctorate or PhD typically remains required; but it substantially strengthens grant readiness and interdisciplinary placement.",
     "pathScores": {
       "research": {
         "methodologyDepth": 88,
@@ -4202,7 +4202,7 @@ export const certifications = [
       "PT",
       "OT"
     ],
-    "evidence": "CCRC is the standard operational credential for clinical trial coordinators, requiring ~3,000 hours of CRC experience plus exam. Evidence (Sonstein & Jones 2018; Stroo 2020) shows it standardizes GCP/regulatory competency and is increasingly required for AMC coordinator hiring, with ~5-10% salary premium (Freel 2017). However, career trajectories lead to senior coordinator/CRA/project manager roles — not PI status — without an additional doctoral degree (Behar-Horenstein 2018).",
+    "evidence": "CCRC is the standard operational credential for clinical trial coordinators, requiring ~3,000 hours of CRC experience plus exam. Evidence (Sonstein & Jones 2018; Stroo 2020) shows it standardizes GCP/regulatory competency and is increasingly required for AMC coordinator hiring, with ~5-10% salary premium (Freel 2017). However, career trajectories lead to senior coordinator/CRA/project manager roles; not PI status; without an additional doctoral degree (Behar-Horenstein 2018).",
     "pathScores": {
       "research": {
         "methodologyDepth": 30,
@@ -4226,7 +4226,7 @@ export const certifications = [
       "RN",
       "Researcher"
     ],
-    "evidence": "SOCRA CCRP is a globally recognized clinical research workforce credential held by ~25,000+ professionals; it is frequently listed as preferred/required for clinical research coordinator (CRC) and research associate roles at AMCs and industry sponsors, with BLS/industry surveys showing CRC salaries ~$60-85K and meaningful wage premiums (~5-15%) for certified vs non-certified coordinators. It is a coordinator-level credential — not a PI pathway — with no direct linkage to K/R-series independent funding and minimal methodology depth (GCP, ICH, regulatory focus rather than study design or biostatistics). Holders work primarily in trial operations rather than as first/last-author investigators.",
+    "evidence": "SOCRA CCRP is a globally recognized clinical research workforce credential held by ~25,000+ professionals; it is frequently listed as preferred/required for clinical research coordinator (CRC) and research associate roles at AMCs and industry sponsors, with BLS/industry surveys showing CRC salaries ~$60-85K and meaningful wage premiums (~5-15%) for certified vs non-certified coordinators. It is a coordinator-level credential; not a PI pathway; with no direct linkage to K/R-series independent funding and minimal methodology depth (GCP, ICH, regulatory focus rather than study design or biostatistics). Holders work primarily in trial operations rather than as first/last-author investigators.",
     "pathScores": {
       "research": {
         "methodologyDepth": 25,
@@ -4280,7 +4280,7 @@ export const certifications = [
       "SLP",
       "RN"
     ],
-    "evidence": "Epic-certified analysts/builders command $85K-$135K base salaries (HIMSS 2024 compensation survey), with senior application analysts and Epic consultants commonly exceeding $150K — a 30-60% premium over staff PT/OT compensation (BLS OES 2024 median PT $99K, OT $96K). Demand is durable: Epic holds roughly 36% of U.S. acute-care EHR market share and 54% of large-hospital deployments (KLAS 2024), and Epic certifications appear in tens of thousands of postings annually on Indeed/LinkedIn. The credential's main constraint is access — Epic training is gated to employees of Epic-using organizations or Epic itself, making the initial \"informatics analyst\" hire the true bottleneck rather than the cert.",
+    "evidence": "Epic-certified analysts/builders command $85K-$135K base salaries (HIMSS 2024 compensation survey), with senior application analysts and Epic consultants commonly exceeding $150K; a 30-60% premium over staff PT/OT compensation (BLS OES 2024 median PT $99K, OT $96K). Demand is durable: Epic holds roughly 36% of U.S. acute-care EHR market share and 54% of large-hospital deployments (KLAS 2024), and Epic certifications appear in tens of thousands of postings annually on Indeed/LinkedIn. The credential's main constraint is access; Epic training is gated to employees of Epic-using organizations or Epic itself, making the initial \"informatics analyst\" hire the true bottleneck rather than the cert.",
     "pathScores": {
       "healthTech": {
         "industryPlacement": 88,
@@ -4306,7 +4306,7 @@ export const certifications = [
       "IT",
       "HIM"
     ],
-    "evidence": "Cerner/Oracle Health certified analysts typically earn $75K-$110K, with senior consultants reaching $120K-$140K — a meaningful premium over bedside PT/OT median (~$95K) but generally below Epic-certified peers due to smaller install base (~25% US hospital market vs Epic ~40%+). Most certifications are gated: candidates must be sponsored by a Cerner/Oracle Health client organization or join Oracle Health consulting, limiting open-market accessibility. Demand persists but is concentrating in DoD/VA (Oracle Health's federal EHR contract) and community/critical-access hospitals.",
+    "evidence": "Cerner/Oracle Health certified analysts typically earn $75K-$110K, with senior consultants reaching $120K-$140K; a meaningful premium over bedside PT/OT median (~$95K) but generally below Epic-certified peers due to smaller install base (~25% US hospital market vs Epic ~40%+). Most certifications are gated: candidates must be sponsored by a Cerner/Oracle Health client organization or join Oracle Health consulting, limiting open-market accessibility. Demand persists but is concentrating in DoD/VA (Oracle Health's federal EHR contract) and community/critical-access hospitals.",
     "pathScores": {
       "healthTech": {
         "industryPlacement": 70,
@@ -4330,7 +4330,7 @@ export const certifications = [
       "Informatics",
       "HIM"
     ],
-    "evidence": "For PTs/OTs the practical pathway is AHIC (not the ABMS physician-only board cert), which is increasingly required for senior informatics analyst, clinical product manager, and EHR vendor consultant roles paying $110-160K — a 25-40% premium over bedside (HIMSS 2023). Holders cluster in CMIO-office, vendor (Epic, Oracle Health), and payer informatics teams, with BLS projecting 28% growth in health informatics management through 2032. The credential is strong on signaling but moderate on hands-on technical depth (SQL, build, data science still required).",
+    "evidence": "For PTs/OTs the practical pathway is AHIC (not the ABMS physician-only board cert), which is increasingly required for senior informatics analyst, clinical product manager, and EHR vendor consultant roles paying $110-160K; a 25-40% premium over bedside (HIMSS 2023). Holders cluster in CMIO-office, vendor (Epic, Oracle Health), and payer informatics teams, with BLS projecting 28% growth in health informatics management through 2032. The credential is strong on signaling but moderate on hands-on technical depth (SQL, build, data science still required).",
     "pathScores": {
       "healthTech": {
         "industryPlacement": 80,
@@ -4443,7 +4443,7 @@ export const certifications = [
       "IT",
       "HIM"
     ],
-    "evidence": "HL7 FHIR Proficiency is a low-cost (~$200) self-study credential aligned with ONC Cures Act mandates requiring FHIR R4 APIs in all certified EHRs, driving demand at Epic, Oracle Health, and payers. HIMSS 2023 workforce data lists interoperability among the fastest-growing informatics niches, with FHIR-skilled integration analysts earning $85k-$130k versus typical staff PT salaries of $75k-$95k. The credential alone rarely closes a hire — clinicians typically pair it with SQL/API project work to land roles.",
+    "evidence": "HL7 FHIR Proficiency is a low-cost (~$200) self-study credential aligned with ONC Cures Act mandates requiring FHIR R4 APIs in all certified EHRs, driving demand at Epic, Oracle Health, and payers. HIMSS 2023 workforce data lists interoperability among the fastest-growing informatics niches, with FHIR-skilled integration analysts earning $85k-$130k versus typical staff PT salaries of $75k-$95k. The credential alone rarely closes a hire; clinicians typically pair it with SQL/API project work to land roles.",
     "pathScores": {
       "healthTech": {
         "industryPlacement": 55,
@@ -4517,7 +4517,7 @@ export const certifications = [
       "IT",
       "PM"
     ],
-    "evidence": "PMP holders earn a median 33% salary premium globally and 16% in the US versus non-certified peers per PMI's Earning Power Survey (2023), with US median salaries around $123,000. In healthcare IT and digital health, PMP is named in 25-40% of senior PM and consulting job postings (HIMSS workforce data), and Epic/Oracle Health implementation consulting firms (Nordic, Impact Advisors) routinely list PMP as preferred. For clinicians, PMP signals process discipline but does not by itself open clinical-domain doors — it is a force multiplier paired with clinical credentials.",
+    "evidence": "PMP holders earn a median 33% salary premium globally and 16% in the US versus non-certified peers per PMI's Earning Power Survey (2023), with US median salaries around $123,000. In healthcare IT and digital health, PMP is named in 25-40% of senior PM and consulting job postings (HIMSS workforce data), and Epic/Oracle Health implementation consulting firms (Nordic, Impact Advisors) routinely list PMP as preferred. For clinicians, PMP signals process discipline but does not by itself open clinical-domain doors; it is a force multiplier paired with clinical credentials.",
     "pathScores": {
       "healthTech": {
         "industryPlacement": 70,
@@ -4561,7 +4561,7 @@ export const certifications = [
       "PT",
       "OT"
     ],
-    "evidence": "No US board certification exists for amputee rehabilitation — the most established openly available credential is the ~24-contact-hour Lower Limb Amputee Rehabilitation Programme from Physiopedia Plus in partnership with the ICRC, covering post-op/pre-prosthetic management, prosthetic gait training, and outcome measures. Underlying care evidence is moderate-strong: meta-analyses show exercise and gait training improve prosthetic gait and balance, and acute post-op rehab is associated with 1-year survival and prosthetic procurement — though only ~7% of guideline recommendations derive from RCTs/SRs. Although acute/inpatient pre-prosthetic care is the entry point, the bulk of prosthetic gait, balance, and return-to-activity training occurs across outpatient, home-health, and community settings, where PT–prosthetist collaboration is ongoing — so applicability is not confined to IRF/VA/acute.",
+    "evidence": "No US board certification exists for amputee rehabilitation; the most established openly available credential is the ~24-contact-hour Lower Limb Amputee Rehabilitation Programme from Physiopedia Plus in partnership with the ICRC, covering post-op/pre-prosthetic management, prosthetic gait training, and outcome measures. Underlying care evidence is moderate-strong: meta-analyses show exercise and gait training improve prosthetic gait and balance, and acute post-op rehab is associated with 1-year survival and prosthetic procurement; though only ~7% of guideline recommendations derive from RCTs/SRs. Although acute/inpatient pre-prosthetic care is the entry point, the bulk of prosthetic gait, balance, and return-to-activity training occurs across outpatient, home-health, and community settings, where PT–prosthetist collaboration is ongoing; so applicability is not confined to IRF/VA/acute.",
     "pathScores": {
       "clinical": {
         "clinicalOutcomes": 70,
@@ -4599,7 +4599,7 @@ export const certifications = [
       "AT",
       "EP"
     ],
-    "evidence": "Granted by the Aquatic Therapy & Rehab Institute: 15 hours of aquatic education plus a 75-question proctored exam ($255-675 all-in), open to PTs, OTs, ATs, EPs, and other rehab professionals. The underlying intervention is well evidenced — Cochrane reviews support aquatic exercise for knee/hip OA, fibromyalgia, and post-stroke ADLs; meta-analyses support benefits in Parkinson's, MS, low back pain (including a 2022 JAMA Network Open RCT), and pediatric CP. Effects are generally comparable to land-based exercise; the key practical constraint is therapy-pool access.",
+    "evidence": "Granted by the Aquatic Therapy & Rehab Institute: 15 hours of aquatic education plus a 75-question proctored exam ($255-675 all-in), open to PTs, OTs, ATs, EPs, and other rehab professionals. The underlying intervention is well evidenced; Cochrane reviews support aquatic exercise for knee/hip OA, fibromyalgia, and post-stroke ADLs; meta-analyses support benefits in Parkinson's, MS, low back pain (including a 2022 JAMA Network Open RCT), and pediatric CP. Effects are generally comparable to land-based exercise; the key practical constraint is therapy-pool access.",
     "pathScores": {
       "clinical": {
         "clinicalOutcomes": 62,
@@ -4670,7 +4670,7 @@ export const certifications = [
       "PT",
       "AT"
     ],
-    "evidence": "RMSK (Registered in Musculoskeletal sonography, APCA/Inteleos) is the established credential for PTs, backed by a formal APTA-AIUM-Inteleos education pathway; eligibility requires a valid PT license plus 150 MSK ultrasound studies in 36 months and a 4-hour exam ($600). Diagnostic accuracy of MSK ultrasound rivals MRI for common pathologies, and PT-performed scanning shows moderate-to-substantial agreement with radiologists — but Medicare considers diagnostic ultrasound codes non-covered when performed by PTs, confining billing to cash-pay and select private payers.",
+    "evidence": "RMSK (Registered in Musculoskeletal sonography, APCA/Inteleos) is the established credential for PTs, backed by a formal APTA-AIUM-Inteleos education pathway; eligibility requires a valid PT license plus 150 MSK ultrasound studies in 36 months and a 4-hour exam ($600). Diagnostic accuracy of MSK ultrasound rivals MRI for common pathologies, and PT-performed scanning shows moderate-to-substantial agreement with radiologists; but Medicare considers diagnostic ultrasound codes non-covered when performed by PTs, confining billing to cash-pay and select private payers.",
     "pathScores": {
       "clinical": {
         "clinicalOutcomes": 58,
@@ -4715,7 +4715,7 @@ export const certifications = [
       "OT",
       "AT"
     ],
-    "evidence": "Postural Restoration Institute credential (est. 2004) requiring four primary courses (~75 contact hours), case-study application, and an annual in-person exam; only ~267 clinicians have ever earned it. Evidence base is thin — small RCTs show parity with conventional exercise, supported indirectly by stronger basic-science work on diaphragm postural-respiratory function.",
+    "evidence": "Postural Restoration Institute credential (est. 2004) requiring four primary courses (~75 contact hours), case-study application, and an annual in-person exam; only ~267 clinicians have ever earned it. Evidence base is thin; small RCTs show parity with conventional exercise, supported indirectly by stronger basic-science work on diaphragm postural-respiratory function.",
     "pathScores": {
       "clinical": {
         "clinicalOutcomes": 35,
@@ -4816,14 +4816,14 @@ export const certifications = [
     }
   },
   {
-    "name": "Acute Care POCUS — Lung & Diaphragm Ultrasound",
+    "name": "Acute Care POCUS: Lung & Diaphragm Ultrasound",
     "type": "Certification",
     "discipline": "PT/RT",
     "disciplines": [
       "PT",
       "RT"
     ],
-    "evidence": "Lung and diaphragm point-of-care ultrasound is an established, evidence-supported bedside assessment for ICU/acute-care physiotherapists and respiratory therapists, with substantial interrater reliability and demonstrated influence on respiratory-physiotherapy decisions (atelectasis vs effusion vs consolidation, airway-clearance targeting, mobilization safety, ventilator weaning readiness). The accurate credential path is a focused POCUS Certificate/Certification track (e.g., Inteleos POCUS Certification Academy Lung and Critical Care offerings) layered on POCUS Fundamentals — distinct from the outpatient RMSK pathway.",
+    "evidence": "Lung and diaphragm point-of-care ultrasound is an established, evidence-supported bedside assessment for ICU/acute-care physiotherapists and respiratory therapists, with substantial interrater reliability and demonstrated influence on respiratory-physiotherapy decisions (atelectasis vs effusion vs consolidation, airway-clearance targeting, mobilization safety, ventilator weaning readiness). The accurate credential path is a focused POCUS Certificate/Certification track (e.g., Inteleos POCUS Certification Academy Lung and Critical Care offerings) layered on POCUS Fundamentals; distinct from the outpatient RMSK pathway.",
     "pathScores": {
       "clinical": {
         "clinicalOutcomes": 68,
@@ -4866,7 +4866,7 @@ export const certifications = [
     "disciplines": [
       "PT"
     ],
-    "evidence": "The CAPP-OB (Certificate of Advanced Practice in Physical Therapy in Obstetric Health) is the APTA Academy of Pelvic Health Physical Therapy's advanced obstetric credential, requiring licensed PTs/PTAs to complete all levels of the Pregnancy & Postpartum track (restructured in 2025 into three webinars — Fundamental, Intrapartum, and Advanced topics, ~48 contact hours), pass each Post-Course Exam at 80% or higher with scenario testing, and submit a reviewed PT case reflection, all within a 5-year window. It is a respected, focused academy certificate for obstetric/peripartum PT rather than an ABPTS board certification.",
+    "evidence": "The CAPP-OB (Certificate of Advanced Practice in Physical Therapy in Obstetric Health) is the APTA Academy of Pelvic Health Physical Therapy's advanced obstetric credential, requiring licensed PTs/PTAs to complete all levels of the Pregnancy & Postpartum track (restructured in 2025 into three webinars; Fundamental, Intrapartum, and Advanced topics, ~48 contact hours), pass each Post-Course Exam at 80% or higher with scenario testing, and submit a reviewed PT case reflection, all within a 5-year window. It is a respected, focused academy certificate for obstetric/peripartum PT rather than an ABPTS board certification.",
     "pathScores": {
       "clinical": {
         "clinicalOutcomes": 76,
@@ -4974,7 +4974,7 @@ export const certifications = [
       "RT",
       "EP"
     ],
-    "evidence": "The CCRP is the individual professional credential aligned with the AACVPR/AHA core competencies for cardiac rehabilitation and secondary prevention — distinct from AACVPR program/facility certification. Open to the interdisciplinary CR team (PT, RN, RT, exercise physiologist), it requires ~1,200 documented clinical hours and a 140-item proctored exam (3-year recert). The clinical domain has tier-1 mortality and rehospitalization evidence (Cochrane cardiac rehab, HF-ACTION, Medicare registry studies); credential-specific outcome studies are essentially absent.",
+    "evidence": "The CCRP is the individual professional credential aligned with the AACVPR/AHA core competencies for cardiac rehabilitation and secondary prevention; distinct from AACVPR program/facility certification. Open to the interdisciplinary CR team (PT, RN, RT, exercise physiologist), it requires ~1,200 documented clinical hours and a 140-item proctored exam (3-year recert). The clinical domain has tier-1 mortality and rehospitalization evidence (Cochrane cardiac rehab, HF-ACTION, Medicare registry studies); credential-specific outcome studies are essentially absent.",
     "pathScores": {
       "clinical": {
         "clinicalOutcomes": 80,

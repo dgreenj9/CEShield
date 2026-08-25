@@ -54,14 +54,14 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
     if (!file) return;
 
     if (file.size > 5 * 1024 * 1024) {
-      alert('File size must be less than 5MB');
+      alert('That file is over 5 MB. Upload a smaller file.');
       e.target.value = '';
       return;
     }
 
     const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
     if (!allowedTypes.includes(file.type)) {
-      alert('Please upload a PDF or image file (JPG, PNG, WEBP)');
+      alert('That file type is not supported. Upload a PDF, JPG, PNG, or WEBP.');
       e.target.value = '';
       return;
     }
@@ -104,7 +104,7 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
 
     const hoursNum = parseFloat(course.hours);
     if (isNaN(hoursNum) || hoursNum <= 0) {
-      alert('Please enter valid hours');
+      alert('Hours must be a number above zero.');
       return;
     }
 

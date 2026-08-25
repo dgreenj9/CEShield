@@ -108,7 +108,7 @@ export default function ExplorePage() {
             </>
           ) : (
             <>
-              <span style={{ ...bigStat, color: A.dim }}>—</span>
+              <span style={{ ...bigStat, color: A.dim }}>·</span>
               <span style={statLabel}>
                 <Link to="/profile" style={{ color: A.accent, textDecoration: 'none' }}>Set renewal date →</Link>
               </span>
@@ -118,7 +118,7 @@ export default function ExplorePage() {
         <div style={{ padding: '1.2rem 1.5rem', borderRight: `1px solid ${A.ruleMinor}` }}>
           <span style={bigStat}>
             {hours.total}
-            <span style={{ fontSize: 17, color: A.inkMuted, fontWeight: 600 }}> / {requirements?.total ?? '—'}</span>
+            <span style={{ fontSize: 17, color: A.inkMuted, fontWeight: 600 }}> / {requirements?.total ?? '·'}</span>
           </span>
           <span style={statLabel}>hours banked this cycle</span>
         </div>

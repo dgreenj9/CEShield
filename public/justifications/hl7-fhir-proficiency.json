@@ -1,10 +1,10 @@
 {
   "justifications": {
-    "healthTech.industryPlacement": "Moderate — opens informatics/integration interviews but typically must be paired with hands-on API or EHR project work to convert.",
-    "healthTech.vendorDemand": "High — ONC Cures Act mandates FHIR R4 in certified EHRs, so Epic, Oracle Health, athenahealth, and payers explicitly seek FHIR-fluent staff.",
-    "healthTech.salaryPremium": "Meaningful — interop analyst roles ($85k-$130k) typically exceed bedside PT compensation, especially with 2-3 years industry tenure.",
-    "healthTech.technicalSkillDepth": "Moderate — covers RESTful APIs, resources, profiles, and terminology binding but does not substitute for software engineering depth.",
-    "healthTech.transitionFit": "Good for clinicians — emphasizes clinical-data modeling where domain knowledge of workflows and documentation is an asset.",
-    "healthTech.efficiency": "Very high — ~$200 exam, self-paced study, no employer sponsorship or prerequisite required, completable in weeks."
+    "healthTech.industryPlacement": "Moderate; opens informatics/integration interviews but typically must be paired with hands-on API or EHR project work to convert.",
+    "healthTech.vendorDemand": "High; ONC Cures Act mandates FHIR R4 in certified EHRs, so Epic, Oracle Health, athenahealth, and payers explicitly seek FHIR-fluent staff.",
+    "healthTech.salaryPremium": "Meaningful; interop analyst roles ($85k-$130k) typically exceed bedside PT compensation, especially with 2-3 years industry tenure.",
+    "healthTech.technicalSkillDepth": "Moderate; covers RESTful APIs, resources, profiles, and terminology binding but does not substitute for software engineering depth.",
+    "healthTech.transitionFit": "Good for clinicians; emphasizes clinical-data modeling where domain knowledge of workflows and documentation is an asset.",
+    "healthTech.efficiency": "Very high; ~$200 exam, self-paced study, no employer sponsorship or prerequisite required, completable in weeks."
   }
 }

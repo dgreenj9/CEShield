@@ -1,21 +1,21 @@
 {
   "justifications": {
-    "clinical.clinicalOutcomes": "Multiple Cochrane reviews and meta-analyses show clinically meaningful short-term improvements in pain, function, and QoL for OA, fibromyalgia, stroke, Parkinson's, MS, and low back pain — though most comparisons show equivalence to land-based exercise, so the unique value is for load-intolerant patients.",
+    "clinical.clinicalOutcomes": "Multiple Cochrane reviews and meta-analyses show clinically meaningful short-term improvements in pain, function, and QoL for OA, fibromyalgia, stroke, Parkinson's, MS, and low back pain; though most comparisons show equivalence to land-based exercise, so the unique value is for load-intolerant patients.",
     "clinical.caseloadApplicability": "Hard infrastructure constraint: only usable where a therapy pool exists, which excludes the large majority of outpatient clinics.",
     "clinical.reimbursement": "Aquatic therapy has its own CPT code (97113) reimbursed at or slightly above therapeutic exercise, but the credential confers no payer premium and pool overhead erodes margins.",
-    "clinical.efficiency": "The credential is cheap and fast (15 CE hours + exam), but day-to-day aquatic care is operationally slow — transfers, changing time, and pool setup reduce visits per hour.",
+    "clinical.efficiency": "The credential is cheap and fast (15 CE hours + exam), but day-to-day aquatic care is operationally slow; transfers, changing time, and pool setup reduce visits per hour.",
     "clinical.marketDemand": "Niche but stable demand in SNFs, hospital wellness centers, and aquatic-equipped practices; postings specifically requesting ATRIC are uncommon.",
-    "clinical.patientSatisfaction": "Patients consistently rate aquatic therapy as enjoyable with high adherence — buoyancy enables pain-reduced movement for populations who fail land-based programs.",
+    "clinical.patientSatisfaction": "Patients consistently rate aquatic therapy as enjoyable with high adherence; buoyancy enables pain-reduced movement for populations who fail land-based programs.",
     "business.cashPayViability": "Cash-pay aquatic programs (arthritis/fibromyalgia group classes, post-rehab wellness) sell well to older chronic-pain demographics, but only with affordable recurring pool access.",
     "business.pricingLeverage": "Supports modest premium pricing for a scarce service; ATRIC has little consumer name recognition, so leverage comes from the pool-based offering itself.",
     "business.marketDifferentiation": "Few clinics offer credentialed aquatic therapy, so in markets with pools this creates genuine local differentiation and referral capture.",
     "business.ownerLeverage": "Weak: a therapy pool is a capital-intensive asset most owners cannot justify, forcing dependence on rented community pool time with scheduling and liability friction.",
-    "business.marketDemand": "Real but narrow — concentrated in aging, chronic-pain, and bariatric populations and limited to communities with accessible warm-water pools.",
+    "business.marketDemand": "Real but narrow; concentrated in aging, chronic-pain, and bariatric populations and limited to communities with accessible warm-water pools.",
     "business.efficiency": "Group classes (one therapist, 6-10 cash participants) can produce good revenue per hour, partially offsetting slow 1:1 aquatic economics; acquisition cost is trivial.",
-    "academicClinical.facultyRecognition": "A CE-plus-exam practice certification, not a board specialty — minimal weight in academic promotion and tenure.",
+    "academicClinical.facultyRecognition": "A CE-plus-exam practice certification, not a board specialty; minimal weight in academic promotion and tenure.",
     "academicClinical.scholarship": "Aquatic rehabilitation is an active research area (Cochrane reviews, ongoing RCTs) offering publishable opportunities, though the credential itself has no research pathway.",
     "academicClinical.teachingValue": "Aquatic interventions appear in PT/OT curricula and the credential supports teaching aquatic labs and electives, but occupies limited curricular real estate.",
-    "academicClinical.evidenceDepth": "Strong breadth: three Cochrane reviews plus condition-specific meta-analyses across Parkinson's, MS, stroke, CP, and low back pain — mostly low-to-moderate quality with short-term effects.",
+    "academicClinical.evidenceDepth": "Strong breadth: three Cochrane reviews plus condition-specific meta-analyses across Parkinson's, MS, stroke, CP, and low back pain; mostly low-to-moderate quality with short-term effects.",
     "academicClinical.facultyDemand": "Faculty searches essentially never list aquatic certification as a requirement.",
     "academicClinical.efficiency": "Among the cheapest credentials available (15 CE hours, $255-675), so recognition-per-dollar is reasonable even if absolute recognition is low."
   }

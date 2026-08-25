@@ -7,15 +7,15 @@
     "clinical.marketDemand": "Moderate demand in TBI programs, inpatient rehab, and brain injury specialty clinics.",
     "clinical.patientSatisfaction": "TBI patients and families value clinicians who understand the unique challenges of brain injury.",
     "business.cashPayViability": "TBI rehab is overwhelmingly insurance/Medicaid/waiver funded; families rarely pay cash for brain injury services and case management is the dominant payer pathway.",
-    "business.pricingLeverage": "CBIS is recognized in post-acute and neuro settings but doesn't command premium DTC pricing — it's an employer-required credential, not a consumer brand.",
+    "business.pricingLeverage": "CBIS is recognized in post-acute and neuro settings but doesn't command premium DTC pricing; it's an employer-required credential, not a consumer brand.",
     "business.marketDifferentiation": "Moderately uncommon among outpatient PTs but standard in neuro post-acute facilities, so differentiation depends heavily on local market.",
     "business.ownerLeverage": "Possible to build a concussion/TBI niche clinic around it, but most revenue still flows through insurance contracts limiting cash-pay scale.",
-    "business.marketDemand": "Consumers don't search for 'CBIS' — they search for concussion clinics or neuro rehab; weak brand recognition.",
+    "business.marketDemand": "Consumers don't search for 'CBIS'; they search for concussion clinics or neuro rehab; weak brand recognition.",
     "business.efficiency": "Relatively cheap (~$400) exam-based credential with no residency requirement, so ROI per dollar is reasonable.",
     "academicClinical.facultyRecognition": "Held by some neuro faculty but not weighted heavily for tenure or hiring versus NCS or a residency; nice-to-have, not differentiating.",
     "academicClinical.scholarship": "Modest TBI literature among CBIS holders; the credential itself isn't a scholarship engine but aligns with a publishable clinical area.",
     "academicClinical.teachingValue": "Useful content for neuro and acute care DPT/MOT courses, especially TBI/concussion modules.",
-    "academicClinical.evidenceDepth": "TBI rehab has a growing but heterogeneous evidence base — RCTs exist for specific interventions, less for general rehab pathways.",
+    "academicClinical.evidenceDepth": "TBI rehab has a growing but heterogeneous evidence base; RCTs exist for specific interventions, less for general rehab pathways.",
     "academicClinical.facultyDemand": "Rarely listed as required or preferred in PT/OT faculty job ads; NCS is the dominant neuro credential sought.",
     "academicClinical.efficiency": "Low time/cost burden relative to a neuro residency, making it an efficient way to signal TBI competence."
   }

@@ -37,12 +37,11 @@ export default class ErrorBoundary extends React.Component {
         style={{ background: '#F6F3E7', border: '1px dashed #1B1A17' }}
       >
         <h2 className="font-display text-lg font-semibold m-0 mb-2">
-          Something went wrong.
+          This page failed to render.
         </h2>
         <p className="mb-4" style={{ color: "#45433C" }}>
-          The page hit an unexpected error and couldn&rsquo;t render. Try
-          refreshing &mdash; if it keeps happening, let us know what you were
-          doing.
+          The error is in the page, not your data. Reload to recover. If it
+          repeats, email hello@ceshield.com with what you were doing.
         </p>
         <button
           type="button"

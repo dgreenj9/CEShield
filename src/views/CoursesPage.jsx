@@ -74,7 +74,7 @@ export default function CoursesPage() {
         <EmptyState
           icon={BookOpen}
           title="Nothing logged yet"
-          description="Log your first CE course to start tracking hours, mandatory categories, and renewal status, all in one place."
+          description="Log your first CE course. Hours, mandatory categories, and renewal status compute from the log."
           action={(
             <Button onClick={() => setShowAddCourse(true)}>
               <Plus size={14} aria-hidden="true" /> Log a course
@@ -98,7 +98,7 @@ export default function CoursesPage() {
               <span style={{ fontFamily: FIG, fontSize: 12, color: A.inkMuted, width: 84, flexShrink: 0, ...tabularNums }}>
                 {course.date
                   ? new Date(`${course.date}T12:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' })
-                  : '—'}
+                  : '·'}
               </span>
               <span style={{ flex: 1, minWidth: 0 }}>
                 <span style={{ display: 'block', fontWeight: 600, fontSize: 14.5, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: A.ink }}>

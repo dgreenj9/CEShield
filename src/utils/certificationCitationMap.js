@@ -117,7 +117,7 @@ export const CERTIFICATION_TO_CITATION_MAP = {
 // Methodology content for the popup
 export const METHODOLOGY_CONTENT = {
   title: "Evidence-Based Certification Scoring Methodology",
-  version: "Version 3.0 - March 2026",
+  version: "Version 3.0 · March 2026",
   overview: "This scoring system evaluates rehabilitation certifications based on their demonstrated impact on patient outcomes, not industry prestige or popularity. Each certification is scored across five dimensions; the weights for each dimension are adjustable via the sliders above and default to the values shown below.",
 
   scoringComponents: [
@@ -233,9 +233,9 @@ export const METHODOLOGY_CONTENT = {
   ],
 
   keyFindings: [
-    "Rankings shift more meaningfully when adjusting weights now that Billing & Reimbursement replaces the redundant Evidence Quality dimension",
+    "Rankings shift meaningfully when weights are adjusted; the default weights are shown above",
     "Most certifications lack credential-specific outcome studies; scores reflect evidence for the intervention, not the credential itself",
-    "AACVPR Cardiac Rehab and Pulmonary Rehab score highest on Billing & Reimbursement — CMS literally requires program standards for billing",
+    "AACVPR Cardiac Rehab and Pulmonary Rehab score highest on Billing & Reimbursement: CMS requires program standards for billing",
     "Lymphedema CLT/LANA scores high on reimbursement due to the 2024 Lymphedema Treatment Act mandating Medicare coverage",
     "Certification Investment scores reveal a wide range: CDC STEADI (free, 2 hours) vs. Alexander Technique (1,600 hours, 3 years)",
     "Fall prevention programs (Otago, Matter of Balance) show among the strongest cost-effectiveness ratios of any rehabilitation intervention"
@@ -244,7 +244,7 @@ export const METHODOLOGY_CONTENT = {
   dataSource: "Scoring based on comprehensive literature review through March 2026, including systematic reviews, meta-analyses, RCTs, and economic evaluations. Citation count reflects curated references attached to individual certifications.",
 
   limitations: [
-    "Credential-specific comparative studies (certified vs. non-certified practitioners) are almost universally absent — a known gap in the rehabilitation literature",
+    "Credential-specific comparative studies (certified vs. non-certified practitioners) are almost universally absent, a known gap in the rehabilitation literature",
     "Some certifications have limited research due to recent development or niche population scope",
     "Publication bias may favor positive results, particularly for proprietary techniques",
     "Geographic and payer variations affect cost-effectiveness generalizability",

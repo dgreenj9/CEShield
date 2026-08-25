@@ -300,7 +300,7 @@ export default function PathTabs({ paths, examples }) {
                       textAlign: 'center',
                     }}
                   >
-                    Cert library for this path is being built. Check back soon.
+                    No credentials scored on this path yet.
                   </div>
                 )}
               </div>

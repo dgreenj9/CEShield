@@ -1,6 +1,6 @@
 {
   "justifications": {
-    "clinical.clinicalOutcomes": "The amplitude-based, neuroplasticity-principled approach has solid backing in the broader PD-exercise literature (Farley & Koshland, Petzinger, SPARX), but PWR!Moves-specific RCT evidence is sparse — outcomes are inferred from the borrowed evidence base.",
+    "clinical.clinicalOutcomes": "The amplitude-based, neuroplasticity-principled approach has solid backing in the broader PD-exercise literature (Farley & Koshland, Petzinger, SPARX), but PWR!Moves-specific RCT evidence is sparse; outcomes are inferred from the borrowed evidence base.",
     "clinical.caseloadApplicability": "Parkinson's is a high-volume diagnosis in outpatient neuro and geriatric caseloads, and PWR!Moves applies across disease severity (stages I-IV) in both 1:1 and group settings.",
     "clinical.reimbursement": "PD-specific therapy bills under standard rehab codes, but the signature community/group classes typically fall outside insurance and run as cash-pay wellness.",
     "clinical.efficiency": "A short (2-day) workshop conferring a 3-year credential; the group-class model also lets one clinician serve multiple patients per session.",
@@ -14,9 +14,9 @@
     "business.efficiency": "Group delivery and a train-the-team instructor pathway make the model operationally efficient relative to 1:1-only certifications.",
     "academicClinical.facultyRecognition": "Founder Dr. Becky Farley is a credible PT-neuroscientist, but the credential carries less academic standing than LSVT BIG.",
     "academicClinical.scholarship": "The underlying PD-exercise literature is rich, but PWR!Moves-specific peer-reviewed scholarship is thin (conference abstracts, case reports).",
-    "academicClinical.teachingValue": "Packages teachable, evidence-based content — amplitude training, neuroplasticity principles, PD-specific progression — that maps onto neuro PT/OT curricula.",
+    "academicClinical.teachingValue": "Packages teachable, evidence-based content; amplitude training, neuroplasticity principles, PD-specific progression; that maps onto neuro PT/OT curricula.",
     "academicClinical.evidenceDepth": "Strong for the borrowed principles (neuroplasticity, high-intensity, amplitude training), shallow for the PWR!Moves protocol specifically.",
     "academicClinical.facultyDemand": "Modest, niche demand; programs more often reference LSVT BIG.",
-    "academicClinical.efficiency": "Short workshop with a 3-year credential — efficient way to add PD-specific teaching content, though limited recognition caps the return."
+    "academicClinical.efficiency": "Short workshop with a 3-year credential; efficient way to add PD-specific teaching content, though limited recognition caps the return."
   }
 }
