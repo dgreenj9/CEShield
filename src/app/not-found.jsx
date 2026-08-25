@@ -3,104 +3,59 @@
 // ending it — most bad-slug traffic is misspelled credential names.
 
 import Link from 'next/link';
-import { Compass, Shield, FileText } from 'lucide-react';
-import { colors } from '@/utils/constants';
-import LogoLink from '@/components/common/LogoLink';
+import PublicNav from '@/components/layout/PublicNav';
+import { A, FIG, INS, tabularNums } from '@/components/atlas/theme';
 
 export const metadata = { title: 'Page not found' };
 
+const secondaryLink = {
+  display: 'inline-block',
+  padding: '11px 20px',
+  border: `1px solid ${A.ink}`,
+  color: A.ink,
+  textDecoration: 'none',
+  fontWeight: 600,
+  fontSize: 14.5,
+};
+
 export default function NotFound() {
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        backgroundColor: '#FAFAF6',
-        backgroundImage: 'radial-gradient(circle, rgba(15, 23, 42, 0.05) 1px, transparent 1px)',
-        backgroundSize: '22px 22px',
-        color: colors.textDark,
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      <nav className="cs-public-nav" style={{
-        padding: '1rem 2rem',
-        borderBottom: `1px solid ${colors.slateLight}`,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'white',
-      }}>
-        <LogoLink size="medium" />
-      </nav>
+    <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink, display: 'flex', flexDirection: 'column' }}>
+      <PublicNav />
 
-      <main style={{
-        flex: 1,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '3rem 1.5rem',
-      }}>
-        <div style={{ maxWidth: 520, textAlign: 'center' }}>
-          <div
-            className="font-mono tabular-nums"
-            style={{
-              fontSize: '3.5rem',
-              fontWeight: 600,
-              color: colors.slateLight,
-              letterSpacing: '-0.04em',
-              lineHeight: 1,
-            }}
-          >
+      <main style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '3rem 1.5rem' }}>
+        <div style={{ maxWidth: 560, textAlign: 'center' }}>
+          <div style={{ fontFamily: INS, fontSize: 96, fontWeight: 600, color: A.ruleMinor, letterSpacing: '-0.045em', lineHeight: 1, ...tabularNums }}>
             404
           </div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 600, margin: '1rem 0 0.5rem', letterSpacing: '-0.015em' }}>
-            That page doesn&rsquo;t exist.
+          <h1 style={{ fontFamily: INS, fontSize: 29, fontWeight: 600, margin: '1rem 0 0.5rem', letterSpacing: '-0.03em' }}>
+            That page isn&rsquo;t in the field.
           </h1>
-          <p style={{ color: colors.slateMedium, lineHeight: 1.6, margin: 0 }}>
+          <p style={{ color: A.inkBody, lineHeight: 1.6, margin: 0, fontSize: 15.5 }}>
             If you were looking for a credential, the name in the URL may be
-            misspelled — the full library is searchable.
+            misspelled. The full library is searchable.
           </p>
-          <div style={{
-            marginTop: '2rem',
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '0.75rem',
-            justifyContent: 'center',
-          }}>
+          <div style={{ marginTop: '2rem', display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
             <Link
-              href="/credentials"
+              href="/matrix"
               style={{
-                display: 'inline-flex', alignItems: 'center', gap: 6,
-                padding: '0.65rem 1.25rem', background: colors.primaryBlue,
-                color: 'white', textDecoration: 'none', borderRadius: 8,
-                fontWeight: 500, fontSize: '0.92rem',
+                display: 'inline-block', padding: '12px 20px', background: A.accent,
+                color: A.onAccent, textDecoration: 'none', fontWeight: 600, fontSize: 14.5,
               }}
             >
-              <Shield size={15} aria-hidden="true" /> Search credentials
+              Search the field →
             </Link>
-            <Link
-              href="/career-paths"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 6,
-                padding: '0.65rem 1.25rem', background: 'white',
-                border: `1px solid ${colors.slateLight}`, color: colors.slateMedium,
-                textDecoration: 'none', borderRadius: 8, fontWeight: 500, fontSize: '0.92rem',
-              }}
-            >
-              <Compass size={15} aria-hidden="true" /> Career paths
-            </Link>
-            <Link
-              href="/states"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 6,
-                padding: '0.65rem 1.25rem', background: 'white',
-                border: `1px solid ${colors.slateLight}`, color: colors.slateMedium,
-                textDecoration: 'none', borderRadius: 8, fontWeight: 500, fontSize: '0.92rem',
-              }}
-            >
-              <FileText size={15} aria-hidden="true" /> State CE rules
-            </Link>
+            <Link href="/credentials" style={secondaryLink}>Dossiers</Link>
+            <Link href="/states" style={secondaryLink}>State CE rules</Link>
           </div>
         </div>
       </main>
+
+      <footer style={{ borderTop: `1px solid ${A.ink}` }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '1.25rem 2rem', fontFamily: FIG, fontSize: 12.5, letterSpacing: '0.02em', color: A.inkMuted, fontWeight: 600 }}>
+          CE Shield · Scores are never sponsored
+        </div>
+      </footer>
     </div>
   );
 }

@@ -14,8 +14,25 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CheckCircle, Loader2, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { supabase } from '@/services/supabaseClient';
-import { colors } from '@/utils/constants';
 import CEShieldLogo from '@/components/common/CEShieldLogo';
+
+const INS = "'Instrument Sans', ui-sans-serif, system-ui, sans-serif";
+
+const inputClasses =
+  'w-full px-3 py-2 rounded-none border border-atlas-rule-minor bg-atlas-paper text-sm text-atlas-ink ' +
+  'placeholder:text-atlas-ink-muted focus:outline-none focus:border-atlas-accent focus:ring-1 focus:ring-atlas-accent';
+
+const labelClasses = 'block mb-2 text-sm font-semibold text-atlas-ink';
+
+const primaryBtn = (disabled) => ({
+  background: '#235E6B',
+  color: '#FAFAF5',
+  border: 'none',
+  fontWeight: 600,
+  cursor: disabled ? 'not-allowed' : 'pointer',
+  opacity: disabled ? 0.5 : 1,
+  transition: 'background 0.15s ease, opacity 0.15s ease',
+});
 
 export default function UpdatePasswordPage() {
   const router = useRouter();
@@ -81,24 +98,11 @@ export default function UpdatePasswordPage() {
     }
   };
 
-  const inputStyle = {
-    border: `1px solid ${colors.slateLight}`,
-    background: colors.grayLight,
-  };
-
   return (
-    <div
-      className="min-h-screen flex items-center justify-center p-4"
-      style={{ background: 'linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%)' }}
-    >
+    <div className="min-h-screen flex items-center justify-center p-4 atlas-ground">
       <div
         className="w-full max-w-md"
-        style={{
-          background: 'white',
-          padding: '2rem',
-          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.08)',
-          border: `1px solid ${colors.slateLight}`,
-        }}
+        style={{ background: '#FAFAF5', padding: '2rem', border: '1px solid #1B1A17' }}
       >
         <div className="text-center mb-6">
           <CEShieldLogo showTagline={false} centered size="xlarge" />
@@ -106,8 +110,8 @@ export default function UpdatePasswordPage() {
 
         {phase === 'checking' && (
           <div className="text-center py-6" role="status" aria-live="polite">
-            <Loader2 className="w-6 h-6 mx-auto animate-spin" style={{ color: colors.primaryBlue }} aria-hidden="true" />
-            <p className="text-sm mt-3" style={{ color: colors.textGray }}>
+            <Loader2 className="w-6 h-6 mx-auto animate-spin" style={{ color: '#235E6B' }} aria-hidden="true" />
+            <p className="text-sm mt-3" style={{ color: '#56544C' }}>
               Verifying your reset link…
             </p>
           </div>
@@ -115,12 +119,16 @@ export default function UpdatePasswordPage() {
 
         {phase === 'no-session' && (
           <div className="space-y-4">
-            <div className="text-center p-4" style={{ background: '#fef2f2', border: '1px solid #fecaca' }}>
-              <AlertCircle className="w-8 h-8 mx-auto mb-2" style={{ color: '#dc2626' }} aria-hidden="true" />
-              <h3 className="font-semibold mb-2" style={{ color: '#991b1b' }}>
+            <div
+              className="text-center p-4"
+              style={{ border: '1px dashed #1B1A17', background: '#F6F3E7' }}
+              role="alert"
+            >
+              <AlertCircle className="w-8 h-8 mx-auto mb-2" style={{ color: '#C77B2E' }} aria-hidden="true" />
+              <h3 className="font-semibold mb-2" style={{ fontFamily: INS, color: '#1B1A17' }}>
                 Reset link expired or invalid
               </h3>
-              <p className="text-sm" style={{ color: '#991b1b' }}>
+              <p className="text-sm" style={{ color: '#45433C' }}>
                 Reset links are single-use and expire quickly. Request a new
                 one from the sign-in page.
               </p>
@@ -128,24 +136,27 @@ export default function UpdatePasswordPage() {
             <button
               onClick={() => router.replace('/sign-in')}
               className="w-full py-2 px-4"
-              style={{ background: colors.primaryBlue, color: 'white', border: 'none', fontWeight: 500, cursor: 'pointer' }}
+              style={primaryBtn(false)}
             >
-              Back to Sign In
+              Back to sign in
             </button>
           </div>
         )}
 
         {phase === 'ready' && (
           <div>
-            <h2 className="text-xl font-semibold text-center mb-2" style={{ color: colors.textDark }}>
+            <h2
+              className="text-xl font-semibold text-center mb-2"
+              style={{ fontFamily: INS, color: '#1B1A17', letterSpacing: '-0.02em' }}
+            >
               Set a new password
             </h2>
-            <p className="text-center text-sm mb-6" style={{ color: colors.textGray }}>
+            <p className="text-center text-sm mb-6" style={{ color: '#56544C' }}>
               Choose a new password for your account.
             </p>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block mb-2 text-sm font-medium" style={{ color: colors.textDark }}>
+                <label className={labelClasses}>
                   <Lock className="inline w-4 h-4 mr-1" aria-hidden="true" />
                   New password
                 </label>
@@ -154,8 +165,7 @@ export default function UpdatePasswordPage() {
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-3 py-2 pr-10 focus:outline-none focus:ring-2"
-                    style={inputStyle}
+                    className={`${inputClasses} pr-10`}
                     required
                     minLength={8}
                     autoComplete="new-password"
@@ -165,14 +175,14 @@ export default function UpdatePasswordPage() {
                     onClick={() => setShowPassword(!showPassword)}
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                     className="absolute right-2 top-2.5"
-                    style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer' }}
+                    style={{ color: '#56544C', background: 'none', border: 'none', cursor: 'pointer' }}
                   >
                     {showPassword ? <EyeOff className="w-5 h-5" aria-hidden="true" /> : <Eye className="w-5 h-5" aria-hidden="true" />}
                   </button>
                 </div>
               </div>
               <div>
-                <label className="block mb-2 text-sm font-medium" style={{ color: colors.textDark }}>
+                <label className={labelClasses}>
                   <Lock className="inline w-4 h-4 mr-1" aria-hidden="true" />
                   Confirm new password
                 </label>
@@ -180,8 +190,7 @@ export default function UpdatePasswordPage() {
                   type={showPassword ? 'text' : 'password'}
                   value={confirm}
                   onChange={(e) => setConfirm(e.target.value)}
-                  className="w-full px-3 py-2 focus:outline-none focus:ring-2"
-                  style={inputStyle}
+                  className={inputClasses}
                   required
                   minLength={8}
                   autoComplete="new-password"
@@ -192,13 +201,14 @@ export default function UpdatePasswordPage() {
                 <div
                   role="alert"
                   style={{
-                    background: '#fef2f2',
-                    border: '1px solid #fecaca',
-                    color: '#dc2626',
-                    padding: '0.75rem',
+                    border: '1px dashed #1B1A17',
+                    background: '#F6F3E7',
+                    padding: '0.75rem 1rem',
                     fontSize: '0.875rem',
+                    color: '#45433C',
                   }}
                 >
+                  <strong style={{ color: '#C77B2E', fontWeight: 700, marginRight: 8 }}>Error</strong>
                   {error}
                 </div>
               )}
@@ -207,26 +217,23 @@ export default function UpdatePasswordPage() {
                 type="submit"
                 disabled={saving || !password || !confirm}
                 className="w-full py-2 px-4 flex items-center justify-center"
-                style={{
-                  background: saving || !password || !confirm ? colors.slateMedium : colors.primaryBlue,
-                  color: 'white',
-                  border: 'none',
-                  fontWeight: 500,
-                  cursor: saving || !password || !confirm ? 'not-allowed' : 'pointer',
-                  opacity: saving || !password || !confirm ? 0.5 : 1,
-                }}
+                style={primaryBtn(saving || !password || !confirm)}
               >
-                {saving ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" /> : 'Update Password'}
+                {saving ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" /> : 'Update password'}
               </button>
             </form>
           </div>
         )}
 
         {phase === 'done' && (
-          <div className="text-center p-4" style={{ background: '#f0fdf4', border: '1px solid #86efac' }} role="status">
-            <CheckCircle className="w-8 h-8 mx-auto mb-2" style={{ color: '#10b981' }} aria-hidden="true" />
-            <h3 className="font-semibold mb-2" style={{ color: '#166534' }}>Password updated</h3>
-            <p className="text-sm" style={{ color: '#166534' }}>
+          <div
+            className="text-center p-4"
+            style={{ border: '1px solid #235E6B', background: '#FAFAF5' }}
+            role="status"
+          >
+            <CheckCircle className="w-8 h-8 mx-auto mb-2" style={{ color: '#235E6B' }} aria-hidden="true" />
+            <h3 className="font-semibold mb-2" style={{ fontFamily: INS, color: '#1B1A17' }}>Password updated</h3>
+            <p className="text-sm" style={{ color: '#45433C' }}>
               Taking you to your dashboard…
             </p>
           </div>

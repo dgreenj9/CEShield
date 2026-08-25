@@ -6,8 +6,8 @@
 // so SEO still sees every lens's text content.
 
 import React, { useEffect, useState } from 'react';
-import { colors } from '@/utils/constants';
 import useTablistKeyboard from '@/hooks/useTablistKeyboard';
+import { A, FIG, ruledHead, tabularNums } from '@/components/atlas/theme';
 
 export default function LensBreakdownTabs({ lenses, initialActive }) {
   const [active, setActive] = useState(initialActive || lenses[0]?.key);
@@ -28,22 +28,7 @@ export default function LensBreakdownTabs({ lenses, initialActive }) {
 
   return (
     <section style={{ marginTop: '2.5rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-        <span
-          className="font-mono"
-          style={{
-            fontSize: '0.7rem',
-            color: colors.textGray,
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            fontWeight: 500,
-            whiteSpace: 'nowrap',
-          }}
-        >
-          Score breakdown per lens
-        </span>
-        <hr style={{ flex: 1, border: 0, borderTop: `1px solid ${colors.slateLight}`, margin: 0 }} />
-      </div>
+      <div style={{ ...ruledHead, marginBottom: 16 }}>Score anatomy · every lens</div>
 
       <div
         role="tablist"
@@ -51,7 +36,7 @@ export default function LensBreakdownTabs({ lenses, initialActive }) {
         style={{
           display: 'flex',
           flexWrap: 'wrap',
-          gap: '0.5rem',
+          gap: 6,
           marginBottom: '1.25rem',
         }}
       >
@@ -68,33 +53,24 @@ export default function LensBreakdownTabs({ lenses, initialActive }) {
               {...tabProps(l.key)}
               onClick={() => setActive(l.key)}
               style={{
-                padding: '0.45rem 0.9rem',
-                fontSize: '0.85rem',
-                fontWeight: 500,
-                border: `1px solid ${isActive ? colors.primaryBlue : colors.slateLight}`,
-                borderRadius: 9999,
-                background: isActive ? colors.primaryBlue : 'white',
-                color: isActive ? 'white' : colors.slateMedium,
+                padding: '7px 14px',
+                fontFamily: FIG,
+                fontSize: 12.5,
+                fontWeight: 700,
+                letterSpacing: '0.01em',
+                border: `1px solid ${isActive ? A.accent : A.ruleMinor}`,
+                background: isActive ? A.accent : 'transparent',
+                color: isActive ? A.onAccent : A.inkMuted,
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
                 whiteSpace: 'nowrap',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: 6,
+                gap: 8,
               }}
             >
-              {l.label}
-              <span
-                className="font-mono tabular-nums"
-                style={{
-                  fontSize: '0.7rem',
-                  fontWeight: 600,
-                  padding: '1px 6px',
-                  borderRadius: 4,
-                  background: isActive ? 'rgba(255,255,255,0.18)' : colors.grayLight,
-                  color: isActive ? 'white' : colors.textGray,
-                }}
-              >
+              {(isActive ? '● ' : '') + l.label.replace(' & Industry', '')}
+              <span style={{ fontWeight: 700, opacity: isActive ? 0.85 : 1, ...tabularNums }}>
                 {l.totalScore}
               </span>
             </button>
@@ -110,26 +86,26 @@ export default function LensBreakdownTabs({ lenses, initialActive }) {
           aria-labelledby={`lens-tab-${l.key}`}
           hidden={l.key !== active}
         >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem 2rem' }}>
             {l.dims.map((d) => (
               <div key={d.key}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 6 }}>
-                  <div style={{ fontWeight: 600, fontSize: '0.9rem', color: colors.textDark }}>
-                    {d.label}
-                    <span className="font-mono" style={{ color: colors.textGray, fontWeight: 500, fontSize: '0.72rem', marginLeft: 8 }}>
-                      ×{d.weight}%
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 5 }}>
+                  <div style={{ fontWeight: 600, fontSize: 13.5, color: A.ink }}>
+                    {d.label}{' '}
+                    <span style={{ fontFamily: FIG, color: A.inkMuted, fontWeight: 500, fontSize: 11.5, ...tabularNums }}>
+                      ×{d.weight}
                     </span>
                   </div>
-                  <div className="font-mono tabular-nums" style={{ fontSize: '0.95rem', fontWeight: 600, color: colors.textDark }}>
+                  <div style={{ fontFamily: FIG, fontSize: 13.5, fontWeight: 700, color: A.ink, ...tabularNums }}>
                     {d.value}
-                    <span style={{ color: colors.textGray, fontWeight: 400, fontSize: '0.7rem', marginLeft: 2 }}>/100</span>
+                    <span style={{ color: A.inkMuted, fontWeight: 500, fontSize: 11, marginLeft: 2 }}>/100</span>
                   </div>
                 </div>
-                <div style={{ height: 4, background: colors.slateLight, borderRadius: 999, overflow: 'hidden' }}>
-                  <div style={{ height: '100%', width: `${d.value}%`, background: colors.primaryBlue }} />
+                <div style={{ height: 4, background: A.ruleFaint }}>
+                  <div style={{ height: '100%', width: `${d.value}%`, background: A.accent }} />
                 </div>
                 {d.justification && (
-                  <p style={{ fontSize: '0.85rem', color: colors.slateMedium, marginTop: 6, lineHeight: 1.5 }}>
+                  <p style={{ fontSize: 13.5, color: A.inkBody, marginTop: 6, marginBottom: 0, lineHeight: 1.55 }}>
                     {d.justification}
                   </p>
                 )}

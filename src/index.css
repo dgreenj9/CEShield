@@ -47,16 +47,15 @@ input[type="range"] { accent-color: #235E6B; }
    feel like one product rather than a stack of templates. */
 .eyebrow {
   display: inline-block;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #6b7280;
+  letter-spacing: 0.02em;
+  color: #56544C;
 }
 
 .section-rule {
   height: 1px;
-  background: linear-gradient(to right, #E8E6DF 0%, #E8E6DF 80%, transparent 100%);
+  background: #D5D3C6;
   border: none;
 }
 
@@ -77,19 +76,19 @@ input[type="range"] { accent-color: #235E6B; }
 /* Gradient-text accent — clipped to text. Used sparingly, typically on one
    word in a hero headline for emphasis. */
 .text-gradient {
-  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 60%, #1e3a8a 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  color: #235E6B;
 }
 
 /* Subtle dot-grid texture for hero backgrounds. ~4% opacity dots on a 22px
    grid — visible enough to add texture, invisible enough to never compete
    with content. */
 .bg-dot-grid {
-  background-image: radial-gradient(circle, rgba(15, 23, 42, 0.07) 1px, transparent 1px);
-  background-size: 22px 22px;
+  background-image:
+    linear-gradient(rgba(27, 26, 23, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 26, 23, 0.045) 1px, transparent 1px),
+    linear-gradient(rgba(27, 26, 23, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 26, 23, 0.022) 1px, transparent 1px);
+  background-size: 130px 130px, 130px 130px, 26px 26px, 26px 26px;
 }
 
 /* Card hover lift — used by cert list rows and other interactive cards.
@@ -99,7 +98,7 @@ input[type="range"] { accent-color: #235E6B; }
   transition: background-color 150ms ease, box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
 }
 .card-hover:hover {
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  background-color: #F2F1E9;
 }
 
 /* Skeleton placeholder shimmer — used during async citation fetch. The
@@ -117,7 +116,6 @@ input[type="range"] { accent-color: #235E6B; }
   );
   background-size: 200% 100%;
   animation: skeleton-shimmer 1.6s ease-in-out infinite;
-  border-radius: 4px;
 }
 @media (prefers-reduced-motion: reduce) {
   .skeleton { animation: none; }
@@ -192,13 +190,13 @@ input[type="range"] { accent-color: #235E6B; }
 
 /* Consistent slider track background across all range inputs */
 input[type="range"]::-webkit-slider-runnable-track {
-  background: #e2e8f0;
-  border-radius: 4px;
+  background: #E4E2D6;
+  border-radius: 0;
   height: 4px;
 }
 input[type="range"]::-moz-range-track {
-  background: #e2e8f0;
-  border-radius: 4px;
+  background: #E4E2D6;
+  border-radius: 0;
   height: 4px;
 }
 
@@ -266,9 +264,9 @@ input[type="range"]::-moz-range-track {
 }
 .cs-dim-card {
   padding: 0.9rem 1.1rem;
-  border-left: 3px solid #3b82f6;
-  background: #f9fafb;
-  border-radius: 0 8px 8px 0;
+  border-left: 3px solid #235E6B;
+  background: #F2F1E9;
+  border-radius: 0;
 }
 .cs-dim-card-header {
   display: flex;
@@ -290,11 +288,11 @@ input[type="range"]::-moz-range-track {
 }
 .cs-frame {
   padding: 1rem 1.25rem;
-  border-radius: 10px;
+  border-radius: 0;
   border: 1px solid;
 }
-.cs-frame-blue { background: #EFF6FF; border-color: #3b82f633; }
-.cs-frame-sage { background: #E8EFEA; border-color: #2F6B4D33; }
+.cs-frame-blue { background: #F2F1E9; border-color: #D5D3C6; }
+.cs-frame-sage { background: #F6F3E7; border-color: #D5D3C6; }
 .cs-frame-eyebrow {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.7rem;
@@ -303,8 +301,8 @@ input[type="range"]::-moz-range-track {
   letter-spacing: 0.1em;
   margin-bottom: 6px;
 }
-.cs-frame-blue .cs-frame-eyebrow { color: #3b82f6; }
-.cs-frame-sage .cs-frame-eyebrow { color: #2F6B4D; }
+.cs-frame-blue .cs-frame-eyebrow { color: #235E6B; }
+.cs-frame-sage .cs-frame-eyebrow { color: #C77B2E; }
 .cs-frame-label { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
 .cs-frame p { font-size: 0.9rem; color: #475569; margin: 0; line-height: 1.55; }
 
@@ -313,14 +311,14 @@ input[type="range"]::-moz-range-track {
   display: flex;
   gap: 0.75rem;
   padding: 1rem 1.25rem;
-  border-radius: 10px;
+  border-radius: 0;
   border: 1px solid;
   align-items: flex-start;
 }
 .cs-callout > svg { flex-shrink: 0; margin-top: 2px; }
 .cs-callout p { margin: 0; line-height: 1.55; }
-.cs-callout-blue { background: #EFF6FF; border-color: #3b82f633; color: #475569; }
-.cs-callout-blue > svg { color: #3b82f6; }
+.cs-callout-blue { background: #F2F1E9; border-color: #D5D3C6; color: #45433C; }
+.cs-callout-blue > svg { color: #235E6B; }
 
 /* Public clinician CV: identity sidebar + main column. Sidebar sits left
    on desktop and sticky; stacks on top on mobile. */
@@ -386,9 +384,6 @@ input[type="range"]::-moz-range-track {
     position: sticky;
     top: 5.5rem;
     padding: 1.25rem;
-    background: white;
-    border: 1px solid #f1f5f9;
-    border-radius: 12px;
   }
 }
 
@@ -452,7 +447,7 @@ input[type="range"]::-moz-range-track {
   /* Subtle vertical dividers between columns at the widest breakpoint —
      makes the dashboard read as 3 deliberate cells instead of a row. */
   .cs-path-dims, .cs-path-picks {
-    border-left: 1px solid #f1f5f9;
+    border-left: 1px solid #D5D3C6;
     padding-left: 2rem;
     margin-left: -0.25rem;
   }
@@ -541,7 +536,6 @@ select {
   /* Cert detail panel: reduce its 1.5rem internal padding on phones. */
   .cs-detail-card {
     padding: 1rem !important;
-    border-radius: 10px !important;
   }
 }
 /* ──────────────────────────────────────────────────────────────────────────

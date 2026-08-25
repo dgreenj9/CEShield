@@ -12,8 +12,8 @@
 import React, { useMemo, useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, X, ArrowRight } from 'lucide-react';
-import { colors } from '@/utils/constants';
-import { PATHS, LENS_COLORS } from '@/utils/careerPaths';
+import { PATHS } from '@/utils/careerPaths';
+import { A, FIG, eyebrow, tabularNums } from '@/components/atlas/theme';
 
 const DISCIPLINES = ['PT', 'OT', 'SLP', 'AT', 'RN', 'RT', 'EP', 'Audiology'];
 
@@ -24,7 +24,8 @@ const certDisciplineList = (cert) =>
     .map((d) => d.trim())
     .filter(Boolean);
 
-function Chip({ active, color, children, onClick, count }) {
+// Atlas filter chip: rectangular, ink fill when active, count inline.
+function Chip({ active, children, onClick, count }) {
   return (
     <button
       type="button"
@@ -34,13 +35,14 @@ function Chip({ active, color, children, onClick, count }) {
         display: 'inline-flex',
         alignItems: 'center',
         gap: 6,
-        padding: '0.4rem 0.85rem',
-        fontSize: '0.82rem',
-        fontWeight: 500,
-        border: `1px solid ${active ? color : colors.slateLight}`,
-        borderRadius: 9999,
-        background: active ? color : 'white',
-        color: active ? 'white' : colors.slateMedium,
+        padding: '5px 11px',
+        fontFamily: FIG,
+        fontSize: 12,
+        fontWeight: 700,
+        letterSpacing: '0.01em',
+        border: `1px solid ${active ? A.ink : A.ruleMinor}`,
+        background: active ? A.ink : 'transparent',
+        color: active ? A.onAccent : A.inkMuted,
         cursor: 'pointer',
         transition: 'all 0.12s ease',
         whiteSpace: 'nowrap',
@@ -48,17 +50,7 @@ function Chip({ active, color, children, onClick, count }) {
     >
       {children}
       {typeof count === 'number' && (
-        <span
-          className="font-mono tabular-nums"
-          style={{
-            fontSize: '0.7rem',
-            fontWeight: 600,
-            padding: '1px 6px',
-            borderRadius: 4,
-            background: active ? 'rgba(255,255,255,0.2)' : colors.grayLight,
-            color: active ? 'white' : colors.textGray,
-          }}
-        >
+        <span style={{ fontWeight: 600, opacity: active ? 0.8 : 1, color: active ? A.onAccent : A.inkMuted, ...tabularNums }}>
           {count}
         </span>
       )}
@@ -155,29 +147,30 @@ export default function CredentialsBrowser({ rows }) {
   return (
     <>
       {/* Toolbar — search + chip filters. Sticky so it stays in reach as
-          the user scrolls a long results list. */}
+          the user scrolls a long results list. Opaque paper so rows scroll
+          away beneath it. */}
       <div
         style={{
           position: 'sticky',
-          top: 65,           // height of the page nav + a small gap
+          top: 61, // height of the page nav + a small gap
           zIndex: 4,
-          background: '#FAFAF6',
+          background: A.paper,
           paddingTop: 12,
           paddingBottom: 14,
           marginBottom: 18,
-          borderBottom: `1px solid ${colors.slateLight}`,
+          borderBottom: `1px solid ${A.ink}`,
         }}
       >
         <div style={{ position: 'relative' }}>
           <Search
-            size={16}
+            size={15}
             aria-hidden="true"
             style={{
               position: 'absolute',
-              left: 14,
+              left: 2,
               top: '50%',
               transform: 'translateY(-50%)',
-              color: colors.textGray,
+              color: A.inkMuted,
               pointerEvents: 'none',
             }}
           />
@@ -190,11 +183,13 @@ export default function CredentialsBrowser({ rows }) {
             aria-label="Search credentials"
             style={{
               width: '100%',
-              padding: '0.75rem 2.6rem 0.75rem 2.5rem',
-              border: `1px solid ${colors.slateLight}`,
-              borderRadius: 10,
-              background: 'white',
-              fontSize: '0.95rem',
+              padding: '8px 2.6rem 8px 26px',
+              border: 'none',
+              borderBottom: `2px solid ${A.ruleMinor}`,
+              background: 'transparent',
+              fontFamily: FIG,
+              fontSize: 'max(16px, 15px)',
+              color: A.ink,
               outline: 'none',
               boxSizing: 'border-box',
             }}
@@ -206,14 +201,14 @@ export default function CredentialsBrowser({ rows }) {
               aria-label="Clear search"
               style={{
                 position: 'absolute',
-                right: 10,
+                right: 36,
                 top: '50%',
                 transform: 'translateY(-50%)',
                 background: 'transparent',
                 border: 'none',
                 cursor: 'pointer',
                 padding: 6,
-                color: colors.textGray,
+                color: A.inkMuted,
                 display: 'flex',
               }}
             >
@@ -224,18 +219,16 @@ export default function CredentialsBrowser({ rows }) {
             aria-hidden="true"
             style={{
               position: 'absolute',
-              right: query ? 38 : 14,
+              right: 8,
               top: '50%',
               transform: 'translateY(-50%)',
-              fontSize: '0.7rem',
-              color: colors.textGray,
-              fontFamily: 'JetBrains Mono, monospace',
-              padding: '2px 6px',
-              borderRadius: 4,
-              border: `1px solid ${colors.slateLight}`,
-              background: colors.grayLight,
+              fontFamily: FIG,
+              fontSize: 11,
+              fontWeight: 600,
+              color: A.inkMuted,
+              padding: '2px 7px',
+              border: `1px solid ${A.ruleMinor}`,
               pointerEvents: 'none',
-              transition: 'right 0.12s ease',
             }}
           >
             /
@@ -245,25 +238,12 @@ export default function CredentialsBrowser({ rows }) {
         {/* Filter rows — discipline above, lens below. Compact labels on
             the left, chips wrap to the right. */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 14 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-            <span
-              className="font-mono"
-              style={{
-                fontSize: '0.66rem',
-                color: colors.textGray,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                fontWeight: 600,
-                minWidth: 78,
-              }}
-            >
-              Discipline
-            </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+            <span style={{ ...eyebrow(12), minWidth: 78 }}>Discipline</span>
             {DISCIPLINES.map((d) => (
               <Chip
                 key={d}
                 active={activeDisciplines.has(d)}
-                color={colors.primaryBlue}
                 count={disciplineCounts[d] || 0}
                 onClick={() => setActiveDisciplines(toggle(activeDisciplines, d))}
               >
@@ -271,29 +251,16 @@ export default function CredentialsBrowser({ rows }) {
               </Chip>
             ))}
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-            <span
-              className="font-mono"
-              style={{
-                fontSize: '0.66rem',
-                color: colors.textGray,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                fontWeight: 600,
-                minWidth: 78,
-              }}
-            >
-              Lens
-            </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+            <span style={{ ...eyebrow(12), minWidth: 78 }}>Lens</span>
             {Object.keys(PATHS).map((p) => (
               <Chip
                 key={p}
                 active={activeLenses.has(p)}
-                color={LENS_COLORS[p]}
                 count={lensCounts[p] || 0}
                 onClick={() => setActiveLenses(toggle(activeLenses, p))}
               >
-                {PATHS[p].label}
+                {PATHS[p].label.replace(' & Industry', '')}
               </Chip>
             ))}
           </div>
@@ -306,16 +273,14 @@ export default function CredentialsBrowser({ rows }) {
             justifyContent: 'space-between',
             alignItems: 'center',
             marginTop: 12,
-            fontSize: '0.82rem',
-            color: colors.textGray,
+            fontFamily: FIG,
+            fontSize: 12.5,
+            color: A.inkMuted,
           }}
         >
-          <span>
-            <span className="font-mono tabular-nums" style={{ fontWeight: 600, color: colors.textDark }}>
-              {filtered.length}
-            </span>{' '}
-            of{' '}
-            <span className="font-mono tabular-nums">{rows.length}</span> credentials
+          <span style={tabularNums}>
+            <strong style={{ color: A.ink, fontWeight: 700 }}>{filtered.length}</strong>
+            {' '}of {rows.length} credentials
           </span>
           {hasFilter && (
             <button
@@ -324,9 +289,11 @@ export default function CredentialsBrowser({ rows }) {
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: colors.primaryBlue,
+                color: A.accent,
                 cursor: 'pointer',
-                fontSize: '0.82rem',
+                fontFamily: FIG,
+                fontSize: 12.5,
+                fontWeight: 700,
                 padding: 0,
                 textDecoration: 'underline',
               }}
@@ -337,67 +304,61 @@ export default function CredentialsBrowser({ rows }) {
         </div>
       </div>
 
-      {/* Results list */}
+      {/* Results list — a survey table drawn with ink rules. */}
       {filtered.length > 0 ? (
-        <ol style={{
-          listStyle: 'none',
-          padding: 0,
-          margin: 0,
-          background: 'white',
-          border: `1px solid ${colors.slateLight}`,
-          borderRadius: 12,
-          overflow: 'hidden',
-        }}>
+        <ol
+          style={{
+            listStyle: 'none',
+            padding: 0,
+            margin: 0,
+            background: A.paper,
+            border: `1px solid ${A.ink}`,
+          }}
+        >
           {filtered.map((row, idx) => (
             <li
               key={row.slug}
               style={{
-                borderBottom: idx < filtered.length - 1 ? `1px solid ${colors.slateLight}` : 'none',
+                borderBottom: idx < filtered.length - 1 ? `1px solid ${A.ruleFaint}` : 'none',
               }}
             >
               <Link
                 href={`/credentials/${row.slug}`}
+                className="card-hover"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   gap: 16,
-                  padding: '0.95rem 1.25rem',
+                  padding: '0.8rem 1.1rem',
                   textDecoration: 'none',
                   color: 'inherit',
                 }}
               >
                 <span
-                  className="font-mono tabular-nums"
-                  style={{ fontSize: '0.78rem', color: colors.textGray, minWidth: 28 }}
+                  style={{ fontFamily: FIG, fontSize: 11, color: A.inkMuted, minWidth: 28, textAlign: 'right', ...tabularNums }}
                 >
                   {String(idx + 1).padStart(3, '0')}
                 </span>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: '1rem', fontWeight: 600, color: colors.textDark, letterSpacing: '-0.005em' }}>
+                  <div style={{ fontSize: 14.5, fontWeight: 600, color: A.ink, letterSpacing: '-0.01em' }}>
                     {row.cert.name}
                   </div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center', marginTop: 4 }}>
-                    <span style={{ fontSize: '0.74rem', color: colors.textGray }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center', marginTop: 3 }}>
+                    <span style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted }}>
                       {row.cert.type} · {certDisciplineList(row.cert).join(' · ')}
                     </span>
-                    <span style={{ fontSize: '0.72rem', color: colors.textGray, marginLeft: 6 }}>
-                      <span className="font-mono tabular-nums">{row.count}</span> citations
+                    <span style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, ...tabularNums }}>
+                      · {row.count} citations
                     </span>
                   </div>
                 </div>
-                <div style={{ display: 'flex', gap: 4, flexShrink: 0 }} aria-label={`Scored on ${row.lenses.length} lens${row.lenses.length === 1 ? '' : 'es'}`}>
-                  {row.lenses.map((p) => (
-                    <span
-                      key={p}
-                      title={PATHS[p]?.label}
-                      style={{
-                        width: 8, height: 8, borderRadius: '50%',
-                        background: LENS_COLORS[p],
-                      }}
-                    />
-                  ))}
-                </div>
-                <ArrowRight size={16} aria-hidden="true" style={{ color: colors.textGray, flexShrink: 0 }} />
+                <span
+                  style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, flexShrink: 0, whiteSpace: 'nowrap', ...tabularNums }}
+                  title={row.lenses.map((p) => PATHS[p]?.label).filter(Boolean).join(' · ')}
+                >
+                  {row.lenses.length} lens{row.lenses.length === 1 ? '' : 'es'}
+                </span>
+                <ArrowRight size={15} aria-hidden="true" style={{ color: A.accent, flexShrink: 0 }} />
               </Link>
             </li>
           ))}
@@ -406,17 +367,16 @@ export default function CredentialsBrowser({ rows }) {
         <div
           style={{
             padding: '2.5rem 1.5rem',
-            background: 'white',
-            border: `1px dashed ${colors.slateLight}`,
-            borderRadius: 12,
+            background: A.notice,
+            border: `1px dashed ${A.ink}`,
             textAlign: 'center',
-            color: colors.textGray,
+            color: A.inkMuted,
           }}
         >
-          <div style={{ fontWeight: 600, color: colors.textDark, marginBottom: 6 }}>
-            No credentials match these filters.
+          <div style={{ fontWeight: 600, color: A.ink, marginBottom: 6 }}>
+            Nothing in the library matches.
           </div>
-          <div style={{ fontSize: '0.88rem' }}>
+          <div style={{ fontSize: 14 }}>
             Try removing a chip, or{' '}
             <button
               type="button"
@@ -424,11 +384,12 @@ export default function CredentialsBrowser({ rows }) {
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: colors.primaryBlue,
+                color: A.accent,
                 cursor: 'pointer',
                 padding: 0,
                 textDecoration: 'underline',
                 font: 'inherit',
+                fontWeight: 700,
               }}
             >
               clear all filters

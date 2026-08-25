@@ -1,7 +1,7 @@
 import React from 'react';
 import { ExternalLink, BadgeCheck } from 'lucide-react';
-import { colors } from '../../utils/constants';
 import catalog from '../../data/courseCatalog.json';
+import { A, FIG, INS, tabularNums } from '../atlas/theme';
 
 // Course recommendations for compliance gaps.
 //
@@ -48,48 +48,43 @@ export default function CourseRecommendations({
   return (
     <section style={{ marginTop: '1.5rem' }}>
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, marginBottom: 10 }}>
-        <h3 style={{ fontSize: '1rem', fontWeight: 600, margin: 0, color: colors.textDark }}>
+        <h3 style={{ fontFamily: INS, fontSize: 17, fontWeight: 600, letterSpacing: '-0.02em', margin: 0, color: A.ink }}>
           Courses that close this gap
         </h3>
         {anySponsored && (
-          <span style={{ fontSize: '0.72rem', color: colors.textGray }}>
-            Some links below are referral links — we may earn a fee. They never
+          <span style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted }}>
+            Some links below are referral links; we may earn a fee. They never
             affect credential scores.
           </span>
         )}
       </div>
-      <ul style={{
-        listStyle: 'none', padding: 0, margin: 0,
-        border: `1px solid ${colors.slateLight}`, borderRadius: 10,
-        overflow: 'hidden', background: 'white',
-      }}>
+      <ul style={{ listStyle: 'none', padding: 0, margin: 0, border: `1px solid ${A.ink}`, background: A.paper }}>
         {courses.map((c, i) => (
           <li
             key={c.id}
             style={{
               display: 'flex', alignItems: 'center', gap: 12,
               padding: '0.8rem 1rem',
-              borderBottom: i < courses.length - 1 ? `1px solid ${colors.slateLight}` : 'none',
+              borderBottom: i < courses.length - 1 ? `1px solid ${A.ruleFaint}` : 'none',
             }}
           >
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontWeight: 600, fontSize: '0.92rem', color: colors.textDark }}>
+              <div style={{ fontWeight: 600, fontSize: 14, color: A.ink }}>
                 {c.title}
               </div>
-              <div style={{ fontSize: '0.78rem', color: colors.textGray, marginTop: 2, display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
+              <div style={{ fontFamily: FIG, fontSize: 12, color: A.inkMuted, marginTop: 2, display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
                 <span>{c.provider}</span>
-                <span className="font-mono tabular-nums">{c.hours} hr</span>
+                <span style={tabularNums}>{c.hours} hr</span>
                 {typeof c.priceUsd === 'number' && (
-                  <span className="font-mono tabular-nums">${c.priceUsd}</span>
+                  <span style={tabularNums}>${c.priceUsd}</span>
                 )}
                 <span>{c.format}</span>
                 {c.sponsored && (
                   <span
                     style={{
-                      fontSize: '0.66rem', fontWeight: 600,
-                      padding: '1px 7px', borderRadius: 999,
-                      background: colors.grayLight, color: colors.textGray,
-                      textTransform: 'uppercase', letterSpacing: '0.04em',
+                      fontFamily: FIG, fontSize: 10.5, fontWeight: 700,
+                      padding: '1px 7px', border: `1px solid ${A.ruleMinor}`,
+                      color: A.inkMuted, letterSpacing: '0.02em',
                     }}
                   >
                     Referral link
@@ -105,17 +100,17 @@ export default function CourseRecommendations({
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 6,
                 padding: '0.45rem 0.9rem', flexShrink: 0,
-                background: colors.primaryBlue, color: 'white',
-                textDecoration: 'none', borderRadius: 6,
-                fontSize: '0.82rem', fontWeight: 500, whiteSpace: 'nowrap',
+                background: A.accent, color: A.onAccent,
+                textDecoration: 'none', fontFamily: FIG,
+                fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap',
               }}
             >
-              View course <ExternalLink size={13} aria-hidden="true" />
+              View the course <ExternalLink size={13} aria-hidden="true" />
             </a>
           </li>
         ))}
       </ul>
-      <p style={{ fontSize: '0.72rem', color: colors.textGray, marginTop: 8, display: 'flex', alignItems: 'center', gap: 5 }}>
+      <p style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, marginTop: 8, display: 'flex', alignItems: 'center', gap: 5 }}>
         <BadgeCheck size={13} aria-hidden="true" style={{ flexShrink: 0 }} />
         Courses listed here are vetted to satisfy the stated requirement.
         Always confirm category acceptance with your board before purchase.

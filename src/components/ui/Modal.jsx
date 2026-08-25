@@ -105,18 +105,18 @@ export default function Modal({
         aria-modal="true"
         aria-labelledby={titleId}
         tabIndex={-1}
-        className={`bg-white rounded-lg shadow-floating w-full ${sizeClass} max-h-[90vh] overflow-y-auto outline-none animate-slide-up`}
+        className={`bg-atlas-paper rounded-none border border-atlas-ink w-full ${sizeClass} max-h-[90vh] overflow-y-auto outline-none animate-slide-up`}
       >
         {(title || onClose) && (
-          <div className="flex items-start justify-between px-5 py-4 border-b border-slate-light">
+          <div className="flex items-start justify-between px-5 py-4 border-b border-atlas-ink">
             <div>
               {title ? (
-                <h2 id={titleId} className="text-lg font-semibold text-ink-dark m-0">
+                <h2 id={titleId} className="font-display text-lg font-semibold text-atlas-ink m-0">
                   {title}
                 </h2>
               ) : null}
               {description ? (
-                <p className="text-sm text-ink-gray mt-1">{description}</p>
+                <p className="text-sm text-atlas-ink-muted mt-1">{description}</p>
               ) : null}
             </div>
             {onClose ? (
@@ -124,7 +124,7 @@ export default function Modal({
                 type="button"
                 onClick={onClose}
                 aria-label="Close dialog"
-                className="text-ink-gray hover:text-ink-dark p-1 -mr-1 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
+                className="text-atlas-ink-muted hover:text-atlas-ink p-1 -mr-1 rounded-none focus:outline-none focus-visible:ring-2 focus-visible:ring-atlas-accent"
               >
                 <X size={20} />
               </button>

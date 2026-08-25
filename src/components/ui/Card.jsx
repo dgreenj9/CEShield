@@ -1,5 +1,7 @@
 import React from 'react';
 
+// Atlas card: a paper panel drawn with a 1px ink rule. Zero radius, zero
+// shadow — structure comes from the rule, hierarchy from type.
 const PADDING = { none: '', sm: 'p-3', md: 'p-4', lg: 'p-6' };
 
 export default function Card({
@@ -12,9 +14,9 @@ export default function Card({
   ...rest
 }) {
   const classes = [
-    'bg-white rounded-lg',
-    bordered ? 'border border-slate-light' : '',
-    hoverable ? 'transition-shadow hover:shadow-elev' : 'shadow-card',
+    'bg-atlas-paper rounded-none',
+    bordered ? 'border border-atlas-ink' : '',
+    hoverable ? 'transition-colors hover:bg-atlas-band' : '',
     PADDING[padding] || PADDING.md,
     className,
   ]
@@ -32,5 +34,5 @@ export const CardHeader = ({ children, className = '' }) => (
 );
 
 export const CardTitle = ({ children, className = '' }) => (
-  <h3 className={`text-base font-semibold text-ink-dark m-0 ${className}`}>{children}</h3>
+  <h3 className={`font-display text-base font-semibold text-atlas-ink m-0 ${className}`}>{children}</h3>
 );

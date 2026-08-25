@@ -33,12 +33,13 @@ export default class ErrorBoundary extends React.Component {
     return (
       <div
         role="alert"
-        className="m-8 p-6 bg-red-50 border border-red-200 rounded-lg text-sm"
+        className="m-8 p-6 text-sm"
+        style={{ background: '#F6F3E7', border: '1px dashed #1B1A17' }}
       >
-        <h2 className="text-lg font-semibold text-red-700 m-0 mb-2">
+        <h2 className="font-display text-lg font-semibold m-0 mb-2">
           Something went wrong.
         </h2>
-        <p className="text-red-700 mb-4">
+        <p className="mb-4" style={{ color: "#45433C" }}>
           The page hit an unexpected error and couldn&rsquo;t render. Try
           refreshing &mdash; if it keeps happening, let us know what you were
           doing.
@@ -46,7 +47,8 @@ export default class ErrorBoundary extends React.Component {
         <button
           type="button"
           onClick={() => window.location.reload()}
-          className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2"
+          className="px-4 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+          style={{ background: '#235E6B', color: '#FAFAF5', fontWeight: 600 }}
         >
           Reload page
         </button>

@@ -1,27 +1,30 @@
 import React from 'react';
-import { colors } from '../../utils/constants';
 import Modal from '../common/Modal';
+import { A, FIG, INS } from '../atlas/theme';
 
+// Destructive confirmation. Atlas has no red — ochre is the warning voice.
 const DeleteConfirmationModal = ({ course, onConfirm, onClose }) => (
   <Modal onClose={onClose}>
-    <h3 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Confirm Deletion</h3>
-    <p className="mb-6" style={{ color: colors.textGray }}>
-      Are you sure you want to delete the course "{course.title}"? This action cannot be undone.
+    <h3 style={{ fontFamily: INS, fontWeight: 600, fontSize: 22, letterSpacing: '-0.02em', color: A.ink, margin: '0 0 0.9rem' }}>
+      Delete this course?
+    </h3>
+    <p style={{ fontFamily: FIG, fontSize: 14.5, color: A.inkBody, lineHeight: 1.55, margin: '0 0 1.5rem' }}>
+      &ldquo;{course.title}&rdquo; will be removed from your log. This cannot be undone.
     </p>
-    <div className="flex justify-end space-x-3">
+    <div className="flex justify-end gap-2.5">
       <button
+        type="button"
         onClick={onClose}
-        className="px-4 py-2"
-        style={{ color: colors.textDark, background: colors.slateLight, border: 'none', cursor: 'pointer' }}
+        style={{ fontFamily: FIG, fontSize: 13.5, fontWeight: 600, padding: '9px 16px', color: A.ink, background: 'transparent', border: `1px solid ${A.ink}`, cursor: 'pointer' }}
       >
         Cancel
       </button>
       <button
+        type="button"
         onClick={() => { onConfirm(course.id); onClose(); }}
-        className="px-4 py-2"
-        style={{ background: '#dc2626', color: 'white', border: 'none', cursor: 'pointer' }}
+        style={{ fontFamily: FIG, fontSize: 13.5, fontWeight: 600, padding: '9px 16px', background: A.warn, color: A.onAccent, border: `1px solid ${A.warn}`, cursor: 'pointer' }}
       >
-        Delete Course
+        Delete the course
       </button>
     </div>
   </Modal>

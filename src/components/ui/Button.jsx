@@ -1,16 +1,17 @@
 import React, { forwardRef } from 'react';
 
-// Concentric variants — chosen for the cases the app actually has, not all
-// possible variants. Add variants when a real usage shows up, not preemptively.
+// Atlas buttons: rectangular (zero radius), no shadows. Primary = petrol
+// fill; secondary = 1px ink border on transparent; ghost = quiet text;
+// danger = ochre fill (Atlas has no red — ochre is the single warning voice).
 const VARIANTS = {
   primary:
-    'bg-brand-blue text-white hover:bg-brand-blue-strong active:bg-brand-blue-strong shadow-sm',
+    'bg-atlas-accent text-atlas-on-accent hover:bg-atlas-accent-hover active:bg-atlas-accent-hover',
   secondary:
-    'bg-white text-brand-blue border border-brand-blue hover:bg-brand-light-blue',
+    'bg-transparent text-atlas-ink border border-atlas-ink hover:bg-atlas-band',
   ghost:
-    'bg-transparent text-slate-medium hover:bg-slate-light',
+    'bg-transparent text-atlas-ink-muted hover:bg-atlas-band',
   danger:
-    'bg-red-600 text-white hover:bg-red-700 shadow-sm',
+    'bg-atlas-warn text-atlas-on-accent hover:opacity-90',
 };
 
 const SIZES = {
@@ -20,9 +21,9 @@ const SIZES = {
 };
 
 const baseClasses =
-  'inline-flex items-center justify-center gap-2 font-medium rounded-md ' +
+  'inline-flex items-center justify-center gap-2 font-semibold rounded-none ' +
   'transition-colors duration-150 ' +
-  'focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 ' +
+  'focus:outline-none focus-visible:ring-2 focus-visible:ring-atlas-accent focus-visible:ring-offset-2 ' +
   'disabled:opacity-50 disabled:cursor-not-allowed';
 
 const Button = forwardRef(function Button(

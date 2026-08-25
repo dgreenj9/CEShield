@@ -1,19 +1,12 @@
 // /methodology — Server Component. Editorial doc layout: sticky scroll-spy
-// TOC on the left, prose on the right.
-//
-// Design rules:
-//   - Hero is single-column (no stat panel) — methodology is philosophy,
-//     not data. Stats live on /credentials and /about where they pay off.
-//   - Each section uses a numbered eyebrow ("01 ─────") + h2, not the
-//     title-as-eyebrow + h2 duplicate that read as noise before.
-//   - TOC highlights the section currently in view (scroll-spy).
-//   - Prose is capped at a readable measure inside a wider column —
-//     callouts/cards can break out to fill the column for emphasis.
+// TOC on the left, prose on the right. Atlas: reads like a published
+// survey — numbered sections, ink rules, quiet labels, petrol accents.
+// The conflict-of-interest section is the trust centerpiece.
 
 import Link from 'next/link';
 import { BookOpen, AlertCircle } from 'lucide-react';
-import { colors } from '@/utils/constants';
 import PublicNav from '@/components/layout/PublicNav';
+import { A, INS, eyebrow, tabularNums } from '@/components/atlas/theme';
 import { METHODOLOGY_CONTENT } from '@/utils/certificationCitationMap';
 import TOC from './_TOC';
 import siteStats from '@/data/siteStats.json';
@@ -70,54 +63,49 @@ const SECTIONS = [
   { title: 'Authors' },
 ].map((s, i) => ({ ...s, id: slugify(s.title), number: i + 1 }));
 
-// Numbered section header. The eyebrow shows the section number + a hairline
-// rule — clean editorial rhythm. The h2 holds the actual section title once.
+// Atlas tier colors for the score-tier list. The content module carries
+// legacy hex values — remap by tier name so color stays within the
+// accent family (and Limited stays readable as text).
+const TIER_TEXT_COLORS = {
+  strong: A.accent,
+  good: A.accentMid,
+  moderate: A.warn,
+  limited: A.inkMuted,
+};
+const tierTextColor = (name) =>
+  TIER_TEXT_COLORS[String(name).toLowerCase().split(' ')[0]] || A.ink;
+
+// Numbered section header: section number + a hairline rule, then the
+// title once, in the display face.
 function Section({ section, children }) {
   return (
     <section
       id={section.id}
-      style={{
-        marginTop: '3.5rem',
-        scrollMarginTop: '5rem',
-      }}
+      style={{ marginTop: '3.5rem', scrollMarginTop: '5rem' }}
     >
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 14,
-          marginBottom: 12,
-        }}
-      >
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 12 }}>
         <span
-          className="font-mono tabular-nums"
           style={{
-            fontSize: '0.72rem',
-            color: colors.textGray,
-            letterSpacing: '0.16em',
+            fontSize: '0.8rem',
+            color: A.inkMuted,
             fontWeight: 600,
+            ...tabularNums,
           }}
         >
           {String(section.number).padStart(2, '0')}
         </span>
-        <hr
-          style={{
-            flex: 1,
-            border: 0,
-            borderTop: `1px solid ${colors.slateLight}`,
-            margin: 0,
-          }}
-        />
+        <hr style={{ flex: 1, border: 0, borderTop: `1px solid ${A.ruleMinor}`, margin: 0 }} />
       </div>
       <h2
         style={{
-          fontSize: '1.5rem',
+          fontFamily: INS,
+          fontSize: '1.6rem',
           fontWeight: 600,
-          color: colors.textDark,
+          color: A.ink,
           margin: 0,
           marginBottom: '1.25rem',
-          letterSpacing: '-0.02em',
-          lineHeight: 1.2,
+          letterSpacing: '-0.025em',
+          lineHeight: 1.15,
         }}
       >
         {section.title}
@@ -127,55 +115,40 @@ function Section({ section, children }) {
   );
 }
 
+const proseLink = { color: A.accent, textDecoration: 'underline', textUnderlineOffset: 2 };
+
 export default function MethodologyPage() {
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        backgroundColor: '#FAFAF6',
-        backgroundImage: 'radial-gradient(circle, rgba(15, 23, 42, 0.05) 1px, transparent 1px)',
-        backgroundSize: '22px 22px',
-        color: colors.textDark,
-      }}
-    >
+    <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink }}>
       <PublicNav currentPath="/methodology" />
 
       <main className="cs-page-pad" style={{
-        maxWidth: 1200,
+        maxWidth: 1280,
         margin: '0 auto',
         padding: '3rem 2rem 6rem',
         lineHeight: 1.65,
       }}>
-        {/* Hero — single column, left-anchored. No stat panel. Methodology
-            is philosophy; numbers live on /credentials and /about. */}
+        {/* Hero — single column, left-anchored. Methodology is philosophy;
+            numbers live on /credentials and /about. */}
         <header style={{ marginBottom: '2.5rem', maxWidth: 760 }}>
-          <div
-            className="font-mono"
-            style={{
-              fontSize: '0.72rem',
-              color: colors.primaryPurple,
-              letterSpacing: '0.14em',
-              textTransform: 'uppercase',
-              fontWeight: 600,
-              marginBottom: 12,
-            }}
-          >
-            {METHODOLOGY_CONTENT.version} · Last reviewed March 2026
+          <div style={{ ...eyebrow(), marginBottom: 12 }}>
+            {METHODOLOGY_CONTENT.version} · last reviewed March 2026
           </div>
           <h1
             className="cs-h1-clamp"
             style={{
-              fontSize: '2.25rem',
+              fontFamily: INS,
+              fontSize: '2.5rem',
               fontWeight: 600,
-              color: colors.textDark,
+              color: A.ink,
               margin: 0,
-              letterSpacing: '-0.02em',
-              lineHeight: 1.15,
+              letterSpacing: '-0.03em',
+              lineHeight: 1.05,
             }}
           >
             {METHODOLOGY_CONTENT.title}
           </h1>
-          <p style={{ fontSize: '1.08rem', marginTop: '1rem', color: colors.slateMedium }}>
+          <p style={{ fontSize: '1.08rem', marginTop: '1rem', color: A.inkBody }}>
             {METHODOLOGY_CONTENT.overview}
           </p>
         </header>
@@ -189,14 +162,14 @@ export default function MethodologyPage() {
                 CE Shield&rsquo;s certification rankings are built on a curated
                 literature review conducted in collaboration with research
                 librarians. Below: the evidence-type composition of the
-                citation library — what kind of studies sit behind the
+                citation library, the kind of studies that sit behind the
                 scores.
               </p>
               <ul className="cs-bullet-list">
                 {evidenceBreakdown.map(([type, n]) => (
                   <li key={type}>
                     <strong>{EVIDENCE_LABELS[type] || type}:</strong>{' '}
-                    <span className="font-mono tabular-nums">{n.toLocaleString()}</span> citations
+                    <span className="tabular-nums">{n.toLocaleString()}</span> citations
                   </li>
                 ))}
               </ul>
@@ -206,32 +179,32 @@ export default function MethodologyPage() {
               <p>
                 Every credential is scored 0&ndash;100 on six dimensions per
                 lens. A weighted sum produces the displayed score. Weights
-                are user-adjustable in the matrix &mdash; the values below
-                are the defaults for the clinical lens.
+                are user-adjustable in the matrix; the values below are the
+                defaults for the clinical lens.
               </p>
               <div className="cs-bleed cs-dim-list">
                 {METHODOLOGY_CONTENT.scoringComponents.map((c) => (
                   <div key={c.dimensionKey} className="cs-dim-card">
                     <div className="cs-dim-card-header">
-                      <h3 style={{ fontSize: '0.98rem', fontWeight: 600, margin: 0 }}>
+                      <h3 style={{ fontFamily: INS, fontSize: '1rem', fontWeight: 600, margin: 0, letterSpacing: '-0.01em' }}>
                         {c.name}
                       </h3>
                       <span
-                        className="font-mono tabular-nums"
                         style={{
-                          color: colors.primaryPurple,
-                          fontWeight: 600,
-                          fontSize: '0.78rem',
+                          color: A.accent,
+                          fontWeight: 700,
+                          fontSize: '0.8rem',
                           whiteSpace: 'nowrap',
+                          ...tabularNums,
                         }}
                       >
-                        Default {c.defaultWeight}
+                        ×{c.defaultWeight}
                       </span>
                     </div>
-                    <p style={{ marginTop: 6, marginBottom: 8, color: colors.slateMedium, fontSize: '0.92rem' }}>
+                    <p style={{ marginTop: 6, marginBottom: 8, color: A.inkBody, fontSize: '0.92rem' }}>
                       {c.description}
                     </p>
-                    <ul style={{ margin: 0, paddingLeft: '1.1rem', color: colors.textGray, fontSize: '0.85rem' }}>
+                    <ul style={{ margin: 0, paddingLeft: '1.1rem', color: A.inkMuted, fontSize: '0.85rem' }}>
                       {c.criteria.map((cr) => (<li key={cr}>{cr}</li>))}
                     </ul>
                   </div>
@@ -248,22 +221,22 @@ export default function MethodologyPage() {
               </p>
               <div className="cs-bleed cs-frame-grid">
                 <div className="cs-frame cs-frame-blue">
-                  <div className="cs-frame-eyebrow">Clinical-intervention frame</div>
+                  <div className="cs-frame-eyebrow" style={{ letterSpacing: '0.02em', textTransform: 'none', fontSize: '0.8rem' }}>Clinical-intervention frame</div>
                   <div className="cs-frame-label">Clinical · Business · Academic Clinical</div>
                   <p>
                     Evaluates credentials by the published clinical-outcome
                     evidence for the underlying intervention. Source:
                     peer-reviewed RCTs, systematic reviews, meta-analyses,
-                    clinical guidelines &mdash; curated by research
-                    librarians across two passes (Dec 2025, Mar 2026).
+                    clinical guidelines, curated by research librarians
+                    across two passes (Dec 2025, Mar 2026).
                   </p>
                 </div>
                 <div className="cs-frame cs-frame-sage">
-                  <div className="cs-frame-eyebrow">Career-outcome frame</div>
+                  <div className="cs-frame-eyebrow" style={{ letterSpacing: '0.02em', textTransform: 'none', fontSize: '0.8rem' }}>Career-outcome frame</div>
                   <div className="cs-frame-label">Research · HealthTech &amp; Industry</div>
                   <p>
                     Evaluates credentials by the documented career outcomes
-                    for people who hold them &mdash; grant-funding rates,
+                    for people who hold them: grant-funding rates,
                     time-to-PI, publication output, industry placement,
                     salary premiums. Sources include peer-reviewed
                     career-outcome studies (JAMIA, Academic Medicine,
@@ -281,8 +254,8 @@ export default function MethodologyPage() {
                 Research path (K-to-R conversion data, publication output).
                 Epic certification inverts: poor on Clinical, strong on
                 HealthTech. Forcing both into one rubric would either
-                inflate the wrong cells or compress the right ones
-                &mdash; per-path scoring keeps the evaluation honest.
+                inflate the wrong cells or compress the right ones;
+                per-path scoring keeps the evaluation honest.
               </p>
               <p>
                 Citations are tagged by evidence type using a deterministic
@@ -302,7 +275,7 @@ export default function MethodologyPage() {
               <ul className="cs-bullet-list">
                 {METHODOLOGY_CONTENT.scoringTiers.map((t) => (
                   <li key={t.tier}>
-                    <strong style={{ color: t.color }}>{t.tier} ({t.range}):</strong>{' '}
+                    <strong style={{ color: tierTextColor(t.tier) }}>{t.tier} ({t.range}):</strong>{' '}
                     {t.description}
                   </li>
                 ))}
@@ -318,8 +291,8 @@ export default function MethodologyPage() {
             </Section>
 
             <Section section={SECTIONS[5]}>
-              <div className="cs-callout cs-callout-blue">
-                <AlertCircle size={20} aria-hidden="true" />
+              <div className="cs-callout cs-callout-blue" style={{ border: `1px dashed ${A.ink}`, background: A.notice }}>
+                <AlertCircle size={20} aria-hidden="true" style={{ color: A.warn }} />
                 <p>
                   Rankings are tools for clinical reasoning, not
                   endorsements. They describe the evidence base for an
@@ -334,6 +307,18 @@ export default function MethodologyPage() {
             </Section>
 
             <Section section={SECTIONS[6]}>
+              {/* The trust centerpiece — banded, ink-ruled, with the $0
+                  declaration carried over from the landing. */}
+              <div className="cs-bleed" style={{ background: A.band, border: `1px solid ${A.ink}`, padding: '1.5rem 1.75rem', marginBottom: '1.25rem' }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 18, flexWrap: 'wrap' }}>
+                  <span style={{ fontFamily: INS, fontSize: '3rem', fontWeight: 600, lineHeight: 1, letterSpacing: '-0.04em', color: A.ink, ...tabularNums }}>
+                    $0
+                  </span>
+                  <span style={{ color: A.inkBody, fontSize: '0.98rem' }}>
+                    from the programs we score. No ads. No sponsored rankings.
+                  </span>
+                </div>
+              </div>
               <p>
                 <strong>CE Shield receives no compensation from any
                 certification program, training organization, or vendor.</strong>{' '}
@@ -360,10 +345,10 @@ export default function MethodologyPage() {
                 experience, payer/policy literature, and the
                 librarian-curated citation library referenced above.
               </p>
-              <p style={{ color: colors.textGray, fontSize: '0.92rem' }}>
+              <p style={{ color: A.inkMuted, fontSize: '0.92rem' }}>
                 Disagree with a score, find a missing citation, or spot an
-                error? Corrections welcome &mdash; this page versions on
-                every release.
+                error? Corrections welcome. This page versions on every
+                release.
               </p>
             </Section>
 
@@ -371,8 +356,8 @@ export default function MethodologyPage() {
               style={{
                 marginTop: '3.5rem',
                 paddingTop: '1.25rem',
-                borderTop: `1px solid ${colors.slateLight}`,
-                color: colors.textGray,
+                borderTop: `1px solid ${A.ink}`,
+                color: A.inkMuted,
                 fontSize: '0.88rem',
                 display: 'flex',
                 alignItems: 'center',
@@ -380,7 +365,7 @@ export default function MethodologyPage() {
                 flexWrap: 'wrap',
               }}
             >
-              <BookOpen size={14} aria-hidden="true" />
+              <BookOpen size={14} aria-hidden="true" style={{ color: A.accent }} />
               {METHODOLOGY_CONTENT.dataSource}
             </div>
           </article>

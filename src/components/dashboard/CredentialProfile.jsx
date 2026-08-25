@@ -1,14 +1,12 @@
 import React, { useMemo, useState } from 'react';
-import { Search, X, Plus, ExternalLink, Award, Check } from 'lucide-react';
-import { colors } from '../../utils/constants';
+import { Search, X, Plus, ExternalLink, Award } from 'lucide-react';
 import { Link } from '../../router';
 import { useUserData } from '../../contexts/UserDataContext';
 import { certifications as certData } from '../../utils/certificationData';
 import { getLibraryMetaForCertification } from '../../utils/citationsLibrary';
-import {
-  PATHS, PATH_ORDER, getPathDefaultWeights, scoreColor,
-} from '../../utils/careerPaths';
+import { PATHS, PATH_ORDER, getPathDefaultWeights } from '../../utils/careerPaths';
 import { computeScore, certScoresForPath } from '../../utils/certScoring';
+import { A, FIG, INS, tierColor, tabularNums } from '../atlas/theme';
 
 // Best lens for a credential = the path (default weights) it scores highest on.
 // Gives the CV a one-glance "where this credential pays off" signal.
@@ -23,10 +21,12 @@ const bestLensFor = (cert) => {
   return best;
 };
 
+// Status marks match the Explore claims card: ● earned petrol / ◐ in
+// progress ochre / ○ planned stone.
 const STATUS_META = {
-  earned:      { label: 'Earned',       chip: '#2F6B4D', bg: '#E8EFEA' },
-  in_progress: { label: 'In progress',  chip: '#8A6332', bg: '#F6F0E5' },
-  planned:     { label: 'Planned',      chip: '#3b82f6', bg: '#e0f2fe' },
+  earned: { label: 'Earned', mark: '●', color: A.accent },
+  in_progress: { label: 'In progress', mark: '◐', color: A.warn },
+  planned: { label: 'Planned', mark: '○', color: A.dim },
 };
 const STATUS_ORDER = ['earned', 'in_progress', 'planned'];
 
@@ -85,124 +85,129 @@ export default function CredentialProfile() {
   };
 
   return (
-    <div
-      style={{
-        background: 'white',
-        border: `1px solid ${colors.slateLight}`,
-        borderRadius: 12,
-        padding: '1.5rem',
-      }}
-    >
-      <div className="flex items-center justify-between flex-wrap gap-2" style={{ marginBottom: '0.5rem' }}>
-        <h2 className="text-base font-semibold" style={{ color: colors.textDark, margin: 0 }}>
-          Your credential profile
+    <div style={{ background: A.paper, border: `1px solid ${A.ink}` }}>
+      {/* Head strip */}
+      <div style={{ padding: '12px 1.5rem', borderBottom: `1px solid ${A.ink}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10 }}>
+        <h2 style={{ fontFamily: INS, fontWeight: 600, fontSize: 18, letterSpacing: '-0.02em', color: A.ink, margin: 0 }}>
+          Your claims on the field
         </h2>
         <button
           type="button"
           onClick={() => setShowSearch((s) => !s)}
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 6,
-            padding: '0.45rem 0.9rem', borderRadius: 8,
-            background: showSearch ? colors.grayLight : colors.primaryBlue,
-            color: showSearch ? colors.slateMedium : 'white',
-            border: showSearch ? `1px solid ${colors.slateLight}` : 'none',
-            fontSize: '0.85rem', fontWeight: 500, cursor: 'pointer',
+            padding: '0.45rem 0.9rem',
+            background: showSearch ? 'transparent' : A.accent,
+            color: showSearch ? A.ink : A.onAccent,
+            border: `1px solid ${showSearch ? A.ink : A.accent}`,
+            fontFamily: FIG, fontSize: 13, fontWeight: 600, cursor: 'pointer',
           }}
         >
           {showSearch ? <X size={14} aria-hidden="true" /> : <Plus size={14} aria-hidden="true" />}
-          {showSearch ? 'Close' : 'Add a credential'}
+          {showSearch ? 'Close' : 'Claim a credential'}
         </button>
       </div>
 
-      {/* CV snapshot strip */}
-      <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
-        <Snapshot value={earnedCount} label={`credential${earnedCount === 1 ? '' : 's'} earned`} />
-        <Snapshot value={byStatus.in_progress.length} label="in progress" />
-        <Snapshot value={Math.round(totalCeHours)} label="CE hours logged" />
-      </div>
-
-      {/* Search / add */}
-      {showSearch && (
-        <div style={{ marginBottom: '1.25rem' }}>
-          <div style={{ position: 'relative' }}>
-            <Search
-              size={16}
-              aria-hidden="true"
-              style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: colors.textGray, pointerEvents: 'none' }}
-            />
-            <input
-              type="search"
-              autoFocus
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search 143 credentials — e.g. OCS, pelvic, POCUS…"
-              aria-label="Search credentials to add"
-              style={{
-                width: '100%', padding: '0.7rem 1rem 0.7rem 2.4rem',
-                border: `1px solid ${colors.slateLight}`, borderRadius: 10,
-                background: colors.grayLight, fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box',
-              }}
-            />
-          </div>
-          {results.length > 0 && (
-            <ul style={{ listStyle: 'none', padding: 0, margin: '0.5rem 0 0', border: `1px solid ${colors.slateLight}`, borderRadius: 10, overflow: 'hidden' }}>
-              {results.map((c) => (
-                <li key={c.name}>
-                  <button
-                    type="button"
-                    onClick={() => addCredential(c.name)}
-                    disabled={saving}
-                    style={{
-                      width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 10,
-                      padding: '0.6rem 0.85rem', background: 'white', border: 'none',
-                      borderBottom: `1px solid ${colors.slateLight}`, cursor: 'pointer',
-                    }}
-                  >
-                    <Plus size={14} aria-hidden="true" style={{ color: colors.primaryBlue, flexShrink: 0 }} />
-                    <span style={{ flex: 1, minWidth: 0 }}>
-                      <span style={{ fontSize: '0.9rem', fontWeight: 600, color: colors.textDark }}>{c.name}</span>
-                      <span style={{ fontSize: '0.76rem', color: colors.textGray, marginLeft: 8 }}>{c.type}</span>
-                    </span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-          {query.trim() && results.length === 0 && (
-            <p style={{ fontSize: '0.85rem', color: colors.textGray, marginTop: 8 }}>
-              No matching credential not already on your profile. The matrix has 143 — try a shorter term.
-            </p>
-          )}
+      <div style={{ padding: '1.25rem 1.5rem' }}>
+        {/* CV snapshot strip */}
+        <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
+          <Snapshot value={earnedCount} label={`credential${earnedCount === 1 ? '' : 's'} earned`} />
+          <Snapshot value={byStatus.in_progress.length} label="in progress" />
+          <Snapshot value={Math.round(totalCeHours)} label="CE hours logged" />
         </div>
-      )}
 
-      {/* Credential groups */}
-      {enriched.length === 0 ? (
-        <div style={{ padding: '1.5rem', textAlign: 'center', background: colors.grayLight, border: `1px dashed ${colors.slateLight}`, borderRadius: 10 }}>
-          <Award size={22} aria-hidden="true" style={{ color: colors.slateMedium, marginBottom: 6 }} />
-          <div style={{ fontWeight: 600, color: colors.textDark, marginBottom: 4 }}>Build your credential picture</div>
-          <div style={{ fontSize: '0.88rem', color: colors.textGray }}>
-            Add the certifications you hold or are pursuing to assemble your living rehab CV.
-          </div>
-        </div>
-      ) : (
-        STATUS_ORDER.filter((s) => byStatus[s].length > 0).map((status) => (
-          <div key={status} style={{ marginBottom: '1.25rem' }}>
-            <div className="eyebrow" style={{ marginBottom: 8, display: 'block' }}>
-              {STATUS_META[status].label} · {byStatus[status].length}
+        {/* Search / add */}
+        {showSearch && (
+          <div style={{ marginBottom: '1.25rem' }}>
+            <div style={{ position: 'relative' }}>
+              <Search
+                size={16}
+                aria-hidden="true"
+                style={{ position: 'absolute', left: 2, top: '50%', transform: 'translateY(-50%)', color: A.inkMuted, pointerEvents: 'none' }}
+              />
+              <input
+                type="search"
+                autoFocus
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search 143 credentials: OCS, pelvic, POCUS…"
+                aria-label="Search credentials to add"
+                style={{
+                  width: '100%', padding: '8px 2px 8px 26px',
+                  border: 'none', borderBottom: `2px solid ${A.ruleMinor}`,
+                  background: 'transparent', fontFamily: FIG, fontSize: 'max(16px, 15px)',
+                  color: A.ink, outline: 'none', boxSizing: 'border-box',
+                }}
+              />
             </div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {byStatus[status].map((e) => (
-                <CredentialRow key={e.cert_name} entry={e} onSetStatus={saveCredential} onRemove={removeCredential} saving={saving} />
-              ))}
-            </ul>
+            {results.length > 0 && (
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0.5rem 0 0', border: `1px solid ${A.ink}` }}>
+                {results.map((c, i) => (
+                  <li key={c.name}>
+                    <button
+                      type="button"
+                      onClick={() => addCredential(c.name)}
+                      disabled={saving}
+                      style={{
+                        width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 10,
+                        padding: '0.6rem 0.85rem', background: 'transparent', border: 'none',
+                        borderBottom: i < results.length - 1 ? `1px solid ${A.ruleFaint}` : 'none',
+                        cursor: 'pointer', fontFamily: 'inherit',
+                      }}
+                    >
+                      <Plus size={14} aria-hidden="true" style={{ color: A.accent, flexShrink: 0 }} />
+                      <span style={{ flex: 1, minWidth: 0 }}>
+                        <span style={{ fontSize: 14, fontWeight: 600, color: A.ink }}>{c.name}</span>
+                        <span style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, marginLeft: 8 }}>{c.type}</span>
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {query.trim() && results.length === 0 && (
+              <p style={{ fontFamily: FIG, fontSize: 13, color: A.inkMuted, marginTop: 8 }}>
+                No matching credential that isn&rsquo;t already on your profile. The field has 143; try a shorter term.
+              </p>
+            )}
           </div>
-        ))
-      )}
+        )}
 
-      <p style={{ fontSize: '0.74rem', color: colors.textGray, marginTop: '0.5rem', fontStyle: 'italic' }}>
-        Self-reported. Credential verification is coming — for now this is your private working CV.
-      </p>
+        {/* Credential groups */}
+        {enriched.length === 0 ? (
+          <div style={{ padding: '1.5rem', textAlign: 'center', background: A.notice, border: `1px dashed ${A.ink}` }}>
+            <Award size={22} aria-hidden="true" style={{ color: A.inkMuted, marginBottom: 6 }} />
+            <div style={{ fontWeight: 600, color: A.ink, marginBottom: 4 }}>Stake your claims</div>
+            <div style={{ fontFamily: FIG, fontSize: 13.5, color: A.inkMuted }}>
+              Add the certifications you hold or are pursuing to assemble your living rehab CV.
+            </div>
+          </div>
+        ) : (
+          STATUS_ORDER.filter((s) => byStatus[s].length > 0).map((status) => (
+            <div key={status} style={{ marginBottom: '1.25rem' }}>
+              <div style={{ fontFamily: FIG, fontSize: 12.5, letterSpacing: '0.02em', fontWeight: 700, color: A.inkMuted, borderTop: `2px solid ${A.ink}`, paddingTop: 8, marginBottom: 6, ...tabularNums }}>
+                {STATUS_META[status].label} · {byStatus[status].length}
+              </div>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {byStatus[status].map((e, i) => (
+                  <CredentialRow
+                    key={e.cert_name}
+                    entry={e}
+                    isLast={i === byStatus[status].length - 1}
+                    onSetStatus={saveCredential}
+                    onRemove={removeCredential}
+                    saving={saving}
+                  />
+                ))}
+              </ul>
+            </div>
+          ))
+        )}
+
+        <p style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, margin: '0.5rem 0 0', letterSpacing: '0.02em' }}>
+          Self-reported. Credential verification is coming; for now this is your private working CV.
+        </p>
+      </div>
     </div>
   );
 }
@@ -210,42 +215,45 @@ export default function CredentialProfile() {
 function Snapshot({ value, label }) {
   return (
     <div>
-      <div className="font-mono tabular-nums" style={{ fontSize: '1.5rem', fontWeight: 600, color: colors.textDark, lineHeight: 1 }}>
+      <div style={{ fontFamily: FIG, fontSize: 27, fontWeight: 800, color: A.ink, lineHeight: 1, ...tabularNums }}>
         {value}
       </div>
-      <div style={{ fontSize: '0.76rem', color: colors.textGray, marginTop: 3 }}>{label}</div>
+      <div style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 600, color: A.inkMuted, marginTop: 4, letterSpacing: '0.02em' }}>{label}</div>
     </div>
   );
 }
 
-function CredentialRow({ entry, onSetStatus, onRemove, saving }) {
+function CredentialRow({ entry, isLast, onSetStatus, onRemove, saving }) {
   const { cert, slug, best, status, cert_name: name } = entry;
+  const meta = STATUS_META[status] || STATUS_META.earned;
   return (
     <li
       style={{
         display: 'flex', alignItems: 'center', gap: 12,
-        padding: '0.7rem 0.85rem', border: `1px solid ${colors.slateLight}`, borderRadius: 10, background: 'white',
+        padding: '0.65rem 0.25rem',
+        borderBottom: isLast ? 'none' : `1px solid ${A.ruleFaintest}`,
       }}
     >
+      <span aria-hidden="true" style={{ color: meta.color, fontSize: 13, flexShrink: 0 }}>{meta.mark}</span>
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: '0.92rem', fontWeight: 600, color: colors.textDark }}>
+        <div style={{ fontSize: 14, fontWeight: 600, color: A.ink, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {slug ? (
-            <Link to={`/credentials/${slug}`} style={{ color: colors.textDark, textDecoration: 'none' }}>
+            <Link to={`/credentials/${slug}`} style={{ color: A.ink, textDecoration: 'none' }}>
               {name}
             </Link>
           ) : name}
         </div>
-        <div style={{ fontSize: '0.76rem', color: colors.textGray, marginTop: 2 }}>
+        <div style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, marginTop: 2 }}>
           {cert.type} · {(cert.disciplines || [cert.discipline]).join(' · ')}
         </div>
       </div>
 
       {best && (
         <div style={{ textAlign: 'right', flexShrink: 0 }} title={`Scores ${best.score}/100 on the ${best.label} lens (default weights)`}>
-          <div className="font-mono tabular-nums" style={{ fontSize: '1.05rem', fontWeight: 700, color: scoreColor(best.score), lineHeight: 1 }}>
+          <div style={{ fontFamily: FIG, fontSize: 16, fontWeight: 700, color: tierColor(best.score), lineHeight: 1, ...tabularNums }}>
             {best.score}
           </div>
-          <div style={{ fontSize: '0.68rem', color: colors.textGray, marginTop: 2 }}>{best.label}</div>
+          <div style={{ fontFamily: FIG, fontSize: 10.5, color: A.inkMuted, marginTop: 2 }}>{best.label.replace(' & Industry', '')}</div>
         </div>
       )}
 
@@ -256,10 +264,10 @@ function CredentialRow({ entry, onSetStatus, onRemove, saving }) {
         onChange={(e) => onSetStatus({ certName: name, status: e.target.value })}
         aria-label={`Status for ${name}`}
         style={{
-          flexShrink: 0, fontSize: '0.78rem', padding: '0.3rem 0.5rem',
-          borderRadius: 999, border: `1px solid ${STATUS_META[status].chip}`,
-          background: STATUS_META[status].bg, color: STATUS_META[status].chip,
-          fontWeight: 600, cursor: 'pointer',
+          flexShrink: 0, fontFamily: FIG, fontSize: 12, padding: '0.3rem 0.5rem',
+          borderRadius: 0, border: `1px solid ${meta.color === A.dim ? A.ruleMinor : meta.color}`,
+          background: 'transparent', color: meta.color === A.dim ? A.inkMuted : meta.color,
+          fontWeight: 700, cursor: 'pointer',
         }}
       >
         <option value="earned">Earned</option>
@@ -268,7 +276,7 @@ function CredentialRow({ entry, onSetStatus, onRemove, saving }) {
       </select>
 
       {slug && (
-        <Link to={`/credentials/${slug}`} aria-label={`Open ${name} details`} style={{ color: colors.primaryBlue, flexShrink: 0, display: 'inline-flex' }}>
+        <Link to={`/credentials/${slug}`} aria-label={`Open ${name} details`} style={{ color: A.accent, flexShrink: 0, display: 'inline-flex' }}>
           <ExternalLink size={14} aria-hidden="true" />
         </Link>
       )}
@@ -279,7 +287,7 @@ function CredentialRow({ entry, onSetStatus, onRemove, saving }) {
         disabled={saving}
         aria-label={`Remove ${name}`}
         title="Remove from profile"
-        style={{ background: 'none', border: 'none', color: colors.textGray, cursor: 'pointer', padding: 4, flexShrink: 0, display: 'inline-flex' }}
+        style={{ background: 'none', border: 'none', color: A.inkMuted, cursor: 'pointer', padding: 4, flexShrink: 0, display: 'inline-flex' }}
       >
         <X size={15} aria-hidden="true" />
       </button>

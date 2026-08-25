@@ -6,7 +6,7 @@
 // browser does smooth scrolling via CSS scroll-behavior set globally.
 
 import React, { useEffect, useState } from 'react';
-import { colors } from '@/utils/constants';
+import { A, tabularNums } from '@/components/atlas/theme';
 
 export default function TOC({ sections }) {
   const [activeId, setActiveId] = useState(sections[0]?.id);
@@ -48,14 +48,14 @@ export default function TOC({ sections }) {
   return (
     <aside className="cs-doc-toc" aria-label="On this page">
       <div
-        className="font-mono"
         style={{
-          fontSize: '0.66rem',
-          color: colors.textGray,
-          letterSpacing: '0.14em',
-          textTransform: 'uppercase',
+          fontSize: '0.8rem',
+          color: A.inkMuted,
+          letterSpacing: '0.02em',
           fontWeight: 600,
           marginBottom: 14,
+          borderTop: `2px solid ${A.ink}`,
+          paddingTop: 10,
         }}
       >
         On this page
@@ -74,21 +74,22 @@ export default function TOC({ sections }) {
                   gap: 10,
                   padding: '6px 0 6px 12px',
                   marginLeft: -12,
-                  fontSize: '0.85rem',
-                  color: isActive ? colors.textDark : colors.slateMedium,
-                  fontWeight: isActive ? 600 : 400,
+                  fontSize: '0.88rem',
+                  color: isActive ? A.ink : A.inkMuted,
+                  fontWeight: isActive ? 700 : 500,
                   textDecoration: 'none',
-                  borderLeft: `2px solid ${isActive ? colors.primaryBlue : 'transparent'}`,
+                  borderLeft: `2px solid ${isActive ? A.accent : 'transparent'}`,
                   lineHeight: 1.35,
                   transition: 'color 0.15s ease, border-color 0.15s ease',
                 }}
               >
                 <span
-                  className="font-mono tabular-nums"
                   style={{
-                    fontSize: '0.7rem',
-                    color: isActive ? colors.primaryBlue : colors.textGray,
+                    fontSize: '0.72rem',
+                    color: isActive ? A.accent : A.inkMuted,
                     minWidth: 18,
+                    fontWeight: 600,
+                    ...tabularNums,
                   }}
                 >
                   {String(idx + 1).padStart(2, '0')}

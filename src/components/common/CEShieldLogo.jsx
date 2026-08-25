@@ -1,29 +1,52 @@
 import React from 'react';
-import { colors } from '../../utils/constants';
 
-// CE Shield Logo Component
-const CEShieldLogo = ({ showTagline = true, className = "", size = "large", centered = false }) => {
+// CE Shield logo — Atlas re-ink. The three-layer shield in petrol at three
+// opacities (back 0.25, mid 0.6, front 1.0); wordmark "CE Shield" in
+// Instrument Sans 600 with no weight split.
+const PETROL = '#235E6B';
+const INK = '#1B1A17';
+const MUTED = '#56544C';
+const INS = "'Instrument Sans', ui-sans-serif, system-ui, sans-serif";
+
+const CEShieldLogo = ({ showTagline = true, className = '', size = 'large', centered = false }) => {
   const scales = {
-    small: { svg: "30", text: "14", tagline: "8" },
-    medium: { svg: "44", text: "20", tagline: "10" },
-    large: { svg: "54", text: "30", tagline: "10" },
-    xlarge: { svg: "48", text: "32", tagline: "6" }
+    small: { svg: 30, text: 15 },
+    medium: { svg: 40, text: 19 },
+    large: { svg: 52, text: 27 },
+    xlarge: { svg: 48, text: 29 },
   };
-  
+
   const scale = scales[size] || scales.large;
   const logoSvg = (
-    <svg width={scale.svg} height={parseInt(scale.svg) * 0.67} viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
+    <svg
+      width={scale.svg}
+      height={Math.round(scale.svg * 0.67)}
+      viewBox="0 0 60 40"
+      xmlns="http://www.w3.org/2000/svg"
+      className="flex-shrink-0"
+      aria-hidden="true"
+    >
       <g transform="translate(0, 4)">
-        <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill={colors.lightBlue}/>
-        <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill={colors.primaryBlue} opacity="0.85"/>
-        <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill={colors.primaryPurple} opacity="0.85"/>
+        <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill={PETROL} opacity="0.25" />
+        <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill={PETROL} opacity="0.6" />
+        <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill={PETROL} />
       </g>
     </svg>
   );
 
   const logoText = (
-    <h1 style={{ fontSize: `${scale.text}px`, lineHeight: '1', color: colors.textDark }}>
-      <span style={{ fontWeight: 200, letterSpacing: '0.03em' }}>CE</span><span style={{ fontWeight: 700 }}>Shield</span>
+    <h1
+      style={{
+        fontFamily: INS,
+        fontSize: `${scale.text}px`,
+        lineHeight: 1,
+        color: INK,
+        fontWeight: 600,
+        letterSpacing: '-0.02em',
+        margin: 0,
+      }}
+    >
+      CE Shield
     </h1>
   );
 
@@ -34,14 +57,16 @@ const CEShieldLogo = ({ showTagline = true, className = "", size = "large", cent
           {logoSvg}
           {logoText}
         </div>
-        <p className={`text-[${scale.tagline}px] tracking-[1.5px] mt-2 uppercase ${centered ? 'text-center whitespace-nowrap' : ''}`} 
-           style={{ color: colors.textGray, paddingLeft: '0', fontSize: size === 'xlarge' ? '10px' : `${scale.tagline}px` }}>
-          Track Education. Protect Your License.
+        <p
+          className={`mt-2 ${centered ? 'text-center whitespace-nowrap' : ''}`}
+          style={{ color: MUTED, fontSize: 11.5, letterSpacing: '0.02em', fontWeight: 600, margin: '8px 0 0' }}
+        >
+          Track education. Protect your license.
         </p>
       </div>
     );
   }
-  
+
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       {logoSvg}

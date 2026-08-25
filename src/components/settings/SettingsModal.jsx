@@ -1,11 +1,24 @@
 import React, { useMemo, useState } from 'react';
-import { colors } from '../../utils/constants';
 import Modal from '../common/Modal';
 import ConfirmDialog from '../ui/ConfirmDialog';
 import { SUPPORTED_STATES, getRulesFor } from '../../data/stateRules';
+import { A, FIG, INS, tabularNums } from '../atlas/theme';
+
+const label = { display: 'block', fontFamily: FIG, fontSize: 13.5, fontWeight: 600, color: A.ink, marginBottom: 6 };
+const field = {
+  width: '100%',
+  padding: '8px 10px',
+  fontFamily: FIG,
+  fontSize: 14,
+  border: `1px solid ${A.ruleMinor}`,
+  background: A.paper,
+  color: A.ink,
+  borderRadius: 0,
+  boxSizing: 'border-box',
+};
 
 const SettingsModal = ({ user, onSave, onClose, courses }) => {
-  const [localUser, setLocalUser] = useState({...user});
+  const [localUser, setLocalUser] = useState({ ...user });
   const [saving, setSaving] = useState(false);
   const [pendingLicenseChange, setPendingLicenseChange] = useState(null);
 
@@ -29,7 +42,7 @@ const SettingsModal = ({ user, onSave, onClose, courses }) => {
   };
 
   // Pull live total-hours from the rules registry so the buttons stay accurate
-  // even as we add states. PT/OT buttons show "{N} hours/{cycle} years".
+  // even as we add states. PT/OT buttons show "{N}h / {cycle}yr".
   const ptRules = useMemo(() => getRulesFor(localUser.state, 'PT'), [localUser.state]);
   const otRules = useMemo(() => getRulesFor(localUser.state, 'OT'), [localUser.state]);
   const selectedRules = useMemo(
@@ -39,43 +52,44 @@ const SettingsModal = ({ user, onSave, onClose, courses }) => {
 
   const LicenseButton = ({ type, selected, onClick }) => {
     const r = type === 'PT' ? ptRules : otRules;
-    const summary = r
-      ? `${r.totalHours} hours/${r.cycleYears} years`
-      : 'Requirements unavailable';
+    const summary = r ? `${r.totalHours}h / ${r.cycleYears}yr` : 'Unavailable';
     return (
       <button
         type="button"
+        aria-pressed={selected}
         onClick={onClick}
-        className="p-3"
+        className="p-3 text-left"
         style={{
-          border: `2px solid ${selected ? colors.primaryBlue : colors.slateLight}`,
-          background: selected ? colors.lightBlue : 'white', cursor: 'pointer',
-          borderRadius: 8,
+          border: `1px solid ${selected ? A.accent : A.ruleMinor}`,
+          background: selected ? A.accent : 'transparent',
+          borderRadius: 0,
+          cursor: 'pointer',
         }}
       >
-        <div className="font-semibold">{type}</div>
-        <div className="text-xs" style={{ color: colors.textGray }}>{summary}</div>
+        <div style={{ fontFamily: INS, fontWeight: 600, fontSize: 16, color: selected ? A.onAccent : A.ink }}>{type}</div>
+        <div style={{ fontFamily: FIG, fontSize: 11.5, color: selected ? A.onAccent : A.inkMuted, marginTop: 2, ...tabularNums }}>{summary}</div>
         {r && r.verified === false && (
-          <div className="text-xs mt-1" style={{ color: '#92400e', fontWeight: 600 }}>
-            DRAFT
+          <div style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 700, marginTop: 4, color: selected ? A.onAccent : A.warn, letterSpacing: '0.02em' }}>
+            Draft rules
           </div>
         )}
       </button>
     );
   };
-  
+
   return (
     <Modal onClose={onClose}>
-      <h3 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>Profile Settings</h3>
-      
+      <h3 style={{ fontFamily: INS, fontWeight: 600, fontSize: 22, letterSpacing: '-0.02em', color: A.ink, margin: '0 0 1.25rem' }}>
+        Profile settings
+      </h3>
+
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>State</label>
+          <label style={label}>State</label>
           <select
             value={localUser.state || 'IL'}
             onChange={(e) => setLocalUser({ ...localUser, state: e.target.value })}
-            className="w-full px-3 py-2"
-            style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight, borderRadius: 6 }}
+            style={field}
           >
             {SUPPORTED_STATES.map((s) => {
               const r = getRulesFor(s, 'PT') || getRulesFor(s, 'OT');
@@ -88,14 +102,14 @@ const SettingsModal = ({ user, onSave, onClose, courses }) => {
             })}
           </select>
           {selectedRules && selectedRules.verified === false && (
-            <p className="text-xs mt-1" style={{ color: '#92400e' }}>
-              {selectedRules.jurisdictionName} rules are <strong>draft</strong> —
-              verify against{' '}
+            <p style={{ fontFamily: FIG, fontSize: 12, color: A.warn, margin: '4px 0 0', lineHeight: 1.5 }}>
+              {selectedRules.jurisdictionName} rules are <strong>draft</strong>.
+              Verify against{' '}
               <a
                 href={selectedRules.boardUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ textDecoration: 'underline' }}
+                style={{ color: A.warn, fontWeight: 700 }}
               >
                 {selectedRules.citation}
               </a>
@@ -103,15 +117,15 @@ const SettingsModal = ({ user, onSave, onClose, courses }) => {
             </p>
           )}
           {selectedRules && selectedRules.verified !== false && (
-            <p className="text-xs mt-1" style={{ color: colors.textGray }}>
+            <p style={{ fontFamily: FIG, fontSize: 12, color: A.inkMuted, margin: '4px 0 0' }}>
               Verified against {selectedRules.citation} (last reviewed {selectedRules.lastReviewed}).
             </p>
           )}
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>License Type</label>
-          <div className="grid grid-cols-2 gap-4">
+          <label style={label}>License type</label>
+          <div className="grid grid-cols-2 gap-3">
             <LicenseButton
               type="PT"
               selected={localUser.licenseType === 'PT'}
@@ -125,61 +139,60 @@ const SettingsModal = ({ user, onSave, onClose, courses }) => {
           </div>
         </div>
 
-        {['name', 'licenseNumber', 'renewalDate'].map(field => (
-          <div key={field}>
-            <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-              {field === 'name' ? 'Your Name' : 
-               field === 'licenseNumber' ? `${localUser.state} License Number` : 'Renewal Date'}
+        {['name', 'licenseNumber', 'renewalDate'].map((f) => (
+          <div key={f}>
+            <label style={label}>
+              {f === 'name' ? 'Your name'
+                : f === 'licenseNumber' ? `${localUser.state} license number` : 'Renewal date'}
             </label>
             <input
-              type={field === 'renewalDate' ? 'date' : 'text'}
-              value={localUser[field]}
-              onChange={(e) => setLocalUser({...localUser, [field]: e.target.value})}
-              className="w-full px-3 py-2"
-              style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+              type={f === 'renewalDate' ? 'date' : 'text'}
+              value={localUser[f]}
+              onChange={(e) => setLocalUser({ ...localUser, [f]: e.target.value })}
+              style={field}
             />
           </div>
         ))}
 
         <div>
-          <label className="flex items-center">
+          <label className="flex items-center" style={{ fontFamily: FIG, fontSize: 13.5, cursor: 'pointer' }}>
             <input
               type="checkbox"
               checked={localUser.isFirstRenewal}
-              onChange={(e) => setLocalUser({...localUser, isFirstRenewal: e.target.checked})}
+              onChange={(e) => setLocalUser({ ...localUser, isFirstRenewal: e.target.checked })}
               className="mr-2"
             />
-            <span className="text-sm">This is my first renewal (CE exempt)</span>
+            <span>This is my first renewal (CE exempt)</span>
           </label>
         </div>
 
-        <div className="flex justify-end space-x-3">
+        <div className="flex justify-end gap-2.5">
           <button
+            type="button"
             onClick={onClose}
-            className="px-4 py-2"
-            style={{ color: colors.textDark, background: colors.slateLight, border: 'none', cursor: 'pointer' }}
+            style={{ fontFamily: FIG, fontSize: 13.5, fontWeight: 600, padding: '9px 16px', color: A.ink, background: 'transparent', border: `1px solid ${A.ink}`, cursor: 'pointer' }}
           >
             Cancel
           </button>
           <button
+            type="button"
             onClick={handleSave}
-            className="px-4 py-2"
-            style={{ 
-              background: saving ? colors.slateMedium : colors.primaryBlue, 
-              color: 'white', border: 'none', 
-              cursor: saving ? 'not-allowed' : 'pointer',
-              opacity: saving ? 0.5 : 1
-            }}
             disabled={saving}
+            style={{
+              fontFamily: FIG, fontSize: 13.5, fontWeight: 600, padding: '9px 16px',
+              background: A.accent, color: A.onAccent, border: `1px solid ${A.accent}`,
+              cursor: saving ? 'not-allowed' : 'pointer',
+              opacity: saving ? 0.5 : 1,
+            }}
           >
-            {saving ? 'Saving...' : 'Save Changes'}
+            {saving ? 'Saving…' : 'Save changes'}
           </button>
         </div>
       </div>
       <ConfirmDialog
         open={!!pendingLicenseChange}
         title="Change license type?"
-        description="Changing license type will update all requirements (PT 40h ↔ OT 24h, different mandatory categories). Your logged courses stay — only the targets change."
+        description="Changing license type updates all requirements (PT 40h vs OT 24h, different mandatory categories). Your logged courses stay; only the targets change."
         confirmLabel="Yes, change"
         cancelLabel="Keep current"
         onConfirm={() => {

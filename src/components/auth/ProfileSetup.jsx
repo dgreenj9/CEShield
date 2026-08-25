@@ -1,11 +1,19 @@
 import React, { useMemo, useState } from 'react';
 import { LogOut, User, ChevronDown } from 'lucide-react';
 import { supabase } from '../../services/supabaseClient';
-import { colors } from '../../utils/constants';
 import CEShieldLogo from '../common/CEShieldLogo';
 import { SUPPORTED_STATES, getRulesFor } from '../../data/stateRules';
 
-// Profile Setup Component
+// Profile setup — Atlas register panel. All save/completion logic unchanged.
+
+const INS = "'Instrument Sans', ui-sans-serif, system-ui, sans-serif";
+
+const inputClasses =
+  'w-full px-3 py-2 rounded-none border border-atlas-rule-minor bg-atlas-paper text-sm text-atlas-ink ' +
+  'placeholder:text-atlas-ink-muted focus:outline-none focus:border-atlas-accent focus:ring-1 focus:ring-atlas-accent';
+
+const labelClasses = 'block text-sm font-semibold mb-2 text-atlas-ink';
+
 const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
   const [user, setUser] = useState({
     name: '', licenseType: '', licenseNumber: '', renewalDate: '', isFirstRenewal: false, state: 'IL'
@@ -14,7 +22,7 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
 
   const handleSave = async () => {
     if (!user.name || !user.licenseNumber || !user.renewalDate) return;
-    
+
     setSaving(true);
     try {
       const { error } = await supabase.from('user_profiles').upsert({
@@ -46,30 +54,38 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
     [user.state, user.licenseType],
   );
 
+  const saveDisabled = !user.name || !user.licenseNumber || !user.renewalDate || saving;
+
   const LicenseButton = ({ type, selected, onClick }) => {
     const r = type === 'PT' ? ptRules : otRules;
     const summary = r
-      ? `${r.totalHours} hours/${r.cycleYears} years`
+      ? `${r.totalHours} hours / ${r.cycleYears} years`
       : 'Pick a state first';
     return (
       <button
         type="button"
         onClick={onClick}
-        className="p-4 transition-all"
+        aria-pressed={selected}
+        className="p-4 text-left"
         style={{
-          border: `2px solid ${selected ? colors.primaryBlue : colors.slateLight}`,
-          background: selected ? colors.lightBlue : 'white', cursor: 'pointer',
-          borderRadius: 8,
+          border: selected ? '1px solid #235E6B' : '1px solid #D5D3C6',
+          boxShadow: selected ? 'inset 0 0 0 1px #235E6B' : 'none',
+          background: selected ? '#F2F1E9' : '#FAFAF5',
+          cursor: 'pointer',
+          borderRadius: 0,
+          transition: 'background 0.12s ease, border-color 0.12s ease',
         }}
       >
-        <div className="font-semibold">{type}</div>
-        <div className="text-sm" style={{ color: colors.textGray }}>
+        <div className="font-semibold" style={{ fontFamily: INS, color: selected ? '#235E6B' : '#1B1A17' }}>
+          {selected ? '● ' : ''}{type}
+        </div>
+        <div className="text-sm" style={{ color: '#56544C' }}>
           {type === 'PT' ? 'Physical Therapist' : 'Occupational Therapist'}
         </div>
-        <div className="text-xs mt-1" style={{ color: colors.textGray }}>{summary}</div>
+        <div className="text-xs mt-1 tabular-nums" style={{ color: '#56544C' }}>{summary}</div>
         {r && r.verified === false && (
-          <div className="text-xs mt-1" style={{ color: '#92400e', fontWeight: 600 }}>
-            DRAFT
+          <div className="text-xs mt-1" style={{ color: '#C77B2E', fontWeight: 700 }}>
+            Draft rules
           </div>
         )}
       </button>
@@ -77,34 +93,38 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
   };
 
   return (
-    <div className="min-h-screen p-4" style={{ background: colors.grayLight }}>
+    <div className="min-h-screen p-4 atlas-ground">
       <div className="max-w-md mx-auto mt-10">
-        <div style={{ background: 'white', padding: '2rem', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.06)', border: `1px solid ${colors.slateLight}` }}>
+        <div style={{ background: '#FAFAF5', padding: '2rem', border: '1px solid #1B1A17' }}>
           <div className="flex justify-between items-center mb-6">
             <CEShieldLogo showTagline={false} size="medium" />
-            <button onClick={onSignOut} style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer' }} title="Sign Out">
-              <LogOut className="w-5 h-5" />
+            <button
+              onClick={onSignOut}
+              style={{ color: '#56544C', background: 'none', border: 'none', cursor: 'pointer' }}
+              title="Sign out"
+              aria-label="Sign out"
+            >
+              <LogOut className="w-5 h-5" aria-hidden="true" />
             </button>
           </div>
-          
-          <div className="mb-4 p-3" style={{ background: colors.lightBlue }}>
-            <p className="text-sm" style={{ color: colors.textDark }}>
-              <User className="inline w-4 h-4 mr-1" />
+
+          <div className="mb-4 p-3" style={{ background: '#F2F1E9', border: '1px solid #D5D3C6' }}>
+            <p className="text-sm" style={{ color: '#1B1A17' }}>
+              <User className="inline w-4 h-4 mr-1" aria-hidden="true" />
               Signed in as: {authUser.email}
             </p>
           </div>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-                Select Your State
+              <label className={labelClasses}>
+                Your state
               </label>
               <div className="relative">
                 <select
                   value={user.state}
                   onChange={(e) => setUser({ ...user, state: e.target.value })}
-                  className="w-full px-3 py-2 appearance-none focus:outline-none focus:ring-2"
-                  style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight, borderRadius: 6 }}
+                  className={`${inputClasses} appearance-none`}
                 >
                   <option value="">Choose a state</option>
                   {SUPPORTED_STATES.map((s) => {
@@ -118,16 +138,17 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
                   })}
                 </select>
                 <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                  <ChevronDown className="w-5 h-5" style={{ color: colors.textGray }} aria-hidden="true" />
+                  <ChevronDown className="w-5 h-5" style={{ color: '#56544C' }} aria-hidden="true" />
                 </div>
               </div>
               {selectedRules && selectedRules.verified === false ? (
-                <p className="text-xs mt-1" style={{ color: '#92400e' }}>
-                  {selectedRules.jurisdictionName} rules are <strong>draft</strong> —
-                  verify with your licensing board before relying on totals.
+                <p className="text-xs mt-1" style={{ color: '#45433C' }}>
+                  <strong style={{ color: '#C77B2E' }}>Draft:</strong>{' '}
+                  {selectedRules.jurisdictionName} rules are unverified. Confirm
+                  with your licensing board before relying on totals.
                 </p>
               ) : (
-                <p className="text-xs mt-1" style={{ color: colors.textGray }}>
+                <p className="text-xs mt-1" style={{ color: '#56544C' }}>
                   More states rolling out monthly. Don&rsquo;t see yours? Email us.
                 </p>
               )}
@@ -136,8 +157,8 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
             {user.state && (
               <>
                 <div>
-                  <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-                    Select Your License Type
+                  <label className={labelClasses}>
+                    Your license type
                   </label>
                   <div className="grid grid-cols-2 gap-4">
                     <LicenseButton type="PT" selected={user.licenseType === 'PT'} onClick={() => setUser({...user, licenseType: 'PT'})} />
@@ -148,40 +169,37 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
                 {user.licenseType && (
                   <>
                     <div>
-                      <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>Your Name</label>
+                      <label className={labelClasses}>Your name</label>
                       <input
                         type="text"
                         value={user.name}
                         onChange={(e) => setUser({...user, name: e.target.value})}
-                        className="w-full px-3 py-2 focus:outline-none focus:ring-2"
-                        style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                        className={inputClasses}
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-                        {user.state} License Number
+                      <label className={labelClasses}>
+                        {user.state} license number
                       </label>
                       <input
                         type="text"
                         value={user.licenseNumber}
                         onChange={(e) => setUser({...user, licenseNumber: e.target.value})}
-                        className="w-full px-3 py-2 focus:outline-none focus:ring-2"
-                        style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                        className={inputClasses}
                         placeholder={`Enter your ${user.state} license number`}
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>Renewal Date</label>
+                      <label className={labelClasses}>Renewal date</label>
                       <input
                         type="date"
                         value={user.renewalDate}
                         onChange={(e) => setUser({...user, renewalDate: e.target.value})}
-                        className="w-full px-3 py-2 focus:outline-none focus:ring-2"
-                        style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                        className={inputClasses}
                         required
                       />
                     </div>
@@ -193,23 +211,27 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
                           checked={user.isFirstRenewal}
                           onChange={(e) => setUser({...user, isFirstRenewal: e.target.checked})}
                           className="mr-2"
+                          style={{ accentColor: '#235E6B' }}
                         />
-                        <span className="text-sm">This is my first renewal (CE exempt)</span>
+                        <span className="text-sm" style={{ color: '#1B1A17' }}>This is my first renewal (CE exempt)</span>
                       </label>
                     </div>
 
                     <button
                       onClick={handleSave}
-                      className="w-full py-2 px-4 transition-all"
+                      className="w-full py-2 px-4"
                       style={{
-                        background: (!user.name || !user.licenseNumber || !user.renewalDate || saving) ? colors.slateMedium : colors.primaryBlue,
-                        color: 'white', border: 'none', fontWeight: 500,
-                        cursor: (!user.name || !user.licenseNumber || !user.renewalDate || saving) ? 'not-allowed' : 'pointer',
-                        opacity: (!user.name || !user.licenseNumber || !user.renewalDate || saving) ? 0.5 : 1
+                        background: '#235E6B',
+                        color: '#FAFAF5',
+                        border: 'none',
+                        fontWeight: 600,
+                        cursor: saveDisabled ? 'not-allowed' : 'pointer',
+                        opacity: saveDisabled ? 0.5 : 1,
+                        transition: 'background 0.15s ease, opacity 0.15s ease',
                       }}
-                      disabled={!user.name || !user.licenseNumber || !user.renewalDate || saving}
+                      disabled={saveDisabled}
                     >
-                      {saving ? 'Saving...' : 'Continue'}
+                      {saving ? 'Saving…' : 'Continue'}
                     </button>
                   </>
                 )}

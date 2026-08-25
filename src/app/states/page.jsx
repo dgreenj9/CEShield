@@ -3,10 +3,9 @@
 // per-state SSG pages. Also useful as a public directory.
 
 import Link from 'next/link';
-import { ArrowRight, MapPin } from 'lucide-react';
-import { colors } from '@/utils/constants';
 import PublicNav from '@/components/layout/PublicNav';
 import { allStateLicenseEntries } from '@/data/stateRules';
+import { A, FIG, INS, tabularNums } from '@/components/atlas/theme';
 
 export const metadata = {
   title: 'CE requirements by state',
@@ -26,98 +25,76 @@ export default function StatesIndex() {
   }
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        backgroundColor: '#FAFAF6',
-        backgroundImage: 'radial-gradient(circle, rgba(15, 23, 42, 0.05) 1px, transparent 1px)',
-        backgroundSize: '22px 22px',
-        color: colors.textDark,
-      }}
-    >
+    <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink }}>
       <PublicNav />
 
-      <main style={{
-        maxWidth: 860, margin: '0 auto', padding: '3rem 2rem 6rem', lineHeight: 1.65,
-      }}>
+      <main style={{ maxWidth: 860, margin: '0 auto', padding: '3rem 2rem 6rem', lineHeight: 1.65 }}>
         <header style={{ marginBottom: '2.5rem' }}>
-          <div
-            className="font-mono"
-            style={{
-              fontSize: '0.7rem', color: colors.textGray,
-              letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 6,
-            }}
+          <h1
+            className="cs-h1-clamp"
+            style={{ fontFamily: INS, fontSize: 40, fontWeight: 600, margin: 0, letterSpacing: '-0.025em', lineHeight: 1.05 }}
           >
-            <MapPin size={11} style={{ display: 'inline', marginRight: 4 }} aria-hidden="true" />
-            CE requirements directory
-          </div>
-          <h1 style={{
-            fontSize: '2.4rem', fontWeight: 600, color: colors.textDark, margin: 0,
-            letterSpacing: '-0.02em', lineHeight: 1.1,
-          }}>
             CE requirements by state
           </h1>
-          <p style={{ marginTop: '0.75rem', color: colors.slateMedium, fontSize: '1.05rem' }}>
+          <p style={{ marginTop: '0.75rem', color: A.inkBody, fontSize: 16.5, maxWidth: '38em' }}>
             Continuing-education rules for physical and occupational therapists,
-            broken out per state. Coverage is growing &mdash; verified states are
-            ready to rely on; draft states are first-pass and require your
-            verification before renewal.
+            broken out per state. Verified states are ready to rely on; draft
+            states are first-pass and need your verification before renewal.
           </p>
         </header>
 
         {Object.entries(byState).map(([stateCode, items]) => {
           const stateName = items[0].rules.jurisdictionName;
           return (
-            <section key={stateCode} style={{ marginBottom: '2rem' }}>
-              <div className="flex items-center gap-3 mb-3">
-                <span className="eyebrow">{stateName}</span>
-                <hr className="section-rule flex-1 m-0" />
+            <section key={stateCode} style={{ marginBottom: '2.5rem' }}>
+              <div
+                style={{
+                  fontFamily: FIG, fontSize: 12.5, fontWeight: 700, color: A.inkMuted,
+                  letterSpacing: '0.02em', borderTop: `2px solid ${A.ink}`, paddingTop: 10, marginBottom: 14,
+                }}
+              >
+                {stateName}
               </div>
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                gap: '0.75rem',
-              }}>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gap: '0.75rem',
+                }}
+              >
                 {items.map((e) => (
                   <Link
                     key={e.slug}
                     href={`/states/${e.slug}`}
+                    className="card-hover"
                     style={{
                       display: 'block', padding: '1.25rem',
-                      background: 'white',
-                      border: `1px solid ${colors.slateLight}`,
-                      borderRadius: 12, textDecoration: 'none', color: 'inherit',
+                      background: A.paper,
+                      border: `1px solid ${A.ink}`,
+                      textDecoration: 'none', color: 'inherit',
                     }}
                   >
-                    <div style={{
-                      display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
-                    }}>
-                      <div style={{ fontWeight: 600, fontSize: '1.05rem', color: colors.textDark }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 12 }}>
+                      <div style={{ fontFamily: INS, fontWeight: 600, fontSize: 17, letterSpacing: '-0.02em', color: A.ink }}>
                         {e.licenseType === 'PT' ? 'Physical Therapy' : 'Occupational Therapy'}
                       </div>
-                      <div className="font-mono tabular-nums" style={{
-                        fontSize: '1.1rem', fontWeight: 600, color: colors.primaryBlue,
-                      }}>
+                      <div style={{ fontFamily: FIG, fontSize: 18, fontWeight: 700, color: A.accent, ...tabularNums }}>
                         {e.rules.totalHours}h
                       </div>
                     </div>
-                    <div style={{ fontSize: '0.85rem', color: colors.textGray, marginTop: 4 }}>
+                    <div style={{ fontFamily: FIG, fontSize: 13, color: A.inkMuted, marginTop: 4 }}>
                       every {e.rules.cycleYears} years · {Object.keys(e.rules.mandatory || {}).filter((k) => e.rules.mandatory[k] > 0).length} mandatory categories
                     </div>
-                    <div style={{
-                      marginTop: 10, display: 'flex', alignItems: 'center', gap: 6,
-                      fontSize: '0.78rem', color: colors.primaryBlue, fontWeight: 500,
-                    }}>
-                      View requirements <ArrowRight size={13} aria-hidden="true" />
+                    <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                      <span style={{ fontFamily: FIG, fontSize: 12.5, color: A.accent, fontWeight: 700 }}>
+                        View requirements →
+                      </span>
+                      {e.rules.verified === false && (
+                        <span style={{ fontFamily: FIG, fontSize: 11, fontWeight: 700, color: A.warn, letterSpacing: '0.02em' }}>
+                          Draft · verify before use
+                        </span>
+                      )}
                     </div>
-                    {e.rules.verified === false && (
-                      <div className="font-mono" style={{
-                        marginTop: 6, fontSize: '0.6rem',
-                        color: '#92400e', letterSpacing: '0.05em',
-                      }}>
-                        DRAFT — VERIFY BEFORE USE
-                      </div>
-                    )}
                   </Link>
                 ))}
               </div>
@@ -127,17 +104,16 @@ export default function StatesIndex() {
 
         <section
           style={{
-            marginTop: '3rem', padding: '1.5rem',
-            background: 'white', border: `1px solid ${colors.slateLight}`,
-            borderRadius: 12, textAlign: 'center',
+            marginTop: '3rem', padding: '1.25rem 1.5rem',
+            border: `1px dashed ${A.ink}`, background: A.notice, textAlign: 'center',
           }}
         >
-          <p style={{ color: colors.textGray, fontSize: '0.95rem', margin: 0 }}>
+          <p style={{ color: A.inkBody, fontSize: 14.5, margin: 0 }}>
             Don&rsquo;t see your state?{' '}
-            <a href="mailto:hello@ceshield.com" style={{ color: colors.primaryBlue, textDecoration: 'underline' }}>
+            <a href="mailto:hello@ceshield.com" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>
               Email us
             </a>{' '}
-            &mdash; we&rsquo;re adding states monthly.
+            · we&rsquo;re adding states monthly.
           </p>
         </section>
       </main>

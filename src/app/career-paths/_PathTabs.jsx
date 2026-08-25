@@ -2,18 +2,15 @@
 
 // Client-side tabbed interface for /career-paths. Receives all 5 paths'
 // precomputed data as props (top picks computed at build time on the server
-// component) and renders a sticky tab bar + the active path's content as
-// a 3-column dashboard widget on wide screens.
+// component) and renders a sticky tab strip + the active path's content as
+// a 3-column instrument panel on wide screens.
 //
 // Layout intent:
-//   ── tabs (full width) ──
+//   ── tab strip (full width, joined rectangles, petrol active) ──
 //   ┌────────────┬──────────────┬───────────────┐
 //   │ identity   │ dimensions   │ top picks     │
 //   │ + CTAs     │              │               │
 //   └────────────┴──────────────┴───────────────┘
-//
-// Each column has a single job. Identity left, rubric middle, results
-// right — the eye reads what / how / winners.
 //
 // Inactive panels stay in the DOM with `hidden` so Googlebot still sees
 // all 5 paths' text for SEO.
@@ -28,7 +25,7 @@ import {
   FlaskConical,
   Cpu,
 } from 'lucide-react';
-import { colors } from '@/utils/constants';
+import { A, FIG, INS, tabularNums } from '@/components/atlas/theme';
 import useTablistKeyboard from '@/hooks/useTablistKeyboard';
 
 const ICONS = {
@@ -42,16 +39,17 @@ const ICONS = {
 const dimLabel = (dim) =>
   dim.replace(/([A-Z])/g, ' $1').trim().replace(/^./, (s) => s.toUpperCase());
 
-const Eyebrow = ({ children }) => (
+const PanelLabel = ({ children }) => (
   <div
-    className="font-mono"
     style={{
-      fontSize: '0.68rem',
-      color: colors.textGray,
-      letterSpacing: '0.12em',
-      textTransform: 'uppercase',
+      fontFamily: FIG,
+      fontSize: '0.8rem',
+      color: A.inkMuted,
+      letterSpacing: '0.02em',
       fontWeight: 600,
       marginBottom: 14,
+      borderTop: `2px solid ${A.ink}`,
+      paddingTop: 10,
     }}
   >
     {children}
@@ -82,9 +80,9 @@ export default function PathTabs({ paths, examples }) {
   };
 
   return (
-    <div>
-      {/* Tab bar — full width, sticky on scroll so it stays in view as the
-          user reads the panel below. */}
+    <div style={{ border: `1px solid ${A.ink}`, background: A.paper }}>
+      {/* Tab strip — joined rectangles, sticky so it stays in view as the
+          user reads the panel below. Active = petrol fill + ● prefix. */}
       <div
         id="path-tabs"
         role="tablist"
@@ -93,52 +91,47 @@ export default function PathTabs({ paths, examples }) {
           position: 'sticky',
           top: 0,
           zIndex: 5,
-          background: '#FAFAF6',
-          paddingTop: '0.5rem',
-          paddingBottom: '0.75rem',
-          marginBottom: '1.25rem',
-          borderBottom: `1px solid ${colors.slateLight}`,
+          display: 'flex',
+          alignItems: 'stretch',
+          flexWrap: 'wrap',
+          background: A.paper,
+          borderBottom: `1px solid ${A.ink}`,
         }}
       >
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-          {paths.map((p) => {
-            const Icon = ICONS[p.key];
-            const isActive = p.key === active;
-            return (
-              <button
-                key={p.key}
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                aria-controls={`panel-${p.key}`}
-                id={`tab-${p.key}`}
-                {...tabProps(p.key)}
-                onClick={() => selectPath(p.key)}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  padding: '0.55rem 1rem',
-                  fontSize: '0.9rem',
-                  fontWeight: 500,
-                  border: `1px solid ${isActive ? p.color : colors.slateLight}`,
-                  borderRadius: 9999,
-                  background: isActive ? p.color : 'white',
-                  color: isActive ? 'white' : colors.slateMedium,
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                {Icon && <Icon size={14} aria-hidden="true" />}
-                {p.label}
-              </button>
-            );
-          })}
-        </div>
+        {paths.map((p) => {
+          const isActive = p.key === active;
+          return (
+            <button
+              key={p.key}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              aria-controls={`panel-${p.key}`}
+              id={`tab-${p.key}`}
+              {...tabProps(p.key)}
+              onClick={() => selectPath(p.key)}
+              style={{
+                fontFamily: FIG,
+                fontSize: 13,
+                fontWeight: 700,
+                letterSpacing: '0.01em',
+                padding: '13px 18px',
+                background: isActive ? A.accent : 'transparent',
+                color: isActive ? A.onAccent : A.inkMuted,
+                border: 'none',
+                borderRight: `1px solid ${A.ruleMinor}`,
+                cursor: 'pointer',
+                transition: 'background 0.15s ease, color 0.15s ease',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {(isActive ? '● ' : '') + p.label.replace(' & Industry', '')}
+            </button>
+          );
+        })}
       </div>
 
-      {/* Panels — one card per path, 3-column grid inside on wide screens. */}
+      {/* Panels — one per path, 3-column grid inside on wide screens. */}
       {paths.map((p) => {
         const isActive = p.key === active;
         const Icon = ICONS[p.key];
@@ -153,49 +146,24 @@ export default function PathTabs({ paths, examples }) {
             aria-labelledby={`tab-${p.key}`}
             hidden={!isActive}
             className="cs-path-panel"
-            style={{
-              border: `1px solid ${colors.slateLight}`,
-              borderRadius: 16,
-              background: 'white',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
           >
-            {/* Brand-color accent stripe at the top — anchors the panel's
-                identity to the active tab. */}
-            <div
-              aria-hidden="true"
-              style={{
-                position: 'absolute', top: 0, left: 0, right: 0, height: 3,
-                background: p.color,
-              }}
-            />
-
-            <div className="cs-path-panel-grid">
+            <div className="cs-path-panel-grid" style={{ padding: '1.5rem 1.75rem' }}>
               {/* LEFT — identity + CTAs */}
               <div className="cs-path-identity">
-                <div
-                  style={{
-                    width: 48, height: 48, borderRadius: 12,
-                    background: p.accent, color: p.color,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    marginBottom: 16,
-                  }}
-                >
-                  {Icon && <Icon size={22} aria-hidden="true" />}
-                </div>
+                {Icon && <Icon size={22} aria-hidden="true" style={{ color: A.accent, marginBottom: 14 }} />}
                 <h2 style={{
-                  fontSize: '1.4rem',
+                  fontFamily: INS,
+                  fontSize: '1.5rem',
                   fontWeight: 600,
                   margin: 0,
-                  color: colors.textDark,
-                  letterSpacing: '-0.015em',
-                  lineHeight: 1.2,
+                  color: A.ink,
+                  letterSpacing: '-0.025em',
+                  lineHeight: 1.15,
                 }}>
                   {p.label}
                 </h2>
                 <p style={{
-                  color: colors.slateMedium,
+                  color: A.inkBody,
                   lineHeight: 1.6,
                   marginTop: 12,
                   marginBottom: 20,
@@ -206,22 +174,21 @@ export default function PathTabs({ paths, examples }) {
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <Link
-                    href={`/explore?lens=${p.key}`}
+                    href={`/matrix?lens=${p.key}`}
                     style={{
                       display: 'inline-flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
                       gap: 8,
                       padding: '0.65rem 1rem',
-                      background: p.color,
-                      color: 'white',
+                      background: A.accent,
+                      color: A.onAccent,
                       textDecoration: 'none',
-                      borderRadius: 8,
                       fontSize: '0.9rem',
-                      fontWeight: 500,
+                      fontWeight: 600,
                     }}
                   >
-                    <span>Open matrix · {p.label}</span>
+                    <span>Rank the field · {p.label.replace(' & Industry', '')}</span>
                     <ArrowRight size={14} aria-hidden="true" />
                   </Link>
                   <Link
@@ -232,13 +199,12 @@ export default function PathTabs({ paths, examples }) {
                       justifyContent: 'space-between',
                       gap: 6,
                       padding: '0.65rem 1rem',
-                      background: 'white',
-                      border: `1px solid ${colors.slateLight}`,
-                      color: colors.slateMedium,
+                      background: 'transparent',
+                      border: `1px solid ${A.ink}`,
+                      color: A.ink,
                       textDecoration: 'none',
-                      borderRadius: 8,
                       fontSize: '0.88rem',
-                      fontWeight: 500,
+                      fontWeight: 600,
                     }}
                   >
                     <span>Browse all credentials</span>
@@ -249,25 +215,24 @@ export default function PathTabs({ paths, examples }) {
 
               {/* MIDDLE — scoring dimensions with weight bars */}
               <div className="cs-path-dims">
-                <Eyebrow>Scoring dimensions · default weights</Eyebrow>
+                <PanelLabel>Scoring dimensions · default weights</PanelLabel>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
                   {Object.entries(p.defaultWeights).map(([dim, weight]) => (
                     <li key={dim}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 5 }}>
-                        <span style={{ fontSize: '0.88rem', color: colors.textDark, fontWeight: 500 }}>
+                        <span style={{ fontSize: '0.88rem', color: A.ink, fontWeight: 600 }}>
                           {dimLabel(dim)}
                         </span>
-                        <span className="font-mono tabular-nums" style={{ color: colors.textGray, fontSize: '0.78rem', fontWeight: 600 }}>
-                          {weight}%
+                        <span style={{ color: A.accent, fontSize: '0.8rem', fontWeight: 700, ...tabularNums }}>
+                          ×{weight}
                         </span>
                       </div>
-                      <div style={{ height: 4, background: colors.slateLight, borderRadius: 999, overflow: 'hidden' }}>
+                      <div style={{ height: 4, background: A.ruleFaint }}>
                         <div
                           style={{
                             height: '100%',
                             width: `${(weight / maxWeight) * 100}%`,
-                            background: p.color,
-                            opacity: 0.85,
+                            background: A.accent,
                           }}
                         />
                       </div>
@@ -278,15 +243,13 @@ export default function PathTabs({ paths, examples }) {
 
               {/* RIGHT — top picks under these defaults */}
               <div className="cs-path-picks">
-                <Eyebrow>Top picks · default weights</Eyebrow>
+                <PanelLabel>Top picks · default weights</PanelLabel>
                 {list.length > 0 ? (
                   <ol style={{
                     listStyle: 'none',
                     padding: 0,
                     margin: 0,
-                    border: `1px solid ${colors.slateLight}`,
-                    borderRadius: 10,
-                    overflow: 'hidden',
+                    border: `1px solid ${A.ink}`,
                   }}>
                     {list.map((cert, i) => (
                       <li
@@ -297,32 +260,28 @@ export default function PathTabs({ paths, examples }) {
                           gap: 12,
                           alignItems: 'center',
                           padding: '0.7rem 0.85rem',
-                          borderBottom: i < list.length - 1 ? `1px solid ${colors.slateLight}` : 'none',
-                          background: 'white',
+                          borderBottom: i < list.length - 1 ? `1px solid ${A.ruleFaint}` : 'none',
                         }}
                       >
-                        <span
-                          className="font-mono"
-                          style={{ fontSize: '0.72rem', color: colors.textGray, fontWeight: 500 }}
-                        >
+                        <span style={{ fontSize: '0.74rem', color: A.inkMuted, fontWeight: 600, ...tabularNums }}>
                           {String(i + 1).padStart(2, '0')}
                         </span>
                         <Link
                           href={cert.slug ? `/credentials/${cert.slug}` : '/credentials'}
-                          style={{ color: colors.textDark, textDecoration: 'none', minWidth: 0 }}
+                          style={{ color: A.ink, textDecoration: 'none', minWidth: 0 }}
                         >
                           <div style={{ fontWeight: 600, fontSize: '0.9rem', letterSpacing: '-0.005em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                             {cert.name}
                           </div>
-                          <div style={{ fontSize: '0.76rem', color: colors.textGray, marginTop: 2 }}>
+                          <div style={{ fontSize: '0.78rem', color: A.inkMuted, marginTop: 2 }}>
                             {cert.discipline} · {cert.type}
                           </div>
                         </Link>
                         <span
-                          className="font-mono tabular-nums"
                           style={{
                             minWidth: 38, textAlign: 'right',
-                            fontWeight: 700, color: p.color, fontSize: '1.05rem',
+                            fontWeight: 700, color: A.accent, fontSize: '1.05rem',
+                            ...tabularNums,
                           }}
                         >
                           {cert.score}
@@ -334,15 +293,14 @@ export default function PathTabs({ paths, examples }) {
                   <div
                     style={{
                       padding: '1.25rem',
-                      background: colors.grayLight,
-                      border: `1px dashed ${colors.slateLight}`,
-                      borderRadius: 10,
-                      color: colors.textGray,
+                      background: A.notice,
+                      border: `1px dashed ${A.ink}`,
+                      color: A.inkMuted,
                       fontSize: '0.85rem',
                       textAlign: 'center',
                     }}
                   >
-                    Cert library for this path is being built — check back soon.
+                    Cert library for this path is being built. Check back soon.
                   </div>
                 )}
               </div>

@@ -8,7 +8,7 @@ export default function PageSection({ title, action, children, className = '' })
       {(title || action) && (
         <div className="flex items-center justify-between mb-3 gap-3">
           {title ? (
-            <h2 className="text-xs font-semibold text-ink-gray uppercase tracking-wider m-0">
+            <h2 className="text-sm font-semibold text-atlas-ink-muted m-0">
               {title}
             </h2>
           ) : <span />}

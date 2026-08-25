@@ -1,8 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { FileText, Loader2 } from 'lucide-react';
-import { colors } from '../../utils/constants';
 import { parseCertificate } from '../../utils/certificateParser';
 import Modal from '../common/Modal';
+import { A, FIG, INS } from '../atlas/theme';
+
+const label = { display: 'block', fontFamily: FIG, fontSize: 13.5, fontWeight: 600, color: A.ink, marginBottom: 6 };
+const hint = { fontFamily: FIG, fontSize: 12, color: A.inkMuted, fontWeight: 500 };
+const field = {
+  width: '100%',
+  padding: '8px 10px',
+  fontFamily: FIG,
+  fontSize: 14,
+  border: `1px solid ${A.ruleMinor}`,
+  background: A.paper,
+  color: A.ink,
+  borderRadius: 0,
+  boxSizing: 'border-box',
+};
 
 const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
   const [course, setCourse] = useState({
@@ -87,7 +101,7 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
 
   const handleSubmit = async (e) => {
     e?.preventDefault?.();
-    
+
     const hoursNum = parseFloat(course.hours);
     if (isNaN(hoursNum) || hoursNum <= 0) {
       alert('Please enter valid hours');
@@ -118,14 +132,14 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
 
   return (
     <Modal onClose={onClose}>
-      <h3 className="text-lg font-semibold mb-4" style={{ color: colors.textDark }}>
-        {editingCourse ? 'Edit CE Course' : 'Add CE Course'}
+      <h3 style={{ fontFamily: INS, fontWeight: 600, fontSize: 22, letterSpacing: '-0.02em', color: A.ink, margin: '0 0 1.25rem' }}>
+        {editingCourse ? 'Edit the course' : 'Log a course'}
       </h3>
-      
+
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-            Upload Certificate/Documentation <span className="text-xs" style={{ color: colors.textGray }}>(PDF, JPG, PNG)</span>
+          <label style={label}>
+            Certificate or documentation <span style={hint}>(PDF, JPG, PNG)</span>
           </label>
           <div className="space-y-2">
             <div className="relative">
@@ -133,22 +147,21 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
                 type="file"
                 accept=".pdf,.jpg,.jpeg,.png"
                 onChange={handleCertificateUpload}
-                className="w-full px-3 py-2 text-sm"
-                style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                style={{ ...field, border: `1px dashed ${A.ink}`, background: A.notice, cursor: 'pointer', fontSize: 13 }}
                 disabled={isParsing}
               />
               {isParsing && (
-                <div className="absolute inset-0 flex items-center justify-center" style={{ background: 'rgba(255, 255, 255, 0.9)' }}>
+                <div className="absolute inset-0 flex items-center justify-center" style={{ background: 'rgba(250, 250, 245, 0.92)' }}>
                   <div className="text-center">
-                    <Loader2 className="w-6 h-6 animate-spin mx-auto mb-2" style={{ color: colors.primaryBlue }} />
-                    <div className="text-sm" style={{ color: colors.primaryBlue }}>Scanning certificate...</div>
+                    <Loader2 className="w-6 h-6 animate-spin mx-auto mb-2" style={{ color: A.accent }} />
+                    <div style={{ fontFamily: FIG, fontSize: 13.5, color: A.accent, fontWeight: 600 }}>Scanning the certificate…</div>
                   </div>
                 </div>
               )}
             </div>
             {displayedCertificateName && (
-              <div className="flex items-center justify-between p-2" style={{ background: colors.grayLight }}>
-                <span className="text-sm truncate" style={{ color: colors.textGray }}>
+              <div className="flex items-center justify-between" style={{ padding: '6px 10px', background: A.band, border: `1px solid ${A.ruleMinor}` }}>
+                <span className="truncate" style={{ fontFamily: FIG, fontSize: 13, color: A.inkBody }}>
                   <FileText className="inline w-4 h-4 mr-1" aria-hidden="true" />
                   {displayedCertificateName}
                 </span>
@@ -160,131 +173,123 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
                     certificate: null,
                     certificate_storage: null,
                   }))}
-                  className="text-sm"
-                  style={{ color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer' }}
+                  style={{ fontFamily: FIG, fontSize: 12.5, fontWeight: 700, color: A.warn, background: 'none', border: 'none', cursor: 'pointer' }}
                   aria-label={`Remove ${displayedCertificateName}`}
                 >
                   Remove
                 </button>
               </div>
             )}
-            <p className="text-xs" style={{ color: colors.textGray }}>
-              Upload any supporting documentation: certificates, attendance lists, teaching records, etc.
-              {!editingCourse && ' • Images can be scanned for auto-fill.'}
+            <p style={{ ...hint, margin: 0 }}>
+              Upload any supporting documentation: certificates, attendance lists, teaching records.
+              {!editingCourse && ' Images can be scanned for auto-fill.'}
             </p>
           </div>
         </div>
 
-        {['title', 'provider'].map(field => (
-          <div key={field}>
-            <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-              {field === 'title' ? 'Course Title' : 'Provider Name'} *
+        {['title', 'provider'].map((f) => (
+          <div key={f}>
+            <label style={label}>
+              {f === 'title' ? 'Course title' : 'Provider name'} <span aria-hidden="true" style={{ color: A.warn }}>*</span>
             </label>
             <input
               type="text"
-              value={course[field]}
-              onChange={(e) => setCourse(prev => ({...prev, [field]: e.target.value}))}
-              className="w-full px-3 py-2"
-              style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+              value={course[f]}
+              onChange={(e) => setCourse((prev) => ({ ...prev, [f]: e.target.value }))}
+              style={field}
               required
             />
           </div>
         ))}
 
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>Date Completed *</label>
+          <label style={label}>Date completed <span aria-hidden="true" style={{ color: A.warn }}>*</span></label>
           <input
             type="date"
             value={course.date}
-            onChange={(e) => setCourse(prev => ({...prev, date: e.target.value}))}
-            className="w-full px-3 py-2"
-            style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+            onChange={(e) => setCourse((prev) => ({ ...prev, date: e.target.value }))}
+            style={field}
             required
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>
-            Hours * <span className="text-xs" style={{ color: colors.textGray }}>(1 hour = 50 minutes)</span>
+          <label style={label}>
+            Hours <span aria-hidden="true" style={{ color: A.warn }}>*</span> <span style={hint}>(1 hour = 50 minutes)</span>
           </label>
           <input
             type="number"
             step="0.5"
             min="0.5"
             value={course.hours}
-            onChange={(e) => setCourse(prev => ({...prev, hours: e.target.value}))}
-            className="w-full px-3 py-2"
-            style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+            onChange={(e) => setCourse((prev) => ({ ...prev, hours: e.target.value }))}
+            style={field}
             required
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>Category *</label>
+          <label style={label}>Category <span aria-hidden="true" style={{ color: A.warn }}>*</span></label>
           <select
             value={course.category}
-            onChange={(e) => setCourse(prev => ({...prev, category: e.target.value}))}
-            className="w-full px-3 py-2"
-            style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+            onChange={(e) => setCourse((prev) => ({ ...prev, category: e.target.value }))}
+            style={field}
           >
             <option value="general">General CE</option>
             <option value="ethics">Ethics</option>
-            <option value="sexualHarassment">Sexual Harassment Prevention</option>
-            <option value="culturalCompetency">Cultural Competency (NEW 2025)</option>
-            <option value="implicitBias">Implicit Bias</option>
-            <option value="dementia">Alzheimer's Disease & Dementia</option>
+            <option value="sexualHarassment">Sexual harassment prevention</option>
+            <option value="culturalCompetency">Cultural competency (new 2025)</option>
+            <option value="implicitBias">Implicit bias</option>
+            <option value="dementia">Alzheimer&rsquo;s disease &amp; dementia</option>
           </select>
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: colors.textDark }}>Format *</label>
+          <label style={label}>Format <span aria-hidden="true" style={{ color: A.warn }}>*</span></label>
           <select
             value={course.format}
-            onChange={(e) => setCourse(prev => ({...prev, format: e.target.value}))}
-            className="w-full px-3 py-2"
-            style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+            onChange={(e) => setCourse((prev) => ({ ...prev, format: e.target.value }))}
+            style={field}
           >
-            <option value="live">Live/In-Person</option>
-            <option value="selfStudy">Self-Study/Online</option>
+            <option value="live">Live / in person</option>
+            <option value="selfStudy">Self-study / online</option>
             <option value="teaching">Teaching</option>
-            <option value="clinicalInstructor">Clinical Instructor</option>
-            <option value="journalClubs">Journal Club</option>
-            <option value="inservices">Departmental Inservice</option>
-            <option value="districtMeetings">IPTA District Meeting</option>
-            <option value="skillsCertification">Skills Certification (CPR, etc.)</option>
+            <option value="clinicalInstructor">Clinical instructor</option>
+            <option value="journalClubs">Journal club</option>
+            <option value="inservices">Departmental inservice</option>
+            <option value="districtMeetings">IPTA district meeting</option>
+            <option value="skillsCertification">Skills certification (CPR, etc.)</option>
           </select>
         </div>
 
         {course.format === 'selfStudy' && (
           <div>
-            <label className="flex items-center">
+            <label className="flex items-center" style={{ fontFamily: FIG, fontSize: 13.5, cursor: 'pointer' }}>
               <input
                 type="checkbox"
                 checked={course.hasTest}
-                onChange={(e) => setCourse(prev => ({...prev, hasTest: e.target.checked}))}
+                onChange={(e) => setCourse((prev) => ({ ...prev, hasTest: e.target.checked }))}
                 className="mr-2"
               />
-              <span className="text-sm">Course included a test (required for self-study)</span>
+              <span>Course included a test (required for self-study)</span>
             </label>
           </div>
         )}
 
-        <div className="flex justify-end space-x-3 mt-6">
+        <div className="flex justify-end gap-2.5 mt-6">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2"
-            style={{ color: colors.textDark, background: colors.slateLight, border: 'none', cursor: 'pointer' }}
+            style={{ fontFamily: FIG, fontSize: 13.5, fontWeight: 600, padding: '9px 16px', color: A.ink, background: 'transparent', border: `1px solid ${A.ink}`, cursor: 'pointer' }}
           >
             Cancel
           </button>
           <button
             type="button"
             onClick={handleSubmit}
-            className="px-4 py-2"
-            style={{ background: colors.primaryBlue, color: 'white', border: 'none', cursor: 'pointer' }}
+            style={{ fontFamily: FIG, fontSize: 13.5, fontWeight: 600, padding: '9px 16px', background: A.accent, color: A.onAccent, border: `1px solid ${A.accent}`, cursor: 'pointer' }}
           >
-            {editingCourse ? 'Update Course' : 'Add Course'}
+            {editingCourse ? 'Update the course' : 'Add the course'}
           </button>
         </div>
       </div>

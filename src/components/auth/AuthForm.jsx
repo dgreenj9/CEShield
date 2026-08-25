@@ -1,11 +1,62 @@
 import React, { useState } from 'react';
 import { CheckCircle, Loader2, Mail, Eye, EyeOff, Lock } from 'lucide-react';
 import { supabase } from '../../services/supabaseClient';
-import { colors } from '../../utils/constants';
 import CEShieldLogo from '../common/CEShieldLogo';
 import siteStats from '../../data/siteStats.json';
 
-// Auth Form Component
+// Auth form — Atlas register panel: 1px ink rule on paper, petrol actions,
+// ochre for errors, sentence-case copy. All auth logic unchanged.
+
+const INS = "'Instrument Sans', ui-sans-serif, system-ui, sans-serif";
+
+const inputClasses =
+  'w-full px-3 py-2 rounded-none border border-atlas-rule-minor bg-atlas-paper text-sm text-atlas-ink ' +
+  'placeholder:text-atlas-ink-muted focus:outline-none focus:border-atlas-accent focus:ring-1 focus:ring-atlas-accent';
+
+const labelClasses = 'block mb-2 text-sm font-semibold text-atlas-ink';
+
+const primaryBtn = (disabled) => ({
+  background: '#235E6B',
+  color: '#FAFAF5',
+  border: 'none',
+  fontWeight: 600,
+  cursor: disabled ? 'not-allowed' : 'pointer',
+  opacity: disabled ? 0.5 : 1,
+  transition: 'background 0.15s ease, opacity 0.15s ease',
+});
+
+const textLink = {
+  color: '#235E6B',
+  background: 'none',
+  border: 'none',
+  cursor: 'pointer',
+  fontWeight: 600,
+};
+
+const ErrorNotice = ({ children }) => (
+  <div
+    role="alert"
+    style={{
+      border: '1px dashed #1B1A17',
+      background: '#F6F3E7',
+      padding: '0.75rem 1rem',
+      fontSize: '0.875rem',
+      color: '#45433C',
+    }}
+  >
+    <strong style={{ color: '#C77B2E', fontWeight: 700, marginRight: 8 }}>Error</strong>
+    {children}
+  </div>
+);
+
+const SuccessPanel = ({ title, children }) => (
+  <div className="text-center p-4" style={{ border: '1px solid #235E6B', background: '#FAFAF5' }} role="status">
+    <CheckCircle className="w-8 h-8 mx-auto mb-2" style={{ color: '#235E6B' }} aria-hidden="true" />
+    <h3 className="font-semibold mb-2" style={{ fontFamily: INS, color: '#1B1A17' }}>{title}</h3>
+    <p className="text-sm" style={{ color: '#45433C' }}>{children}</p>
+  </div>
+);
+
 const AuthForm = ({ onSuccess }) => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
@@ -73,25 +124,21 @@ const AuthForm = ({ onSuccess }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4" 
-         style={{ background: `linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%)` }}>
-      <div className="w-full max-w-md" 
-           style={{ background: 'white', padding: '2rem', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.08)', border: `1px solid ${colors.slateLight}` }}>
-        
+    <div className="min-h-screen flex items-center justify-center p-4 atlas-ground">
+      <div
+        className="w-full max-w-md"
+        style={{ background: '#FAFAF5', padding: '2rem', border: '1px solid #1B1A17' }}
+      >
         <div className="text-center mb-6">
           <CEShieldLogo showTagline={true} centered={true} size="xlarge" />
         </div>
 
         {confirmEmailSent ? (
           <div className="space-y-4">
-            <div className="text-center p-4" style={{ background: '#f0fdf4', border: '1px solid #86efac' }}>
-              <CheckCircle className="w-8 h-8 mx-auto mb-2" style={{ color: '#10b981' }} />
-              <h3 className="font-semibold mb-2" style={{ color: '#166534' }}>Check your email!</h3>
-              <p className="text-sm" style={{ color: '#166534' }}>
-                We&rsquo;ve sent a confirmation link to <strong>{email}</strong>.
-                Click it to activate your account, then sign in here.
-              </p>
-            </div>
+            <SuccessPanel title="Check your email">
+              We&rsquo;ve sent a confirmation link to <strong>{email}</strong>.
+              Click it to activate your account, then sign in here.
+            </SuccessPanel>
             <button
               onClick={() => {
                 setConfirmEmailSent(false);
@@ -99,21 +146,17 @@ const AuthForm = ({ onSuccess }) => {
                 setPassword('');
                 setError('');
               }}
-              className="w-full py-2 px-4 transition-all"
-              style={{ background: colors.primaryBlue, color: 'white', border: 'none', fontWeight: 500, cursor: 'pointer' }}
+              className="w-full py-2 px-4"
+              style={primaryBtn(false)}
             >
-              Back to Sign In
+              Back to sign in
             </button>
           </div>
         ) : resetEmailSent ? (
           <div className="space-y-4">
-            <div className="text-center p-4" style={{ background: '#f0fdf4', border: '1px solid #86efac' }}>
-              <CheckCircle className="w-8 h-8 mx-auto mb-2" style={{ color: '#10b981' }} />
-              <h3 className="font-semibold mb-2" style={{ color: '#166534' }}>Check your email!</h3>
-              <p className="text-sm" style={{ color: '#166534' }}>
-                We've sent a password reset link to {email}
-              </p>
-            </div>
+            <SuccessPanel title="Check your email">
+              We&rsquo;ve sent a password reset link to {email}
+            </SuccessPanel>
             <button
               onClick={() => {
                 setShowForgotPassword(false);
@@ -122,62 +165,52 @@ const AuthForm = ({ onSuccess }) => {
                 setPassword('');
                 setError('');
               }}
-              className="w-full py-2 px-4 transition-all"
-              style={{ background: colors.primaryBlue, color: 'white', border: 'none', fontWeight: 500, cursor: 'pointer' }}
+              className="w-full py-2 px-4"
+              style={primaryBtn(false)}
             >
-              Back to Sign In
+              Back to sign in
             </button>
           </div>
         ) : showForgotPassword ? (
           // Forgot Password Form
           <div>
             <div className="mb-6">
-              <h2 className="text-xl font-semibold text-center mb-2" style={{ color: colors.textDark }}>
+              <h2
+                className="text-xl font-semibold text-center mb-2"
+                style={{ fontFamily: INS, color: '#1B1A17', letterSpacing: '-0.02em' }}
+              >
                 Reset your password
               </h2>
-              <p className="text-center text-sm" style={{ color: colors.textGray }}>
-                Enter your email address and we'll send you a link to reset your password.
+              <p className="text-center text-sm" style={{ color: '#56544C' }}>
+                Enter your email address and we&rsquo;ll send you a link to reset your password.
               </p>
             </div>
 
             <form onSubmit={handlePasswordReset} className="space-y-4">
               <div>
-                <label className="block mb-2 text-sm font-medium" style={{ color: colors.textDark }}>
-                  <Mail className="inline w-4 h-4 mr-1" />
+                <label className={labelClasses}>
+                  <Mail className="inline w-4 h-4 mr-1" aria-hidden="true" />
                   Email
                 </label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 focus:outline-none focus:ring-2"
-                  style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                  className={inputClasses}
                   placeholder="Enter your email address"
                   required
                 />
               </div>
 
-              {error && (
-                <div style={{ 
-                  background: '#fef2f2', border: '1px solid #fecaca', color: '#dc2626',
-                  padding: '0.75rem', fontSize: '0.875rem'
-                }}>
-                  {error}
-                </div>
-              )}
+              {error && <ErrorNotice>{error}</ErrorNotice>}
 
               <button
                 type="submit"
                 disabled={loading || !email}
-                className="w-full py-2 px-4 flex items-center justify-center transition-all"
-                style={{
-                  background: loading || !email ? colors.slateMedium : colors.primaryBlue,
-                  color: 'white', border: 'none', fontWeight: 500,
-                  cursor: loading || !email ? 'not-allowed' : 'pointer',
-                  opacity: loading || !email ? 0.5 : 1
-                }}
+                className="w-full py-2 px-4 flex items-center justify-center"
+                style={primaryBtn(loading || !email)}
               >
-                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Send Reset Link'}
+                {loading ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" /> : 'Send reset link'}
               </button>
             </form>
 
@@ -188,9 +221,9 @@ const AuthForm = ({ onSuccess }) => {
                   setError('');
                 }}
                 className="text-sm"
-                style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer' }}
+                style={textLink}
               >
-                Back to Sign In
+                Back to sign in
               </button>
             </div>
           </div>
@@ -198,23 +231,25 @@ const AuthForm = ({ onSuccess }) => {
           // Normal Sign In/Sign Up Form
           <div>
             <div className="mb-6">
-              <p className="text-center" style={{ color: colors.textGray }}>
+              <p className="text-center" style={{ color: '#56544C' }}>
                 {isSignUp ? 'Create your account' : 'Sign in to your account'}
               </p>
               {isSignUp && (
-                <p className="text-center text-sm mt-2" style={{ color: colors.textGray }}>
-                  Free during beta &mdash; the full matrix ({siteStats.certCount} credentials,{' '}
-                  {siteStats.citationTotal.toLocaleString()} citations), five career-path lenses, and your CE
-                  compliance tracked in one place. Students: CE Shield is
-                  free for you, always.
+                <p className="text-center text-sm mt-2" style={{ color: '#56544C' }}>
+                  Free during beta: the full field ({siteStats.certCount} credentials,{' '}
+                  {siteStats.citationTotal.toLocaleString()} citations), five career lenses, and your CE
+                  compliance tracked in one place.{' '}
+                  <strong style={{ color: '#1B1A17' }}>
+                    Students: CE Shield is free for you, always.
+                  </strong>
                 </p>
               )}
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block mb-2 text-sm font-medium" style={{ color: colors.textDark }}>
-                  <Mail className="inline w-4 h-4 mr-1" />
+                <label className={labelClasses}>
+                  <Mail className="inline w-4 h-4 mr-1" aria-hidden="true" />
                   Email
                 </label>
                 <div className="relative">
@@ -222,16 +257,15 @@ const AuthForm = ({ onSuccess }) => {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-3 py-2 pr-10 focus:outline-none focus:ring-2"
-                    style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                    className={`${inputClasses} pr-10`}
                     required
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block mb-2 text-sm font-medium" style={{ color: colors.textDark }}>
-                  <Lock className="inline w-4 h-4 mr-1" />
+                <label className={labelClasses}>
+                  <Lock className="inline w-4 h-4 mr-1" aria-hidden="true" />
                   Password
                 </label>
                 <div className="relative">
@@ -239,8 +273,7 @@ const AuthForm = ({ onSuccess }) => {
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-3 py-2 pr-10 focus:outline-none focus:ring-2"
-                    style={{ border: `1px solid ${colors.slateLight}`, background: colors.grayLight }}
+                    className={`${inputClasses} pr-10`}
                     required
                     minLength={8}
                   />
@@ -249,7 +282,7 @@ const AuthForm = ({ onSuccess }) => {
                     onClick={() => setShowPassword(!showPassword)}
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                     className="absolute right-2 top-2.5"
-                    style={{ color: colors.textGray, background: 'none', border: 'none', cursor: 'pointer' }}
+                    style={{ color: '#56544C', background: 'none', border: 'none', cursor: 'pointer' }}
                   >
                     {showPassword ? <EyeOff className="w-5 h-5" aria-hidden="true" /> : <Eye className="w-5 h-5" aria-hidden="true" />}
                   </button>
@@ -262,34 +295,22 @@ const AuthForm = ({ onSuccess }) => {
                     type="button"
                     onClick={() => setShowForgotPassword(true)}
                     className="text-sm"
-                    style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer' }}
+                    style={textLink}
                   >
                     Forgot password?
                   </button>
                 </div>
               )}
 
-              {error && (
-                <div style={{ 
-                  background: '#fef2f2', border: '1px solid #fecaca', color: '#dc2626',
-                  padding: '0.75rem', fontSize: '0.875rem'
-                }}>
-                  {error}
-                </div>
-              )}
+              {error && <ErrorNotice>{error}</ErrorNotice>}
 
               <button
                 type="submit"
                 disabled={loading || !email || !password}
-                className="w-full py-2 px-4 flex items-center justify-center transition-all"
-                style={{
-                  background: loading || !email || !password ? colors.slateMedium : colors.primaryBlue,
-                  color: 'white', border: 'none', fontWeight: 500,
-                  cursor: loading || !email || !password ? 'not-allowed' : 'pointer',
-                  opacity: loading || !email || !password ? 0.5 : 1
-                }}
+                className="w-full py-2 px-4 flex items-center justify-center"
+                style={primaryBtn(loading || !email || !password)}
               >
-                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : (isSignUp ? 'Create Account' : 'Sign In')}
+                {loading ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" /> : (isSignUp ? 'Create account' : 'Sign in')}
               </button>
             </form>
 
@@ -297,16 +318,16 @@ const AuthForm = ({ onSuccess }) => {
               <button
                 onClick={() => { setIsSignUp(!isSignUp); setError(''); }}
                 className="text-sm"
-                style={{ color: colors.primaryBlue, background: 'none', border: 'none', cursor: 'pointer' }}
+                style={textLink}
               >
-                {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
+                {isSignUp ? 'Already have an account? Sign in' : 'No account? Sign up, free'}
               </button>
             </div>
           </div>
         )}
 
-        <div className="mt-6 pt-6" style={{ borderTop: `1px solid ${colors.slateLight}` }}>
-          <p className="text-xs text-center" style={{ color: colors.textGray }}>
+        <div className="mt-6 pt-6" style={{ borderTop: '1px solid #D5D3C6' }}>
+          <p className="text-xs text-center" style={{ color: '#56544C' }}>
             Stored securely. We never share your information.
           </p>
         </div>

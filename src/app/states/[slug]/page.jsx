@@ -2,19 +2,19 @@
 // One static HTML page per (state, license) combo, generated at build time.
 // This is the SEO payoff of the Next.js migration: each page has its own
 // crawlable URL with state-specific keywords in title, h1, and body.
+//
+// Atlas: echoes the Compliance Ledger's language — big tabular numerals,
+// ruled mandatory-category rows, bordered format-cap tiles, source footer.
 
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import {
-  ArrowLeft, ArrowRight, Shield, ExternalLink, CheckCircle, AlertCircle,
-} from 'lucide-react';
-import { colors } from '@/utils/constants';
 import PublicNav from '@/components/layout/PublicNav';
 import {
   allStateLicenseEntries,
   parseStateLicenseSlug,
   getRulesFor,
 } from '@/data/stateRules';
+import { A, FIG, INS, tabularNums } from '@/components/atlas/theme';
 
 // ─── SSG plumbing ─────────────────────────────────────────────────────────
 
@@ -60,6 +60,11 @@ export async function generateMetadata({ params }) {
 const humanCategory = (key) =>
   key.replace(/([A-Z])/g, ' $1').trim().replace(/^./, (s) => s.toUpperCase());
 
+const headLabel = {
+  fontFamily: FIG, fontSize: 12.5, fontWeight: 700, color: A.inkMuted,
+  letterSpacing: '0.02em', borderTop: `2px solid ${A.ink}`, paddingTop: 10, marginBottom: 14,
+};
+
 export default async function Page({ params }) {
   const { slug } = await params;
   const parsed = parseStateLicenseSlug(slug);
@@ -84,16 +89,10 @@ export default async function Page({ params }) {
     ],
   }).replace(/</g, '\\u003c');
 
+  const mandatoryEntries = Object.entries(r.mandatory || {}).filter(([, v]) => v > 0);
+
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        backgroundColor: '#FAFAF6',
-        backgroundImage: 'radial-gradient(circle, rgba(15, 23, 42, 0.05) 1px, transparent 1px)',
-        backgroundSize: '22px 22px',
-        color: colors.textDark,
-      }}
-    >
+    <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink }}>
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
@@ -101,36 +100,27 @@ export default async function Page({ params }) {
       />
       <PublicNav />
 
-      <main className="cs-page-pad" style={{
-        maxWidth: 860, margin: '0 auto', padding: '3rem 2rem 6rem', lineHeight: 1.65,
-      }}>
+      <main className="cs-page-pad" style={{ maxWidth: 860, margin: '0 auto', padding: '3rem 2rem 6rem', lineHeight: 1.65 }}>
         <Link
           href="/states"
           style={{
-            display: 'inline-flex', alignItems: 'center', gap: 6,
-            color: colors.primaryBlue, textDecoration: 'none', fontWeight: 500,
-            fontSize: '0.88rem', marginBottom: '1.25rem',
+            display: 'inline-block', fontFamily: FIG, color: A.accent, textDecoration: 'none',
+            fontWeight: 700, fontSize: 13, marginBottom: '1.25rem',
           }}
         >
-          <ArrowLeft size={14} aria-hidden="true" /> All states
+          ← All states
         </Link>
         <header style={{ marginBottom: '2rem' }}>
-          <div
-            className="font-mono"
-            style={{
-              fontSize: '0.7rem', color: colors.textGray,
-              letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 6,
-            }}
-          >
-            {r.jurisdictionName} · {parsed.licenseType}
+          <div style={{ fontFamily: FIG, fontSize: 12.5, color: A.inkMuted, fontWeight: 600, letterSpacing: '0.02em', marginBottom: 8 }}>
+            {r.jurisdictionName} · {parsed.licenseType} · {r.totalHours}h / {r.cycleYears}yr
           </div>
-          <h1 style={{
-            fontSize: 'clamp(1.6rem, 6vw, 2.4rem)', fontWeight: 600, color: colors.textDark, margin: 0,
-            letterSpacing: '-0.02em', lineHeight: 1.1,
-          }}>
+          <h1
+            className="cs-h1-clamp"
+            style={{ fontFamily: INS, fontSize: 40, fontWeight: 600, margin: 0, letterSpacing: '-0.025em', lineHeight: 1.05 }}
+          >
             {r.jurisdictionName} {parsed.licenseType} CE requirements
           </h1>
-          <p style={{ color: colors.slateMedium, marginTop: '0.75rem', fontSize: '1.05rem' }}>
+          <p style={{ color: A.inkBody, marginTop: '0.75rem', fontSize: 16.5, maxWidth: '40em' }}>
             {r.totalHours} hours of continuing education every {r.cycleYears}{' '}
             years for {licenseLong.toLowerCase()} licensed in {r.jurisdictionName}.
             Below: the full breakdown, the mandatory categories most CE platforms
@@ -141,55 +131,53 @@ export default async function Page({ params }) {
             <div
               role="alert"
               style={{
-                marginTop: '1.25rem', padding: '0.875rem 1rem',
-                background: '#fef3c7', border: '1px solid #fbbf24',
-                borderRadius: 8, color: '#92400e', fontSize: '0.875rem',
+                marginTop: '1.25rem', padding: '0.85rem 1.4rem',
+                border: `1px dashed ${A.ink}`, background: A.notice,
+                display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap',
+                fontSize: 14,
               }}
             >
-              <strong>Draft state.</strong> These values are a first draft based
-              on <a href={r.boardUrl} target="_blank" rel="noopener noreferrer" style={{ color: '#92400e', textDecoration: 'underline' }}>{r.citation}</a>.
-              Verify with your licensing board before relying on totals.
+              <span style={{ fontFamily: FIG, fontSize: 12, letterSpacing: '0.02em', fontWeight: 700, color: A.warn, whiteSpace: 'nowrap' }}>
+                Draft state
+              </span>
+              <span style={{ color: A.inkBody }}>
+                These values are a first draft based on{' '}
+                <a href={r.boardUrl} target="_blank" rel="noopener noreferrer" style={{ color: A.accent, fontWeight: 700 }}>
+                  {r.citation}
+                </a>
+                . Verify with your licensing board before relying on totals.
+              </span>
             </div>
           )}
         </header>
 
-        {/* Stat strip */}
+        {/* Stat band */}
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-            gap: '0.75rem',
-            marginBottom: '2rem',
+            border: `1px solid ${A.ink}`,
+            background: A.paper,
+            marginBottom: '2.5rem',
           }}
         >
           {[
-            { label: 'Total CE hours', value: r.totalHours },
-            { label: 'Cycle length', value: `${r.cycleYears} yrs` },
-            { label: 'Mandatory categories', value: Object.keys(r.mandatory || {}).filter((k) => r.mandatory[k] > 0).length },
-            { label: 'First-renewal exempt', value: r.firstRenewalExempt ? 'Yes' : 'No' },
-          ].map((s) => (
+            { label: 'total CE hours', value: r.totalHours },
+            { label: 'cycle length', value: `${r.cycleYears} yrs` },
+            { label: 'mandatory categories', value: mandatoryEntries.length },
+            { label: 'first renewal exempt', value: r.firstRenewalExempt ? 'Yes' : 'No' },
+          ].map((s, i, arr) => (
             <div
               key={s.label}
               style={{
-                padding: '1rem',
-                background: 'white',
-                border: `1px solid ${colors.slateLight}`,
-                borderRadius: 12,
+                padding: '1.2rem 1.4rem',
+                borderRight: i < arr.length - 1 ? `1px solid ${A.ruleMinor}` : 'none',
               }}
             >
-              <div
-                className="tabular-nums"
-                style={{
-                  fontSize: '1.85rem', fontWeight: 700, color: colors.primaryBlue,
-                  letterSpacing: '-0.025em', lineHeight: 1,
-                }}
-              >
+              <div style={{ fontFamily: FIG, fontSize: 30, fontWeight: 800, lineHeight: 1, ...tabularNums }}>
                 {s.value}
               </div>
-              <div
-                className="eyebrow"
-                style={{ marginTop: 6, fontSize: '0.62rem' }}
-              >
+              <div style={{ fontFamily: FIG, fontSize: 11.5, letterSpacing: '0.02em', color: A.inkMuted, fontWeight: 600, marginTop: 5 }}>
                 {s.label}
               </div>
             </div>
@@ -197,76 +185,58 @@ export default async function Page({ params }) {
         </div>
 
         {/* Mandatory categories */}
-        <section style={{ marginBottom: '2.5rem' }}>
-          <div className="flex items-center gap-3 mb-3">
-            <span className="eyebrow">Mandatory categories</span>
-            <hr className="section-rule flex-1 m-0" />
-          </div>
-          <div style={{
-            background: 'white', border: `1px solid ${colors.slateLight}`,
-            borderRadius: 12, overflow: 'hidden',
-          }}>
-            {Object.entries(r.mandatory || {})
-              .filter(([, v]) => v > 0)
-              .map(([key, val], i, arr) => (
+        {mandatoryEntries.length > 0 && (
+          <section style={{ marginBottom: '2.5rem' }}>
+            <div style={headLabel}>Mandatory categories</div>
+            <div style={{ border: `1px solid ${A.ink}`, background: A.paper }}>
+              {mandatoryEntries.map(([key, val], i, arr) => (
                 <div
                   key={key}
                   style={{
-                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                    padding: '0.875rem 1.25rem',
-                    borderBottom: i < arr.length - 1 ? `1px solid ${colors.slateLight}` : 'none',
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+                    padding: '0.8rem 1.4rem',
+                    borderBottom: i < arr.length - 1 ? `1px solid ${A.ruleFaintest}` : 'none',
                   }}
                 >
-                  <span style={{ fontSize: '0.95rem', color: colors.textDark }}>
-                    {humanCategory(key)}
-                  </span>
-                  <span className="font-mono tabular-nums" style={{
-                    fontWeight: 600, color: colors.textDark,
-                  }}>
+                  <span style={{ fontSize: 14.5, color: A.ink }}>{humanCategory(key)}</span>
+                  <span style={{ fontFamily: FIG, fontWeight: 700, fontSize: 14.5, color: A.ink, ...tabularNums }}>
                     {val} {val === 1 ? 'hour' : 'hours'}
                   </span>
                 </div>
               ))}
-          </div>
-          {r.notes?.length > 0 && (
-            <ul style={{
-              marginTop: '1rem', paddingLeft: '1.25rem',
-              color: colors.textGray, fontSize: '0.88rem', lineHeight: 1.6,
-            }}>
-              {r.notes.map((n, i) => <li key={i}>{n}</li>)}
-            </ul>
-          )}
-        </section>
+            </div>
+            {r.notes?.length > 0 && (
+              <ul
+                style={{
+                  marginTop: '1rem', paddingLeft: '1.25rem',
+                  color: A.inkMuted, fontSize: 13.5, lineHeight: 1.6,
+                }}
+              >
+                {r.notes.map((n, i) => <li key={i}>{n}</li>)}
+              </ul>
+            )}
+          </section>
+        )}
 
-        {/* Limits */}
+        {/* Format caps */}
         {Object.keys(r.limits || {}).length > 0 && (
           <section style={{ marginBottom: '2.5rem' }}>
-            <div className="flex items-center gap-3 mb-3">
-              <span className="eyebrow">Category caps</span>
-              <hr className="section-rule flex-1 m-0" />
-            </div>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-              gap: '0.5rem',
-            }}>
+            <div style={headLabel}>Format caps</div>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+                gap: 10,
+              }}
+            >
               {Object.entries(r.limits).map(([key, val]) => (
-                <div
-                  key={key}
-                  style={{
-                    background: 'white',
-                    border: `1px solid ${colors.slateLight}`,
-                    borderRadius: 10,
-                    padding: '0.75rem 0.875rem',
-                  }}
-                >
-                  <div style={{ fontSize: '0.78rem', color: colors.textGray }}>
-                    {humanCategory(key)}
+                <div key={key} style={{ border: `1px solid ${A.ruleFaint}`, background: A.paper, padding: '10px 12px' }}>
+                  <div style={{ fontFamily: FIG, fontSize: 17, fontWeight: 800, ...tabularNums }}>
+                    {val}
+                    <span style={{ fontSize: 12, color: A.inkMuted, fontWeight: 600 }}> h cap</span>
                   </div>
-                  <div className="font-mono tabular-nums" style={{
-                    fontWeight: 600, color: colors.textDark, marginTop: 2,
-                  }}>
-                    cap {val} hr
+                  <div style={{ fontSize: 11.5, color: A.inkMuted, marginTop: 3, textTransform: 'capitalize' }}>
+                    {humanCategory(key)}
                   </div>
                 </div>
               ))}
@@ -274,110 +244,67 @@ export default async function Page({ params }) {
           </section>
         )}
 
-        {/* Source */}
-        <section style={{ marginBottom: '2.5rem' }}>
-          <div className="flex items-center gap-3 mb-3">
-            <span className="eyebrow">Source</span>
-            <hr className="section-rule flex-1 m-0" />
-          </div>
-          <div style={{
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            gap: '1rem', flexWrap: 'wrap',
-            padding: '1rem 1.25rem',
-            background: 'white', border: `1px solid ${colors.slateLight}`,
-            borderRadius: 12,
-          }}>
-            <div>
-              <div style={{ fontSize: '0.78rem', color: colors.textGray, marginBottom: 4 }}>
-                Statutory citation
-              </div>
-              <div style={{ fontWeight: 500, color: colors.textDark }}>{r.citation}</div>
-              {r.lastReviewed && (
-                <div style={{ fontSize: '0.78rem', color: colors.textGray, marginTop: 4 }}>
-                  Last reviewed {r.lastReviewed}
-                </div>
-              )}
-            </div>
-            <a
-              href={r.boardUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 6,
-                padding: '0.5rem 0.875rem',
-                background: 'white', color: colors.primaryBlue,
-                border: `1px solid ${colors.primaryBlue}`,
-                borderRadius: 6, textDecoration: 'none', fontSize: '0.9rem',
-              }}
-            >
-              Board page <ExternalLink size={14} aria-hidden="true" />
-            </a>
-          </div>
-        </section>
-
         {/* CTA */}
         <section
           style={{
-            marginTop: '3rem', padding: '1.75rem',
-            background: colors.grayLight, borderRadius: 16,
-            border: `1px solid ${colors.slateLight}`,
+            marginTop: '3rem', padding: '1.25rem 1.75rem',
+            border: `1px solid ${A.ink}`, background: A.band,
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            gap: '1.5rem', flexWrap: 'wrap',
           }}
         >
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 600, margin: 0, color: colors.textDark }}>
-            Track {r.jurisdictionName} {parsed.licenseType} CE hours with CE Shield
-          </h2>
-          <p style={{
-            color: colors.slateMedium, lineHeight: 1.6, marginTop: '0.5rem',
-          }}>
-            One place for your hours, mandatory categories, and certificate
-            uploads &mdash; plus an evidence-backed certifications matrix to
-            help you pick credentials that actually move your career forward.
-            Free during beta.
-          </p>
-          <div style={{ marginTop: '1.25rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+          <div style={{ maxWidth: '34em' }}>
+            <h2 style={{ fontFamily: INS, fontSize: 20, fontWeight: 600, margin: 0, letterSpacing: '-0.025em', color: A.ink }}>
+              Track {r.jurisdictionName} {parsed.licenseType} CE with CE Shield
+            </h2>
+            <p style={{ color: A.inkBody, lineHeight: 1.55, margin: '0.4rem 0 0', fontSize: 14 }}>
+              Hours, mandatory categories, and certificate uploads in one ledger,
+              plus an evidence-scored credential field. Free during beta.
+            </p>
+          </div>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
             <Link
               href="/sign-in"
               style={{
-                display: 'inline-flex', alignItems: 'center', gap: 6,
-                padding: '0.625rem 1.25rem',
-                background: colors.primaryBlue, color: 'white',
-                borderRadius: 6, textDecoration: 'none', fontWeight: 500,
+                textDecoration: 'none', fontWeight: 600, fontSize: 14.5,
+                background: A.accent, color: A.onAccent, padding: '12px 20px', whiteSpace: 'nowrap',
               }}
             >
-              Start tracking <ArrowRight size={14} aria-hidden="true" />
+              Start tracking →
             </Link>
             <Link
-              href="/"
+              href="/matrix"
               style={{
-                display: 'inline-flex', alignItems: 'center',
-                padding: '0.625rem 1.25rem',
-                background: 'white', color: colors.primaryBlue,
-                border: `1px solid ${colors.primaryBlue}`,
-                borderRadius: 6, textDecoration: 'none', fontWeight: 500,
+                textDecoration: 'none', fontWeight: 600, fontSize: 14.5,
+                border: `1px solid ${A.ink}`, color: A.ink, padding: '11px 20px', whiteSpace: 'nowrap',
               }}
             >
-              See the matrix
+              See the field
             </Link>
           </div>
         </section>
 
-        {/* Cross-link to sibling license + index */}
-        <section style={{
-          marginTop: '2.5rem',
-          textAlign: 'center', color: colors.textGray, fontSize: '0.9rem',
-        }}>
+        {/* Source footer + cross-links */}
+        <p style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, margin: '1.5rem 0 0', letterSpacing: '0.02em' }}>
+          Source: {r.citation}
+          {r.lastReviewed ? ` · last reviewed ${r.lastReviewed}` : ''} ·{' '}
+          <a href={r.boardUrl} target="_blank" rel="noopener noreferrer" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>
+            Read the rule ↗
+          </a>
+        </p>
+        <p style={{ fontFamily: FIG, fontSize: 12.5, color: A.inkMuted, margin: '0.75rem 0 0' }}>
           {otherEntry && (
             <Link
               href={`/states/${otherEntry.slug}`}
-              style={{ color: colors.primaryBlue, textDecoration: 'underline', marginRight: '1rem' }}
+              style={{ color: A.accent, fontWeight: 700, textDecoration: 'none', marginRight: '1.25rem' }}
             >
-              {r.jurisdictionName} {otherLicense} requirements &rarr;
+              {r.jurisdictionName} {otherLicense} requirements →
             </Link>
           )}
-          <Link href="/states" style={{ color: colors.primaryBlue, textDecoration: 'underline' }}>
+          <Link href="/states" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>
             All states
           </Link>
-        </section>
+        </p>
       </main>
     </div>
   );

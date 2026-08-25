@@ -20,7 +20,6 @@ import { UserDataProvider } from '@/contexts/UserDataContext';
 import AppShell from '@/components/layout/AppShell';
 import ProfileSetup from '@/components/auth/ProfileSetup';
 import ErrorBoundary from '@/components/common/ErrorBoundary';
-import { colors } from '@/utils/constants';
 
 const Fallback = () => (
   <div
@@ -29,7 +28,7 @@ const Fallback = () => (
     aria-label="Loading"
     className="min-h-screen flex items-center justify-center bg-paper-bg"
   >
-    <Loader2 className="w-8 h-8 animate-spin" style={{ color: colors.primaryBlue }} aria-hidden="true" />
+    <Loader2 className="w-8 h-8 animate-spin" style={{ color: '#235E6B' }} aria-hidden="true" />
     <span className="sr-only">Loading…</span>
   </div>
 );
