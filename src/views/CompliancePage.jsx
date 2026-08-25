@@ -14,7 +14,7 @@ import { A, FIG, INS, eyebrow, tabularNums } from '../components/atlas/theme';
 
 const labelize = (key) => key.replace(/([A-Z])/g, ' $1').trim();
 
-const headLabel = { fontFamily: FIG, fontSize: 11, letterSpacing: '0.12em', fontWeight: 700, color: A.inkMuted, textTransform: 'uppercase' };
+const headLabel = { fontFamily: FIG, fontSize: 12.5, letterSpacing: '0.02em', fontWeight: 700, color: A.inkMuted };
 
 export default function CompliancePage() {
   const { user, courses } = useUserData();
@@ -33,13 +33,12 @@ export default function CompliancePage() {
   const renewalDateLabel = user.renewalDate
     ? new Date(`${user.renewalDate}T12:00:00`)
         .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-        .toUpperCase()
     : null;
 
   if (!requirements) {
     return (
       <div>
-        <div style={{ ...eyebrow(), marginBottom: 8 }}>TABLE 3 — THE LEDGER</div>
+        <div style={{ ...eyebrow(), marginBottom: 8 }}>The Ledger</div>
         <h1 style={{ fontFamily: INS, fontWeight: 600, fontSize: 36, lineHeight: 1.02, letterSpacing: '-0.025em', margin: '0 0 1.5rem' }}>
           Renewal day should be boring.
         </h1>
@@ -75,8 +74,8 @@ export default function CompliancePage() {
       <header style={{ marginBottom: '1.25rem', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '2rem', flexWrap: 'wrap' }}>
         <div>
           <div style={{ ...eyebrow(), marginBottom: 8 }}>
-            TABLE 3 — THE LEDGER · {(requirements.jurisdictionName || user.state).toUpperCase()} {user.licenseType} ·{' '}
-            {requirements.total}H / {requirements.cycleYears}YR{cite ? ` · ${cite}` : ''}
+            The Ledger · {requirements.jurisdictionName || user.state} {user.licenseType} ·{' '}
+            {requirements.total}h / {requirements.cycleYears}yr{cite ? ` · ${cite}` : ''}
           </div>
           <h1 className="cs-h1-clamp" style={{ fontFamily: INS, fontWeight: 600, fontSize: 36, lineHeight: 1.02, letterSpacing: '-0.025em', margin: 0 }}>
             Renewal day should be boring.
@@ -88,13 +87,13 @@ export default function CompliancePage() {
               <span style={{ fontFamily: FIG, fontSize: 44, fontWeight: 800, lineHeight: 1, color: renewalDays < 90 ? A.warn : A.ink, ...tabularNums }}>
                 {renewalDays}
               </span>
-              <span style={{ display: 'block', fontFamily: FIG, fontSize: 10.5, letterSpacing: '0.1em', color: A.inkMuted, fontWeight: 600, marginTop: 2 }}>
-                DAYS TO RENEWAL{renewalDateLabel ? ` · ${renewalDateLabel}` : ''}
+              <span style={{ display: 'block', fontFamily: FIG, fontSize: 11.5, letterSpacing: '0.02em', color: A.inkMuted, fontWeight: 600, marginTop: 2 }}>
+                days to renewal{renewalDateLabel ? ` · ${renewalDateLabel}` : ''}
               </span>
             </>
           ) : (
-            <Link to="/profile" style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 700, letterSpacing: '0.08em', color: A.accent, textDecoration: 'none' }}>
-              SET YOUR RENEWAL DATE →
+            <Link to="/profile" style={{ fontFamily: FIG, fontSize: 12.5, fontWeight: 700, letterSpacing: '0.02em', color: A.accent, textDecoration: 'none' }}>
+              Set your renewal date →
             </Link>
           )}
         </div>
@@ -103,7 +102,7 @@ export default function CompliancePage() {
       {/* Unverified-state notice */}
       {requirements.verified === false && (
         <div role="alert" style={{ border: `1px dashed ${A.ink}`, padding: '0.85rem 1.4rem', marginBottom: '1.5rem', background: A.notice, display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap' }}>
-          <span style={{ fontFamily: FIG, fontSize: 11, letterSpacing: '0.1em', fontWeight: 700, color: A.warn }}>BETA STATE</span>
+          <span style={{ fontFamily: FIG, fontSize: 12, letterSpacing: '0.02em', fontWeight: 700, color: A.warn }}>Beta state</span>
           <span style={{ fontSize: 14 }}>
             {requirements.jurisdictionName} CE rules are unverified. Confirm against{' '}
             <a href={requirements.boardUrl} target="_blank" rel="noopener noreferrer" style={{ color: A.accent, fontWeight: 700 }}>
@@ -117,7 +116,7 @@ export default function CompliancePage() {
       {/* First-renewal exemption */}
       {user.isFirstRenewal && (
         <div style={{ border: `1px dashed ${A.ink}`, padding: '0.85rem 1.4rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap' }}>
-          <span style={{ fontFamily: FIG, fontSize: 11, letterSpacing: '0.1em', fontWeight: 700, color: A.accent }}>FIRST RENEWAL</span>
+          <span style={{ fontFamily: FIG, fontSize: 12, letterSpacing: '0.02em', fontWeight: 700, color: A.accent }}>First renewal</span>
           <span style={{ fontSize: 14 }}>No CE requirements needed for this cycle.</span>
         </div>
       )}
@@ -125,9 +124,9 @@ export default function CompliancePage() {
       {/* New-rule notice */}
       {showCulturalNotice && (
         <div style={{ border: `1px dashed ${A.ink}`, padding: '0.85rem 1.4rem', marginBottom: '1.5rem', background: A.notice, display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap' }}>
-          <span style={{ fontFamily: FIG, fontSize: 11, letterSpacing: '0.1em', fontWeight: 700, color: A.warn }}>NEW 2025 RULE</span>
+          <span style={{ fontFamily: FIG, fontSize: 12, letterSpacing: '0.02em', fontWeight: 700, color: A.warn }}>New 2025 rule</span>
           <span style={{ fontSize: 14 }}>
-            Cultural competency ({requirements.mandatory.culturalCompetency} h) now required in Illinois — one hour, this cycle.
+            Cultural competency ({requirements.mandatory.culturalCompetency} h) is now required in Illinois, starting this cycle.
           </span>
         </div>
       )}
@@ -136,14 +135,14 @@ export default function CompliancePage() {
         {/* Fig. 4 — hours banked + mandatory categories */}
         <div className="atlas-ledger-grid">
           <div style={{ padding: '1.5rem 1.75rem', borderRight: `1px solid ${A.ink}` }}>
-            <div style={{ ...headLabel, marginBottom: 14 }}>FIG. 4 — HOURS BANKED</div>
+            <div style={{ ...headLabel, marginBottom: 14 }}>Hours banked</div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
               <span style={{ fontFamily: FIG, fontSize: 58, fontWeight: 800, lineHeight: 1, letterSpacing: '-0.02em', ...tabularNums }}>
                 {hours.total}
               </span>
               <span style={{ fontFamily: FIG, fontSize: 20, fontWeight: 600, color: A.inkMuted }}>/ {requirements.total} h</span>
-              <span style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 700, letterSpacing: '0.08em', padding: '3px 10px', background: onPace ? A.accent : A.warn, color: A.onAccent, alignSelf: 'center' }}>
-                {onPace ? 'ON PACE' : 'BEHIND PACE'}
+              <span style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 700, letterSpacing: '0.02em', padding: '3px 10px', background: onPace ? A.accent : A.warn, color: A.onAccent, alignSelf: 'center' }}>
+                {onPace ? 'On pace' : 'Behind pace'}
               </span>
             </div>
             <div
@@ -157,13 +156,13 @@ export default function CompliancePage() {
               <span style={{ display: 'block', height: '100%', width: `${pct}%`, background: A.accent }} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: FIG, fontSize: 11.5, color: A.inkMuted }}>
-              <span>{Math.round(pct)}% OF CYCLE REQUIREMENT</span>
-              <span>{Math.max(0, requirements.total - hours.total)} H STILL TO LOG</span>
+              <span>{Math.round(pct)}% of cycle requirement</span>
+              <span>{Math.max(0, requirements.total - hours.total)} h still to log</span>
             </div>
           </div>
           <div style={{ padding: '1.5rem 1.75rem' }}>
             <div style={{ ...headLabel, marginBottom: 14 }}>
-              MANDATORY CATEGORIES — {mandatoryDone} OF {mandatoryEntries.length} DONE
+              Mandatory categories · {mandatoryDone} of {mandatoryEntries.length} done
             </div>
             {mandatoryEntries.map(([key, required]) => {
               const done = hours[key] || 0;
@@ -173,12 +172,12 @@ export default function CompliancePage() {
                   <span style={{ fontSize: 14, textTransform: 'capitalize' }}>
                     {labelize(key)}{' '}
                     {key === 'culturalCompetency' && (
-                      <span style={{ fontFamily: FIG, fontSize: 10, fontWeight: 700, color: A.warn, letterSpacing: '0.06em' }}>NEW 2025</span>
+                      <span style={{ fontFamily: FIG, fontSize: 10, fontWeight: 700, color: A.warn, letterSpacing: '0.02em' }}>New 2025</span>
                     )}
                   </span>
                   <span style={{ fontFamily: FIG, fontSize: 13.5, fontWeight: 700, ...tabularNums }}>{done}/{required} h</span>
-                  <span style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 800, color: ok ? A.accent : A.warn, letterSpacing: '0.06em', minWidth: 30, textAlign: 'right' }}>
-                    {ok ? '✓' : 'DUE'}
+                  <span style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 800, color: ok ? A.accent : A.warn, letterSpacing: '0.02em', minWidth: 30, textAlign: 'right' }}>
+                    {ok ? '✓' : 'Due'}
                   </span>
                 </div>
               );
@@ -192,7 +191,7 @@ export default function CompliancePage() {
         {/* Format caps */}
         {Object.keys(requirements.limits || {}).length > 0 && (
           <div style={{ borderTop: `1px solid ${A.ink}`, padding: '1.25rem 1.75rem' }}>
-            <div style={{ ...headLabel, marginBottom: 12 }}>FORMAT CAPS</div>
+            <div style={{ ...headLabel, marginBottom: 12 }}>Format caps</div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 10 }}>
               {Object.entries(requirements.limits).map(([key, limit]) => {
                 const current = hours[key] || 0;
@@ -205,8 +204,8 @@ export default function CompliancePage() {
                         {current}
                         <span style={{ fontSize: 12, color: A.inkMuted, fontWeight: 600 }}>/{limit}</span>
                       </span>
-                      <span style={{ fontFamily: FIG, fontSize: 10, fontWeight: 800, letterSpacing: '0.06em', color: over || near ? A.warn : A.accentMid }}>
-                        {over ? 'AT CAP' : near ? 'NEAR' : 'OK'}
+                      <span style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 800, letterSpacing: '0.02em', color: over || near ? A.warn : A.accentMid }}>
+                        {over ? 'At cap' : near ? 'Near' : 'OK'}
                       </span>
                     </div>
                     <span style={{ display: 'block', fontSize: 11.5, color: A.inkMuted, marginTop: 3, textTransform: 'capitalize' }}>
@@ -222,9 +221,9 @@ export default function CompliancePage() {
         {/* Table 4 — the course log */}
         <div style={{ borderTop: `1px solid ${A.ink}` }}>
           <div style={{ padding: '12px 1.75rem', borderBottom: `1px solid ${A.ruleFaint}`, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 10 }}>
-            <span style={headLabel}>TABLE 4 — THE COURSE LOG · {courses.length} ENTRIES</span>
+            <span style={headLabel}>Course log · {courses.length} entries</span>
             <Link to="/courses" style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 700, color: A.accent, textDecoration: 'none' }}>
-              ADD OR EDIT COURSES →
+              Add or edit courses →
             </Link>
           </div>
           {sortedCourses.map((course, i) => (
@@ -236,7 +235,6 @@ export default function CompliancePage() {
                 {course.date
                   ? new Date(`${course.date}T12:00:00`)
                       .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' })
-                      .toUpperCase()
                   : '—'}
               </span>
               <span style={{ flex: 1, minWidth: 0 }}>
@@ -248,8 +246,8 @@ export default function CompliancePage() {
                 </span>
               </span>
               {course.certificate_storage && (
-                <span style={{ fontFamily: FIG, fontSize: 10, fontWeight: 700, letterSpacing: '0.06em', padding: '2px 8px', border: `1px solid ${A.accent}`, color: A.accent, flexShrink: 0 }}>
-                  CERTIFICATE
+                <span style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 700, letterSpacing: '0.02em', padding: '2px 8px', border: `1px solid ${A.accent}`, color: A.accent, flexShrink: 0 }}>
+                  Certificate
                 </span>
               )}
               <span style={{ fontFamily: FIG, fontSize: 16, fontWeight: 800, width: 52, textAlign: 'right', flexShrink: 0, ...tabularNums }}>
@@ -275,16 +273,16 @@ export default function CompliancePage() {
             <button
               type="button"
               onClick={() => generateReport(user, courses, false)}
-              style={{ fontFamily: FIG, fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', background: 'transparent', border: `1px solid ${A.ink}`, color: A.ink, padding: '10px 18px', cursor: 'pointer' }}
+              style={{ fontFamily: FIG, fontSize: 12, fontWeight: 700, letterSpacing: '0.02em', background: 'transparent', border: `1px solid ${A.ink}`, color: A.ink, padding: '10px 18px', cursor: 'pointer' }}
             >
-              EXPORT REPORT
+              Export report
             </button>
             <button
               type="button"
               onClick={() => generateReport(user, courses, true)}
-              style={{ fontFamily: FIG, fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', background: A.accent, border: `1px solid ${A.accent}`, color: A.onAccent, padding: '10px 18px', cursor: 'pointer' }}
+              style={{ fontFamily: FIG, fontSize: 12, fontWeight: 700, letterSpacing: '0.02em', background: A.accent, border: `1px solid ${A.accent}`, color: A.onAccent, padding: '10px 18px', cursor: 'pointer' }}
             >
-              CERTIFICATES ZIP
+              Certificates ZIP
             </button>
           </span>
         </div>
@@ -292,9 +290,9 @@ export default function CompliancePage() {
 
       {/* Source footer */}
       <p style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, margin: '1.25rem 0 0', letterSpacing: '0.04em' }}>
-        SOURCE: {cite || 'STATE BOARD RULES'}{requirements.lastReviewed ? ` · LAST REVIEWED ${String(requirements.lastReviewed).toUpperCase()}` : ''} —{' '}
+        Source: {requirements.citation || 'state board rules'}{requirements.lastReviewed ? ` · last reviewed ${requirements.lastReviewed}` : ''} ·{' '}
         <a href={requirements.boardUrl || '#'} target="_blank" rel="noopener noreferrer" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>
-          READ THE RULE ↗
+          Read the rule ↗
         </a>
       </p>
     </div>

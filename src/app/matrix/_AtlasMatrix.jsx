@@ -31,9 +31,9 @@ const DISCIPLINES = ['All', 'PT', 'OT', 'SLP', 'AT'];
 
 const chipStyle = (on) => ({
   fontFamily: FIG,
-  fontSize: 11.5,
+  fontSize: 12,
   fontWeight: 700,
-  letterSpacing: '0.04em',
+  letterSpacing: '0.01em',
   padding: '5px 11px',
   background: on ? A.ink : 'transparent',
   color: on ? A.onAccent : A.inkMuted,
@@ -123,15 +123,15 @@ export default function AtlasMatrix() {
   return (
     <>
       <header style={{ marginBottom: '1.5rem' }}>
-        <div style={{ ...eyebrow(), marginBottom: 8 }}>
-          TABLE 1 — THE CREDENTIAL FIELD, RANKED · {filtered.length} OF {certifications.length} SHOWN
-        </div>
         <h1
           className="cs-h1-clamp"
           style={{ fontFamily: INS, fontWeight: 600, fontSize: 40, lineHeight: 1.02, letterSpacing: '-0.025em', margin: 0 }}
         >
           Rank by evidence. Calibrate by career.
         </h1>
+        <div style={{ ...eyebrow(), marginTop: 10, ...tabularNums }}>
+          {filtered.length} of {certifications.length} credentials shown
+        </div>
       </header>
 
       <div style={{ border: `1px solid ${A.ink}`, background: A.paper }}>
@@ -146,9 +146,9 @@ export default function AtlasMatrix() {
               onClick={() => setShowCal((v) => !v)}
               style={{
                 fontFamily: FIG,
-                fontSize: 12,
+                fontSize: 13,
                 fontWeight: 700,
-                letterSpacing: '0.08em',
+                letterSpacing: '0.01em',
                 padding: '13px 18px',
                 marginLeft: 'auto',
                 background: showCal ? A.ink : 'transparent',
@@ -158,7 +158,7 @@ export default function AtlasMatrix() {
                 cursor: 'pointer',
               }}
             >
-              CALIBRATION {showCal ? '−' : '+'}
+              Calibration {showCal ? '−' : '+'}
             </button>
           )}
         />
@@ -167,16 +167,16 @@ export default function AtlasMatrix() {
         {showCal && (
           <div style={{ borderBottom: `1px solid ${A.ink}`, padding: '1.25rem 1.5rem', background: A.band }}>
             <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-              <span style={eyebrow()}>CALIBRATION · Σ = {weightsTotal}</span>
+              <span style={eyebrow()}>Calibration · Σ = {weightsTotal}</span>
               <button
                 type="button"
                 onClick={() => setWeights(getPathDefaultWeights(path))}
                 style={{
-                  fontFamily: FIG, fontSize: 12, fontWeight: 600, background: 'transparent',
+                  fontFamily: FIG, fontSize: 12.5, fontWeight: 600, background: 'transparent',
                   border: `1px solid ${A.ink}`, padding: '5px 12px', cursor: 'pointer', color: A.ink,
                 }}
               >
-                RESET DEFAULTS
+                Reset defaults
               </button>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.9rem 2rem' }}>
@@ -218,11 +218,11 @@ export default function AtlasMatrix() {
           />
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }} role="group" aria-label="Filter by evidence tier">
             {[
-              ['all', `ALL ${tierCounts.all}`],
-              ['strong', `STRONG ${tierCounts.strong}`],
-              ['good', `GOOD ${tierCounts.good}`],
-              ['moderate', `MODERATE ${tierCounts.moderate}`],
-              ['limited', `LIMITED ${tierCounts.limited}`],
+              ['all', `All ${tierCounts.all}`],
+              ['strong', `Strong ${tierCounts.strong}`],
+              ['good', `Good ${tierCounts.good}`],
+              ['moderate', `Moderate ${tierCounts.moderate}`],
+              ['limited', `Limited ${tierCounts.limited}`],
             ].map(([value, label]) => (
               <button key={value} type="button" aria-pressed={tier === value} onClick={() => setTier(value)} style={chipStyle(tier === value)}>
                 {label}
@@ -232,7 +232,7 @@ export default function AtlasMatrix() {
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }} role="group" aria-label="Filter by discipline">
             {DISCIPLINES.map((d) => (
               <button key={d} type="button" aria-pressed={discipline === d} onClick={() => setDiscipline(d)} style={chipStyle(discipline === d)}>
-                {d.toUpperCase()}
+                {d}
               </button>
             ))}
           </div>
@@ -292,8 +292,8 @@ export default function AtlasMatrix() {
           <div style={{ padding: '1.75rem 1.75rem 2rem', minHeight: 600 }}>
             {selected && det && (
               <>
-                <div style={{ ...eyebrow(11), marginBottom: 10 }}>
-                  PLATE — {(selected.type || '').toUpperCase()} · {(selected.disciplines || [selected.discipline]).join(' · ').toUpperCase()}
+                <div style={{ ...eyebrow(12), marginBottom: 10 }}>
+                  {selected.type} · {(selected.disciplines || [selected.discipline]).join(' · ')}
                 </div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1.5rem' }}>
                   <h2 style={{ fontFamily: INS, fontWeight: 600, fontSize: 27, lineHeight: 1.08, letterSpacing: '-0.02em', margin: 0, textWrap: 'balance' }}>
@@ -303,20 +303,20 @@ export default function AtlasMatrix() {
                     <span style={{ fontFamily: FIG, fontSize: 44, fontWeight: 800, lineHeight: 1, color: tierColor(det.score), letterSpacing: '-0.02em', ...tabularNums }}>
                       {det.score.toFixed(1)}
                     </span>
-                    <span style={{ display: 'block', fontFamily: FIG, fontSize: 10.5, letterSpacing: '0.1em', color: A.inkMuted, marginTop: 2 }}>
-                      OF 100 · {tierLabel(det.score)}
+                    <span style={{ display: 'block', fontFamily: FIG, fontSize: 11.5, letterSpacing: '0.02em', color: A.inkMuted, marginTop: 2 }}>
+                      of 100 · {tierLabel(det.score)}
                     </span>
                   </span>
                 </div>
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 12 }}>
                   {det.evTop.map(([k, n]) => (
-                    <span key={k} style={{ fontFamily: FIG, fontSize: 11, fontWeight: 700, padding: '3px 10px', border: `1px solid ${A.ruleMinor}`, color: A.inkBody }}>
-                      {n} {(EVIDENCE_LABELS[k] || k).toUpperCase()}
+                    <span key={k} style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 700, padding: '3px 10px', border: `1px solid ${A.ruleMinor}`, color: A.inkBody }}>
+                      {n} {EVIDENCE_LABELS[k] || k}
                     </span>
                   ))}
                   {det.meta.source === 'librarian' && (
-                    <span style={{ fontFamily: FIG, fontSize: 11, fontWeight: 700, padding: '3px 10px', background: A.accent, color: A.onAccent }}>
-                      LIBRARIAN-REVIEWED
+                    <span style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 700, padding: '3px 10px', background: A.accent, color: A.onAccent }}>
+                      Librarian-reviewed
                     </span>
                   )}
                 </div>
@@ -324,7 +324,7 @@ export default function AtlasMatrix() {
                 {/* Fig. A — score anatomy */}
                 <div style={{ marginTop: '1.6rem' }}>
                   <div style={{ ...ruledHead, marginBottom: 12 }}>
-                    FIG. A — SCORE ANATOMY · {lensShortLabel(path).toUpperCase()} LENS
+                    Score anatomy · {lensShortLabel(path)} lens
                   </div>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem 2rem' }}>
                     {Object.keys(dims).map((key) => (
@@ -347,7 +347,7 @@ export default function AtlasMatrix() {
                 {/* Fig. B — cross-lens comparison */}
                 {det.cross.length > 1 && (
                   <div style={{ marginTop: '1.6rem' }}>
-                    <div style={{ ...ruledHead, marginBottom: 12 }}>FIG. B — THE SAME CREDENTIAL, EVERY LENS</div>
+                    <div style={{ ...ruledHead, marginBottom: 12 }}>The same credential, every lens</div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
                       {det.cross.map((cp) => (
                         <div key={cp.key} style={{ display: 'grid', gridTemplateColumns: '130px 1fr 44px', gap: 12, alignItems: 'center' }}>
@@ -368,7 +368,7 @@ export default function AtlasMatrix() {
 
                 {/* Notes — evidence summary */}
                 <div style={{ marginTop: '1.6rem' }}>
-                  <div style={{ ...ruledHead, marginBottom: 10 }}>NOTES — EVIDENCE SUMMARY</div>
+                  <div style={{ ...ruledHead, marginBottom: 10 }}>Evidence summary</div>
                   {splitEvidence(selected.evidence).slice(0, 1).map((text) => (
                     <p key={text.slice(0, 24)} style={{ fontSize: 14, color: A.inkBody, lineHeight: 1.65, margin: '0 0 0.7rem' }}>
                       {text}
@@ -379,7 +379,7 @@ export default function AtlasMatrix() {
                 {/* Sources — citation list */}
                 <div style={{ marginTop: '1.4rem' }}>
                   <div style={{ ...ruledHead, marginBottom: 10 }}>
-                    SOURCES — {citationsLoading ? det.meta.count : (det.visible.length || det.meta.count)} ON FILE
+                    Sources · {citationsLoading ? det.meta.count : (det.visible.length || det.meta.count)} on file
                   </div>
                   {citationsLoading && (
                     <p style={{ fontFamily: FIG, fontSize: 12.5, color: A.inkMuted, margin: 0 }}>pulling the citation library…</p>
@@ -397,7 +397,7 @@ export default function AtlasMatrix() {
                           <span style={{ flex: 1, minWidth: 0 }}>
                             <span style={{ display: 'block', fontSize: 13.5, fontWeight: 600, lineHeight: 1.4 }}>{c.title}</span>
                             <span style={{ display: 'block', fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, marginTop: 2 }}>
-                              {[c.authors, c.journal].filter(Boolean).join(' · ')} · {c.year || '—'} · {(EVIDENCE_LABELS[c.evidence_type] || 'Other').toUpperCase()}
+                              {[c.authors, c.journal].filter(Boolean).join(' · ')} · {c.year || '—'} · {EVIDENCE_LABELS[c.evidence_type] || 'Other'}
                             </span>
                           </span>
                           {citationUrl(c) && (
@@ -431,12 +431,12 @@ export default function AtlasMatrix() {
         <div
           style={{
             borderTop: `1px solid ${A.ink}`, padding: '10px 1.5rem', display: 'flex', justifyContent: 'space-between',
-            gap: '1rem', flexWrap: 'wrap', fontFamily: FIG, fontSize: 11, letterSpacing: '0.08em', color: A.inkMuted,
+            gap: '1rem', flexWrap: 'wrap', fontFamily: FIG, fontSize: 12, letterSpacing: '0.02em', color: A.inkMuted,
           }}
         >
-          <span>SOURCE: CESHIELD EVIDENCE LIBRARY · {getTotalCitationsCount().toLocaleString()} CITATIONS</span>
+          <span>Source: CE Shield evidence library · {getTotalCitationsCount().toLocaleString()} citations</span>
           <Link href="/methodology" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>
-            SURVEY METHODOLOGY →
+            Survey methodology →
           </Link>
         </div>
       </div>

@@ -218,19 +218,19 @@ function FigureOne() {
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '2rem' }}>
             <div style={{ position: 'relative', height: 52, flex: 1, minWidth: 0 }}>
               {[
-                [1, 'FIG. 1a', 'The field, unmeasured.'],
-                [2, 'FIG. 1b', 'Weighed, it takes shape.'],
-                [3, 'FIG. 1c', 'The strong few, named.'],
+                [1, 'Fig. 1a', 'The field, unmeasured.'],
+                [2, 'Fig. 1b', 'Weighed, it takes shape.'],
+                [3, 'Fig. 1c', 'The strong few, named.'],
               ].map(([n, fig, caption]) => (
                 <div key={n} style={capStyle(n)}>
-                  <span style={{ fontSize: 11, letterSpacing: '0.14em', color: A.inkMuted, fontWeight: 600 }}>{fig}</span>
+                  <span style={{ fontSize: 12, letterSpacing: '0.02em', color: A.inkMuted, fontWeight: 600 }}>{fig}</span>
                   <h2 style={{ fontFamily: INS, fontWeight: 600, fontSize: 29, letterSpacing: '-0.03em', margin: '3px 0 0' }}>{caption}</h2>
                 </div>
               ))}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexShrink: 0, paddingBottom: 4 }}>
-              <span style={{ fontSize: 11.5, letterSpacing: '0.1em', color: A.inkMuted, fontWeight: 600, ...tabularNums }}>
-                n = {String(measured).padStart(3, '0')} MEASURED
+              <span style={{ fontSize: 12, letterSpacing: '0.02em', color: A.inkMuted, fontWeight: 600, ...tabularNums }}>
+                n = {String(measured).padStart(3, '0')} measured
               </span>
               <span style={{ display: 'flex', gap: 4 }} aria-hidden="true">
                 {[1, 2, 3].map((n) => (
@@ -247,8 +247,8 @@ function FigureOne() {
               <span key={v} aria-hidden="true" style={{ position: 'absolute', left: `${X0 + (v / 100) * XW}%`, bottom: 0, width: 1, height: `${axisT * 100}%`, background: A.ink, opacity: 0.09 }} />
             ))}
             <span aria-hidden="true" style={{ position: 'absolute', left: `${X0 + (median / 100) * XW}%`, bottom: 0, width: 1, height: `${medianT * 62}%`, background: A.warn, opacity: medianT * (1 - callT * 0.7), transition: reduce ? 'none' : 'height 0.3s ease, opacity 0.3s ease' }}>
-              <span style={{ position: 'absolute', top: -19, left: 6, fontSize: 10.5, letterSpacing: '0.1em', fontWeight: 700, color: A.warn, whiteSpace: 'nowrap' }}>
-                MEDIAN {median}
+              <span style={{ position: 'absolute', top: -19, left: 6, fontSize: 11.5, letterSpacing: '0.02em', fontWeight: 700, color: A.warn, whiteSpace: 'nowrap' }}>
+                Median {median}
               </span>
             </span>
             {dots.map((d) => (
@@ -273,11 +273,11 @@ function FigureOne() {
           </div>
 
           {/* Legend */}
-          <div style={{ display: 'flex', gap: 24, marginTop: 46, fontSize: 10.5, letterSpacing: '0.1em', color: A.inkMuted, fontWeight: 600, alignItems: 'center', flexWrap: 'wrap' }}>
-            <span><span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', background: A.accent, marginRight: 7 }} />STRONG ≥70</span>
-            <span><span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', background: A.accentMid, marginRight: 7 }} />GOOD 50–69</span>
-            <span><span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', background: A.warn, opacity: 0.75, marginRight: 7 }} />BELOW</span>
-            <span style={{ marginLeft: 'auto' }}>ONE POINT PER CREDENTIAL · BEST LENS · DEFAULT WEIGHTS</span>
+          <div style={{ display: 'flex', gap: 24, marginTop: 46, fontSize: 12, letterSpacing: '0.02em', color: A.inkMuted, fontWeight: 600, alignItems: 'center', flexWrap: 'wrap' }}>
+            <span><span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', background: A.accent, marginRight: 7 }} />Strong ≥70</span>
+            <span><span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', background: A.accentMid, marginRight: 7 }} />Good 50–69</span>
+            <span><span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', background: A.warn, opacity: 0.75, marginRight: 7 }} />Below</span>
+            <span style={{ marginLeft: 'auto' }}>One point per credential · best lens · default weights</span>
           </div>
         </div>
       </div>
@@ -303,10 +303,10 @@ export default function LandingPageClient() {
   );
 
   const stats = [
-    [siteStats.certCount.toLocaleString(), 'CREDENTIALS'],
-    [siteStats.citationTotal.toLocaleString(), 'CITATIONS'],
-    [siteStats.rctSrMa.toLocaleString(), 'RCT · SR · META'],
-    [String(siteStats.lensCount), 'LENSES'],
+    [siteStats.certCount.toLocaleString(), 'credentials'],
+    [siteStats.citationTotal.toLocaleString(), 'citations'],
+    [siteStats.rctSrMa.toLocaleString(), 'RCT · SR · meta-analyses'],
+    [String(siteStats.lensCount), 'career lenses'],
   ];
 
   const underlineLink = {
@@ -320,7 +320,7 @@ export default function LandingPageClient() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: A.paper, color: A.ink, overflowX: 'clip' }}>
+    <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink, overflowX: 'clip' }}>
       <PublicNav
         maxWidth={1200}
         cta={(
@@ -340,7 +340,6 @@ export default function LandingPageClient() {
 
       {/* Hero */}
       <header style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem 2rem 5.5rem' }}>
-        <div style={{ ...eyebrow(11.5, '0.14em'), marginBottom: 22 }}>PLATE I — THE CREDENTIAL FIELD</div>
         <h1 style={{ fontFamily: INS, fontWeight: 600, fontSize: 'clamp(56px, 7.4vw, 96px)', lineHeight: 0.94, letterSpacing: '-0.045em', margin: 0, maxWidth: '11em', textWrap: 'balance' }}>
           {siteStats.certCount} credentials, plotted honestly.
         </h1>
@@ -371,7 +370,7 @@ export default function LandingPageClient() {
               }}
             >
               <span style={{ fontFamily: INS, fontSize: 27, fontWeight: 600, letterSpacing: '-0.03em', ...tabularNums }}>{value}</span>
-              <span style={{ display: 'block', fontSize: 10.5, letterSpacing: '0.12em', color: A.inkMuted, fontWeight: 600, marginTop: 3 }}>{label}</span>
+              <span style={{ display: 'block', fontSize: 12.5, letterSpacing: '0.02em', color: A.inkMuted, fontWeight: 600, marginTop: 3 }}>{label}</span>
             </div>
           ))}
         </div>
@@ -385,12 +384,11 @@ export default function LandingPageClient() {
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem 2rem' }}>
           <div className="atlas-lens-split">
             <div>
-              <div style={{ ...eyebrow(11, '0.14em'), marginBottom: 14 }}>TABLE 2</div>
               <h2 className="cs-h2-clamp" style={{ fontFamily: INS, fontWeight: 600, fontSize: 44, lineHeight: 0.98, letterSpacing: '-0.04em', margin: 0, textWrap: 'balance' }}>
                 One rubric per career.
               </h2>
               <p style={{ fontSize: 15.5, color: A.inkMuted, lineHeight: 1.6, margin: '1rem 0 0' }}>
-                Scores aren&rsquo;t comparable across lenses — deliberately.
+                Scores aren&rsquo;t comparable across lenses, deliberately.
               </p>
               <Link href="/career-paths" style={{ ...underlineLink, marginTop: '1.4rem' }}>
                 The lens definitions →
@@ -415,7 +413,9 @@ export default function LandingPageClient() {
       {/* Notes — what an account adds */}
       <section aria-label="Beyond the field" style={{ borderTop: `1px solid ${A.ink}` }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem 2rem' }}>
-          <div style={{ ...eyebrow(11, '0.14em'), marginBottom: '2.25rem' }}>NOTES — WHAT AN ACCOUNT ADDS</div>
+          <h2 style={{ fontFamily: INS, fontWeight: 600, fontSize: 29, letterSpacing: '-0.03em', margin: '0 0 2.25rem' }}>
+            What an account adds
+          </h2>
           <div className="atlas-4col" style={{ gap: '3rem' }}>
             {[
               ['a.', 'The Ledger', 'Compliance, computed live.', '/compliance'],
@@ -436,7 +436,7 @@ export default function LandingPageClient() {
       {/* Declaration of interests */}
       <section aria-label="Declaration of interests" style={{ borderTop: `1px solid ${A.ink}`, background: A.band }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem 2rem', textAlign: 'center' }}>
-          <div style={eyebrow(11, '0.14em')}>DECLARATION OF INTERESTS</div>
+          <div style={eyebrow(13)}>Declaration of interests</div>
           <div style={{ fontFamily: INS, fontSize: 'clamp(110px, 14vw, 190px)', fontWeight: 600, lineHeight: 1, letterSpacing: '-0.055em', color: A.ink, margin: '1.5rem 0 1rem', ...tabularNums }}>
             $0
           </div>
@@ -454,26 +454,26 @@ export default function LandingPageClient() {
             See where your next credential lands.
           </h2>
           <Link href="/matrix" style={{ textDecoration: 'none', fontWeight: 600, fontSize: 16, background: A.accent, color: A.onAccent, padding: '16px 28px', whiteSpace: 'nowrap' }}>
-            Explore the field — free →
+            Explore the field, free →
           </Link>
         </div>
       </section>
 
       {/* Footer */}
       <footer style={{ borderTop: `1px solid ${A.ink}` }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', gap: '2rem', flexWrap: 'wrap', fontSize: 10.5, letterSpacing: '0.1em', color: A.inkMuted, fontWeight: 600 }}>
-          <span>CE SHIELD © {new Date().getFullYear()}</span>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', gap: '2rem', flexWrap: 'wrap', fontSize: 12.5, letterSpacing: '0.02em', color: A.inkMuted, fontWeight: 600 }}>
+          <span>CE Shield © {new Date().getFullYear()}</span>
           <span style={{ display: 'flex', gap: 22, flexWrap: 'wrap' }}>
             {[
-              ['/matrix', 'THE FIELD'],
-              ['/credentials', 'DOSSIERS'],
-              ['/states', 'STATES'],
-              ['/about', 'ABOUT'],
+              ['/matrix', 'The field'],
+              ['/credentials', 'Dossiers'],
+              ['/states', 'States'],
+              ['/about', 'About'],
             ].map(([href, label]) => (
               <Link key={href} href={href} style={{ color: A.inkMuted, textDecoration: 'none' }}>{label}</Link>
             ))}
           </span>
-          <span>SCORES ARE NEVER SPONSORED</span>
+          <span>Scores are never sponsored</span>
         </div>
       </footer>
     </div>

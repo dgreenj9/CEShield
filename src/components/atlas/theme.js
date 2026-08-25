@@ -37,29 +37,29 @@ export const tierColor = (score) =>
   score >= 70 ? A.accent : score >= 50 ? A.accentMid : score >= 30 ? A.warn : A.dim;
 
 export const tierLabel = (score) =>
-  score >= 70 ? 'STRONG' : score >= 50 ? 'GOOD' : score >= 30 ? 'MODERATE' : 'LIMITED';
+  score >= 70 ? 'Strong' : score >= 50 ? 'Good' : score >= 30 ? 'Moderate' : 'Limited';
 
-// Uppercase eyebrow / label style. Size and tracking per the Atlas spec
-// (Figtree 600, 10.5–11.5px, 0.12–0.14em).
-export const eyebrow = (size = 11.5, tracking = '0.12em') => ({
+// Quiet label style. Sentence case, near-normal tracking — the heavy
+// uppercase-tracked "eyebrow" treatment read as template/AI design and was
+// deliberately retired (2026-08-25). Hierarchy comes from size, weight, and
+// the ink rules, not from letterspacing.
+export const eyebrow = (size = 12.5, tracking = '0.02em') => ({
   fontFamily: FIG,
   fontSize: size,
   letterSpacing: tracking,
   color: A.inkMuted,
   fontWeight: 600,
-  textTransform: 'uppercase',
 });
 
 // Section-head label with the 2px ink top rule (the "Notes column" motif).
 export const ruledHead = {
   fontFamily: FIG,
-  fontSize: 11,
-  letterSpacing: '0.12em',
+  fontSize: 12.5,
+  letterSpacing: '0.02em',
   fontWeight: 600,
   color: A.inkMuted,
   borderTop: `2px solid ${A.ink}`,
   paddingTop: 10,
-  textTransform: 'uppercase',
 };
 
 export const tabularNums = { fontVariantNumeric: 'tabular-nums' };

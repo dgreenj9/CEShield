@@ -9,8 +9,8 @@ export const lensShortLabel = (key) => PATHS[key].label.replace(' & Industry', '
 
 export default function LensTabs({ active, onSelect, size = 'md', trailing = null }) {
   const dims = size === 'md'
-    ? { fontSize: 12, letterSpacing: '0.08em', padding: '13px 18px' }
-    : { fontSize: 11, letterSpacing: '0.06em', padding: '11px 13px' };
+    ? { fontSize: 13, letterSpacing: '0.01em', padding: '13px 18px' }
+    : { fontSize: 12, letterSpacing: '0.01em', padding: '11px 13px' };
   return (
     <div style={{ display: 'flex', alignItems: 'stretch', borderBottom: `1px solid ${A.ink}`, flexWrap: 'wrap' }}>
       {PATH_ORDER.map((key) => {
@@ -32,7 +32,6 @@ export default function LensTabs({ active, onSelect, size = 'md', trailing = nul
               borderRight: `1px solid ${A.ruleMinor}`,
               cursor: 'pointer',
               transition: 'background 0.15s ease, color 0.15s ease',
-              textTransform: 'uppercase',
             }}
           >
             {(on ? '● ' : '') + lensShortLabel(key)}

@@ -44,7 +44,7 @@ function MatrixFallback() {
 
 export default function MatrixPage() {
   return (
-    <div style={{ minHeight: '100vh', background: '#FAFAF5', color: '#1B1A17' }}>
+    <div className="atlas-ground" style={{ minHeight: '100vh', color: '#1B1A17' }}>
       <PublicNav currentPath="/matrix" />
 
       <main style={{ maxWidth: 1280, margin: '0 auto', padding: '2.5rem 2rem 5rem' }}>

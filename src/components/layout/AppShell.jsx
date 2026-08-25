@@ -6,16 +6,16 @@ import { A, FIG } from '../atlas/theme';
 import { useUserData } from '../../contexts/UserDataContext';
 
 // Atlas app chrome: a sticky blurred top bar over a 1px ink rule, with the
-// section links as uppercase Figtree tabs (active = petrol fill). Replaces
+// section links as Figtree tabs (active = petrol fill). Replaces
 // the previous sidebar shell. Children render in the main content column;
 // the shell handles the global loading state while user data hydrates.
 
 const NAV_ITEMS = [
-  { to: '/explore', label: 'HOME' },
-  { to: '/matrix', label: 'THE FIELD' },
-  { to: '/compliance', label: 'LEDGER' },
-  { to: '/courses', label: 'COURSES' },
-  { to: '/profile', label: 'PROFILE' },
+  { to: '/explore', label: 'Home' },
+  { to: '/matrix', label: 'The field' },
+  { to: '/compliance', label: 'Ledger' },
+  { to: '/courses', label: 'Courses' },
+  { to: '/profile', label: 'Profile' },
 ];
 
 export default function AppShell({ onSignOut, children }) {
@@ -38,7 +38,7 @@ export default function AppShell({ onSignOut, children }) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: A.paper }}>
+    <div className="min-h-screen flex flex-col atlas-ground">
       <a href="#main-content" className="skip-to-main">Skip to main content</a>
       <nav
         aria-label="Primary"
@@ -67,7 +67,7 @@ export default function AppShell({ onSignOut, children }) {
           </Link>
           <div
             className="atlas-nav-links"
-            style={{ gap: 0, fontFamily: FIG, fontSize: 12, fontWeight: 700, letterSpacing: '0.08em' }}
+            style={{ gap: 0, fontFamily: FIG, fontSize: 13, fontWeight: 700, letterSpacing: '0.01em' }}
           >
             {NAV_ITEMS.map((item) => {
               const on = path === item.to;
@@ -117,14 +117,14 @@ export default function AppShell({ onSignOut, children }) {
                 border: `1px solid ${A.ruleMinor}`,
                 color: A.inkMuted,
                 fontFamily: FIG,
-                fontSize: 11,
+                fontSize: 11.5,
                 fontWeight: 700,
-                letterSpacing: '0.06em',
+                letterSpacing: '0.01em',
                 padding: '4px 10px',
                 cursor: 'pointer',
               }}
             >
-              <LogOut size={12} aria-hidden="true" /> OUT
+              <LogOut size={12} aria-hidden="true" /> Sign out
             </button>
           </span>
         </div>
@@ -144,8 +144,8 @@ export default function AppShell({ onSignOut, children }) {
                 fontSize: 14,
               }}
             >
-              <strong style={{ color: A.warn, fontSize: 11, letterSpacing: '0.1em', marginRight: 10 }}>
-                DATA ERROR
+              <strong style={{ color: A.warn, fontSize: 12, marginRight: 10 }}>
+                Data error
               </strong>
               {loadError}
             </div>

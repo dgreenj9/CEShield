@@ -550,6 +550,20 @@ select {
    classes carry only what inline styles can't — responsive collapses.
    ────────────────────────────────────────────────────────────────────── */
 
+/* The ground: warm paper over a faint drafting grid — fine 26px cells with
+   a heavier rule every 5th line, like the plotting paper the "survey plate"
+   figures are drawn on. Opacities are tuned to be felt, not seen; panels and
+   band sections sit opaquely on top, so the grid only shows on open ground. */
+.atlas-ground {
+  background-color: #FAFAF5;
+  background-image:
+    linear-gradient(rgba(27, 26, 23, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 26, 23, 0.045) 1px, transparent 1px),
+    linear-gradient(rgba(27, 26, 23, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 26, 23, 0.022) 1px, transparent 1px);
+  background-size: 130px 130px, 130px 130px, 26px 26px, 26px 26px;
+}
+
 /* Landing stat band + notes: 4 columns → 2 → 1. */
 .atlas-4col { display: grid; grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 900px) { .atlas-4col { grid-template-columns: repeat(2, 1fr); } }

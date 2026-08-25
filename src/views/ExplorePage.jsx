@@ -17,16 +17,16 @@ import LensTabs from '../components/atlas/LensTabs';
 const labelize = (key) => key.replace(/([A-Z])/g, ' $1').trim();
 
 const statLabel = {
-  display: 'block', fontFamily: FIG, fontSize: 10.5, letterSpacing: '0.1em',
-  color: A.inkMuted, marginTop: 4, fontWeight: 600, textTransform: 'uppercase',
+  display: 'block', fontFamily: FIG, fontSize: 11.5, letterSpacing: '0.02em',
+  color: A.inkMuted, marginTop: 4, fontWeight: 600,
 };
 const bigStat = { fontFamily: FIG, fontSize: 34, fontWeight: 800, lineHeight: 1, ...tabularNums };
 const cardHead = {
   padding: '12px 16px', borderBottom: `1px solid ${A.ink}`, display: 'flex',
   justifyContent: 'space-between', alignItems: 'baseline', gap: 10, flexWrap: 'wrap',
 };
-const cardHeadLabel = { fontFamily: FIG, fontSize: 11, letterSpacing: '0.12em', fontWeight: 700, textTransform: 'uppercase' };
-const cardHeadLink = { fontFamily: FIG, fontSize: 11, fontWeight: 700, color: A.accent, textDecoration: 'none' };
+const cardHeadLabel = { fontFamily: FIG, fontSize: 12.5, letterSpacing: '0.02em', fontWeight: 700 };
+const cardHeadLink = { fontFamily: FIG, fontSize: 12, fontWeight: 700, color: A.accent, textDecoration: 'none' };
 
 export default function ExplorePage() {
   const { user, courses, credentials } = useUserData();
@@ -50,7 +50,6 @@ export default function ExplorePage() {
   const renewalShort = user.renewalDate
     ? new Date(`${user.renewalDate}T12:00:00`)
         .toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-        .toUpperCase()
     : null;
 
   const mandatoryEntries = useMemo(
@@ -77,9 +76,7 @@ export default function ExplorePage() {
     setPreference('careerPath', key);
   };
 
-  const logDate = `LOG — ${new Date()
-    .toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
-    .toUpperCase()}`;
+  const logDate = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
   return (
     <div>
@@ -106,14 +103,14 @@ export default function ExplorePage() {
             <>
               <span style={{ ...bigStat, color: renewalDays < 90 ? A.warn : A.ink }}>{renewalDays}</span>
               <span style={statLabel}>
-                DAYS TO {user.state || ''} RENEWAL{renewalShort ? ` · ${renewalShort}` : ''}
+                days to {user.state || ''} renewal{renewalShort ? ` · ${renewalShort}` : ''}
               </span>
             </>
           ) : (
             <>
               <span style={{ ...bigStat, color: A.dim }}>—</span>
               <span style={statLabel}>
-                <Link to="/profile" style={{ color: A.accent, textDecoration: 'none' }}>SET RENEWAL DATE →</Link>
+                <Link to="/profile" style={{ color: A.accent, textDecoration: 'none' }}>Set renewal date →</Link>
               </span>
             </>
           )}
@@ -123,18 +120,18 @@ export default function ExplorePage() {
             {hours.total}
             <span style={{ fontSize: 17, color: A.inkMuted, fontWeight: 600 }}> / {requirements?.total ?? '—'}</span>
           </span>
-          <span style={statLabel}>HOURS BANKED THIS CYCLE</span>
+          <span style={statLabel}>hours banked this cycle</span>
         </div>
         <div style={{ padding: '1.2rem 1.5rem', borderRight: `1px solid ${A.ruleMinor}` }}>
           <span style={bigStat}>
             {mandatoryDone}
             <span style={{ fontSize: 17, color: A.inkMuted, fontWeight: 600 }}> / {mandatoryEntries.length}</span>
           </span>
-          <span style={statLabel}>MANDATORY CATEGORIES DONE</span>
+          <span style={statLabel}>mandatory categories done</span>
         </div>
         <div style={{ padding: '1.2rem 1.5rem' }}>
           <span style={bigStat}>{courses.length}</span>
-          <span style={statLabel}>COURSES LOGGED · {certCount} CERTIFICATES</span>
+          <span style={statLabel}>courses logged · {certCount} certificates</span>
         </div>
       </section>
 
@@ -145,11 +142,11 @@ export default function ExplorePage() {
           style={{ border: `1px dashed ${A.ink}`, borderTop: 'none', padding: '0.9rem 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem', flexWrap: 'wrap', background: A.notice }}
         >
           <span style={{ fontSize: 14.5 }}>
-            <strong style={{ fontFamily: FIG, fontSize: 11, letterSpacing: '0.1em', color: A.warn, marginRight: 10 }}>NEXT ACTION</strong>
-            {missing[0][1]}h {labelize(missing[0][0]).toLowerCase()} — {hours[missing[0][0]] || 0}/{missing[0][1]} logged.
+            <strong style={{ fontFamily: FIG, fontSize: 12, letterSpacing: '0.02em', color: A.warn, marginRight: 10 }}>Next action</strong>
+            {missing[0][1]}h {labelize(missing[0][0]).toLowerCase()} · {hours[missing[0][0]] || 0}/{missing[0][1]} logged.
           </span>
-          <Link to="/courses" style={{ fontFamily: FIG, fontSize: 12, fontWeight: 700, color: A.accent, textDecoration: 'none', whiteSpace: 'nowrap' }}>
-            LOG A COURSE →
+          <Link to="/courses" style={{ fontFamily: FIG, fontSize: 12.5, fontWeight: 700, color: A.accent, textDecoration: 'none', whiteSpace: 'nowrap' }}>
+            Log a course →
           </Link>
         </section>
       )}
@@ -162,8 +159,8 @@ export default function ExplorePage() {
             onSelect={selectLens}
             size="sm"
             trailing={(
-              <span style={{ marginLeft: 'auto', alignSelf: 'center', paddingRight: 16, fontFamily: FIG, fontSize: 11, color: A.inkMuted, letterSpacing: '0.08em', whiteSpace: 'nowrap', flexShrink: 0 }}>
-                TOP 10 / {ranked.length}
+              <span style={{ marginLeft: 'auto', alignSelf: 'center', paddingRight: 16, fontFamily: FIG, fontSize: 12, color: A.inkMuted, letterSpacing: '0.02em', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                Top 10 of {ranked.length}
               </span>
             )}
           />
@@ -181,7 +178,7 @@ export default function ExplorePage() {
                   {cert.name}
                 </Link>
                 {claim && (
-                  <span style={{ fontFamily: FIG, fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', padding: '2px 8px', background: A.accent, color: A.onAccent, flexShrink: 0, textTransform: 'uppercase' }}>
+                  <span style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 700, letterSpacing: '0.02em', padding: '2px 8px', background: A.accent, color: A.onAccent, flexShrink: 0, textTransform: 'capitalize' }}>
                     {claim.replace('_', ' ')}
                   </span>
                 )}
@@ -192,10 +189,10 @@ export default function ExplorePage() {
               </div>
             );
           })}
-          <div style={{ padding: '10px 16px', borderTop: `1px solid ${A.ink}`, display: 'flex', justifyContent: 'space-between', fontFamily: FIG, fontSize: 11, letterSpacing: '0.08em', color: A.inkMuted }}>
-            <span>DEFAULT WEIGHTS</span>
+          <div style={{ padding: '10px 16px', borderTop: `1px solid ${A.ink}`, display: 'flex', justifyContent: 'space-between', fontFamily: FIG, fontSize: 12, letterSpacing: '0.02em', color: A.inkMuted }}>
+            <span>Default weights</span>
             <Link to={`/matrix?lens=${lens}`} style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>
-              CALIBRATE THE WEIGHTS →
+              Calibrate the weights →
             </Link>
           </div>
         </section>
@@ -205,9 +202,9 @@ export default function ExplorePage() {
           <section aria-label="The ledger" style={{ border: `1px solid ${A.ink}` }}>
             <div style={cardHead}>
               <span style={cardHeadLabel}>
-                THE LEDGER{requirements ? ` — ${user.state} ${user.licenseType} · ${requirements.total}H / ${requirements.cycleYears}YR` : ''}
+                The Ledger{requirements ? ` · ${user.state} ${user.licenseType} · ${requirements.total}h / ${requirements.cycleYears}yr` : ''}
               </span>
-              <Link to="/compliance" style={cardHeadLink}>FULL LEDGER →</Link>
+              <Link to="/compliance" style={cardHeadLink}>Full ledger →</Link>
             </div>
             {requirements ? (
               <div style={{ padding: '1.1rem 1.35rem' }}>
@@ -220,7 +217,7 @@ export default function ExplorePage() {
                     <div key={key} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '5px 0', borderBottom: `1px solid ${A.ruleFaintest}` }}>
                       <span style={{ fontSize: 13.5, textTransform: 'capitalize' }}>{labelize(key)}</span>
                       <span style={{ fontFamily: FIG, fontSize: 12, fontWeight: 700, color: done ? A.accent : A.warn, letterSpacing: '0.04em', ...tabularNums }}>
-                        {hours[key] || 0}/{required} {done ? '✓' : 'DUE'}
+                        {hours[key] || 0}/{required} {done ? '✓' : 'Due'}
                       </span>
                     </div>
                   );
@@ -237,8 +234,8 @@ export default function ExplorePage() {
           {/* Claims */}
           <section aria-label="Your claims" style={{ border: `1px solid ${A.ink}` }}>
             <div style={cardHead}>
-              <span style={cardHeadLabel}>YOUR CLAIMS ON THE FIELD</span>
-              <Link to="/profile" style={cardHeadLink}>PROFILE →</Link>
+              <span style={cardHeadLabel}>Your claims on the field</span>
+              <Link to="/profile" style={cardHeadLink}>Profile →</Link>
             </div>
             {(credentials || []).map((c) => (
               <div key={c.id || c.cert_name} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '0.65rem 1.35rem', borderBottom: `1px solid ${A.ruleFaintest}` }}>
@@ -248,7 +245,7 @@ export default function ExplorePage() {
                 <span style={{ flex: 1, minWidth: 0, fontWeight: 600, fontSize: 13.5, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {c.cert_name}
                 </span>
-                <span style={{ fontFamily: FIG, fontSize: 10.5, letterSpacing: '0.08em', color: A.inkMuted, textTransform: 'uppercase' }}>
+                <span style={{ fontFamily: FIG, fontSize: 11, letterSpacing: '0.02em', color: A.inkMuted, textTransform: 'capitalize' }}>
                   {(c.status || '').replace('_', ' ')}
                 </span>
               </div>
@@ -259,7 +256,7 @@ export default function ExplorePage() {
                 <Link to="/profile" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>Claim your first credential →</Link>
               </div>
             )}
-            <div style={{ padding: '10px 16px', fontFamily: FIG, fontSize: 11, color: A.inkMuted, letterSpacing: '0.06em' }}>SELF-REPORTED</div>
+            <div style={{ padding: '10px 16px', fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, letterSpacing: '0.02em' }}>Self-reported</div>
           </section>
         </div>
       </div>
