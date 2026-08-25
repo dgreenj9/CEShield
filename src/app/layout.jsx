@@ -57,7 +57,7 @@ export const metadata = {
 
 // Next 14+ split themeColor out of the metadata export.
 export const viewport = {
-  themeColor: '#3b82f6',
+  themeColor: '#235E6B',
   width: 'device-width',
   initialScale: 1,
 };
@@ -66,14 +66,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Fonts — preconnect + the same Google Fonts URL CRA's index.html
-            uses. Next normally manages fonts via next/font for self-hosting,
-            but for parity with the existing CRA build during the migration
-            we use the same external link. */}
+        {/* Fonts — Atlas type system: Instrument Sans (display) + Figtree
+            (body/UI). Two families, no serif, no mono. */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@200;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Figtree:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
       </head>

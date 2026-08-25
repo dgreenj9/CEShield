@@ -39,11 +39,37 @@ const paper = {
   rule: '#E8E6DF',  // hairline divider tone
 };
 
+// Atlas evidence-tier scale — the only place color encodes data. Tiers stay
+// within the accent family: petrol → mid-petrol → ochre → stone.
 const evidence = {
-  strong: '#22c55e',  // tier: Strong (70-100)
-  good: '#3b82f6',    // tier: Good (50-69)
-  moderate: '#fbbf24', // tier: Moderate (30-49)
-  limited: '#94a3b8',  // tier: Limited (0-29)
+  strong: '#235E6B',   // tier: Strong (70-100)
+  good: '#4E7E8B',     // tier: Good (50-69)
+  moderate: '#C77B2E', // tier: Moderate (30-49)
+  limited: '#B9B4A6',  // tier: Limited (0-29)
+};
+
+// "Atlas" design tokens — the ground-up redesign (2026-08). Scientific-atlas
+// art direction: warm paper ground, 1px ink rules, a single petrol accent,
+// ochre as the only warning voice. Zero radius, zero shadow on Atlas
+// surfaces. Source of truth: docs/design (Atlas handoff) +
+// src/components/atlas/theme.js (JS mirror for inline-styled components).
+const atlas = {
+  paper: '#FAFAF5',
+  band: '#F2F1E9',
+  notice: '#F6F3E7',
+  ink: '#1B1A17',
+  'ink-body': '#45433C',
+  'ink-muted': '#56544C',
+  'rule-minor': '#D5D3C6',
+  'rule-faint': '#E4E2D6',
+  'rule-faintest': '#EEECDF',
+  accent: '#235E6B',
+  'accent-hover': '#17434E',
+  'accent-mid': '#4E7E8B',
+  'accent-tint': '#D9E4E6',
+  warn: '#C77B2E',
+  dim: '#B9B4A6',
+  'on-accent': '#FAFAF5',
 };
 
 module.exports = {
@@ -56,6 +82,7 @@ module.exports = {
         ink,
         evidence,
         paper,
+        atlas,
         'gray-bg': '#f9fafb',
       },
       borderRadius: {
@@ -90,10 +117,11 @@ module.exports = {
         brand: brand.blue,
       },
       fontFamily: {
-        // Inter for body text — clean, neutral, but slightly more characterful
-        // than system-ui defaults.
+        // Atlas type system: Figtree for body/UI/labels/tabular numerals.
+        // No serif and no monospace anywhere — deliberate override of the
+        // previous Fraunces + JetBrains Mono pairing.
         sans: [
-          'Inter',
+          'Figtree',
           'ui-sans-serif',
           'system-ui',
           '-apple-system',
@@ -104,16 +132,17 @@ module.exports = {
           'Arial',
           'sans-serif',
         ],
-        // Fraunces serif for page titles, hero, big stats. Variable-axis,
-        // looks like a journal headline rather than a SaaS template.
+        // Instrument Sans for display: h1/h2/h3, big numerals, score chips.
         display: [
-          'Fraunces',
-          'ui-serif',
-          'Georgia',
-          'Cambria',
-          '"Times New Roman"',
-          'Times',
-          'serif',
+          '"Instrument Sans"',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          '"Segoe UI"',
+          'Roboto',
+          '"Helvetica Neue"',
+          'Arial',
+          'sans-serif',
         ],
       },
       keyframes: {

@@ -17,17 +17,23 @@
      for page titles, hero copy, big stat numbers. Serif on a clinical
      product reads as editorial / journal, not as a SaaS template.
    ──────────────────────────────────────────────────────────────────────── */
+/* Atlas ground: warm paper, ink text, Figtree UI face.
+   NOTE: tabular figures are applied per-numeral-element (.tabular-nums),
+   never globally — a global "tnum" broke punctuation spacing in display
+   headlines. */
 body {
-  background-color: #FAFAF6;
-  color: #111827;
-  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+  background-color: #FAFAF5;
+  color: #1B1A17;
+  font-family: 'Figtree', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 15px;
-  font-feature-settings: "tnum" 1, "ss01" 1;  /* tabular figures + stylistic set */
+  font-size: 15.5px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+
+::selection { background: #D9E4E6; }
+input[type="range"] { accent-color: #235E6B; }
 
 /* Tabular numerals utility — apply directly on numeric cells/score chips. */
 .tabular-nums {
@@ -54,20 +60,18 @@ body {
   border: none;
 }
 
-/* Display-serif utility — when a title should be the serif Fraunces. */
+/* Display utility — Instrument Sans, the Atlas display face. (Previously
+   Fraunces serif; Atlas uses no serif anywhere.) */
 .font-display {
-  font-family: 'Fraunces', ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  font-optical-sizing: auto;
-  font-variation-settings: "opsz" 36, "SOFT" 30;
+  font-family: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Monospace utility — JetBrains Mono. Used for technical numerics that benefit
-   from monospace character (ranks, weight notation, DOIs, hour counts in
-   tables). Adds character without going editorial. */
+/* Legacy monospace utility — remapped to Figtree with tabular figures.
+   Atlas uses no monospace; existing call sites (ranks, DOIs, hour counts)
+   keep their alignment via tnum. */
 .font-mono {
-  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, "Liberation Mono", "Courier New", monospace;
-  font-feature-settings: "tnum" 1, "zero" 1, "ss02" 1;
+  font-family: 'Figtree', ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "tnum" 1;
 }
 
 /* Gradient-text accent — clipped to text. Used sparingly, typically on one
@@ -139,12 +143,11 @@ body {
   position: absolute;
   left: -10000px;
   top: 0;
-  background: #3b82f6;
-  color: white;
+  background: #235E6B;
+  color: #FAFAF5;
   padding: 12px 18px;
   text-decoration: none;
   font-weight: 600;
-  border-radius: 0 0 8px 0;
   z-index: 2000;
 }
 .skip-to-main:focus {
@@ -155,7 +158,7 @@ body {
    buttons set focus:outline-none expecting a tailwind ring; this is the
    floor in case any are missed. */
 *:focus-visible {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid #235E6B;
   outline-offset: 2px;
 }
 
@@ -540,4 +543,39 @@ select {
     padding: 1rem !important;
     border-radius: 10px !important;
   }
+}
+/* ──────────────────────────────────────────────────────────────────────────
+   Atlas layout helpers. The Atlas surfaces (landing, matrix, explore,
+   compliance) are inline-styled from src/components/atlas/theme.js; these
+   classes carry only what inline styles can't — responsive collapses.
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Landing stat band + notes: 4 columns → 2 → 1. */
+.atlas-4col { display: grid; grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 900px) { .atlas-4col { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .atlas-4col { grid-template-columns: 1fr; } }
+
+/* Matrix instrument: ranked list + plate side by side, stacked on mobile. */
+.atlas-two-pane { display: grid; grid-template-columns: minmax(340px, 0.9fr) minmax(0, 1.1fr); }
+@media (max-width: 900px) { .atlas-two-pane { grid-template-columns: 1fr; } }
+
+/* Explore dashboard: field table + rail. */
+.atlas-dash-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 2rem; align-items: start; }
+@media (max-width: 980px) { .atlas-dash-grid { grid-template-columns: 1fr; } }
+
+/* Compliance ledger: hours banked + mandatory categories. */
+.atlas-ledger-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); }
+@media (max-width: 820px) { .atlas-ledger-grid { grid-template-columns: 1fr; } }
+@media (max-width: 820px) { .atlas-ledger-grid > div:first-child { border-right: none !important; border-bottom: 1px solid #1B1A17; } }
+
+/* Landing Table 2: copy column + lens rows. */
+.atlas-lens-split { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.3fr); gap: 5rem; align-items: start; }
+@media (max-width: 900px) { .atlas-lens-split { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+/* Sticky Atlas nav link rows scroll horizontally rather than wrap on
+   very small screens. */
+.atlas-nav-links { display: flex; align-items: center; }
+@media (max-width: 720px) {
+  .atlas-nav-links { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .atlas-nav-links::-webkit-scrollbar { display: none; }
 }

@@ -1,22 +1,20 @@
-import React, { useMemo, useCallback } from 'react';
-import {
-  AlertCircle, CheckCircle, Clock, Download, Info, Shield,
-} from 'lucide-react';
-import { colors } from '../utils/constants';
+import React, { useMemo } from 'react';
+import { Shield } from 'lucide-react';
+import { Link } from '../router';
 import { useUserData } from '../contexts/UserDataContext';
 import { getRequirements, calculateHours } from '../utils/calculations';
 import { generateReport } from '../utils/reportGenerator';
-import { Link } from '../router';
-import { PageHeader, Card, Button, EmptyState } from '../components/ui';
-import CourseRecommendations from '../components/dashboard/CourseRecommendations';
+import { A, FIG, INS, eyebrow, tabularNums } from '../components/atlas/theme';
 
-const checkLimit = (requirements, category, currentHours) => {
-  if (!requirements?.limits?.[category]) return 'ok';
-  const limit = requirements.limits[category];
-  if (currentHours >= limit) return 'exceeded';
-  if (currentHours >= limit * 0.8) return 'warning';
-  return 'ok';
-};
+// Compliance — "The Ledger" (Table 3). Make renewal boring.
+// All values are computed by the rules engine, never hardcoded: the header
+// citation, the hours meter, the mandatory-category checklist, the format
+// caps, and the course log all derive from src/data/stateRules + the user's
+// logged courses.
+
+const labelize = (key) => key.replace(/([A-Z])/g, ' $1').trim();
+
+const headLabel = { fontFamily: FIG, fontSize: 11, letterSpacing: '0.12em', fontWeight: 700, color: A.inkMuted, textTransform: 'uppercase' };
 
 export default function CompliancePage() {
   const { user, courses } = useUserData();
@@ -26,272 +24,279 @@ export default function CompliancePage() {
   );
   const hours = useMemo(() => calculateHours(courses), [courses]);
 
-  const getDaysUntilRenewal = useCallback(() => {
+  const renewalDays = useMemo(() => {
     if (!user.renewalDate) return null;
-    const renewal = new Date(user.renewalDate);
-    const today = new Date();
-    return Math.ceil((renewal - today) / (1000 * 60 * 60 * 24));
+    const days = Math.ceil((new Date(user.renewalDate) - new Date()) / 86400000);
+    return Number.isFinite(days) ? days : null;
   }, [user.renewalDate]);
 
-  const daysUntilRenewal = getDaysUntilRenewal();
-  const totalPct = requirements && requirements.total > 0
-    ? Math.min((hours.total / requirements.total) * 100, 100)
-    : 0;
-
-  // Mandatory categories the user hasn't finished — drives the course
-  // recommendations below the requirements cards. Empty catalog or no gaps
-  // → the section renders nothing.
-  const unmetCategories = useMemo(() => {
-    if (!requirements) return [];
-    return Object.entries(requirements.mandatory || {})
-      .filter(([key, required]) => required > 0 && (hours[key] || 0) < required)
-      .map(([key]) => key);
-  }, [requirements, hours]);
+  const renewalDateLabel = user.renewalDate
+    ? new Date(`${user.renewalDate}T12:00:00`)
+        .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        .toUpperCase()
+    : null;
 
   if (!requirements) {
     return (
       <div>
-        <PageHeader icon={Shield} title="Compliance" />
-        <EmptyState
-          icon={Shield}
-          title="Your state isn't in our rules library yet"
-          description="Pick a state we cover (Illinois, Wisconsin, or North Carolina) in Profile to see your CE requirements."
-          action={<Link to="/profile" className="text-brand-blue underline">Choose a state →</Link>}
-        />
+        <div style={{ ...eyebrow(), marginBottom: 8 }}>TABLE 3 — THE LEDGER</div>
+        <h1 style={{ fontFamily: INS, fontWeight: 600, fontSize: 36, lineHeight: 1.02, letterSpacing: '-0.025em', margin: '0 0 1.5rem' }}>
+          Renewal day should be boring.
+        </h1>
+        <div style={{ border: `1px dashed ${A.ink}`, padding: '2rem', textAlign: 'center', color: A.inkBody }}>
+          <Shield size={20} aria-hidden="true" style={{ color: A.inkMuted, marginBottom: 8 }} />
+          <p style={{ margin: '0 0 4px', fontWeight: 600, color: A.ink }}>Your state isn&rsquo;t in our rules library yet.</p>
+          <p style={{ margin: 0, fontSize: 14 }}>
+            Pick a covered state (Illinois, Wisconsin, or North Carolina) in{' '}
+            <Link to="/profile" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>Profile →</Link>
+          </p>
+        </div>
       </div>
     );
   }
 
+  const pct = requirements.total > 0 ? Math.min(100, (hours.total / requirements.total) * 100) : 0;
+  const mandatoryEntries = Object.entries(requirements.mandatory || {}).filter(([, r]) => r > 0);
+  const mandatoryDone = mandatoryEntries.filter(([k, r]) => (hours[k] || 0) >= r).length;
+  const cycleDays = (requirements.cycleYears || 2) * 365;
+  const onPace = renewalDays === null
+    ? pct >= 50
+    : pct / 100 >= (1 - renewalDays / cycleDays) - 0.1;
+  const showCulturalNotice =
+    user.state === 'IL' && !user.isFirstRenewal &&
+    (requirements.mandatory.culturalCompetency || 0) > 0 &&
+    (hours.culturalCompetency || 0) < requirements.mandatory.culturalCompetency;
+  const sortedCourses = [...courses].sort((a, b) => new Date(b.date) - new Date(a.date));
+  const cite = (requirements.citation || '').toUpperCase();
+
   return (
     <div>
-      <PageHeader
-        icon={Shield}
-        title="Compliance"
-        subtitle={
-          <>
-            {requirements.jurisdictionName} {user.licenseType} &middot;{' '}
-            {requirements.total} hours per {requirements.cycleYears}-year cycle.
-            {daysUntilRenewal !== null && (
-              <strong
-                className={daysUntilRenewal < 90 ? 'text-red-600 ml-1' : 'text-slate-medium ml-1'}
-              >
-                {daysUntilRenewal} days until renewal.
-              </strong>
-            )}
-          </>
-        }
-      />
+      {/* Header */}
+      <header style={{ marginBottom: '1.25rem', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '2rem', flexWrap: 'wrap' }}>
+        <div>
+          <div style={{ ...eyebrow(), marginBottom: 8 }}>
+            TABLE 3 — THE LEDGER · {(requirements.jurisdictionName || user.state).toUpperCase()} {user.licenseType} ·{' '}
+            {requirements.total}H / {requirements.cycleYears}YR{cite ? ` · ${cite}` : ''}
+          </div>
+          <h1 className="cs-h1-clamp" style={{ fontFamily: INS, fontWeight: 600, fontSize: 36, lineHeight: 1.02, letterSpacing: '-0.025em', margin: 0 }}>
+            Renewal day should be boring.
+          </h1>
+        </div>
+        <div style={{ textAlign: 'right' }}>
+          {renewalDays !== null ? (
+            <>
+              <span style={{ fontFamily: FIG, fontSize: 44, fontWeight: 800, lineHeight: 1, color: renewalDays < 90 ? A.warn : A.ink, ...tabularNums }}>
+                {renewalDays}
+              </span>
+              <span style={{ display: 'block', fontFamily: FIG, fontSize: 10.5, letterSpacing: '0.1em', color: A.inkMuted, fontWeight: 600, marginTop: 2 }}>
+                DAYS TO RENEWAL{renewalDateLabel ? ` · ${renewalDateLabel}` : ''}
+              </span>
+            </>
+          ) : (
+            <Link to="/profile" style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 700, letterSpacing: '0.08em', color: A.accent, textDecoration: 'none' }}>
+              SET YOUR RENEWAL DATE →
+            </Link>
+          )}
+        </div>
+      </header>
 
-      {/* Unverified-state banner */}
+      {/* Unverified-state notice */}
       {requirements.verified === false && (
-        <div
-          role="alert"
-          className="mb-5 px-4 py-3 rounded-md border text-sm"
-          style={{ background: '#fef3c7', borderColor: '#fbbf24', color: '#92400e' }}
-        >
-          <strong>Beta state ({requirements.jurisdictionName}):</strong>{' '}
-          CE rules are unverified. Confirm against{' '}
-          <a
-            href={requirements.boardUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline"
-            style={{ color: '#92400e' }}
-          >
-            {requirements.citation}
-          </a>{' '}
-          before relying on totals.
+        <div role="alert" style={{ border: `1px dashed ${A.ink}`, padding: '0.85rem 1.4rem', marginBottom: '1.5rem', background: A.notice, display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap' }}>
+          <span style={{ fontFamily: FIG, fontSize: 11, letterSpacing: '0.1em', fontWeight: 700, color: A.warn }}>BETA STATE</span>
+          <span style={{ fontSize: 14 }}>
+            {requirements.jurisdictionName} CE rules are unverified. Confirm against{' '}
+            <a href={requirements.boardUrl} target="_blank" rel="noopener noreferrer" style={{ color: A.accent, fontWeight: 700 }}>
+              {requirements.citation}
+            </a>{' '}
+            before relying on totals.
+          </span>
         </div>
       )}
 
       {/* First-renewal exemption */}
       {user.isFirstRenewal && (
-        <div className="mb-5 px-4 py-3 rounded-md border flex items-center gap-2 text-sm"
-             style={{ background: '#f0fdf4', borderColor: '#86efac', color: '#166534' }}>
-          <CheckCircle size={18} aria-hidden="true" />
-          First renewal &mdash; no CE requirements needed for this cycle.
+        <div style={{ border: `1px dashed ${A.ink}`, padding: '0.85rem 1.4rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap' }}>
+          <span style={{ fontFamily: FIG, fontSize: 11, letterSpacing: '0.1em', fontWeight: 700, color: A.accent }}>FIRST RENEWAL</span>
+          <span style={{ fontSize: 14 }}>No CE requirements needed for this cycle.</span>
         </div>
       )}
 
-      {/* IL cultural competency banner */}
-      {user.state === 'IL' && !user.isFirstRenewal && hours.culturalCompetency === 0 && (
-        <div className="mb-5 px-4 py-3 rounded-md border flex items-start gap-2 text-sm"
-             style={{ background: colors.lightBlue, borderColor: `${colors.primaryBlue}33` }}>
-          <Info size={18} aria-hidden="true" className="text-brand-blue mt-0.5 flex-shrink-0" />
-          <div className="text-ink-dark">
-            <div className="font-semibold mb-0.5">New 2025 Illinois requirement</div>
-            Cultural competency training (1 hour) is now required. You have 3 renewal
-            cycles to complete it, but you can start now.
-          </div>
+      {/* New-rule notice */}
+      {showCulturalNotice && (
+        <div style={{ border: `1px dashed ${A.ink}`, padding: '0.85rem 1.4rem', marginBottom: '1.5rem', background: A.notice, display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap' }}>
+          <span style={{ fontFamily: FIG, fontSize: 11, letterSpacing: '0.1em', fontWeight: 700, color: A.warn }}>NEW 2025 RULE</span>
+          <span style={{ fontSize: 14 }}>
+            Cultural competency ({requirements.mandatory.culturalCompetency} h) now required in Illinois — one hour, this cycle.
+          </span>
         </div>
       )}
 
-      {/* Stat strip — refined: index numerals, mono values, eyebrow labels */}
-      <div className="grid gap-3 mb-6"
-           style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))' }}>
-        {[
-          { label: 'Hours completed', value: hours.total, tone: 'brand' },
-          { label: 'Hours required', value: requirements.total, tone: 'neutral' },
-          { label: 'Hours remaining', value: Math.max(0, requirements.total - hours.total), tone: 'neutral' },
-          { label: 'Courses logged', value: courses.length, tone: 'neutral' },
-        ].map((s, i) => (
-          <Card key={s.label} padding="sm" className="relative overflow-hidden">
-            {i === 0 && (
-              <div
-                aria-hidden="true"
-                className="absolute top-0 left-0 right-0"
-                style={{ height: 2, background: 'linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%)' }}
-              />
-            )}
-            <div
-              className="font-display tabular-nums leading-none"
-              style={{
-                fontSize: '2rem',
-                fontWeight: 500,
-                color: s.tone === 'brand' ? colors.primaryBlue : colors.textDark,
-                letterSpacing: '-0.02em',
-              }}
-            >
-              {s.value}
+      <div style={{ border: `1px solid ${A.ink}` }}>
+        {/* Fig. 4 — hours banked + mandatory categories */}
+        <div className="atlas-ledger-grid">
+          <div style={{ padding: '1.5rem 1.75rem', borderRight: `1px solid ${A.ink}` }}>
+            <div style={{ ...headLabel, marginBottom: 14 }}>FIG. 4 — HOURS BANKED</div>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
+              <span style={{ fontFamily: FIG, fontSize: 58, fontWeight: 800, lineHeight: 1, letterSpacing: '-0.02em', ...tabularNums }}>
+                {hours.total}
+              </span>
+              <span style={{ fontFamily: FIG, fontSize: 20, fontWeight: 600, color: A.inkMuted }}>/ {requirements.total} h</span>
+              <span style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 700, letterSpacing: '0.08em', padding: '3px 10px', background: onPace ? A.accent : A.warn, color: A.onAccent, alignSelf: 'center' }}>
+                {onPace ? 'ON PACE' : 'BEHIND PACE'}
+              </span>
             </div>
-            <div className="text-2xs text-ink-gray mt-1.5 uppercase tracking-wider font-semibold">{s.label}</div>
-          </Card>
-        ))}
-      </div>
-
-      {/* Progress — refined with eyebrow + percent tracking */}
-      <Card className="mb-6">
-        <div className="flex items-baseline justify-between mb-3">
-          <h2 className="text-base font-semibold text-ink-dark m-0">Overall progress</h2>
-          <div className="flex items-baseline gap-2">
-            <span className="font-mono tabular-nums text-sm text-ink-gray">{Math.round(totalPct)}%</span>
-            <span className="font-mono tabular-nums text-sm font-semibold text-brand-blue">
-              {hours.total} / {requirements.total}
-            </span>
-            <span className="text-2xs text-ink-gray">hours</span>
+            <div
+              role="progressbar"
+              aria-valuenow={Math.round(pct)}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label="Cycle hours progress"
+              style={{ height: 8, background: A.ruleFaint, margin: '16px 0 8px' }}
+            >
+              <span style={{ display: 'block', height: '100%', width: `${pct}%`, background: A.accent }} />
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: FIG, fontSize: 11.5, color: A.inkMuted }}>
+              <span>{Math.round(pct)}% OF CYCLE REQUIREMENT</span>
+              <span>{Math.max(0, requirements.total - hours.total)} H STILL TO LOG</span>
+            </div>
           </div>
-        </div>
-        <div
-          role="progressbar"
-          aria-valuenow={Math.round(totalPct)}
-          aria-valuemin={0}
-          aria-valuemax={100}
-          style={{ height: 8, background: colors.slateLight, borderRadius: 999, overflow: 'hidden', position: 'relative' }}
-        >
-          <div
-            style={{
-              height: '100%',
-              width: `${totalPct}%`,
-              background: totalPct >= 100
-                ? 'linear-gradient(90deg, #2F6B4D 0%, #1F4D38 100%)'
-                : 'linear-gradient(90deg, #3b82f6 0%, #2563eb 100%)',
-              transition: 'width 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-              borderRadius: 999,
-            }}
-          />
-        </div>
-      </Card>
-
-      {/* Mandatory + Limits side-by-side */}
-      <div className="grid gap-4 mb-6"
-           style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
-        <Card>
-          <h2 className="text-base font-semibold text-ink-dark m-0 mb-3">Mandatory requirements</h2>
-          <div className="flex flex-col gap-2">
-            {Object.entries(requirements.mandatory || {}).map(([key, required]) => {
-              if (required === 0) return null;
-              const completed = hours[key] || 0;
-              const isComplete = completed >= required;
-              const isNew2025 = key === 'culturalCompetency';
+          <div style={{ padding: '1.5rem 1.75rem' }}>
+            <div style={{ ...headLabel, marginBottom: 14 }}>
+              MANDATORY CATEGORIES — {mandatoryDone} OF {mandatoryEntries.length} DONE
+            </div>
+            {mandatoryEntries.map(([key, required]) => {
+              const done = hours[key] || 0;
+              const ok = done >= required;
               return (
-                <div key={key} className="flex items-center justify-between text-sm">
-                  <span className="capitalize">
-                    {key.replace(/([A-Z])/g, ' $1').trim()}
-                    {isNew2025 && (
-                      <span className="ml-1.5 text-2xs text-brand-blue">(NEW 2025)</span>
+                <div key={key} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto', gap: 14, alignItems: 'baseline', padding: '6px 0', borderBottom: `1px solid ${A.ruleFaintest}` }}>
+                  <span style={{ fontSize: 14, textTransform: 'capitalize' }}>
+                    {labelize(key)}{' '}
+                    {key === 'culturalCompetency' && (
+                      <span style={{ fontFamily: FIG, fontSize: 10, fontWeight: 700, color: A.warn, letterSpacing: '0.06em' }}>NEW 2025</span>
                     )}
                   </span>
-                  <span className="flex items-center gap-1.5">
-                    <span className={`font-mono tabular-nums font-semibold ${isComplete ? 'text-green-600' : 'text-red-600'}`}>
-                      {completed}/{required}
+                  <span style={{ fontFamily: FIG, fontSize: 13.5, fontWeight: 700, ...tabularNums }}>{done}/{required} h</span>
+                  <span style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 800, color: ok ? A.accent : A.warn, letterSpacing: '0.06em', minWidth: 30, textAlign: 'right' }}>
+                    {ok ? '✓' : 'DUE'}
+                  </span>
+                </div>
+              );
+            })}
+            {mandatoryEntries.length === 0 && (
+              <p style={{ fontSize: 14, color: A.inkMuted, margin: 0 }}>No mandatory categories for this jurisdiction.</p>
+            )}
+          </div>
+        </div>
+
+        {/* Format caps */}
+        {Object.keys(requirements.limits || {}).length > 0 && (
+          <div style={{ borderTop: `1px solid ${A.ink}`, padding: '1.25rem 1.75rem' }}>
+            <div style={{ ...headLabel, marginBottom: 12 }}>FORMAT CAPS</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 10 }}>
+              {Object.entries(requirements.limits).map(([key, limit]) => {
+                const current = hours[key] || 0;
+                const over = current >= limit;
+                const near = current >= limit * 0.8;
+                return (
+                  <div key={key} style={{ border: `1px solid ${A.ruleFaint}`, padding: '10px 12px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                      <span style={{ fontFamily: FIG, fontSize: 17, fontWeight: 800, ...tabularNums }}>
+                        {current}
+                        <span style={{ fontSize: 12, color: A.inkMuted, fontWeight: 600 }}>/{limit}</span>
+                      </span>
+                      <span style={{ fontFamily: FIG, fontSize: 10, fontWeight: 800, letterSpacing: '0.06em', color: over || near ? A.warn : A.accentMid }}>
+                        {over ? 'AT CAP' : near ? 'NEAR' : 'OK'}
+                      </span>
+                    </div>
+                    <span style={{ display: 'block', fontSize: 11.5, color: A.inkMuted, marginTop: 3, textTransform: 'capitalize' }}>
+                      {labelize(key)}
                     </span>
-                    {isComplete ? (
-                      <CheckCircle size={16} className="text-green-600" aria-label="Complete" />
-                    ) : (
-                      <AlertCircle size={16} className="text-red-600" aria-label="Incomplete" />
-                    )}
-                  </span>
-                </div>
-              );
-            })}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <CourseRecommendations
-            state={user.state}
-            licenseType={user.licenseType}
-            neededCategories={unmetCategories}
-          />
-        </Card>
+        )}
 
-        <Card>
-          <h2 className="text-base font-semibold text-ink-dark m-0 mb-3">Category limits</h2>
-          <div className="grid gap-2"
-               style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))' }}>
-            {Object.entries(requirements.limits || {}).map(([category, limit]) => {
-              const current = hours[category] || 0;
-              const status = checkLimit(requirements, category, current);
-              const cls =
-                status === 'exceeded' ? 'text-red-600'
-                  : status === 'warning' ? 'text-amber-600'
-                  : 'text-ink-dark';
-              return (
-                <div key={category} className="text-center py-2 px-1 rounded-md bg-gray-bg">
-                  <div className="text-2xs text-ink-gray capitalize">
-                    {category.replace(/([A-Z])/g, ' $1').trim()}
-                  </div>
-                  <div className={`font-mono tabular-nums text-lg font-semibold ${cls}`}>
-                    {current}/{limit}
-                  </div>
-                  {status === 'exceeded' && (
-                    <div className="text-2xs text-red-600">Over limit</div>
-                  )}
-                </div>
-              );
-            })}
+        {/* Table 4 — the course log */}
+        <div style={{ borderTop: `1px solid ${A.ink}` }}>
+          <div style={{ padding: '12px 1.75rem', borderBottom: `1px solid ${A.ruleFaint}`, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 10 }}>
+            <span style={headLabel}>TABLE 4 — THE COURSE LOG · {courses.length} ENTRIES</span>
+            <Link to="/courses" style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 700, color: A.accent, textDecoration: 'none' }}>
+              ADD OR EDIT COURSES →
+            </Link>
           </div>
-        </Card>
+          {sortedCourses.map((course, i) => (
+            <div
+              key={course.id || `${course.title}-${i}`}
+              style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '0.62rem 1.75rem', borderBottom: i < sortedCourses.length - 1 ? `1px solid ${A.ruleFaintest}` : 'none' }}
+            >
+              <span style={{ fontFamily: FIG, fontSize: 12, color: A.inkMuted, width: 84, flexShrink: 0, ...tabularNums }}>
+                {course.date
+                  ? new Date(`${course.date}T12:00:00`)
+                      .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' })
+                      .toUpperCase()
+                  : '—'}
+              </span>
+              <span style={{ flex: 1, minWidth: 0 }}>
+                <span style={{ display: 'block', fontWeight: 600, fontSize: 14.5, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {course.title}
+                </span>
+                <span style={{ display: 'block', fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, marginTop: 1, textTransform: 'capitalize' }}>
+                  {[course.provider, labelize(course.category || '')].filter(Boolean).join(' · ')}
+                </span>
+              </span>
+              {course.certificate_storage && (
+                <span style={{ fontFamily: FIG, fontSize: 10, fontWeight: 700, letterSpacing: '0.06em', padding: '2px 8px', border: `1px solid ${A.accent}`, color: A.accent, flexShrink: 0 }}>
+                  CERTIFICATE
+                </span>
+              )}
+              <span style={{ fontFamily: FIG, fontSize: 16, fontWeight: 800, width: 52, textAlign: 'right', flexShrink: 0, ...tabularNums }}>
+                {course.hours}
+                <span style={{ fontSize: 11, color: A.inkMuted, fontWeight: 600 }}> h</span>
+              </span>
+            </div>
+          ))}
+          {sortedCourses.length === 0 && (
+            <div style={{ padding: '1.5rem 1.75rem', fontSize: 14, color: A.inkMuted }}>
+              Nothing in the log yet.{' '}
+              <Link to="/courses" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>Log your first course →</Link>
+            </div>
+          )}
+        </div>
+
+        {/* Export strip */}
+        <div style={{ borderTop: `1px solid ${A.ink}`, padding: '1rem 1.75rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem', flexWrap: 'wrap', background: A.band }}>
+          <span style={{ fontSize: 14, maxWidth: '34em', color: A.inkBody }}>
+            <strong style={{ color: A.ink }}>The full binder, board-ready.</strong>
+          </span>
+          <span style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              onClick={() => generateReport(user, courses, false)}
+              style={{ fontFamily: FIG, fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', background: 'transparent', border: `1px solid ${A.ink}`, color: A.ink, padding: '10px 18px', cursor: 'pointer' }}
+            >
+              EXPORT REPORT
+            </button>
+            <button
+              type="button"
+              onClick={() => generateReport(user, courses, true)}
+              style={{ fontFamily: FIG, fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', background: A.accent, border: `1px solid ${A.accent}`, color: A.onAccent, padding: '10px 18px', cursor: 'pointer' }}
+            >
+              CERTIFICATES ZIP
+            </button>
+          </span>
+        </div>
       </div>
 
-      {/* Reports */}
-      <Card>
-        <div className="flex items-center justify-between flex-wrap gap-3">
-          <div>
-            <h2 className="text-base font-semibold text-ink-dark m-0">Audit-ready exports</h2>
-            <p className="text-sm text-ink-gray m-0 mt-1">
-              Renewal-ready report (printable HTML) or a ZIP of every uploaded certificate.
-            </p>
-          </div>
-          <div className="flex gap-2">
-            <Button variant="secondary" onClick={() => generateReport(user, courses, false)}>
-              <Download size={16} aria-hidden="true" /> HTML report
-            </Button>
-            <Button onClick={() => generateReport(user, courses, true)}>
-              <Download size={16} aria-hidden="true" /> Certificates ZIP
-            </Button>
-          </div>
-        </div>
-      </Card>
-
-      <p className="mt-6 text-center text-sm text-ink-gray">
-        Need to add or edit a CE course?{' '}
-        <Link to="/courses" className="text-brand-blue underline">
-          Go to Courses &rarr;
-        </Link>
+      {/* Source footer */}
+      <p style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, margin: '1.25rem 0 0', letterSpacing: '0.04em' }}>
+        SOURCE: {cite || 'STATE BOARD RULES'}{requirements.lastReviewed ? ` · LAST REVIEWED ${String(requirements.lastReviewed).toUpperCase()}` : ''} —{' '}
+        <a href={requirements.boardUrl || '#'} target="_blank" rel="noopener noreferrer" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>
+          READ THE RULE ↗
+        </a>
       </p>
-      {daysUntilRenewal !== null && daysUntilRenewal < 90 && (
-        <p className="mt-2 text-center text-sm text-red-600 flex items-center justify-center gap-1">
-          <Clock size={14} aria-hidden="true" /> Renewal in under 90 days.
-        </p>
-      )}
     </div>
   );
 }
