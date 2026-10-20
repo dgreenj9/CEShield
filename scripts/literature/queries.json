@@ -1,0 +1,1152 @@
+{
+  "_macros": {
+    "SR": "(systematic review[pt] OR meta-analysis[pt] OR systematic review[ti] OR meta-analy*[ti] OR scoping review[ti] OR umbrella review[ti])",
+    "RCT": "(randomized controlled trial[pt] OR randomized[ti] OR randomised[ti])",
+    "GL": "(practice guideline[pt] OR guideline[pt] OR guideline*[ti] OR consensus[ti] OR position statement[ti])",
+    "HQ": "({SR} OR {RCT} OR {GL})",
+    "PT": "(\"physical therapy\"[tiab] OR \"physical therapist\"[tiab] OR \"physical therapists\"[tiab] OR physiotherap*[tiab])",
+    "OT": "(\"occupational therapy\"[tiab] OR \"occupational therapist\"[tiab] OR \"occupational therapists\"[tiab])",
+    "SLP": "(\"speech-language pathologist\"[tiab] OR \"speech-language pathologists\"[tiab] OR \"speech and language therap*\"[tiab] OR \"speech-language patholog*\"[tiab] OR \"speech therap*\"[tiab])",
+    "CERT": "(\"board certified\"[tiab] OR \"board-certified\"[tiab] OR \"board certification\"[tiab] OR \"specialist certification\"[tiab] OR \"specialty certification\"[tiab] OR \"clinical specialist\"[tiab] OR \"specialist physiotherapist*\"[tiab] OR ABPTS[tiab] OR \"advanced practice\"[tiab] OR \"post-professional\"[tiab] OR \"residency-trained\"[tiab] OR \"specialization\"[tiab])",
+    "OLD": "(\"older adults\"[ti] OR elderly[ti] OR \"older people\"[ti] OR \"older persons\"[ti] OR \"older patients\"[ti] OR geriatric*[ti] OR \"aged\"[ti] OR \"older women\"[ti] OR \"older men\"[ti] OR frail*[ti] OR \"nursing home*\"[ti] OR \"long-term care\"[ti])",
+    "ABPTS": "(\"board-certified\"[tiab] OR \"board certified\"[tiab] OR \"board certification\"[tiab] OR \"specialist certification\"[tiab] OR \"clinical specialist*\"[tiab] OR \"American Board of Physical Therapy Specialties\"[tiab] OR \"description of specialty practice\"[tiab] OR \"residency-trained\"[tiab] OR \"residency training\"[tiab] OR \"residency program*\"[tiab])",
+    "PTTI": "(\"physical therap*\"[ti] OR physiotherap*[ti] OR \"physical therapist*\"[tiab])"
+  },
+  "certified-exercise-expert-for-aging-adults": {
+    "target": 45,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "term": "(\"exercise prescription\"[ti] OR \"exercise dose\"[ti] OR dosage[ti] OR \"dose-response\"[ti] OR intensity[ti] OR underdos*[ti] OR \"therapeutic quality\"[ti] OR \"exercise principles\"[ti]) AND (older[ti] OR elderly[ti] OR geriatric[ti] OR aged[ti] OR aging[ti] OR ageing[ti]) AND (exercise[tiab] OR training[tiab]) AND (physiotherap*[tiab] OR \"physical therap*\"[tiab] OR rehabilitation[tiab])"
+      },
+      {
+        "retmax": 50,
+        "term": "(exercise[ti] OR \"resistance training\"[ti] OR \"strength training\"[ti] OR \"physical activity\"[ti] OR \"multicomponent\"[ti]) AND {OLD} AND ({SR} OR {GL})"
+      },
+      {
+        "retmax": 30,
+        "term": "(\"resistance training\"[ti] OR \"power training\"[ti] OR \"high-intensity\"[ti] OR \"progressive resistance\"[ti] OR \"multicomponent exercise\"[ti]) AND {OLD} AND randomized controlled trial[pt]"
+      }
+    ]
+  },
+  "board-certification-in-gerontology": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "term": "(\"occupational therapy\"[ti] OR \"occupational therapist*\"[ti]) AND (older[ti] OR geriatric*[ti] OR gerontolog*[ti] OR aging[ti] OR ageing[ti] OR elderly[ti] OR dementia[ti] OR \"later life\"[ti])"
+      },
+      {
+        "retmax": 50,
+        "term": "{OT} AND ({OLD} OR dementia[ti] OR \"aging in place\"[ti] OR \"ageing in place\"[ti] OR \"home modification*\"[ti]) AND {HQ}"
+      },
+      {
+        "retmax": 25,
+        "term": "(\"home modification*\"[ti] OR \"home hazard\"[ti] OR \"functional decline\"[ti] OR \"activities of daily living\"[ti]) AND {OLD} AND ({SR} OR {RCT})"
+      }
+    ]
+  },
+  "aota-board-certifications-physical-rehab": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "term": "(\"occupational therap*\"[ti]) AND (specialist*[ti] OR certification[ti] OR \"advanced practice\"[ti] OR competenc*[ti] OR expertise[ti] OR \"scope of practice\"[ti]) AND (rehabilitation[tiab] OR physical[tiab])",
+        "years": "2005:2026"
+      },
+      {
+        "retmax": 50,
+        "term": "(\"occupational therapy\"[ti] OR \"occupational therapist*\"[ti]) AND (stroke[ti] OR \"spinal cord injur*\"[ti] OR \"brain injur*\"[ti] OR \"hip fracture\"[ti] OR \"upper limb\"[ti] OR \"upper extremity\"[ti] OR \"hand therapy\"[ti] OR \"physical rehabilitation\"[ti] OR orthopaedic[ti] OR orthopedic[ti]) AND {HQ}"
+      },
+      {
+        "retmax": 25,
+        "term": "(\"activities of daily living\"[ti] OR \"ADL\"[ti] OR \"task-oriented\"[ti] OR \"task-specific\"[ti]) AND (stroke[ti] OR rehabilitation[ti]) AND {OT} AND ({SR} OR {RCT})"
+      }
+    ]
+  },
+  "geriatric-clinical-specialist-gcs": {
+    "target": 45,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2000:2026",
+        "term": "{ABPTS} AND {PTTI}"
+      },
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "{PTTI} AND (geriatric*[ti] OR \"older adults\"[ti] OR gerontolog*[ti]) AND (competenc*[ti] OR specialist*[ti] OR certification[tiab] OR residency[ti] OR \"specialty practice\"[ti] OR education[ti] OR curricul*[ti])"
+      },
+      {
+        "retmax": 40,
+        "term": "(fall*[ti]) AND (exercise[ti] OR prevention[ti] OR physiotherap*[ti] OR \"physical therapy\"[ti]) AND {OLD} AND ({SR} OR {GL})"
+      },
+      {
+        "retmax": 30,
+        "term": "(\"hip fracture\"[ti] OR frailty[ti] OR sarcopenia[ti] OR \"hospital-associated\"[ti] OR deconditioning[ti]) AND (rehabilitation[ti] OR exercise[ti] OR \"physical therapy\"[ti] OR physiotherapy[ti]) AND {HQ}"
+      }
+    ]
+  },
+  "imot-intensive-therapy": {
+    "target": 35,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 25,
+        "term": "(\"cerebral palsy\"[ti] OR \"acquired brain injury\"[ti] OR hemipleg*[ti] OR \"motor disorder*\"[ti]) AND (intensive[ti] OR intensity[ti] OR dose[ti] OR dosage[ti] OR camp[ti] OR bootcamp[ti] OR \"high-intensity\"[ti]) AND (therapy[tiab] OR training[tiab] OR rehabilitation[tiab] OR intervention[tiab])"
+      },
+      {
+        "retmax": 40,
+        "term": "\"cerebral palsy\"[ti] AND (\"motor training\"[tiab] OR \"goal-directed\"[tiab] OR \"task-specific\"[tiab] OR \"activity-based\"[tiab] OR intensive[tiab] OR \"motor learning\"[tiab] OR \"gross motor\"[ti]) AND ({SR} OR {GL} OR {RCT})"
+      }
+    ]
+  },
+  "bc-ancds-neurologic-communication": {
+    "target": 45,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "(aphasia[ti] OR dysarthria[ti] OR \"cognitive-communication\"[ti] OR \"motor speech\"[ti]) AND (\"speech-language patholog*\"[ti] OR \"speech and language therap*\"[ti] OR clinicians[ti] OR clinician[ti]) AND (practice[ti] OR survey[ti] OR competenc*[ti] OR expertise[ti] OR training[ti] OR \"best practice\"[ti] OR knowledge[ti])"
+      },
+      {
+        "retmax": 40,
+        "term": "(aphasia[ti]) AND (therapy[ti] OR treatment[ti] OR rehabilitation[ti] OR intervention*[ti] OR intensity[ti] OR intensive[ti]) AND ({SR} OR {GL} OR {RCT})"
+      },
+      {
+        "retmax": 25,
+        "term": "(dysarthria[ti] OR \"apraxia of speech\"[ti] OR \"cognitive-communication\"[ti] OR \"primary progressive aphasia\"[ti] OR \"right hemisphere\"[ti]) AND (treatment[tiab] OR therapy[tiab] OR intervention*[tiab]) AND ({SR} OR {GL} OR {RCT})"
+      }
+    ]
+  },
+  "board-certification-intraoperative-monitoring": {
+    "target": 35,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2005:2026",
+        "term": "(intraoperative[ti]) AND (neurophysiolog*[ti] OR neuromonitoring[ti] OR monitoring[ti] OR \"evoked potential*\"[ti]) AND (guideline*[ti] OR position[ti] OR recommendation*[ti] OR certification[tiab] OR credential*[tiab] OR training[ti] OR audiolog*[tiab] OR \"medicolegal\"[tiab] OR team[ti] OR \"remote\"[ti] OR standards[ti])"
+      },
+      {
+        "retmax": 40,
+        "term": "(intraoperative[ti]) AND (neurophysiolog*[ti] OR neuromonitoring[ti] OR \"nerve monitoring\"[ti] OR \"motor evoked\"[ti] OR \"somatosensory evoked\"[ti] OR \"evoked potential*\"[ti] OR electromyograph*[ti]) AND ({SR} OR {GL} OR {RCT})"
+      },
+      {
+        "retmax": 20,
+        "term": "(\"auditory brainstem response\"[tiab] OR \"facial nerve monitoring\"[tiab] OR \"cochlear nerve\"[tiab] OR \"hearing preservation\"[ti]) AND (intraoperative[ti] OR monitoring[ti])"
+      }
+    ]
+  },
+  "modern-management-of-older-adult": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "term": "(\"high-intensity\"[ti] OR \"high intensity\"[ti] OR \"progressive resistance\"[ti] OR intensity[ti] OR \"physical therapy\"[ti] OR rehabilitation[ti]) AND (\"skilled nursing\"[tiab] OR \"post-acute\"[tiab] OR \"home health\"[tiab] OR \"nursing home*\"[tiab] OR \"long-term care\"[tiab]) AND (older[ti] OR elderly[ti] OR veterans[ti] OR geriatric[ti] OR \"skilled nursing\"[ti] OR \"post-acute\"[ti] OR \"home health\"[ti])"
+      },
+      {
+        "retmax": 40,
+        "term": "(frailty[ti] OR \"pre-frail\"[ti] OR \"functional decline\"[ti] OR \"hospitalized older\"[ti] OR \"acute care for elders\"[ti] OR \"in-hospital mobility\"[ti] OR \"comprehensive geriatric assessment\"[ti]) AND (exercise[tiab] OR rehabilitation[tiab] OR mobility[tiab] OR intervention*[tiab]) AND ({SR} OR {GL} OR {RCT})"
+      },
+      {
+        "retmax": 20,
+        "term": "(\"underdosing\"[tiab] OR \"low-value care\"[tiab] OR \"ageism\"[tiab] OR \"exercise intensity\"[tiab]) AND {OLD} AND (rehabilitation[tiab] OR \"physical therapy\"[tiab] OR physiotherapy[tiab])"
+      }
+    ]
+  },
+  "neurologic-clinical-specialist-ncs": {
+    "target": 45,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2000:2026",
+        "term": "{ABPTS} AND {PTTI} AND (neurolog*[tiab] OR stroke[tiab] OR \"spinal cord\"[tiab] OR \"brain injury\"[tiab] OR vestibular[tiab])"
+      },
+      {
+        "retmax": 30,
+        "term": "(\"clinical practice guideline\"[ti] OR \"core set\"[ti] OR \"core outcome measures\"[ti]) AND (stroke[tiab] OR \"brain injury\"[tiab] OR \"spinal cord injury\"[tiab] OR neurolog*[tiab] OR \"locomotor\"[tiab]) AND {PT}"
+      },
+      {
+        "retmax": 40,
+        "term": "(stroke[ti] OR \"spinal cord injur*\"[ti] OR \"traumatic brain injur*\"[ti]) AND (\"locomotor training\"[ti] OR \"gait training\"[ti] OR \"high-intensity\"[ti] OR \"task-specific\"[ti] OR \"walking\"[ti] OR \"balance training\"[ti] OR \"physical therapy\"[ti] OR physiotherapy[ti]) AND ({SR} OR {GL})"
+      }
+    ]
+  },
+  "vestibular-aib-certifications": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "(vestibular[ti] OR dizziness[ti] OR BPPV[ti] OR vertigo[ti]) AND (\"physical therapist*\"[ti] OR physiotherapist*[ti] OR clinicians[ti] OR \"physical therapy\"[ti]) AND (training[ti] OR competenc*[ti] OR expertise[ti] OR specialist*[ti] OR certification[ti] OR knowledge[ti] OR survey[ti] OR practice[ti] OR management[ti])"
+      },
+      {
+        "retmax": 45,
+        "term": "(\"vestibular rehabilitation\"[ti] OR \"vestibular physical therapy\"[ti] OR \"vestibular physiotherapy\"[ti] OR \"vestibular exercise*\"[ti] OR \"vestibular therapy\"[ti]) AND ({SR} OR {GL} OR {RCT})"
+      },
+      {
+        "retmax": 25,
+        "term": "(\"benign paroxysmal positional vertigo\"[ti] OR BPPV[ti] OR \"persistent postural-perceptual dizziness\"[ti] OR \"vestibular hypofunction\"[ti]) AND (maneuver*[tiab] OR manoeuvre*[tiab] OR rehabilitation[tiab] OR treatment[ti]) AND ({SR} OR {GL} OR {RCT})"
+      }
+    ]
+  },
+  "vestibular-vcc-certification": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "(vestibular[ti] OR dizziness[ti] OR BPPV[ti] OR vertigo[ti]) AND (\"physical therapist*\"[ti] OR physiotherapist*[ti] OR clinicians[ti] OR \"physical therapy\"[ti]) AND (training[ti] OR competenc*[ti] OR expertise[ti] OR specialist*[ti] OR certification[ti] OR knowledge[ti] OR survey[ti] OR practice[ti] OR management[ti])"
+      },
+      {
+        "retmax": 45,
+        "term": "(\"vestibular rehabilitation\"[ti] OR \"vestibular physical therapy\"[ti] OR \"vestibular physiotherapy\"[ti] OR \"vestibular exercise*\"[ti] OR \"vestibular therapy\"[ti]) AND ({SR} OR {GL} OR {RCT})"
+      },
+      {
+        "retmax": 25,
+        "term": "(concussion[ti] OR \"mild traumatic brain injury\"[ti] OR \"vestibular migraine\"[ti] OR \"bilateral vestibul*\"[ti] OR dizziness[ti]) AND (\"vestibular rehabilitation\"[tiab] OR \"vestibular therapy\"[tiab] OR \"vestibular physical therapy\"[tiab]) AND ({SR} OR {RCT})"
+      }
+    ]
+  },
+  "board-certified-specialist-in-swallowing": {
+    "target": 45,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "(dysphagia[ti] OR swallowing[ti]) AND (\"speech-language patholog*\"[ti] OR \"speech and language therap*\"[ti] OR clinicians[ti] OR specialist*[ti]) AND (practice[ti] OR survey[ti] OR competenc*[ti] OR expertise[ti] OR training[ti] OR certification[tiab] OR reliability[ti] OR knowledge[ti])"
+      },
+      {
+        "retmax": 45,
+        "term": "(dysphagia[ti] OR swallowing[ti] OR \"oropharyngeal\"[ti]) AND (therapy[ti] OR treatment[ti] OR rehabilitation[ti] OR management[ti] OR intervention*[ti] OR exercise*[ti] OR screening[ti]) AND ({SR} OR {GL} OR {RCT})"
+      },
+      {
+        "retmax": 20,
+        "term": "(\"fiberoptic endoscopic evaluation\"[tiab] OR FEES[ti] OR videofluoroscop*[ti] OR \"texture-modified\"[ti] OR IDDSI[tiab] OR \"head and neck cancer\"[ti]) AND (dysphagia[tiab] OR swallow*[tiab]) AND ({SR} OR {GL})"
+      }
+    ]
+  },
+  "rolfingstructural-integration": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 25,
+        "years": "1990:2026",
+        "term": "(rolfing[tiab] OR \"structural integration\"[tiab] OR \"Rolf method\"[tiab] OR \"Rolf Institute\"[tiab])"
+      },
+      {
+        "retmax": 30,
+        "term": "(\"myofascial release\"[ti] OR \"fascial manipulation\"[ti] OR \"fascia\"[ti]) AND (pain[tiab] OR posture[tiab] OR function[tiab]) AND ({SR} OR {RCT})"
+      }
+    ]
+  },
+  "acrp-certified-clinical-research-coordinator-ccrc": {
+    "target": 30,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 40,
+        "years": "2005:2026",
+        "term": "(\"clinical research coordinator*\"[tiab] OR \"study coordinator*\"[tiab] OR \"research coordinator*\"[tiab] OR \"clinical research professional*\"[tiab] OR \"clinical research workforce\"[tiab] OR \"clinical research nurse*\"[tiab])"
+      },
+      {
+        "retmax": 15,
+        "term": "(\"clinical trial*\"[ti]) AND (\"site staff\"[tiab] OR \"research staff\"[tiab] OR \"workforce\"[ti] OR competenc*[ti] OR \"good clinical practice\"[ti]) AND (training[tiab] OR certification[tiab] OR education[tiab])"
+      }
+    ]
+  },
+  "socra-certified-clinical-research-professional-ccrp": {
+    "target": 30,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 40,
+        "years": "2005:2026",
+        "term": "(\"clinical research professional*\"[tiab] OR \"clinical research coordinator*\"[tiab] OR \"clinical research associate*\"[tiab] OR \"clinical research workforce\"[tiab] OR \"clinical research staff\"[tiab] OR \"research coordinator*\"[tiab])"
+      },
+      {
+        "retmax": 15,
+        "term": "(\"good clinical practice\"[ti] OR \"research ethics\"[ti] OR \"protocol deviation*\"[ti] OR \"data quality\"[ti]) AND (\"clinical trial*\"[tiab] OR \"clinical research\"[tiab]) AND (training[tiab] OR certification[tiab] OR competenc*[tiab])"
+      }
+    ]
+  },
+  "ahima-rhia-registered-health-information-administrator": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 30,
+        "years": "2005:2026",
+        "term": "(\"health information management\"[tiab] OR \"health information manager*\"[tiab] OR \"health information professional*\"[tiab] OR AHIMA[tiab]) AND (workforce[tiab] OR profession*[tiab] OR role*[tiab] OR competenc*[tiab] OR education[tiab] OR credential*[tiab])"
+      },
+      {
+        "retmax": 20,
+        "term": "(\"clinical documentation\"[ti] OR \"health information\"[ti] OR \"data governance\"[ti] OR \"medical record*\"[ti] OR \"health record*\"[ti]) AND (quality[ti] OR integrity[ti] OR accuracy[ti] OR governance[ti]) AND ({SR})"
+      }
+    ]
+  },
+  "ahima-rhit-registered-health-information-technician": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 25,
+        "years": "2005:2026",
+        "term": "(\"clinical coding\"[ti] OR \"medical coding\"[ti] OR \"medical coders\"[tiab] OR \"clinical coders\"[tiab] OR \"coding accuracy\"[tiab] OR \"coding quality\"[tiab] OR \"health information technician*\"[tiab])"
+      },
+      {
+        "retmax": 25,
+        "years": "2010:2026",
+        "term": "(\"ICD-10\"[ti] OR \"clinical coding\"[tiab] OR \"medical coding\"[tiab] OR \"diagnosis coding\"[tiab] OR \"coded data\"[tiab] OR \"health information management\"[tiab]) AND (accuracy[tiab] OR error*[tiab] OR quality[tiab] OR workforce[tiab]) AND ({SR} OR audit[ti] OR survey[ti])"
+      }
+    ]
+  },
+  "ahima-chda-certified-health-data-analyst": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 25,
+        "years": "2010:2026",
+        "term": "(\"health data analyst*\"[tiab] OR \"healthcare analytics\"[ti] OR \"health analytics\"[ti] OR \"data analytics\"[ti] OR \"data literacy\"[ti]) AND (healthcare[tiab] OR \"health care\"[tiab] OR hospital*[tiab] OR workforce[tiab] OR competenc*[tiab])"
+      },
+      {
+        "retmax": 25,
+        "years": "2012:2026",
+        "term": "(\"data quality\"[ti] OR \"big data\"[ti] OR \"real-world data\"[ti] OR \"electronic health record data\"[ti]) AND (healthcare[tiab] OR clinical[tiab]) AND ({SR} OR framework[ti])"
+      }
+    ]
+  },
+  "amia-clinical-informatics-board-certification": {
+    "target": 30,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 35,
+        "years": "2008:2026",
+        "term": "(\"clinical informatics\"[ti] OR \"health informatics\"[ti] OR informaticist*[ti] OR \"informatics workforce\"[tiab] OR \"nursing informatics\"[ti]) AND (certification[tiab] OR \"board certification\"[tiab] OR fellowship[tiab] OR workforce[tiab] OR competenc*[tiab] OR education[ti] OR training[ti] OR profession*[ti])"
+      },
+      {
+        "retmax": 15,
+        "years": "2012:2026",
+        "term": "(informatics[ti]) AND (\"physical therap*\"[tiab] OR rehabilitation[tiab] OR \"allied health\"[tiab] OR \"occupational therap*\"[tiab])"
+      }
+    ]
+  },
+  "himss-cphims-certified-professional-in-healthcare-information-management-systems": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2008:2026",
+        "term": "(HIMSS[tiab] OR \"health information systems\"[ti] OR \"health information technology\"[ti]) AND (workforce[tiab] OR leadership[tiab] OR competenc*[tiab] OR certification[tiab] OR \"maturity model\"[tiab] OR EMRAM[tiab])"
+      },
+      {
+        "retmax": 30,
+        "years": "2012:2026",
+        "term": "(\"electronic health record*\"[ti] OR \"electronic medical record*\"[ti] OR \"health information technology\"[ti] OR \"health information exchange\"[ti]) AND (implementation[ti] OR adoption[ti] OR outcomes[ti] OR impact[ti] OR quality[ti]) AND {SR}"
+      }
+    ]
+  },
+  "hl7-fhir-proficiency": {
+    "target": 35,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 30,
+        "years": "2014:2026",
+        "term": "(\"Fast Healthcare Interoperability Resources\"[tiab] OR FHIR[ti]) AND ({SR} OR review[ti] OR implementation[ti] OR evaluation[ti] OR adoption[ti])"
+      },
+      {
+        "retmax": 25,
+        "years": "2014:2026",
+        "term": "(FHIR[ti] OR \"HL7\"[ti] OR interoperability[ti]) AND (\"electronic health record*\"[tiab] OR EHR[tiab] OR \"health information exchange\"[tiab] OR \"SMART on FHIR\"[tiab])"
+      }
+    ]
+  },
+  "iso-13485-medical-device-qms-training": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2008:2026",
+        "term": "(\"ISO 13485\"[tiab] OR \"quality management system*\"[tiab] OR \"design control*\"[tiab]) AND (\"medical device*\"[tiab] OR \"software as a medical device\"[tiab])"
+      },
+      {
+        "retmax": 30,
+        "years": "2012:2026",
+        "term": "(\"medical device*\"[ti]) AND (regulation[ti] OR regulatory[ti] OR \"post-market\"[ti] OR postmarket[ti] OR recall*[ti] OR \"Medical Device Regulation\"[ti] OR \"510(k)\"[ti] OR approval[ti] OR \"quality\"[ti])"
+      }
+    ]
+  },
+  "lean-six-sigma-in-healthcare-greenblack-belt": {
+    "target": 35,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 30,
+        "years": "2010:2026",
+        "term": "(\"lean six sigma\"[tiab] OR \"six sigma\"[tiab] OR \"lean management\"[tiab] OR \"lean thinking\"[tiab] OR \"lean healthcare\"[tiab]) AND ({SR} OR rehabilitation[tiab] OR \"physical therapy\"[tiab] OR outcomes[ti] OR hospital*[ti])"
+      },
+      {
+        "retmax": 20,
+        "years": "2010:2026",
+        "term": "(lean[ti] OR \"six sigma\"[ti] OR \"quality improvement\"[ti]) AND (rehabilitation[tiab] OR \"physical therapy\"[tiab] OR physiotherapy[tiab] OR \"occupational therapy\"[tiab] OR outpatient[tiab]) AND (efficiency[tiab] OR \"wait time*\"[tiab] OR throughput[tiab] OR \"length of stay\"[tiab])"
+      }
+    ]
+  },
+  "multiple-sclerosis-certified-specialist": {
+    "target": 45,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "\"multiple sclerosis\"[ti] AND (specialist*[ti] OR \"MS nurse*\"[ti] OR multidisciplinary[ti] OR interdisciplinary[ti] OR \"comprehensive care\"[ti] OR \"MS centre*\"[ti] OR \"MS center*\"[ti] OR \"models of care\"[ti] OR \"rehabilitation services\"[ti])"
+      },
+      {
+        "retmax": 45,
+        "term": "\"multiple sclerosis\"[ti] AND (exercise[ti] OR rehabilitation[ti] OR \"physical therapy\"[ti] OR physiotherapy[ti] OR fatigue[ti] OR balance[ti] OR walking[ti] OR cognitive[ti] OR \"occupational therapy\"[ti]) AND ({SR} OR {GL})"
+      },
+      {
+        "retmax": 20,
+        "term": "\"multiple sclerosis\"[ti] AND (exercise[ti] OR rehabilitation[ti] OR \"fatigue management\"[ti] OR \"energy conservation\"[ti] OR \"balance training\"[ti]) AND randomized controlled trial[pt]"
+      }
+    ]
+  },
+  "pmp-project-management-professional": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 30,
+        "years": "2005:2026",
+        "term": "(\"project management\"[ti] OR \"project manager*\"[ti]) AND (healthcare[tiab] OR \"health care\"[tiab] OR hospital*[tiab] OR clinical[tiab] OR research[tiab])"
+      },
+      {
+        "retmax": 20,
+        "years": "2012:2026",
+        "term": "(\"implementation science\"[ti] OR \"implementation strateg*\"[ti] OR \"change management\"[ti]) AND (healthcare[tiab] OR rehabilitation[tiab]) AND ({SR})"
+      }
+    ]
+  },
+  "research-doctorates-phdscd": {
+    "target": 30,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 30,
+        "years": "2005:2026",
+        "term": "(PhD[ti] OR doctoral[ti] OR doctorate[ti] OR \"clinician-scientist*\"[ti] OR \"clinician scientist*\"[ti] OR \"clinical academic*\"[ti] OR \"research capacity\"[ti]) AND (\"physical therap*\"[tiab] OR physiotherap*[tiab] OR rehabilitation[tiab] OR \"allied health\"[tiab] OR \"occupational therap*\"[tiab] OR nursing[tiab])"
+      },
+      {
+        "retmax": 15,
+        "years": "2010:2026",
+        "term": "(\"research capacity\"[ti] OR \"research career*\"[ti] OR \"research workforce\"[ti]) AND (\"allied health\"[tiab] OR rehabilitation[tiab] OR \"health professional*\"[tiab]) AND {SR}"
+      },
+      {
+        "retmax": 35,
+        "years": "2000:2026",
+        "term": "(\"physical therap*\"[ti] OR physiotherap*[ti] OR rehabilitation[ti] OR \"occupational therap*\"[ti] OR \"allied health\"[ti] OR \"speech-language\"[ti]) AND (PhD[tiab] OR doctoral[ti] OR \"research career*\"[ti] OR \"clinician-scientist*\"[ti] OR \"clinical academic*\"[ti] OR \"research capacity\"[ti] OR \"research training\"[ti] OR \"research productivity\"[ti] OR \"faculty\"[ti])"
+      }
+    ]
+  },
+  "tpi-golf-certification": {
+    "target": 30,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2005:2026",
+        "term": "golf*[ti] AND (\"movement screen*\"[tiab] OR screening[tiab] OR \"Titleist\"[tiab] OR \"physical screening\"[tiab] OR \"physical characteristics\"[tiab] OR fitness[ti])"
+      },
+      {
+        "retmax": 40,
+        "years": "2010:2026",
+        "term": "golf*[ti] AND (injur*[ti] OR \"low back pain\"[ti] OR performance[ti] OR training[ti] OR biomechanic*[ti] OR \"swing\"[ti] OR exercise[ti] OR rehabilitation[ti])"
+      }
+    ]
+  },
+  "cerner-oracle-health-certification": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2008:2026",
+        "term": "(Cerner[tiab] OR \"Oracle Health\"[tiab]) AND (\"electronic health record*\"[tiab] OR EHR[tiab] OR implementation[tiab] OR transition[tiab])"
+      },
+      {
+        "retmax": 30,
+        "years": "2014:2026",
+        "term": "(\"electronic health record*\"[ti] OR EHR[ti]) AND (usability[ti] OR training[ti] OR transition[ti] OR implementation[ti] OR optimization[ti] OR burden[ti]) AND ({SR} OR rehabilitation[tiab] OR \"physical therap*\"[tiab])"
+      }
+    ]
+  },
+  "epic-certification-build-configuration": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2010:2026",
+        "term": "(\"Epic Systems\"[tiab] OR \"Epic EHR\"[tiab] OR \"Epic electronic health record\"[tiab] OR \"physician builder\"[tiab] OR \"EHR build\"[tiab]) AND (implementation[tiab] OR transition[tiab] OR optimization[tiab] OR build*[tiab] OR training[tiab])"
+      },
+      {
+        "retmax": 30,
+        "years": "2014:2026",
+        "term": "(\"electronic health record*\"[ti] OR EHR[ti]) AND (\"clinical decision support\"[ti] OR usability[ti] OR optimization[ti] OR \"documentation burden\"[ti] OR training[ti] OR implementation[ti]) AND ({SR} OR rehabilitation[tiab] OR \"physical therap*\"[tiab])"
+      }
+    ]
+  },
+  "cochrane-jbi-systematic-review-training": {
+    "target": 35,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 25,
+        "years": "2008:2026",
+        "term": "(\"systematic review*\"[ti] OR \"evidence synthesis\"[ti] OR Cochrane[ti] OR \"JBI\"[ti]) AND (training[ti] OR education[ti] OR workshop*[ti] OR course*[ti] OR methodology[ti] OR methodological[ti] OR quality[ti] OR AMSTAR[ti] OR PRISMA[ti])"
+      },
+      {
+        "retmax": 25,
+        "years": "2010:2026",
+        "term": "(\"systematic review*\"[ti] OR \"meta-analys*\"[ti]) AND (\"methodological quality\"[ti] OR \"reporting quality\"[ti] OR \"risk of bias\"[ti] OR AMSTAR[ti] OR PRISMA[ti] OR \"spin\"[ti]) AND (rehabilitation[tiab] OR \"physical therapy\"[tiab] OR physiotherapy[tiab] OR \"occupational therapy\"[tiab])"
+      }
+    ]
+  },
+  "ms-in-biostatistics": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 25,
+        "years": "2005:2026",
+        "term": "(statistic*[ti] OR biostatistic*[ti]) AND (error*[ti] OR misuse[ti] OR reporting[ti] OR quality[ti] OR literacy[ti] OR education[ti] OR training[ti] OR \"sample size\"[ti] OR \"p-value*\"[ti] OR power[ti]) AND (rehabilitation[tiab] OR \"physical therapy\"[tiab] OR physiotherapy[tiab] OR \"sports medicine\"[tiab] OR clinical[ti])"
+      },
+      {
+        "retmax": 20,
+        "years": "2010:2026",
+        "term": "(biostatistician*[ti] OR statistician*[ti] OR \"statistical consult*\"[ti] OR \"quantitative methods\"[ti]) AND (research[tiab] OR clinical[tiab])"
+      }
+    ]
+  },
+  "ms-in-clinical-research-translational-science": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 30,
+        "years": "2005:2026",
+        "term": "(\"clinical research training\"[tiab] OR \"translational science\"[ti] OR \"translational research\"[ti] OR \"Clinical and Translational Science Award*\"[tiab] OR CTSA[tiab] OR KL2[tiab] OR \"master's degree\"[tiab] OR \"master of science in clinical research\"[tiab]) AND (training[tiab] OR education[tiab] OR program*[tiab] OR outcomes[tiab] OR workforce[tiab])"
+      },
+      {
+        "retmax": 15,
+        "years": "2010:2026",
+        "term": "(\"clinical research\"[ti] OR \"translational\"[ti]) AND (\"rehabilitation\"[tiab] OR \"physical therapy\"[tiab]) AND (training[ti] OR capacity[ti] OR career*[ti] OR workforce[ti] OR infrastructure[ti])"
+      },
+      {
+        "retmax": 35,
+        "years": "2005:2026",
+        "term": "(\"clinical research\"[ti] OR \"translational research\"[ti] OR \"clinical and translational\"[ti] OR \"translational science\"[ti]) AND (training[ti] OR education[ti] OR curriculum[ti] OR \"career development\"[ti] OR scholars[ti] OR workforce[ti] OR mentor*[ti] OR degree[ti] OR program[ti])"
+      }
+    ]
+  },
+  "nahq-cphq-certified-professional-in-healthcare-quality": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2005:2026",
+        "term": "(\"healthcare quality professional*\"[tiab] OR \"quality professional*\"[tiab] OR \"quality improvement\"[ti] OR \"patient safety\"[ti]) AND (workforce[ti] OR competenc*[ti] OR certification[tiab] OR training[ti] OR education[ti] OR leader*[ti])"
+      },
+      {
+        "retmax": 30,
+        "years": "2012:2026",
+        "term": "(\"quality improvement\"[ti] OR \"quality improvement collaborative*\"[ti] OR \"plan-do-study-act\"[tiab] OR PDSA[ti]) AND (rehabilitation[tiab] OR \"physical therapy\"[tiab] OR hospital*[tiab] OR outcomes[ti]) AND {SR}"
+      }
+    ]
+  },
+  "nih-k-award-k01k12k23": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 35,
+        "years": "2005:2026",
+        "term": "(\"career development award*\"[tiab] OR \"K award*\"[tiab] OR K23[tiab] OR K08[tiab] OR K01[tiab] OR K12[tiab] OR KL2[tiab] OR \"mentored research\"[tiab]) AND (NIH[tiab] OR \"National Institutes of Health\"[tiab] OR outcomes[tiab] OR R01[tiab] OR independence[tiab])"
+      },
+      {
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "(\"physician-scientist*\"[ti] OR \"clinician-scientist*\"[ti] OR \"research career*\"[ti]) AND (rehabilitation[tiab] OR \"physical therap*\"[tiab] OR \"allied health\"[tiab] OR funding[ti] OR pipeline[ti])"
+      }
+    ]
+  },
+  "postdoctoral-research-fellowship-t32f32": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 35,
+        "years": "2005:2026",
+        "term": "(postdoctoral[ti] OR postdoc*[ti] OR T32[tiab] OR F32[tiab] OR \"Ruth L. Kirschstein\"[tiab] OR \"institutional training grant*\"[tiab] OR \"research training program*\"[tiab]) AND (outcomes[tiab] OR career*[tiab] OR training[tiab] OR NIH[tiab])"
+      },
+      {
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "(\"research training\"[ti] OR \"research fellowship*\"[ti] OR \"postdoctoral\"[tiab]) AND (rehabilitation[tiab] OR \"physical therap*\"[tiab] OR \"occupational therap*\"[tiab] OR \"allied health\"[tiab])"
+      }
+    ]
+  },
+  "sports-clinical-specialist-scs": {
+    "target": 45,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2000:2026",
+        "term": "{ABPTS} AND {PTTI} AND (sport*[tiab] OR athlet*[tiab] OR orthop*[tiab])"
+      },
+      {
+        "retmax": 30,
+        "term": "(\"anterior cruciate ligament\"[ti] OR ACL[ti] OR \"ankle sprain*\"[ti] OR hamstring[ti] OR \"return to sport\"[ti] OR \"injury prevention\"[ti]) AND (rehabilitation[tiab] OR \"physical therapy\"[tiab] OR exercise[tiab] OR program*[tiab]) AND ({SR} OR {GL})"
+      },
+      {
+        "retmax": 25,
+        "term": "(athlete*[ti] OR sport*[ti]) AND (\"injury prevention\"[ti] OR \"neuromuscular training\"[ti] OR \"exercise-based\"[ti] OR rehabilitation[ti]) AND ({RCT} OR consensus[ti])"
+      }
+    ]
+  },
+  "transitional-dpt-tdpt": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 25,
+        "years": "2000:2026",
+        "term": "(\"transitional DPT\"[tiab] OR \"transitional doctor\"[tiab] OR \"clinical doctorate\"[tiab] OR \"doctor of physical therapy\"[ti] OR DPT[ti] OR \"entry-level doctorate\"[tiab] OR \"professional doctorate\"[ti]) AND (physical therap*[tiab] OR physiotherap*[tiab])"
+      },
+      {
+        "retmax": 20,
+        "years": "2010:2026",
+        "term": "(\"physical therapist education\"[ti] OR \"physical therapy education\"[ti] OR \"physiotherapy education\"[ti] OR \"post-professional\"[ti]) AND (outcomes[tiab] OR degree[tiab] OR doctorate[tiab] OR \"clinical performance\"[tiab])"
+      }
+    ]
+  },
+  "cochlear-implant-specialty": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "(\"cochlear implant*\"[ti]) AND (audiologist*[ti] OR programming[ti] OR fitting[ti] OR mapping[ti] OR \"clinical practice\"[ti] OR \"service delivery\"[ti] OR remote[ti] OR \"telehealth\"[ti] OR \"care pathway\"[ti])"
+      },
+      {
+        "retmax": 40,
+        "term": "(\"cochlear implant*\"[ti]) AND (\"auditory training\"[ti] OR rehabilitation[ti] OR outcomes[ti] OR \"speech perception\"[ti] OR \"quality of life\"[ti] OR candidacy[ti]) AND ({SR} OR {GL})"
+      },
+      {
+        "retmax": 15,
+        "term": "(\"cochlear implant*\"[ti]) AND (\"auditory training\"[tiab] OR rehabilitation[tiab] OR \"auditory-verbal\"[tiab]) AND {RCT}"
+      }
+    ]
+  },
+  "advanced-cardiovascular-life-support-acls": {
+    "target": 35,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 25,
+        "years": "2005:2026",
+        "term": "(\"advanced cardiac life support\"[tiab] OR \"advanced cardiovascular life support\"[tiab] OR ACLS[ti] OR \"advanced life support\"[ti]) AND (training[tiab] OR course*[tiab] OR certification[tiab] OR outcome*[tiab] OR retention[tiab])"
+      },
+      {
+        "retmax": 30,
+        "term": "(\"cardiac arrest\"[ti] OR resuscitation[ti] OR CPR[ti] OR \"cardiopulmonary resuscitation\"[ti]) AND (training[ti] OR education[ti] OR simulation[ti] OR \"skill retention\"[ti] OR \"in-hospital\"[ti]) AND ({SR} OR {GL} OR {RCT})"
+      }
+    ]
+  },
+  "capp-ob-certificate-of-advanced-practice-in-physical-therapy-in-obstetric-health": {
+    "target": 45,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2005:2026",
+        "term": "(pregnan*[ti] OR postpartum[ti] OR antenatal[ti] OR perinatal[ti] OR obstetric*[ti] OR postnatal[ti]) AND (\"physical therap*\"[ti] OR physiotherap*[ti] OR \"pelvic health\"[ti] OR \"women's health\"[ti])"
+      },
+      {
+        "retmax": 45,
+        "term": "(pregnan*[ti] OR postpartum[ti] OR antenatal[ti] OR postnatal[ti] OR \"post-partum\"[ti] OR perinatal[ti]) AND (\"pelvic floor muscle training\"[ti] OR \"pelvic girdle pain\"[ti] OR \"low back pain\"[ti] OR \"diastasis\"[ti] OR exercise[ti] OR physiotherapy[ti] OR \"physical therapy\"[ti] OR incontinence[ti]) AND ({SR} OR {GL})"
+      },
+      {
+        "retmax": 20,
+        "term": "(pregnan*[ti] OR postpartum[ti] OR antenatal[ti] OR postnatal[ti]) AND (\"pelvic floor\"[ti] OR \"pelvic girdle\"[ti] OR exercise[ti] OR physiotherapy[ti] OR \"diastasis\"[ti]) AND randomized controlled trial[pt]"
+      }
+    ]
+  },
+  "capp-pelvic-certificate-of-advanced-practice-in-physical-therapy-in-pelvic-health": {
+    "target": 45,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "(\"pelvic health\"[ti] OR \"pelvic floor\"[ti] OR \"women's health\"[ti] OR \"pelvic physiotherap*\"[ti] OR urogynecolog*[ti]) AND (\"physical therap*\"[ti] OR physiotherap*[ti]) AND (specialist*[tiab] OR training[tiab] OR education[ti] OR competenc*[tiab] OR knowledge[ti] OR survey[ti] OR access[ti] OR referral*[ti] OR practice[ti])"
+      },
+      {
+        "retmax": 45,
+        "term": "(\"pelvic floor muscle training\"[ti] OR \"pelvic floor rehabilitation\"[ti] OR \"pelvic floor physical therapy\"[ti] OR \"pelvic floor physiotherapy\"[ti] OR \"urinary incontinence\"[ti] OR \"pelvic organ prolapse\"[ti] OR \"chronic pelvic pain\"[ti] OR \"faecal incontinence\"[ti] OR \"fecal incontinence\"[ti]) AND (training[tiab] OR physiotherapy[tiab] OR \"physical therapy\"[tiab] OR exercise[tiab] OR conservative[tiab]) AND ({SR} OR {GL})"
+      },
+      {
+        "retmax": 20,
+        "term": "(\"pelvic floor muscle training\"[ti] OR \"pelvic floor physical therapy\"[ti] OR \"pelvic floor physiotherapy\"[ti]) AND randomized controlled trial[pt]"
+      }
+    ]
+  },
+  "eim-pelvic-health-specialist-certification": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "(\"pelvic health\"[ti] OR \"pelvic floor\"[ti] OR \"women's health\"[ti] OR \"pelvic physiotherap*\"[ti] OR urogynecolog*[ti]) AND (\"physical therap*\"[ti] OR physiotherap*[ti]) AND (specialist*[tiab] OR training[tiab] OR education[ti] OR competenc*[tiab] OR knowledge[ti] OR survey[ti] OR access[ti] OR referral*[ti] OR practice[ti])"
+      },
+      {
+        "retmax": 40,
+        "term": "(\"pelvic floor\"[ti] OR \"urinary incontinence\"[ti] OR \"pelvic pain\"[ti] OR \"pelvic organ prolapse\"[ti] OR \"post-prostatectomy\"[ti] OR prostatectomy[ti] OR dyspareunia[ti] OR vulvodynia[ti]) AND (\"muscle training\"[ti] OR physiotherapy[ti] OR \"physical therapy\"[ti] OR rehabilitation[ti] OR biofeedback[ti] OR \"conservative\"[ti]) AND ({SR} OR {GL} OR {RCT})"
+      }
+    ]
+  },
+  "neonatal-therapy-certification": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2005:2026",
+        "term": "(NICU[ti] OR \"neonatal intensive care\"[ti] OR neonatal[ti] OR preterm[ti]) AND (\"occupational therap*\"[ti] OR \"physical therap*\"[ti] OR physiotherap*[ti] OR \"speech-language\"[ti] OR \"neonatal therap*\"[ti] OR \"developmental care\"[ti] OR therapists[ti])"
+      },
+      {
+        "retmax": 45,
+        "term": "(preterm[ti] OR premature[ti] OR NICU[ti] OR \"neonatal intensive care\"[ti] OR neonat*[ti]) AND (\"oral feeding\"[ti] OR \"oral motor\"[ti] OR \"oral stimulation\"[ti] OR \"developmental care\"[ti] OR positioning[ti] OR \"early intervention\"[ti] OR \"motor intervention\"[ti] OR \"kangaroo\"[ti] OR \"neurodevelopment*\"[ti]) AND ({SR} OR {GL} OR {RCT})"
+      }
+    ]
+  },
+  "postural-restoration-certified-prc": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2000:2026",
+        "term": "(\"postural restoration\"[tiab] OR \"Postural Restoration Institute\"[tiab])"
+      },
+      {
+        "retmax": 30,
+        "term": "(\"diaphragmatic breathing\"[ti] OR \"breathing exercise*\"[ti] OR \"respiratory muscle\"[ti] OR \"diaphragm\"[ti] OR \"breathing pattern\"[ti]) AND (\"low back pain\"[ti] OR \"neck pain\"[ti] OR posture[ti] OR \"postural control\"[ti] OR \"trunk stability\"[ti] OR \"core stability\"[ti]) AND ({SR} OR {RCT})"
+      }
+    ]
+  },
+  "pwrmoves-certified-therapist-parkinson-wellness-recovery": {
+    "target": 45,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "(\"Parkinson*\"[ti]) AND (\"PWR\"[tiab] OR \"amplitude\"[tiab] OR \"LSVT BIG\"[tiab] OR \"large-amplitude\"[tiab] OR \"high-intensity\"[ti] OR \"specialist\"[tiab] OR \"Parkinson's specialist\"[tiab] OR ParkinsonNet[tiab] OR \"specialized\"[ti])"
+      },
+      {
+        "retmax": 45,
+        "term": "(Parkinson*[ti]) AND (exercise[ti] OR \"physical therapy\"[ti] OR physiotherapy[ti] OR rehabilitation[ti] OR training[ti] OR balance[ti] OR gait[ti]) AND ({SR} OR {GL})"
+      },
+      {
+        "retmax": 20,
+        "term": "(Parkinson*[ti]) AND (exercise[ti] OR \"high-intensity\"[ti] OR \"aerobic\"[ti] OR \"resistance\"[ti] OR amplitude[ti] OR boxing[ti] OR \"dual-task\"[ti]) AND randomized controlled trial[pt]"
+      }
+    ]
+  },
+  "vitalstim": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2005:2026",
+        "term": "(VitalStim[tiab] OR \"neuromuscular electrical stimulation\"[tiab] OR NMES[tiab] OR \"electrical stimulation\"[ti]) AND (dysphagia[ti] OR swallow*[ti])"
+      },
+      {
+        "retmax": 40,
+        "term": "(\"electrical stimulation\"[tiab] OR NMES[tiab] OR \"neuromuscular electrical stimulation\"[tiab] OR \"pharyngeal electrical stimulation\"[tiab] OR \"transcutaneous\"[tiab]) AND (dysphagia[tiab] OR swallow*[tiab]) AND ({SR} OR {RCT} OR {GL})"
+      }
+    ]
+  },
+  "assistive-technology-professional-atp": {
+    "target": 35,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2005:2026",
+        "term": "(\"assistive technology\"[ti] OR \"assistive device*\"[ti] OR \"assistive products\"[ti]) AND (\"service delivery\"[ti] OR professional*[ti] OR competenc*[ti] OR provision[ti] OR credential*[ti] OR RESNA[tiab] OR training[ti] OR outcomes[ti] OR practitioners[ti])"
+      },
+      {
+        "retmax": 35,
+        "term": "(\"assistive technology\"[ti] OR \"assistive device*\"[ti] OR \"assistive products\"[ti] OR \"augmentative and alternative communication\"[ti] OR \"wheelchair*\"[ti] OR \"environmental control\"[ti]) AND (outcome*[tiab] OR effectiveness[tiab] OR participation[tiab]) AND ({SR} OR {GL} OR {RCT})"
+      }
+    ]
+  },
+  "sos-feeding-approach": {
+    "target": 35,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "(\"Sequential Oral Sensory\"[tiab] OR \"SOS approach\"[tiab] OR \"food chaining\"[tiab] OR \"sensory-based\"[tiab]) AND (feeding[tiab] OR eating[tiab] OR food[tiab])"
+      },
+      {
+        "retmax": 45,
+        "term": "(\"pediatric feeding\"[ti] OR \"paediatric feeding\"[ti] OR \"feeding disorder*\"[ti] OR \"feeding difficult*\"[ti] OR \"food selectivity\"[ti] OR \"picky eating\"[ti] OR \"food refusal\"[ti] OR ARFID[ti] OR \"avoidant/restrictive\"[ti]) AND (intervention*[tiab] OR treatment[tiab] OR therapy[tiab]) AND ({SR} OR {GL} OR {RCT})"
+      }
+    ]
+  },
+  "aacvpr-certified-cardiac-rehabilitation-professional-ccrp": {
+    "target": 45,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "(\"cardiac rehabilitation\"[ti]) AND (\"core components\"[ti] OR competenc*[ti] OR staff*[ti] OR workforce[ti] OR professional*[ti] OR certification[ti] OR \"performance measures\"[ti] OR quality[ti] OR accreditation[tiab])"
+      },
+      {
+        "retmax": 40,
+        "term": "(\"cardiac rehabilitation\"[ti] OR \"exercise-based rehabilitation\"[ti] OR \"exercise training\"[ti]) AND (\"coronary\"[tiab] OR \"heart failure\"[tiab] OR \"cardiovascular\"[tiab] OR \"myocardial\"[tiab]) AND ({SR} OR {GL})"
+      },
+      {
+        "retmax": 20,
+        "term": "(\"cardiac rehabilitation\"[ti]) AND (\"home-based\"[ti] OR participation[ti] OR adherence[ti] OR referral[ti] OR \"hybrid\"[ti] OR \"virtual\"[ti]) AND randomized controlled trial[pt]"
+      }
+    ]
+  },
+  "cardiovascular-pulmonary-pt-residency-abptrfe": {
+    "target": 45,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2005:2026",
+        "term": "(residency[ti] OR residents[ti] OR \"residency-trained\"[tiab] OR \"residency program*\"[tiab] OR fellowship[ti]) AND {PTTI}"
+      },
+      {
+        "retmax": 30,
+        "term": "(\"early mobilization\"[ti] OR \"early mobilisation\"[ti] OR \"intensive care unit\"[ti] OR ICU[ti] OR \"critically ill\"[ti] OR \"acute care\"[ti]) AND (physiotherapy[tiab] OR \"physical therapy\"[tiab] OR rehabilitation[tiab] OR mobilization[tiab]) AND ({SR} OR {GL})"
+      },
+      {
+        "retmax": 30,
+        "term": "(\"heart failure\"[ti] OR COPD[ti] OR \"chronic obstructive\"[ti] OR \"cardiac surgery\"[ti] OR \"inspiratory muscle training\"[ti]) AND (\"exercise training\"[ti] OR rehabilitation[ti] OR physiotherapy[ti] OR \"inspiratory muscle\"[ti]) AND ({SR} OR {GL})"
+      }
+    ]
+  },
+  "aquatic-therapeutic-exercise-certification-atric": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "(\"aquatic therap*\"[tiab] OR \"aquatic physiotherapy\"[tiab] OR \"aquatic physical therapy\"[tiab] OR hydrotherapy[tiab]) AND (therapist*[tiab] OR practice[ti] OR safety[ti] OR survey[ti] OR \"clinical reasoning\"[tiab])"
+      },
+      {
+        "retmax": 45,
+        "term": "(aquatic[ti] OR \"water-based\"[ti] OR hydrotherapy[ti] OR \"pool-based\"[ti] OR \"aquatic exercise\"[ti]) AND (exercise[tiab] OR therapy[tiab] OR rehabilitation[tiab] OR training[tiab]) AND ({SR} OR {GL} OR {RCT})"
+      }
+    ]
+  },
+  "impact-trained-physical-therapist-itpt": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2005:2026",
+        "term": "(\"neurocognitive test*\"[tiab] OR \"baseline testing\"[tiab] OR \"computerised neurocognitive\"[tiab] OR \"Immediate Post-Concussion Assessment\"[tiab] OR \"computerized neurocognitive\"[tiab]) AND concussion[ti]"
+      },
+      {
+        "retmax": 40,
+        "term": "(concussion[ti] OR \"mild traumatic brain injury\"[ti] OR mTBI[ti]) AND (rehabilitation[ti] OR \"physical therapy\"[ti] OR physiotherapy[ti] OR exercise[ti] OR \"vestibular\"[ti] OR \"cervical\"[ti] OR \"aerobic\"[ti] OR \"return to\"[ti] OR management[ti]) AND ({SR} OR {GL} OR {RCT})"
+      }
+    ]
+  },
+  "lower-limb-amputee-rehabilitation-physiopediaicrc-certificate": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "(amput*[ti] OR prosthe*[ti]) AND (\"physical therapist*\"[ti] OR physiotherap*[ti] OR \"physical therapy\"[ti] OR rehabilitation[ti]) AND (education[ti] OR training[ti] OR competenc*[ti] OR \"clinical practice\"[ti] OR guideline*[ti] OR specialist[ti] OR survey[ti] OR services[ti] OR \"standards\"[ti])"
+      },
+      {
+        "retmax": 45,
+        "term": "(amput*[ti] OR prosthe*[ti]) AND (\"lower limb\"[tiab] OR \"lower extremity\"[tiab] OR transtibial[tiab] OR transfemoral[tiab]) AND (rehabilitation[tiab] OR \"gait training\"[tiab] OR exercise[tiab] OR \"physical therapy\"[tiab] OR physiotherapy[tiab] OR falls[tiab] OR mobility[tiab]) AND ({SR} OR {GL} OR {RCT})"
+      }
+    ]
+  },
+  "acute-care-pocus-lung-diaphragm-ultrasound": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2010:2026",
+        "term": "(ultrasound[ti] OR ultrasonography[ti] OR sonograph*[ti] OR POCUS[ti]) AND (physiotherap*[tiab] OR \"physical therapist*\"[tiab] OR \"respiratory therapist*\"[tiab]) AND (lung[tiab] OR diaphragm*[tiab] OR \"point-of-care\"[tiab])"
+      },
+      {
+        "retmax": 45,
+        "term": "(\"lung ultrasound\"[ti] OR \"diaphragm ultrasound\"[ti] OR \"diaphragmatic ultrasound\"[ti] OR \"diaphragm\"[ti] OR \"point-of-care ultrasound\"[ti]) AND (weaning[tiab] OR extubation[tiab] OR \"diagnostic accuracy\"[tiab] OR pneumonia[tiab] OR \"critically ill\"[tiab] OR ICU[tiab] OR \"mechanical ventilation\"[tiab]) AND ({SR} OR {GL})"
+      }
+    ]
+  },
+  "aota-specialty-certifications": {
+    "target": 45,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "(\"occupational therap*\"[ti]) AND (\"driver rehabilitation\"[tiab] OR \"low vision\"[ti] OR \"school-based\"[ti] OR \"home modification*\"[ti] OR \"environmental modification*\"[ti] OR \"feeding\"[ti]) AND (specialist*[tiab] OR certification[tiab] OR competenc*[tiab] OR practice[ti] OR role[ti])"
+      },
+      {
+        "retmax": 15,
+        "term": "(driving[ti] OR driver*[ti]) AND (rehabilitation[ti] OR \"occupational therap*\"[tiab] OR \"fitness to drive\"[tiab] OR \"on-road\"[tiab]) AND ({SR} OR {GL} OR {RCT})"
+      },
+      {
+        "retmax": 15,
+        "term": "(\"low vision\"[ti] OR \"vision rehabilitation\"[ti] OR \"visual impairment\"[ti]) AND (rehabilitation[tiab] OR \"occupational therap*\"[tiab] OR intervention*[tiab]) AND ({SR} OR {RCT})"
+      },
+      {
+        "retmax": 15,
+        "term": "(\"school-based\"[ti] OR \"school\"[ti] OR handwriting[ti]) AND (\"occupational therap*\"[ti]) AND ({SR} OR {RCT} OR effectiveness[ti])"
+      },
+      {
+        "retmax": 15,
+        "term": "(\"home modification*\"[ti] OR \"environmental modification*\"[ti] OR \"home hazard*\"[ti] OR \"home environment\"[ti]) AND (falls[tiab] OR function[tiab] OR \"occupational therap*\"[tiab]) AND ({SR} OR {RCT})"
+      },
+      {
+        "retmax": 10,
+        "term": "(feeding[ti] OR eating[ti] OR mealtime[ti] OR swallowing[ti]) AND (\"occupational therap*\"[ti]) AND ({SR} OR {RCT} OR intervention*[ti])"
+      }
+    ]
+  },
+  "musculoskeletal-ultrasound-rmsk": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 25,
+        "years": "2005:2026",
+        "term": "(ultrasound[ti] OR ultrasonography[ti] OR sonograph*[ti] OR \"ultrasound imaging\"[ti]) AND (physiotherap*[ti] OR \"physical therap*\"[ti] OR \"physical therapist*\"[tiab] OR physiotherapist*[tiab])"
+      },
+      {
+        "retmax": 45,
+        "term": "(\"musculoskeletal ultrasound\"[ti] OR \"musculoskeletal ultrasonography\"[ti] OR sonograph*[ti] OR ultrasound[ti] OR ultrasonography[ti]) AND (\"rotator cuff\"[ti] OR shoulder[ti] OR tendon*[ti] OR tendinopathy[ti] OR \"carpal tunnel\"[ti] OR muscle[ti] OR ligament[ti] OR \"plantar fasci*\"[ti] OR musculoskeletal[ti] OR \"soft tissue\"[ti]) AND (diagnos*[ti] OR accuracy[ti] OR reliability[ti] OR imaging[ti] OR assessment[ti]) AND ({SR} OR {GL})"
+      }
+    ]
+  },
+  "selective-functional-movement-assessment-sfma": {
+    "target": 30,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2005:2026",
+        "term": "(\"Selective Functional Movement Assessment\"[tiab] OR SFMA[tiab] OR \"Functional Movement Screen\"[tiab] OR \"movement screen*\"[ti])"
+      },
+      {
+        "retmax": 30,
+        "term": "(\"movement screen*\"[ti] OR \"movement assessment\"[ti] OR \"movement control\"[ti] OR \"movement system\"[ti] OR \"movement impairment\"[ti] OR \"regional interdependence\"[ti]) AND ({SR} OR reliability[ti] OR validity[ti] OR {RCT})"
+      }
+    ]
+  },
+  "alexander-technique": {
+    "target": 25,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 30,
+        "years": "2000:2026",
+        "term": "\"Alexander technique\"[tiab]"
+      }
+    ]
+  },
+  "comtmanual-therapy-certification": {
+    "target": 45,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2000:2026",
+        "term": "(\"manual therapy\"[tiab] OR \"orthopaedic manual\"[tiab] OR \"orthopedic manual\"[tiab] OR OMPT[tiab] OR \"manipulative therapy\"[tiab]) AND (certification[tiab] OR fellowship[tiab] OR \"post-graduate\"[tiab] OR postgraduate[tiab] OR \"advanced training\"[tiab] OR specialist*[tiab] OR \"residency\"[tiab]) AND {PT}"
+      },
+      {
+        "retmax": 45,
+        "term": "(\"manual therapy\"[ti] OR manipulation[ti] OR mobilization[ti] OR mobilisation[ti] OR \"thrust\"[ti]) AND (\"low back pain\"[ti] OR \"neck pain\"[ti] OR headache[ti] OR spine[ti] OR spinal[ti] OR \"knee osteoarthritis\"[ti] OR \"hip osteoarthritis\"[ti] OR shoulder[ti]) AND ({SR} OR {GL})"
+      },
+      {
+        "retmax": 15,
+        "term": "(\"clinical practice guideline*\"[ti]) AND (\"neck pain\"[ti] OR \"low back pain\"[ti] OR \"hip pain\"[ti] OR \"knee pain\"[ti] OR \"shoulder\"[ti]) AND {PT}"
+      }
+    ]
+  },
+  "seating-and-mobility-specialist": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2005:2026",
+        "term": "(wheelchair*[ti] OR seating[ti] OR \"powered mobility\"[ti] OR \"power mobility\"[ti]) AND (provision[ti] OR prescription[ti] OR \"service delivery\"[ti] OR clinician*[ti] OR specialist*[ti] OR training[ti] OR competenc*[ti] OR assessment[ti])"
+      },
+      {
+        "retmax": 40,
+        "term": "(wheelchair*[ti] OR seating[ti] OR cushion*[ti] OR \"pressure injur*\"[ti] OR \"pressure ulcer*\"[ti] OR \"power mobility\"[ti] OR \"powered mobility\"[ti]) AND (\"spinal cord injur*\"[tiab] OR \"cerebral palsy\"[tiab] OR seating[tiab] OR wheelchair*[tiab]) AND ({SR} OR {GL} OR {RCT})"
+      }
+    ]
+  },
+  "clinical-electrophysiology-specialist": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2000:2026",
+        "term": "(electrodiagnos*[ti] OR electroneuromyograph*[ti] OR \"nerve conduction\"[ti] OR electromyograph*[ti] OR \"clinical electrophysiolog*\"[ti] OR \"electrophysiologic testing\"[ti]) AND (\"physical therap*\"[tiab] OR physiotherap*[tiab])"
+      },
+      {
+        "retmax": 25,
+        "term": "(\"nerve conduction\"[ti] OR electrodiagnos*[ti] OR electromyograph*[ti]) AND (\"carpal tunnel\"[tiab] OR radiculopathy[tiab] OR neuropathy[tiab] OR \"diagnostic accuracy\"[tiab]) AND ({SR} OR {GL})"
+      },
+      {
+        "retmax": 25,
+        "term": "(\"electrical stimulation\"[ti] OR NMES[ti] OR \"functional electrical stimulation\"[ti] OR TENS[ti] OR \"transcutaneous electrical nerve stimulation\"[ti]) AND (rehabilitation[tiab] OR pain[tiab] OR strength[tiab] OR stroke[tiab]) AND {SR}"
+      }
+    ]
+  },
+  "emergency-medical-response": {
+    "target": 35,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2005:2026",
+        "term": "(\"emergency action plan*\"[tiab] OR \"emergency preparedness\"[ti] OR \"emergency care\"[ti] OR \"first responder*\"[ti] OR \"pre-hospital\"[ti] OR prehospital[ti] OR \"on-field\"[ti] OR sideline[ti]) AND (athlet*[tiab] OR sport*[tiab])"
+      },
+      {
+        "retmax": 35,
+        "term": "(\"sudden cardiac arrest\"[ti] OR \"sudden cardiac death\"[ti] OR \"automated external defibrillator*\"[ti] OR AED[ti] OR \"exertional heat stroke\"[ti] OR \"cervical spine\"[ti] OR \"spine-injured\"[ti] OR \"catastrophic injur*\"[ti]) AND (athlete*[tiab] OR sport*[tiab]) AND ({SR} OR {GL} OR consensus[tiab])"
+      }
+    ]
+  },
+  "board-certification-in-pediatrics": {
+    "target": 40,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 15,
+        "years": "2005:2026",
+        "term": "(\"occupational therap*\"[ti]) AND (pediatric[ti] OR paediatric[ti] OR children[ti] OR child[ti]) AND (practice[ti] OR competenc*[ti] OR \"evidence-based\"[ti] OR specialty[ti] OR survey[ti] OR \"scope\"[ti] OR role[ti])"
+      },
+      {
+        "retmax": 45,
+        "term": "(\"occupational therapy\"[ti] OR \"sensory integration\"[ti] OR \"CO-OP\"[ti] OR \"Cognitive Orientation to daily Occupational Performance\"[ti] OR handwriting[ti] OR \"fine motor\"[ti] OR \"developmental coordination disorder\"[ti]) AND (children[tiab] OR pediatric[tiab] OR paediatric[tiab] OR autism[tiab] OR \"cerebral palsy\"[tiab]) AND ({SR} OR {GL} OR {RCT})"
+      }
+    ]
+  },
+  "suit-therapy": {
+    "target": 30,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 25,
+        "years": "2000:2026",
+        "term": "(TheraSuit[tiab] OR \"suit therapy\"[tiab] OR \"Adeli suit\"[tiab] OR \"dynamic elastomeric\"[tiab] OR \"Lycra\"[tiab] OR \"compression garment*\"[tiab] OR \"NeuroSuit\"[tiab] OR \"full body suit\"[tiab]) AND (\"cerebral palsy\"[tiab] OR children[tiab])"
+      },
+      {
+        "retmax": 25,
+        "term": "(\"cerebral palsy\"[ti]) AND (orthos*[ti] OR \"intensive\"[ti] OR \"physiotherapy\"[ti] OR \"physical therapy\"[ti] OR \"interventions\"[ti]) AND ({SR} OR {GL})"
+      }
+    ]
+  },
+  "fce-functional-capacity-eval": {
+    "target": 35,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 30,
+        "years": "2000:2026",
+        "term": "(\"functional capacity evaluation*\"[tiab] OR \"functional capacity assessment*\"[tiab] OR \"work capacity evaluation\"[tiab] OR \"functional capacity\"[ti] AND work[tiab])"
+      },
+      {
+        "retmax": 25,
+        "term": "(\"return to work\"[ti] OR \"work disability\"[ti] OR \"work rehabilitation\"[ti] OR \"work conditioning\"[ti] OR \"work hardening\"[ti] OR \"vocational rehabilitation\"[ti]) AND (\"musculoskeletal\"[tiab] OR \"low back pain\"[tiab] OR injur*[tiab]) AND ({SR} OR {GL})"
+      },
+      {
+        "retmax": 40,
+        "years": "1995:2026",
+        "term": "(\"functional capacity evaluation\"[ti] OR \"functional capacity evaluations\"[ti] OR \"work capacity\"[ti] OR \"physical demands\"[ti] OR \"lifting capacity\"[ti] OR \"work hardening\"[ti])"
+      }
+    ]
+  },
+  "feldenkrais-method": {
+    "target": 30,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 35,
+        "years": "2000:2026",
+        "term": "(Feldenkrais[tiab] OR \"Awareness Through Movement\"[tiab] OR \"Functional Integration\"[ti])"
+      },
+      {
+        "retmax": 15,
+        "term": "(\"somatic\"[ti] OR \"mind-body\"[ti] OR \"body awareness\"[ti]) AND (balance[tiab] OR pain[tiab] OR \"multiple sclerosis\"[tiab]) AND ({SR} OR {RCT})"
+      }
+    ]
+  },
+  "wound-care-specialist": {
+    "target": 45,
+    "queries": [
+      {
+        "core": true,
+        "retmax": 20,
+        "years": "2005:2026",
+        "term": "(\"wound care\"[ti] OR \"wound management\"[ti] OR \"wound clinic*\"[tiab] OR \"wound cent*\"[tiab] OR \"wound specialist*\"[tiab] OR \"wound ostomy\"[tiab]) AND (specialist*[tiab] OR certif*[tiab] OR multidisciplinary[tiab] OR team[tiab] OR \"physical therap*\"[tiab] OR outcomes[ti])"
+      },
+      {
+        "retmax": 45,
+        "term": "(\"pressure injur*\"[ti] OR \"pressure ulcer*\"[ti] OR \"diabetic foot ulcer*\"[ti] OR \"venous leg ulcer*\"[ti] OR \"chronic wound*\"[ti] OR \"wound healing\"[ti]) AND (\"electrical stimulation\"[tiab] OR offloading[tiab] OR \"off-loading\"[tiab] OR compression[tiab] OR debridement[tiab] OR prevention[tiab] OR exercise[tiab] OR \"total contact cast\"[tiab]) AND ({SR} OR {GL})"
+      }
+    ]
+  }
+}
