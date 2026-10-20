@@ -1,557 +1,542 @@
 'use client';
 
-// The Atlas landing ("Plate I — the credential field").
+// Client islands for the landing page. The page itself is a server
+// component (all copy and numbers render as HTML); these add motion and the
+// two live figures:
 //
-// The product presents itself as a published survey: numbered plates and
-// tables, 1px ink rules, one petrol accent, and a single showpiece scroll
-// sequence (Fig. 1) in which all credentials physically settle into a
-// beeswarm distribution against the score axis. Every number on this page is
-// computed from the real dataset — nothing is hardcoded copy except the
-// declaration of interests, which is deliberately $0.
+//   Reveals      masked line reveals + soft rises as sections enter, and the
+//                warm light leaning toward the pointer.
+//   FieldScene   the cinematic scroll field: every credential scatters, then
+//                gathers by Clinical composite, glides to Business, then to
+//                Research (same dot = same credential), and the five that
+//                lead lift and get named. Canvas, lazy-started on approach.
+//                Reduced motion renders the final frame.
+//   FieldPreview a working preview of the field: switch lenses and watch the
+//                same dots re-sort, hover or arrow through any credential,
+//                open it in the full instrument.
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
-import PublicNav from '@/components/layout/PublicNav';
-import PublicFooter from '@/components/layout/PublicFooter';
-import { certifications } from '@/utils/certificationData';
-import { PATH_ORDER, getPathDefaultWeights } from '@/utils/careerPaths';
-import { computeScore, certScoresForPath, rankCertifications } from '@/utils/certScoring';
-import { A, INS, eyebrow, tabularNums, tierColor, tierLabel } from '@/components/atlas/theme';
-import { lensShortLabel } from '@/components/atlas/LensTabs';
-import siteStats from '@/data/siteStats.json';
+import { useRouter } from 'next/navigation';
 
-const clamp01 = (v) => Math.max(0, Math.min(1, v));
-const easeOut = (t) => 1 - Math.pow(1 - t, 3);
-const easeIO = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const ease = (t) => 1 - Math.pow(1 - t, 3);
 const lerp = (a, b, t) => a + (b - a) * t;
-// Deterministic per-name noise (FNV-1a) so the scattered state is stable
-// across reloads and SSR/CSR render identically.
-const hash = (s) => {
-  let h = 2166136261;
-  for (let i = 0; i < s.length; i += 1) {
-    h ^= s.charCodeAt(i);
-    h = Math.imul(h, 16777619);
-  }
-  return (h >>> 0) / 4294967295;
-};
+const range = (p, a, b) => clamp((p - a) / (b - a));
+const short = (n, m) => (n.length > m ? `${n.slice(0, m - 1).trimEnd()}…` : n);
+const prefersReduced = () =>
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Plate geometry, in % of the 460px plate.
-const X0 = 3, XW = 94, BASE = 95, STACK = 1.95, BIN = 3.1, MAXROWS = 13;
+// Validated categorical slot on the plum ground, plus the highlight voice.
+const DOT = '#8f78e6';
+const PEACH = '#f0c3a8';
+const GROUND = '#292331';
 
-// ── Fig. 1 — the beeswarm settle ─────────────────────────────────────────
-function FigureOne() {
-  const [p, setP] = useState(0);
-  const [reduce, setReduce] = useState(false);
-  const scrollerRef = useRef(null);
-  const plateRef = useRef(null);
-  const [hover, setHover] = useState(null);
-
-  // Beeswarm packing, computed once. Sort ascending by score; bin each
-  // point's x, stack within the bin — capped at MAXROWS, spilling sideways
-  // into alternating sub-columns so dense bins read as broad mounds.
-  const { points, tiers, swarmTop, top3, median } = useMemo(() => {
-    const pts = certifications.map((c) => {
-      let best = 0;
-      for (const key of PATH_ORDER) {
-        const subs = certScoresForPath(c, key);
-        if (!subs) continue;
-        const sc = computeScore(subs, getPathDefaultWeights(key));
-        if (sc > best) best = sc;
+// Greedy beeswarm: place each value on x, then step outward on y until it
+// clears every placed dot.
+function beeswarm(items, x0, x1, cy, r, lo, hi) {
+  const gap = r * 2 + 1.6;
+  const placed = [];
+  const out = {};
+  [...items].sort((a, b) => a.v - b.v).forEach((it) => {
+    const x = x0 + ((it.v - lo) / (hi - lo)) * (x1 - x0);
+    let off = 0;
+    let k = 0;
+    for (;;) {
+      const y = cy + off;
+      if (!placed.some((p) => Math.abs(p.x - x) < gap && Math.abs(p.y - y) < gap)) {
+        placed.push({ x, y });
+        out[it.i] = { x, y };
+        break;
       }
-      return { name: c.name, score: best, rx: hash(c.name), ry: hash(`${c.name}y`) };
-    });
-    const cols = {};
-    pts.sort((a, b) => a.score - b.score).forEach((pt) => {
-      const x = X0 + (pt.score / 100) * XW;
-      const col = Math.round(x / BIN);
-      const n = cols[col] || 0;
-      const row = n % MAXROWS;
-      const sub = Math.floor(n / MAXROWS);
-      const offset = sub === 0 ? 0 : (sub % 2 === 1 ? 1 : -1) * Math.ceil(sub / 2) * 0.95;
-      pt.tx = col * BIN + offset;
-      pt.ty = BASE - row * STACK;
-      cols[col] = n + 1;
-      pt.color = tierColor(pt.score);
-      pt.delay = clamp01(pt.tx / 100) * 0.45; // left-to-right settling sweep
-    });
-    const sortedScores = pts.map((q) => q.score).sort((a, b) => a - b);
-    const tiers = { Strong: 0, Good: 0, Moderate: 0, Limited: 0 };
-    pts.forEach((q) => { tiers[tierLabel(q.score)] += 1; });
-    return {
-      points: pts,
-      tiers,
-      swarmTop: Math.min(...pts.map((q) => q.ty)),
-      top3: [...pts].sort((a, b) => b.score - a.score).slice(0, 3),
-      median: Math.round(sortedScores[Math.floor(sortedScores.length / 2)]),
+      k += 1;
+      off = (k % 2 ? 1 : -1) * Math.ceil(k / 2) * gap * 0.92;
+    }
+  });
+  return out;
+}
+
+// ── Reveals ──────────────────────────────────────────────────────────────
+export function Reveals() {
+  useEffect(() => {
+    const els = document.querySelectorAll('.lp .rise, .lp .lines');
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.14 },
+    );
+    els.forEach((el) => io.observe(el));
+
+    // The warm light leans toward the pointer (fine pointers only).
+    const world = document.querySelector('.world');
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const onMove = (e) => {
+      world.style.setProperty('--lx', `${((e.clientX / window.innerWidth - 0.5) * 8).toFixed(2)}%`);
+      world.style.setProperty('--ly', `${((e.clientY / window.innerHeight - 0.5) * 6).toFixed(2)}%`);
+    };
+    if (world && fine && !prefersReduced()) window.addEventListener('pointermove', onMove, { passive: true });
+    return () => {
+      io.disconnect();
+      window.removeEventListener('pointermove', onMove);
+      if (world) { world.style.removeProperty('--lx'); world.style.removeProperty('--ly'); }
     };
   }, []);
+  return null;
+}
+
+// ── FieldScene ───────────────────────────────────────────────────────────
+const SCENE_LENSES = ['clinical', 'business', 'research'];
+// Transition windows in scene progress: scatter→clinical, →business,
+// →research, then the five that lead lift and get labels.
+const SEGS = [[0.1, 0.26], [0.36, 0.5], [0.6, 0.74], [0.78, 0.88]];
+const stepOf = (p) => (p < 0.2 ? 0 : p < 0.45 ? 1 : p < 0.68 ? 2 : p < 0.8 ? 3 : 4);
+
+export function FieldScene({ certs, lensLabels, captions }) {
+  const sectionRef = useRef(null);
+  const stageRef = useRef(null);
+  const canvasRef = useRef(null);
+  const [step, setStep] = useState(0);
 
   useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const syncReduce = () => setReduce(mq.matches);
-    syncReduce();
-    mq.addEventListener?.('change', syncReduce);
+    const section = sectionRef.current;
+    const stage = stageRef.current;
+    const cv = canvasRef.current;
+    if (!section || !stage || !cv) return undefined;
+    const cx = cv.getContext('2d');
+    if (!cx) return undefined;
+    const reduce = prefersReduced();
 
-    let frame = 0;
+    // Deterministic scatter (same field on every load).
+    let seed = 42;
+    const rng = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+    const seeds = certs.map(() => [rng(), rng(), rng()]);
+
+    let W = 0;
+    let H = 0;
+    let L = null;
+    let lastP = reduce ? 1 : 0;
+    let lastStep = -1;
+    let raf = 0;
+    let live = false;
+
+    const layout = () => {
+      const rect = cv.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      W = rect.width; H = rect.height;
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const mobile = W < 700;
+      const r = clamp(W / 260, 2.6, 4.6);
+      const x0 = W * (mobile ? 0.07 : 0.1);
+      const x1 = W * (mobile ? 0.93 : 0.9);
+      const cy = H * (mobile ? 0.44 : 0.5);
+      const vals = SCENE_LENSES.flatMap((l) => certs.map((c) => c.s[l]).filter((v) => v != null));
+      const lo = Math.floor(Math.min(...vals) / 10) * 10;
+      const hi = Math.ceil(Math.max(...vals) / 10) * 10;
+      const scatter = certs.map((c, i) => ({
+        x: W * (0.06 + seeds[i][0] * 0.88),
+        y: H * (0.1 + seeds[i][1] * 0.62),
+        a: 0.35 + seeds[i][2] * 0.4,
+      }));
+      const parkY = H * (mobile ? 0.12 : 0.17);
+      const lensPos = {};
+      let minY = Infinity;
+      let maxY = -Infinity;
+      for (const l of SCENE_LENSES) {
+        const items = certs.map((c, i) => ({ i, v: c.s[l] })).filter((d) => d.v != null);
+        const pos = beeswarm(items, x0, x1, cy, r, lo, hi);
+        Object.values(pos).forEach((p) => { minY = Math.min(minY, p.y); maxY = Math.max(maxY, p.y); });
+        const missing = certs.map((c, i) => i).filter((i) => !pos[i]);
+        missing.forEach((i, j) => {
+          pos[i] = { x: x0 + ((j + 0.5) / missing.length) * (x1 - x0), y: parkY, park: true };
+        });
+        const top = [...items].sort((a, b) => b.v - a.v).slice(0, 5).map((d) => d.i);
+        const topY = Math.min(...top.map((i) => pos[i].y));
+        lensPos[l] = { pos, top, topY };
+      }
+      L = { scatter, lensPos, r, x0, x1, cy, lo, hi, parkY, mobile, axisY: maxY + (mobile ? 30 : 44), labelY: mobile ? parkY + 46 : minY - 44 };
+    };
+
+    const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+    const mix = (a, b, t) => {
+      const A = hex(a); const B = hex(b);
+      return `rgb(${A.map((v, i) => Math.round(lerp(v, B[i], t))).join(',')})`;
+    };
+    const setSpacing = (v) => { if ('letterSpacing' in cx) cx.letterSpacing = v; };
+
+    const draw = (p) => {
+      if (!L) return;
+      cx.clearRect(0, 0, W, H);
+      const [t1, t2, t3, t4] = SEGS.map(([a, b]) => ease(range(p, a, b)));
+      const C = L.lensPos.clinical.pos;
+      const B = L.lensPos.business.pos;
+      const R = L.lensPos.research.pos;
+      const { top } = L.lensPos.research;
+      const lensKey = t3 > 0.5 ? 'research' : t2 > 0.5 ? 'business' : 'clinical';
+
+      // Axis, ticks, lens label, parking row label.
+      if (t1 > 0) {
+        cx.globalAlpha = t1 * 0.9;
+        cx.strokeStyle = 'rgba(255,255,255,0.12)';
+        cx.lineWidth = 1;
+        cx.beginPath(); cx.moveTo(L.x0, L.axisY + 0.5); cx.lineTo(L.x1, L.axisY + 0.5); cx.stroke();
+        cx.fillStyle = '#a998ae';
+        cx.font = '10px Figtree, system-ui, sans-serif';
+        setSpacing('0px');
+        cx.textAlign = 'center';
+        for (let v = L.lo; v <= L.hi; v += 10) {
+          const x = L.x0 + ((v - L.lo) / (L.hi - L.lo)) * (L.x1 - L.x0);
+          cx.fillRect(Math.round(x), L.axisY, 1, 4);
+          cx.fillText(String(v), x, L.axisY + 17);
+        }
+        cx.textAlign = 'left';
+        cx.fillStyle = PEACH;
+        cx.font = '600 10px Figtree, system-ui, sans-serif';
+        setSpacing('1.6px');
+        cx.fillText(`${lensLabels[lensKey].toUpperCase()} LENS · COMPOSITE SCORE`, L.x0, L.labelY);
+        setSpacing('0px');
+        cx.fillStyle = '#a998ae';
+        cx.font = '10px Figtree, system-ui, sans-serif';
+        cx.fillText('Not scored in this lens', L.x0, L.parkY - 14);
+        cx.globalAlpha = 1;
+      }
+
+      // Dots.
+      certs.forEach((c, i) => {
+        const s = L.scatter[i];
+        let x = lerp(s.x, C[i].x, t1);
+        let y = lerp(s.y, C[i].y, t1);
+        x = lerp(x, B[i].x, t2); y = lerp(y, B[i].y, t2);
+        x = lerp(x, R[i].x, t3); y = lerp(y, R[i].y, t3);
+        const parked = clamp((C[i].park ? 1 - t2 : 0) * t1 + (B[i].park ? t2 - t3 : 0) + (R[i].park ? t3 : 0));
+        const isTop = top.includes(i);
+        if (isTop) y -= t4 * 18;
+        cx.globalAlpha = lerp(s.a, 0.85, t1) * (1 - parked * 0.74);
+        cx.fillStyle = isTop && t4 > 0 ? mix(DOT, PEACH, t4) : DOT;
+        cx.beginPath(); cx.arc(x, y, L.r * (isTop ? 1 + t4 * 0.45 : 1), 0, Math.PI * 2); cx.fill();
+        if (isTop && t4 > 0) { cx.globalAlpha = t4; cx.strokeStyle = GROUND; cx.lineWidth = 2; cx.stroke(); }
+      });
+
+      // Labels for the five that lead, in a column on the open side; the dot
+      // farthest from the column takes the top row so leaders never cross.
+      if (t4 > 0) {
+        const pts = top.map((i) => ({ i, x: R[i].x, y: R[i].y - 18 }));
+        const minX = Math.min(...pts.map((d) => d.x));
+        const maxX = Math.max(...pts.map((d) => d.x));
+        const onLeft = (minX + maxX) / 2 > W * 0.5;
+        const colX = onLeft ? minX - (L.mobile ? 14 : 36) : maxX + (L.mobile ? 14 : 36);
+        pts.sort((a, b) => (onLeft ? b.x - a.x : a.x - b.x));
+        const rowH = L.mobile ? 17 : 21;
+        const lowest = Math.min(...pts.map((d) => d.y)) - L.r * 2 - 12;
+        const baseY = lowest - (pts.length - 1) * rowH;
+        cx.font = `${L.mobile ? 11 : 12}px Figtree, system-ui, sans-serif`;
+        pts.forEach((d, j) => {
+          const ly = baseY + j * rowH;
+          cx.globalAlpha = t4;
+          cx.strokeStyle = 'rgba(240,195,168,0.45)';
+          cx.lineWidth = 1;
+          cx.beginPath();
+          cx.moveTo(colX + (onLeft ? 4 : -4), ly - 4);
+          cx.lineTo(d.x, ly - 4);
+          cx.lineTo(d.x, d.y - L.r * 1.7);
+          cx.stroke();
+          cx.fillStyle = '#f6eee9';
+          cx.textAlign = onLeft ? 'right' : 'left';
+          const room = onLeft ? colX - 8 : W - colX - 8;
+          let label = short(certs[d.i].n, 52);
+          while (label.length > 8 && cx.measureText(label).width > room) label = short(label, label.length - 2);
+          cx.fillText(label, colX + (onLeft ? -2 : 2), ly);
+        });
+        cx.textAlign = 'left';
+        cx.globalAlpha = 1;
+      }
+
+      const st = stepOf(p);
+      if (st !== lastStep) { lastStep = st; setStep(st); }
+    };
+
+    const stageTop = () => parseFloat(getComputedStyle(stage).top) || 0;
     const measure = () => {
-      frame = 0;
-      const el = scrollerRef.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const total = el.offsetHeight - window.innerHeight;
-      setP(clamp01(-rect.top / Math.max(1, total)));
+      raf = 0;
+      if (reduce) { draw(1); return; }
+      const r = section.getBoundingClientRect();
+      const total = r.height - stage.offsetHeight;
+      const p = total > 0 ? clamp((stageTop() - r.top) / total) : 0;
+      lastP = p;
+      draw(p);
     };
-    const onScroll = () => { if (!frame) frame = requestAnimationFrame(measure); };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    measure();
+    const request = () => { if (!raf) raf = requestAnimationFrame(measure); };
+
+    // Lazy start: nothing is laid out or listened to until the field is near.
+    const start = () => {
+      if (live) return;
+      live = true;
+      layout();
+      measure();
+      if (!reduce) window.addEventListener('scroll', request, { passive: true });
+    };
+    const stop = () => {
+      if (!live) return;
+      live = false;
+      window.removeEventListener('scroll', request);
+    };
+    const io = new IntersectionObserver(
+      ([e]) => (e.isIntersecting ? start() : stop()),
+      { rootMargin: '50% 0px 50% 0px' },
+    );
+    io.observe(section);
+    const ro = new ResizeObserver(() => { if (live) { layout(); draw(reduce ? 1 : lastP); } });
+    ro.observe(cv);
+    document.fonts?.ready.then(() => { if (live) draw(reduce ? 1 : lastP); });
+
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      mq.removeEventListener?.('change', syncReduce);
-      if (frame) cancelAnimationFrame(frame);
+      io.disconnect();
+      ro.disconnect();
+      stop();
+      if (raf) cancelAnimationFrame(raf);
     };
-  }, []);
-
-  const swarmRaw = reduce ? 1 : clamp01((p - 0.16) / 0.42);
-  const axisT = reduce ? 1 : easeOut(clamp01((p - 0.14) / 0.16));
-  const medianT = reduce ? 1 : easeOut(clamp01((p - 0.5) / 0.12));
-  const callT = reduce ? 1 : easeOut(clamp01((p - 0.66) / 0.18));
-  const scene = reduce ? 3 : p < 0.24 ? 1 : p < 0.64 ? 2 : 3;
-
-  const capStyle = (n) => ({
-    gridArea: '1 / 1',
-    opacity: scene === n ? 1 : 0,
-    transform: scene === n ? 'translateY(0)' : 'translateY(8px)',
-    transition: 'opacity 0.4s ease, transform 0.4s ease',
-  });
-
-  let measured = 0;
-  const dots = points.map((pt) => {
-    const local = reduce ? 1 : easeIO(clamp01((swarmRaw - pt.delay) / 0.55));
-    if (local > 0.55) measured += 1;
-    const sx = 4 + pt.rx * 92;
-    const sy = 4 + pt.ry * 84;
-    const x = lerp(sx, pt.tx, local);
-    const y = lerp(sy, pt.ty, local);
-    const isTop = top3.indexOf(pt) !== -1;
-    const isHover = hover === pt;
-    const size = isHover ? 11 : isTop ? lerp(7, 13, callT) : lerp(7, 8, local);
-    const dim = isHover || isTop ? 1 : lerp(1, pt.score >= 70 ? 1 : 0.26, callT) * (hover ? 0.55 : 1);
-    return {
-      key: pt.name,
-      style: {
-        position: 'absolute',
-        left: `${x}%`,
-        top: `${y}%`,
-        width: size,
-        height: size,
-        borderRadius: '50%',
-        background: pt.color,
-        boxShadow: isHover ? '0 0 0 4px rgba(35,94,107,0.18)' : isTop && callT > 0.4 ? `0 0 0 ${lerp(0, 4, callT)}px rgba(35,94,107,0.16)` : 'none',
-        zIndex: isHover ? 3 : undefined,
-        opacity: lerp(0.34, 1, local) * dim,
-        transform: 'translate(-50%, -50%)',
-        transition: reduce ? 'none' : 'left 0.1s linear, top 0.1s linear, opacity 0.25s ease, width 0.15s ease, height 0.15s ease',
-        willChange: 'left, top',
-      },
-    };
-  });
-
-  // Callout rows are derived from the actual swarm height, never hardcoded.
-  const gutter = Math.max(14, (swarmTop || 50) - 18);
-  const ROWS = [0, 1, 2].map((i) => 3 + (i * (gutter - 3)) / 2);
-  const labels = top3.map((pt, i) => {
-    const rowY = ROWS[i];
-    const labelBottom = rowY + 6.2;
-    return {
-      key: pt.name,
-      name: pt.name.length > 26 ? `${pt.name.slice(0, 24)}…` : pt.name,
-      score: Math.round(pt.score),
-      style: {
-        position: 'absolute',
-        left: `${pt.tx}%`,
-        top: `${rowY}%`,
-        transform: `translate(-100%, 0) translateY(${(1 - callT) * 8}px)`,
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: 10,
-        padding: '6px 13px',
-        marginLeft: -6,
-        background: A.paper,
-        border: `1px solid ${A.ink}`,
-        whiteSpace: 'nowrap',
-        opacity: callT,
-        transition: reduce ? 'none' : 'opacity 0.3s ease, transform 0.3s ease',
-      },
-      leaderStyle: {
-        position: 'absolute',
-        left: `${pt.tx}%`,
-        top: `${labelBottom}%`,
-        width: 1,
-        height: `${Math.max(0, (pt.ty - labelBottom) * callT)}%`,
-        background: A.ink,
-        opacity: callT * 0.55,
-        transition: reduce ? 'none' : 'height 0.3s ease, opacity 0.3s ease',
-      },
-    };
-  });
-
-  const xAt = (v) => `${X0 + (v / 100) * XW}%`;
-  const settled = reduce || swarmRaw >= 1;
-
-  // Hover readout: nearest settled point to the pointer, within ~14px.
-  const onPlateMove = (e) => {
-    if (!settled || !plateRef.current) return;
-    const r = plateRef.current.getBoundingClientRect();
-    let best = null;
-    let bestD = 14 * 14;
-    for (const pt of points) {
-      const dx = (pt.tx / 100) * r.width - (e.clientX - r.left);
-      const dy = (pt.ty / 100) * r.height - (e.clientY - r.top);
-      const d = dx * dx + dy * dy;
-      if (d < bestD) { bestD = d; best = pt; }
-    }
-    if (best !== hover) setHover(best);
-  };
-
-  const axisTick = (v, value = String(v), accent = false) => (
-    <span
-      style={{
-        position: 'absolute',
-        bottom: -28,
-        left: xAt(v),
-        transform: 'translateX(-50%)',
-        fontSize: 10.5,
-        color: accent ? A.accent : A.inkMuted,
-        fontWeight: accent ? 700 : 600,
-        ...tabularNums,
-      }}
-    >
-      {value}
-    </span>
-  );
-
-  const summary = `${points.length} credentials by best-lens score at default weights: `
-    + `${tiers.Strong} strong, ${tiers.Good} good, ${tiers.Moderate} moderate, ${tiers.Limited} limited. `
-    + `Median ${median}. Highest: ${top3.map((t) => `${t.name} ${Math.round(t.score)}`).join(', ')}.`;
-
-  // Tier ranges drawn under the axis: the scale carries its own legend.
-  const tierBands = [
-    [0, 30, A.dim], [30, 50, A.warn], [50, 70, A.accentMid], [70, 100, A.accent],
-  ];
+  }, [certs, lensLabels]);
 
   return (
-    <div id="fig1" ref={scrollerRef} style={{ height: reduce ? 'auto' : '360vh', position: 'relative' }}>
-      <div className={reduce ? undefined : 'atlas-fig-sticky'} style={{ position: 'relative', overflow: 'hidden' }}>
-        <figure className="atlas-wrap" style={{ maxWidth: 1200, margin: '0 auto', padding: reduce ? '5rem 2rem' : '0 2rem', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          {/* Caption + act meter */}
-          <div className="atlas-fig-head">
-            <div style={{ display: 'grid', flex: 1, minWidth: 0 }}>
-              {[
-                [1, 'Fig. 1a', 'The field, unmeasured.'],
-                [2, 'Fig. 1b', 'Scored, the field settles.'],
-                [3, 'Fig. 1c', 'The strong few, named.'],
-              ].map(([n, fig, caption]) => (
-                <div key={n} style={capStyle(n)} aria-hidden={scene !== n}>
-                  <span style={{ fontSize: 12, letterSpacing: '0.02em', color: A.inkMuted, fontWeight: 600 }}>{fig}</span>
-                  <h2 style={{ fontFamily: INS, fontWeight: 600, fontSize: 'clamp(22px, 5.6vw, 29px)', lineHeight: 1.1, letterSpacing: '-0.03em', margin: '3px 0 0' }}>{caption}</h2>
-                </div>
-              ))}
+    <section ref={sectionRef} className="lp-field" aria-label="The field, animated: credentials gather by composite score under three career lenses">
+      <div ref={stageRef} className="lp-field-stage">
+        <canvas ref={canvasRef} aria-hidden="true" />
+        <div className="lp-capt">
+          {captions.map((c, i) => (
+            <div key={c.title} data-on={i === step ? '' : undefined} aria-hidden={i === step ? undefined : 'true'}>
+              <b>{c.eyebrow}</b>
+              <strong>{c.title}</strong>
+              <p>{c.body}</p>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexShrink: 0, paddingBottom: 4 }}>
-              <span style={{ fontSize: 12, letterSpacing: '0.02em', color: A.inkMuted, fontWeight: 600, ...tabularNums }}>
-                n = {measured} measured
-              </span>
-              <span style={{ display: 'flex', gap: 4 }} aria-hidden="true">
-                {[1, 2, 3].map((n) => (
-                  <span key={n} style={{ width: 26, height: 3, display: 'inline-block', background: scene >= n ? A.accent : A.ruleMinor, transition: 'background 0.3s ease' }} />
-                ))}
-              </span>
-            </div>
-          </div>
-
-          {/* The plate */}
-          <div
-            ref={plateRef}
-            role="img"
-            aria-label={summary}
-            onPointerMove={onPlateMove}
-            onPointerLeave={() => setHover(null)}
-            style={{ position: 'relative', height: 'min(460px, 52vh)', minHeight: 300, marginTop: '2.25rem', borderLeft: `1px solid ${A.ink}`, cursor: settled ? 'crosshair' : 'default' }}
-          >
-            <span aria-hidden="true" style={{ position: 'absolute', left: 0, bottom: 0, height: 1, width: `${axisT * 100}%`, background: A.ink, transition: reduce ? 'none' : 'width 0.2s ease' }} />
-            {tierBands.map(([lo, hi, color]) => (
-              <span
-                key={lo}
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  bottom: -6,
-                  height: 3,
-                  left: lo === 0 ? 0 : xAt(lo),
-                  width: lo === 0 ? xAt(hi) : `${((hi - lo) / 100) * XW}%`,
-                  background: color,
-                  opacity: axisT,
-                  transition: reduce ? 'none' : 'opacity 0.3s ease',
-                }}
-              />
-            ))}
-            {[30, 50, 70].map((v) => (
-              <span key={v} aria-hidden="true" style={{ position: 'absolute', left: xAt(v), bottom: 0, width: 1, height: `${axisT * 100}%`, background: A.ink, opacity: 0.09 }} />
-            ))}
-            <span aria-hidden="true" style={{ position: 'absolute', left: xAt(median), bottom: 0, width: 1, height: `${medianT * 62}%`, background: A.warn, opacity: medianT * (1 - callT * 0.7), transition: reduce ? 'none' : 'height 0.3s ease, opacity 0.3s ease' }}>
-              <span style={{ position: 'absolute', top: -19, left: 6, fontSize: 11.5, letterSpacing: '0.02em', fontWeight: 700, color: A.warn, whiteSpace: 'nowrap', ...tabularNums }}>
-                Median {median}
-              </span>
-            </span>
-            {dots.map((d) => (
-              <span key={d.key} aria-hidden="true" style={d.style} />
-            ))}
-            {labels.map((lab) => (
-              <React.Fragment key={lab.key}>
-                <span aria-hidden="true" style={lab.leaderStyle} />
-                <span aria-hidden="true" style={{ ...lab.style, opacity: hover ? lab.style.opacity * 0.3 : lab.style.opacity }}>
-                  <span style={{ fontSize: 11.5, fontWeight: 700, color: A.accent, ...tabularNums }}>{lab.score}</span>
-                  <span style={{ fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap' }}>{lab.name}</span>
-                </span>
-              </React.Fragment>
-            ))}
-            {hover && (
-              <span
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  left: `${hover.tx}%`,
-                  top: `${hover.ty}%`,
-                  transform: `translate(${hover.tx > 55 ? 'calc(-100% - 14px)' : '14px'}, -50%)`,
-                  zIndex: 4,
-                  background: A.paper,
-                  border: `1px solid ${A.ink}`,
-                  padding: '7px 11px',
-                  whiteSpace: 'nowrap',
-                  pointerEvents: 'none',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 2,
-                }}
-              >
-                <span style={{ fontSize: 13, fontWeight: 600, color: A.ink, maxWidth: 280, overflow: 'hidden', textOverflow: 'ellipsis' }}>{hover.name}</span>
-                <span style={{ fontSize: 11.5, fontWeight: 600, color: A.inkMuted, ...tabularNums }}>
-                  <span style={{ color: tierColor(hover.score), fontWeight: 700 }}>{Math.round(hover.score)}</span> · {tierLabel(hover.score)} · best lens
-                </span>
-              </span>
-            )}
-            <span aria-hidden="true" style={{ position: 'absolute', inset: 0, opacity: axisT, transition: 'opacity 0.3s ease', pointerEvents: 'none' }}>
-              {axisTick(0)}
-              {axisTick(30)}
-              {axisTick(50)}
-              {axisTick(70)}
-              {axisTick(100, '100', true)}
-            </span>
-          </div>
-
-          {/* Legend: every tier color paired with its word and its count. */}
-          <figcaption className="atlas-fig-legend">
-            {[
-              ['Strong', '≥70', A.accent],
-              ['Good', '50–69', A.accentMid],
-              ['Moderate', '30–49', A.warn],
-              ['Limited', '<30', A.dim],
-            ].map(([label, range, color]) => (
-              <span key={label} style={{ display: 'inline-flex', alignItems: 'center', gap: 7, whiteSpace: 'nowrap' }}>
-                <span aria-hidden="true" style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', background: color }} />
-                {label}
-                <span style={{ color: A.inkMuted, fontWeight: 500, ...tabularNums }}>{range} · n {tiers[label]}</span>
-              </span>
-            ))}
-            <span className="atlas-fig-note">One point per credential · best lens · default weights</span>
-          </figcaption>
-        </figure>
+          ))}
+        </div>
+        <div className="lp-steps" aria-hidden="true">
+          {captions.map((c, i) => <i key={c.title} data-on={i === step ? '' : undefined} />)}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
-// ── The page ─────────────────────────────────────────────────────────────
-export default function LandingPageClient() {
-  const lensRows = useMemo(
-    () => PATH_ORDER.map((key) => {
-      const ranked = rankCertifications(certifications, getPathDefaultWeights(key), key);
-      const top = ranked[0];
-      return {
-        key,
-        label: lensShortLabel(key),
-        count: ranked.length,
-        topPick: top.name,
-        topScore: Math.round(top.computedScore),
-      };
-    }),
-    [],
+// ── FieldPreview ─────────────────────────────────────────────────────────
+const matrixHref = (lens, name) =>
+  `/matrix?lens=${lens}${name ? `&cert=${encodeURIComponent(name)}` : ''}`;
+
+export function FieldPreview({ certs, lenses }) {
+  const router = useRouter();
+  const wrapRef = useRef(null);
+  const [lens, setLens] = useState(lenses[0].key);
+  const [W, setW] = useState(760);
+  const [hover, setHover] = useState(null); // cert index
+  const [cursor, setCursor] = useState(-1); // index into xOrder (keyboard)
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return undefined;
+    const ro = new ResizeObserver(([e]) => {
+      const w = Math.round(e.contentRect.width);
+      if (w > 0) setW(w);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  // One shared axis across lenses so a dot's glide between lenses is a
+  // real change in score.
+  const geo = useMemo(() => {
+    const mobile = W < 560;
+    const r = clamp(W / 190, 2.8, 4.6);
+    const x0 = 18;
+    const x1 = W - 18;
+    const vals = certs.flatMap((c) => lenses.map((l) => c.s[l.key]).filter((v) => v != null));
+    const lo = Math.floor(Math.min(...vals) / 10) * 10;
+    const hi = Math.ceil(Math.max(...vals) / 10) * 10;
+    const per = {};
+    let minY = Infinity;
+    let maxY = -Infinity;
+    for (const l of lenses) {
+      const items = certs.map((c, i) => ({ i, v: c.s[l.key] })).filter((d) => d.v != null);
+      const pos = beeswarm(items, x0, x1, 0, r, lo, hi);
+      Object.values(pos).forEach((p) => { minY = Math.min(minY, p.y); maxY = Math.max(maxY, p.y); });
+      const ranked = [...items].sort((a, b) => b.v - a.v);
+      const rank = {};
+      ranked.forEach((d, k) => { rank[d.i] = k + 1; });
+      per[l.key] = { pos, rank, ranked: ranked.map((d) => d.i), n: items.length };
+    }
+    const padTop = r + 14;
+    const shift = padTop - minY;
+    for (const l of lenses) {
+      Object.values(per[l.key].pos).forEach((p) => { p.y += shift; });
+    }
+    const axisY = maxY + shift + r + 16;
+    return { r, x0, x1, lo, hi, per, axisY, H: axisY + 26, mobile };
+  }, [W, certs, lenses]);
+
+  const cur = geo.per[lens];
+  const lensMeta = lenses.find((l) => l.key === lens);
+  const top5 = cur.ranked.slice(0, 5);
+  const xOrder = useMemo(
+    () => cur.ranked.map((i) => ({ i, x: cur.pos[i].x })).sort((a, b) => a.x - b.x).map((d) => d.i),
+    [cur],
   );
+  // Where an unscored dot rests while hidden: its spot in the first lens
+  // that does score it, so it fades in place instead of flying.
+  const restPos = useCallback((i) => {
+    for (const l of lenses) { const p = geo.per[l.key].pos[i]; if (p) return p; }
+    return { x: geo.x0, y: geo.axisY };
+  }, [geo, lenses]);
 
-  const stats = [
-    [siteStats.certCount.toLocaleString(), 'credentials'],
-    [siteStats.citationTotal.toLocaleString(), 'citations'],
-    [siteStats.rctSrMa.toLocaleString(), 'RCT · SR · meta-analyses'],
-    [String(siteStats.lensCount), 'career lenses'],
-  ];
+  const pickLens = (k) => { setLens(k); setHover(null); setCursor(-1); };
+  const active = cursor >= 0 ? xOrder[cursor] : hover;
+  const activePos = active != null ? cur.pos[active] : null;
 
-  const underlineLink = {
-    display: 'inline-block',
-    fontWeight: 600,
-    fontSize: 14.5,
-    color: A.accent,
-    textDecoration: 'none',
-    borderBottom: `2px solid ${A.accent}`,
-    paddingBottom: 2,
+  const onKey = (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      const start = cursor < 0 ? (e.key === 'ArrowRight' ? -1 : xOrder.length) : cursor;
+      setCursor(clamp(start + (e.key === 'ArrowRight' ? 1 : -1), 0, xOrder.length - 1));
+    } else if (e.key === 'Home' || e.key === 'End') {
+      e.preventDefault();
+      setCursor(e.key === 'Home' ? 0 : xOrder.length - 1);
+    } else if (e.key === 'Enter' && cursor >= 0) {
+      router.push(matrixHref(lens, certs[xOrder[cursor]].n));
+    } else if (e.key === 'Escape') {
+      setCursor(-1);
+    }
   };
 
+  const ticks = [];
+  for (let v = geo.lo; v <= geo.hi; v += 10) ticks.push(v);
+  const xOf = (v) => geo.x0 + ((v - geo.lo) / (geo.hi - geo.lo)) * (geo.x1 - geo.x0);
+  const describe = (i) => `${certs[i].n}. ${lensMeta.label} composite ${certs[i].s[lens].toFixed(1)}, rank ${cur.rank[i]} of ${cur.n}. ${certs[i].c.toLocaleString()} citations.`;
+
   return (
-    <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink, overflowX: 'clip' }}>
-      <PublicNav
-        maxWidth={1200}
-        cta={(
-          <>
-            <Link href="/sign-in" className="atlas-nav-signin">
-              Sign in
-            </Link>
-            <Link href="/matrix" className="atlas-btn atlas-btn-primary atlas-btn-sm">
-              Explore the field →
-            </Link>
-          </>
-        )}
-      />
+    <div className="lp-preview">
+      <div className="lp-preview-controls">
+        <div className="lp-seg" role="group" aria-label="Career lens">
+          {lenses.map((l) => (
+            <button key={l.key} type="button" aria-pressed={l.key === lens} onClick={() => pickLens(l.key)}>
+              {l.label}
+            </button>
+          ))}
+        </div>
+      </div>
 
-      <main id="main">
-        {/* Hero */}
-        <header className="atlas-wrap atlas-hero" style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem 2rem 5.5rem' }}>
-          <h1 style={{ fontFamily: INS, fontWeight: 600, fontSize: 'clamp(46px, 7.4vw, 96px)', lineHeight: 0.94, letterSpacing: '-0.045em', margin: 0, maxWidth: '11em', textWrap: 'balance' }}>
-            {siteStats.certCount} credentials, scored and cited.
-          </h1>
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '2rem 3rem', marginTop: '2.5rem', flexWrap: 'wrap' }}>
-            <p style={{ fontSize: 'clamp(17px, 2.2vw, 19px)', lineHeight: 1.55, color: A.inkBody, margin: 0, maxWidth: '24em', textWrap: 'pretty' }}>
-              {siteStats.citationTotal.toLocaleString()} curated citations, five career lenses. Built by practicing PTs.
-            </p>
-            <div style={{ display: 'flex', gap: 22, alignItems: 'center', flexWrap: 'wrap' }}>
-              <Link href="/matrix" className="atlas-btn atlas-btn-primary" style={{ fontSize: 15.5, padding: '15px 26px' }}>
-                Explore the field →
-              </Link>
-              <Link href="/methodology" className="atlas-ink-link" style={{ textDecoration: 'none', fontWeight: 600, fontSize: 14.5, color: A.ink, borderBottom: `2px solid ${A.ink}`, paddingBottom: 2 }}>
-                Methodology
-              </Link>
+      <div className="lp-preview-grid">
+        <div className="lp-panel lp-preview-swarm">
+          <div className="lp-panel-top">
+            <div>
+              <h3>Every credential, by composite score</h3>
+              <p className="lp-sub">{lensMeta.label} lens · default weights · higher is better</p>
             </div>
+            <span className="lp-count">{cur.n} of {certs.length} scored</span>
           </div>
-        </header>
-
-        {/* Stat band */}
-        <section aria-label="By the numbers" style={{ borderTop: `1px solid ${A.ink}`, borderBottom: `1px solid ${A.ink}` }}>
-          <dl className="atlas-wrap atlas-stats" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 2rem' }}>
-            {stats.map(([value, label]) => (
-              <div key={label}>
-                <dt style={{ display: 'block', fontSize: 12.5, letterSpacing: '0.02em', color: A.inkMuted, fontWeight: 600, marginTop: 3, order: 2 }}>{label}</dt>
-                <dd style={{ margin: 0, fontFamily: INS, fontSize: 27, fontWeight: 600, letterSpacing: '-0.03em', lineHeight: 1.15, order: 1, ...tabularNums }}>{value}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-
-        {/* Fig. 1 — the scroll showpiece */}
-        <FigureOne />
-
-        {/* Table 2 — the five lenses */}
-        <section aria-label="The five lenses" style={{ borderTop: `1px solid ${A.ink}`, background: A.band }}>
-          <div className="atlas-wrap atlas-section" style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem 2rem' }}>
-            <div className="atlas-lens-split">
-              <div>
-                <h2 style={{ fontFamily: INS, fontWeight: 600, fontSize: 'clamp(32px, 4.4vw, 44px)', lineHeight: 0.98, letterSpacing: '-0.04em', margin: 0, textWrap: 'balance' }}>
-                  One rubric per career.
-                </h2>
-                <p style={{ fontSize: 15.5, color: A.inkMuted, lineHeight: 1.6, margin: '1rem 0 0' }}>
-                  Scores aren&rsquo;t comparable across lenses, deliberately.
-                </p>
-                <Link href="/career-paths" className="atlas-link" style={{ ...underlineLink, marginTop: '1.4rem' }}>
-                  The lens definitions →
-                </Link>
-              </div>
-              <div>
-                <div aria-hidden="true" className="atlas-lens-row atlas-lens-head">
-                  <span style={{ gridArea: 'lens' }}>Lens</span>
-                  <span style={{ gridArea: 'n', textAlign: 'right' }}>Scored</span>
-                  <span style={{ gridArea: 'pick' }}>Top credential</span>
-                  <span style={{ gridArea: 'score', textAlign: 'right' }}>Score</span>
-                </div>
-                {lensRows.map((lens) => (
-                  <Link
-                    key={lens.key}
-                    href={`/matrix?lens=${lens.key}`}
-                    className="atlas-lens-row atlas-row"
-                    aria-label={`${lens.label} lens: ${lens.count} scored, top credential ${lens.topPick}, ${lens.topScore}`}
-                  >
-                    <span style={{ gridArea: 'lens', fontFamily: INS, fontWeight: 600, fontSize: 17, letterSpacing: '-0.02em', color: A.ink }}>{lens.label}</span>
-                    <span style={{ gridArea: 'n', fontSize: 12.5, color: A.inkMuted, fontWeight: 600, textAlign: 'right', ...tabularNums }}>{lens.count}</span>
-                    <span title={lens.topPick} style={{ gridArea: 'pick', fontSize: 14.5, fontWeight: 500, color: A.inkBody, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{lens.topPick}</span>
-                    <span style={{ gridArea: 'score', fontFamily: INS, fontSize: 18, fontWeight: 600, color: A.accent, textAlign: 'right', letterSpacing: '-0.02em', ...tabularNums }}>
-                      {lens.topScore}
-                    </span>
-                  </Link>
+          <div ref={wrapRef} className="lp-swarm-wrap">
+            <svg
+              width={W}
+              height={geo.H}
+              viewBox={`0 0 ${W} ${geo.H}`}
+              className="lp-swarm"
+              tabIndex={0}
+              role="group"
+              aria-label={`Beeswarm of ${cur.n} credentials by ${lensMeta.label} composite score. Use the left and right arrow keys to move between credentials and Enter to open one in the field.`}
+              onKeyDown={onKey}
+              onBlur={() => setCursor(-1)}
+              onPointerLeave={() => setHover(null)}
+            >
+              <g className="lp-axis" aria-hidden="true">
+                {ticks.map((v) => (
+                  <line key={`g${v}`} x1={xOf(v)} x2={xOf(v)} y1={8} y2={geo.axisY} className="lp-grid" />
                 ))}
+                <line x1={geo.x0} x2={geo.x1} y1={geo.axisY + 0.5} y2={geo.axisY + 0.5} />
+                {ticks.map((v) => (
+                  <text key={v} x={xOf(v)} y={geo.axisY + 17} textAnchor="middle">{v}</text>
+                ))}
+              </g>
+              <g aria-hidden="true">
+                {certs.map((c, i) => {
+                  const p = cur.pos[i];
+                  const on = !!p;
+                  const at = p || restPos(i);
+                  const lead = on && top5.includes(i);
+                  const isActive = active === i;
+                  return (
+                    <circle
+                      key={c.n}
+                      r={lead || isActive ? geo.r + 1.4 : geo.r}
+                      cx={0}
+                      cy={0}
+                      className="lp-dot"
+                      style={{
+                        transform: `translate(${at.x.toFixed(1)}px, ${at.y.toFixed(1)}px)`,
+                        opacity: on ? (active != null && !isActive ? 0.55 : lead ? 1 : 0.82) : 0,
+                        pointerEvents: on ? 'auto' : 'none',
+                      }}
+                      fill={lead || isActive ? PEACH : DOT}
+                      stroke={lead || isActive ? GROUND : 'none'}
+                      strokeWidth={lead || isActive ? 1.5 : 0}
+                      onPointerEnter={() => { setCursor(-1); setHover(i); }}
+                      onClick={() => router.push(matrixHref(lens, c.n))}
+                    />
+                  );
+                })}
+              </g>
+              {activePos && (
+                <circle cx={activePos.x} cy={activePos.y} r={geo.r + 6} fill="none" stroke={PEACH} strokeWidth={1.2} pointerEvents="none" aria-hidden="true" />
+              )}
+            </svg>
+            {activePos && (
+              <div
+                className="lp-tip"
+                aria-hidden="true"
+                style={{
+                  left: clamp(activePos.x, 110, Math.max(110, W - 110)),
+                  top: activePos.y,
+                }}
+              >
+                <b>{certs[active].n}</b>
+                <span>{certs[active].t}{certs[active].d.length ? ` · ${certs[active].d.slice(0, 4).join(', ')}` : ''}</span>
+                <span>Composite {certs[active].s[lens].toFixed(1)} · rank {cur.rank[active]} of {cur.n}</span>
+                <span>{certs[active].c.toLocaleString()} citations</span>
               </div>
+            )}
+          </div>
+          <p className="lp-note">
+            <span className="lp-key" aria-hidden="true"><i /></span>
+            The five that lead this lens. Hover or arrow through any dot; select one to open it in the field.
+          </p>
+          <p className="lp-sr" aria-live="polite">{cursor >= 0 ? describe(xOrder[cursor]) : ''}</p>
+        </div>
+
+        <div className="lp-panel lp-preview-top">
+          <div className="lp-panel-top">
+            <div>
+              <h3>The five that lead</h3>
+              <p className="lp-sub">{lensMeta.label} lens · weighted toward {lensMeta.heaviest.slice(0, 2).join(' and ')}</p>
             </div>
           </div>
-        </section>
-
-        {/* Notes — what an account adds */}
-        <section aria-label="Beyond the field" style={{ borderTop: `1px solid ${A.ink}` }}>
-          <div className="atlas-wrap atlas-section" style={{ maxWidth: 1200, margin: '0 auto', padding: '6rem 2rem' }}>
-            <h2 style={{ fontFamily: INS, fontWeight: 600, fontSize: 29, letterSpacing: '-0.03em', margin: '0 0 2.25rem' }}>
-              What an account adds
-            </h2>
-            <div className="atlas-4col atlas-notes">
-              {[
-                ['a.', 'The Ledger', 'Compliance, computed live.', '/compliance'],
-                ['b.', 'Dossiers', `${siteStats.certCount} published evidence pages.`, '/credentials'],
-                ['c.', 'The CV', 'Your credentials, with evidence attached.', '/profile'],
-                ['d.', 'Exports', 'The audit binder, one click.', '/compliance'],
-              ].map(([index, title, copy, href]) => (
-                <Link key={title} href={href} className="atlas-note" style={{ textDecoration: 'none', borderTop: `2px solid ${A.ink}`, paddingTop: 16, color: 'inherit' }}>
-                  <span style={{ display: 'block', fontSize: 12, fontWeight: 700, color: A.accent, marginBottom: 8 }}>{index}</span>
-                  <span className="atlas-note-title" style={{ display: 'block', fontFamily: INS, fontWeight: 600, fontSize: 20, letterSpacing: '-0.025em' }}>{title}</span>
-                  <span style={{ display: 'block', fontSize: 14, color: A.inkMuted, marginTop: 5, lineHeight: 1.5 }}>{copy}</span>
+          <ol className="lp-rank">
+            {top5.map((i) => (
+              <li key={certs[i].n}>
+                <Link href={matrixHref(lens, certs[i].n)} onPointerEnter={() => setHover(i)} onPointerLeave={() => setHover(null)} onFocus={() => setHover(i)} onBlur={() => setHover(null)}>
+                  <span className="lp-rank-r">{cur.rank[i]}</span>
+                  <span className="lp-rank-n">{certs[i].n}<small>{certs[i].t}</small></span>
+                  <span className="lp-rank-s">{certs[i].s[lens].toFixed(1)}</span>
                 </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Declaration of interests */}
-        <section aria-label="Declaration of interests" style={{ borderTop: `1px solid ${A.ink}`, background: A.band }}>
-          <div className="atlas-wrap atlas-section" style={{ maxWidth: 1200, margin: '0 auto', padding: '7rem 2rem', textAlign: 'center' }}>
-            <div style={eyebrow(13)}>Declaration of interests</div>
-            <div style={{ fontFamily: INS, fontSize: 'clamp(96px, 14vw, 190px)', fontWeight: 600, lineHeight: 1, letterSpacing: '-0.055em', color: A.ink, margin: '1.5rem 0 1rem', ...tabularNums }}>
-              $0
-            </div>
-            <p style={{ fontSize: 'clamp(16px, 2vw, 18px)', color: A.inkBody, margin: '0 auto', maxWidth: '30em', textWrap: 'balance' }}>from the programs we score. No ads. No sponsored rankings.</p>
-            <Link href="/methodology" className="atlas-link" style={{ ...underlineLink, marginTop: '1.5rem' }}>
-              Methodology, limitations included →
-            </Link>
-          </div>
-        </section>
-
-        {/* Closing */}
-        <section aria-label="Closing" style={{ borderTop: `1px solid ${A.ink}` }}>
-          <div className="atlas-wrap atlas-section" style={{ maxWidth: 1200, margin: '0 auto', padding: '5rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '2rem 3rem', flexWrap: 'wrap' }}>
-            <h2 style={{ fontFamily: INS, fontWeight: 600, fontSize: 'clamp(30px, 4.6vw, 46px)', lineHeight: 0.98, letterSpacing: '-0.04em', margin: 0, maxWidth: '13em', textWrap: 'balance' }}>
-              See where your next credential lands.
-            </h2>
-            <Link href="/matrix" className="atlas-btn atlas-btn-primary" style={{ fontSize: 16, padding: '16px 28px' }}>
-              Explore the field, free →
-            </Link>
-          </div>
-        </section>
-      </main>
-
-      <PublicFooter maxWidth={1200} />
+              </li>
+            ))}
+          </ol>
+          <Link href={matrixHref(lens)} className="lp-arrow-link">
+            Open the {lensMeta.label} field
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" /></svg>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
