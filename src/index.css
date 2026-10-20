@@ -247,15 +247,28 @@ input[type="range"]::-moz-range-track {
 .cs-prose > ol {
   max-width: 700px;
 }
+.cs-prose > p { margin: 0 0 1rem; }
+.cs-prose > p:last-child { margin-bottom: 0; }
 .cs-bleed { max-width: none; }
 
-/* Bullet list shared across sections — tighter spacing, slight indent. */
+/* Bullet list shared across sections: a small petrol square marks each
+   item (square geometry, no default disc). */
 .cs-bullet-list {
-  padding-left: 1.2rem;
+  list-style: none;
+  padding-left: 0;
   margin: 0;
   max-width: 700px;
 }
-.cs-bullet-list li { margin-bottom: 6px; line-height: 1.6; }
+.cs-bullet-list li { position: relative; padding-left: 1.1rem; margin-bottom: 7px; line-height: 1.6; }
+.cs-bullet-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  background: #235E6B;
+}
 
 /* Scoring-dimension card grid: 2-column on the wider article column,
    1-column when the column is narrower. */
@@ -269,9 +282,10 @@ input[type="range"]::-moz-range-track {
   .cs-dim-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 .cs-dim-card {
-  padding: 0.9rem 1.1rem;
-  border-left: 3px solid #235E6B;
-  background: #F2F1E9;
+  padding: 1rem 1.15rem 1.1rem;
+  border: 1px solid #D5D3C6;
+  border-top: 2px solid #1B1A17;
+  background: #FAFAF5;
   border-radius: 0;
 }
 .cs-dim-card-header {
@@ -300,17 +314,17 @@ input[type="range"]::-moz-range-track {
 .cs-frame-blue { background: #F2F1E9; border-color: #D5D3C6; }
 .cs-frame-sage { background: #F6F3E7; border-color: #D5D3C6; }
 .cs-frame-eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-family: 'Figtree', ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   margin-bottom: 6px;
 }
 .cs-frame-blue .cs-frame-eyebrow { color: #235E6B; }
 .cs-frame-sage .cs-frame-eyebrow { color: #C77B2E; }
 .cs-frame-label { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
-.cs-frame p { font-size: 0.9rem; color: #475569; margin: 0; line-height: 1.55; }
+.cs-frame p { font-size: 0.9rem; color: #45433C; margin: 0; line-height: 1.6; }
+.cs-frame-sage .cs-frame-eyebrow { color: #9A5E21; }
 
 /* Callouts (blue alert, etc.) — used for inline notes inside sections. */
 .cs-callout {
@@ -323,7 +337,39 @@ input[type="range"]::-moz-range-track {
 }
 .cs-callout > svg { flex-shrink: 0; margin-top: 2px; }
 .cs-callout p { margin: 0; line-height: 1.55; }
-.cs-callout-blue { background: #F2F1E9; border-color: #D5D3C6; color: #45433C; }
+.cs-callout-blue { background: #F2F1E9; border-color: #D5D3C6; color: #45433C; margin-bottom: 1rem; }
+
+/* Methodology bar table (evidence base) and tier table. */
+.atlas-bar-table { margin: 0.25rem 0 0; max-width: 760px; font-size: 14px; }
+.atlas-bar-row {
+  display: grid;
+  grid-template-columns: minmax(0, 10.5rem) minmax(0, 1fr) 4.5rem 3.5rem;
+  gap: 0 1rem;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #EEECDF;
+}
+.atlas-bar-head { border-bottom: 2px solid #1B1A17; font-size: 12.5px; font-weight: 600; color: #56544C; letter-spacing: 0.02em; padding-bottom: 7px; }
+.atlas-bar-total { border-bottom: none; border-top: 1px solid #1B1A17; font-weight: 700; margin-top: -1px; }
+@media (max-width: 560px) {
+  .atlas-bar-row { grid-template-columns: minmax(0, 8.5rem) minmax(0, 1fr) 3.5rem; }
+  .atlas-bar-row > :nth-child(4) { display: none; }
+}
+.atlas-tier-table { margin: 1.25rem 0 0; border-top: 2px solid #1B1A17; }
+.atlas-tier-row {
+  display: grid;
+  grid-template-columns: 12rem minmax(0, 1fr) 3rem;
+  gap: 0.25rem 1.5rem;
+  align-items: baseline;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #E4E2D6;
+  font-size: 14px;
+  line-height: 1.55;
+}
+@media (max-width: 640px) {
+  .atlas-tier-row { grid-template-columns: minmax(0, 1fr) 3rem; }
+  .atlas-tier-row > dd:nth-of-type(1) { grid-column: 1 / -1; grid-row: 2; }
+}
 .cs-callout-blue > svg { color: #235E6B; }
 
 /* Public clinician CV: identity sidebar + main column. Sidebar sits left
@@ -647,6 +693,88 @@ select {
   }
   .atlas-lens-head { grid-template-areas: "lens n score"; }
   .atlas-lens-head > span:nth-child(3) { display: none; }
+}
+
+/* States index: one ruled table, rows grouped per state (the state name
+   prints once per group). Phones: two-line rows. */
+.atlas-state-table { border-top: 2px solid #1B1A17; }
+.atlas-state-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr) 4rem 3.5rem minmax(0, 1fr) 7.5rem 1rem;
+  grid-template-areas: "state lic hours cycle mand status go";
+  gap: 0 1.25rem;
+  align-items: baseline;
+  padding: 0.9rem 0.5rem;
+  border-bottom: 1px solid #E4E2D6;
+  text-decoration: none;
+  color: inherit;
+}
+.atlas-state-head { border-bottom: 2px solid #1B1A17; margin-top: -2px; padding-top: 0.6rem; padding-bottom: 0.6rem; font-size: 12.5px; font-weight: 600; color: #56544C; letter-spacing: 0.02em; }
+.atlas-state-group { border-bottom: 1px solid #1B1A17; }
+.atlas-state-group > .atlas-state-row:last-child { border-bottom: none; }
+.atlas-state-repeat { visibility: hidden; }
+@media (max-width: 720px) {
+  .atlas-state-head { display: none; }
+  .atlas-state-row {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-areas: "state state go" "lic hours cycle" "mand status status";
+    gap: 0.15rem 1rem;
+  }
+  .atlas-state-repeat { visibility: visible; }
+  .atlas-state-row [style*="grid-area: status"], .atlas-state-row > span:nth-child(6) { text-align: right; }
+}
+
+/* State page: stat band 4 → 2×2, and format-cap meter rows. */
+.atlas-state-stats { display: grid; grid-template-columns: repeat(4, 1fr); }
+.atlas-state-stats > div + div { border-left: 1px solid #D5D3C6; }
+@media (max-width: 640px) {
+  .atlas-state-stats { grid-template-columns: repeat(2, 1fr); }
+  .atlas-state-stats > div:nth-child(3) { border-left: none; }
+  .atlas-state-stats > div:nth-child(n+3) { border-top: 1px solid #D5D3C6; }
+}
+.atlas-cap-row {
+  display: grid;
+  grid-template-columns: minmax(0, 11rem) minmax(0, 1fr) 3.5rem;
+  gap: 0 1.25rem;
+  align-items: center;
+  padding: 0.7rem 1.4rem;
+}
+@media (max-width: 560px) { .atlas-cap-row { grid-template-columns: minmax(0, 1fr) 5rem 3rem; padding: 0.7rem 1rem; } }
+
+/* Lenses panel: one gutter on phones, not two stacked paddings. */
+@media (max-width: 640px) {
+  .cs-path-panel { padding: 0 !important; }
+  .cs-path-panel-grid { padding: 1.25rem 1rem 1.5rem !important; }
+}
+
+/* Touch screens: form fields reach the 44px target. */
+@media (pointer: coarse) {
+  input[type="email"], input[type="password"], input[type="text"], input[type="search"] { min-height: 44px; }
+}
+
+/* Prose inside bordered cards: paragraph rhythm. */
+.atlas-card-prose > p { margin: 0 0 0.9rem; }
+.atlas-card-prose > :last-child { margin-bottom: 0; }
+
+/* Lenses page tab strip: pinned under the nav; one swipeable row on
+   phones. The active tab is a petrol fill, so the hover rule skips it. */
+.atlas-pathtabs { position: sticky; top: var(--atlas-nav-h, 72px); display: flex; align-items: stretch; flex-wrap: wrap; }
+.atlas-pathtabs > .atlas-tab[aria-selected="true"]:hover { background: #235E6B !important; color: #FAFAF5 !important; }
+@media (max-width: 720px) {
+  .atlas-pathtabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .atlas-pathtabs::-webkit-scrollbar { display: none; }
+  .atlas-pathtabs > button { flex-shrink: 0; min-height: 44px; }
+}
+
+/* Numbered steps: tabular 01–05 in petrol, hanging. */
+.atlas-steps { list-style: none; counter-reset: step; margin: 0; padding: 0; max-width: 760px; color: #45433C; line-height: 1.6; }
+.atlas-steps li { counter-increment: step; position: relative; padding: 0.55rem 0 0.55rem 2.4rem; border-top: 1px solid #D5D3C6; }
+.atlas-steps li:first-child { border-top: none; }
+.atlas-steps li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute; left: 0; top: 0.62rem;
+  font-size: 12px; font-weight: 700; color: #235E6B;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Dossier library filters: pinned under the nav on desktop; on phones
