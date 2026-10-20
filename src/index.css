@@ -35,7 +35,7 @@ body {
 ::selection { background: #D9E4E6; }
 
 /* In-page anchors (methodology TOC, skip link) land below the sticky nav. */
-html { scroll-padding-top: 5rem; }
+html { scroll-padding-top: calc(var(--atlas-nav-h, 72px) + 1rem); }
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
@@ -116,9 +116,9 @@ input[type="range"] { accent-color: #235E6B; }
 .skeleton {
   background: linear-gradient(
     90deg,
-    rgba(15, 23, 42, 0.05) 0%,
-    rgba(15, 23, 42, 0.10) 50%,
-    rgba(15, 23, 42, 0.05) 100%
+    rgba(27, 26, 23, 0.05) 0%,
+    rgba(27, 26, 23, 0.09) 50%,
+    rgba(27, 26, 23, 0.05) 100%
   );
   background-size: 200% 100%;
   animation: skeleton-shimmer 1.6s ease-in-out infinite;
@@ -649,6 +649,68 @@ select {
   .atlas-lens-head > span:nth-child(3) { display: none; }
 }
 
+/* Dossier library filters: pinned under the nav on desktop; on phones
+   the panel scrolls away (it would otherwise eat the screen) and each chip
+   group becomes one swipeable row. */
+.atlas-filter-sticky { position: sticky; top: var(--atlas-nav-h, 72px); }
+.atlas-chip-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+@media (max-width: 720px) {
+  .atlas-filter-sticky { position: static; }
+  .atlas-kbd { display: none; }
+  .atlas-chip-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+  .atlas-chip-row::-webkit-scrollbar { display: none; }
+  .atlas-chip-row > * { flex-shrink: 0; }
+  .atlas-chip-row > span:first-child { min-width: 0 !important; margin-right: 4px; }
+}
+
+/* Dossier evidence profile: mix + years side by side, stacked on phones. */
+.atlas-evidence-profile { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+.atlas-evidence-profile > div:nth-child(2) { border-left: 1px solid #E4E2D6; }
+.atlas-evidence-foot { grid-column: 1 / -1; }
+@media (max-width: 760px) {
+  .atlas-evidence-profile { grid-template-columns: 1fr; }
+  .atlas-evidence-profile > div:nth-child(2) { border-left: none; border-top: 1px solid #E4E2D6; }
+}
+
+/* Matrix list pane: the cell carries the rule for the full height of the
+   row; the list inside pins under the nav and scrolls on its own, so it
+   stays beside a long plate instead of ending in a void. */
+.atlas-list-cell { border-right: 1px solid #1B1A17; min-width: 0; }
+.atlas-list-scroll {
+  position: sticky;
+  top: var(--atlas-nav-h, 72px);
+  max-height: min(760px, calc(100vh - var(--atlas-nav-h, 72px)));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.atlas-anatomy { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem 2rem; }
+@media (max-width: 900px) {
+  .atlas-list-cell { border-right: none; border-bottom: 1px solid #1B1A17; }
+  .atlas-list-scroll { position: static; max-height: 46vh; }
+}
+@media (max-width: 560px) {
+  .atlas-anatomy { grid-template-columns: 1fr; }
+  .atlas-plate { padding: 1.25rem 1rem 1.5rem !important; }
+  .atlas-filter-row { padding: 0.8rem 1rem !important; }
+  /* Chip groups become single swipeable rows instead of stacking three deep. */
+  .atlas-filter-row > [role="group"] {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    scrollbar-width: none;
+    width: calc(100% + 2rem);
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+  .atlas-filter-row > [role="group"]::-webkit-scrollbar { display: none; }
+  .atlas-filter-row > [role="group"] > button { flex-shrink: 0; }
+}
+
 /* Matrix instrument: ranked list + plate side by side, stacked on mobile. */
 .atlas-two-pane { display: grid; grid-template-columns: minmax(340px, 0.9fr) minmax(0, 1.1fr); }
 @media (max-width: 900px) { .atlas-two-pane { grid-template-columns: 1fr; } }
@@ -783,6 +845,16 @@ select {
 /* Chip / tab buttons: inactive hover nudges the text to ink. */
 .atlas-chip:not([aria-pressed="true"]):hover { color: #1B1A17 !important; border-color: #1B1A17 !important; }
 .atlas-tab:not([aria-pressed="true"]):hover { color: #1B1A17 !important; background: #F2F1E9 !important; }
+
+/* Small inline links (DOI ↗) get a 44px-class hit area without moving. */
+.atlas-hit { display: inline-block; padding: 10px; margin: -10px; }
+@media (max-width: 720px), (pointer: coarse) {
+  .atlas-chip { min-height: 44px; }
+}
+
+/* Search fields: petrol rule on focus, alongside the global outline. */
+.atlas-search { transition: border-color 0.15s ease; }
+.atlas-search:focus { border-bottom-color: #235E6B !important; }
 
 /* Lens tab strip: one row that scrolls sideways on phones instead of
    wrapping into a ragged grid. */

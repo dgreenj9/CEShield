@@ -16,6 +16,7 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
 import PublicNav from '@/components/layout/PublicNav';
+import PublicFooter from '@/components/layout/PublicFooter';
 import AtlasMatrix from './_AtlasMatrix';
 import siteStats from '@/data/siteStats.json';
 
@@ -47,7 +48,7 @@ export default function MatrixPage() {
     <div className="atlas-ground" style={{ minHeight: '100vh', color: '#1B1A17' }}>
       <PublicNav currentPath="/matrix" />
 
-      <main style={{ maxWidth: 1280, margin: '0 auto', padding: '2.5rem 2rem 5rem' }}>
+      <main id="main" className="atlas-wrap" style={{ maxWidth: 1280, margin: '0 auto', padding: '2.5rem 2rem 5rem' }}>
         <Suspense fallback={<MatrixFallback />}>
           <AtlasMatrix />
         </Suspense>
@@ -73,22 +74,12 @@ export default function MatrixPage() {
             Log hours against your renewal. Claim credentials. Export the
             binder. Free for students, always.
           </span>
-          <Link
-            href="/sign-in"
-            style={{
-              textDecoration: 'none',
-              fontWeight: 600,
-              fontSize: 14.5,
-              background: '#235E6B',
-              color: '#FAFAF5',
-              padding: '12px 20px',
-              whiteSpace: 'nowrap',
-            }}
-          >
+          <Link href="/sign-in" className="atlas-btn atlas-btn-primary" style={{ fontSize: 14.5, padding: '12px 20px' }}>
             Create a free account →
           </Link>
         </section>
       </main>
+      <PublicFooter />
     </div>
   );
 }
