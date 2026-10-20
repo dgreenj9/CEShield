@@ -1102,3 +1102,48 @@ input[type="date"].plum-input { color-scheme: dark; }
 .plum-table { width: 100%; border-collapse: collapse; }
 .plum-table th { font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #A998AE; text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-2); }
 .plum-table td { padding: 12px; border-bottom: 1px solid var(--line-faint); color: #D5C9D9; font-variant-numeric: tabular-nums; }
+
+/* Stat bands inside a panel: hairline dividers that follow the 4 → 2 → 1 collapse. */
+.plum-statband > div + div { border-left: 1px solid var(--line-faint); }
+@media (max-width: 900px) {
+  .plum-statband > div:nth-child(odd) { border-left: none; }
+  .plum-statband > div:nth-child(n+3) { border-top: 1px solid var(--line-faint); }
+}
+@media (max-width: 480px) {
+  .plum-statband > div + div { border-left: none; border-top: 1px solid var(--line-faint); }
+}
+
+/* Course log rows: one line on desktop; on phones a three-line card so the
+   title keeps its width and every action keeps a 44px target. */
+.plum-icon-btn:hover { background: rgba(255, 255, 255, 0.05); }
+@media (max-width: 640px) {
+  .plum-logrow {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "date hours" "title title" "badge actions";
+    gap: 2px 12px !important;
+    padding: 0.75rem 0.5rem 0.25rem 1rem !important;
+    align-items: center;
+  }
+  .plum-logrow-date { grid-area: date; width: auto !important; }
+  .plum-logrow-title { grid-area: title; }
+  .plum-logrow-title > span:first-child { white-space: normal !important; }
+  .plum-logrow-hours { grid-area: hours; }
+  .plum-logrow-badge { grid-area: badge; justify-self: start; }
+  .plum-logrow-actions { grid-area: actions; justify-self: end; }
+}
+
+/* App shell: tabs, sign-out and gutters on phones. */
+.plum-signout { transition: border-color 0.3s var(--plum-ease), color 0.3s var(--plum-ease); }
+.plum-signout:hover { border-color: #F0C3A8 !important; color: #F6EEE9 !important; }
+@media (max-width: 720px) {
+  .plum-app-bar { flex-wrap: wrap; padding: 0.4rem 1rem 0 !important; row-gap: 0 !important; }
+  .plum-app-tabs { gap: 0 !important; min-width: 0; }
+  .plum-app-tabs > a { min-height: 44px !important; padding: 0 12px !important; }
+  .plum-app-who { display: none; }
+  .plum-app-main { padding: 2rem 1rem 4rem !important; }
+}
+@media (max-width: 640px) {
+  .plum-renewal { text-align: left !important; }
+  .plum-logrow:not(:has(.plum-logrow-badge, .plum-logrow-actions)) { padding-bottom: 0.75rem !important; }
+}

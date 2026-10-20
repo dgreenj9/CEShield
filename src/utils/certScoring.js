@@ -20,12 +20,18 @@ export const scoreTier = (score) => {
   return 'limited';
 };
 
-// Editorial tier chip styling — sage/blue/ochre/slate from the brand palette.
+// Tier chip styling on the plum ground: tier color text on a faint tint with
+// a hairline border in the same hue. Mirrors tierColor() in atlas/theme.js;
+// pair the chip with its tier word wherever it renders.
+const chip = (color, rgb) => ({
+  gradient: { background: `rgba(${rgb},0.10)`, color, border: `1px solid rgba(${rgb},0.45)`, borderRadius: 999, fontVariantNumeric: 'tabular-nums' },
+  border: color,
+});
 const STYLE_BY_TIER = {
-  strong:   { gradient: { background: '#FFFFFF', color: '#1F4D38', border: '1px solid #2F6B4D', boxShadow: 'inset 0 0 0 1px #E8EFEA', fontVariantNumeric: 'tabular-nums' }, border: '#2F6B4D' },
-  good:     { gradient: { background: '#FFFFFF', color: '#1D4ED8', border: '1px solid #3b82f6', boxShadow: 'inset 0 0 0 1px #EFF6FF', fontVariantNumeric: 'tabular-nums' }, border: '#3b82f6' },
-  moderate: { gradient: { background: '#FFFFFF', color: '#7A5A2F', border: '1px solid #A87B3F', boxShadow: 'inset 0 0 0 1px #F6F0E5', fontVariantNumeric: 'tabular-nums' }, border: '#A87B3F' },
-  limited:  { gradient: { background: '#FFFFFF', color: '#475569', border: '1px solid #94a3b8', boxShadow: 'inset 0 0 0 1px #F8FAFC', fontVariantNumeric: 'tabular-nums' }, border: '#94a3b8' },
+  strong:   chip('#F0C3A8', '240,195,168'),
+  good:     chip('#C7B6DC', '199,182,220'),
+  moderate: chip('#E0A85A', '224,168,90'),
+  limited:  chip('#A998AE', '169,152,174'),
 };
 export const getScoreStyle  = (score) => STYLE_BY_TIER[scoreTier(score)].gradient;
 export const getBorderColor = (score) => STYLE_BY_TIER[scoreTier(score)].border;

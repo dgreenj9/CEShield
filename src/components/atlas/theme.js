@@ -143,3 +143,8 @@ export const kpi = (size = 30) => ({
   fontVariantNumeric: 'tabular-nums',
   color: A.ink,
 });
+
+// Tier color for TEXT. The Limited tier's stone (#7D6E83) is a mark color and
+// falls under AA for small text on the plum ground, so tier words use muted
+// ink there instead. Marks (dots, bars) keep tierColor().
+export const tierTextColor = (score) => (score < 30 ? A.inkMuted : tierColor(score));

@@ -32,7 +32,7 @@ import {
 import { citationUrl, cleanCitation, EVIDENCE_LABELS } from '@/utils/citationsLibrary';
 import { splitEvidence } from '@/utils/formatEvidence';
 import {
-  A, FIG, tierColor, tierLabel, tabularNums,
+  A, FIG, tierColor, tierTextColor, tierLabel, tabularNums,
   LINE, LINE2, LINE_FAINT, VIZ, panel, kicker, capLabel, hairHead, display, kpi,
 } from '@/components/atlas/theme';
 import LensBreakdownTabs from './_LensBreakdownTabs';
@@ -335,7 +335,7 @@ export default async function Page({ params }) {
               <span style={{ fontFamily: FIG, fontSize: 12, fontWeight: 600, color: A.inkBody, letterSpacing: '0.02em' }}>
                 Composite across lenses
               </span>
-              <span style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 500, color: tierColor(bestScore) }}>
+              <span style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 500, color: tierTextColor(bestScore) }}>
                 Best: {tierLabel(bestScore)}
               </span>
             </div>
@@ -366,7 +366,7 @@ export default async function Page({ params }) {
                     <div style={{ minWidth: 0 }}>
                       <div style={{ fontSize: 13.5, fontWeight: isBest ? 500 : 400, color: isBest ? A.ink : A.inkBody, display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
                         {label.replace(' & Industry', '')}
-                        <span style={{ fontSize: 11, fontWeight: 500, color: tierColor(score) }}>{tierLabel(score)}</span>
+                        <span style={{ fontSize: 11, fontWeight: 500, color: tierTextColor(score) }}>{tierLabel(score)}</span>
                       </div>
                       <div aria-hidden="true" style={{ position: 'relative', height: 14, marginTop: 6 }}>
                         <span style={{ position: 'absolute', left: 0, right: 0, top: 7, height: 1, background: LINE }} />

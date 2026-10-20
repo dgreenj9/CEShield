@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import Modal from '../common/Modal';
 import ConfirmDialog from '../ui/ConfirmDialog';
 import { SUPPORTED_STATES, getRulesFor } from '../../data/stateRules';
-import { A, FIG, INS, tabularNums } from '../atlas/theme';
+import { A, FIG, INS, tabularNums, LINE, LINE2 } from '../atlas/theme';
 
 const label = { display: 'block', fontFamily: FIG, fontSize: 13.5, fontWeight: 600, color: A.ink, marginBottom: 6 };
 const field = {
@@ -10,7 +10,7 @@ const field = {
   padding: '8px 10px',
   fontFamily: FIG,
   fontSize: 14,
-  border: `1px solid ${A.ruleMinor}`,
+  border: `1px solid ${LINE2}`,
   background: A.paper,
   color: A.ink,
   borderRadius: 0,
@@ -69,7 +69,7 @@ const SettingsModal = ({ user, onSave, onClose, courses }) => {
         <div style={{ fontFamily: INS, fontWeight: 600, fontSize: 16, color: selected ? A.onAccent : A.ink }}>{type}</div>
         <div style={{ fontFamily: FIG, fontSize: 11.5, color: selected ? A.onAccent : A.inkMuted, marginTop: 2, ...tabularNums }}>{summary}</div>
         {r && r.verified === false && (
-          <div style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 700, marginTop: 4, color: selected ? A.onAccent : A.warn, letterSpacing: '0.02em' }}>
+          <div style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 500, marginTop: 4, color: selected ? A.onAccent : A.warn, letterSpacing: '0.02em' }}>
             Draft rules
           </div>
         )}
@@ -109,7 +109,7 @@ const SettingsModal = ({ user, onSave, onClose, courses }) => {
                 href={selectedRules.boardUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: A.warn, fontWeight: 700 }}
+                style={{ color: A.warn, fontWeight: 500 }}
               >
                 {selectedRules.citation}
               </a>
@@ -170,7 +170,7 @@ const SettingsModal = ({ user, onSave, onClose, courses }) => {
           <button
             type="button"
             onClick={onClose}
-            style={{ fontFamily: FIG, fontSize: 13.5, fontWeight: 600, padding: '9px 16px', color: A.ink, background: 'transparent', border: `1px solid ${A.ink}`, cursor: 'pointer' }}
+            style={{ fontFamily: FIG, fontSize: 13.5, fontWeight: 600, padding: '9px 16px', color: A.ink, background: 'transparent', border: `1px solid ${LINE}`, borderRadius: 6, cursor: 'pointer' }}
           >
             Cancel
           </button>

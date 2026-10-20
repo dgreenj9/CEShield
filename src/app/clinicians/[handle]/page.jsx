@@ -18,7 +18,7 @@ import { certifications as certData } from '@/utils/certificationData';
 import { getLibraryMetaForCertification } from '@/utils/citationsLibrary';
 import { PATHS, PATH_ORDER, getPathDefaultWeights } from '@/utils/careerPaths';
 import { computeScore, certScoresForPath } from '@/utils/certScoring';
-import { A, FIG, tierColor, tierLabel, tabularNums, panel, hairHead, display, LINE, LINE2, LINE_FAINT } from '@/components/atlas/theme';
+import { A, FIG, tierColor, tierTextColor, tierLabel, tabularNums, panel, hairHead, display, LINE, LINE2, LINE_FAINT } from '@/components/atlas/theme';
 
 export const dynamic = 'force-dynamic';
 
@@ -43,7 +43,7 @@ const bestLensFor = (cert) => {
 const STATUS_LABEL = { earned: 'Earned', in_progress: 'In progress', planned: 'Planned' };
 const STATUS_MARK = { earned: '●', in_progress: '◐', planned: '○' };
 const statusColor = (status) =>
-  status === 'earned' ? A.accent : status === 'in_progress' ? A.warn : A.dim;
+  status === 'earned' ? A.accent : status === 'in_progress' ? A.warn : A.inkMuted;
 
 async function loadProfile(handle) {
   const client = sb();
@@ -245,7 +245,7 @@ function CredList({ items, showStatus }) {
             <div style={{ textAlign: 'right', flexShrink: 0 }} title={`${e.best.score}/100 on the ${e.best.label} lens, ${tierLabel(e.best.score)}`}>
               <div style={{ fontFamily: FIG, fontSize: 18, fontWeight: 400, letterSpacing: '-0.03em', color: A.ink, lineHeight: 1, ...tabularNums }}>
                 {e.best.score}{' '}
-                <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: 0, color: tierColor(e.best.score) }}>{tierLabel(e.best.score)}</span>
+                <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: 0, color: tierTextColor(e.best.score) }}>{tierLabel(e.best.score)}</span>
               </div>
               <div style={{ fontFamily: FIG, fontSize: 11, color: A.inkMuted, marginTop: 3 }}>{e.best.label}</div>
             </div>
