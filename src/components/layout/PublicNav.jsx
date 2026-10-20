@@ -1,27 +1,32 @@
-// Shared nav bar for all public (unauthenticated) pages — Atlas chrome.
+// Shared nav bar for all public (unauthenticated) pages.
 //
-// Sticky blurred paper bar over a 1px ink rule. The current section is
-// marked with a 2px petrol bottom border, not a fill. Server-component
-// compatible (no hooks): the responsive behavior lives in index.css
-// (`.atlas-nav-*`). Below 720px the section links drop to their own
-// horizontally scrollable row so the wordmark and the CTA never wrap.
+// A quiet translucent plum bar over a hairline rule, in the register of the
+// portfolio stage: blurred ground, light type, the current section marked by
+// a short peach rule under the label. Server-component compatible; the link
+// row is a tiny client island so the current section is detected from the
+// URL (nested routes included), with `currentPath` as an explicit override.
+// Below 720px the section links drop to their own horizontally swipeable
+// row so the wordmark and the CTA never wrap. Every target is 44px tall.
 
 import Link from 'next/link';
 import AtlasLogo from '@/components/atlas/AtlasLogo';
+import PublicNavLinks from './PublicNavLinks';
 
-const SECONDARY_LINKS = [
+export const SECONDARY_LINKS = [
   { href: '/matrix', label: 'The field' },
   { href: '/credentials', label: 'Dossiers' },
   { href: '/career-paths', label: 'Lenses' },
   { href: '/methodology', label: 'Method' },
+  { href: '/states', label: 'States' },
 ];
 
 export default function PublicNav({
   sticky = true,
-  // Optional custom CTA node (e.g. the landing page's "Explore the field →").
+  // Optional custom CTA node (e.g. the landing page's "Explore the field").
   // Defaults to a Sign in button.
   cta = null,
-  // Mark the link matching the current page (pass its href).
+  // Mark the link matching the current page (pass its href). Optional: the
+  // link row also reads the URL.
   currentPath = null,
   maxWidth = 1280,
 }) {
@@ -31,23 +36,12 @@ export default function PublicNav({
       <nav aria-label="Primary" className={`atlas-nav${sticky ? ' atlas-nav-sticky' : ''}`}>
         <div className="atlas-nav-inner" style={{ maxWidth }}>
           <Link href="/" className="atlas-nav-home" aria-label="CE Shield home">
-            <AtlasLogo />
+            <AtlasLogo fontSize={16.5} />
           </Link>
-          <div className="atlas-nav-links">
-            {SECONDARY_LINKS.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="atlas-nav-link"
-                aria-current={l.href === currentPath ? 'page' : undefined}
-              >
-                {l.label}
-              </Link>
-            ))}
-          </div>
+          <PublicNavLinks links={SECONDARY_LINKS} currentPath={currentPath} />
           <div className="atlas-nav-cta">
             {cta || (
-              <Link href="/sign-in" className="atlas-btn atlas-btn-primary atlas-btn-sm">
+              <Link href="/sign-in" className="atlas-nav-btn">
                 Sign in
               </Link>
             )}
