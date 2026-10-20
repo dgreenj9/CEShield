@@ -13,6 +13,7 @@ import { createClient } from '@supabase/supabase-js';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import PublicNav from '@/components/layout/PublicNav';
+import PublicFooter from '@/components/layout/PublicFooter';
 import { certifications as certData } from '@/utils/certificationData';
 import { getLibraryMetaForCertification } from '@/utils/citationsLibrary';
 import { PATHS, PATH_ORDER, getPathDefaultWeights } from '@/utils/careerPaths';
@@ -107,14 +108,14 @@ export default async function ClinicianPage({ params }) {
     <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink }}>
       <PublicNav />
 
-      <main className="cs-page-pad" style={{ maxWidth: 1080, margin: '0 auto', padding: '3rem 2rem 6rem' }}>
+      <main id="main" className="atlas-wrap" style={{ maxWidth: 1080, margin: '0 auto', padding: '3rem 2rem 6rem' }}>
         <div className="cs-cv-grid">
           {/* LEFT — identity sidebar */}
           <aside className="cs-cv-side">
             <div
               aria-hidden={!profile.avatar_url}
               style={{
-                width: 120, height: 120, borderRadius: '50%', overflow: 'hidden',
+                width: 120, height: 120, overflow: 'hidden',
                 background: A.accentTint, color: A.accent,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontFamily: INS, fontSize: 34, fontWeight: 600, marginBottom: '1.25rem',
@@ -201,6 +202,7 @@ export default async function ClinicianPage({ params }) {
           </div>
         </div>
       </main>
+      <PublicFooter />
     </div>
   );
 }

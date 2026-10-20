@@ -6,8 +6,8 @@
 // breathe symmetrically. Atlas: paper ground, 1px ink rules, petrol accent.
 
 import Link from 'next/link';
-import { Shield, FileText, Mail, Compass } from 'lucide-react';
 import PublicNav from '@/components/layout/PublicNav';
+import PublicFooter from '@/components/layout/PublicFooter';
 import { A, INS, eyebrow, tabularNums } from '@/components/atlas/theme';
 import citationMeta from '@/data/citations_meta.json';
 
@@ -24,7 +24,7 @@ const totalCitations = Object.values(citationMeta).reduce(
 );
 const totalCerts = Object.keys(citationMeta).length;
 
-function AboutCard({ icon: Icon, label, title, children }) {
+function AboutCard({ label, title, children }) {
   return (
     <section
       style={{
@@ -34,8 +34,7 @@ function AboutCard({ icon: Icon, label, title, children }) {
         marginBottom: '1rem',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.85rem', marginBottom: '0.875rem' }}>
-        {Icon ? <Icon size={20} aria-hidden="true" style={{ color: A.accent, flexShrink: 0, marginTop: 2 }} /> : null}
+      <div style={{ marginBottom: '0.875rem' }}>
         <div style={{ minWidth: 0 }}>
           {label && (
             <div style={{ ...eyebrow(12), marginBottom: 4 }}>{label}</div>
@@ -45,7 +44,7 @@ function AboutCard({ icon: Icon, label, title, children }) {
           </h2>
         </div>
       </div>
-      <div style={{ color: A.inkBody, lineHeight: 1.65 }}>{children}</div>
+      <div className="atlas-card-prose" style={{ color: A.inkBody, lineHeight: 1.65 }}>{children}</div>
     </section>
   );
 }
@@ -75,14 +74,15 @@ function HeroStat({ value, label }) {
 }
 
 const proseLink = { color: A.accent, textDecoration: 'underline', textUnderlineOffset: 2 };
-const footLink = { color: A.accent, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 5, fontWeight: 600 };
+const footLink = { textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 5, fontWeight: 600, padding: '10px 0' };
 
 export default function AboutPage() {
   return (
     <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink }}>
       <PublicNav />
 
-      <main className="cs-page-pad" style={{ maxWidth: 780, margin: '0 auto', padding: '3rem 1.5rem 6rem' }}>
+      <main id="main" className="atlas-wrap" style={{ maxWidth: 1280, margin: '0 auto', padding: '3rem 2rem 6rem' }}>
+        <div style={{ maxWidth: 780 }}>
         <header style={{ marginBottom: '2rem' }}>
           <div style={{ ...eyebrow(), marginBottom: 12 }}>About CE Shield</div>
           <h1 className="cs-h1-clamp" style={{
@@ -114,7 +114,7 @@ export default function AboutPage() {
           </div>
         </header>
 
-        <AboutCard icon={Shield} label="The problem" title="CE spending runs on marketing.">
+        <AboutCard label="The problem" title="CE spending runs on marketing.">
           <p>
             Rehabilitation professionals spend thousands of dollars and hundreds
             of hours each renewal cycle on continuing education, and most of
@@ -138,7 +138,7 @@ export default function AboutPage() {
           </p>
         </AboutCard>
 
-        <AboutCard icon={FileText} label="Authors" title="Who built it">
+        <AboutCard label="Authors" title="Who built it">
           <p>
             CE Shield is built by <strong>physical therapists</strong> who
             treat patients and have lived the credential-decision problem
@@ -149,7 +149,7 @@ export default function AboutPage() {
           </p>
         </AboutCard>
 
-        <AboutCard icon={Shield} label="Independence" title="How we make money, and how we don't">
+        <AboutCard label="Independence" title="How we make money, and how we don't">
           <p>
             <strong style={{ color: A.accent }}>Credential scores are not for sale.</strong>{' '}
             We take no money from certification programs, training vendors, or
@@ -160,7 +160,7 @@ export default function AboutPage() {
             Here&rsquo;s the model we&rsquo;re building toward, stated up front
             so you can hold us to it:
           </p>
-          <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0' }}>
+          <ul className="cs-bullet-list" style={{ margin: '0 0 0.9rem' }}>
             <li style={{ marginBottom: 6 }}>
               <strong>Premium tracking</strong> · a paid tier for
               compliance tracking and the document vault, priced under the
@@ -179,13 +179,13 @@ export default function AboutPage() {
             </li>
           </ul>
           <p>
-            <strong>Free for students, always.</strong> If you&rsquo;re in a
+            <strong>Free for students, always.</strong>{' '}If you&rsquo;re in a
             DPT, OTD, or related program, CE Shield&rsquo;s career-path
             intelligence is free for you, not just during beta.
           </p>
         </AboutCard>
 
-        <AboutCard icon={Mail} label="Feedback" title="Get in touch">
+        <AboutCard label="Feedback" title="Get in touch">
           <p>
             Found an error, disagree with a score, or have a certification we
             should add? Scores are revised as the evidence changes, and each
@@ -209,20 +209,14 @@ export default function AboutPage() {
             fontSize: '0.88rem',
           }}
         >
-          <Link href="/career-paths" style={footLink}>
-            <Compass size={14} aria-hidden="true" /> Five career paths
-          </Link>
-          <Link href="/credentials" style={footLink}>
-            <Shield size={14} aria-hidden="true" /> Credential library
-          </Link>
-          <Link href="/methodology" style={footLink}>
-            <FileText size={14} aria-hidden="true" /> Methodology
-          </Link>
-          <Link href="/states" style={footLink}>
-            <Shield size={14} aria-hidden="true" /> State CE requirements
-          </Link>
+          <Link href="/career-paths" className="atlas-link" style={footLink}>Five career lenses →</Link>
+          <Link href="/credentials" className="atlas-link" style={footLink}>Dossier library →</Link>
+          <Link href="/methodology" className="atlas-link" style={footLink}>Methodology →</Link>
+          <Link href="/states" className="atlas-link" style={footLink}>State CE requirements →</Link>
+        </div>
         </div>
       </main>
+      <PublicFooter />
     </div>
   );
 }
