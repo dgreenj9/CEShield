@@ -12,13 +12,15 @@ export default function LensTabs({ active, onSelect, size = 'md', trailing = nul
     ? { fontSize: 13, letterSpacing: '0.01em', padding: '13px 18px' }
     : { fontSize: 12, letterSpacing: '0.01em', padding: '11px 13px' };
   return (
-    <div style={{ display: 'flex', alignItems: 'stretch', borderBottom: `1px solid ${A.ink}`, flexWrap: 'wrap' }}>
+    <div className="atlas-tabstrip" style={{ borderBottom: `1px solid ${A.ink}` }}>
+      <div className="atlas-tabstrip-tabs" role="group" aria-label="Career lens">
       {PATH_ORDER.map((key) => {
         const on = active === key;
         return (
           <button
             key={key}
             type="button"
+            className="atlas-tab"
             aria-pressed={on}
             title={PATHS[key].description}
             onClick={() => onSelect(key)}
@@ -38,6 +40,7 @@ export default function LensTabs({ active, onSelect, size = 'md', trailing = nul
           </button>
         );
       })}
+      </div>
       {trailing}
     </div>
   );
