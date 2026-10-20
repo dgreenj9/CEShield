@@ -44,3 +44,6 @@ supabase/.temp/
 # Python
 __pycache__/
 *.pyc
+
+# Citation pipeline HTTP cache (scripts/expand_citations.py)
+/.cache/

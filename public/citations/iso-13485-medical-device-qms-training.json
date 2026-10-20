@@ -24,10 +24,10 @@
       "volume": "",
       "issue": "",
       "pages": "",
-      "doi": "",
+      "doi": "10.2345/9781570206047.ch1",
       "pmid": "",
       "url": "",
-      "library_link": "",
+      "library_link": "https://libkey.io/libraries/1712/10.2345/9781570206047.ch1",
       "evidence_type": "unknown",
       "source_type": "industry",
       "what_it_says": "ISO 13485:2016 is the international standard itself, published by the International Organization for Standardization, which normatively defines the medical device QMS scope and requirements that third-party training certificates attest to; cited as the underlying normative document rather than as independent evidence of training program quality."
@@ -49,22 +49,6 @@
       "what_it_says": "Reports that 13485 auditor training and RAC credentials are the two most-cited qualifications in MedTech QA/RA postings and correlate with mid-five-figure compensation premiums at the specialist level."
     },
     {
-      "authors": "Sertkaya A, Wong HH, Jessup A, Beleche T",
-      "year": 2018,
-      "title": "Quality management system implementation and medical device innovation",
-      "journal": "Therapeutic Innovation & Regulatory Science",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "unknown",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Quantifies the regulatory and QMS workforce burden in device firms, underscoring sustained employer demand for ISO 13485-trained QA personnel."
-    },
-    {
       "authors": "U.S. Food and Drug Administration",
       "year": 2024,
       "title": "Medical Devices; Quality System Regulation Amendments (QMSR Final Rule harmonizing 21 CFR 820 with ISO 13485)",
@@ -79,22 +63,6 @@
       "evidence_type": "unknown",
       "source_type": "government",
       "what_it_says": "Finalizes alignment of 21 CFR 820 with ISO 13485, increasing the practical value of 13485 training for U.S. MedTech QA roles through the 2026 effective date and beyond."
-    },
-    {
-      "authors": "Chatterjee P, Joshi A",
-      "year": 2021,
-      "title": "Career transitions from clinical practice to medical device industry: a survey of clinical specialists",
-      "journal": "BMC Medical Education",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "cross_sectional",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Finds that clinicians most often enter MedTech through clinical-specialist or education roles, with QA/RA pathways typically requiring supplemental credentials such as ISO 13485 or RAC after initial industry entry."
     }
   ]
 }

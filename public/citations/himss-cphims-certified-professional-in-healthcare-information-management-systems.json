@@ -1,38 +1,6 @@
 {
   "citations": [
     {
-      "authors": "Gardner RM, Overhage JM, Steen EB, et al.",
-      "year": 2019,
-      "title": "The health informatics workforce: updated analysis of demand and supply",
-      "journal": "Journal of the American Medical Informatics Association (JAMIA)",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "unknown",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Documents persistent demand for credentialed health IT professionals and identifies HIMSS CPHIMS among the recognized certifications signaling workforce readiness for informatics and IT management roles."
-    },
-    {
-      "authors": "Hersh WR, Gorman PN, Biagioli FE, Mohan V, Gold JA, Mejicano GC",
-      "year": 2014,
-      "title": "Health informatics competencies across the professions: an international Delphi study",
-      "journal": "Applied Clinical Informatics",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "unknown",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Maps competency expectations underlying credentials like CPHIMS, showing the breadth-over-depth profile (governance, privacy, workflow) characteristic of the certification."
-    },
-    {
       "authors": "HIMSS Analytics",
       "year": 2023,
       "title": "HIMSS Healthcare IT Workforce Survey / Compensation Survey",

@@ -1,38 +1,6 @@
 {
   "citations": [
     {
-      "authors": "Ayaz M, Pasha MF, Alzahrani MY, Budiarto R, Stiawan D",
-      "year": 2021,
-      "title": "Fast Healthcare Interoperability Resources (FHIR) as a meta standard for healthcare interoperability: systematic review",
-      "journal": "JMIR Medical Informatics",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "systematic_review",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Establishes FHIR as the dominant emerging interop standard, validating market demand for engineers and analysts who can implement FHIR resources and APIs."
-    },
-    {
-      "authors": "Vorisek CN, Lehne M, Klopfenstein SAI, Mayer PJ, Bartschke A, Haese T, Thun S",
-      "year": 2022,
-      "title": "The evolution of the HL7 FHIR standard and its adoption in healthcare",
-      "journal": "JMIR Medical Informatics",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "unknown",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Documents rapid FHIR adoption across EHR vendors and payers following CMS interoperability rules, signaling rising demand for FHIR-credentialed integration talent."
-    },
-    {
       "authors": "Office of the National Coordinator for Health IT",
       "year": 2020,
       "title": "ONC Cures Act Final Rule: API certification criterion using FHIR Release 4",
@@ -79,22 +47,6 @@
       "evidence_type": "narrative",
       "source_type": "industry",
       "what_it_says": "Per HL7 International's own program documentation (the standards body that authors and administers the credential), the FHIR Proficiency exam is offered as a low-cost, self-study assessment intended to signal baseline competency without requiring vendor sponsorship. Figures reflect HL7's published fee schedule at time of citation and should be re-verified against HL7's current program page."
-    },
-    {
-      "authors": "Sengstack P, Boicey C, et al.",
-      "year": 2020,
-      "title": "Clinician informaticists and the bridge from practice to health IT industry roles",
-      "journal": "Applied Clinical Informatics",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "unknown",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Finds clinicians who add technical interop credentials transition successfully into vendor and payer informatics roles, though deeper engineering skills are often still required."
     }
   ]
 }

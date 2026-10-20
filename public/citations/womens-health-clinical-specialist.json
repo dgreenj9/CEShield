@@ -9,7 +9,7 @@
       "issue": "1",
       "pages": "71-80",
       "doi": "10.1080/07370016.2025.2549814",
-      "pmid": "190609392",
+      "pmid": "40856510",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=141ebfc9-e51e-38c0-8b07-baefaaf2edf0",
       "library_link": "https://libkey.io/libraries/1712/10.1080/07370016.2025.2549814",
       "evidence_type": "unknown"
@@ -37,7 +37,7 @@
       "issue": "2",
       "pages": "18-24",
       "doi": "10.1097/01.JAA.0000000000000309",
-      "pmid": "191049944",
+      "pmid": "41568851",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=ca35d861-b7e9-3f5f-a6a8-1d33a9c13435",
       "library_link": "https://libkey.io/libraries/1712/10.1097/01.JAA.0000000000000309",
       "evidence_type": "unknown"
@@ -64,10 +64,10 @@
       "volume": "23",
       "issue": "4",
       "pages": "2026-01-12",
-      "doi": "",
-      "pmid": "188764655",
+      "doi": "10.46743/1540-580x.2761",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=496b7a1b-3ee2-3ecd-b03a-62ca95b5ef86",
-      "library_link": "",
+      "library_link": "https://libkey.io/libraries/1712/10.46743/1540-580x.2761",
       "evidence_type": "unknown"
     },
     {
@@ -79,7 +79,7 @@
       "issue": "2",
       "pages": "94-101",
       "doi": "10.1097/JWH.0000000000000332",
-      "pmid": "184602624",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=4d3da1f1-5ff8-3d22-a3d5-8e1f7bf29e3c",
       "library_link": "https://libkey.io/libraries/1712/10.1097/JWH.0000000000000332",
       "evidence_type": "unknown"
@@ -205,7 +205,7 @@
       "issue": "2",
       "pages": "55-63",
       "doi": "10.1097/JWH.0000000000000324",
-      "pmid": "184602619",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=374580a3-b547-333e-87ee-a271e3559959",
       "library_link": "https://libkey.io/libraries/1712/10.1097/JWH.0000000000000324",
       "evidence_type": "unknown"
@@ -807,7 +807,7 @@
       "issue": "3",
       "pages": "458-464",
       "doi": "10.1123/japa.2022-0032",
-      "pmid": "163928370",
+      "pmid": "36410339",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=3df9e692-c333-3277-9b87-8c468725cb27",
       "library_link": "https://libkey.io/libraries/1712/10.1123/japa.2022-0032",
       "evidence_type": "unknown"
@@ -849,7 +849,7 @@
       "issue": "6",
       "pages": "16-26",
       "doi": "",
-      "pmid": "157601494",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=a3e80894-fe6f-368c-a4cf-c6d064666535",
       "library_link": "",
       "evidence_type": "unknown"
@@ -863,7 +863,7 @@
       "issue": "5",
       "pages": "2026-01-08",
       "doi": "10.1093/ptj/pzac021",
-      "pmid": "157332110",
+      "pmid": "35225339",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=a213f276-a09b-3712-97e2-6ba7d5017fb9",
       "library_link": "https://libkey.io/libraries/1712/10.1093/ptj/pzac021",
       "evidence_type": "unknown"
@@ -1217,7 +1217,7 @@
       "issue": "8",
       "pages": "e2307",
       "doi": "10.1002/hsr2.2307",
-      "pmid": "39148522",
+      "pmid": "39139465",
       "url": "https://pubmed.ncbi.nlm.nih.gov/39148522/",
       "library_link": "",
       "evidence_type": "cohort",

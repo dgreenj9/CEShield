@@ -1,22 +1,6 @@
 {
   "citations": [
     {
-      "authors": "Sengstack P, Boicey C, Anderson C, et al.",
-      "year": 2020,
-      "title": "The clinical informaticist workforce: A national survey of AMIA members",
-      "journal": "Journal of the American Medical Informatics Association (JAMIA)",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "cross_sectional",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Documents that vendor-specific EHR certifications (Epic prominent) are a primary credential pathway into clinical informatics analyst roles, with clinicians forming a large share of the workforce."
-    },
-    {
       "authors": "HIMSS Analytics",
       "year": 2023,
       "title": "Health informatics workforce: An update from the HIMSS workforce survey",
@@ -63,38 +47,6 @@
       "evidence_type": "unknown",
       "source_type": "government",
       "what_it_says": "Provides 2024 median wages establishing the clinical baseline (PT $99K, OT $96K) against which Epic analyst/consultant compensation premiums are measured."
-    },
-    {
-      "authors": "Gardner RL, Cooper E, Haskell J, et al.",
-      "year": 2019,
-      "title": "Transitioning from clinician to clinical informaticist: Career pathways and credentialing",
-      "journal": "Applied Clinical Informatics",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "unknown",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Describes the common transition pathway in which bedside clinicians are hired as super-users, then sponsored for Epic build certification, validating high transition-fit for PT/OT-to-informatics moves."
-    },
-    {
-      "authors": "Fenton SH, Low S, Abrams KJ, Butler-Henderson K",
-      "year": 2017,
-      "title": "Health IT workforce competencies and certifications: An analysis of job postings",
-      "journal": "Perspectives in Health Information Management (AHIMA)",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "unknown",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Job-posting analysis finding Epic certifications among the top vendor credentials demanded in U.S. health IT postings, with significant wage premiums associated with named-module certifications."
     },
     {
       "authors": "Office of the National Coordinator for Health IT",

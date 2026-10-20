@@ -1,38 +1,6 @@
 {
   "citations": [
     {
-      "authors": "Gardner RM, Overhage JM, Steen EB, et al.",
-      "year": 2019,
-      "title": "The clinical informatics workforce: an update from the AMIA workforce survey",
-      "journal": "Journal of the American Medical Informatics Association (JAMIA)",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "cross_sectional",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Documents that EHR-vendor-certified analysts (Epic and Cerner) form a core segment of the informatics workforce with strong placement into provider and vendor consulting roles."
-    },
-    {
-      "authors": "Hersh WR, Wright A",
-      "year": 2008,
-      "title": "Health information technology workforce needs: estimating demand under the HITECH Act",
-      "journal": "AMIA Annual Symposium Proceedings",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "unknown",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Projected sustained demand for EHR-vendor-trained analysts (including Cerner) and supported the federal investment in workforce pipelines that now favor multi-vendor literacy."
-    },
-    {
       "authors": "U.S. Bureau of Labor Statistics",
       "year": 2024,
       "title": "Occupational Outlook Handbook: Medical and Health Services Managers / Computer Occupations",
@@ -79,22 +47,6 @@
       "evidence_type": "cross_sectional",
       "source_type": "professional-society",
       "what_it_says": "Survey finds Cerner-certified analysts represent roughly 20-25% of EHR-credentialed respondents, with median compensation trailing Epic-certified peers by a modest margin."
-    },
-    {
-      "authors": "Sengstack P, Boicey C",
-      "year": 2021,
-      "title": "Transitioning from clinical practice to clinical informatics: a qualitative study",
-      "journal": "Applied Clinical Informatics",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "qualitative",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Clinician-to-informaticist transitions are most successful when paired with employer-sponsored vendor certification (Epic or Cerner) obtained during an initial analyst hire."
     },
     {
       "authors": "Office of the National Coordinator for Health Information Technology (ONC)",

@@ -17,22 +17,6 @@
       "what_it_says": "Defines the methodological standards Cochrane trainees must master; completion of associated training is the de facto prerequisite for leading a Cochrane review."
     },
     {
-      "authors": "Peters MDJ, Godfrey C, McInerney P, Soares CB, Khalil H, Parker D",
-      "year": 2020,
-      "title": "The Joanna Briggs Institute Reviewers' Manual: methodology for JBI scoping reviews",
-      "journal": "JBI Evidence Synthesis",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "unknown",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Describes JBI's structured training pathway in evidence synthesis that credentials reviewers to publish JBI-affiliated systematic and scoping reviews."
-    },
-    {
       "authors": "Page MJ, McKenzie JE, Bossuyt PM, et al.",
       "year": 2021,
       "title": "Preferred reporting items for systematic reviews and meta-analyses: the PRISMA 2020 statement",
@@ -47,70 +31,6 @@
       "evidence_type": "meta_analysis",
       "source_type": "peer-reviewed",
       "what_it_says": "Demonstrates that formally trained systematic reviewers produce higher-quality, citable publications that anchor evidence-based grant proposals."
-    },
-    {
-      "authors": "Bunn F, Trivedi D, Alderson P, et al.",
-      "year": 2015,
-      "title": "Bibliometric analysis of Cochrane reviews: citation impact and uptake in clinical guidelines",
-      "journal": "Journal of Clinical Epidemiology",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "unknown",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Cochrane-trained authors' reviews receive 2-3x more citations than non-Cochrane systematic reviews and are disproportionately cited in clinical guidelines, boosting academic visibility."
-    },
-    {
-      "authors": "Maher CG, Sherrington C, Elkins M, Herbert RD, Moseley AM",
-      "year": 2008,
-      "title": "Building research capacity in physiotherapy: the role of systematic review training",
-      "journal": "Physical Therapy",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "systematic_review",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Rehab clinicians who complete systematic review training (Cochrane/PEDro pathway) markedly increase peer-reviewed publication output and serve as a stepping stone toward PhD enrollment."
-    },
-    {
-      "authors": "Scurlock-Evans L, Upton P, Upton D",
-      "year": 2014,
-      "title": "Evidence-based practice profiles of physiotherapists transitioning into research careers",
-      "journal": "Physiotherapy",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "unknown",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Identifies systematic review methods training as a low-cost, high-yield credential for clinician-researchers but notes it is insufficient alone for PI independence without doctoral training."
-    },
-    {
-      "authors": "Useem J, Brennan L, Goldman M, et al.",
-      "year": 2015,
-      "title": "Methodological quality of systematic reviews authored by Cochrane vs non-Cochrane groups",
-      "journal": "PLOS ONE",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "unknown",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Cochrane-trained author teams produce reviews with significantly higher AMSTAR scores, supporting the credential's signaling value for grant reviewers evaluating methodological competence."
     }
   ]
 }

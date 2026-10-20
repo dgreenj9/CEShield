@@ -65,22 +65,6 @@
       "what_it_says": "Defines the CHDA competency framework and positions it as the credential signaling readiness for payer and provider analytics roles, including population health and quality reporting."
     },
     {
-      "authors": "Valenta AL, Berner ES, Boren SA, Deckard GJ, Eldredge C, Fridsma DB, et al.",
-      "year": 2018,
-      "title": "Health Informatics Competencies Across the Learning Continuum",
-      "journal": "Applied Clinical Informatics",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "unknown",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Maps analytics-focused credentials such as CHDA against AMIA competency domains, showing partial coverage of technical analytics skills but limited depth in programming and machine learning relative to graduate informatics programs."
-    },
-    {
       "authors": "Office of the National Coordinator for Health Information Technology",
       "year": 2021,
       "title": "Health IT Workforce Development: ONC Report to Congress",

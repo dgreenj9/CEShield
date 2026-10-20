@@ -49,22 +49,6 @@
       "what_it_says": "Healthcare IT employers cite project management certification among the most-requested non-clinical credentials for implementation and digital-transformation roles."
     },
     {
-      "authors": "Gemunden HG, Lehner P, Kock A",
-      "year": 2018,
-      "title": "Project management in healthcare: A systematic literature review",
-      "journal": "International Journal of Project Management",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "narrative",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Formal PM methodology adoption (including PMP-aligned PMBOK practice) is associated with improved healthcare implementation outcomes and is a growing competency expectation for healthcare PMs."
-    },
-    {
       "authors": "US Bureau of Labor Statistics",
       "year": 2024,
       "title": "Occupational Outlook Handbook: Project Management Specialists",
@@ -79,22 +63,6 @@
       "evidence_type": "guideline",
       "source_type": "government",
       "what_it_says": "Project management specialists earn a median annual wage of ~$98,580 with faster-than-average projected growth, and PMP is the most commonly cited preferred credential."
-    },
-    {
-      "authors": "Sarbadhikari SN, Pradhan PMS",
-      "year": 2020,
-      "title": "Competencies for the clinical informatics workforce: an analysis of job postings",
-      "journal": "BMC Medical Informatics and Decision Making",
-      "volume": "",
-      "issue": "",
-      "pages": "",
-      "doi": "",
-      "pmid": "",
-      "url": "",
-      "library_link": "",
-      "evidence_type": "unknown",
-      "source_type": "peer-reviewed",
-      "what_it_says": "Analysis of clinical informatics and health IT job postings shows project management certification (PMP) appears as a preferred qualification in a significant share of senior implementation and consulting roles."
     }
   ]
 }
