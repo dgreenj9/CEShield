@@ -12,7 +12,7 @@
       "pmid": "37230552",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/37230552",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.ccc.2023.01.003",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "J. C. Lin; A. Srivastava; S. Malone; S. Jennison; M. Simino; C. Traube; K. LaRose; Y. Kawai; L. Neu; S. Kudchadkar; B. Wieczorek; K. Hajnik; C. M. Kordik; V. K. Kumar; S. Aghamohammadi; G. M. Arteaga; H. A. B. Smith; T. Spentzas; A. Orman; B. M. Landman; H. Valdivia; H. Browne; T. Fang; J. J. Zimmerman",
@@ -26,7 +26,7 @@
       "pmid": "37125798",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/37125798",
       "library_link": "https://libkey.io/libraries/1712/10.1097/pcc.0000000000003262",
-      "evidence_type": "unknown"
+      "evidence_type": "cohort"
     },
     {
       "authors": "L. C. Mion; A. Tan; A. Brockman; J. A. Tate; E. E. Vasilevskis; B. T. Pun; S. R. Rosas; M. C. Balas",
@@ -96,7 +96,7 @@
       "pmid": "37041029",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/37041029",
       "library_link": "https://libkey.io/libraries/1712/10.4187/respcare.10481",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "M. C. Balas; A. Tan; B. T. Pun; E. W. Ely; S. S. Carson; L. Mion; M. A. Barnes-Daly; E. E. Vasilevskis",
@@ -138,7 +138,7 @@
       "pmid": "35586826",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/35586826",
       "library_link": "https://libkey.io/libraries/1712/10.3389/fped.2022.886334",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "C. L. Hodgson; M. Bailey; R. Bellomo; K. Brickell; T. Broadley; H. Buhr; B. J. Gabbe; D. W. Gould; M. Harrold; A. M. Higgins; S. Hurford; T. J. Iwashyna; A. Serpa Neto; A. D. Nichol; J. J. Presneill; S. J. Schaller; J. Sivasuthan; C. J. Tipping; S. Webb; P. J. Young",
@@ -152,7 +152,7 @@
       "pmid": "36286256",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/36286256",
       "library_link": "https://libkey.io/libraries/1712/10.1056/NEJMoa2209083",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "E. Ista; J. Redivo; P. Kananur; K. Choong; J. Colleti Jr; D. M. Needham; R. Awojoodu; S. R. Kudchadkar; J. Colleti, Jr.; P.-P. I. International",
@@ -180,7 +180,7 @@
       "pmid": "36205994",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=11e171b4-a2ea-3ac0-a86a-67b903241c78",
       "library_link": "https://libkey.io/libraries/1712/10.1001/jamanetworkopen.2022.35339",
-      "evidence_type": "unknown"
+      "evidence_type": "cohort"
     },
     {
       "authors": "R. A. Loberg; B. A. Smallheer; J. A. Thompson",
@@ -250,7 +250,7 @@
       "pmid": "35343926",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/35343926",
       "library_link": "https://libkey.io/libraries/1712/10.1097/ta.0000000000003622",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "H. A. B. Smith; J. B. Besunder; K. A. Betters; P. N. Johnson; V. Srinivasan; A. Stormorken; E. Farrington; B. Golianu; A. J. Godshall; L. Acinelli; C. Almgren; C. H. Bailey; J. M. Boyd; M. J. Cisco; M. Damian; M. L. deAlmeida; J. Fehr; K. E. Fenton; F. Gilliland; M. J. C. Grant; J. Howell; C. A. Ruggles; S. Simone; F. Su; J. E. Sullivan; K. Tegtmeyer; C. Traube; S. Williams; J. W. Berkenbosch",
@@ -264,7 +264,7 @@
       "pmid": "35119438",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/35119438",
       "library_link": "https://libkey.io/libraries/1712/10.1097/pcc.0000000000002873",
-      "evidence_type": "unknown"
+      "evidence_type": "guideline"
     },
     {
       "authors": "X. P. Wang; D. Lv; Y. F. Chen; N. Chen; X. D. Li; C. F. Xu; Y. Li; L. Tian",
@@ -278,7 +278,7 @@
       "pmid": "35608396",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/35608396",
       "library_link": "https://libkey.io/libraries/1712/10.1097/jnr.0000000000000497",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "Y. T. Wang; J. K. Lang; K. J. Haines; E. H. Skinner; T. P. Haines",
@@ -320,7 +320,7 @@
       "pmid": "34549188",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/34549188",
       "library_link": "https://libkey.io/libraries/1712/10.1097/cce.0000000000000525",
-      "evidence_type": "unknown"
+      "evidence_type": "cross_sectional"
     },
     {
       "authors": "S. Liang; J. P. C. Chau; S. H. S. Lo; S. Li; M. Gao",
@@ -390,7 +390,7 @@
       "pmid": "34366295",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/34366295",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.enfie.2020.11.001",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "M. Raurell-Torredà; E. Regaira-Martínez; B. Planas-Pascual; R. Ferrer-Roca; J. D. Martí; E. Blazquez-Martínez; G. Ballesteros-Reviriego; I. Vinuesa-Suárez; G. Zariquiey-Esteva",
@@ -418,7 +418,7 @@
       "pmid": "33003078",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/33003078",
       "library_link": "https://libkey.io/libraries/1712/10.1097/ccm.0000000000004609",
-      "evidence_type": "unknown"
+      "evidence_type": "cohort"
     },
     {
       "authors": "J. K. Lang; M. S. Paykel; K. J. Haines; C. L. Hodgson",
@@ -446,7 +446,7 @@
       "pmid": "32725615",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/32725615",
       "library_link": "https://libkey.io/libraries/1712/10.1055/s-0040-1709139",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "S. Worraphan; A. Thammata; K. Chittawatanarat; S. Saokaew; K. Kengkla; M. Prasannarong",
@@ -505,7 +505,7 @@
       "pmid": "30339549",
       "url": "",
       "library_link": "",
-      "evidence_type": "unknown",
+      "evidence_type": "cohort",
       "source_type": "peer-reviewed",
       "what_it_says": "Demonstrates that the ICU Liberation Collaborative functions as a large multi-site research network producing co-authorship and dataset access opportunities, a key K-to-R transition asset for trainees pursuing independent PI careers in critical care.",
       "path": "research"
@@ -539,7 +539,7 @@
       "pmid": "28639262",
       "url": "",
       "library_link": "",
-      "evidence_type": "unknown",
+      "evidence_type": "systematic_review",
       "source_type": "peer-reviewed",
       "what_it_says": "Validates interprofessional implementation bundles (the ABCDEF model) as a recognized methodological domain in dissemination and implementation science, the field NIH Office of Behavioral and Social Sciences funds for independent investigator development.",
       "path": "research"

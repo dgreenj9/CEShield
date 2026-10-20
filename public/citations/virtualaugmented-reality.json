@@ -40,7 +40,7 @@
       "pmid": "40886124",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=dc258834-e5f6-37a1-9b94-a893fa44dd31",
       "library_link": "https://libkey.io/libraries/1712/10.1002/pri.70102",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "I. Bani Mohammad; M. Ahmad",
@@ -82,7 +82,7 @@
       "pmid": "40431872",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/40431872",
       "library_link": "https://libkey.io/libraries/1712/10.3390/s25103080",
-      "evidence_type": "unknown"
+      "evidence_type": "systematic_review"
     },
     {
       "authors": "Y. Chen; J. Xu; A. Howard",
@@ -194,7 +194,7 @@
       "pmid": "39775922",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/39775922",
       "library_link": "https://libkey.io/libraries/1712/10.1002/14651858.CD013834.pub2",
-      "evidence_type": "unknown"
+      "evidence_type": "meta_analysis"
     },
     {
       "authors": "G. De Natale; E. Qorri; J. Todri; O. Lena",
@@ -306,7 +306,7 @@
       "pmid": "40537150",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/40537150",
       "library_link": "https://libkey.io/libraries/1712/10.1002/14651858.CD008349.pub5",
-      "evidence_type": "unknown"
+      "evidence_type": "meta_analysis"
     },
     {
       "authors": "F. Li; W. Pan; J. Huang; L. Zhu; X. Li",
@@ -376,7 +376,7 @@
       "pmid": "40886364",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/40886364",
       "library_link": "https://libkey.io/libraries/1712/10.33549/physiolres.935590",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "A. S. Majelan; O. Shahani; M. A. S. Ghaleh Zo; M. Arman Far",
@@ -740,7 +740,7 @@
       "pmid": "38032538",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/38032538",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s11916-023-01192-5",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "Y. Gao; N. Wang; Y. Liu; N. Liu",
@@ -852,7 +852,7 @@
       "pmid": "39355707",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/39355707",
       "library_link": "https://libkey.io/libraries/1712/10.1155/2024/2020263",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "A. Khan; Y. Z. Imam; M. Muneer; S. Al Jerdi; S. K. Gill",
@@ -866,7 +866,7 @@
       "pmid": "39367480",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/39367480",
       "library_link": "https://libkey.io/libraries/1712/10.1186/s42234-024-00150-9",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "M. Krohn; A. Rintala; J. Immonen; T. Sjögren",
@@ -978,7 +978,7 @@
       "pmid": "38646260",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/38646260",
       "library_link": "https://libkey.io/libraries/1712/10.7759/cureus.56724",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "E. Obrero-Gaitán; C. Y. Chau-Cubero; R. Lomas-Vega; M. C. Osuna-Pérez; H. García-López; I. Cortés-Pérez",
@@ -1454,7 +1454,7 @@
       "pmid": "36660485",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=950afdba-5fc4-3430-bb94-87d6bbbcbab3",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s43465-022-00766-6",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "X. Lan; Z. Tan; T. Zhou; Z. Huang; Z. Huang; C. Wang; Z. Chen; Y. Ma; T. Kang; Y. Gu; D. Wang; Y. Huang",
@@ -1482,7 +1482,7 @@
       "pmid": "37165743",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=01334ca1-2034-3e15-bbf2-c25f79a8f986",
       "library_link": "https://libkey.io/libraries/1712/10.1111/jgs.18398",
-      "evidence_type": "unknown"
+      "evidence_type": "meta_analysis"
     },
     {
       "authors": "S. J. LeMarshall; L. M. Stevens; N. P. Ragg; L. Barnes; J. Foster; E. F. D. Canetti",
@@ -2084,7 +2084,7 @@
       "pmid": "36160828",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/36160828",
       "library_link": "https://libkey.io/libraries/1712/10.1155/2022/7389658",
-      "evidence_type": "unknown"
+      "evidence_type": "systematic_review"
     },
     {
       "authors": "E. Sarasso; A. Gardoni; A. Tettamanti; F. Agosta; M. Filippi; D. Corbetta",
@@ -2185,20 +2185,6 @@
       "evidence_type": "meta_analysis"
     },
     {
-      "authors": "A. Yimu Vassantachart; E. Yeo; B. Chau",
-      "year": 2022,
-      "title": "Virtual and Augmented Reality-based Treatments for Phantom Limb Pain: A Systematic Review",
-      "journal": "Innovations in Clinical Neuroscience",
-      "volume": "19",
-      "issue": "45942",
-      "pages": "48-57",
-      "doi": "",
-      "pmid": "36591552",
-      "url": "https://research.ebsco.com/linkprocessor/plink?id=b88fda00-3617-3019-a65f-4b8f0c1210c8",
-      "library_link": "",
-      "evidence_type": "systematic_review"
-    },
-    {
       "authors": "J. M. Blasco; C. Igual-Camacho; M. C. Blasco; V. Antón-Antón; Á. Ortiz-Llueca; S. Roig-Casasús",
       "year": 2021,
       "title": "The efficacy of virtual reality tools for total knee replacement rehabilitation: A systematic review",
@@ -2238,7 +2224,7 @@
       "pmid": "31606141",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/31606141",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.cpcardiol.2019.100472",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "H. Cai; T. Lin; L. Chen; H. Weng; R. Zhu; Y. Chen; G. Cai",
@@ -2392,7 +2378,7 @@
       "pmid": "31971071",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=a17eb288-3d4b-3ddc-ae01-d2e9c4e12e75",
       "library_link": "https://libkey.io/libraries/1712/10.1080/09602011.2020.1715231",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "G. Palacios-Navarro; N. Hogan",
@@ -2504,7 +2490,7 @@
       "pmid": "30183347",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/30183347",
       "library_link": "",
-      "evidence_type": "unknown",
+      "evidence_type": "meta_analysis",
       "source_type": "peer-reviewed",
       "what_it_says": "Maps the expanding VR digital-health industry landscape and the clinician-developer roles emerging as XR moves from research labs into FDA-cleared medical devices.",
       "path": "healthTech"

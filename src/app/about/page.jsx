@@ -14,7 +14,7 @@ import citationMeta from '@/data/citations_meta.json';
 export const metadata = {
   title: 'About',
   description:
-    'CE Shield scores 143 rehab credentials against 7,000 curated citations and tracks CE compliance for physical and occupational therapists. Built by practicing PTs. No sponsorship.',
+    'CE Shield scores 143 rehab credentials against 8,609 curated citations and tracks CE compliance for physical and occupational therapists. Built by practicing PTs. No sponsorship.',
   alternates: { canonical: '/about' },
   openGraph: { title: 'About CE Shield', url: '/about' },
 };

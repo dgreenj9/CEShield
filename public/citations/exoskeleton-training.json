@@ -26,7 +26,7 @@
       "pmid": "40260718",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/40260718",
       "library_link": "https://libkey.io/libraries/1712/10.1177/10538135241296733",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "H. Xie; X. Li; Q. Tan; Y. Xie; Z. Li; M. Zhang; Z. Dou",
@@ -110,7 +110,7 @@
       "pmid": "40163006",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/40163006",
       "library_link": "https://libkey.io/libraries/1712/10.18071/isz.77.0107",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "E. W. Tan; S. C. Chai; Y. Sankai; M. Shingu; N. A. Razaob; H. Hussain",
@@ -138,7 +138,7 @@
       "pmid": "39762953",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/39762953",
       "library_link": "https://libkey.io/libraries/1712/10.1186/s12984-024-01536-1",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "P. Syringas; V. Potsika; N. Tachos; A. Pardalis; C. Papaioannou; A. Mitsis; E. E. Pakos; O. N. Zestas; G. Papagiannis; A. Triantafyllou; N. D. Tselikas; K. G. Yiannopoulou; G. Papathanasiou; G. Georgoudis; D. Bakalidou; M. Kyriakidou; P. Gkrilias; I. Kakkos; G. K. Matsopoulos; D. I. Fotiadis",
@@ -376,7 +376,7 @@
       "pmid": "39615826",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/39615826",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.apmr.2024.11.008",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "K. Koh; G. Oppizzi; R. Baghi; G. J. Kehs; L. Q. Zhang",
@@ -404,7 +404,7 @@
       "pmid": "40042227",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/40042227",
       "library_link": "https://libkey.io/libraries/1712/10.1097/PHM.0000000000002735",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "J. Kim; J. Do; C. R. Bae; Y. H. Mo; J. H. Kim; D. Y. Kim",
@@ -474,7 +474,7 @@
       "pmid": "41103512",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/41103512",
       "library_link": "https://libkey.io/libraries/1712/10.3389/fneur.2025.1639659",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "M. Gandolla; B. Luciani; V. Longatelli; P. Tropea; A. Seregni; M. Corbo; F. Braghin; A. Pedrocchi",
@@ -502,7 +502,7 @@
       "pmid": "40319228",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/40319228",
       "library_link": "https://libkey.io/libraries/1712/10.1186/s12883-025-04203-7",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "A. M. Ethier; L. A. Escalante; N. West; C. M. Kwasnica",
@@ -516,7 +516,7 @@
       "pmid": "40491690",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/40491690",
       "library_link": "https://libkey.io/libraries/1712/10.3389/fresc.2025.1575148",
-      "evidence_type": "unknown"
+      "evidence_type": "cohort"
     },
     {
       "authors": "Y. Ding; F. Lou; R. Cao; Z. Lu; G. Yang; Q. Jiang; M. Shuai; Y. Zhong",
@@ -558,7 +558,7 @@
       "pmid": "40153922",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/40153922",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.clinph.2025.03.027",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "G. Ciardi; D. Giraudo; M. Fontana; C. Citterio; P. Gandolfi; G. Lamberti",
@@ -628,7 +628,7 @@
       "pmid": "40188310",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/40188310",
       "library_link": "https://libkey.io/libraries/1712/10.1038/s41598-025-96084-6",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "H. L. Cao; D. D. Pham; T. H. Luu; P. H. Le; Q. T. Nguyen; T. P. T. Thien; P. M. Nguyen; H. D. Nguyen; C. N. Nguyen",
@@ -684,7 +684,7 @@
       "pmid": "40267293",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/40267293",
       "library_link": "https://libkey.io/libraries/1712/10.1177/02692155251334286",
-      "evidence_type": "unknown"
+      "evidence_type": "cohort"
     },
     {
       "authors": "K. Bosteder; M. Benning; M. Bennett; S. Baltz; F. Meza; S. Sikka; R. Dubiel; S. Driver; C. Swank",
@@ -922,7 +922,7 @@
       "pmid": "38357879",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/38357879",
       "library_link": "https://libkey.io/libraries/1712/10.1080/09638288.2024.2317994",
-      "evidence_type": "unknown"
+      "evidence_type": "qualitative"
     },
     {
       "authors": "C. Y. Tsai; W. J. Weinrauch; N. Manente; V. Huang; T. N. Bryce; A. M. Spungen",
@@ -1034,7 +1034,7 @@
       "pmid": "38388571",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/38388571",
       "library_link": "https://libkey.io/libraries/1712/10.1038/s41598-024-54200-y",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "M. C. Mauro; A. Fasano; M. Germanotta; L. Cortellini; S. Insalaco; A. Pavan; A. Comanducci; E. Guglielmelli; I. G. Aprile",
@@ -1132,7 +1132,7 @@
       "pmid": "38396060",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/38396060",
       "library_link": "https://libkey.io/libraries/1712/10.1038/s41598-024-53482-6",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "D. A. Kegelmeyer; R. Minarsch; S. K. Kostyk; D. Kline; R. Smith; A. D. Kloos",
@@ -1174,7 +1174,7 @@
       "pmid": "38769400",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/38769400",
       "library_link": "https://libkey.io/libraries/1712/10.1038/s41390-024-03240-1",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "Y. Jin; B. Xiong; L. Chen; W. Zhao; Z. Li; C. Zhang; X. Xu",
@@ -1272,7 +1272,7 @@
       "pmid": "39593164",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/39593164",
       "library_link": "https://libkey.io/libraries/1712/10.1186/s12984-024-01510-x",
-      "evidence_type": "unknown"
+      "evidence_type": "pilot"
     },
     {
       "authors": "X. Hu; J. Lu; Y. Wang; R. Pang; J. Liu; X. Gou; X. Bai; A. Zhang; H. Cheng; Q. Wang; Y. Chang; J. Yin; C. Chang; H. Xiao; W. Wang",
@@ -1300,7 +1300,7 @@
       "pmid": "38306065",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/38306065",
       "library_link": "https://libkey.io/libraries/1712/10.3233/NRE-230258",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "N. Hishikawa; K. Sawada; H. Maeda; T. Ikeda; S. Ohashi; Y. Mikami",
@@ -1370,7 +1370,7 @@
       "pmid": "39201194",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/39201194",
       "library_link": "https://libkey.io/libraries/1712/10.3390/healthcare12161636",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "B. Elmas Bodur; Y. Erdoganoglu; S. Asena Sel",
@@ -1440,7 +1440,7 @@
       "pmid": "38778042",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/38778042",
       "library_link": "https://libkey.io/libraries/1712/10.1038/s41598-024-62185-x",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "F. Z. da Silva Areas; S. Baltz; J. Gillespie; C. Ochoa; T. Gilliland; R. Dubiel; M. Bennett; S. Driver; C. Swank",
@@ -1524,7 +1524,7 @@
       "pmid": "38303153",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/38303153",
       "library_link": "https://libkey.io/libraries/1712/10.1111/dmcn.15834",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "S. A. Cechova; D. Pastucha; H. Tomaskova; S. Banikova; M. Dabrowska; I. Fiedorova",
@@ -1538,7 +1538,7 @@
       "pmid": "39344765",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/39344765",
       "library_link": "https://libkey.io/libraries/1712/10.4149/BLL_2024_96",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "P. Castro; M. Marti; B. Olivan-Blazquez; N. Bonar; V. Garcia; S. Gascon-Santos; A. Panzano; S. Vela; S. Tajadura; A. Pena; M. J. Tris-Ara",
@@ -1594,7 +1594,7 @@
       "pmid": "38433740",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/38433740",
       "library_link": "https://libkey.io/libraries/1712/10.46292/sci23-00001",
-      "evidence_type": "unknown"
+      "evidence_type": "cohort"
     },
     {
       "authors": "M. O. S. Alyahyaee; J. Cheong; M. Kim",
@@ -1692,7 +1692,7 @@
       "pmid": "38348456",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/38348456",
       "library_link": "https://libkey.io/libraries/1712/10.3389/fresc.2024.1353374",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "J. Gillespie; M. Trammell; C. Ochoa; S. Driver; L. Callender; R. Dubiel; C. Swank",
@@ -1776,7 +1776,7 @@
       "pmid": "36260577",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/36260577",
       "library_link": "https://libkey.io/libraries/1712/10.1109/TNSRE.2022.3215652",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "L. Wu; G. Xu; Q. Wu",
@@ -1846,7 +1846,7 @@
       "pmid": "37638457",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/37638457",
       "library_link": "https://libkey.io/libraries/1712/10.3233/NRE-230085",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "C. Shackleton; R. Evans; S. West; W. Derman; Y. Albertus",
@@ -1888,7 +1888,7 @@
       "pmid": "36342771",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/36342771",
       "library_link": "https://libkey.io/libraries/1712/10.1080/09638288.2022.2140848",
-      "evidence_type": "unknown"
+      "evidence_type": "qualitative"
     },
     {
       "authors": "Y. Murakami; K. Honaga; H. Kono; K. Haruyama; T. Yamaguchi; M. Tani; R. Isayama; T. Takakura; A. Tanuma; K. Hatori; F. Wada; T. Fujiwara",
@@ -1944,7 +1944,7 @@
       "pmid": "33503390",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/33503390",
       "library_link": "https://libkey.io/libraries/1712/10.1080/17483107.2021.1874064",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "X. R. G. Leow; S. L. A. Ng; Y. Lau",
@@ -2224,7 +2224,7 @@
       "pmid": "31909703",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/31909703",
       "library_link": "https://libkey.io/libraries/1712/10.1080/10400435.2020.1712498",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "T. Sado; J. Nielsen; B. Glaister; K. Z. Takahashi; P. Malcolm; M. Mukherjee",
@@ -2238,7 +2238,7 @@
       "pmid": "35165776",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/35165776",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s00221-022-06314-w",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "M. Romanato; F. Spolaor; C. Beretta; F. Fichera; A. Bertoldo; D. Volpe; Z. Sawacha",
@@ -2308,7 +2308,7 @@
       "pmid": "32649239",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/32649239",
       "library_link": "https://libkey.io/libraries/1712/10.1080/09638288.2020.1789765",
-      "evidence_type": "unknown"
+      "evidence_type": "qualitative"
     },
     {
       "authors": "G. Morone; F. Capone; M. Iosa; A. Cruciani; M. Paolucci; A. Martino Cinnera; G. Musumeci; N. Brunelli; C. Costa; S. Paolucci; V. Di Lazzaro",
@@ -2322,7 +2322,7 @@
       "pmid": "36458455",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/36458455",
       "library_link": "https://libkey.io/libraries/1712/10.1177/15459683221138743",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "F. Moll; A. Kessel; A. Bonetto; J. Stresow; M. Herten; M. Dudda; J. Adermann",
@@ -2364,7 +2364,7 @@
       "pmid": "33571072",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/33571072",
       "library_link": "https://libkey.io/libraries/1712/10.1080/10400435.2021.1887400",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "T. T. Ma; Q. Zhang; T. T. Zhou; Y. Q. Zhang; Y. He; S. J. Li; Q. J. Liu",
@@ -2378,7 +2378,7 @@
       "pmid": "35964210",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/35964210",
       "library_link": "https://libkey.io/libraries/1712/10.3233/NRE-220124",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "V. Lozano-Berrio; M. Alcobendas-Maestro; B. Polonio-Lopez; A. Gil-Agudo; A. de la Pena-Gonzalez; A. de Los Reyes-Guzman",
@@ -2504,7 +2504,7 @@
       "pmid": "36197213",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/36197213",
       "library_link": "https://libkey.io/libraries/1712/10.1097/MD.0000000000030818",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "C. Jayaraman; K. R. Embry; C. K. Mummidisetty; Y. Moon; M. Giffhorn; S. Prokup; B. Lim; J. Lee; Y. Lee; M. Lee; A. Jayaraman",
@@ -2574,7 +2574,7 @@
       "pmid": "36176092",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/36176092",
       "library_link": "https://libkey.io/libraries/1712/10.1109/ICORR55369.2022.9896569",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "W. S. Fu; Y. C. Song; B. A. Wu; C. H. Qu; J. F. Zhao",
@@ -2630,7 +2630,7 @@
       "pmid": "32886532",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/32886532",
       "library_link": "https://libkey.io/libraries/1712/10.1080/17483107.2020.1815086",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "D. J. Edwards; G. Forrest; M. Cortes; M. M. Weightman; C. Sadowsky; S. H. Chang; K. Furman; A. Bialek; S. Prokup; J. Carlow; L. VanHiel; L. Kemp; D. Musick; M. Campo; A. Jayaraman",
@@ -2672,7 +2672,7 @@
       "pmid": "35627346",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/35627346",
       "library_link": "https://libkey.io/libraries/1712/10.3390/ijerph19105814",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "Y. S. Cho; S. Y. Joo; C. H. Seo",
@@ -2826,7 +2826,7 @@
       "pmid": "33998555",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/33998555",
       "library_link": "https://libkey.io/libraries/1712/10.3233/NRE-210034",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "C. Son; A. Lee; J. Lee; D. Kim; S. J. Kim; M. H. Chun; J. Choi",
@@ -2868,7 +2868,7 @@
       "pmid": "34723448",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/34723448",
       "library_link": "https://libkey.io/libraries/1712/10.23970/AHRQEPCCER241",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "C. Sconza; F. Negrini; B. Di Matteo; A. Borboni; G. Boccia; I. Petrikonis; E. Stankevicius; R. Casale",
@@ -2938,7 +2938,7 @@
       "pmid": "33225442",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/33225442",
       "library_link": "https://libkey.io/libraries/1712/10.1111/dmcn.14746",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "C. Park; M. Oh-Park; A. Bialek; K. Friel; D. Edwards; J. S. H. You",
@@ -2980,7 +2980,7 @@
       "pmid": "33661430",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/33661430",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s10548-021-00825-5",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "D. R. Louie; W. B. Mortenson; M. Durocher; A. Schneeberg; R. Teasell; J. Yao; J. J. Eng",
@@ -3008,7 +3008,7 @@
       "pmid": "33895428",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/33895428",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.jstrokecerebrovasdis.2021.105807",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "B. Kayabinar; I. Alemdaroglu-Gurbuz; O. Yilmaz",
@@ -3092,7 +3092,7 @@
       "pmid": "33314016",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/33314016",
       "library_link": "https://libkey.io/libraries/1712/10.5603/PJNNS.a2020.0096",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "J. Faulkner; L. Martinelli; K. Cook; L. Stoner; H. Ryan-Stewart; E. Paine; H. Hobbs; D. Lambrick",
@@ -3134,7 +3134,7 @@
       "pmid": "33411195",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/33411195",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s10072-020-04954-w",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "Z. J. Chen; C. He; F. Guo; C. H. Xiong; X. L. Huang",
@@ -3204,7 +3204,7 @@
       "pmid": "33655789",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/33655789",
       "library_link": "https://libkey.io/libraries/1712/10.1177/1545968321997769",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "J. F. Alingh; B. E. Groen; J. F. Kamphuis; A. C. H. Geurts; V. Weerdesteyn",
@@ -3330,7 +3330,7 @@
       "pmid": "33115480",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/33115480",
       "library_link": "https://libkey.io/libraries/1712/10.1186/s12984-020-00762-7",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "R. De Luca; G. Maresca; T. Balletta; A. Cannavo; S. Leonardi; D. Latella; M. G. Maggio; S. Portaro; A. Naro; R. S. Calabro",
@@ -3448,7 +3448,7 @@
       "pmid": "27278136",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/27278136",
       "library_link": "",
-      "evidence_type": "unknown",
+      "evidence_type": "meta_analysis",
       "source_type": "peer-reviewed",
       "what_it_says": "Maps the commercial exoskeleton device landscape (Ekso, ReWalk, Indego, HAL, Lokomat) and the clinician training requirements each vendor mandates, defining the device-specific certification pathway that bridges clinicians into industry clinical-specialist roles.",
       "path": "healthTech"
@@ -3465,7 +3465,7 @@
       "pmid": "30254967",
       "url": "",
       "library_link": "",
-      "evidence_type": "unknown",
+      "evidence_type": "narrative",
       "source_type": "peer-reviewed",
       "what_it_says": "Documents the vendor-driven training and certification ecosystem (ReWalk, Ekso, Indego) and the role of certified clinicians as device representatives, clinical educators, and field clinical engineers within the rehabilitation-robotics industry.",
       "path": "healthTech"

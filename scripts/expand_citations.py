@@ -435,7 +435,7 @@ ABSTRACT_RULES = [
     ("protocol", re.compile(r"\b(this|the present|our) (study )?protocol (describes|outlines|details)|\bwill be randomi[sz]ed\b|\bwill be recruited\b", re.I)),
     ("meta_analysis", re.compile(r"\b(we|was|were) (conducted|performed|undertook|carried out) (a |an )?(systematic review (and|with) )?meta[- ]analys|\bpooled (analysis|estimate)s? (using|with) (a )?random[- ]effects", re.I)),
     ("systematic_review", re.compile(r"\bprisma\b|\bscoping review\b.*\b(arksey|jbi|joanna briggs)\b|\b(we|was|were) (conducted|performed|undertook|carried out) (a |an )?(systematic|scoping|umbrella) review", re.I)),
-    ("rct", re.compile(r"\bwere randomi[sz]ed\b|\brandomly (assigned|allocated)\b|\bwere randomly\b|\brandomi[sz]ed (controlled|clinical) trial\b", re.I)),
+    ("rct", re.compile(r"\b(were|was) randomi[sz]ed (to|into|in)\b|\b(were|was) randomly (assigned|allocated)\b|\bwe randomly (assigned|allocated)\b|\bparticipants were randomi[sz]ed\b", re.I)),
     ("qualitative", re.compile(r"\bsemi[- ]structured interviews\b|\bthematic(ally)? analy|\bfocus groups? (were|was)\b|\binterpretative phenomenological", re.I)),
     ("cross_sectional", re.compile(r"\bcross[- ]sectional\b|\b(online|national|web-based) survey\b|\bsurvey (was|were) (distributed|administered|sent)\b", re.I)),
     ("cohort", re.compile(r"\b(retrospective|prospective) (cohort|observational|chart|review)\b|\bcohort study\b|\bdata (were|was) (extracted|obtained) from\b.*\b(registry|database)\b", re.I)),
@@ -846,15 +846,39 @@ def cmd_add(dry: bool = False, only: set[str] | None = None) -> None:
 # ────────────────────────────────────────────────────────── 3. classify ──
 
 
+def cmd_dedupe() -> None:
+    """Drop exact duplicates within a file (same PMID or same DOI); first copy wins."""
+    log = load_log()
+    removed = []
+    for slug in all_slugs():
+        cits, keep, seen = load_file(slug), [], set()
+        for c in cits:
+            ks = {f"pmid:{c['pmid']}" for _ in [0] if c.get("pmid")} | \
+                 {f"doi:{str(c['doi']).lower()}" for _ in [0] if str(c.get("doi") or "").startswith("10.")}
+            if ks & seen:
+                removed.append({"file": slug, "title": c.get("title", "")[:120], "pmid": c.get("pmid", ""), "doi": c.get("doi", "")})
+                continue
+            seen |= ks
+            keep.append(c)
+        if len(keep) != len(cits):
+            save_file(slug, keep)
+    log.setdefault("repair", {})["duplicates_removed"] = removed
+    save_log(log)
+    print(f"duplicates removed: {len(removed)}")
+
+
 def cmd_classify() -> None:
     log = load_log()
     files = {s: load_file(s) for s in all_slugs()}
     pmids = {str(c["pmid"]) for cits in files.values() for c in cits if is_real_pmid(str(c.get("pmid") or ""))}
     pubmed_records(pmids)
     counts, basis_counts, changes = Counter(), Counter(), []
+    # Records this pipeline added are (re)classified with the final rules too;
+    # pre-existing labels other than "unknown" are left as curated.
+    added = {s: {a["pmid"] for a in v} for s, v in log.get("added", {}).items()}
     for slug, cits in files.items():
         for c in cits:
-            if c.get("evidence_type") not in (None, "", "unknown"):
+            if c.get("evidence_type") not in (None, "", "unknown") and str(c.get("pmid")) not in added.get(slug, ()):
                 continue
             pm = _pm_cache.get(str(c.get("pmid") or ""))
             if pm and not same_work(c["title"], pm, c.get("year")):
@@ -892,7 +916,8 @@ def cmd_stats() -> None:
             if isinstance(y, int) and 1980 <= y <= 2030:
                 years[y] += 1
         entry["count"] = len(cits)
-        entry["evidence_mix"] = dict(mix.most_common())
+        old_order = [k for k in entry.get("evidence_mix", {}) if mix[k]]  # stable key order, smaller diffs
+        entry["evidence_mix"] = {k: mix[k] for k in old_order + [k for k, _ in mix.most_common() if k not in old_order]}
         entry["year_dist"] = {str(y): n for y, n in sorted(years.items())}
         if entry["slug"] in expanded:
             # Added records were retrieved by script, not reviewed by a librarian:
@@ -923,7 +948,7 @@ def cmd_report() -> None:
 
 
 if __name__ == "__main__":
-    cmds = {"repair": cmd_repair, "search": cmd_search, "add": cmd_add,
+    cmds = {"repair": cmd_repair, "search": cmd_search, "add": cmd_add, "dedupe": cmd_dedupe,
             "classify": cmd_classify, "stats": cmd_stats, "report": cmd_report}
     if len(sys.argv) < 2 or sys.argv[1] not in cmds:
         sys.exit(f"usage: {sys.argv[0]} {{{'|'.join(cmds)}}}")

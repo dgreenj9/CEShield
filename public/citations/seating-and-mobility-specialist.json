@@ -54,7 +54,7 @@
       "pmid": "35960885",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1080/10400435.2022.2113178",
-      "evidence_type": "unknown"
+      "evidence_type": "cross_sectional"
     },
     {
       "authors": "K. R. Johnson; M. G. Blaskowitz; W. J. Mahoney",
@@ -96,7 +96,7 @@
       "pmid": "33705274",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1080/10790268.2021.1890680",
-      "evidence_type": "unknown"
+      "evidence_type": "qualitative"
     },
     {
       "authors": "C. H. Carver; S. Mullis; K. H. Fitzgerald",
@@ -110,7 +110,7 @@
       "pmid": "36243470",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.pmr.2022.06.011",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "K. K. Ott; R. M. Schein; A. Saptono; B. E. Dicianno; M. R. Schmeler",
@@ -217,7 +217,7 @@
       "pmid": "22250145",
       "url": "https://www.ncbi.nlm.nih.gov/books/NBK114559/",
       "library_link": "https://libkey.io/libraries/1712/10.7326/0003-4819-156-2-201201170-00010",
-      "evidence_type": "unknown",
+      "evidence_type": "narrative",
       "source_type": "government",
       "what_it_says": "AHRQ evidence review identifies the CRT supplier-clinician dyad (ATP/SMS plus prescribing therapist) as the dominant service delivery model, signaling that the SMS credential is structurally tied to industry employment rather than purely hospital-based practice.",
       "path": "healthTech"

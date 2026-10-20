@@ -54,7 +54,7 @@
       "pmid": "40950458",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1101/2025.09.02.25334970",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "S. M. Yeo; J. Y. Lim; S. Kim; H. Y. Park; J. Y. Lim; J. G. Do; J. I. Lee; J. H. Hwang",
@@ -96,7 +96,7 @@
       "pmid": "39920519",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s11845-025-03899-3",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "Z. Yang; S. Yu; W. Meng; X. Ma; L. Yang",
@@ -180,7 +180,7 @@
       "pmid": "39453567",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s41999-024-01082-y",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "Y. Wang; Q. Xue; Z. Li; F. Li",
@@ -194,7 +194,7 @@
       "pmid": "40143671",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.2340/jrm.v57.42726",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "G. Vuong; J. Dignam; C. Burns; D. Copland; H. Wedley; K. O'Brien; A. J. Hill",
@@ -306,7 +306,7 @@
       "pmid": "40998595",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.jht.2025.06.002",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "F. M. Toh; W. W. T. Lam; P. Cruz Gonzalez; K. N. K. Fong",
@@ -348,7 +348,7 @@
       "pmid": "40593106",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1038/s41598-025-07064-9",
-      "evidence_type": "unknown"
+      "evidence_type": "cross_sectional"
     },
     {
       "authors": "A. R. Teo; M. C. Benton; E. R. Hooker; B. Zaccari; N. J. Hidalgo; S. Newell; A. Tuepker; D. W. Greaves; F. M. Nicosia",
@@ -390,7 +390,7 @@
       "pmid": "37545432",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1177/1357633x231189761",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "H. Takenaka; K. Ida; S. Goto; J. Suzuki",
@@ -460,7 +460,7 @@
       "pmid": "37208997",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1177/1357633x231172245",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "A. M. Smith; H. Rogan; D. E. Logan",
@@ -516,7 +516,7 @@
       "pmid": "40947050",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.cct.2025.108074",
-      "evidence_type": "unknown"
+      "evidence_type": "protocol"
     },
     {
       "authors": "F. Sari; Y. Mirza; P. D. Yılmaz; A. Küçük",
@@ -824,7 +824,7 @@
       "pmid": "40126998",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.7547/22-178",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "E. E. McShan; S. Alrawi; S. Calhoun; T. Gilliland; M. Bennett; R. Dubiel; S. Driver",
@@ -1048,7 +1048,7 @@
       "pmid": "40731361",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1186/s12913-025-13198-3",
-      "evidence_type": "unknown"
+      "evidence_type": "cross_sectional"
     },
     {
       "authors": "R. Kaymaz; F. Taspinar; O. Engin; B. Taspinar",
@@ -1090,7 +1090,7 @@
       "pmid": "40575145",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.63144/ijt.2025.6703",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "S. Kalpesh; N. Mukkamala; P. Kumar; P. R. Jha",
@@ -1286,7 +1286,7 @@
       "pmid": "40868691",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.3390/healthcare13162074",
-      "evidence_type": "unknown"
+      "evidence_type": "cohort"
     },
     {
       "authors": "Á. García-Bustillo; J. M. Ramírez-Sanz; J. L. Garrido-Labrador; A. Olivares-Gil; F. Valiñas-Sieiro; M. Allende-Río; J. González-Santos; J. J. González-Bernal; M. Jahouh; S. Calvo-Simal; L. Simón-Vicente; N. Mariscal; J. F. Díez-Pastor; D. García-García; Á. Arnaiz-González; J. Trejo-Gabriel-Galán; E. Cubo",
@@ -1384,7 +1384,7 @@
       "pmid": "40817301",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s00431-025-06383-3",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "A. Fanuscu; Ö. Ülger",
@@ -1524,7 +1524,7 @@
       "pmid": "39838709",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1111/ene.16561",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "N. S. Cox; C. McDonald; A. T. Burge; C. J. Hill; J. Bondarenko; A. E. Holland",
@@ -1538,7 +1538,7 @@
       "pmid": "39522594",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.chest.2024.11.001",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "R. M. Comodo; D. Grassa; A. E. Motassime; G. Bocchino; R. Totti; A. De Fazio; C. Meschini; G. Capece; G. Maccauro; R. Vitiello",
@@ -1706,7 +1706,7 @@
       "pmid": "39648851",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1080/09638288.2024.2438251",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "N. Bolognini; L. Diana; A. Rossetti; L. Melzi; G. Basso; V. Manzo; F. Cruz-Sanabria; G. Cammarata; F. Cernigliaro; S. Bianchi Marzoli; F. Tinelli; S. Fiori; C. Casati",
@@ -1818,7 +1818,7 @@
       "pmid": "40186881",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1080/09638288.2025.2486467",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "Ş. Ayçiçek; A. Tunç; C. Bağcı",
@@ -1832,7 +1832,7 @@
       "pmid": "40282942",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.3390/medicina61040651",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "H. Ayan; B. Kara; R. S. Erbayraktar",
@@ -1860,7 +1860,7 @@
       "pmid": "41316669",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.jbmt.2025.09.046",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "E. Alkan; N. Gelecek; K. Oz İ; A. Akcalı",
@@ -2070,7 +2070,7 @@
       "pmid": "37812269",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s00402-023-05083-7",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "R. Tedeschi; D. Platano; P. Pillastrini; L. Berti; M. G. Benedetti",
@@ -2238,7 +2238,7 @@
       "pmid": "39822208",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.arrct.2024.100367",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "F. Saygili; A. Guclu-Gunduz; S. Eldemir; K. Eldemir; C. Ozkul; G. T. Gursoy",
@@ -2252,7 +2252,7 @@
       "pmid": "38873866",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1002/brb3.3569",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "Y. Sasmaz; G. A. Bayram",
@@ -2294,7 +2294,7 @@
       "pmid": "38486359",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1093/geront/gnae028",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "M. C. Rogerson; A. C. Jackson; H. S. Navaratnam; M. R. Le Grande; R. O. Higgins; J. Clarke; B. M. Murphy",
@@ -2322,7 +2322,7 @@
       "pmid": "38164068",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=89997f2c-9b06-3d58-b108-a74ab92fa2b3",
       "library_link": "https://libkey.io/libraries/1712/10.1080/17483107.2023.2299720",
-      "evidence_type": "unknown"
+      "evidence_type": "cross_sectional"
     },
     {
       "authors": "M. R. Rauzi; M. K. Tran; J. Plew; C. L. Christiansen; M. L. Mealer; K. A. Nearing; J. E. Stevens-Lapsley",
@@ -2378,7 +2378,7 @@
       "pmid": "39511552",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1186/s12891-024-08003-x",
-      "evidence_type": "unknown"
+      "evidence_type": "cross_sectional"
     },
     {
       "authors": "N. L. Potter; M. VanDam; L. Bruce; J. Davis; L. Eng; L. Finestack; V. Heinlen; N. Scherer; C. Schrock; R. Seltzer; C. Stoel-Gammon; L. Thompson; B. Peter",
@@ -2406,7 +2406,7 @@
       "pmid": "38937986",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1002/jcsm.13530",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "E. Pleguezuelos; A. Del Carmen; E. Moreno; M. Miravitlles; M. Serra; M. V. Garnacho‐Castaño",
@@ -2686,7 +2686,7 @@
       "pmid": "39768521",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.3390/jcm13247599",
-      "evidence_type": "unknown"
+      "evidence_type": "pilot"
     },
     {
       "authors": "C. Mbada; O. O. Olanipekun; A. Ademoyegun; M. O. Egwu; M. Makinde; T. Gebrye; O. A. Sonuga; F. Fatoye",
@@ -2784,7 +2784,7 @@
       "pmid": "37976124",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1089/tmj.2023.0299",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "K. M. Long; L. Quinn; A. C. Pacheco",
@@ -2854,7 +2854,7 @@
       "pmid": "39207737",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.2519/jospt.2024.12383",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "C. Y. Lai; C. H. Lin; T. C. Chao; C. H. Lin; C. C. Chang; C. Y. Huang; S. L. Chiang",
@@ -2924,7 +2924,7 @@
       "pmid": "38981171",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.hrtlng.2024.06.016",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "B. B. Kilic; A. Yildiz Ozer; C. Ozarpaci; M. G. Polat",
@@ -2938,7 +2938,7 @@
       "pmid": "38761232",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s00192-024-05808-1",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "M. Kheirollahzadeh; A. Azad; S. H. Saneii; M. A. Zarei",
@@ -3050,7 +3050,7 @@
       "pmid": "38124400",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=a337ea93-cf28-3bec-8813-f8c731e21281",
       "library_link": "https://libkey.io/libraries/1712/10.1111/iwj.14568",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "R. S. Hinman; P. K. Campbell; A. J. Kimp; T. Russell; N. E. Foster; J. Kasza; A. Harris; K. L. Bennell",
@@ -3260,7 +3260,7 @@
       "pmid": "37147864",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1080/09638288.2023.2205174",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "E. Eftekhari; R. Sheikhhoseini; Z. Salahzadeh; M. Dadfar",
@@ -3274,7 +3274,7 @@
       "pmid": "38448857",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1186/s12877-024-04779-8",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "R. Dua; S. Malik; A. S. Bhadoria; O. Neyaz; A. S. Krishnan; C. Pandya",
@@ -3456,7 +3456,7 @@
       "pmid": "39686957",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.conctc.2024.101406",
-      "evidence_type": "unknown"
+      "evidence_type": "protocol"
     },
     {
       "authors": "B. Carpallo-Porcar; S. Calvo; J. Alamillo-Salas; P. Herrero; M. Gómez-Barrera; C. Jiménez-Sánchez",
@@ -3638,7 +3638,7 @@
       "pmid": "39610824",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1177/20552076241261909",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "A. Ataç; E. Pehlivan; F. S. Karaahmetoğlu; Z. B. Özcan; H. Çınarka; M. Çörtük; K. N. Baydili; E. Çetinkaya",
@@ -3750,7 +3750,7 @@
       "pmid": "37709260",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=091e875a-a9e3-3ddb-a753-1257b4891f0d",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.jamda.2023.08.015",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "I. Yavas; T. Kahraman; O. Sagici; A. T. Ozdogar; P. Yigit; C. Baba; S. Ozakbas",
@@ -3876,7 +3876,7 @@
       "pmid": "36279075",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s10067-022-06417-3",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "R. Swarnakar; S. Yadav; S. Wadhwa; S. Venkataraman",
@@ -3932,7 +3932,7 @@
       "pmid": "37969861",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.cjcpc.2023.04.001",
-      "evidence_type": "unknown"
+      "evidence_type": "protocol"
     },
     {
       "authors": "C. Spence; N. Khoo; A. Mackie; J. Conway; S. Rowland; R. Foshaug; P. Boulanger; J. C. Spence; M. K. Stickland; M. Khoury",
@@ -3946,7 +3946,7 @@
       "pmid": "37657493",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.cjca.2023.08.015",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "C. Silva-Batista; J. L. Wilhelm; K. T. Scanlan; M. Stojak; P. Carlson-Kuhta; S. Chen; W. Liu; T. N. G. de la Huerta; F. B. Horak; M. Mancini; L. A. King",
@@ -3960,7 +3960,7 @@
       "pmid": "37833645",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1186/s12883-023-03403-3",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "S. A. Sel; M. K. Günel; S. Erdem; M. Tunçdemir",
@@ -3988,7 +3988,7 @@
       "pmid": "38060283",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.2196/48845",
-      "evidence_type": "unknown"
+      "evidence_type": "pilot"
     },
     {
       "authors": "M. Santiago; P. Cardoso-Teixeira; S. Pereira; J. Firmino-Machado; S. Moreira",
@@ -4114,7 +4114,7 @@
       "pmid": "36749196",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.18087/cardio.2023.1.n2124",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "A. Plaza; J. Paratz; M. Cottrell",
@@ -4170,7 +4170,7 @@
       "pmid": "34156873",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1177/1357633x211023353",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "F. Özden; M. Özkeskin; İ. Tümtürk; C. Yalın Kılınç",
@@ -4240,7 +4240,7 @@
       "pmid": "37977056",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.msard.2023.105129",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "E. S. Mojica; K. Vasavada; E. T. Hurley; C. C. Lin; S. Buzin; G. Gonzalez-Lomas; M. J. Alaia; E. J. Strauss; L. M. Jazrawi; K. A. Campbell",
@@ -4296,7 +4296,7 @@
       "pmid": "38137084",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.3390/brainsci13121636",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "K. M. Lundgren; K. A. R. Langlo; Ø. Salvesen; P. Zanaboni; E. Cittanti; R. Mo; Ø. Ellingsen; H. Dalen; I. A. Aksetøy",
@@ -4562,7 +4562,7 @@
       "pmid": "37347244",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s00246-023-03215-9",
-      "evidence_type": "unknown"
+      "evidence_type": "pilot"
     },
     {
       "authors": "C. Espinoza-Bravo; A. Arnal-Gómez; F. M. Martínez-Arnau; R. Núñez-Cortés; D. Hernández-Guillén; C. Flor-Rufino; S. Cortés-Amador",
@@ -4646,7 +4646,7 @@
       "pmid": "36574926",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.chest.2022.12.023",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "U. N. Colombage; S. E. Soh; K. Y. Lin; J. Kruger; H. C. Frawley",
@@ -4716,7 +4716,7 @@
       "pmid": "36193903",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=9d81d8be-7c58-3cf5-8638-cb81212c35cd",
       "library_link": "https://libkey.io/libraries/1712/10.1111/wvn.12607",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "J. Chen; J. Li; F. Qiao; Z. Shi; W. Lu",
@@ -4814,7 +4814,7 @@
       "pmid": "36637057",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1002/14651858.CD011019.pub4",
-      "evidence_type": "unknown"
+      "evidence_type": "systematic_review"
     },
     {
       "authors": "S. F. M. Baigi; K. Kimiafar; K. Ghaddaripouri; M. R. Mehneh; A. S. Mousavi; M. Sarbaz",
@@ -4898,7 +4898,7 @@
       "pmid": "36960762",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1177/15394492231158375",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "A. Zengin Alpozgen; K. Kardes; E. Acikbas; F. Demirhan; K. Sagir; E. Avcil",
@@ -4968,7 +4968,7 @@
       "pmid": "34423693",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1177/15394492211038293",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "G. Tao; W. C. Miller; J. J. Eng; E. Esfandiari; B. Imam; H. Lindstrom; M. W. Payne",
@@ -4996,7 +4996,7 @@
       "pmid": "34786870",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1002/pmrj.12738",
-      "evidence_type": "unknown"
+      "evidence_type": "systematic_review"
     },
     {
       "authors": "A. Stephenson; S. Howes; P. J. Murphy; J. E. Deutsch; M. Stokes; K. Pedlow; S. M. McDonough",
@@ -5052,7 +5052,7 @@
       "pmid": "35311721",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.3233/nre-210332",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "C. Salgueiro; G. Urrútia; R. Cabanas-Valdés",
@@ -5094,7 +5094,7 @@
       "pmid": "32847466",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1177/1357633x20948302",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "A. Sahin; A. Agar; C. Erturk",
@@ -5122,7 +5122,7 @@
       "pmid": "34528692",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=cb31ff90-4bcb-3a93-980f-b39d480dd1fd",
       "library_link": "https://libkey.io/libraries/1712/10.1093/geronb/gbab165",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "C. Rodríguez-Blanco; C. Bernal-Utrera; E. Anarte-Lazo; M. Saavedra-Hernandez; E. De-La-Barrera-Aranda; M. A. Serrera-Figallo; M. Gonzalez-Martin; J. J. Gonzalez-Gerez",
@@ -5150,7 +5150,7 @@
       "pmid": "32460583",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1177/1357633x20923824",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "E. R. Ramage; M. Burke; M. Galloway; I. D. Graham; H. Janssen; D. L. Marsden; A. J. Patterson; M. Pollack; C. M. Said; E. A. Lynch; C. English",
@@ -5248,7 +5248,7 @@
       "pmid": "34504288",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1038/s41366-021-00965-5",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "F. Özden; Z. Sarı; N. Karaman Ö; H. Aydoğmuş",
@@ -5262,7 +5262,7 @@
       "pmid": "34357527",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s11845-021-02727-8",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "K. K. Oursler; V. C. Marconi; B. C. Briggs; J. D. Sorkin; A. S. Ryan",
@@ -5388,7 +5388,7 @@
       "pmid": "36573031",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.12659/msm.938926",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "S. J. Lee; E. C. Lee; M. Kim; S. H. Ko; S. Huh; W. Choi; Y. I. Shin; J. H. Min",
@@ -5556,7 +5556,7 @@
       "pmid": "35167358",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1089/jicm.2021.0268",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "I. L. Holthe; N. Rohrer-Baumgartner; E. J. Svendsen; S. L. Hauger; M. V. Forslund; I. M. H. Borgen; H. P. Øra; I. Kleffelgård; A. P. Strand-Saugnes; J. Egeland; C. Røe; S. L. Wade; M. Løvstad",
@@ -5598,7 +5598,7 @@
       "pmid": "34304292",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s00520-021-06415-2",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "P. S. Goode; T. M. Johnson, 2nd; D. K. Newman; C. P. Vaughan; K. V. Echt; A. D. Markland; R. Kennedy; K. N. Van Arsdalen; S. Rais-Bahrami; M. M. Issa; S. Barnacastle; K. C. Wright; P. McCabe; M. P. Malone; D. T. Redden; K. L. Burgio",
@@ -5668,7 +5668,7 @@
       "pmid": "34425088",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=98c645ac-32ce-3c8f-81a8-5457f2233f91",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.apmr.2021.07.807",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "E. Dalli-Peydró; R. Gisbert-Criado; N. Amigó; N. Sanz-Sevilla; J. Cosín-Sales",
@@ -5766,7 +5766,7 @@
       "pmid": "35917136",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1167/tvst.11.8.4",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "K. L. Bennell; B. J. Lawford; C. Keating; C. Brown; J. Kasza; D. Mackenzie; B. Metcalf; A. J. Kimp; T. Egerton; L. Spiers; J. Proietto; P. Sumithran; A. Harris; J. G. Quicke; R. S. Hinman",
@@ -5850,7 +5850,7 @@
       "pmid": "35927708",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1186/s13063-022-06585-2",
-      "evidence_type": "unknown"
+      "evidence_type": "protocol"
     },
     {
       "authors": "R. S. Weinstein; M. J. Holcomb; J. Mo; P. Yonsetto; O. Bojorquez; M. Grant; C. S. Wendel; N. J. Tallman; E. Ercolano; Z. Cidav; M. C. Hornbrook; V. Sun; R. McCorkle; R. S. Krouse",
@@ -5920,7 +5920,7 @@
       "pmid": "33527740",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1002/ehf2.13189",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "R. Sutherland; A. Hodge; E. Chan; N. Silove",
@@ -5948,7 +5948,7 @@
       "pmid": "33415649",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s13187-021-01958-8",
-      "evidence_type": "unknown"
+      "evidence_type": "protocol"
     },
     {
       "authors": "C. Skov Schacksen; A. K. Dyrvig; N. C. Henneberg; J. Dam Gade; H. Spindler; J. Refsgaard; M. Hollingdal; L. Dittman; K. Dremstrup; B. Dinesen",
@@ -5976,7 +5976,7 @@
       "pmid": "34371825",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.3390/nu13072311",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "M. T. Shaw; P. Best; A. Frontario; L. E. Charvet",
@@ -6004,7 +6004,7 @@
       "pmid": "34419529",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.ijcard.2021.08.024",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "N. L. Saywell; A. C. Vandal; S. Mudge; L. Hale; P. Brown; V. Feigin; C. Hanger; D. Taylor",
@@ -6088,7 +6088,7 @@
       "pmid": "31530065",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1177/1357633x19869796",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "C. Nam; B. Zhang; T. Chow; F. Ye; Y. Huang; Z. Guo; W. Li; W. Rong; X. Hu; W. Poon",
@@ -6116,7 +6116,7 @@
       "pmid": "33839775",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=bc2c28d2-9050-3fed-a634-3a4289b4d337",
       "library_link": "https://libkey.io/libraries/1712/10.1093/rheumatology/keab339",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "V. Motz; A. Faust; J. Dahmus; B. Stern; C. Soriano; J. G. Stine",
@@ -6228,7 +6228,7 @@
       "pmid": "34920553",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.3233/shti210752",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "Y. I. Hsu; Y. C. Chen; C. L. Lee; N. J. Chang",
@@ -6256,7 +6256,7 @@
       "pmid": "33672691",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.3390/ijerph18042075",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "N. Hajizadeh; J. Polo; M. Basile; K. Ordonez; R. Medina; S. Jacome; D. Madera; D. Tsang; M. Zhang; M. Williams; J. Lisker; S. Khanijo; M. Lesser; R. Pekmezaris",
@@ -6270,7 +6270,7 @@
       "pmid": "38917257",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.25302/08.2021.Ad.151133066",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "J. J. Gonzalez-Gerez; M. Saavedra-Hernandez; E. Anarte-Lazo; C. Bernal-Utrera; M. Perez-Ale; C. Rodriguez-Blanco",
@@ -6382,7 +6382,7 @@
       "pmid": "33394268",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s10926-020-09933-8",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "N. S. Cox; S. Dal Corso; H. Hansen; C. F. McDonald; C. J. Hill; P. Zanaboni; J. A. Alison; P. O'Halloran; H. Macdonald; A. E. Holland",
@@ -6396,7 +6396,7 @@
       "pmid": "33511633",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1002/14651858.CD013040.pub2",
-      "evidence_type": "unknown"
+      "evidence_type": "meta_analysis"
     },
     {
       "authors": "I. Cikajlo; A. Hukić; D. Zajc",
@@ -6508,7 +6508,7 @@
       "pmid": "34854907",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1001/jamanetworkopen.2021.36652",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "R. W. M. Brouwers; J. J. Kraal; M. Regis; R. F. Spee; H. M. C. Kemps",
@@ -6550,7 +6550,7 @@
       "pmid": "34575185",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.3390/jcm10184069",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "L. Batalik; F. Dosbaba; M. Hartman; V. Konecny; K. Batalikova; J. Spinar",
@@ -6606,7 +6606,7 @@
       "pmid": "35646235",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.5195/ijt.2021.6401",
-      "evidence_type": "unknown"
+      "evidence_type": "systematic_review"
     },
     {
       "authors": "Z. Wu; J. Xu; C. Yue; Y. Li; Y. Liang",
@@ -6651,7 +6651,7 @@
       "pmid": "",
       "url": "",
       "library_link": "",
-      "evidence_type": "unknown",
+      "evidence_type": "pilot",
       "source_type": "peer-reviewed",
       "what_it_says": "Documents how telehealth training translates into hireable digital-health competencies and is increasingly listed as a requirement by health-tech employers and payors.",
       "path": "healthTech"
@@ -6668,7 +6668,7 @@
       "pmid": "",
       "url": "https://www.himss.org/resources/himss-workforce-survey",
       "library_link": "",
-      "evidence_type": "unknown",
+      "evidence_type": "cross_sectional",
       "source_type": "professional-society",
       "what_it_says": "HIMSS workforce data show clinicians with formal telehealth/digital-health credentials command higher salaries and dominate hiring pipelines at EHR vendors, payors, and digital-health startups.",
       "path": "healthTech"
@@ -6685,7 +6685,7 @@
       "pmid": "29880129",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/29880129",
       "library_link": "",
-      "evidence_type": "unknown",
+      "evidence_type": "narrative",
       "source_type": "peer-reviewed",
       "what_it_says": "Maps the digital-health industry pathway for clinicians, identifying telehealth literacy as a core competency sought by medtech firms, FDA-regulated SaMD companies, and remote-monitoring vendors.",
       "path": "healthTech"

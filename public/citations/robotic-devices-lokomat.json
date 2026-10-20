@@ -12,7 +12,7 @@
       "pmid": "40141847",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.3390/life15030503",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "C. F. Blanco-Diaz; E. Serafini; T. Bastos-Filho; A. Dantas; C. Santo; D. Delisle-Rodriguez",
@@ -54,7 +54,7 @@
       "pmid": "40745625",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1177/08919887251354899",
-      "evidence_type": "unknown"
+      "evidence_type": "cohort"
     },
     {
       "authors": "K. I. A. Chiu; C. Taylor; P. Saha; J. Geddes; T. Bishop; J. Bernard; D. Lui",
@@ -82,7 +82,7 @@
       "pmid": "40153922",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.clinph.2025.03.027",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "N. Comino-Suárez; J. C. Moreno; Á. Megía-García; A. J. Del-Ama; D. Serrano-Muñoz; J. Avendaño-Coy; Á. Gil-Agudo; M. Alcobendas-Maestro; E. López-López; J. Gómez-Soriano",
@@ -292,7 +292,7 @@
       "pmid": "38610440",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.3390/s24072230",
-      "evidence_type": "unknown"
+      "evidence_type": "systematic_review"
     },
     {
       "authors": "B. Grimm",
@@ -460,7 +460,7 @@
       "pmid": "38066802",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.3390/diagnostics13233561",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "I. Fabbri; F. Betti; R. Tedeschi",
@@ -824,7 +824,7 @@
       "pmid": "33411195",
       "url": "",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s10072-020-04954-w",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "L. Hoo Young; P. Jung Hyun; K. Tae-Woo; H. Y. Lee; J. H. Park; T.-W. Kim",
@@ -838,7 +838,7 @@
       "pmid": "33950915",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=e5e96f2d-f50a-39b2-8a42-eef8993272fa",
       "library_link": "https://libkey.io/libraries/1712/10.1097/MD.0000000000025125",
-      "evidence_type": "unknown"
+      "evidence_type": "cross_sectional"
     },
     {
       "authors": "S. Klobucká; R. Klobucký; B. Kollár",
@@ -1051,7 +1051,7 @@
       "pmid": "28553117",
       "url": "",
       "library_link": "",
-      "evidence_type": "unknown",
+      "evidence_type": "narrative",
       "source_type": "peer-reviewed",
       "what_it_says": "Reviews the commercial rehabilitation-robotics industry landscape (Hocoma, Ekso, ReWalk, Cyberdyne) and the clinical-applications specialist roles vendors recruit for, establishing industry demand for clinicians credentialed on devices like the Lokomat.",
       "path": "healthTech"
@@ -1085,7 +1085,7 @@
       "pmid": "30954154",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/30954154",
       "library_link": "",
-      "evidence_type": "unknown",
+      "evidence_type": "narrative",
       "source_type": "peer-reviewed",
       "what_it_says": "Surveys the lower-limb robotic-rehabilitation device industry and the clinician-operator workforce required, providing evidence that vendor-specific certification (e.g., Lokomat) is a recognized credential for industry roles in rehabilitation medtech.",
       "path": "healthTech"

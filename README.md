@@ -6,7 +6,7 @@ Live at **[ceshield.com](https://www.ceshield.com)**.
 CE Shield helps physical and occupational therapists answer a question their
 profession never made easy: *which credential is actually worth my time and
 money?* It scores **143 rehab credentials** across **five career-path lenses**,
-backed by **~7,000 curated citations**, then layers on CE-compliance tracking
+backed by **~8,600 curated citations**, then layers on CE-compliance tracking
 and a clinician profile ("living rehab CV"). It's built to grow into a two-sided
 platform where patients can discover credentialed clinicians.
 
@@ -50,7 +50,7 @@ The credential matrix is a build-time dataset (`src/utils/certificationData.js`)
 plus split, lazy-loaded per-credential **citations** (`public/citations/`) and
 **justifications** (`public/justifications/`) — keeping ~280KB of prose out of
 the client bundle. Site-wide stats are centralized in `src/data/siteStats.json`
-so every "143 credentials / 7,000 citations" reference stays in sync.
+so every "143 credentials / 8,609 citations" reference stays in sync.
 
 User data (`user_profiles`, `courses`, `user_credentials`) lives in Supabase
 under per-user RLS. Public clinician CVs read through dedicated SQL views
