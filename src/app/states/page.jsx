@@ -6,7 +6,7 @@ import Link from 'next/link';
 import PublicNav from '@/components/layout/PublicNav';
 import PublicFooter from '@/components/layout/PublicFooter';
 import { allStateLicenseEntries } from '@/data/stateRules';
-import { A, INS, tabularNums } from '@/components/atlas/theme';
+import { A, tabularNums, kicker, display, panel } from '@/components/atlas/theme';
 
 const mandatoryLabel = (n) => (n === 0 ? 'None' : `${n} ${n === 1 ? 'category' : 'categories'}`);
 
@@ -31,16 +31,14 @@ export default function StatesIndex() {
     <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink }}>
       <PublicNav />
 
-      <main id="main" className="atlas-wrap" style={{ maxWidth: 1280, margin: '0 auto', padding: '3rem 2rem 6rem', lineHeight: 1.65 }}>
+      <main id="main" className="atlas-wrap" style={{ maxWidth: 1280, margin: '0 auto', padding: '4.5rem 2rem 6rem', lineHeight: 1.65 }}>
         <div style={{ maxWidth: 960 }}>
-          <header style={{ marginBottom: '2.25rem' }}>
-            <h1
-              className="cs-h1-clamp"
-              style={{ fontFamily: INS, fontSize: 40, fontWeight: 600, margin: 0, letterSpacing: '-0.025em', lineHeight: 1.05 }}
-            >
-              CE requirements by state
+          <header className="plum-rise" style={{ marginBottom: '3rem' }}>
+            <div style={{ ...kicker(), marginBottom: 18 }}>States · PT and OT</div>
+            <h1 style={display('clamp(2.3rem, 5.4vw, 4.2rem)', 350)}>
+              CE requirements by state. <em style={{ fontStyle: 'normal', color: A.accentMid }}>Cited to the board rule.</em>
             </h1>
-            <p style={{ marginTop: '0.75rem', marginBottom: 0, color: A.inkBody, fontSize: 16.5, maxWidth: '38em' }}>
+            <p style={{ marginTop: '1.5rem', marginBottom: 0, color: A.inkBody, fontSize: 16, lineHeight: 1.75, maxWidth: '36em' }}>
               Continuing-education rules for physical and occupational therapists,
               per state. Verified states are checked against the board rule and
               cited. Draft states are a first pass: confirm against the citation
@@ -70,14 +68,14 @@ export default function StatesIndex() {
                       className="atlas-state-row atlas-row"
                       aria-label={`${e.rules.jurisdictionName} ${licenseLong}: ${e.rules.totalHours} hours every ${e.rules.cycleYears} years, ${mandatoryLabel(mandatory)}${draft ? ', draft' : ', verified'}`}
                     >
-                      <span style={{ gridArea: 'state', fontFamily: INS, fontWeight: 600, fontSize: 17, letterSpacing: '-0.02em', color: A.ink }}>
+                      <span style={{ gridArea: 'state', fontWeight: 400, fontSize: 18, letterSpacing: '-0.03em', color: A.ink }}>
                         <span className={i > 0 ? 'atlas-state-repeat' : undefined}>{e.rules.jurisdictionName}</span>
                       </span>
-                      <span style={{ gridArea: 'lic', fontSize: 14.5, color: A.ink, fontWeight: 500 }}>
+                      <span style={{ gridArea: 'lic', fontSize: 14.5, color: A.inkBody, fontWeight: 400 }}>
                         {licenseLong}
                       </span>
-                      <span style={{ gridArea: 'hours', textAlign: 'right', fontWeight: 700, fontSize: 17, color: A.accent, ...tabularNums }}>
-                        {e.rules.totalHours}<span style={{ fontSize: 12, color: A.inkMuted, fontWeight: 600 }}> h</span>
+                      <span style={{ gridArea: 'hours', textAlign: 'right', fontWeight: 400, fontSize: 18, letterSpacing: '-0.03em', color: A.ink, ...tabularNums }}>
+                        {e.rules.totalHours}<span style={{ fontSize: 12, color: A.inkMuted, fontWeight: 400, letterSpacing: 0 }}> h</span>
                       </span>
                       <span style={{ gridArea: 'cycle', textAlign: 'right', fontSize: 14, color: A.inkBody, ...tabularNums }}>
                         {e.rules.cycleYears} yr
@@ -85,10 +83,11 @@ export default function StatesIndex() {
                       <span style={{ gridArea: 'mand', fontSize: 14, color: A.inkBody, ...tabularNums }}>
                         {mandatoryLabel(mandatory)}
                       </span>
-                      <span style={{ gridArea: 'status', fontSize: 12.5, fontWeight: 700, letterSpacing: '0.02em', color: draft ? A.warn : A.accent, whiteSpace: 'nowrap' }}>
-                        {draft ? 'Draft · verify' : '✓ Verified'}
+                      <span style={{ gridArea: 'status', fontSize: 12, fontWeight: 500, color: draft ? A.warn : A.inkBody, whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: 7 }}>
+                        <i aria-hidden="true" style={{ width: 6, height: 6, borderRadius: '50%', background: draft ? A.warn : '#2fa894' }} />
+                        {draft ? 'Draft · verify' : 'Verified'}
                       </span>
-                      <span aria-hidden="true" style={{ gridArea: 'go', color: A.accent, fontWeight: 700, textAlign: 'right' }}>→</span>
+                      <span aria-hidden="true" style={{ gridArea: 'go', color: A.accent, fontWeight: 400, textAlign: 'right' }}>→</span>
                     </Link>
                   );
                 })}
@@ -98,13 +97,12 @@ export default function StatesIndex() {
 
           <section
             style={{
-              marginTop: '2.5rem', padding: '1.1rem 1.5rem',
-              border: `1px dashed ${A.ink}`, background: A.notice,
+              ...panel, marginTop: '2.5rem', padding: '1.1rem 1.5rem',
             }}
           >
             <p style={{ color: A.inkBody, fontSize: 14.5, margin: 0 }}>
               Don&rsquo;t see your state?{' '}
-              <a href="mailto:hello@ceshield.com" className="atlas-link" style={{ fontWeight: 700, textDecoration: 'none', borderBottom: `2px solid ${A.accent}` }}>
+              <a href="mailto:hello@ceshield.com" className="atlas-link" style={{ fontWeight: 500, textDecoration: 'none', borderBottom: '1px solid rgba(240,195,168,0.5)' }}>
                 Email us
               </a>{' '}
               and it goes on the coverage list.

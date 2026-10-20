@@ -5,7 +5,7 @@
 import Link from 'next/link';
 import PublicNav from '@/components/layout/PublicNav';
 import PublicFooter from '@/components/layout/PublicFooter';
-import { A, INS, tabularNums } from '@/components/atlas/theme';
+import { A, tabularNums, kicker, display } from '@/components/atlas/theme';
 
 export const metadata = { title: 'Page not found' };
 
@@ -16,14 +16,12 @@ export default function NotFound() {
       <PublicNav />
 
       <main id="main" style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '3rem 1.5rem' }}>
-        <div style={{ maxWidth: 560, textAlign: 'center' }}>
-          <div style={{ fontFamily: INS, fontSize: 96, fontWeight: 600, color: A.ruleMinor, letterSpacing: '-0.045em', lineHeight: 1, ...tabularNums }}>
-            404
-          </div>
-          <h1 style={{ fontFamily: INS, fontSize: 29, fontWeight: 600, margin: '1rem 0 0.5rem', letterSpacing: '-0.03em' }}>
-            That page isn&rsquo;t in the field.
+        <div className="plum-rise" style={{ maxWidth: 600, textAlign: 'center' }}>
+          <div style={{ ...kicker(), ...tabularNums }}>Error 404</div>
+          <h1 style={{ ...display('clamp(2.1rem, 5vw, 3.4rem)', 350), margin: '1.25rem 0 1rem' }}>
+            That page isn&rsquo;t <em style={{ fontStyle: 'normal', color: A.accentMid }}>in the field.</em>
           </h1>
-          <p style={{ color: A.inkBody, lineHeight: 1.6, margin: 0, fontSize: 15.5 }}>
+          <p style={{ color: A.inkBody, lineHeight: 1.75, margin: '0 auto', fontSize: 15.5, maxWidth: '30em' }}>
             If you were looking for a credential, the name in the URL may be
             misspelled. The full library is searchable.
           </p>
