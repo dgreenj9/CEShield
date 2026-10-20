@@ -31,7 +31,10 @@ import {
 } from '@/utils/certScoring';
 import { citationUrl, cleanCitation, EVIDENCE_LABELS } from '@/utils/citationsLibrary';
 import { splitEvidence } from '@/utils/formatEvidence';
-import { A, FIG, INS, eyebrow, ruledHead, tierColor, tierLabel, tabularNums } from '@/components/atlas/theme';
+import {
+  A, FIG, tierColor, tierLabel, tabularNums,
+  LINE, LINE2, LINE_FAINT, VIZ, panel, kicker, capLabel, hairHead, display, kpi,
+} from '@/components/atlas/theme';
 import LensBreakdownTabs from './_LensBreakdownTabs';
 import EvidenceProfile from './_EvidenceProfile';
 
@@ -107,13 +110,95 @@ export async function generateMetadata({ params }) {
 
 // ─── UI helpers ───────────────────────────────────────────────────────────
 
-// Section head drawn with the 2px ink top rule ("Notes column" motif).
-const Section = ({ title, eyebrow: eyebrowText, children }) => (
-  <section style={{ marginTop: '2.5rem' }}>
-    <div style={{ ...ruledHead, marginBottom: 16 }}>{eyebrowText || title}</div>
+// Section head: a peach eyebrow over a hairline, then an optional light
+// display title with a lilac second clause.
+const Section = ({ eyebrow: eyebrowText, title, em, children }) => (
+  <section style={{ marginTop: '4rem' }}>
+    <div style={{ ...hairHead, marginBottom: title ? 14 : 20 }}>{eyebrowText}</div>
+    {title && (
+      <h2 style={{ ...display('clamp(1.6rem, 2.6vw, 2.2rem)'), marginBottom: 22 }}>
+        {title}{em && <> <em style={{ fontStyle: 'normal', color: A.accentMid }}>{em}</em></>}
+      </h2>
+    )}
     {children}
   </section>
 );
+
+// How many citations print before the rest fold into "Show all". The folded
+// rows stay in the HTML (a <details> element), so crawlers still read them.
+const CITE_VISIBLE = 12;
+
+function CitationRow({ c, idx, last }) {
+  const link = citationUrl(c);
+  // 'Other' tags say nothing; only typed evidence earns a tag.
+  const evidenceLabel = c.evidence_type && c.evidence_type !== 'unknown' ? EVIDENCE_LABELS[c.evidence_type] : null;
+  const tag = {
+    fontFamily: FIG,
+    fontSize: 10.5,
+    fontWeight: 500,
+    padding: '2px 9px',
+    borderRadius: 20,
+    border: `1px solid ${LINE2}`,
+    color: A.inkBody,
+    whiteSpace: 'nowrap',
+  };
+  return (
+    <li
+      className="plum-cite-row"
+      style={{
+        padding: '1rem 1.25rem',
+        borderBottom: last ? 'none' : `1px solid ${LINE_FAINT}`,
+        display: 'flex',
+        gap: 14,
+        alignItems: 'flex-start',
+      }}
+    >
+      <span style={{ flexShrink: 0, fontFamily: FIG, fontSize: 11, color: A.inkMuted, marginTop: 3, minWidth: 26, ...tabularNums }}>
+        {String(idx + 1).padStart(2, '0')}
+      </span>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ fontWeight: 450, fontSize: 14.5, color: A.ink, lineHeight: 1.45, letterSpacing: '-0.005em' }}>
+          {c.title}
+        </div>
+        <div style={{ fontFamily: FIG, fontSize: 12, color: A.inkMuted, marginTop: 4, ...tabularNums }}>
+          {[c.authors, c.journal].filter(Boolean).join(' · ')}
+          {c.year ? ` · ${c.year}` : ''}
+        </div>
+        {c.what_it_says && (
+          <div style={{ fontSize: 13.5, color: A.inkBody, marginTop: 6, lineHeight: 1.6 }}>
+            {c.what_it_says}
+          </div>
+        )}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8, alignItems: 'center' }}>
+          {evidenceLabel && (
+            <span style={{ ...tag, borderColor: 'rgba(240,195,168,0.45)', color: A.accent }}>{evidenceLabel}</span>
+          )}
+          {c.source_type && c.source_type !== 'peer-reviewed' && (
+            <span style={{ ...tag, color: A.inkMuted }}>{c.source_type.replace(/-/g, ' ')}</span>
+          )}
+          {c.doi && (
+            <span style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, overflowWrap: 'anywhere' }}>doi:{c.doi}</span>
+          )}
+          {!c.doi && c.pmid && (
+            <span style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, ...tabularNums }}>PMID {c.pmid}</span>
+          )}
+        </div>
+      </div>
+      {link && (
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Open source: ${c.title}`}
+          className="atlas-link atlas-hit"
+          style={{ flexShrink: 0, fontFamily: FIG, fontSize: 12, fontWeight: 500, textDecoration: 'none', whiteSpace: 'nowrap', marginTop: 2 }}
+        >
+          DOI ↗
+        </a>
+      )}
+    </li>
+  );
+}
 
 // ─── Render ───────────────────────────────────────────────────────────────
 
@@ -175,11 +260,15 @@ export default async function Page({ params }) {
   const pill = {
     fontFamily: FIG,
     fontSize: 11.5,
-    fontWeight: 700,
-    padding: '3px 10px',
-    border: `1px solid ${A.ruleMinor}`,
-    color: A.inkBody,
+    fontWeight: 450,
+    padding: '4px 11px',
+    borderRadius: 20,
+    border: `1px solid ${LINE2}`,
+    color: A.inkMuted,
   };
+
+  const shownCites = citations.slice(0, CITE_VISIBLE);
+  const foldedCites = citations.slice(CITE_VISIBLE);
 
   return (
     <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink }}>
@@ -197,45 +286,40 @@ export default async function Page({ params }) {
         )}
       />
 
-      <main id="main" className="atlas-wrap" style={{ maxWidth: 1280, margin: '0 auto', padding: '2.5rem 2rem 5rem', lineHeight: 1.6 }}>
+      <main id="main" className="atlas-wrap" style={{ maxWidth: 1280, margin: '0 auto', padding: '4rem 2rem 6rem', lineHeight: 1.6 }}>
         {/* Hero — 2 columns on wide screens. Identity + evidence summary on
-            the left, cross-lens score panel on the right. The score rows ARE
-            the primary CTAs (each deep-links into /matrix with that lens +
-            cert preselected). */}
-        <header className="cs-cert-hero" style={{ marginBottom: '1.5rem' }}>
+            the left, the cross-lens comparison panel on the right. The lens
+            rows ARE the primary CTAs (each deep-links into /matrix with that
+            lens + cert preselected). */}
+        <header className="cs-cert-hero plum-rise" style={{ marginBottom: '1rem' }}>
           <div className="cs-cert-hero-text">
-            <div style={{ ...eyebrow(12), marginBottom: 10 }}>
+            <Link href="/credentials" className="atlas-ink-link" style={{ ...kicker(10.5, A.inkMuted), textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 6, minHeight: 32 }}>
+              <ArrowLeft size={12} aria-hidden="true" /> All dossiers
+            </Link>
+            <div style={{ ...kicker(), marginTop: 18, marginBottom: 16 }}>
               {cert.type} · {(cert.disciplines || [cert.discipline]).join(' · ')}
             </div>
-            <h1
-              className="cs-h1-clamp"
-              style={{
-                fontFamily: INS,
-                fontSize: 'clamp(1.6rem, 4.5vw, 2.4rem)',
-                fontWeight: 600,
-                color: A.ink,
-                margin: 0,
-                letterSpacing: '-0.025em',
-                lineHeight: 1.08,
-                textWrap: 'balance',
-              }}
-            >
+            <h1 style={display('clamp(2.1rem, 5vw, 3.75rem)', 360)}>
               {cert.name}
             </h1>
-            <div style={{ ...eyebrow(12.5), marginTop: 12, ...tabularNums }}>
-              {meta.count > 0 ? `${meta.count} citations · ` : ''}
-              {availablePaths.length} lens{availablePaths.length === 1 ? '' : 'es'} scored
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px 34px', marginTop: 26, fontSize: 12, color: A.inkMuted }}>
+              {meta.count > 0 && (
+                <div>Citations<b style={{ display: 'block', fontWeight: 500, color: A.inkBody, fontSize: 14, marginTop: 3, ...tabularNums }}>{meta.count.toLocaleString()}</b></div>
+              )}
+              <div>Lenses scored<b style={{ display: 'block', fontWeight: 500, color: A.inkBody, fontSize: 14, marginTop: 3, ...tabularNums }}>{availablePaths.length}</b></div>
+              <div>Best lens<b style={{ display: 'block', fontWeight: 500, color: A.inkBody, fontSize: 14, marginTop: 3 }}>{PATHS[bestPath]?.label}</b></div>
             </div>
 
             {cert.evidence && splitEvidence(cert.evidence).map((para, i) => (
               <p
                 key={i}
                 style={{
-                  fontSize: 15.5,
+                  fontSize: 16,
                   color: A.inkBody,
-                  lineHeight: 1.65,
-                  marginTop: i === 0 ? '1.5rem' : '0.85rem',
+                  lineHeight: 1.75,
+                  marginTop: i === 0 ? '2rem' : '0.85rem',
                   marginBottom: 0,
+                  maxWidth: 620,
                 }}
               >
                 {para}
@@ -243,20 +327,22 @@ export default async function Page({ params }) {
             ))}
           </div>
 
-          {/* Right column: cross-lens score panel. Each row is a deep-link
-              into /matrix with that lens preselected. */}
-          <aside className="cs-cert-scores" aria-label="Career-path scores" style={{ border: `1px solid ${A.ink}`, background: A.paper, alignSelf: 'start' }}>
-            <div style={{ padding: '12px 16px', borderBottom: `1px solid ${A.ink}`, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12 }}>
-              <span style={{ fontFamily: FIG, fontSize: 12.5, fontWeight: 700, color: A.inkMuted }}>
-                Every lens · default weights
+          {/* Right column: composite across lenses. A 0 to 100 dot plot on
+              hairline grids; the best lens carries the peach dot. Each row is
+              a deep-link into /matrix with that lens preselected. */}
+          <aside className="cs-cert-scores" aria-label="Career-path scores" style={{ ...panel, alignSelf: 'start', padding: '20px 20px 14px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12 }}>
+              <span style={{ fontFamily: FIG, fontSize: 12, fontWeight: 600, color: A.inkBody, letterSpacing: '0.02em' }}>
+                Composite across lenses
               </span>
-              <span style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 700, color: tierColor(bestScore) }}>
+              <span style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 500, color: tierColor(bestScore) }}>
                 Best: {tierLabel(bestScore)}
               </span>
             </div>
-            <div>
-              {lensScores.map(({ pathKey, label, score }, i) => {
-                const color = tierColor(score);
+            <div style={{ fontSize: 11, color: A.inkMuted, marginTop: 3 }}>Default weights · 0 to 100</div>
+            <div style={{ marginTop: 14 }}>
+              {lensScores.map(({ pathKey, label, score }) => {
+                const isBest = pathKey === bestPath;
                 return (
                   <Link
                     key={pathKey}
@@ -266,47 +352,52 @@ export default async function Page({ params }) {
                     style={{
                       display: 'grid',
                       gridTemplateColumns: '1fr auto',
-                      gap: 12,
+                      gap: '6px 14px',
                       alignItems: 'center',
-                      padding: '0.7rem 1rem',
-                      borderBottom: i < lensScores.length - 1 ? `1px solid ${A.ruleFaint}` : 'none',
+                      padding: '10px 8px',
+                      margin: '0 -8px',
+                      borderRadius: 4,
+                      borderTop: `1px solid ${LINE_FAINT}`,
                       textDecoration: 'none',
                       color: 'inherit',
+                      minHeight: 44,
                     }}
                   >
                     <div style={{ minWidth: 0 }}>
-                      <div style={{ fontSize: 13.5, fontWeight: 600, color: A.ink, letterSpacing: '-0.005em', display: 'flex', alignItems: 'baseline', gap: 8 }}>
+                      <div style={{ fontSize: 13.5, fontWeight: isBest ? 500 : 400, color: isBest ? A.ink : A.inkBody, display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
                         {label.replace(' & Industry', '')}
-                        <span style={{ fontSize: 11.5, fontWeight: 600, color: A.inkMuted }}>{tierLabel(score)}</span>
+                        <span style={{ fontSize: 11, fontWeight: 500, color: tierColor(score) }}>{tierLabel(score)}</span>
                       </div>
-                      <div style={{ height: 4, background: A.ruleFaint, marginTop: 6 }}>
-                        <div style={{ height: '100%', width: `${score}%`, background: color }} />
+                      <div aria-hidden="true" style={{ position: 'relative', height: 14, marginTop: 6 }}>
+                        <span style={{ position: 'absolute', left: 0, right: 0, top: 7, height: 1, background: LINE }} />
+                        {[0, 50, 100].map((t) => (
+                          <span key={t} style={{ position: 'absolute', left: `${t}%`, top: 3, width: 1, height: 9, background: LINE }} />
+                        ))}
+                        <span
+                          style={{
+                            position: 'absolute',
+                            left: `calc(${score}% - ${isBest ? 6 : 5}px)`,
+                            top: isBest ? 1 : 2,
+                            width: isBest ? 12 : 10,
+                            height: isBest ? 12 : 10,
+                            borderRadius: '50%',
+                            background: isBest ? A.accent : VIZ.c2,
+                            boxShadow: `0 0 0 2px ${A.paper}`,
+                          }}
+                        />
                       </div>
                     </div>
-                    <div
-                      style={{
-                        fontFamily: FIG,
-                        fontSize: 22,
-                        fontWeight: 800,
-                        color,
-                        letterSpacing: '-0.02em',
-                        lineHeight: 1,
-                        whiteSpace: 'nowrap',
-                        ...tabularNums,
-                      }}
-                    >
+                    <div style={{ ...kpi(24), color: A.ink, whiteSpace: 'nowrap' }}>
                       {score}
-                      <span style={{ fontSize: 11, color: A.inkMuted, fontWeight: 600, marginLeft: 2 }}>
-                        /100
-                      </span>
+                      <span style={{ fontSize: 11, color: A.inkMuted, fontWeight: 400, letterSpacing: 0, marginLeft: 2 }}>/100</span>
                     </div>
                   </Link>
                 );
               })}
             </div>
-            <p style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, margin: 0, padding: '10px 16px', borderTop: `1px solid ${A.ruleFaint}`, lineHeight: 1.5 }}>
+            <p style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, margin: '4px 0 0', paddingTop: 12, borderTop: `1px solid ${LINE_FAINT}`, lineHeight: 1.55 }}>
               Each lens scores different dimensions, deliberately.{' '}
-              <Link href="/methodology" className="atlas-link" style={{ fontWeight: 700, textDecoration: 'none' }}>
+              <Link href="/methodology" className="atlas-link" style={{ fontWeight: 500, textDecoration: 'none' }}>
                 Methodology →
               </Link>
             </p>
@@ -341,110 +432,61 @@ export default async function Page({ params }) {
         {/* Citation library */}
         {citations.length > 0 && (
           <Section
-            title={`Citations (${citations.length})`}
             eyebrow={`Sources · ${citations.length} on file`}
+            title="The citation library"
+            em="behind every score."
           >
             <EvidenceProfile meta={meta} />
             {Object.keys(sourceCounts).length > 1 && (
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 14, alignItems: 'center' }}>
+                <span style={{ ...capLabel(), marginRight: 6 }}>Source types</span>
                 {Object.entries(sourceCounts)
                   .sort((a, b) => b[1] - a[1])
                   .map(([type, n]) => (
-                    <span key={type} style={{ ...pill, fontWeight: 600, color: A.inkMuted, ...tabularNums }}>
+                    <span key={type} style={{ ...pill, ...tabularNums }}>
                       {n} {type.replace(/_/g, ' ')}
                     </span>
                   ))}
               </div>
             )}
-            <ol
-              style={{
-                paddingLeft: 0,
-                listStyle: 'none',
-                margin: 0,
-                border: `1px solid ${A.ink}`,
-                background: A.paper,
-              }}
-            >
-              {citations.map((c, idx) => {
-                const link = citationUrl(c);
-                // 'Other' tags say nothing; only typed evidence earns a tag.
-                const evidenceLabel = c.evidence_type && c.evidence_type !== 'unknown' ? EVIDENCE_LABELS[c.evidence_type] : null;
-                return (
-                  <li
-                    key={idx}
+            <div style={{ ...panel, overflow: 'hidden' }}>
+              <ol style={{ paddingLeft: 0, listStyle: 'none', margin: 0 }}>
+                {shownCites.map((c, idx) => (
+                  <CitationRow key={idx} c={c} idx={idx} last={idx === shownCites.length - 1 && !foldedCites.length} />
+                ))}
+              </ol>
+              {foldedCites.length > 0 && (
+                <details className="plum-more">
+                  <summary
                     style={{
-                      padding: '0.8rem 1rem',
-                      borderBottom: idx < citations.length - 1 ? `1px solid ${A.ruleFaint}` : 'none',
                       display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
                       gap: 12,
-                      alignItems: 'flex-start',
+                      minHeight: 52,
+                      padding: '0 1.25rem',
+                      borderTop: `1px solid ${LINE}`,
+                      fontSize: 13,
+                      color: A.inkBody,
                     }}
                   >
-                    <span
-                      style={{
-                        flexShrink: 0,
-                        fontFamily: FIG,
-                        fontSize: 11,
-                        color: A.inkMuted,
-                        marginTop: 2,
-                        minWidth: 24,
-                        ...tabularNums,
-                      }}
-                    >
-                      {String(idx + 1).padStart(2, '0')}
+                    <span>
+                      <span className="plum-more-closed">Show all {citations.length.toLocaleString()} citations</span>
+                      <span className="plum-more-open">Showing all {citations.length.toLocaleString()} citations</span>
                     </span>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontWeight: 600, fontSize: 13.5, color: A.ink, lineHeight: 1.4 }}>
-                        {c.title}
-                      </div>
-                      <div style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, marginTop: 2, ...tabularNums }}>
-                        {[c.authors, c.journal].filter(Boolean).join(' · ')}
-                        {c.year ? ` · ${c.year}` : ''}
-                      </div>
-                      {c.what_it_says && (
-                        <div style={{ fontSize: 13, color: A.inkBody, marginTop: 4, lineHeight: 1.5, fontStyle: 'italic' }}>
-                          {c.what_it_says}
-                        </div>
-                      )}
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 6, alignItems: 'center' }}>
-                        {evidenceLabel && (
-                          <span style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 700, padding: '1px 8px', border: `1px solid ${A.accent}`, color: A.accent }}>
-                            {evidenceLabel}
-                          </span>
-                        )}
-                        {c.source_type && c.source_type !== 'peer-reviewed' && (
-                          <span style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 600, padding: '1px 8px', border: `1px solid ${A.ruleMinor}`, color: A.inkMuted }}>
-                            {c.source_type.replace(/-/g, ' ')}
-                          </span>
-                        )}
-                        {c.doi && (
-                          <span style={{ fontFamily: FIG, fontSize: 11, color: A.inkMuted }}>
-                            doi:{c.doi}
-                          </span>
-                        )}
-                        {!c.doi && c.pmid && (
-                          <span style={{ fontFamily: FIG, fontSize: 11, color: A.inkMuted }}>
-                            PMID {c.pmid}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    {link && (
-                      <a
-                        href={link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Open source: ${c.title}`}
-                        className="atlas-link atlas-hit"
-                        style={{ flexShrink: 0, fontFamily: FIG, fontSize: 11.5, fontWeight: 700, textDecoration: 'none', whiteSpace: 'nowrap', marginTop: 2 }}
-                      >
-                        DOI ↗
-                      </a>
-                    )}
-                  </li>
-                );
-              })}
-            </ol>
+                    <span style={{ color: A.accent, fontSize: 12, fontWeight: 500, ...tabularNums }}>
+                      <span className="plum-more-closed">+{foldedCites.length.toLocaleString()} more</span>
+                      <span className="plum-more-open">Collapse</span>
+                    </span>
+                  </summary>
+                  <ol start={CITE_VISIBLE + 1} style={{ paddingLeft: 0, listStyle: 'none', margin: 0, borderTop: `1px solid ${LINE_FAINT}` }}>
+                    {foldedCites.map((c, i) => (
+                      <CitationRow key={i} c={c} idx={CITE_VISIBLE + i} last={i === foldedCites.length - 1} />
+                    ))}
+                  </ol>
+                </details>
+              )}
+            </div>
           </Section>
         )}
 
@@ -452,9 +494,9 @@ export default async function Page({ params }) {
             the left-anchored rhythm of the whole page. */}
         <div
           style={{
-            marginTop: '3rem',
-            paddingTop: '1.25rem',
-            borderTop: `1px solid ${A.ink}`,
+            marginTop: '4rem',
+            paddingTop: '1.5rem',
+            borderTop: `1px solid ${LINE}`,
             display: 'flex',
             flexWrap: 'wrap',
             gap: '0.75rem 1.5rem',
@@ -463,15 +505,15 @@ export default async function Page({ params }) {
             fontSize: 14,
           }}
         >
-          <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap', fontWeight: 600 }}>
-            <Link href="/credentials" className="atlas-link" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4, minHeight: 44 }}>
+          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', fontWeight: 500 }}>
+            <Link href="/credentials" className="atlas-link" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 6, minHeight: 44 }}>
               <ArrowLeft size={14} aria-hidden="true" /> All credentials
             </Link>
             <Link href="/methodology" className="atlas-link" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4, minHeight: 44 }}>
               Methodology
             </Link>
           </div>
-          <Link href={fieldHref(bestPath)} className="atlas-btn atlas-btn-primary" style={{ padding: '12px 20px' }}>
+          <Link href={fieldHref(bestPath)} className="atlas-btn atlas-btn-primary" style={{ padding: '12px 22px' }}>
             Open in the field <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>

@@ -6,7 +6,7 @@
 import { AlertCircle } from 'lucide-react';
 import PublicNav from '@/components/layout/PublicNav';
 import PublicFooter from '@/components/layout/PublicFooter';
-import { A, INS, eyebrow, tabularNums, tierColor } from '@/components/atlas/theme';
+import { A, tabularNums, tierColor, kicker, display, panel, VIZ, LINE } from '@/components/atlas/theme';
 import { METHODOLOGY_CONTENT } from '@/utils/certificationCitationMap';
 import { PATH_DIMENSIONS, getPathDefaultWeights } from '@/utils/careerPaths';
 import { rankCertifications, tierCountsFor } from '@/utils/certScoring';
@@ -97,31 +97,13 @@ function Section({ section, children }) {
       id={section.id}
       style={{ marginTop: '3.5rem', scrollMarginTop: '5rem' }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 12 }}>
-        <span
-          style={{
-            fontSize: '0.8rem',
-            color: A.inkMuted,
-            fontWeight: 600,
-            ...tabularNums,
-          }}
-        >
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 16 }}>
+        <span style={{ ...kicker(), ...tabularNums }}>
           {String(section.number).padStart(2, '0')}
         </span>
-        <hr style={{ flex: 1, border: 0, borderTop: `1px solid ${A.ruleMinor}`, margin: 0 }} />
+        <hr style={{ flex: 1, border: 0, borderTop: `1px solid ${LINE}`, margin: 0 }} />
       </div>
-      <h2
-        style={{
-          fontFamily: INS,
-          fontSize: '1.6rem',
-          fontWeight: 600,
-          color: A.ink,
-          margin: 0,
-          marginBottom: '1.25rem',
-          letterSpacing: '-0.025em',
-          lineHeight: 1.15,
-        }}
-      >
+      <h2 style={{ ...display('clamp(1.6rem, 2.4vw, 2rem)', 380), lineHeight: 1.1, marginBottom: '1.25rem' }}>
         {section.title}
       </h2>
       <div className="cs-prose">{children}</div>
@@ -137,30 +119,19 @@ export default function MethodologyPage() {
       <main id="main" className="atlas-wrap" style={{
         maxWidth: 1280,
         margin: '0 auto',
-        padding: '3rem 2rem 6rem',
+        padding: '4.5rem 2rem 6rem',
         lineHeight: 1.65,
       }}>
         {/* Hero — single column, left-anchored. Methodology is philosophy;
             numbers live on /credentials and /about. */}
-        <header style={{ marginBottom: '2.5rem', maxWidth: 760 }}>
-          <div style={{ ...eyebrow(), marginBottom: 12 }}>
+        <header className="plum-rise" style={{ marginBottom: '3.5rem', maxWidth: 860 }}>
+          <div style={{ ...kicker(), marginBottom: 18 }}>
             {METHODOLOGY_CONTENT.version} · last reviewed March 2026
           </div>
-          <h1
-            className="cs-h1-clamp"
-            style={{
-              fontFamily: INS,
-              fontSize: '2.5rem',
-              fontWeight: 600,
-              color: A.ink,
-              margin: 0,
-              letterSpacing: '-0.03em',
-              lineHeight: 1.05,
-            }}
-          >
-            Scoring methodology
+          <h1 style={display('clamp(2.3rem, 5.4vw, 4.4rem)', 350)}>
+            Scoring methodology. <em style={{ fontStyle: 'normal', color: A.accentMid }}>How every score is made.</em>
           </h1>
-          <p style={{ fontSize: '1.08rem', marginTop: '1rem', marginBottom: 0, color: A.inkBody, maxWidth: '38em' }}>
+          <p style={{ fontSize: 'clamp(15px, 1.25vw, 17.5px)', lineHeight: 1.75, marginTop: '1.75rem', marginBottom: 0, color: A.inkBody, maxWidth: '36em' }}>
             {METHODOLOGY_CONTENT.overview}
           </p>
         </header>
@@ -184,11 +155,11 @@ export default function MethodologyPage() {
                 </div>
                 {evidenceBreakdown.map(([type, n]) => (
                   <div role="row" key={type} className="atlas-bar-row">
-                    <span role="cell" style={{ fontWeight: 600 }}>{EVIDENCE_LABELS[type] || type}</span>
-                    <span role="cell" aria-hidden="true" style={{ height: 6, background: A.ruleFaint, alignSelf: 'center' }}>
-                      <span style={{ display: 'block', height: '100%', width: `${(n / evidenceMax) * 100}%`, background: A.accent }} />
+                    <span role="cell" style={{ fontWeight: 400, color: A.inkBody }}>{EVIDENCE_LABELS[type] || type}</span>
+                    <span role="cell" aria-hidden="true" style={{ height: 6, background: VIZ.track, borderRadius: 3, overflow: 'hidden', alignSelf: 'center' }}>
+                      <span className="plum-grow" style={{ display: 'block', height: '100%', width: `${(n / evidenceMax) * 100}%`, background: VIZ.c3, borderRadius: '0 4px 4px 0' }} />
                     </span>
-                    <span role="cell" style={{ textAlign: 'right', fontWeight: 700, ...tabularNums }}>{n.toLocaleString()}</span>
+                    <span role="cell" style={{ textAlign: 'right', fontWeight: 450, color: A.ink, ...tabularNums }}>{n.toLocaleString()}</span>
                     <span role="cell" style={{ textAlign: 'right', color: A.inkMuted, ...tabularNums }}>
                       {((n / typedTotal) * 100).toFixed(1)}%
                     </span>
@@ -218,15 +189,15 @@ export default function MethodologyPage() {
                 {clinicalDimensions.map((c) => (
                   <div key={c.key} className="cs-dim-card">
                     <div className="cs-dim-card-header">
-                      <h3 style={{ fontFamily: INS, fontSize: '1.02rem', fontWeight: 600, margin: 0, letterSpacing: '-0.01em' }}>
+                      <h3 style={{ fontSize: '1.1rem', fontWeight: 450, margin: 0, letterSpacing: '-0.02em', color: A.ink }}>
                         {c.label}
                       </h3>
-                      <span style={{ color: A.accent, fontWeight: 700, fontSize: '0.85rem', whiteSpace: 'nowrap', ...tabularNums }}>
-                        ×{c.weight}
+                      <span style={{ color: A.inkMuted, fontWeight: 400, fontSize: '0.8rem', whiteSpace: 'nowrap', ...tabularNums }}>
+                        weight <span style={{ color: A.ink, fontWeight: 500 }}>{c.weight}</span>
                       </span>
                     </div>
-                    <div aria-hidden="true" style={{ height: 3, background: A.ruleFaint, margin: '8px 0 10px' }}>
-                      <span style={{ display: 'block', height: '100%', width: `${c.weight}%`, background: A.accent }} />
+                    <div aria-hidden="true" style={{ height: 4, background: VIZ.track, borderRadius: 2, overflow: 'hidden', margin: '10px 0 12px' }}>
+                      <span className="plum-grow" style={{ display: 'block', height: '100%', width: `${c.weight}%`, background: VIZ.c2, borderRadius: '0 3px 3px 0' }} />
                     </div>
                     <p style={{ margin: '0 0 8px', color: A.inkBody, fontSize: '0.92rem', lineHeight: 1.55 }}>
                       {c.description}
@@ -308,7 +279,7 @@ export default function MethodologyPage() {
                 <div
                   role="img"
                   aria-label={`Clinical lens, ${clinicalTierCounts.all} credentials: ${TIERS.map((t) => `${t.count} ${t.word.toLowerCase()}`).join(', ')}.`}
-                  style={{ display: 'flex', height: 30, border: `1px solid ${A.ink}`, background: A.paper }}
+                  style={{ display: 'flex', height: 28, borderRadius: 6, overflow: 'hidden', background: A.paper }}
                 >
                   {[...TIERS].reverse().map((t) => (
                     <span
@@ -317,12 +288,12 @@ export default function MethodologyPage() {
                         flex: `${t.count} 0 0`,
                         minWidth: t.count ? 3 : 0,
                         background: t.color,
-                        borderLeft: t.key === 'limited' ? 'none' : `1px solid ${A.paper}`,
+                        borderLeft: t.key === 'limited' ? 'none' : `2px solid ${A.paper}`,
                       }}
                     />
                   ))}
                 </div>
-                <div aria-hidden="true" style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6, fontSize: 11.5, fontWeight: 600, color: A.inkMuted, ...tabularNums }}>
+                <div aria-hidden="true" style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8, fontSize: 11.5, fontWeight: 400, color: A.inkMuted, ...tabularNums }}>
                   <span>Lower scores</span>
                   <span>n = {clinicalTierCounts.all}</span>
                   <span>Higher scores</span>
@@ -331,12 +302,12 @@ export default function MethodologyPage() {
                   {TIERS.map((t) => (
                     <div key={t.key} className="atlas-tier-row">
                       <dt>
-                        <span aria-hidden="true" style={{ display: 'inline-block', width: 10, height: 10, background: t.color, marginRight: 9 }} />
-                        <span style={{ fontWeight: 700, color: A.ink }}>{t.word}</span>
-                        <span style={{ color: A.inkMuted, fontWeight: 600, marginLeft: 8, ...tabularNums }}>{t.range}</span>
+                        <span aria-hidden="true" style={{ display: 'inline-block', width: 10, height: 10, borderRadius: 3, background: t.color, marginRight: 10 }} />
+                        <span style={{ fontWeight: 500, color: A.ink }}>{t.word}</span>
+                        <span style={{ color: A.inkMuted, fontWeight: 400, marginLeft: 8, ...tabularNums }}>{t.range}</span>
                       </dt>
                       <dd style={{ margin: 0, color: A.inkBody }}>{t.description}</dd>
-                      <dd style={{ margin: 0, textAlign: 'right', fontWeight: 700, ...tabularNums }}>{t.count}</dd>
+                      <dd style={{ margin: 0, textAlign: 'right', fontWeight: 450, color: A.ink, ...tabularNums }}>{t.count}</dd>
                     </div>
                   ))}
                 </dl>
@@ -352,7 +323,7 @@ export default function MethodologyPage() {
             </Section>
 
             <Section section={SECTIONS[5]}>
-              <div className="cs-bleed cs-callout cs-callout-blue" style={{ border: `1px dashed ${A.ink}`, background: A.notice }}>
+              <div className="cs-bleed cs-callout cs-callout-blue" style={{ borderColor: 'rgba(224,168,90,0.35)', background: 'rgba(224,168,90,0.06)' }}>
                 <AlertCircle size={20} aria-hidden="true" style={{ color: A.warn }} />
                 <p>
                   Rankings are tools for clinical reasoning, not
@@ -370,9 +341,9 @@ export default function MethodologyPage() {
             <Section section={SECTIONS[6]}>
               {/* The trust centerpiece — banded, ink-ruled, with the $0
                   declaration carried over from the landing. */}
-              <div className="cs-bleed" style={{ background: A.band, border: `1px solid ${A.ink}`, padding: '1.5rem 1.75rem', marginBottom: '1.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 18, flexWrap: 'wrap' }}>
-                  <span style={{ fontFamily: INS, fontSize: '3rem', fontWeight: 600, lineHeight: 1, letterSpacing: '-0.04em', color: A.ink, ...tabularNums }}>
+              <div className="cs-bleed" style={{ ...panel, padding: '1.75rem 2rem', marginBottom: '1.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 20, flexWrap: 'wrap' }}>
+                  <span style={{ fontSize: 'clamp(2.75rem, 5vw, 3.75rem)', fontWeight: 330, lineHeight: 1, letterSpacing: '-0.05em', color: A.ink, ...tabularNums }}>
                     $0
                   </span>
                   <span style={{ color: A.inkBody, fontSize: '0.98rem' }}>
@@ -417,8 +388,8 @@ export default function MethodologyPage() {
               style={{
                 marginTop: '3.5rem',
                 marginBottom: 0,
-                paddingTop: '1.25rem',
-                borderTop: `1px solid ${A.ink}`,
+                paddingTop: '1.5rem',
+                borderTop: `1px solid ${LINE}`,
                 color: A.inkMuted,
                 fontSize: '0.85rem',
                 lineHeight: 1.6,

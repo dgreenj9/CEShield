@@ -49,13 +49,12 @@ export default function TOC({ sections }) {
     <aside className="cs-doc-toc" aria-label="On this page">
       <div
         style={{
-          fontSize: '0.8rem',
-          color: A.inkMuted,
-          letterSpacing: '0.02em',
+          fontSize: 10.5,
+          color: A.accent,
+          letterSpacing: '0.17em',
+          textTransform: 'uppercase',
           fontWeight: 600,
           marginBottom: 14,
-          borderTop: `2px solid ${A.ink}`,
-          paddingTop: 10,
         }}
       >
         On this page
@@ -76,11 +75,11 @@ export default function TOC({ sections }) {
                   marginLeft: -12,
                   fontSize: '0.88rem',
                   color: isActive ? A.ink : A.inkMuted,
-                  fontWeight: isActive ? 700 : 500,
+                  fontWeight: isActive ? 500 : 400,
                   textDecoration: 'none',
-                  borderLeft: `2px solid ${isActive ? A.accent : 'transparent'}`,
+                  borderLeft: `1px solid ${isActive ? A.accent : 'transparent'}`,
                   lineHeight: 1.35,
-                  transition: 'color 0.15s ease, border-color 0.15s ease',
+                  transition: 'color 0.3s cubic-bezier(.2,.7,.2,1), border-color 0.3s cubic-bezier(.2,.7,.2,1)',
                 }}
               >
                 <span
@@ -88,7 +87,7 @@ export default function TOC({ sections }) {
                     fontSize: '0.72rem',
                     color: isActive ? A.accent : A.inkMuted,
                     minWidth: 18,
-                    fontWeight: 600,
+                    fontWeight: 500,
                     ...tabularNums,
                   }}
                 >
