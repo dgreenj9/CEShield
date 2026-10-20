@@ -25,6 +25,7 @@ export const EVIDENCE_LABELS = {
   protocol: 'Study protocol',
   qualitative: 'Qualitative',
   narrative: 'Narrative review',
+  government_dataset: 'Government dataset',
   unknown: 'Other',
 };
 

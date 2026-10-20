@@ -13,6 +13,7 @@ import { rankCertifications, tierCountsFor } from '@/utils/certScoring';
 import { certifications } from '@/utils/certificationData';
 import TOC from './_TOC';
 import siteStats from '@/data/siteStats.json';
+import { EVIDENCE_LABELS } from '@/utils/citationsLibrary';
 
 export const metadata = {
   title: METHODOLOGY_CONTENT.title,
@@ -22,21 +23,6 @@ export const metadata = {
   openGraph: { title: METHODOLOGY_CONTENT.title, url: '/methodology' },
 };
 
-const EVIDENCE_LABELS = {
-  meta_analysis: 'Meta-analysis',
-  systematic_review: 'Systematic review',
-  rct: 'RCT',
-  guideline: 'Clinical guideline',
-  cohort: 'Cohort study',
-  case_control: 'Case-control',
-  cross_sectional: 'Cross-sectional',
-  case_series: 'Case series',
-  pilot: 'Pilot/feasibility',
-  protocol: 'Study protocol',
-  qualitative: 'Qualitative',
-  narrative: 'Narrative review',
-  unknown: 'Other',
-};
 
 // Build-time evidence-type breakdown — used inside the Evidence Base section.
 import citationMeta from '@/data/citations_meta.json';
