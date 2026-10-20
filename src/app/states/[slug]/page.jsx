@@ -9,6 +9,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import PublicNav from '@/components/layout/PublicNav';
+import PublicFooter from '@/components/layout/PublicFooter';
+import siteStats from '@/data/siteStats.json';
 import {
   allStateLicenseEntries,
   parseStateLicenseSlug,
@@ -57,8 +59,9 @@ export async function generateMetadata({ params }) {
 
 // ─── Render ───────────────────────────────────────────────────────────────
 
+// Sentence case per the voice doc: "Sexual harassment", not "Sexual Harassment".
 const humanCategory = (key) =>
-  key.replace(/([A-Z])/g, ' $1').trim().replace(/^./, (s) => s.toUpperCase());
+  key.replace(/([A-Z])/g, ' $1').trim().toLowerCase().replace(/^./, (s) => s.toUpperCase());
 
 const headLabel = {
   fontFamily: FIG, fontSize: 12.5, fontWeight: 700, color: A.inkMuted,
@@ -90,6 +93,7 @@ export default async function Page({ params }) {
   }).replace(/</g, '\\u003c');
 
   const mandatoryEntries = Object.entries(r.mandatory || {}).filter(([, v]) => v > 0);
+  const mandatoryHours = mandatoryEntries.reduce((a, [, v]) => a + v, 0);
 
   return (
     <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink }}>
@@ -100,12 +104,14 @@ export default async function Page({ params }) {
       />
       <PublicNav />
 
-      <main className="cs-page-pad" style={{ maxWidth: 860, margin: '0 auto', padding: '3rem 2rem 6rem', lineHeight: 1.65 }}>
+      <main id="main" className="atlas-wrap" style={{ maxWidth: 1280, margin: '0 auto', padding: '2.25rem 2rem 6rem', lineHeight: 1.65 }}>
+        <div style={{ maxWidth: 880 }}>
         <Link
           href="/states"
+          className="atlas-link"
           style={{
-            display: 'inline-block', fontFamily: FIG, color: A.accent, textDecoration: 'none',
-            fontWeight: 700, fontSize: 13, marginBottom: '1.25rem',
+            display: 'inline-block', fontFamily: FIG, textDecoration: 'none',
+            fontWeight: 700, fontSize: 13, padding: '10px 0', marginBottom: '0.5rem',
           }}
         >
           ← All states
@@ -123,15 +129,15 @@ export default async function Page({ params }) {
           <p style={{ color: A.inkBody, marginTop: '0.75rem', fontSize: 16.5, maxWidth: '40em' }}>
             {r.totalHours} hours of continuing education every {r.cycleYears}{' '}
             years for {licenseLong.toLowerCase()} licensed in {r.jurisdictionName},
-            per {r.citation}. Below: the full breakdown
+            per {r.citation}.
             {mandatoryEntries.length > 0
-              ? `, including ${mandatoryEntries.length} mandatory ${mandatoryEntries.length === 1 ? 'category' : 'categories'}`
-              : ''}, and a free Ledger that tracks each requirement.
+              ? ` Of those, ${mandatoryHours} go to ${mandatoryEntries.length} mandatory ${mandatoryEntries.length === 1 ? 'category' : 'categories'}.`
+              : ' No category is mandatory.'}
           </p>
 
           {r.verified === false && (
             <div
-              role="alert"
+              role="note"
               style={{
                 marginTop: '1.25rem', padding: '0.85rem 1.4rem',
                 border: `1px dashed ${A.ink}`, background: A.notice,
@@ -156,12 +162,11 @@ export default async function Page({ params }) {
         {/* Stat band */}
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
             border: `1px solid ${A.ink}`,
             background: A.paper,
             marginBottom: '2.5rem',
           }}
+          className="atlas-state-stats"
         >
           {[
             { label: 'total CE hours', value: r.totalHours },
@@ -171,10 +176,7 @@ export default async function Page({ params }) {
           ].map((s, i, arr) => (
             <div
               key={s.label}
-              style={{
-                padding: '1.2rem 1.4rem',
-                borderRight: i < arr.length - 1 ? `1px solid ${A.ruleMinor}` : 'none',
-              }}
+              style={{ padding: '1.2rem 1.4rem' }}
             >
               <div style={{ fontFamily: FIG, fontSize: 30, fontWeight: 800, lineHeight: 1, ...tabularNums }}>
                 {s.value}
@@ -190,6 +192,27 @@ export default async function Page({ params }) {
         {mandatoryEntries.length > 0 && (
           <section style={{ marginBottom: '2.5rem' }}>
             <div style={headLabel}>Mandatory categories</div>
+            {/* The cycle's hour budget: every mandatory category as a
+                segment of the total, the remainder open. */}
+            <div style={{ marginBottom: 14 }}>
+              <div
+                role="img"
+                aria-label={`${mandatoryHours} of ${r.totalHours} hours assigned to mandatory categories; ${r.totalHours - mandatoryHours} open.`}
+                style={{ display: 'flex', height: 14, border: `1px solid ${A.ink}`, background: A.ruleFaint }}
+              >
+                {mandatoryEntries.map(([key, val], i) => (
+                  <span
+                    key={key}
+                    title={`${humanCategory(key)} · ${val} h`}
+                    style={{ width: `${(val / r.totalHours) * 100}%`, background: A.accent, borderLeft: i ? `1px solid ${A.paper}` : 'none' }}
+                  />
+                ))}
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, marginTop: 6, fontSize: 12, fontWeight: 600, color: A.inkMuted, letterSpacing: '0.02em', ...tabularNums }}>
+                <span><span style={{ color: A.accent }}>■</span> {mandatoryHours} h mandatory</span>
+                <span>{r.totalHours - mandatoryHours} h open · {r.totalHours} h total</span>
+              </div>
+            </div>
             <div style={{ border: `1px solid ${A.ink}`, background: A.paper }}>
               {mandatoryEntries.map(([key, val], i, arr) => (
                 <div
@@ -209,8 +232,9 @@ export default async function Page({ params }) {
             </div>
             {r.notes?.length > 0 && (
               <ul
+                className="cs-bullet-list"
                 style={{
-                  marginTop: '1rem', paddingLeft: '1.25rem',
+                  marginTop: '1rem',
                   color: A.inkMuted, fontSize: 13.5, lineHeight: 1.6,
                 }}
               >
@@ -224,25 +248,28 @@ export default async function Page({ params }) {
         {Object.keys(r.limits || {}).length > 0 && (
           <section style={{ marginBottom: '2.5rem' }}>
             <div style={headLabel}>Format caps</div>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-                gap: 10,
-              }}
-            >
-              {Object.entries(r.limits).map(([key, val]) => (
-                <div key={key} style={{ border: `1px solid ${A.ruleFaint}`, background: A.paper, padding: '10px 12px' }}>
-                  <div style={{ fontFamily: FIG, fontSize: 17, fontWeight: 800, ...tabularNums }}>
-                    {val}
-                    <span style={{ fontSize: 12, color: A.inkMuted, fontWeight: 600 }}> h cap</span>
+            <p style={{ fontSize: 13.5, color: A.inkMuted, margin: '0 0 12px' }}>
+              The most hours each format can count toward the {r.totalHours}.
+            </p>
+            <dl style={{ margin: 0, border: `1px solid ${A.ink}`, background: A.paper }}>
+              {Object.entries(r.limits)
+                .sort((a, b) => b[1] - a[1])
+                .map(([key, val], i, arr) => (
+                  <div
+                    key={key}
+                    className="atlas-cap-row"
+                    style={{ borderBottom: i < arr.length - 1 ? `1px solid ${A.ruleFaintest}` : 'none' }}
+                  >
+                    <dt style={{ fontSize: 14.5, color: A.ink }}>{humanCategory(key)}</dt>
+                    <dd aria-hidden="true" style={{ margin: 0, height: 6, background: A.ruleFaint }}>
+                      <span style={{ display: 'block', height: '100%', width: `${Math.min(100, (val / r.totalHours) * 100)}%`, background: A.accentMid }} />
+                    </dd>
+                    <dd style={{ margin: 0, textAlign: 'right', fontWeight: 700, fontSize: 14.5, ...tabularNums }}>
+                      ≤{val}<span style={{ fontSize: 12, color: A.inkMuted, fontWeight: 600 }}> h</span>
+                    </dd>
                   </div>
-                  <div style={{ fontSize: 11.5, color: A.inkMuted, marginTop: 3, textTransform: 'capitalize' }}>
-                    {humanCategory(key)}
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+            </dl>
           </section>
         )}
 
@@ -261,26 +288,14 @@ export default async function Page({ params }) {
             </h2>
             <p style={{ color: A.inkBody, lineHeight: 1.55, margin: '0.4rem 0 0', fontSize: 14 }}>
               Hours, mandatory categories, and certificate uploads in the Ledger,
-              plus 143 credentials scored and cited in the field. Free during beta.
+              plus {siteStats.certCount} credentials scored and cited in the field. Free during beta.
             </p>
           </div>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-            <Link
-              href="/sign-in"
-              style={{
-                textDecoration: 'none', fontWeight: 600, fontSize: 14.5,
-                background: A.accent, color: A.onAccent, padding: '12px 20px', whiteSpace: 'nowrap',
-              }}
-            >
+            <Link href="/sign-in" className="atlas-btn atlas-btn-primary" style={{ fontSize: 14.5, padding: '12px 20px' }}>
               Start tracking →
             </Link>
-            <Link
-              href="/matrix"
-              style={{
-                textDecoration: 'none', fontWeight: 600, fontSize: 14.5,
-                border: `1px solid ${A.ink}`, color: A.ink, padding: '11px 20px', whiteSpace: 'nowrap',
-              }}
-            >
+            <Link href="/matrix" className="atlas-btn atlas-btn-secondary" style={{ fontSize: 14.5, padding: '12px 20px' }}>
               See the field
             </Link>
           </div>
@@ -290,24 +305,27 @@ export default async function Page({ params }) {
         <p style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, margin: '1.5rem 0 0', letterSpacing: '0.02em' }}>
           Source: {r.citation}
           {r.lastReviewed ? ` · last reviewed ${r.lastReviewed}` : ''} ·{' '}
-          <a href={r.boardUrl} target="_blank" rel="noopener noreferrer" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>
+          <a href={r.boardUrl} target="_blank" rel="noopener noreferrer" className="atlas-link atlas-hit" style={{ fontWeight: 700, textDecoration: 'none' }}>
             Read the rule ↗
           </a>
         </p>
-        <p style={{ fontFamily: FIG, fontSize: 12.5, color: A.inkMuted, margin: '0.75rem 0 0' }}>
+        <p style={{ fontFamily: FIG, fontSize: 12.5, color: A.inkMuted, margin: '0.5rem 0 0', display: 'flex', gap: '0 1.5rem', flexWrap: 'wrap' }}>
           {otherEntry && (
             <Link
               href={`/states/${otherEntry.slug}`}
-              style={{ color: A.accent, fontWeight: 700, textDecoration: 'none', marginRight: '1.25rem' }}
+              className="atlas-link"
+              style={{ fontWeight: 700, textDecoration: 'none', padding: '10px 0' }}
             >
               {r.jurisdictionName} {otherLicense} requirements →
             </Link>
           )}
-          <Link href="/states" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>
+          <Link href="/states" className="atlas-link" style={{ fontWeight: 700, textDecoration: 'none', padding: '10px 0' }}>
             All states
           </Link>
         </p>
+        </div>
       </main>
+      <PublicFooter />
     </div>
   );
 }

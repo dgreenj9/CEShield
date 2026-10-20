@@ -4,8 +4,11 @@
 
 import Link from 'next/link';
 import PublicNav from '@/components/layout/PublicNav';
+import PublicFooter from '@/components/layout/PublicFooter';
 import { allStateLicenseEntries } from '@/data/stateRules';
-import { A, FIG, INS, tabularNums } from '@/components/atlas/theme';
+import { A, INS, tabularNums } from '@/components/atlas/theme';
+
+const mandatoryLabel = (n) => (n === 0 ? 'None' : `${n} ${n === 1 ? 'category' : 'categories'}`);
 
 export const metadata = {
   title: 'CE requirements by state',
@@ -28,96 +31,88 @@ export default function StatesIndex() {
     <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink }}>
       <PublicNav />
 
-      <main style={{ maxWidth: 860, margin: '0 auto', padding: '3rem 2rem 6rem', lineHeight: 1.65 }}>
-        <header style={{ marginBottom: '2.5rem' }}>
-          <h1
-            className="cs-h1-clamp"
-            style={{ fontFamily: INS, fontSize: 40, fontWeight: 600, margin: 0, letterSpacing: '-0.025em', lineHeight: 1.05 }}
-          >
-            CE requirements by state
-          </h1>
-          <p style={{ marginTop: '0.75rem', color: A.inkBody, fontSize: 16.5, maxWidth: '38em' }}>
-            Continuing-education rules for physical and occupational therapists,
-            broken out per state. Verified states are checked against the board
-            rule and cited. Draft states are first-pass: confirm against the
-            citation before you rely on them.
-          </p>
-        </header>
+      <main id="main" className="atlas-wrap" style={{ maxWidth: 1280, margin: '0 auto', padding: '3rem 2rem 6rem', lineHeight: 1.65 }}>
+        <div style={{ maxWidth: 960 }}>
+          <header style={{ marginBottom: '2.25rem' }}>
+            <h1
+              className="cs-h1-clamp"
+              style={{ fontFamily: INS, fontSize: 40, fontWeight: 600, margin: 0, letterSpacing: '-0.025em', lineHeight: 1.05 }}
+            >
+              CE requirements by state
+            </h1>
+            <p style={{ marginTop: '0.75rem', marginBottom: 0, color: A.inkBody, fontSize: 16.5, maxWidth: '38em' }}>
+              Continuing-education rules for physical and occupational therapists,
+              per state. Verified states are checked against the board rule and
+              cited. Draft states are a first pass: confirm against the citation
+              before you rely on them.
+            </p>
+          </header>
 
-        {Object.entries(byState).map(([stateCode, items]) => {
-          const stateName = items[0].rules.jurisdictionName;
-          return (
-            <section key={stateCode} style={{ marginBottom: '2.5rem' }}>
-              <div
-                style={{
-                  fontFamily: FIG, fontSize: 12.5, fontWeight: 700, color: A.inkMuted,
-                  letterSpacing: '0.02em', borderTop: `2px solid ${A.ink}`, paddingTop: 10, marginBottom: 14,
-                }}
-              >
-                {stateName}
-              </div>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                  gap: '0.75rem',
-                }}
-              >
-                {items.map((e) => (
-                  <Link
-                    key={e.slug}
-                    href={`/states/${e.slug}`}
-                    className="card-hover"
-                    style={{
-                      display: 'block', padding: '1.25rem',
-                      background: A.paper,
-                      border: `1px solid ${A.ink}`,
-                      textDecoration: 'none', color: 'inherit',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 12 }}>
-                      <div style={{ fontFamily: INS, fontWeight: 600, fontSize: 17, letterSpacing: '-0.02em', color: A.ink }}>
-                        {e.licenseType === 'PT' ? 'Physical Therapy' : 'Occupational Therapy'}
-                      </div>
-                      <div style={{ fontFamily: FIG, fontSize: 18, fontWeight: 700, color: A.accent, ...tabularNums }}>
-                        {e.rules.totalHours}h
-                      </div>
-                    </div>
-                    <div style={{ fontFamily: FIG, fontSize: 13, color: A.inkMuted, marginTop: 4 }}>
-                      every {e.rules.cycleYears} years · {Object.keys(e.rules.mandatory || {}).filter((k) => e.rules.mandatory[k] > 0).length} mandatory categories
-                    </div>
-                    <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-                      <span style={{ fontFamily: FIG, fontSize: 12.5, color: A.accent, fontWeight: 700 }}>
-                        View requirements →
+          <div className="atlas-state-table">
+            <div className="atlas-state-row atlas-state-head" aria-hidden="true">
+              <span style={{ gridArea: 'state' }}>State</span>
+              <span style={{ gridArea: 'lic' }}>License</span>
+              <span style={{ gridArea: 'hours', textAlign: 'right' }}>Hours</span>
+              <span style={{ gridArea: 'cycle', textAlign: 'right' }}>Cycle</span>
+              <span style={{ gridArea: 'mand' }}>Mandatory</span>
+              <span style={{ gridArea: 'status' }}>Status</span>
+            </div>
+            {Object.entries(byState).map(([stateCode, items]) => (
+              <div key={stateCode} className="atlas-state-group">
+                {items.map((e, i) => {
+                  const mandatory = Object.values(e.rules.mandatory || {}).filter((v) => v > 0).length;
+                  const licenseLong = e.licenseType === 'PT' ? 'Physical therapy' : 'Occupational therapy';
+                  const draft = e.rules.verified === false;
+                  return (
+                    <Link
+                      key={e.slug}
+                      href={`/states/${e.slug}`}
+                      className="atlas-state-row atlas-row"
+                      aria-label={`${e.rules.jurisdictionName} ${licenseLong}: ${e.rules.totalHours} hours every ${e.rules.cycleYears} years, ${mandatoryLabel(mandatory)}${draft ? ', draft' : ', verified'}`}
+                    >
+                      <span style={{ gridArea: 'state', fontFamily: INS, fontWeight: 600, fontSize: 17, letterSpacing: '-0.02em', color: A.ink }}>
+                        <span className={i > 0 ? 'atlas-state-repeat' : undefined}>{e.rules.jurisdictionName}</span>
                       </span>
-                      {e.rules.verified === false && (
-                        <span style={{ fontFamily: FIG, fontSize: 11, fontWeight: 700, color: A.warn, letterSpacing: '0.02em' }}>
-                          Draft · verify before use
-                        </span>
-                      )}
-                    </div>
-                  </Link>
-                ))}
+                      <span style={{ gridArea: 'lic', fontSize: 14.5, color: A.ink, fontWeight: 500 }}>
+                        {licenseLong}
+                      </span>
+                      <span style={{ gridArea: 'hours', textAlign: 'right', fontWeight: 700, fontSize: 17, color: A.accent, ...tabularNums }}>
+                        {e.rules.totalHours}<span style={{ fontSize: 12, color: A.inkMuted, fontWeight: 600 }}> h</span>
+                      </span>
+                      <span style={{ gridArea: 'cycle', textAlign: 'right', fontSize: 14, color: A.inkBody, ...tabularNums }}>
+                        {e.rules.cycleYears} yr
+                      </span>
+                      <span style={{ gridArea: 'mand', fontSize: 14, color: A.inkBody, ...tabularNums }}>
+                        {mandatoryLabel(mandatory)}
+                      </span>
+                      <span style={{ gridArea: 'status', fontSize: 12.5, fontWeight: 700, letterSpacing: '0.02em', color: draft ? A.warn : A.accent, whiteSpace: 'nowrap' }}>
+                        {draft ? 'Draft · verify' : '✓ Verified'}
+                      </span>
+                      <span aria-hidden="true" style={{ gridArea: 'go', color: A.accent, fontWeight: 700, textAlign: 'right' }}>→</span>
+                    </Link>
+                  );
+                })}
               </div>
-            </section>
-          );
-        })}
+            ))}
+          </div>
 
-        <section
-          style={{
-            marginTop: '3rem', padding: '1.25rem 1.5rem',
-            border: `1px dashed ${A.ink}`, background: A.notice, textAlign: 'center',
-          }}
-        >
-          <p style={{ color: A.inkBody, fontSize: 14.5, margin: 0 }}>
-            Don&rsquo;t see your state?{' '}
-            <a href="mailto:hello@ceshield.com" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>
-              Email us
-            </a>{' '}
-            and it goes on the coverage list.
-          </p>
-        </section>
+          <section
+            style={{
+              marginTop: '2.5rem', padding: '1.1rem 1.5rem',
+              border: `1px dashed ${A.ink}`, background: A.notice,
+            }}
+          >
+            <p style={{ color: A.inkBody, fontSize: 14.5, margin: 0 }}>
+              Don&rsquo;t see your state?{' '}
+              <a href="mailto:hello@ceshield.com" className="atlas-link" style={{ fontWeight: 700, textDecoration: 'none', borderBottom: `2px solid ${A.accent}` }}>
+                Email us
+              </a>{' '}
+              and it goes on the coverage list.
+            </p>
+          </section>
+        </div>
       </main>
+      <PublicFooter />
     </div>
   );
 }
