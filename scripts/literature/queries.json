@@ -310,7 +310,7 @@
       {
         "retmax": 25,
         "years": "2010:2026",
-        "term": "(\"ICD-10\"[ti] OR coding[ti] OR \"health information management\"[tiab]) AND (accuracy[tiab] OR error*[tiab] OR quality[tiab] OR workforce[tiab]) AND ({SR} OR audit[ti] OR survey[ti])"
+        "term": "(\"ICD-10\"[ti] OR \"clinical coding\"[tiab] OR \"medical coding\"[tiab] OR \"diagnosis coding\"[tiab] OR \"coded data\"[tiab] OR \"health information management\"[tiab]) AND (accuracy[tiab] OR error*[tiab] OR quality[tiab] OR workforce[tiab]) AND ({SR} OR audit[ti] OR survey[ti])"
       }
     ]
   },
@@ -458,6 +458,11 @@
         "retmax": 15,
         "years": "2010:2026",
         "term": "(\"research capacity\"[ti] OR \"research career*\"[ti] OR \"research workforce\"[ti]) AND (\"allied health\"[tiab] OR rehabilitation[tiab] OR \"health professional*\"[tiab]) AND {SR}"
+      },
+      {
+        "retmax": 35,
+        "years": "2000:2026",
+        "term": "(\"physical therap*\"[ti] OR physiotherap*[ti] OR rehabilitation[ti] OR \"occupational therap*\"[ti] OR \"allied health\"[ti] OR \"speech-language\"[ti]) AND (PhD[tiab] OR doctoral[ti] OR \"research career*\"[ti] OR \"clinician-scientist*\"[ti] OR \"clinical academic*\"[ti] OR \"research capacity\"[ti] OR \"research training\"[ti] OR \"research productivity\"[ti] OR \"faculty\"[ti])"
       }
     ]
   },
@@ -554,6 +559,11 @@
         "retmax": 15,
         "years": "2010:2026",
         "term": "(\"clinical research\"[ti] OR \"translational\"[ti]) AND (\"rehabilitation\"[tiab] OR \"physical therapy\"[tiab]) AND (training[ti] OR capacity[ti] OR career*[ti] OR workforce[ti] OR infrastructure[ti])"
+      },
+      {
+        "retmax": 35,
+        "years": "2005:2026",
+        "term": "(\"clinical research\"[ti] OR \"translational research\"[ti] OR \"clinical and translational\"[ti] OR \"translational science\"[ti]) AND (training[ti] OR education[ti] OR curriculum[ti] OR \"career development\"[ti] OR scholars[ti] OR workforce[ti] OR mentor*[ti] OR degree[ti] OR program[ti])"
       }
     ]
   },
@@ -881,7 +891,7 @@
         "core": true,
         "retmax": 20,
         "years": "2005:2026",
-        "term": "(ImPACT[ti] OR \"Immediate Post-Concussion Assessment\"[tiab] OR \"computerized neurocognitive\"[tiab]) AND (concussion[tiab] OR \"sport-related\"[tiab])"
+        "term": "(\"neurocognitive test*\"[tiab] OR \"baseline testing\"[tiab] OR \"computerised neurocognitive\"[tiab] OR \"Immediate Post-Concussion Assessment\"[tiab] OR \"computerized neurocognitive\"[tiab]) AND concussion[ti]"
       },
       {
         "retmax": 40,
@@ -960,8 +970,8 @@
         "term": "(ultrasound[ti] OR ultrasonography[ti] OR sonograph*[ti] OR \"ultrasound imaging\"[ti]) AND (physiotherap*[ti] OR \"physical therap*\"[ti] OR \"physical therapist*\"[tiab] OR physiotherapist*[tiab])"
       },
       {
-        "retmax": 40,
-        "term": "(\"musculoskeletal ultrasound\"[ti] OR ultrasonograph*[ti] OR ultrasound[ti]) AND (\"diagnostic accuracy\"[ti] OR \"rotator cuff\"[ti] OR shoulder[ti] OR tendinopathy[ti] OR \"carpal tunnel\"[ti] OR \"ultrasound-guided\"[ti] OR reliability[ti]) AND ({SR} OR {GL})"
+        "retmax": 45,
+        "term": "(\"musculoskeletal ultrasound\"[ti] OR \"musculoskeletal ultrasonography\"[ti] OR sonograph*[ti] OR ultrasound[ti] OR ultrasonography[ti]) AND (\"rotator cuff\"[ti] OR shoulder[ti] OR tendon*[ti] OR tendinopathy[ti] OR \"carpal tunnel\"[ti] OR muscle[ti] OR ligament[ti] OR \"plantar fasci*\"[ti] OR musculoskeletal[ti] OR \"soft tissue\"[ti]) AND (diagnos*[ti] OR accuracy[ti] OR reliability[ti] OR imaging[ti] OR assessment[ti]) AND ({SR} OR {GL})"
       }
     ]
   },
@@ -1101,6 +1111,11 @@
       {
         "retmax": 25,
         "term": "(\"return to work\"[ti] OR \"work disability\"[ti] OR \"work rehabilitation\"[ti] OR \"work conditioning\"[ti] OR \"work hardening\"[ti] OR \"vocational rehabilitation\"[ti]) AND (\"musculoskeletal\"[tiab] OR \"low back pain\"[tiab] OR injur*[tiab]) AND ({SR} OR {GL})"
+      },
+      {
+        "retmax": 40,
+        "years": "1995:2026",
+        "term": "(\"functional capacity evaluation\"[ti] OR \"functional capacity evaluations\"[ti] OR \"work capacity\"[ti] OR \"physical demands\"[ti] OR \"lifting capacity\"[ti] OR \"work hardening\"[ti])"
       }
     ]
   },

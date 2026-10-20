@@ -803,9 +803,13 @@ def cmd_add(dry: bool = False, only: set[str] | None = None) -> None:
         rank = {"guideline": 0, "meta_analysis": 1, "systematic_review": 2, "rct": 3, "cohort": 4,
                 "cross_sectional": 5, "pilot": 5, "case_control": 5, "qualitative": 6, "narrative": 7,
                 "unknown": 7, "case_series": 8, "protocol": 9}
+        # accepted.json (if present) records the title/abstract review: only PMIDs that
+        # were read and kept are eligible; anything unreviewed is left out.
+        acc_path = LIT_DIR / "accepted.json"
+        accepted = set(json.loads(acc_path.read_text()).get(slug, [])) if acc_path.exists() else None
         by_q: dict[int, list] = defaultdict(list)
         for c in cands:
-            if not c["auto_reject"] and c["pmid"] not in rej:
+            if not c["auto_reject"] and c["pmid"] not in rej and (accepted is None or c["pmid"] in accepted):
                 by_q[c["q"]].append(c)
         for qi, lst in by_q.items():
             if not lst[0].get("core"):
