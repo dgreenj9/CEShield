@@ -3,10 +3,10 @@ import React from 'react';
 // CE Shield logo — Atlas re-ink. The three-layer shield in petrol at three
 // opacities (back 0.25, mid 0.6, front 1.0); wordmark "CE Shield" in
 // Instrument Sans 600 with no weight split.
-const PETROL = '#235E6B';
-const INK = '#1B1A17';
-const MUTED = '#56544C';
-const INS = "'Instrument Sans', ui-sans-serif, system-ui, sans-serif";
+const PETROL = '#F0C3A8';
+const INK = '#F6EEE9';
+const MUTED = '#A998AE';
+const INS = "'Figtree', ui-sans-serif, system-ui, sans-serif";
 
 const CEShieldLogo = ({ showTagline = true, className = '', size = 'large', centered = false }) => {
   const scales = {

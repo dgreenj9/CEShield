@@ -34,12 +34,12 @@ export default class ErrorBoundary extends React.Component {
       <div
         role="alert"
         className="m-8 p-6 text-sm"
-        style={{ background: '#F6F3E7', border: '1px dashed #1B1A17' }}
+        style={{ background: '#3A3043', border: '1px dashed #F6EEE9' }}
       >
         <h2 className="font-display text-lg font-semibold m-0 mb-2">
           This page failed to render.
         </h2>
-        <p className="mb-4" style={{ color: "#45433C" }}>
+        <p className="mb-4" style={{ color: "#D5C9D9" }}>
           The error is in the page, not your data. Reload to recover. If it
           repeats, email hello@ceshield.com with what you were doing.
         </p>
@@ -47,7 +47,7 @@ export default class ErrorBoundary extends React.Component {
           type="button"
           onClick={() => window.location.reload()}
           className="px-4 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-          style={{ background: '#235E6B', color: '#FAFAF5', fontWeight: 600 }}
+          style={{ background: '#F0C3A8', color: '#2A2230', fontWeight: 600 }}
         >
           Reload page
         </button>

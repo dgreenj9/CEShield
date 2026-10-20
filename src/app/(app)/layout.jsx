@@ -28,7 +28,7 @@ const Fallback = () => (
     aria-label="Loading"
     className="min-h-screen flex items-center justify-center bg-paper-bg"
   >
-    <Loader2 className="w-8 h-8 animate-spin" style={{ color: '#235E6B' }} aria-hidden="true" />
+    <Loader2 className="w-8 h-8 animate-spin" style={{ color: '#F0C3A8' }} aria-hidden="true" />
     <span className="sr-only">Loading…</span>
   </div>
 );

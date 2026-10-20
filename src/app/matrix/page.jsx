@@ -37,7 +37,7 @@ function MatrixFallback() {
       aria-label="Loading the field"
       style={{ display: 'flex', justifyContent: 'center', padding: '4rem 0' }}
     >
-      <Loader2 className="w-7 h-7 animate-spin" style={{ color: '#235E6B' }} aria-hidden="true" />
+      <Loader2 className="w-7 h-7 animate-spin" style={{ color: '#F0C3A8' }} aria-hidden="true" />
       <span className="sr-only">Loading the field…</span>
     </div>
   );
@@ -45,7 +45,7 @@ function MatrixFallback() {
 
 export default function MatrixPage() {
   return (
-    <div className="atlas-ground" style={{ minHeight: '100vh', color: '#1B1A17' }}>
+    <div className="atlas-ground" style={{ minHeight: '100vh', color: '#F6EEE9' }}>
       <PublicNav currentPath="/matrix" />
 
       <main id="main" className="atlas-wrap" style={{ maxWidth: 1280, margin: '0 auto', padding: '2.5rem 2rem 5rem' }}>
@@ -59,18 +59,18 @@ export default function MatrixPage() {
           aria-label="Create a free account"
           style={{
             marginTop: '2rem',
-            border: '1px solid #1B1A17',
+            border: '1px solid #F6EEE9',
             padding: '1rem 1.75rem',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '1.5rem',
             flexWrap: 'wrap',
-            background: '#F2F1E9',
+            background: '#302838',
           }}
         >
-          <span style={{ fontSize: 14, color: '#45433C', maxWidth: '38em' }}>
-            <strong style={{ color: '#1B1A17' }}>The personal layer.</strong>{' '}
+          <span style={{ fontSize: 14, color: '#D5C9D9', maxWidth: '38em' }}>
+            <strong style={{ color: '#F6EEE9' }}>The personal layer.</strong>{' '}
             Log hours against your renewal. Claim credentials. Export the
             binder. Free for students, always.
           </span>

@@ -1,34 +1,31 @@
-// Atlas design tokens — JS mirror of the `atlas` palette in
-// tailwind.config.js, for the inline-styled Atlas surfaces.
-//
-// Art direction in one paragraph: the product presents itself as a published
-// survey, not an app. Structure is drawn with 1px ink rules, never shadows or
-// rounded cards — border-radius is 0 everywhere on Atlas surfaces. One accent
-// (petrol) carries every interactive and "strong evidence" signal; ochre is
-// the single warning/median voice.
+// Atlas tokens, plum edition (2026-10-20). The product now shares the stage of
+// its portfolio presentation: a dark plum ground lit by one warm light, ink
+// stepped by tone, peach as the single interactive and "strong" voice, lilac
+// as its quieter second, ochre as the only warning. One typeface (Figtree),
+// light display weights, hairline rules.
 
 export const A = {
-  paper: '#FAFAF5',
-  band: '#F2F1E9',
-  notice: '#F6F3E7',
-  ink: '#1B1A17',
-  inkBody: '#45433C',
-  inkMuted: '#56544C',
-  ruleMinor: '#D5D3C6',
-  ruleFaint: '#E4E2D6',
-  ruleFaintest: '#EEECDF',
-  accent: '#235E6B',
-  accentHover: '#17434E',
-  accentMid: '#4E7E8B',
-  accentTint: '#D9E4E6',
-  warn: '#C77B2E',
-  dim: '#B9B4A6',
-  onAccent: '#FAFAF5',
+  paper: '#292331',
+  band: '#302838',
+  notice: '#3A3043',
+  ink: '#F6EEE9',
+  inkBody: '#D5C9D9',
+  inkMuted: '#A998AE',
+  ruleMinor: '#4A4055',
+  ruleFaint: '#3D3447',
+  ruleFaintest: '#352D3E',
+  accent: '#F0C3A8',
+  accentHover: '#FDE3D3',
+  accentMid: '#C7B6DC',
+  accentTint: '#43384C',
+  warn: '#E0A85A',
+  dim: '#7D6E83',
+  onAccent: '#2A2230',
 };
 
 // Font stacks. Instrument Sans = display (headings, big numerals, score
 // chips); Figtree = body, UI, labels, all tabular numerals.
-export const INS = "'Instrument Sans', ui-sans-serif, system-ui, sans-serif";
+export const INS = "'Figtree', ui-sans-serif, system-ui, sans-serif";
 export const FIG = "'Figtree', ui-sans-serif, system-ui, sans-serif";
 
 // Evidence-tier scale — the only place color encodes data.

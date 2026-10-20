@@ -46,7 +46,7 @@ export default function AppShell({ onSignOut, children }) {
           position: 'sticky',
           top: 0,
           zIndex: 100,
-          background: 'rgba(250,250,245,0.95)',
+          background: 'rgba(35,30,43,0.82)',
           backdropFilter: 'blur(8px)',
           borderBottom: `1px solid ${A.ink}`,
         }}

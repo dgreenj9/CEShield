@@ -57,7 +57,7 @@ export const metadata = {
 
 // Next 14+ split themeColor out of the metadata export.
 export const viewport = {
-  themeColor: '#235E6B',
+  themeColor: '#292331',
   width: 'device-width',
   initialScale: 1,
 };
@@ -66,16 +66,19 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Fonts — Atlas type system: Instrument Sans (display) + Figtree
-            (body/UI). Two families, no serif, no mono. */}
+        {/* One typeface: Figtree, variable weight, light at display sizes. */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Figtree:wght@400;500;600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..800&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {/* The stage: one warm light on a plum ground, with a little grain. */}
+        <div className="world" aria-hidden="true"><i /><i /></div>
+        {children}
+      </body>
       {/* GA4 — activates only when NEXT_PUBLIC_GA_ID is set (Vercel env).
           Loaded after the body via Next's third-parties helper so it never
           blocks rendering. trim() guards against stray whitespace/newlines

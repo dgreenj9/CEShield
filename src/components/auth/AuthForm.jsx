@@ -7,7 +7,7 @@ import siteStats from '../../data/siteStats.json';
 // Auth form — Atlas register panel: 1px ink rule on paper, petrol actions,
 // ochre for errors, sentence-case copy. All auth logic unchanged.
 
-const INS = "'Instrument Sans', ui-sans-serif, system-ui, sans-serif";
+const INS = "'Figtree', ui-sans-serif, system-ui, sans-serif";
 
 const inputClasses =
   'w-full px-3 py-2 rounded-none border border-atlas-rule-minor bg-atlas-paper text-sm text-atlas-ink ' +
@@ -16,8 +16,8 @@ const inputClasses =
 const labelClasses = 'block mb-2 text-sm font-semibold text-atlas-ink';
 
 const primaryBtn = (disabled) => ({
-  background: '#235E6B',
-  color: '#FAFAF5',
+  background: '#F0C3A8',
+  color: '#2A2230',
   border: 'none',
   fontWeight: 600,
   cursor: disabled ? 'not-allowed' : 'pointer',
@@ -26,7 +26,7 @@ const primaryBtn = (disabled) => ({
 });
 
 const textLink = {
-  color: '#235E6B',
+  color: '#F0C3A8',
   background: 'none',
   border: 'none',
   cursor: 'pointer',
@@ -37,23 +37,23 @@ const ErrorNotice = ({ children }) => (
   <div
     role="alert"
     style={{
-      border: '1px dashed #1B1A17',
-      background: '#F6F3E7',
+      border: '1px dashed #F6EEE9',
+      background: '#3A3043',
       padding: '0.75rem 1rem',
       fontSize: '0.875rem',
-      color: '#45433C',
+      color: '#D5C9D9',
     }}
   >
-    <strong style={{ color: '#C77B2E', fontWeight: 700, marginRight: 8 }}>Error</strong>
+    <strong style={{ color: '#E0A85A', fontWeight: 700, marginRight: 8 }}>Error</strong>
     {children}
   </div>
 );
 
 const SuccessPanel = ({ title, children }) => (
-  <div className="text-center p-4" style={{ border: '1px solid #235E6B', background: '#FAFAF5' }} role="status">
-    <CheckCircle className="w-8 h-8 mx-auto mb-2" style={{ color: '#235E6B' }} aria-hidden="true" />
-    <h3 className="font-semibold mb-2" style={{ fontFamily: INS, color: '#1B1A17' }}>{title}</h3>
-    <p className="text-sm" style={{ color: '#45433C' }}>{children}</p>
+  <div className="text-center p-4" style={{ border: '1px solid #F0C3A8', background: '#292331' }} role="status">
+    <CheckCircle className="w-8 h-8 mx-auto mb-2" style={{ color: '#F0C3A8' }} aria-hidden="true" />
+    <h3 className="font-semibold mb-2" style={{ fontFamily: INS, color: '#F6EEE9' }}>{title}</h3>
+    <p className="text-sm" style={{ color: '#D5C9D9' }}>{children}</p>
   </div>
 );
 
@@ -127,7 +127,7 @@ const AuthForm = ({ onSuccess }) => {
     <div className="min-h-screen flex items-center justify-center p-4 atlas-ground">
       <div
         className="w-full max-w-md"
-        style={{ background: '#FAFAF5', padding: '2rem', border: '1px solid #1B1A17' }}
+        style={{ background: '#292331', padding: '2rem', border: '1px solid #F6EEE9' }}
       >
         <div className="text-center mb-6">
           <CEShieldLogo showTagline={true} centered={true} size="xlarge" />
@@ -177,11 +177,11 @@ const AuthForm = ({ onSuccess }) => {
             <div className="mb-6">
               <h2
                 className="text-xl font-semibold text-center mb-2"
-                style={{ fontFamily: INS, color: '#1B1A17', letterSpacing: '-0.02em' }}
+                style={{ fontFamily: INS, color: '#F6EEE9', letterSpacing: '-0.02em' }}
               >
                 Reset your password
               </h2>
-              <p className="text-center text-sm" style={{ color: '#56544C' }}>
+              <p className="text-center text-sm" style={{ color: '#A998AE' }}>
                 Enter your email address and we&rsquo;ll send you a link to reset your password.
               </p>
             </div>
@@ -231,15 +231,15 @@ const AuthForm = ({ onSuccess }) => {
           // Normal Sign In/Sign Up Form
           <div>
             <div className="mb-6">
-              <p className="text-center" style={{ color: '#56544C' }}>
+              <p className="text-center" style={{ color: '#A998AE' }}>
                 {isSignUp ? 'Create your account' : 'Sign in to your account'}
               </p>
               {isSignUp && (
-                <p className="text-center text-sm mt-2" style={{ color: '#56544C' }}>
+                <p className="text-center text-sm mt-2" style={{ color: '#A998AE' }}>
                   Free during beta: the full field ({siteStats.certCount} credentials,{' '}
                   {siteStats.citationTotal.toLocaleString()} citations), five career lenses, and the CE
                   Ledger.{' '}
-                  <strong style={{ color: '#1B1A17' }}>
+                  <strong style={{ color: '#F6EEE9' }}>
                     Students: CE Shield is free for you, always.
                   </strong>
                 </p>
@@ -282,7 +282,7 @@ const AuthForm = ({ onSuccess }) => {
                     onClick={() => setShowPassword(!showPassword)}
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                     className="absolute right-2 top-2.5"
-                    style={{ color: '#56544C', background: 'none', border: 'none', cursor: 'pointer' }}
+                    style={{ color: '#A998AE', background: 'none', border: 'none', cursor: 'pointer' }}
                   >
                     {showPassword ? <EyeOff className="w-5 h-5" aria-hidden="true" /> : <Eye className="w-5 h-5" aria-hidden="true" />}
                   </button>
@@ -326,8 +326,8 @@ const AuthForm = ({ onSuccess }) => {
           </div>
         )}
 
-        <div className="mt-6 pt-6" style={{ borderTop: '1px solid #D5D3C6' }}>
-          <p className="text-xs text-center" style={{ color: '#56544C' }}>
+        <div className="mt-6 pt-6" style={{ borderTop: '1px solid #4A4055' }}>
+          <p className="text-xs text-center" style={{ color: '#A998AE' }}>
             Stored securely. We never share your information.
           </p>
         </div>

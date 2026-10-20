@@ -6,7 +6,7 @@ import { SUPPORTED_STATES, getRulesFor } from '../../data/stateRules';
 
 // Profile setup — Atlas register panel. All save/completion logic unchanged.
 
-const INS = "'Instrument Sans', ui-sans-serif, system-ui, sans-serif";
+const INS = "'Figtree', ui-sans-serif, system-ui, sans-serif";
 
 const inputClasses =
   'w-full px-3 py-2 rounded-none border border-atlas-rule-minor bg-atlas-paper text-sm text-atlas-ink ' +
@@ -68,23 +68,23 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
         aria-pressed={selected}
         className="p-4 text-left"
         style={{
-          border: selected ? '1px solid #235E6B' : '1px solid #D5D3C6',
-          boxShadow: selected ? 'inset 0 0 0 1px #235E6B' : 'none',
-          background: selected ? '#F2F1E9' : '#FAFAF5',
+          border: selected ? '1px solid #F0C3A8' : '1px solid #4A4055',
+          boxShadow: selected ? 'inset 0 0 0 1px #F0C3A8' : 'none',
+          background: selected ? '#302838' : '#292331',
           cursor: 'pointer',
           borderRadius: 0,
           transition: 'background 0.12s ease, border-color 0.12s ease',
         }}
       >
-        <div className="font-semibold" style={{ fontFamily: INS, color: selected ? '#235E6B' : '#1B1A17' }}>
+        <div className="font-semibold" style={{ fontFamily: INS, color: selected ? '#F0C3A8' : '#F6EEE9' }}>
           {selected ? '● ' : ''}{type}
         </div>
-        <div className="text-sm" style={{ color: '#56544C' }}>
+        <div className="text-sm" style={{ color: '#A998AE' }}>
           {type === 'PT' ? 'Physical Therapist' : 'Occupational Therapist'}
         </div>
-        <div className="text-xs mt-1 tabular-nums" style={{ color: '#56544C' }}>{summary}</div>
+        <div className="text-xs mt-1 tabular-nums" style={{ color: '#A998AE' }}>{summary}</div>
         {r && r.verified === false && (
-          <div className="text-xs mt-1" style={{ color: '#C77B2E', fontWeight: 700 }}>
+          <div className="text-xs mt-1" style={{ color: '#E0A85A', fontWeight: 700 }}>
             Draft rules
           </div>
         )}
@@ -95,12 +95,12 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
   return (
     <div className="min-h-screen p-4 atlas-ground">
       <div className="max-w-md mx-auto mt-10">
-        <div style={{ background: '#FAFAF5', padding: '2rem', border: '1px solid #1B1A17' }}>
+        <div style={{ background: '#292331', padding: '2rem', border: '1px solid #F6EEE9' }}>
           <div className="flex justify-between items-center mb-6">
             <CEShieldLogo showTagline={false} size="medium" />
             <button
               onClick={onSignOut}
-              style={{ color: '#56544C', background: 'none', border: 'none', cursor: 'pointer' }}
+              style={{ color: '#A998AE', background: 'none', border: 'none', cursor: 'pointer' }}
               title="Sign out"
               aria-label="Sign out"
             >
@@ -108,8 +108,8 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
             </button>
           </div>
 
-          <div className="mb-4 p-3" style={{ background: '#F2F1E9', border: '1px solid #D5D3C6' }}>
-            <p className="text-sm" style={{ color: '#1B1A17' }}>
+          <div className="mb-4 p-3" style={{ background: '#302838', border: '1px solid #4A4055' }}>
+            <p className="text-sm" style={{ color: '#F6EEE9' }}>
               <User className="inline w-4 h-4 mr-1" aria-hidden="true" />
               Signed in as: {authUser.email}
             </p>
@@ -138,17 +138,17 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
                   })}
                 </select>
                 <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                  <ChevronDown className="w-5 h-5" style={{ color: '#56544C' }} aria-hidden="true" />
+                  <ChevronDown className="w-5 h-5" style={{ color: '#A998AE' }} aria-hidden="true" />
                 </div>
               </div>
               {selectedRules && selectedRules.verified === false ? (
-                <p className="text-xs mt-1" style={{ color: '#45433C' }}>
-                  <strong style={{ color: '#C77B2E' }}>Draft:</strong>{' '}
+                <p className="text-xs mt-1" style={{ color: '#D5C9D9' }}>
+                  <strong style={{ color: '#E0A85A' }}>Draft:</strong>{' '}
                   {selectedRules.jurisdictionName} rules are unverified. Confirm
                   with your licensing board before relying on totals.
                 </p>
               ) : (
-                <p className="text-xs mt-1" style={{ color: '#56544C' }}>
+                <p className="text-xs mt-1" style={{ color: '#A998AE' }}>
                   Don&rsquo;t see your state? Email us and it goes on the coverage list.
                 </p>
               )}
@@ -211,9 +211,9 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
                           checked={user.isFirstRenewal}
                           onChange={(e) => setUser({...user, isFirstRenewal: e.target.checked})}
                           className="mr-2"
-                          style={{ accentColor: '#235E6B' }}
+                          style={{ accentColor: '#F0C3A8' }}
                         />
-                        <span className="text-sm" style={{ color: '#1B1A17' }}>This is my first renewal (CE exempt)</span>
+                        <span className="text-sm" style={{ color: '#F6EEE9' }}>This is my first renewal (CE exempt)</span>
                       </label>
                     </div>
 
@@ -221,8 +221,8 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
                       onClick={handleSave}
                       className="w-full py-2 px-4"
                       style={{
-                        background: '#235E6B',
-                        color: '#FAFAF5',
+                        background: '#F0C3A8',
+                        color: '#2A2230',
                         border: 'none',
                         fontWeight: 600,
                         cursor: saveDisabled ? 'not-allowed' : 'pointer',
