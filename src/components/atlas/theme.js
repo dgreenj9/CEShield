@@ -60,3 +60,44 @@ export const ruledHead = {
 };
 
 export const tabularNums = { fontVariantNumeric: 'tabular-nums' };
+
+// matrix additions
+// Dashboard tokens shared by the field (/matrix), the Lenses page, and the
+// dossier library. Hairlines are ink at low alpha so they sit on the world
+// light; the chart palette is the validated dark categorical set (on #2b2434):
+// c2 lilac-violet = the credentials themselves, c3 teal = evidence strength,
+// c1 terracotta reserved for a second series. Peach (A.accent) marks the
+// selection; it never encodes data.
+export const MX = {
+  line: '#ffffff1a',
+  line2: '#ffffff2b',
+  panel: '#ffffff08',
+  c1: '#cf6f4f',
+  c2: '#8f78e6',
+  c3: '#2fa894',
+  good: '#2fa894',
+  ring: '#2b2434',
+};
+
+// Small uppercase peach eyebrow (the portfolio label voice).
+export const mxEyebrow = {
+  fontFamily: FIG,
+  fontSize: 10.5,
+  fontWeight: 600,
+  letterSpacing: '0.17em',
+  textTransform: 'uppercase',
+  color: A.accent,
+};
+
+// Light display heading; pair with <em> for the lilac second line.
+export const mxDisplay = (size = 'clamp(32px, 3.8vw, 54px)') => ({
+  fontFamily: FIG,
+  fontSize: size,
+  fontWeight: 350,
+  letterSpacing: '-0.045em',
+  lineHeight: 1.04,
+  textWrap: 'balance',
+  margin: 0,
+  color: A.ink,
+});
+
