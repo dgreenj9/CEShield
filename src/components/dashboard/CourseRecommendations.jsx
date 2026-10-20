@@ -1,7 +1,7 @@
 import React from 'react';
 import { ExternalLink, BadgeCheck } from 'lucide-react';
 import catalog from '../../data/courseCatalog.json';
-import { A, FIG, INS, tabularNums } from '../atlas/theme';
+import { A, FIG, INS, tabularNums, LINE, LINE2, LINE_FAINT } from '../atlas/theme';
 
 // Course recommendations for compliance gaps.
 //
@@ -58,14 +58,14 @@ export default function CourseRecommendations({
           </span>
         )}
       </div>
-      <ul style={{ listStyle: 'none', padding: 0, margin: 0, border: `1px solid ${A.ink}`, background: A.paper }}>
+      <ul style={{ listStyle: 'none', padding: 0, margin: 0, border: `1px solid ${LINE}`, borderRadius: 6, background: 'rgba(255,255,255,0.03)' }}>
         {courses.map((c, i) => (
           <li
             key={c.id}
             style={{
               display: 'flex', alignItems: 'center', gap: 12,
               padding: '0.8rem 1rem',
-              borderBottom: i < courses.length - 1 ? `1px solid ${A.ruleFaint}` : 'none',
+              borderBottom: i < courses.length - 1 ? `1px solid ${LINE_FAINT}` : 'none',
             }}
           >
             <div style={{ flex: 1, minWidth: 0 }}>
@@ -82,8 +82,8 @@ export default function CourseRecommendations({
                 {c.sponsored && (
                   <span
                     style={{
-                      fontFamily: FIG, fontSize: 10.5, fontWeight: 700,
-                      padding: '1px 7px', border: `1px solid ${A.ruleMinor}`,
+                      fontFamily: FIG, fontSize: 10.5, fontWeight: 500,
+                      padding: '1px 7px', border: `1px solid ${LINE2}`,
                       color: A.inkMuted, letterSpacing: '0.02em',
                     }}
                   >

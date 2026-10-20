@@ -101,3 +101,91 @@ export const mxDisplay = (size = 'clamp(32px, 3.8vw, 54px)') => ({
   color: A.ink,
 });
 
+
+// pages additions ──────────────────────────────────────────────────────────
+// Plum language for the dossiers, method, states, about, CV, auth and the
+// signed-in app. Hairlines are light at 10 to 17%, panels carry a 6px radius
+// and a faint lighter fill, display type is light with tight tracking, and
+// eyebrows are small uppercase peach with wide tracking.
+
+export const LINE = 'rgba(255,255,255,0.10)';
+export const LINE2 = 'rgba(255,255,255,0.17)';
+export const LINE_FAINT = 'rgba(255,255,255,0.06)';
+export const PANEL_FILL = 'rgba(255,255,255,0.03)';
+export const RADIUS = 6;
+export const EASE = 'cubic-bezier(.2,.7,.2,1)';
+
+// Validated dark chart palette (dataviz validator, 3 slots on #2b2434).
+// Categorical only: tier color stays tierColor() and always prints its word.
+export const VIZ = {
+  c1: '#cf6f4f',
+  c2: '#8f78e6',
+  c3: '#2fa894',
+  track: 'rgba(255,255,255,0.07)',
+  grid: 'rgba(255,255,255,0.08)',
+};
+
+export const panel = {
+  background: PANEL_FILL,
+  border: `1px solid ${LINE}`,
+  borderRadius: RADIUS,
+};
+
+// Small uppercase peach eyebrow with wide tracking.
+export const kicker = (size = 10.5, color = A.accent) => ({
+  fontFamily: FIG,
+  fontSize: size,
+  fontWeight: 600,
+  letterSpacing: '0.17em',
+  textTransform: 'uppercase',
+  color,
+});
+
+// Quieter uppercase label for table heads and panel captions.
+export const capLabel = (size = 10.5) => ({
+  fontFamily: FIG,
+  fontSize: size,
+  fontWeight: 600,
+  letterSpacing: '0.14em',
+  textTransform: 'uppercase',
+  color: A.inkMuted,
+});
+
+// Section head: peach eyebrow over a hairline (replaces ruledHead's 2px ink).
+export const hairHead = {
+  ...kicker(),
+  borderTop: `1px solid ${LINE}`,
+  paddingTop: 16,
+};
+
+// Display type: light weight, tight negative tracking. Pair with an <em>
+// second clause styled by `lilacEm`.
+export const display = (size, weight = 370) => ({
+  fontFamily: FIG,
+  fontSize: size,
+  fontWeight: weight,
+  letterSpacing: '-0.04em',
+  lineHeight: 1.04,
+  textWrap: 'balance',
+  color: A.ink,
+  margin: 0,
+});
+
+export const lilacEm = { fontStyle: 'normal', color: A.accentMid };
+
+// Panel title (portfolio .panel h3) and big numeral (portfolio .kpi).
+export const panelTitle = { fontFamily: FIG, fontSize: 12, fontWeight: 600, letterSpacing: '0.02em', color: A.inkBody };
+export const kpi = (size = 30) => ({
+  fontFamily: FIG,
+  fontSize: size,
+  fontWeight: 380,
+  letterSpacing: '-0.04em',
+  lineHeight: 1.1,
+  fontVariantNumeric: 'tabular-nums',
+  color: A.ink,
+});
+
+// Tier color for TEXT. The Limited tier's stone (#7D6E83) is a mark color and
+// falls under AA for small text on the plum ground, so tier words use muted
+// ink there instead. Marks (dots, bars) keep tierColor().
+export const tierTextColor = (score) => (score < 30 ? A.inkMuted : tierColor(score));

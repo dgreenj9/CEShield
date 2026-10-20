@@ -4,7 +4,7 @@ import { useUserData } from '../contexts/UserDataContext';
 import { SUPPORTED_STATES, getRulesFor } from '../data/stateRules';
 import { Card, Button, Input, ConfirmDialog } from '../components/ui';
 import CredentialProfile from '../components/dashboard/CredentialProfile';
-import { A, FIG, INS, eyebrow, tabularNums } from '../components/atlas/theme';
+import { A, FIG, tabularNums, kicker, display, LINE2 } from '../components/atlas/theme';
 
 // Curated rehab service lines for the specialty multi-select. Kept as a flat
 // list (not free text) so future clinician search/filtering has clean facets.
@@ -17,18 +17,9 @@ const SPECIALTY_OPTIONS = [
   'Amputee / Prosthetics', 'Chronic Pain', 'Aquatic', 'Home Health',
 ];
 
-const cardTitle = { fontFamily: INS, fontWeight: 600, fontSize: 18, letterSpacing: '-0.02em', color: A.ink, margin: 0 };
-const fieldStyle = {
-  width: '100%',
-  padding: '8px 10px',
-  fontFamily: FIG,
-  fontSize: 14,
-  border: `1px solid ${A.ruleMinor}`,
-  background: A.paper,
-  color: A.ink,
-  borderRadius: 0,
-  boxSizing: 'border-box',
-};
+const cardTitle = { fontFamily: FIG, fontWeight: 420, fontSize: 19, letterSpacing: '-0.025em', color: A.ink, margin: 0 };
+const fieldLabel = { display: 'block', fontFamily: FIG, fontSize: 13, fontWeight: 500, color: A.inkBody, marginBottom: 8 };
+const fieldStyle = { fontFamily: FIG, fontSize: 14, boxSizing: 'border-box' };
 
 export default function ProfilePage() {
   const { user, setUser, courses, saving, saveUserProfile, uploadAvatar } = useUserData();
@@ -83,14 +74,14 @@ export default function ProfilePage() {
   return (
     <div>
       {/* Header */}
-      <header style={{ marginBottom: '1.25rem' }}>
-        <div style={{ ...eyebrow(), marginBottom: 8 }}>
+      <header className="plum-rise" style={{ marginBottom: '2rem' }}>
+        <div style={{ ...kicker(), marginBottom: 14 }}>
           Your credential record · claims, specialties, licensing
         </div>
-        <h1 className="cs-h1-clamp" style={{ fontFamily: INS, fontWeight: 600, fontSize: 36, lineHeight: 1.02, letterSpacing: '-0.025em', margin: 0 }}>
-          Your record, kept current.
+        <h1 style={display('clamp(2rem, 4.4vw, 3.25rem)', 360)}>
+          Your record, <em style={{ fontStyle: 'normal', color: A.accentMid }}>kept current.</em>
         </h1>
-        <p style={{ fontFamily: FIG, fontSize: 14.5, color: A.inkMuted, margin: '10px 0 0', maxWidth: '44em', lineHeight: 1.55 }}>
+        <p style={{ fontFamily: FIG, fontSize: 15, color: A.inkBody, margin: '14px 0 0', maxWidth: '40em', lineHeight: 1.7 }}>
           The credentials, specialties, and experience that define your practice.
           Licensing details below also drive the ledger.
         </p>
@@ -108,11 +99,11 @@ export default function ProfilePage() {
                 disabled={saving}
                 aria-label="Upload profile photo"
                 style={{
-                  position: 'relative', width: 112, height: 112,
-                  overflow: 'hidden', border: `1px solid ${A.ink}`,
-                  background: A.band, color: A.accent, cursor: 'pointer',
+                  position: 'relative', width: 112, height: 112, borderRadius: '50%',
+                  overflow: 'hidden', border: `1px solid ${LINE2}`,
+                  background: A.accentTint, color: A.accent, cursor: 'pointer',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontFamily: INS, fontSize: '2rem', fontWeight: 600, padding: 0,
+                  fontFamily: FIG, fontSize: '2rem', fontWeight: 350, letterSpacing: '-0.03em', padding: 0,
                 }}
               >
                 {localUser.avatarUrl ? (
@@ -120,9 +111,9 @@ export default function ProfilePage() {
                   <img src={localUser.avatarUrl} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 ) : initials}
                 <span style={{
-                  position: 'absolute', bottom: 0, left: 0, right: 0, padding: '4px 0',
-                  background: 'rgba(27,26,23,0.62)', color: A.onAccent,
-                  fontFamily: FIG, fontSize: 10.5, fontWeight: 600,
+                  position: 'absolute', bottom: 0, left: 0, right: 0, padding: '5px 0 9px',
+                  background: 'rgba(31,26,39,0.78)', color: A.ink,
+                  fontFamily: FIG, fontSize: 10.5, fontWeight: 500,
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
                 }}>
                   {saving ? <Loader2 size={11} className="animate-spin" aria-hidden="true" /> : <Camera size={11} aria-hidden="true" />}
@@ -165,14 +156,7 @@ export default function ProfilePage() {
                         ? (localUser.specialties || []).filter((x) => x !== sp)
                         : [...(localUser.specialties || []), sp],
                     })}
-                    style={{
-                      padding: '0.3rem 0.7rem', fontFamily: FIG, fontSize: 12.5, fontWeight: 600,
-                      cursor: 'pointer', borderRadius: 0,
-                      border: `1px solid ${selected ? A.accent : A.ruleMinor}`,
-                      background: selected ? A.accent : 'transparent',
-                      color: selected ? A.onAccent : A.inkMuted,
-                      transition: 'all 0.12s ease',
-                    }}
+                    className="plum-chip"
                   >
                     {sp}
                   </button>
@@ -186,7 +170,10 @@ export default function ProfilePage() {
         <div className="cs-cv-main" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', minWidth: 0 }}>
           <Card>
             <h2 style={{ ...cardTitle, marginBottom: 12 }}>Bio</h2>
+            <label htmlFor="profile-bio" className="sr-only">Bio</label>
             <textarea
+              id="profile-bio"
+              className="plum-input"
               rows={5}
               placeholder="A short professional summary: focus areas, populations you serve, your approach."
               value={localUser.bio || ''}
@@ -204,7 +191,8 @@ export default function ProfilePage() {
                   href={`/clinicians/${publicLiveHandle}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontFamily: FIG, fontSize: 12.5, fontWeight: 700, color: A.accent, textDecoration: 'none' }}
+                  className="atlas-link"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontFamily: FIG, fontSize: 12.5, fontWeight: 500, textDecoration: 'none', minHeight: 36 }}
                 >
                   View the public CV <ExternalLink size={13} aria-hidden="true" />
                 </a>
@@ -212,19 +200,20 @@ export default function ProfilePage() {
             </div>
             <div className="grid gap-3">
               <div>
-                <label style={{ display: 'block', fontFamily: FIG, fontSize: 13.5, fontWeight: 600, color: A.ink, marginBottom: 6 }}>Profile handle</label>
-                <div className="flex items-center" style={{ border: `1px solid ${handleValid ? A.ruleMinor : A.warn}`, background: A.paper, overflow: 'hidden' }}>
-                  <span style={{ padding: '0.5rem 0 0.5rem 0.75rem', color: A.inkMuted, fontFamily: FIG, fontSize: 13, whiteSpace: 'nowrap' }}>ceshield.com/clinicians/</span>
+                <label htmlFor="profile-handle" style={fieldLabel}>Profile handle</label>
+                <div className="flex items-center plum-input" aria-invalid={!handleValid} style={{ padding: 0, overflow: 'hidden' }}>
+                  <span style={{ padding: '0 0 0 14px', color: A.inkMuted, fontFamily: FIG, fontSize: 13, whiteSpace: 'nowrap' }}>ceshield.com/clinicians/</span>
                   <input
+                    id="profile-handle"
                     value={localUser.handle || ''}
                     onChange={(e) => set({ handle: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') })}
                     placeholder="your-name"
-                    className="flex-1 bg-transparent px-1 py-2 text-sm focus:outline-none"
-                    style={{ minWidth: 0, fontFamily: FIG, color: A.ink }}
+                    className="flex-1 bg-transparent px-1 text-sm focus:outline-none"
+                    style={{ minWidth: 0, minHeight: 42, fontFamily: FIG, color: A.ink, border: 'none' }}
                   />
                 </div>
                 {!handleValid && (
-                  <p style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 600, color: A.warn, margin: '4px 0 0' }}>
+                  <p style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 500, color: A.warn, margin: '6px 0 0' }}>
                     3–30 chars: lowercase letters, numbers, hyphens (no leading or trailing hyphen).
                   </p>
                 )}
@@ -235,10 +224,10 @@ export default function ProfilePage() {
                   type="checkbox"
                   checked={!!localUser.isPublic}
                   onChange={(e) => set({ isPublic: e.target.checked })}
-                  style={{ marginTop: 3 }}
+                  style={{ marginTop: 3, width: 18, height: 18 }}
                 />
                 <span>
-                  <span style={{ fontWeight: 600, color: A.ink, display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+                  <span style={{ fontWeight: 500, color: A.ink, display: 'inline-flex', alignItems: 'center', gap: 5 }}>
                     {localUser.isPublic ? <Eye size={14} aria-hidden="true" /> : <EyeOff size={14} aria-hidden="true" />}
                     Make my CV public
                   </span>
@@ -256,8 +245,10 @@ export default function ProfilePage() {
             <h2 style={{ ...cardTitle, marginBottom: 12 }}>Licensing &amp; compliance</h2>
             <div className="grid gap-3">
               <div>
-                <label style={{ display: 'block', fontFamily: FIG, fontSize: 13.5, fontWeight: 600, color: A.ink, marginBottom: 6 }}>Licensing state</label>
+                <label htmlFor="profile-state" style={fieldLabel}>Licensing state</label>
                 <select
+                  id="profile-state"
+                  className="plum-input"
                   value={localUser.state || 'IL'}
                   onChange={(e) => set({ state: e.target.value })}
                   style={fieldStyle}
@@ -270,8 +261,8 @@ export default function ProfilePage() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontFamily: FIG, fontSize: 13.5, fontWeight: 600, color: A.ink, marginBottom: 6 }}>License type</label>
-                <div className="grid grid-cols-2 gap-3">
+                <span id="profile-license-label" style={fieldLabel}>License type</span>
+                <div className="grid grid-cols-2 gap-3" role="group" aria-labelledby="profile-license-label">
                   {['PT', 'OT'].map((type) => {
                     const r = type === 'PT' ? ptRules : otRules;
                     const selected = localUser.licenseType === type;
@@ -283,14 +274,15 @@ export default function ProfilePage() {
                         onClick={() => requestLicenseChange(type)}
                         className="p-3 text-left w-full transition-colors"
                         style={{
-                          border: `1px solid ${selected ? A.accent : A.ruleMinor}`,
-                          background: selected ? A.accent : 'transparent',
-                          borderRadius: 0,
+                          border: `1px solid ${selected ? 'rgba(240,195,168,0.55)' : LINE2}`,
+                          background: selected ? 'rgba(240,195,168,0.10)' : 'transparent',
+                          borderRadius: 6,
                           cursor: 'pointer',
+                          minHeight: 56,
                         }}
                       >
-                        <div style={{ fontFamily: INS, fontWeight: 600, fontSize: 16, color: selected ? A.onAccent : A.ink }}>{type}</div>
-                        <div style={{ fontFamily: FIG, fontSize: 11.5, color: selected ? A.onAccent : A.inkMuted, marginTop: 2, ...tabularNums }}>
+                        <div style={{ fontFamily: FIG, fontWeight: 420, fontSize: 18, letterSpacing: '-0.02em', color: selected ? A.accent : A.ink }}>{type}</div>
+                        <div style={{ fontFamily: FIG, fontSize: 11.5, color: selected ? A.inkBody : A.inkMuted, marginTop: 2, ...tabularNums }}>
                           {r ? `${r.totalHours}h / ${r.cycleYears}yr` : 'Unavailable'}
                         </div>
                       </button>
@@ -311,13 +303,13 @@ export default function ProfilePage() {
                 onChange={(e) => set({ renewalDate: e.target.value })}
               />
               <label className="flex items-center gap-2 text-sm" style={{ fontFamily: FIG }}>
-                <input type="checkbox" checked={!!localUser.isFirstRenewal} onChange={(e) => set({ isFirstRenewal: e.target.checked })} />
+                <input type="checkbox" checked={!!localUser.isFirstRenewal} onChange={(e) => set({ isFirstRenewal: e.target.checked })} style={{ width: 18, height: 18 }} />
                 This is my first renewal (CE exempt)
               </label>
               {selectedRules && selectedRules.verified === false && (
                 <p style={{ fontFamily: FIG, fontSize: 12, color: A.warn, margin: 0, lineHeight: 1.5 }}>
                   {selectedRules.jurisdictionName} rules are <strong>draft</strong>. Verify with{' '}
-                  <a href={selectedRules.boardUrl} target="_blank" rel="noopener noreferrer" style={{ color: A.warn, fontWeight: 700 }}>
+                  <a href={selectedRules.boardUrl} target="_blank" rel="noopener noreferrer" style={{ color: A.warn, fontWeight: 500 }}>
                     {selectedRules.citation}
                   </a>{' '}before relying on totals.
                 </p>
@@ -333,7 +325,7 @@ export default function ProfilePage() {
           <Save size={16} aria-hidden="true" /> {saving ? 'Saving…' : 'Save changes'}
         </Button>
         {savedAt && (
-          <span style={{ fontFamily: FIG, fontSize: 13, fontWeight: 700, color: A.accent, ...tabularNums }}>
+          <span role="status" style={{ fontFamily: FIG, fontSize: 13, fontWeight: 500, color: '#2fa894', ...tabularNums }}>
             ✓ Saved {savedAt.toLocaleTimeString()}
           </span>
         )}

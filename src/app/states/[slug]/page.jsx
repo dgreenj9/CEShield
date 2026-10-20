@@ -16,7 +16,7 @@ import {
   parseStateLicenseSlug,
   getRulesFor,
 } from '@/data/stateRules';
-import { A, FIG, INS, tabularNums } from '@/components/atlas/theme';
+import { A, FIG, tabularNums, kicker, display, panel, hairHead, kpi, VIZ, LINE_FAINT } from '@/components/atlas/theme';
 
 // ─── SSG plumbing ─────────────────────────────────────────────────────────
 
@@ -63,10 +63,7 @@ export async function generateMetadata({ params }) {
 const humanCategory = (key) =>
   key.replace(/([A-Z])/g, ' $1').trim().toLowerCase().replace(/^./, (s) => s.toUpperCase());
 
-const headLabel = {
-  fontFamily: FIG, fontSize: 12.5, fontWeight: 700, color: A.inkMuted,
-  letterSpacing: '0.02em', borderTop: `2px solid ${A.ink}`, paddingTop: 10, marginBottom: 14,
-};
+const headLabel = { ...hairHead, marginBottom: 16 };
 
 export default async function Page({ params }) {
   const { slug } = await params;
@@ -104,29 +101,26 @@ export default async function Page({ params }) {
       />
       <PublicNav />
 
-      <main id="main" className="atlas-wrap" style={{ maxWidth: 1280, margin: '0 auto', padding: '2.25rem 2rem 6rem', lineHeight: 1.65 }}>
+      <main id="main" className="atlas-wrap" style={{ maxWidth: 1280, margin: '0 auto', padding: '3rem 2rem 6rem', lineHeight: 1.65 }}>
         <div style={{ maxWidth: 880 }}>
         <Link
           href="/states"
           className="atlas-link"
           style={{
             display: 'inline-block', fontFamily: FIG, textDecoration: 'none',
-            fontWeight: 700, fontSize: 13, padding: '10px 0', marginBottom: '0.5rem',
+            fontWeight: 500, fontSize: 13, padding: '10px 0', marginBottom: '1.25rem',
           }}
         >
           ← All states
         </Link>
-        <header style={{ marginBottom: '2rem' }}>
-          <div style={{ fontFamily: FIG, fontSize: 12.5, color: A.inkMuted, fontWeight: 600, letterSpacing: '0.02em', marginBottom: 8 }}>
+        <header className="plum-rise" style={{ marginBottom: '2.5rem' }}>
+          <div style={{ ...kicker(), marginBottom: 18, ...tabularNums }}>
             {r.jurisdictionName} · {parsed.licenseType} · {r.totalHours}h / {r.cycleYears}yr
           </div>
-          <h1
-            className="cs-h1-clamp"
-            style={{ fontFamily: INS, fontSize: 40, fontWeight: 600, margin: 0, letterSpacing: '-0.025em', lineHeight: 1.05 }}
-          >
-            {r.jurisdictionName} {parsed.licenseType} CE requirements
+          <h1 style={display('clamp(2.2rem, 5vw, 3.75rem)', 350)}>
+            {r.jurisdictionName} {parsed.licenseType} <em style={{ fontStyle: 'normal', color: A.accentMid }}>CE requirements</em>
           </h1>
-          <p style={{ color: A.inkBody, marginTop: '0.75rem', fontSize: 16.5, maxWidth: '40em' }}>
+          <p style={{ color: A.inkBody, marginTop: '1.5rem', fontSize: 16, lineHeight: 1.75, maxWidth: '38em' }}>
             {r.totalHours} hours of continuing education every {r.cycleYears}{' '}
             years for {licenseLong.toLowerCase()} licensed in {r.jurisdictionName},
             per {r.citation}.
@@ -139,18 +133,18 @@ export default async function Page({ params }) {
             <div
               role="note"
               style={{
-                marginTop: '1.25rem', padding: '0.85rem 1.4rem',
-                border: `1px dashed ${A.ink}`, background: A.notice,
+                marginTop: '1.25rem', padding: '0.9rem 1.4rem', borderRadius: 6,
+                border: '1px solid rgba(224,168,90,0.35)', background: 'rgba(224,168,90,0.06)',
                 display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap',
                 fontSize: 14,
               }}
             >
-              <span style={{ fontFamily: FIG, fontSize: 12, letterSpacing: '0.02em', fontWeight: 700, color: A.warn, whiteSpace: 'nowrap' }}>
+              <span style={{ ...kicker(10.5, A.warn), whiteSpace: 'nowrap' }}>
                 Draft state
               </span>
               <span style={{ color: A.inkBody }}>
                 These values are a first draft based on{' '}
-                <a href={r.boardUrl} target="_blank" rel="noopener noreferrer" style={{ color: A.accent, fontWeight: 700 }}>
+                <a href={r.boardUrl} target="_blank" rel="noopener noreferrer" className="atlas-link" style={{ fontWeight: 500 }}>
                   {r.citation}
                 </a>
                 . Verify with your licensing board before relying on totals.
@@ -161,11 +155,7 @@ export default async function Page({ params }) {
 
         {/* Stat band */}
         <div
-          style={{
-            border: `1px solid ${A.ink}`,
-            background: A.paper,
-            marginBottom: '2.5rem',
-          }}
+          style={{ ...panel, marginBottom: '3.5rem' }}
           className="atlas-state-stats"
         >
           {[
@@ -176,13 +166,13 @@ export default async function Page({ params }) {
           ].map((s, i, arr) => (
             <div
               key={s.label}
-              style={{ padding: '1.2rem 1.4rem' }}
+              style={{ padding: '1.25rem 1.4rem 1.2rem' }}
             >
-              <div style={{ fontFamily: FIG, fontSize: 30, fontWeight: 800, lineHeight: 1, ...tabularNums }}>
-                {s.value}
+              <div style={{ fontFamily: FIG, fontSize: 12, color: A.inkMuted, fontWeight: 400 }}>
+                {s.label.charAt(0).toUpperCase() + s.label.slice(1)}
               </div>
-              <div style={{ fontFamily: FIG, fontSize: 11.5, letterSpacing: '0.02em', color: A.inkMuted, fontWeight: 600, marginTop: 5 }}>
-                {s.label}
+              <div style={{ ...kpi(32), marginTop: 10 }}>
+                {s.value}
               </div>
             </div>
           ))}
@@ -190,7 +180,7 @@ export default async function Page({ params }) {
 
         {/* Mandatory categories */}
         {mandatoryEntries.length > 0 && (
-          <section style={{ marginBottom: '2.5rem' }}>
+          <section style={{ marginBottom: '3.5rem' }}>
             <div style={headLabel}>Mandatory categories</div>
             {/* The cycle's hour budget: every mandatory category as a
                 segment of the total, the remainder open. */}
@@ -198,33 +188,33 @@ export default async function Page({ params }) {
               <div
                 role="img"
                 aria-label={`${mandatoryHours} of ${r.totalHours} hours assigned to mandatory categories; ${r.totalHours - mandatoryHours} open.`}
-                style={{ display: 'flex', height: 14, border: `1px solid ${A.ink}`, background: A.ruleFaint }}
+                style={{ display: 'flex', height: 12, borderRadius: 6, overflow: 'hidden', background: VIZ.track }}
               >
                 {mandatoryEntries.map(([key, val], i) => (
                   <span
                     key={key}
                     title={`${humanCategory(key)} · ${val} h`}
-                    style={{ width: `${(val / r.totalHours) * 100}%`, background: A.accent, borderLeft: i ? `1px solid ${A.paper}` : 'none' }}
+                    style={{ width: `${(val / r.totalHours) * 100}%`, background: VIZ.c2, borderLeft: i ? `2px solid ${A.paper}` : 'none' }}
                   />
                 ))}
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, marginTop: 6, fontSize: 12, fontWeight: 600, color: A.inkMuted, letterSpacing: '0.02em', ...tabularNums }}>
-                <span><span style={{ color: A.accent }}>■</span> {mandatoryHours} h mandatory</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, marginTop: 8, fontSize: 12, fontWeight: 400, color: A.inkMuted, ...tabularNums }}>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}><i aria-hidden="true" style={{ width: 8, height: 8, borderRadius: 2, background: VIZ.c2 }} /> {mandatoryHours} h mandatory</span>
                 <span>{r.totalHours - mandatoryHours} h open · {r.totalHours} h total</span>
               </div>
             </div>
-            <div style={{ border: `1px solid ${A.ink}`, background: A.paper }}>
+            <div style={panel}>
               {mandatoryEntries.map(([key, val], i, arr) => (
                 <div
                   key={key}
                   style={{
                     display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
-                    padding: '0.8rem 1.4rem',
-                    borderBottom: i < arr.length - 1 ? `1px solid ${A.ruleFaintest}` : 'none',
+                    padding: '0.85rem 1.4rem',
+                    borderBottom: i < arr.length - 1 ? `1px solid ${LINE_FAINT}` : 'none',
                   }}
                 >
-                  <span style={{ fontSize: 14.5, color: A.ink }}>{humanCategory(key)}</span>
-                  <span style={{ fontFamily: FIG, fontWeight: 700, fontSize: 14.5, color: A.ink, ...tabularNums }}>
+                  <span style={{ fontSize: 14.5, color: A.inkBody }}>{humanCategory(key)}</span>
+                  <span style={{ fontFamily: FIG, fontWeight: 450, fontSize: 14.5, color: A.ink, ...tabularNums }}>
                     {val} {val === 1 ? 'hour' : 'hours'}
                   </span>
                 </div>
@@ -246,26 +236,26 @@ export default async function Page({ params }) {
 
         {/* Format caps */}
         {Object.keys(r.limits || {}).length > 0 && (
-          <section style={{ marginBottom: '2.5rem' }}>
+          <section style={{ marginBottom: '3.5rem' }}>
             <div style={headLabel}>Format caps</div>
             <p style={{ fontSize: 13.5, color: A.inkMuted, margin: '0 0 12px' }}>
               The most hours each format can count toward the {r.totalHours}.
             </p>
-            <dl style={{ margin: 0, border: `1px solid ${A.ink}`, background: A.paper }}>
+            <dl style={{ margin: 0, ...panel }}>
               {Object.entries(r.limits)
                 .sort((a, b) => b[1] - a[1])
                 .map(([key, val], i, arr) => (
                   <div
                     key={key}
                     className="atlas-cap-row"
-                    style={{ borderBottom: i < arr.length - 1 ? `1px solid ${A.ruleFaintest}` : 'none' }}
+                    style={{ borderBottom: i < arr.length - 1 ? `1px solid ${LINE_FAINT}` : 'none' }}
                   >
-                    <dt style={{ fontSize: 14.5, color: A.ink }}>{humanCategory(key)}</dt>
-                    <dd aria-hidden="true" style={{ margin: 0, height: 6, background: A.ruleFaint }}>
-                      <span style={{ display: 'block', height: '100%', width: `${Math.min(100, (val / r.totalHours) * 100)}%`, background: A.accentMid }} />
+                    <dt style={{ fontSize: 14.5, color: A.inkBody }}>{humanCategory(key)}</dt>
+                    <dd aria-hidden="true" style={{ margin: 0, height: 6, background: VIZ.track, borderRadius: 3, overflow: 'hidden' }}>
+                      <span className="plum-grow" style={{ display: 'block', height: '100%', width: `${Math.min(100, (val / r.totalHours) * 100)}%`, background: VIZ.c2, borderRadius: '0 4px 4px 0' }} />
                     </dd>
-                    <dd style={{ margin: 0, textAlign: 'right', fontWeight: 700, fontSize: 14.5, ...tabularNums }}>
-                      ≤{val}<span style={{ fontSize: 12, color: A.inkMuted, fontWeight: 600 }}> h</span>
+                    <dd style={{ margin: 0, textAlign: 'right', fontWeight: 450, fontSize: 14.5, color: A.ink, ...tabularNums }}>
+                      ≤{val}<span style={{ fontSize: 12, color: A.inkMuted, fontWeight: 400 }}> h</span>
                     </dd>
                   </div>
                 ))}
@@ -276,17 +266,16 @@ export default async function Page({ params }) {
         {/* CTA */}
         <section
           style={{
-            marginTop: '3rem', padding: '1.25rem 1.75rem',
-            border: `1px solid ${A.ink}`, background: A.band,
+            ...panel, marginTop: '3.5rem', padding: '1.75rem 2rem',
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             gap: '1.5rem', flexWrap: 'wrap',
           }}
         >
           <div style={{ maxWidth: '34em' }}>
-            <h2 style={{ fontFamily: INS, fontSize: 20, fontWeight: 600, margin: 0, letterSpacing: '-0.025em', color: A.ink }}>
+            <h2 style={{ ...display('clamp(1.35rem, 2.2vw, 1.6rem)', 400), lineHeight: 1.2 }}>
               Track {r.jurisdictionName} {parsed.licenseType} CE with CE Shield
             </h2>
-            <p style={{ color: A.inkBody, lineHeight: 1.55, margin: '0.4rem 0 0', fontSize: 14 }}>
+            <p style={{ color: A.inkBody, lineHeight: 1.65, margin: '0.6rem 0 0', fontSize: 14 }}>
               Hours, mandatory categories, and certificate uploads in the Ledger,
               plus {siteStats.certCount} credentials scored and cited in the field. Free during beta.
             </p>
@@ -305,7 +294,7 @@ export default async function Page({ params }) {
         <p style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, margin: '1.5rem 0 0', letterSpacing: '0.02em' }}>
           Source: {r.citation}
           {r.lastReviewed ? ` · last reviewed ${r.lastReviewed}` : ''} ·{' '}
-          <a href={r.boardUrl} target="_blank" rel="noopener noreferrer" className="atlas-link atlas-hit" style={{ fontWeight: 700, textDecoration: 'none' }}>
+          <a href={r.boardUrl} target="_blank" rel="noopener noreferrer" className="atlas-link atlas-hit" style={{ fontWeight: 500, textDecoration: 'none' }}>
             Read the rule ↗
           </a>
         </p>
@@ -314,12 +303,12 @@ export default async function Page({ params }) {
             <Link
               href={`/states/${otherEntry.slug}`}
               className="atlas-link"
-              style={{ fontWeight: 700, textDecoration: 'none', padding: '10px 0' }}
+              style={{ fontWeight: 500, textDecoration: 'none', padding: '10px 0' }}
             >
               {r.jurisdictionName} {otherLicense} requirements →
             </Link>
           )}
-          <Link href="/states" className="atlas-link" style={{ fontWeight: 700, textDecoration: 'none', padding: '10px 0' }}>
+          <Link href="/states" className="atlas-link" style={{ fontWeight: 500, textDecoration: 'none', padding: '10px 0' }}>
             All states
           </Link>
         </p>
