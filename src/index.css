@@ -1285,6 +1285,7 @@ select {
   .lp-field-stage { position: relative; top: 0; height: min(100svh, 820px); }
   .lp-cue::after { animation: none; }
   .world i:nth-child(1) { transform: none; }
+}
 
 /* matrix additions */
 /* The field, the Lenses page and the dossier library share the portfolio's
@@ -1446,6 +1447,7 @@ input.mx-range:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 2px #2b2434, 
   .mx-lib { padding: 0 12px; }
   .mx-lib a { grid-template-columns: 24px minmax(0, 1fr) auto; gap: 10px; }
   .mx-lib .mx-cites, .mx-lib .mx-go { display: none; }
+}
 
 /* pages additions ──────────────────────────────────────────────────────────
    Plum language for the dossiers, method, states, about, CV, auth and the

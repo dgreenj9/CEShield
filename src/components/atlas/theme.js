@@ -55,7 +55,7 @@ export const ruledHead = {
   letterSpacing: '0.02em',
   fontWeight: 600,
   color: A.inkMuted,
-  borderTop: `2px solid ${A.ink}`,
+  borderTop: '1px solid rgba(246, 238, 233, 0.16)',
   paddingTop: 10,
 };
 
