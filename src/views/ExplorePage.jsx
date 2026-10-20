@@ -140,7 +140,7 @@ export default function ExplorePage() {
       {missing.length > 0 && !user.isFirstRenewal && (
         <section
           aria-label="Next action"
-          style={{ marginTop: 10, borderRadius: 6, border: '1px solid rgba(224,168,90,0.35)', padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem 1.5rem', flexWrap: 'wrap', background: 'rgba(224,168,90,0.06)' }}
+          style={{ marginTop: 10, borderRadius: 6, border: '1px solid rgba(224,142,109,0.35)', padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem 1.5rem', flexWrap: 'wrap', background: 'rgba(224,142,109,0.06)' }}
         >
           <span style={{ fontSize: 14.5, color: A.inkBody }}>
             <strong style={{ ...kicker(10.5, A.warn), marginRight: 12 }}>Next action</strong>
@@ -180,7 +180,7 @@ export default function ExplorePage() {
                   {cert.name}
                 </Link>
                 {claim && (
-                  <span style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 500, padding: '2px 9px', borderRadius: 20, border: '1px solid rgba(240,195,168,0.45)', color: A.accent, flexShrink: 0, textTransform: 'capitalize' }}>
+                  <span style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 500, padding: '2px 9px', borderRadius: 20, border: '1px solid rgba(226,196,143,0.45)', color: A.accent, flexShrink: 0, textTransform: 'capitalize' }}>
                     {claim.replace('_', ' ')}
                   </span>
                 )}
@@ -221,7 +221,7 @@ export default function ExplorePage() {
                   return (
                     <div key={key} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '8px 0', borderBottom: `1px solid ${LINE_FAINT}` }}>
                       <span style={{ fontSize: 13.5, color: A.inkBody, textTransform: 'capitalize' }}>{labelize(key)}</span>
-                      <span style={{ fontFamily: FIG, fontSize: 12, fontWeight: 500, color: done ? '#2fa894' : A.warn, ...tabularNums }}>
+                      <span style={{ fontFamily: FIG, fontSize: 12, fontWeight: 500, color: done ? '#2E9F8C' : A.warn, ...tabularNums }}>
                         {hours[key] || 0}/{required} {done ? '✓' : 'Due'}
                       </span>
                     </div>

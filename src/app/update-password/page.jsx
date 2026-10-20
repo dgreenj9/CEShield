@@ -23,11 +23,11 @@ const INS = "'Figtree', ui-sans-serif, system-ui, sans-serif";
 const inputClasses = 'plum-input text-sm';
 
 const labelClasses = 'flex items-center gap-1.5 mb-2 text-sm';
-const labelStyle = { color: '#D5C9D9', fontWeight: 500 };
+const labelStyle = { color: '#C5D2CE', fontWeight: 500 };
 
 const primaryBtn = (disabled) => ({
-  background: '#F0C3A8',
-  color: '#2A2230',
+  background: '#E2C48F',
+  color: '#10201F',
   border: 'none',
   borderRadius: 999,
   minHeight: 46,
@@ -39,8 +39,8 @@ const primaryBtn = (disabled) => ({
 });
 
 const notice = {
-  border: '1px solid rgba(224,168,90,0.35)',
-  background: 'rgba(224,168,90,0.07)',
+  border: '1px solid rgba(224,142,109,0.35)',
+  background: 'rgba(224,142,109,0.07)',
   borderRadius: 6,
 };
 
@@ -112,7 +112,7 @@ export default function UpdatePasswordPage() {
     <div className="min-h-screen flex items-center justify-center p-4 atlas-ground">
       <div
         className="w-full max-w-md plum-rise"
-        style={{ background: 'rgba(41,35,49,0.72)', padding: '2.25rem 2rem 1.75rem', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 6, boxShadow: '0 40px 80px rgba(13,8,26,0.35)', WebkitBackdropFilter: 'blur(12px)', backdropFilter: 'blur(12px)' }}
+        style={{ background: 'rgba(15,29,34,0.72)', padding: '2.25rem 2rem 1.75rem', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 6, boxShadow: '0 40px 80px rgba(3,10,12,0.35)', WebkitBackdropFilter: 'blur(12px)', backdropFilter: 'blur(12px)' }}
       >
         <div className="text-center mb-6">
           <CEShieldLogo showTagline={false} centered size="xlarge" />
@@ -120,8 +120,8 @@ export default function UpdatePasswordPage() {
 
         {phase === 'checking' && (
           <div className="text-center py-6" role="status" aria-live="polite">
-            <Loader2 className="w-6 h-6 mx-auto animate-spin" style={{ color: '#F0C3A8' }} aria-hidden="true" />
-            <p className="text-sm mt-3" style={{ color: '#A998AE' }}>
+            <Loader2 className="w-6 h-6 mx-auto animate-spin" style={{ color: '#E2C48F' }} aria-hidden="true" />
+            <p className="text-sm mt-3" style={{ color: '#8EA5A0' }}>
               Verifying your reset link…
             </p>
           </div>
@@ -134,11 +134,11 @@ export default function UpdatePasswordPage() {
               style={notice}
               role="alert"
             >
-              <AlertCircle className="w-8 h-8 mx-auto mb-2" style={{ color: '#E0A85A' }} aria-hidden="true" />
-              <h3 className="mb-2" style={{ fontFamily: INS, color: '#F6EEE9', fontWeight: 450, fontSize: 18, letterSpacing: '-0.02em' }}>
+              <AlertCircle className="w-8 h-8 mx-auto mb-2" style={{ color: '#E08E6D' }} aria-hidden="true" />
+              <h3 className="mb-2" style={{ fontFamily: INS, color: '#EEF2EC', fontWeight: 450, fontSize: 18, letterSpacing: '-0.02em' }}>
                 Reset link expired or invalid
               </h3>
-              <p className="text-sm" style={{ color: '#D5C9D9' }}>
+              <p className="text-sm" style={{ color: '#C5D2CE' }}>
                 Reset links are single-use and expire quickly. Request a new
                 one from the sign-in page.
               </p>
@@ -157,11 +157,11 @@ export default function UpdatePasswordPage() {
           <div>
             <h2
               className="text-center mb-2"
-              style={{ fontFamily: INS, color: '#F6EEE9', letterSpacing: '-0.035em', fontWeight: 400, fontSize: 26, lineHeight: 1.15 }}
+              style={{ fontFamily: INS, color: '#EEF2EC', letterSpacing: '-0.035em', fontWeight: 400, fontSize: 26, lineHeight: 1.15 }}
             >
               Set a new password
             </h2>
-            <p className="text-center text-sm mb-6" style={{ color: '#A998AE' }}>
+            <p className="text-center text-sm mb-6" style={{ color: '#8EA5A0' }}>
               Choose a new password for your account.
             </p>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -186,7 +186,7 @@ export default function UpdatePasswordPage() {
                     onClick={() => setShowPassword(!showPassword)}
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                     className="absolute right-0 top-0 flex items-center justify-center"
-                    style={{ color: '#A998AE', background: 'none', border: 'none', cursor: 'pointer', width: 44, height: 44 }}
+                    style={{ color: '#8EA5A0', background: 'none', border: 'none', cursor: 'pointer', width: 44, height: 44 }}
                   >
                     {showPassword ? <EyeOff className="w-5 h-5" aria-hidden="true" /> : <Eye className="w-5 h-5" aria-hidden="true" />}
                   </button>
@@ -216,10 +216,10 @@ export default function UpdatePasswordPage() {
                     ...notice,
                     padding: '0.75rem 1rem',
                     fontSize: '0.875rem',
-                    color: '#D5C9D9',
+                    color: '#C5D2CE',
                   }}
                 >
-                  <strong style={{ color: '#E0A85A', fontWeight: 600, marginRight: 8 }}>Error</strong>
+                  <strong style={{ color: '#E08E6D', fontWeight: 600, marginRight: 8 }}>Error</strong>
                   {error}
                 </div>
               )}
@@ -239,12 +239,12 @@ export default function UpdatePasswordPage() {
         {phase === 'done' && (
           <div
             className="text-center p-5"
-            style={{ border: '1px solid rgba(240,195,168,0.4)', background: 'rgba(240,195,168,0.06)', borderRadius: 6 }}
+            style={{ border: '1px solid rgba(226,196,143,0.4)', background: 'rgba(226,196,143,0.06)', borderRadius: 6 }}
             role="status"
           >
-            <CheckCircle className="w-8 h-8 mx-auto mb-2" style={{ color: '#F0C3A8' }} aria-hidden="true" />
-            <h3 className="mb-2" style={{ fontFamily: INS, color: '#F6EEE9', fontWeight: 450, fontSize: 18, letterSpacing: '-0.02em' }}>Password updated</h3>
-            <p className="text-sm" style={{ color: '#D5C9D9' }}>
+            <CheckCircle className="w-8 h-8 mx-auto mb-2" style={{ color: '#E2C48F' }} aria-hidden="true" />
+            <h3 className="mb-2" style={{ fontFamily: INS, color: '#EEF2EC', fontWeight: 450, fontSize: 18, letterSpacing: '-0.02em' }}>Password updated</h3>
+            <p className="text-sm" style={{ color: '#C5D2CE' }}>
               Taking you to your dashboard…
             </p>
           </div>

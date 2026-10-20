@@ -8,7 +8,7 @@ const VARIANTS = {
   brand: 'border-atlas-accent/45 text-atlas-accent',
   accent: 'border-atlas-accent/45 text-atlas-accent',
   solid: 'border-atlas-accent bg-atlas-accent text-atlas-on-accent',
-  success: 'border-[#2fa894]/50 text-[#2fa894]',
+  success: 'border-[#2E9F8C]/50 text-[#2E9F8C]',
   warning: 'border-atlas-warn/50 text-atlas-warn',
   danger: 'border-atlas-warn/50 text-atlas-warn',
   purple: 'border-atlas-accent-mid/50 text-atlas-accent-mid',

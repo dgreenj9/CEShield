@@ -64,7 +64,7 @@ function HeroStat({ value, label }) {
   );
 }
 
-const proseLink = { color: A.accent, textDecoration: 'underline', textDecorationColor: 'rgba(240,195,168,0.45)', textUnderlineOffset: 3 };
+const proseLink = { color: A.accent, textDecoration: 'underline', textDecorationColor: 'rgba(226,196,143,0.45)', textUnderlineOffset: 3 };
 const footLink = { textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 5, fontWeight: 500, padding: '10px 0' };
 
 export default function AboutPage() {

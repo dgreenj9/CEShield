@@ -13,11 +13,11 @@ const INS = "'Figtree', ui-sans-serif, system-ui, sans-serif";
 const inputClasses = 'plum-input text-sm';
 
 const labelClasses = 'flex items-center gap-1.5 mb-2 text-sm';
-const labelStyle = { color: '#D5C9D9', fontWeight: 500 };
+const labelStyle = { color: '#C5D2CE', fontWeight: 500 };
 
 const primaryBtn = (disabled) => ({
-  background: '#F0C3A8',
-  color: '#2A2230',
+  background: '#E2C48F',
+  color: '#10201F',
   border: 'none',
   borderRadius: 999,
   minHeight: 46,
@@ -29,7 +29,7 @@ const primaryBtn = (disabled) => ({
 });
 
 const textLink = {
-  color: '#F0C3A8',
+  color: '#E2C48F',
   background: 'none',
   border: 'none',
   cursor: 'pointer',
@@ -42,24 +42,24 @@ const ErrorNotice = ({ children }) => (
   <div
     role="alert"
     style={{
-      border: '1px solid rgba(224,168,90,0.35)',
-      background: 'rgba(224,168,90,0.07)',
+      border: '1px solid rgba(224,142,109,0.35)',
+      background: 'rgba(224,142,109,0.07)',
       borderRadius: 6,
       padding: '0.75rem 1rem',
       fontSize: '0.875rem',
-      color: '#D5C9D9',
+      color: '#C5D2CE',
     }}
   >
-    <strong style={{ color: '#E0A85A', fontWeight: 600, marginRight: 8 }}>Error</strong>
+    <strong style={{ color: '#E08E6D', fontWeight: 600, marginRight: 8 }}>Error</strong>
     {children}
   </div>
 );
 
 const SuccessPanel = ({ title, children }) => (
-  <div className="text-center p-5" style={{ border: '1px solid rgba(240,195,168,0.4)', background: 'rgba(240,195,168,0.06)', borderRadius: 6 }} role="status">
-    <CheckCircle className="w-8 h-8 mx-auto mb-3" style={{ color: '#F0C3A8' }} aria-hidden="true" />
-    <h3 className="mb-2" style={{ fontFamily: INS, color: '#F6EEE9', fontWeight: 450, fontSize: 18, letterSpacing: '-0.02em' }}>{title}</h3>
-    <p className="text-sm" style={{ color: '#D5C9D9' }}>{children}</p>
+  <div className="text-center p-5" style={{ border: '1px solid rgba(226,196,143,0.4)', background: 'rgba(226,196,143,0.06)', borderRadius: 6 }} role="status">
+    <CheckCircle className="w-8 h-8 mx-auto mb-3" style={{ color: '#E2C48F' }} aria-hidden="true" />
+    <h3 className="mb-2" style={{ fontFamily: INS, color: '#EEF2EC', fontWeight: 450, fontSize: 18, letterSpacing: '-0.02em' }}>{title}</h3>
+    <p className="text-sm" style={{ color: '#C5D2CE' }}>{children}</p>
   </div>
 );
 
@@ -133,7 +133,7 @@ const AuthForm = ({ onSuccess }) => {
     <div className="min-h-screen flex items-center justify-center p-4 atlas-ground">
       <div
         className="w-full max-w-md plum-rise"
-        style={{ background: 'rgba(41,35,49,0.72)', padding: '2.25rem 2rem 1.75rem', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 6, boxShadow: '0 40px 80px rgba(13,8,26,0.35)', WebkitBackdropFilter: 'blur(12px)', backdropFilter: 'blur(12px)' }}
+        style={{ background: 'rgba(15,29,34,0.72)', padding: '2.25rem 2rem 1.75rem', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 6, boxShadow: '0 40px 80px rgba(3,10,12,0.35)', WebkitBackdropFilter: 'blur(12px)', backdropFilter: 'blur(12px)' }}
       >
         <div className="text-center mb-6">
           <CEShieldLogo showTagline={true} centered={true} size="xlarge" />
@@ -183,11 +183,11 @@ const AuthForm = ({ onSuccess }) => {
             <div className="mb-6">
               <h2
                 className="text-center mb-2"
-                style={{ fontFamily: INS, color: '#F6EEE9', letterSpacing: '-0.035em', fontWeight: 400, fontSize: 26, lineHeight: 1.15 }}
+                style={{ fontFamily: INS, color: '#EEF2EC', letterSpacing: '-0.035em', fontWeight: 400, fontSize: 26, lineHeight: 1.15 }}
               >
                 Reset your password
               </h2>
-              <p className="text-center text-sm" style={{ color: '#A998AE' }}>
+              <p className="text-center text-sm" style={{ color: '#8EA5A0' }}>
                 Enter your email address and we&rsquo;ll send you a link to reset your password.
               </p>
             </div>
@@ -239,15 +239,15 @@ const AuthForm = ({ onSuccess }) => {
           // Normal Sign In/Sign Up Form
           <div>
             <div className="mb-6">
-              <h2 className="text-center" style={{ fontFamily: INS, color: '#F6EEE9', letterSpacing: '-0.035em', fontWeight: 400, fontSize: 26, lineHeight: 1.15, margin: 0 }}>
+              <h2 className="text-center" style={{ fontFamily: INS, color: '#EEF2EC', letterSpacing: '-0.035em', fontWeight: 400, fontSize: 26, lineHeight: 1.15, margin: 0 }}>
                 {isSignUp ? 'Create your account' : 'Sign in to your account'}
               </h2>
               {isSignUp && (
-                <p className="text-center text-sm mt-3" style={{ color: '#A998AE', lineHeight: 1.65 }}>
+                <p className="text-center text-sm mt-3" style={{ color: '#8EA5A0', lineHeight: 1.65 }}>
                   Free during beta: the full field ({siteStats.certCount} credentials,{' '}
                   {siteStats.citationTotal.toLocaleString()} citations), five career lenses, and the CE
                   Ledger.{' '}
-                  <strong style={{ color: '#F6EEE9' }}>
+                  <strong style={{ color: '#EEF2EC' }}>
                     Students: CE Shield is free for you, always.
                   </strong>
                 </p>
@@ -294,7 +294,7 @@ const AuthForm = ({ onSuccess }) => {
                     onClick={() => setShowPassword(!showPassword)}
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                     className="absolute right-0 top-0 flex items-center justify-center"
-                    style={{ color: '#A998AE', background: 'none', border: 'none', cursor: 'pointer', width: 44, height: 44 }}
+                    style={{ color: '#8EA5A0', background: 'none', border: 'none', cursor: 'pointer', width: 44, height: 44 }}
                   >
                     {showPassword ? <EyeOff className="w-5 h-5" aria-hidden="true" /> : <Eye className="w-5 h-5" aria-hidden="true" />}
                   </button>
@@ -339,7 +339,7 @@ const AuthForm = ({ onSuccess }) => {
         )}
 
         <div className="mt-6 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-          <p className="text-xs text-center" style={{ color: '#A998AE' }}>
+          <p className="text-xs text-center" style={{ color: '#8EA5A0' }}>
             Stored securely. We never share your information.
           </p>
         </div>

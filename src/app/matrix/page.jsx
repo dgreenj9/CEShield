@@ -102,8 +102,8 @@ export default function MatrixPage() {
           className="mx-panel"
           style={{ marginTop: 28, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '14px 24px', flexWrap: 'wrap', padding: '18px 22px' }}
         >
-          <span style={{ fontSize: 14, color: '#D5C9D9', maxWidth: '38em', lineHeight: 1.6 }}>
-            <strong style={{ color: '#F6EEE9', fontWeight: 500 }}>The personal layer.</strong>{' '}
+          <span style={{ fontSize: 14, color: '#C5D2CE', maxWidth: '38em', lineHeight: 1.6 }}>
+            <strong style={{ color: '#EEF2EC', fontWeight: 500 }}>The personal layer.</strong>{' '}
             Log hours against your renewal. Claim credentials. Export the
             binder. Free for students, always.
           </span>

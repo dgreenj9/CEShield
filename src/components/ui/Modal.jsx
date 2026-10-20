@@ -95,7 +95,7 @@ export default function Modal({
     <div
       ref={overlayRef}
       className="fixed inset-0 z-[200] flex items-center justify-center p-4 animate-fade-in"
-      style={{ background: 'rgba(16,12,22,0.6)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}
+      style={{ background: 'rgba(5,12,14,0.6)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}
       onMouseDown={(e) => {
         if (closeOnBackdrop && e.target === overlayRef.current) onClose?.();
       }}
@@ -107,7 +107,7 @@ export default function Modal({
         aria-labelledby={titleId}
         tabIndex={-1}
         className={`rounded-md border border-white/12 w-full ${sizeClass} max-h-[90vh] overflow-y-auto outline-none animate-slide-up`}
-        style={{ background: '#2B2434', boxShadow: '0 40px 80px rgba(13,8,26,0.45)' }}
+        style={{ background: '#13242A', boxShadow: '0 40px 80px rgba(3,10,12,0.45)' }}
       >
         {(title || onClose) && (
           <div className="flex items-start justify-between gap-4 px-6 pt-5 pb-4 border-b border-white/10">

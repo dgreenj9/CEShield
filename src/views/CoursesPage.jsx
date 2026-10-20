@@ -116,7 +116,7 @@ export default function CoursesPage() {
                 </span>
               </span>
               {(course.certificate || course.certificate_storage) && (
-                <span className="plum-logrow-badge" style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 500, padding: '2px 9px', borderRadius: 20, border: '1px solid rgba(240,195,168,0.45)', color: A.accent, flexShrink: 0 }}>
+                <span className="plum-logrow-badge" style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 500, padding: '2px 9px', borderRadius: 20, border: '1px solid rgba(226,196,143,0.45)', color: A.accent, flexShrink: 0 }}>
                   Certificate
                 </span>
               )}

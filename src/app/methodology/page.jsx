@@ -323,7 +323,7 @@ export default function MethodologyPage() {
             </Section>
 
             <Section section={SECTIONS[5]}>
-              <div className="cs-bleed cs-callout cs-callout-blue" style={{ borderColor: 'rgba(224,168,90,0.35)', background: 'rgba(224,168,90,0.06)' }}>
+              <div className="cs-bleed cs-callout cs-callout-blue" style={{ borderColor: 'rgba(224,142,109,0.35)', background: 'rgba(224,142,109,0.06)' }}>
                 <AlertCircle size={20} aria-hidden="true" style={{ color: A.warn }} />
                 <p>
                   Rankings are tools for clinical reasoning, not

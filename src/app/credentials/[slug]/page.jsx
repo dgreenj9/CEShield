@@ -171,7 +171,7 @@ function CitationRow({ c, idx, last }) {
         )}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8, alignItems: 'center' }}>
           {evidenceLabel && (
-            <span style={{ ...tag, borderColor: 'rgba(240,195,168,0.45)', color: A.accent }}>{evidenceLabel}</span>
+            <span style={{ ...tag, borderColor: 'rgba(226,196,143,0.45)', color: A.accent }}>{evidenceLabel}</span>
           )}
           {c.source_type && c.source_type !== 'peer-reviewed' && (
             <span style={{ ...tag, color: A.inkMuted }}>{c.source_type.replace(/-/g, ' ')}</span>

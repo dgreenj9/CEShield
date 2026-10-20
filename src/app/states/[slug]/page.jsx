@@ -134,7 +134,7 @@ export default async function Page({ params }) {
               role="note"
               style={{
                 marginTop: '1.25rem', padding: '0.9rem 1.4rem', borderRadius: 6,
-                border: '1px solid rgba(224,168,90,0.35)', background: 'rgba(224,168,90,0.06)',
+                border: '1px solid rgba(224,142,109,0.35)', background: 'rgba(224,142,109,0.06)',
                 display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap',
                 fontSize: 14,
               }}

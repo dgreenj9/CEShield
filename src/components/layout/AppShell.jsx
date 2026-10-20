@@ -45,7 +45,7 @@ export default function AppShell({ onSignOut, children }) {
           position: 'sticky',
           top: 0,
           zIndex: 100,
-          background: 'rgba(35,30,43,0.72)',
+          background: 'rgba(13,27,32,0.72)',
           backdropFilter: 'blur(16px) saturate(1.2)',
           WebkitBackdropFilter: 'blur(16px) saturate(1.2)',
           borderBottom: `1px solid ${LINE}`,
@@ -86,7 +86,7 @@ export default function AppShell({ onSignOut, children }) {
                     borderRadius: 999,
                     textDecoration: 'none',
                     whiteSpace: 'nowrap',
-                    background: on ? 'rgba(240,195,168,0.12)' : 'transparent',
+                    background: on ? 'rgba(226,196,143,0.12)' : 'transparent',
                     color: on ? A.accent : A.inkBody,
                   }}
                 >
@@ -145,9 +145,9 @@ export default function AppShell({ onSignOut, children }) {
               style={{
                 marginBottom: '1.5rem',
                 padding: '0.85rem 1.4rem',
-                border: '1px solid rgba(224,168,90,0.35)',
+                border: '1px solid rgba(224,142,109,0.35)',
                 borderRadius: 6,
-                background: 'rgba(224,168,90,0.06)',
+                background: 'rgba(224,142,109,0.06)',
                 color: A.inkBody,
                 fontFamily: FIG,
                 fontSize: 14,

@@ -1,26 +1,26 @@
-// Atlas tokens, plum edition (2026-10-20). The product now shares the stage of
-// its portfolio presentation: a dark plum ground lit by one warm light, ink
-// stepped by tone, peach as the single interactive and "strong" voice, lilac
-// as its quieter second, ochre as the only warning. One typeface (Figtree),
-// light display weights, hairline rules.
+// Atlas tokens, deep-sea edition (2026-10-20). A deep blue-green ground (an
+// echo of the original petrol) lit by one champagne light, cool ivory ink
+// stepped by tone, champagne as the single interactive and "strong" voice,
+// sea-glass as its quieter second, coral as the only warning. One typeface
+// (Figtree), light display weights, hairline rules.
 
 export const A = {
-  paper: '#292331',
-  band: '#302838',
-  notice: '#3A3043',
-  ink: '#F6EEE9',
-  inkBody: '#D5C9D9',
-  inkMuted: '#A998AE',
-  ruleMinor: '#4A4055',
-  ruleFaint: '#3D3447',
-  ruleFaintest: '#352D3E',
-  accent: '#F0C3A8',
-  accentHover: '#FDE3D3',
-  accentMid: '#C7B6DC',
-  accentTint: '#43384C',
-  warn: '#E0A85A',
-  dim: '#7D6E83',
-  onAccent: '#2A2230',
+  paper: '#0F1D22',
+  band: '#142830',
+  notice: '#1A323A',
+  ink: '#EEF2EC',
+  inkBody: '#C5D2CE',
+  inkMuted: '#8EA5A0',
+  ruleMinor: '#26414A',
+  ruleFaint: '#1F363E',
+  ruleFaintest: '#1A2F36',
+  accent: '#E2C48F',
+  accentHover: '#F3E3C2',
+  accentMid: '#9CD1C6',
+  accentTint: '#1E3A3F',
+  warn: '#E08E6D',
+  dim: '#5F7774',
+  onAccent: '#10201F',
 };
 
 // Font stacks. Instrument Sans = display (headings, big numerals, score
@@ -55,7 +55,7 @@ export const ruledHead = {
   letterSpacing: '0.02em',
   fontWeight: 600,
   color: A.inkMuted,
-  borderTop: '1px solid rgba(246, 238, 233, 0.16)',
+  borderTop: '1px solid rgba(238, 242, 236, 0.16)',
   paddingTop: 10,
 };
 
@@ -64,7 +64,7 @@ export const tabularNums = { fontVariantNumeric: 'tabular-nums' };
 // matrix additions
 // Dashboard tokens shared by the field (/matrix), the Lenses page, and the
 // dossier library. Hairlines are ink at low alpha so they sit on the world
-// light; the chart palette is the validated dark categorical set (on #2b2434):
+// light; the chart palette is the validated dark categorical set (on #13242A):
 // c2 lilac-violet = the credentials themselves, c3 teal = evidence strength,
 // c1 terracotta reserved for a second series. Peach (A.accent) marks the
 // selection; it never encodes data.
@@ -72,11 +72,11 @@ export const MX = {
   line: '#ffffff1a',
   line2: '#ffffff2b',
   panel: '#ffffff08',
-  c1: '#cf6f4f',
-  c2: '#8f78e6',
-  c3: '#2fa894',
-  good: '#2fa894',
-  ring: '#2b2434',
+  c1: '#C8744F',
+  c2: '#8A7DE6',
+  c3: '#2E9F8C',
+  good: '#2E9F8C',
+  ring: '#13242A',
 };
 
 // Small uppercase peach eyebrow (the portfolio label voice).
@@ -115,12 +115,12 @@ export const PANEL_FILL = 'rgba(255,255,255,0.03)';
 export const RADIUS = 6;
 export const EASE = 'cubic-bezier(.2,.7,.2,1)';
 
-// Validated dark chart palette (dataviz validator, 3 slots on #2b2434).
+// Validated dark chart palette (dataviz validator, 3 slots on #13242A).
 // Categorical only: tier color stays tierColor() and always prints its word.
 export const VIZ = {
-  c1: '#cf6f4f',
-  c2: '#8f78e6',
-  c3: '#2fa894',
+  c1: '#C8744F',
+  c2: '#8A7DE6',
+  c3: '#2E9F8C',
   track: 'rgba(255,255,255,0.07)',
   grid: 'rgba(255,255,255,0.08)',
 };
@@ -185,7 +185,7 @@ export const kpi = (size = 30) => ({
   color: A.ink,
 });
 
-// Tier color for TEXT. The Limited tier's stone (#7D6E83) is a mark color and
+// Tier color for TEXT. The Limited tier's stone (#5F7774) is a mark color and
 // falls under AA for small text on the plum ground, so tier words use muted
 // ink there instead. Marks (dots, bars) keep tierColor().
 export const tierTextColor = (score) => (score < 30 ? A.inkMuted : tierColor(score));

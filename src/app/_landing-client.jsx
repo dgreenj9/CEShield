@@ -28,9 +28,9 @@ const prefersReduced = () =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Validated categorical slot on the plum ground, plus the highlight voice.
-const DOT = '#8f78e6';
-const PEACH = '#f0c3a8';
-const GROUND = '#292331';
+const DOT = '#8A7DE6';
+const PEACH = '#E2C48F';
+const GROUND = '#0F1D22';
 
 // Greedy beeswarm: place each value on x, then step outward on y until it
 // clears every placed dot.
@@ -185,7 +185,7 @@ export function FieldScene({ certs, lensLabels, captions }) {
         cx.strokeStyle = 'rgba(255,255,255,0.12)';
         cx.lineWidth = 1;
         cx.beginPath(); cx.moveTo(L.x0, L.axisY + 0.5); cx.lineTo(L.x1, L.axisY + 0.5); cx.stroke();
-        cx.fillStyle = '#a998ae';
+        cx.fillStyle = '#8EA5A0';
         cx.font = '10px Figtree, system-ui, sans-serif';
         setSpacing('0px');
         cx.textAlign = 'center';
@@ -200,7 +200,7 @@ export function FieldScene({ certs, lensLabels, captions }) {
         setSpacing('1.6px');
         cx.fillText(`${lensLabels[lensKey].toUpperCase()} LENS · COMPOSITE SCORE`, L.x0, L.labelY);
         setSpacing('0px');
-        cx.fillStyle = '#a998ae';
+        cx.fillStyle = '#8EA5A0';
         cx.font = '10px Figtree, system-ui, sans-serif';
         cx.fillText('Not scored in this lens', L.x0, L.parkY - 14);
         cx.globalAlpha = 1;
@@ -238,14 +238,14 @@ export function FieldScene({ certs, lensLabels, captions }) {
         pts.forEach((d, j) => {
           const ly = baseY + j * rowH;
           cx.globalAlpha = t4;
-          cx.strokeStyle = 'rgba(240,195,168,0.45)';
+          cx.strokeStyle = 'rgba(226,196,143,0.45)';
           cx.lineWidth = 1;
           cx.beginPath();
           cx.moveTo(colX + (onLeft ? 4 : -4), ly - 4);
           cx.lineTo(d.x, ly - 4);
           cx.lineTo(d.x, d.y - L.r * 1.7);
           cx.stroke();
-          cx.fillStyle = '#f6eee9';
+          cx.fillStyle = '#EEF2EC';
           cx.textAlign = onLeft ? 'right' : 'left';
           const room = onLeft ? colX - 8 : W - colX - 8;
           let label = short(certs[d.i].n, 52);

@@ -84,7 +84,7 @@ export default function StatesIndex() {
                         {mandatoryLabel(mandatory)}
                       </span>
                       <span style={{ gridArea: 'status', fontSize: 12, fontWeight: 500, color: draft ? A.warn : A.inkBody, whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: 7 }}>
-                        <i aria-hidden="true" style={{ width: 6, height: 6, borderRadius: '50%', background: draft ? A.warn : '#2fa894' }} />
+                        <i aria-hidden="true" style={{ width: 6, height: 6, borderRadius: '50%', background: draft ? A.warn : '#2E9F8C' }} />
                         {draft ? 'Draft · verify' : 'Verified'}
                       </span>
                       <span aria-hidden="true" style={{ gridArea: 'go', color: A.accent, fontWeight: 400, textAlign: 'right' }}>→</span>
@@ -102,7 +102,7 @@ export default function StatesIndex() {
           >
             <p style={{ color: A.inkBody, fontSize: 14.5, margin: 0 }}>
               Don&rsquo;t see your state?{' '}
-              <a href="mailto:hello@ceshield.com" className="atlas-link" style={{ fontWeight: 500, textDecoration: 'none', borderBottom: '1px solid rgba(240,195,168,0.5)' }}>
+              <a href="mailto:hello@ceshield.com" className="atlas-link" style={{ fontWeight: 500, textDecoration: 'none', borderBottom: '1px solid rgba(226,196,143,0.5)' }}>
                 Email us
               </a>{' '}
               and it goes on the coverage list.

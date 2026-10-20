@@ -67,22 +67,22 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
         aria-pressed={selected}
         className="p-4 text-left"
         style={{
-          border: selected ? '1px solid rgba(240,195,168,0.55)' : '1px solid rgba(255,255,255,0.17)',
-          background: selected ? 'rgba(240,195,168,0.10)' : 'transparent',
+          border: selected ? '1px solid rgba(226,196,143,0.55)' : '1px solid rgba(255,255,255,0.17)',
+          background: selected ? 'rgba(226,196,143,0.10)' : 'transparent',
           cursor: 'pointer',
           borderRadius: 6,
           transition: 'background 0.3s cubic-bezier(.2,.7,.2,1), border-color 0.3s cubic-bezier(.2,.7,.2,1)',
         }}
       >
-        <div style={{ fontFamily: INS, fontWeight: 420, fontSize: 18, letterSpacing: '-0.02em', color: selected ? '#F0C3A8' : '#F6EEE9' }}>
+        <div style={{ fontFamily: INS, fontWeight: 420, fontSize: 18, letterSpacing: '-0.02em', color: selected ? '#E2C48F' : '#EEF2EC' }}>
           {type}
         </div>
-        <div className="text-sm" style={{ color: '#A998AE' }}>
+        <div className="text-sm" style={{ color: '#8EA5A0' }}>
           {type === 'PT' ? 'Physical Therapist' : 'Occupational Therapist'}
         </div>
-        <div className="text-xs mt-1 tabular-nums" style={{ color: '#A998AE' }}>{summary}</div>
+        <div className="text-xs mt-1 tabular-nums" style={{ color: '#8EA5A0' }}>{summary}</div>
         {r && r.verified === false && (
-          <div className="text-xs mt-1" style={{ color: '#E0A85A', fontWeight: 500 }}>
+          <div className="text-xs mt-1" style={{ color: '#E08E6D', fontWeight: 500 }}>
             Draft rules
           </div>
         )}
@@ -93,13 +93,13 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
   return (
     <div className="min-h-screen p-4 atlas-ground">
       <div className="max-w-md mx-auto mt-10">
-        <div className="plum-rise" style={{ background: 'rgba(41,35,49,0.72)', padding: '2rem', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 6, boxShadow: '0 40px 80px rgba(13,8,26,0.35)', WebkitBackdropFilter: 'blur(12px)', backdropFilter: 'blur(12px)' }}>
+        <div className="plum-rise" style={{ background: 'rgba(15,29,34,0.72)', padding: '2rem', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 6, boxShadow: '0 40px 80px rgba(3,10,12,0.35)', WebkitBackdropFilter: 'blur(12px)', backdropFilter: 'blur(12px)' }}>
           <div className="flex justify-between items-center mb-6">
             <CEShieldLogo showTagline={false} size="medium" />
             <button
               onClick={onSignOut}
               className="plum-icon-btn"
-              style={{ color: '#A998AE', background: 'none', border: 'none', cursor: 'pointer', width: 44, height: 44, borderRadius: 999, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
+              style={{ color: '#8EA5A0', background: 'none', border: 'none', cursor: 'pointer', width: 44, height: 44, borderRadius: 999, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
               title="Sign out"
               aria-label="Sign out"
             >
@@ -108,7 +108,7 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
           </div>
 
           <div className="mb-5 p-3" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 6 }}>
-            <p className="text-sm" style={{ color: '#D5C9D9' }}>
+            <p className="text-sm" style={{ color: '#C5D2CE' }}>
               <User className="inline w-4 h-4 mr-1" aria-hidden="true" />
               Signed in as: {authUser.email}
             </p>
@@ -139,17 +139,17 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
                   })}
                 </select>
                 <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
-                  <ChevronDown className="w-5 h-5" style={{ color: '#A998AE' }} aria-hidden="true" />
+                  <ChevronDown className="w-5 h-5" style={{ color: '#8EA5A0' }} aria-hidden="true" />
                 </div>
               </div>
               {selectedRules && selectedRules.verified === false ? (
-                <p className="text-xs mt-1" style={{ color: '#D5C9D9' }}>
-                  <strong style={{ color: '#E0A85A' }}>Draft:</strong>{' '}
+                <p className="text-xs mt-1" style={{ color: '#C5D2CE' }}>
+                  <strong style={{ color: '#E08E6D' }}>Draft:</strong>{' '}
                   {selectedRules.jurisdictionName} rules are unverified. Confirm
                   with your licensing board before relying on totals.
                 </p>
               ) : (
-                <p className="text-xs mt-1" style={{ color: '#A998AE' }}>
+                <p className="text-xs mt-1" style={{ color: '#8EA5A0' }}>
                   Don&rsquo;t see your state? Email us and it goes on the coverage list.
                 </p>
               )}
@@ -217,9 +217,9 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
                           checked={user.isFirstRenewal}
                           onChange={(e) => setUser({...user, isFirstRenewal: e.target.checked})}
                           className="mr-2"
-                          style={{ accentColor: '#F0C3A8', width: 18, height: 18 }}
+                          style={{ accentColor: '#E2C48F', width: 18, height: 18 }}
                         />
-                        <span className="text-sm" style={{ color: '#D5C9D9' }}>This is my first renewal (CE exempt)</span>
+                        <span className="text-sm" style={{ color: '#C5D2CE' }}>This is my first renewal (CE exempt)</span>
                       </label>
                     </div>
 
@@ -227,8 +227,8 @@ const ProfileSetup = ({ authUser, onComplete, onSignOut }) => {
                       onClick={handleSave}
                       className="w-full px-4"
                       style={{
-                        background: '#F0C3A8',
-                        color: '#2A2230',
+                        background: '#E2C48F',
+                        color: '#10201F',
                         border: 'none',
                         borderRadius: 999,
                         minHeight: 46,

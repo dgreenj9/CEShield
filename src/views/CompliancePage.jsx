@@ -15,7 +15,7 @@ import { A, FIG, tabularNums, LINE, LINE_FAINT, VIZ, kicker, display, kpi, panel
 const labelize = (key) => key.replace(/([A-Z])/g, ' $1').trim();
 
 const headLabel = { fontFamily: FIG, fontSize: 12, letterSpacing: '0.02em', fontWeight: 600, color: A.inkBody };
-const GOOD = '#2fa894';
+const GOOD = '#2E9F8C';
 
 export default function CompliancePage() {
   const { user, courses } = useUserData();
@@ -102,7 +102,7 @@ export default function CompliancePage() {
 
       {/* Unverified-state notice */}
       {requirements.verified === false && (
-        <div role="alert" style={{ border: '1px solid rgba(224,168,90,0.35)', borderRadius: 6, padding: '0.85rem 1.4rem', marginBottom: '1.5rem', background: 'rgba(224,168,90,0.06)', display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap' }}>
+        <div role="alert" style={{ border: '1px solid rgba(224,142,109,0.35)', borderRadius: 6, padding: '0.85rem 1.4rem', marginBottom: '1.5rem', background: 'rgba(224,142,109,0.06)', display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap' }}>
           <span style={kicker(10.5, A.warn)}>Beta state</span>
           <span style={{ fontSize: 14 }}>
             {requirements.jurisdictionName} CE rules are unverified. Confirm against{' '}
@@ -124,7 +124,7 @@ export default function CompliancePage() {
 
       {/* New-rule notice */}
       {showCulturalNotice && (
-        <div style={{ border: '1px solid rgba(224,168,90,0.35)', borderRadius: 6, padding: '0.85rem 1.4rem', marginBottom: '1.5rem', background: 'rgba(224,168,90,0.06)', display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap' }}>
+        <div style={{ border: '1px solid rgba(224,142,109,0.35)', borderRadius: 6, padding: '0.85rem 1.4rem', marginBottom: '1.5rem', background: 'rgba(224,142,109,0.06)', display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap' }}>
           <span style={kicker(10.5, A.warn)}>New 2025 rule</span>
           <span style={{ fontSize: 14 }}>
             Cultural competency ({requirements.mandatory.culturalCompetency} h) is now required in Illinois, starting this cycle.
@@ -142,7 +142,7 @@ export default function CompliancePage() {
                 {hours.total}
               </span>
               <span style={{ fontFamily: FIG, fontSize: 20, fontWeight: 400, color: A.inkMuted }}>/ {requirements.total} h</span>
-              <span style={{ fontFamily: FIG, fontSize: 11, fontWeight: 500, padding: '4px 11px', borderRadius: 20, border: `1px solid ${onPace ? 'rgba(47,168,148,0.5)' : 'rgba(224,168,90,0.5)'}`, color: onPace ? GOOD : A.warn, alignSelf: 'center', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ fontFamily: FIG, fontSize: 11, fontWeight: 500, padding: '4px 11px', borderRadius: 20, border: `1px solid ${onPace ? 'rgba(47,168,148,0.5)' : 'rgba(224,142,109,0.5)'}`, color: onPace ? GOOD : A.warn, alignSelf: 'center', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                 <i aria-hidden="true" style={{ width: 6, height: 6, borderRadius: '50%', background: onPace ? GOOD : A.warn }} />
                 {onPace ? 'On pace' : 'Behind pace'}
               </span>
@@ -249,7 +249,7 @@ export default function CompliancePage() {
                 </span>
               </span>
               {course.certificate_storage && (
-                <span className="plum-logrow-badge" style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 500, padding: '2px 9px', borderRadius: 20, border: '1px solid rgba(240,195,168,0.45)', color: A.accent, flexShrink: 0 }}>
+                <span className="plum-logrow-badge" style={{ fontFamily: FIG, fontSize: 10.5, fontWeight: 500, padding: '2px 9px', borderRadius: 20, border: '1px solid rgba(226,196,143,0.45)', color: A.accent, flexShrink: 0 }}>
                   Certificate
                 </span>
               )}

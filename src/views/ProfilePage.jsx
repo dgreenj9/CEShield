@@ -112,7 +112,7 @@ export default function ProfilePage() {
                 ) : initials}
                 <span style={{
                   position: 'absolute', bottom: 0, left: 0, right: 0, padding: '5px 0 9px',
-                  background: 'rgba(31,26,39,0.78)', color: A.ink,
+                  background: 'rgba(10,22,26,0.78)', color: A.ink,
                   fontFamily: FIG, fontSize: 10.5, fontWeight: 500,
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
                 }}>
@@ -274,8 +274,8 @@ export default function ProfilePage() {
                         onClick={() => requestLicenseChange(type)}
                         className="p-3 text-left w-full transition-colors"
                         style={{
-                          border: `1px solid ${selected ? 'rgba(240,195,168,0.55)' : LINE2}`,
-                          background: selected ? 'rgba(240,195,168,0.10)' : 'transparent',
+                          border: `1px solid ${selected ? 'rgba(226,196,143,0.55)' : LINE2}`,
+                          background: selected ? 'rgba(226,196,143,0.10)' : 'transparent',
                           borderRadius: 6,
                           cursor: 'pointer',
                           minHeight: 56,
@@ -325,7 +325,7 @@ export default function ProfilePage() {
           <Save size={16} aria-hidden="true" /> {saving ? 'Saving…' : 'Save changes'}
         </Button>
         {savedAt && (
-          <span role="status" style={{ fontFamily: FIG, fontSize: 13, fontWeight: 500, color: '#2fa894', ...tabularNums }}>
+          <span role="status" style={{ fontFamily: FIG, fontSize: 13, fontWeight: 500, color: '#2E9F8C', ...tabularNums }}>
             ✓ Saved {savedAt.toLocaleTimeString()}
           </span>
         )}

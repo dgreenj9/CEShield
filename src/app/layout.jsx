@@ -57,7 +57,7 @@ export const metadata = {
 
 // Next 14+ split themeColor out of the metadata export.
 export const viewport = {
-  themeColor: '#292331',
+  themeColor: '#0F1D22',
   width: 'device-width',
   initialScale: 1,
 };

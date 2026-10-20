@@ -28,10 +28,10 @@ const chip = (color, rgb) => ({
   border: color,
 });
 const STYLE_BY_TIER = {
-  strong:   chip('#F0C3A8', '240,195,168'),
-  good:     chip('#C7B6DC', '199,182,220'),
-  moderate: chip('#E0A85A', '224,168,90'),
-  limited:  chip('#A998AE', '169,152,174'),
+  strong:   chip('#E2C48F', '226,196,143'),
+  good:     chip('#9CD1C6', '156,209,198'),
+  moderate: chip('#E08E6D', '224,142,109'),
+  limited:  chip('#8EA5A0', '142,165,160'),
 };
 export const getScoreStyle  = (score) => STYLE_BY_TIER[scoreTier(score)].gradient;
 export const getBorderColor = (score) => STYLE_BY_TIER[scoreTier(score)].border;

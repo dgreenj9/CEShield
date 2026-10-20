@@ -3,10 +3,10 @@ import React from 'react';
 // CE Shield logo on the plum stage. The three-layer shield: two lilac
 // layers behind (0.32, 0.78) and the peach front shield; wordmark "CE Shield"
 // in Figtree at a light-medium weight with tight tracking.
-const PEACH = '#F0C3A8';
-const LILAC = '#C7B6DC';
-const INK = '#F6EEE9';
-const MUTED = '#A998AE';
+const PEACH = '#E2C48F';
+const LILAC = '#9CD1C6';
+const INK = '#EEF2EC';
+const MUTED = '#8EA5A0';
 const INS = "'Figtree', ui-sans-serif, system-ui, sans-serif";
 
 const CEShieldLogo = ({ showTagline = true, className = '', size = 'large', centered = false }) => {
