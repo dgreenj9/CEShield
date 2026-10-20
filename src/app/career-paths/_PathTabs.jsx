@@ -17,27 +17,16 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import {
-  ArrowRight,
-  Briefcase,
-  GraduationCap,
-  Stethoscope,
-  FlaskConical,
-  Cpu,
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { A, FIG, INS, tabularNums } from '@/components/atlas/theme';
+import { PATH_DIMENSIONS } from '@/utils/careerPaths';
 import useTablistKeyboard from '@/hooks/useTablistKeyboard';
 
-const ICONS = {
-  clinical: Stethoscope,
-  business: Briefcase,
-  academicClinical: GraduationCap,
-  research: FlaskConical,
-  healthTech: Cpu,
-};
-
-const dimLabel = (dim) =>
-  dim.replace(/([A-Z])/g, ' $1').trim().replace(/^./, (s) => s.toUpperCase());
+// Dimension names come from the lens config, so this page, the field and
+// the dossiers all say "Billing & reimbursement", not "Reimbursement".
+const dimLabel = (pathKey, dim) =>
+  PATH_DIMENSIONS[pathKey]?.[dim]?.label
+  || dim.replace(/([A-Z])/g, ' $1').trim().replace(/^./, (s) => s.toUpperCase());
 
 const PanelLabel = ({ children }) => (
   <div
@@ -87,13 +76,9 @@ export default function PathTabs({ paths, examples }) {
         id="path-tabs"
         role="tablist"
         aria-label="Career paths"
+        className="atlas-pathtabs"
         style={{
-          position: 'sticky',
-          top: 0,
           zIndex: 5,
-          display: 'flex',
-          alignItems: 'stretch',
-          flexWrap: 'wrap',
           background: A.paper,
           borderBottom: `1px solid ${A.ink}`,
         }}
@@ -105,6 +90,7 @@ export default function PathTabs({ paths, examples }) {
               key={p.key}
               type="button"
               role="tab"
+              className="atlas-tab"
               aria-selected={isActive}
               aria-controls={`panel-${p.key}`}
               id={`tab-${p.key}`}
@@ -134,7 +120,6 @@ export default function PathTabs({ paths, examples }) {
       {/* Panels — one per path, 3-column grid inside on wide screens. */}
       {paths.map((p) => {
         const isActive = p.key === active;
-        const Icon = ICONS[p.key];
         const list = examples[p.key] || [];
         const maxWeight = Math.max(...Object.values(p.defaultWeights));
 
@@ -150,7 +135,6 @@ export default function PathTabs({ paths, examples }) {
             <div className="cs-path-panel-grid" style={{ padding: '1.5rem 1.75rem' }}>
               {/* LEFT — identity + CTAs */}
               <div className="cs-path-identity">
-                {Icon && <Icon size={22} aria-hidden="true" style={{ color: A.accent, marginBottom: 14 }} />}
                 <h2 style={{
                   fontFamily: INS,
                   fontSize: '1.5rem',
@@ -175,6 +159,7 @@ export default function PathTabs({ paths, examples }) {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <Link
                     href={`/matrix?lens=${p.key}`}
+                    className="atlas-btn atlas-btn-primary"
                     style={{
                       display: 'inline-flex',
                       alignItems: 'center',
@@ -193,6 +178,7 @@ export default function PathTabs({ paths, examples }) {
                   </Link>
                   <Link
                     href="/credentials"
+                    className="atlas-btn atlas-btn-secondary"
                     style={{
                       display: 'inline-flex',
                       alignItems: 'center',
@@ -221,7 +207,7 @@ export default function PathTabs({ paths, examples }) {
                     <li key={dim}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 5 }}>
                         <span style={{ fontSize: '0.88rem', color: A.ink, fontWeight: 600 }}>
-                          {dimLabel(dim)}
+                          {dimLabel(p.key, dim)}
                         </span>
                         <span style={{ color: A.accent, fontSize: '0.8rem', fontWeight: 700, ...tabularNums }}>
                           ×{weight}

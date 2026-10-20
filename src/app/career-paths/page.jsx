@@ -6,6 +6,7 @@
 
 import Link from 'next/link';
 import PublicNav from '@/components/layout/PublicNav';
+import PublicFooter from '@/components/layout/PublicFooter';
 import { A, INS, eyebrow, tabularNums } from '@/components/atlas/theme';
 import { certifications as certData } from '@/utils/certificationData';
 import { computeScore, certScoresForPath } from '@/utils/certScoring';
@@ -59,7 +60,7 @@ export default function CareerPathsPage() {
     <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink }}>
       <PublicNav currentPath="/career-paths" />
 
-      <main className="cs-page-pad" style={{ maxWidth: 1280, margin: '0 auto', padding: '3rem 2rem 6rem', lineHeight: 1.65 }}>
+      <main id="main" className="atlas-wrap" style={{ maxWidth: 1280, margin: '0 auto', padding: '3rem 2rem 6rem', lineHeight: 1.65 }}>
         {/* Hero. Title + lead on the left; an at-a-glance stat strip on the
             right at wider sizes. */}
         <header className="cs-hero-row" style={{ marginBottom: '2.25rem' }}>
@@ -79,11 +80,11 @@ export default function CareerPathsPage() {
               credential ranks differently under each.
             </p>
             <p style={{ color: A.inkMuted, marginTop: '0.75rem', fontSize: '0.9rem', maxWidth: 640 }}>
-              Tap a path below to see its scoring rubric and top picks. Read the{' '}
-              <Link href="/methodology" style={{ color: A.accent, textDecoration: 'underline', textUnderlineOffset: 2 }}>
+              Each lens below shows its rubric and its top four. The{' '}
+              <Link href="/methodology" className="atlas-link" style={{ textDecoration: 'underline', textUnderlineOffset: 2 }}>
                 methodology
               </Link>{' '}
-              for how dimensions and weights were chosen per path.
+              covers how dimensions and weights were chosen.
             </p>
           </div>
           <aside className="cs-hero-stats" aria-label="At a glance">
@@ -125,20 +126,20 @@ export default function CareerPathsPage() {
           border: `1px solid ${A.ink}`,
         }}>
           <div style={{ ...eyebrow(12.5), marginBottom: 10 }}>Picking your lens</div>
-          <ol style={{ marginTop: 0, paddingLeft: '1.25rem', color: A.inkBody, lineHeight: 1.7, maxWidth: 760 }}>
-            <li>Pick the path that matches where you want your career to go.</li>
+          <ol className="atlas-steps">
+            <li>Pick the lens that matches where your career is headed.</li>
             <li>
               Open{' '}
-              <Link href="/matrix" style={{ color: A.accent, textDecoration: 'underline', textUnderlineOffset: 2 }}>the field</Link>{' '}
-              and select that lens. The table re-ranks to show only credentials
-              scored on that path.
+              <Link href="/matrix" className="atlas-link" style={{ textDecoration: 'underline', textUnderlineOffset: 2 }}>the field</Link>{' '}
+              under that lens. It ranks only the credentials scored on it.
             </li>
-            <li>Adjust the weight sliders to emphasize the dimensions you care about most. Rankings update live.</li>
-            <li>Read the dossier on any credential before committing dollars and hours.</li>
+            <li>Open Calibration and weight the dimensions you care about. Rankings update live.</li>
+            <li>Read the dossier before committing dollars and hours.</li>
             <li>Log the CE hours those courses earn in the Ledger.</li>
           </ol>
         </section>
       </main>
+      <PublicFooter />
     </div>
   );
 }
