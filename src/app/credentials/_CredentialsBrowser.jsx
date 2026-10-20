@@ -29,6 +29,7 @@ function Chip({ active, children, onClick, count }) {
   return (
     <button
       type="button"
+      className="atlas-chip"
       onClick={onClick}
       aria-pressed={active}
       style={{
@@ -150,9 +151,8 @@ export default function CredentialsBrowser({ rows }) {
           the user scrolls a long results list. Opaque paper so rows scroll
           away beneath it. */}
       <div
+        className="atlas-filter-sticky"
         style={{
-          position: 'sticky',
-          top: 61, // height of the page nav + a small gap
           zIndex: 4,
           background: A.paper,
           paddingTop: 12,
@@ -181,6 +181,7 @@ export default function CredentialsBrowser({ rows }) {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search credentials, types, or disciplines…"
             aria-label="Search credentials"
+            className="atlas-search"
             style={{
               width: '100%',
               padding: '8px 2.6rem 8px 26px',
@@ -190,7 +191,6 @@ export default function CredentialsBrowser({ rows }) {
               fontFamily: FIG,
               fontSize: 'max(16px, 15px)',
               color: A.ink,
-              outline: 'none',
               boxSizing: 'border-box',
             }}
           />
@@ -207,7 +207,7 @@ export default function CredentialsBrowser({ rows }) {
                 background: 'transparent',
                 border: 'none',
                 cursor: 'pointer',
-                padding: 6,
+                padding: 10,
                 color: A.inkMuted,
                 display: 'flex',
               }}
@@ -217,6 +217,7 @@ export default function CredentialsBrowser({ rows }) {
           )}
           <span
             aria-hidden="true"
+            className="atlas-kbd"
             style={{
               position: 'absolute',
               right: 8,
@@ -238,7 +239,7 @@ export default function CredentialsBrowser({ rows }) {
         {/* Filter rows — discipline above, lens below. Compact labels on
             the left, chips wrap to the right. */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 14 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+          <div className="atlas-chip-row" role="group" aria-label="Filter by discipline">
             <span style={{ ...eyebrow(12), minWidth: 78 }}>Discipline</span>
             {DISCIPLINES.map((d) => (
               <Chip
@@ -251,7 +252,7 @@ export default function CredentialsBrowser({ rows }) {
               </Chip>
             ))}
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+          <div className="atlas-chip-row" role="group" aria-label="Filter by lens">
             <span style={{ ...eyebrow(12), minWidth: 78 }}>Lens</span>
             {Object.keys(PATHS).map((p) => (
               <Chip
@@ -285,17 +286,18 @@ export default function CredentialsBrowser({ rows }) {
           {hasFilter && (
             <button
               type="button"
+              className="atlas-link"
               onClick={clearAll}
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: A.accent,
                 cursor: 'pointer',
                 fontFamily: FIG,
                 fontSize: 12.5,
                 fontWeight: 700,
-                padding: 0,
+                padding: '8px 0',
                 textDecoration: 'underline',
+                textUnderlineOffset: 3,
               }}
             >
               Clear all
@@ -324,7 +326,7 @@ export default function CredentialsBrowser({ rows }) {
             >
               <Link
                 href={`/credentials/${row.slug}`}
-                className="card-hover"
+                className="atlas-row"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -343,13 +345,9 @@ export default function CredentialsBrowser({ rows }) {
                   <div style={{ fontSize: 14.5, fontWeight: 600, color: A.ink, letterSpacing: '-0.01em' }}>
                     {row.cert.name}
                   </div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center', marginTop: 3 }}>
-                    <span style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted }}>
-                      {row.cert.type} · {certDisciplineList(row.cert).join(' · ')}
-                    </span>
-                    <span style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, ...tabularNums }}>
-                      · {row.count} citations
-                    </span>
+                  <div style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, marginTop: 3, lineHeight: 1.5, ...tabularNums }}>
+                    {row.cert.type} · {certDisciplineList(row.cert).join(' · ')}
+                    {row.count ? <span style={{ whiteSpace: 'nowrap' }}> · {row.count} citations</span> : null}
                   </div>
                 </div>
                 <span
@@ -380,11 +378,11 @@ export default function CredentialsBrowser({ rows }) {
             Try removing a chip, or{' '}
             <button
               type="button"
+              className="atlas-link"
               onClick={clearAll}
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: A.accent,
                 cursor: 'pointer',
                 padding: 0,
                 textDecoration: 'underline',

@@ -92,6 +92,16 @@ export const getTotalCitationsCount = () => {
 const citationsCache = new Map();   // slug -> array<citation>
 const inFlight = new Map();         // slug -> Promise<array>
 
+// Some upstream bibliographic records arrive HTML-escaped ("Journal of
+// Manual &amp; Manipulative Therapy"). Decode the handful of entities at
+// display time so the data files stay untouched.
+const ENTITY = { '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&apos;': "'" };
+export const decodeEntities = (s) =>
+  (typeof s === 'string' ? s.replace(/&(amp|lt|gt|quot|#39|apos);/g, (m) => ENTITY[m] || m) : s);
+export const cleanCitation = (c) => (c && typeof c === 'object'
+  ? { ...c, title: decodeEntities(c.title), authors: decodeEntities(c.authors), journal: decodeEntities(c.journal) }
+  : c);
+
 export const loadCitations = async (name) => {
   const entry = meta[name];
   if (!entry || !entry.slug) return [];
@@ -106,7 +116,7 @@ export const loadCitations = async (name) => {
       const res = await fetch(url);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      const list = Array.isArray(data?.citations) ? data.citations : [];
+      const list = Array.isArray(data?.citations) ? data.citations.map(cleanCitation) : [];
       citationsCache.set(slug, list);
       return list;
     } catch (err) {

@@ -46,6 +46,7 @@ export default function LensBreakdownTabs({ lenses, initialActive }) {
             <button
               key={l.key}
               type="button"
+              className="atlas-chip"
               role="tab"
               aria-selected={isActive}
               aria-controls={`lens-panel-${l.key}`}
@@ -86,7 +87,7 @@ export default function LensBreakdownTabs({ lenses, initialActive }) {
           aria-labelledby={`lens-tab-${l.key}`}
           hidden={l.key !== active}
         >
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem 2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))', gap: '1.25rem 2.5rem' }}>
             {l.dims.map((d) => (
               <div key={d.key}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 5 }}>
@@ -102,7 +103,7 @@ export default function LensBreakdownTabs({ lenses, initialActive }) {
                   </div>
                 </div>
                 <div style={{ height: 4, background: A.ruleFaint }}>
-                  <div style={{ height: '100%', width: `${d.value}%`, background: A.accent }} />
+                  <div style={{ height: '100%', width: `${d.value}%`, background: A.accent, transition: 'width 0.3s ease' }} />
                 </div>
                 {d.justification && (
                   <p style={{ fontSize: 13.5, color: A.inkBody, marginTop: 6, marginBottom: 0, lineHeight: 1.55 }}>

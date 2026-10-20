@@ -14,8 +14,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, ArrowRight, BookOpen } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import PublicNav from '@/components/layout/PublicNav';
+import PublicFooter from '@/components/layout/PublicFooter';
 import { certifications as certData } from '@/utils/certificationData';
 import citationsMeta from '@/data/citations_meta.json';
 import {
@@ -28,10 +29,11 @@ import {
   computeScore,
   certScoresForPath,
 } from '@/utils/certScoring';
-import { citationUrl, EVIDENCE_LABELS } from '@/utils/citationsLibrary';
+import { citationUrl, cleanCitation, EVIDENCE_LABELS } from '@/utils/citationsLibrary';
 import { splitEvidence } from '@/utils/formatEvidence';
 import { A, FIG, INS, eyebrow, ruledHead, tierColor, tierLabel, tabularNums } from '@/components/atlas/theme';
 import LensBreakdownTabs from './_LensBreakdownTabs';
+import EvidenceProfile from './_EvidenceProfile';
 
 // ─── Build-time data ──────────────────────────────────────────────────────
 
@@ -55,7 +57,7 @@ const loadCitationsForSlug = (slug) => {
   try {
     const raw = fs.readFileSync(filePath, 'utf8');
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed?.citations) ? parsed.citations : [];
+    return Array.isArray(parsed?.citations) ? parsed.citations.map(cleanCitation) : [];
   } catch {
     return [];
   }
@@ -189,24 +191,13 @@ export default async function Page({ params }) {
       <PublicNav
         currentPath="/credentials"
         cta={(
-          <Link
-            href={fieldHref(bestPath)}
-            style={{
-              padding: '0.5rem 1rem',
-              background: A.accent,
-              color: A.onAccent,
-              textDecoration: 'none',
-              fontSize: 14,
-              fontWeight: 600,
-              whiteSpace: 'nowrap',
-            }}
-          >
+          <Link href={fieldHref(bestPath)} className="atlas-btn atlas-btn-primary atlas-btn-sm" style={{ fontSize: 14 }}>
             Open in the field →
           </Link>
         )}
       />
 
-      <main className="cs-page-pad" style={{ maxWidth: 1280, margin: '0 auto', padding: '2.5rem 2rem 5rem', lineHeight: 1.6 }}>
+      <main id="main" className="atlas-wrap" style={{ maxWidth: 1280, margin: '0 auto', padding: '2.5rem 2rem 5rem', lineHeight: 1.6 }}>
         {/* Hero — 2 columns on wide screens. Identity + evidence summary on
             the left, cross-lens score panel on the right. The score rows ARE
             the primary CTAs (each deep-links into /matrix with that lens +
@@ -231,15 +222,9 @@ export default async function Page({ params }) {
             >
               {cert.name}
             </h1>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center', marginTop: 14 }}>
-              {(cert.disciplines || [cert.discipline]).map((d) => (
-                <span key={d} style={pill}>{d}</span>
-              ))}
-              {meta.count > 0 && (
-                <span style={{ fontFamily: FIG, fontSize: 12, color: A.inkMuted, ...tabularNums }}>
-                  {meta.count} citations · {availablePaths.length} lens{availablePaths.length === 1 ? '' : 'es'}
-                </span>
-              )}
+            <div style={{ ...eyebrow(12.5), marginTop: 12, ...tabularNums }}>
+              {meta.count > 0 ? `${meta.count} citations · ` : ''}
+              {availablePaths.length} lens{availablePaths.length === 1 ? '' : 'es'} scored
             </div>
 
             {cert.evidence && splitEvidence(cert.evidence).map((para, i) => (
@@ -276,7 +261,8 @@ export default async function Page({ params }) {
                   <Link
                     key={pathKey}
                     href={fieldHref(pathKey)}
-                    className="card-hover"
+                    className="atlas-row"
+                    aria-label={`${label}: ${score} of 100, ${tierLabel(score)}. Open in the field`}
                     style={{
                       display: 'grid',
                       gridTemplateColumns: '1fr auto',
@@ -289,8 +275,9 @@ export default async function Page({ params }) {
                     }}
                   >
                     <div style={{ minWidth: 0 }}>
-                      <div style={{ fontSize: 13.5, fontWeight: 600, color: A.ink, letterSpacing: '-0.005em' }}>
+                      <div style={{ fontSize: 13.5, fontWeight: 600, color: A.ink, letterSpacing: '-0.005em', display: 'flex', alignItems: 'baseline', gap: 8 }}>
                         {label.replace(' & Industry', '')}
+                        <span style={{ fontSize: 11.5, fontWeight: 600, color: A.inkMuted }}>{tierLabel(score)}</span>
                       </div>
                       <div style={{ height: 4, background: A.ruleFaint, marginTop: 6 }}>
                         <div style={{ height: '100%', width: `${score}%`, background: color }} />
@@ -319,7 +306,7 @@ export default async function Page({ params }) {
             </div>
             <p style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, margin: 0, padding: '10px 16px', borderTop: `1px solid ${A.ruleFaint}`, lineHeight: 1.5 }}>
               Each lens scores different dimensions, deliberately.{' '}
-              <Link href="/methodology" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>
+              <Link href="/methodology" className="atlas-link" style={{ fontWeight: 700, textDecoration: 'none' }}>
                 Methodology →
               </Link>
             </p>
@@ -357,6 +344,7 @@ export default async function Page({ params }) {
             title={`Citations (${citations.length})`}
             eyebrow={`Sources · ${citations.length} on file`}
           >
+            <EvidenceProfile meta={meta} />
             {Object.keys(sourceCounts).length > 1 && (
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
                 {Object.entries(sourceCounts)
@@ -379,7 +367,8 @@ export default async function Page({ params }) {
             >
               {citations.map((c, idx) => {
                 const link = citationUrl(c);
-                const evidenceLabel = EVIDENCE_LABELS[c.evidence_type];
+                // 'Other' tags say nothing; only typed evidence earns a tag.
+                const evidenceLabel = c.evidence_type && c.evidence_type !== 'unknown' ? EVIDENCE_LABELS[c.evidence_type] : null;
                 return (
                   <li
                     key={idx}
@@ -445,8 +434,9 @@ export default async function Page({ params }) {
                         href={link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`Open: ${c.title}`}
-                        style={{ flexShrink: 0, fontFamily: FIG, fontSize: 11.5, fontWeight: 700, color: A.accent, textDecoration: 'none', whiteSpace: 'nowrap', marginTop: 2 }}
+                        aria-label={`Open source: ${c.title}`}
+                        className="atlas-link atlas-hit"
+                        style={{ flexShrink: 0, fontFamily: FIG, fontSize: 11.5, fontWeight: 700, textDecoration: 'none', whiteSpace: 'nowrap', marginTop: 2 }}
                       >
                         DOI ↗
                       </a>
@@ -474,31 +464,19 @@ export default async function Page({ params }) {
           }}
         >
           <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap', fontWeight: 600 }}>
-            <Link href="/credentials" style={{ color: A.accent, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+            <Link href="/credentials" className="atlas-link" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4, minHeight: 44 }}>
               <ArrowLeft size={14} aria-hidden="true" /> All credentials
             </Link>
-            <Link href="/methodology" style={{ color: A.accent, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-              <BookOpen size={14} aria-hidden="true" /> Methodology
+            <Link href="/methodology" className="atlas-link" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4, minHeight: 44 }}>
+              Methodology
             </Link>
           </div>
-          <Link
-            href={fieldHref(bestPath)}
-            style={{
-              padding: '12px 20px',
-              background: A.accent,
-              color: A.onAccent,
-              textDecoration: 'none',
-              fontWeight: 600,
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 6,
-              whiteSpace: 'nowrap',
-            }}
-          >
+          <Link href={fieldHref(bestPath)} className="atlas-btn atlas-btn-primary" style={{ padding: '12px 20px' }}>
             Open in the field <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>
       </main>
+      <PublicFooter />
     </div>
   );
 }

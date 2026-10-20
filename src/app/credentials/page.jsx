@@ -4,6 +4,7 @@
 
 import Link from 'next/link';
 import PublicNav from '@/components/layout/PublicNav';
+import PublicFooter from '@/components/layout/PublicFooter';
 import { certifications as certData } from '@/utils/certificationData';
 import citationsMeta from '@/data/citations_meta.json';
 import { PATH_ORDER } from '@/utils/careerPaths';
@@ -44,7 +45,7 @@ export default function CredentialsIndexPage() {
     <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink }}>
       <PublicNav currentPath="/credentials" />
 
-      <main className="cs-page-pad" style={{ maxWidth: 1280, margin: '0 auto', padding: '2.5rem 2rem 5rem' }}>
+      <main id="main" className="atlas-wrap" style={{ maxWidth: 1280, margin: '0 auto', padding: '2.5rem 2rem 5rem' }}>
         <header style={{ marginBottom: '1.5rem' }}>
           <h1
             className="cs-h1-clamp"
@@ -57,15 +58,14 @@ export default function CredentialsIndexPage() {
               margin: 0,
             }}
           >
-            {ROWS.length} credentials, five lenses each.
+            {ROWS.length} credentials, one dossier each.
           </h1>
           <div style={{ ...eyebrow(), marginTop: 10, ...tabularNums }}>
             The dossier library · {totalCitations.toLocaleString()} curated citations
           </div>
           <p style={{ color: A.inkBody, marginTop: '1rem', fontSize: 16, lineHeight: 1.6, maxWidth: '40em' }}>
-            Every rehab credential we score, with an evidence dossier published
-            for each. Search by name, filter by discipline or lens, and pick one
-            to read the evidence behind its scores.
+            Each dossier holds a credential&rsquo;s score in every lens it is
+            scored on, the reasoning per dimension, and its sources.
           </p>
         </header>
 
@@ -83,17 +83,18 @@ export default function CredentialsIndexPage() {
             fontWeight: 600,
           }}
         >
-          <Link href="/methodology" style={{ color: A.accent, textDecoration: 'none' }}>
+          <Link href="/methodology" className="atlas-link" style={{ textDecoration: 'none', padding: '10px 0' }}>
             How scoring works →
           </Link>
-          <Link href="/career-paths" style={{ color: A.accent, textDecoration: 'none' }}>
+          <Link href="/career-paths" className="atlas-link" style={{ textDecoration: 'none', padding: '10px 0' }}>
             The five lenses →
           </Link>
-          <Link href="/matrix" style={{ color: A.accent, textDecoration: 'none' }}>
+          <Link href="/matrix" className="atlas-link" style={{ textDecoration: 'none', padding: '10px 0' }}>
             Rank the whole field →
           </Link>
         </div>
       </main>
+      <PublicFooter />
     </div>
   );
 }
