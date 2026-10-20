@@ -1,9 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- CE Shield mark, Atlas re-ink: three-layer shield in petrol at three
-       opacities (back 0.25, mid 0.6, front 1.0), centered in a square. -->
-  <g transform="translate(2,14)">
-    <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill="#235E6B" opacity="0.25"/>
-    <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill="#235E6B" opacity="0.6"/>
-    <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="#235E6B"/>
+  <!-- CE Shield mark, plum edition: lilac back and middle layers, peach front,
+       on the plum ground so the tab reads the same as the site. -->
+  <rect width="64" height="64" rx="14" fill="#292331"/>
+  <g transform="translate(2,16)">
+    <path d="M10 0 L10 20 Q10 28 25 32 Q40 28 40 20 L40 0 Z" fill="#C7B6DC" opacity="0.32"/>
+    <path d="M20 0 L20 20 Q20 28 35 32 Q50 28 50 20 L50 0 Z" fill="#C7B6DC" opacity="0.78"/>
+    <path d="M30 0 L30 20 Q30 28 45 32 Q60 28 60 20 L60 0 Z" fill="#F0C3A8"/>
   </g>
 </svg>
