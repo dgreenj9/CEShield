@@ -1,43 +1,39 @@
 import React from 'react';
 import { PATHS, PATH_ORDER } from '../../utils/careerPaths';
-import { A, FIG } from './theme';
 
-// The lens tab strip — shared by the Matrix instrument and the Explore
-// dashboard. Active tab = petrol fill + "● " prefix (state is never conveyed
-// by color alone). `size` tunes padding/type for the two contexts.
+// The lens control, shared by the field (/matrix) and the Explore dashboard.
+// A pill segmented control: the active lens takes the peach tint and
+// aria-pressed, so state is never carried by color alone. `size="sm"` adds
+// the inset padding and hairline the Explore panel header expects;
+// `trailing` renders after the control (a count, a button).
 export const lensShortLabel = (key) => PATHS[key].label.replace(' & Industry', '');
 
-export default function LensTabs({ active, onSelect, size = 'md', trailing = null }) {
-  const dims = size === 'md'
-    ? { fontSize: 13, letterSpacing: '0.01em', padding: '13px 18px' }
-    : { fontSize: 12, letterSpacing: '0.01em', padding: '11px 13px' };
+export default function LensTabs({ active, onSelect, size = 'md', trailing = null, label = 'Career lens', full = false }) {
+  const framed = size === 'sm';
   return (
-    <div style={{ display: 'flex', alignItems: 'stretch', borderBottom: `1px solid ${A.ink}`, flexWrap: 'wrap' }}>
-      {PATH_ORDER.map((key) => {
-        const on = active === key;
-        return (
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '10px 16px',
+        padding: framed ? '12px 14px' : 0,
+        borderBottom: framed ? '1px solid #ffffff1a' : 'none',
+      }}
+    >
+      <div className="mx-seg" role="group" aria-label={label}>
+        {PATH_ORDER.map((key) => (
           <button
             key={key}
             type="button"
-            aria-pressed={on}
+            aria-pressed={active === key}
             title={PATHS[key].description}
             onClick={() => onSelect(key)}
-            style={{
-              fontFamily: FIG,
-              fontWeight: 700,
-              ...dims,
-              background: on ? A.accent : 'transparent',
-              color: on ? A.onAccent : A.inkMuted,
-              border: 'none',
-              borderRight: `1px solid ${A.ruleMinor}`,
-              cursor: 'pointer',
-              transition: 'background 0.15s ease, color 0.15s ease',
-            }}
           >
-            {(on ? '● ' : '') + lensShortLabel(key)}
+            {full ? PATHS[key].label : lensShortLabel(key)}
           </button>
-        );
-      })}
+        ))}
+      </div>
       {trailing}
     </div>
   );

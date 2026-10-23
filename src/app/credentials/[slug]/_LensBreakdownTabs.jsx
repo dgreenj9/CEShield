@@ -7,7 +7,7 @@
 
 import React, { useEffect, useState } from 'react';
 import useTablistKeyboard from '@/hooks/useTablistKeyboard';
-import { A, FIG, ruledHead, tabularNums } from '@/components/atlas/theme';
+import { A, FIG, tabularNums, hairHead, display, VIZ } from '@/components/atlas/theme';
 
 export default function LensBreakdownTabs({ lenses, initialActive }) {
   const [active, setActive] = useState(initialActive || lenses[0]?.key);
@@ -27,8 +27,11 @@ export default function LensBreakdownTabs({ lenses, initialActive }) {
   if (!lenses || lenses.length === 0) return null;
 
   return (
-    <section style={{ marginTop: '2.5rem' }}>
-      <div style={{ ...ruledHead, marginBottom: 16 }}>Score anatomy · every lens</div>
+    <section style={{ marginTop: '4.5rem' }}>
+      <div style={{ ...hairHead, marginBottom: 14 }}>Score anatomy · every lens</div>
+      <h2 style={{ ...display('clamp(1.6rem, 2.6vw, 2.2rem)'), marginBottom: 22 }}>
+        Six dimensions per lens, <em style={{ fontStyle: 'normal', color: A.accentMid }}>each with its reasoning.</em>
+      </h2>
 
       <div
         role="tablist"
@@ -37,7 +40,7 @@ export default function LensBreakdownTabs({ lenses, initialActive }) {
           display: 'flex',
           flexWrap: 'wrap',
           gap: 6,
-          marginBottom: '1.25rem',
+          marginBottom: '1.75rem',
         }}
       >
         {lenses.map((l) => {
@@ -46,31 +49,16 @@ export default function LensBreakdownTabs({ lenses, initialActive }) {
             <button
               key={l.key}
               type="button"
+              className="plum-chip"
               role="tab"
               aria-selected={isActive}
               aria-controls={`lens-panel-${l.key}`}
               id={`lens-tab-${l.key}`}
               {...tabProps(l.key)}
               onClick={() => setActive(l.key)}
-              style={{
-                padding: '7px 14px',
-                fontFamily: FIG,
-                fontSize: 12.5,
-                fontWeight: 700,
-                letterSpacing: '0.01em',
-                border: `1px solid ${isActive ? A.accent : A.ruleMinor}`,
-                background: isActive ? A.accent : 'transparent',
-                color: isActive ? A.onAccent : A.inkMuted,
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
-                whiteSpace: 'nowrap',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-              }}
             >
-              {(isActive ? '● ' : '') + l.label.replace(' & Industry', '')}
-              <span style={{ fontWeight: 700, opacity: isActive ? 0.85 : 1, ...tabularNums }}>
+              {l.label.replace(' & Industry', '')}
+              <span style={{ fontWeight: 500, color: isActive ? A.accent : A.inkMuted, ...tabularNums }}>
                 {l.totalScore}
               </span>
             </button>
@@ -86,26 +74,35 @@ export default function LensBreakdownTabs({ lenses, initialActive }) {
           aria-labelledby={`lens-tab-${l.key}`}
           hidden={l.key !== active}
         >
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem 2rem' }}>
-            {l.dims.map((d) => (
-              <div key={d.key}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 5 }}>
-                  <div style={{ fontWeight: 600, fontSize: 13.5, color: A.ink }}>
+          <div className="plum-dossier-dims">
+            {l.dims.map((d, i) => (
+              <div key={d.key} style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 14 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12, marginBottom: 8 }}>
+                  <div style={{ fontWeight: 450, fontSize: 14.5, color: A.ink, letterSpacing: '-0.01em' }}>
                     {d.label}{' '}
-                    <span style={{ fontFamily: FIG, color: A.inkMuted, fontWeight: 500, fontSize: 11.5, ...tabularNums }}>
-                      ×{d.weight}
+                    <span style={{ fontFamily: FIG, color: A.inkMuted, fontWeight: 400, fontSize: 11.5, letterSpacing: 0, ...tabularNums }}>
+                      weight {d.weight}
                     </span>
                   </div>
-                  <div style={{ fontFamily: FIG, fontSize: 13.5, fontWeight: 700, color: A.ink, ...tabularNums }}>
+                  <div style={{ fontFamily: FIG, fontSize: 16, fontWeight: 400, letterSpacing: '-0.02em', color: A.ink, ...tabularNums }}>
                     {d.value}
-                    <span style={{ color: A.inkMuted, fontWeight: 500, fontSize: 11, marginLeft: 2 }}>/100</span>
+                    <span style={{ color: A.inkMuted, fontWeight: 400, fontSize: 11, marginLeft: 2, letterSpacing: 0 }}>/100</span>
                   </div>
                 </div>
-                <div style={{ height: 4, background: A.ruleFaint }}>
-                  <div style={{ height: '100%', width: `${d.value}%`, background: A.accent }} />
+                <div aria-hidden="true" style={{ height: 8, background: VIZ.track, borderRadius: 2, overflow: 'hidden' }}>
+                  <div
+                    className="plum-grow"
+                    style={{
+                      height: '100%',
+                      width: `${d.value}%`,
+                      background: VIZ.c2,
+                      borderRadius: '0 4px 4px 0',
+                      animationDelay: `${i * 40}ms`,
+                    }}
+                  />
                 </div>
                 {d.justification && (
-                  <p style={{ fontSize: 13.5, color: A.inkBody, marginTop: 6, marginBottom: 0, lineHeight: 1.55 }}>
+                  <p style={{ fontSize: 13.5, color: A.inkBody, marginTop: 10, marginBottom: 0, lineHeight: 1.65 }}>
                     {d.justification}
                   </p>
                 )}

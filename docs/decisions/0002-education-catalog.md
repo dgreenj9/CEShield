@@ -241,7 +241,9 @@ profession, jurisdiction, delivery format, and planned date. Provider CEUs alone
 never establish state-license acceptance. No state-specific approval records
 have been published in this release. The course-log handoff prefills title and
 provider only; the clinician must enter the completion date and credited hours
-and confirm format and category. Signing in preserves the requested course.
+and confirm format and category. Signing in and profile setup preserve the
+requested course. The existing Ledger profile setup supports PT and OT only;
+the plan discloses that limit and offers saving/export for all listed professions.
 
 ## Scheduled maintenance
 

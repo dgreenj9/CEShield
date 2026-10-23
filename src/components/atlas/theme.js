@@ -1,34 +1,31 @@
-// Atlas design tokens — JS mirror of the `atlas` palette in
-// tailwind.config.js, for the inline-styled Atlas surfaces.
-//
-// Art direction in one paragraph: the product presents itself as a published
-// survey, not an app. Structure is drawn with 1px ink rules, never shadows or
-// rounded cards — border-radius is 0 everywhere on Atlas surfaces. One accent
-// (petrol) carries every interactive and "strong evidence" signal; ochre is
-// the single warning/median voice.
+// Atlas tokens, deep-sea edition (2026-10-20). A deep blue-green ground (an
+// echo of the original petrol) lit by one champagne light, cool ivory ink
+// stepped by tone, champagne as the single interactive and "strong" voice,
+// sea-glass as its quieter second, coral as the only warning. One typeface
+// (Figtree), light display weights, hairline rules.
 
 export const A = {
-  paper: '#FAFAF5',
-  band: '#F2F1E9',
-  notice: '#F6F3E7',
-  ink: '#1B1A17',
-  inkBody: '#45433C',
-  inkMuted: '#56544C',
-  ruleMinor: '#D5D3C6',
-  ruleFaint: '#E4E2D6',
-  ruleFaintest: '#EEECDF',
-  accent: '#235E6B',
-  accentHover: '#17434E',
-  accentMid: '#4E7E8B',
-  accentTint: '#D9E4E6',
-  warn: '#C77B2E',
-  dim: '#B9B4A6',
-  onAccent: '#FAFAF5',
+  paper: '#0F1D22',
+  band: '#142830',
+  notice: '#1A323A',
+  ink: '#EEF2EC',
+  inkBody: '#C5D2CE',
+  inkMuted: '#8EA5A0',
+  ruleMinor: '#26414A',
+  ruleFaint: '#1F363E',
+  ruleFaintest: '#1A2F36',
+  accent: '#E2C48F',
+  accentHover: '#F3E3C2',
+  accentMid: '#9CD1C6',
+  accentTint: '#1E3A3F',
+  warn: '#E08E6D',
+  dim: '#5F7774',
+  onAccent: '#10201F',
 };
 
 // Font stacks. Instrument Sans = display (headings, big numerals, score
 // chips); Figtree = body, UI, labels, all tabular numerals.
-export const INS = "'Instrument Sans', ui-sans-serif, system-ui, sans-serif";
+export const INS = "'Figtree', ui-sans-serif, system-ui, sans-serif";
 export const FIG = "'Figtree', ui-sans-serif, system-ui, sans-serif";
 
 // Evidence-tier scale — the only place color encodes data.
@@ -58,8 +55,137 @@ export const ruledHead = {
   letterSpacing: '0.02em',
   fontWeight: 600,
   color: A.inkMuted,
-  borderTop: `2px solid ${A.ink}`,
+  borderTop: '1px solid rgba(238, 242, 236, 0.16)',
   paddingTop: 10,
 };
 
 export const tabularNums = { fontVariantNumeric: 'tabular-nums' };
+
+// matrix additions
+// Dashboard tokens shared by the field (/matrix), the Lenses page, and the
+// dossier library. Hairlines are ink at low alpha so they sit on the world
+// light; the chart palette is the validated dark categorical set (on #13242A):
+// c2 lilac-violet = the credentials themselves, c3 teal = evidence strength,
+// c1 terracotta reserved for a second series. Peach (A.accent) marks the
+// selection; it never encodes data.
+export const MX = {
+  line: '#ffffff1a',
+  line2: '#ffffff2b',
+  panel: '#ffffff08',
+  c1: '#C8744F',
+  c2: '#8A7DE6',
+  c3: '#2E9F8C',
+  good: '#2E9F8C',
+  ring: '#13242A',
+};
+
+// Small uppercase peach eyebrow (the portfolio label voice).
+export const mxEyebrow = {
+  fontFamily: FIG,
+  fontSize: 10.5,
+  fontWeight: 600,
+  letterSpacing: '0.17em',
+  textTransform: 'uppercase',
+  color: A.accent,
+};
+
+// Light display heading; pair with <em> for the lilac second line.
+export const mxDisplay = (size = 'clamp(32px, 3.8vw, 54px)') => ({
+  fontFamily: FIG,
+  fontSize: size,
+  fontWeight: 350,
+  letterSpacing: '-0.045em',
+  lineHeight: 1.04,
+  textWrap: 'balance',
+  margin: 0,
+  color: A.ink,
+});
+
+
+// pages additions ──────────────────────────────────────────────────────────
+// Plum language for the dossiers, method, states, about, CV, auth and the
+// signed-in app. Hairlines are light at 10 to 17%, panels carry a 6px radius
+// and a faint lighter fill, display type is light with tight tracking, and
+// eyebrows are small uppercase peach with wide tracking.
+
+export const LINE = 'rgba(255,255,255,0.10)';
+export const LINE2 = 'rgba(255,255,255,0.17)';
+export const LINE_FAINT = 'rgba(255,255,255,0.06)';
+export const PANEL_FILL = 'rgba(255,255,255,0.03)';
+export const RADIUS = 6;
+export const EASE = 'cubic-bezier(.2,.7,.2,1)';
+
+// Validated dark chart palette (dataviz validator, 3 slots on #13242A).
+// Categorical only: tier color stays tierColor() and always prints its word.
+export const VIZ = {
+  c1: '#C8744F',
+  c2: '#8A7DE6',
+  c3: '#2E9F8C',
+  track: 'rgba(255,255,255,0.07)',
+  grid: 'rgba(255,255,255,0.08)',
+};
+
+export const panel = {
+  background: PANEL_FILL,
+  border: `1px solid ${LINE}`,
+  borderRadius: RADIUS,
+};
+
+// Small uppercase peach eyebrow with wide tracking.
+export const kicker = (size = 10.5, color = A.accent) => ({
+  fontFamily: FIG,
+  fontSize: size,
+  fontWeight: 600,
+  letterSpacing: '0.17em',
+  textTransform: 'uppercase',
+  color,
+});
+
+// Quieter uppercase label for table heads and panel captions.
+export const capLabel = (size = 10.5) => ({
+  fontFamily: FIG,
+  fontSize: size,
+  fontWeight: 600,
+  letterSpacing: '0.14em',
+  textTransform: 'uppercase',
+  color: A.inkMuted,
+});
+
+// Section head: peach eyebrow over a hairline (replaces ruledHead's 2px ink).
+export const hairHead = {
+  ...kicker(),
+  borderTop: `1px solid ${LINE}`,
+  paddingTop: 16,
+};
+
+// Display type: light weight, tight negative tracking. Pair with an <em>
+// second clause styled by `lilacEm`.
+export const display = (size, weight = 370) => ({
+  fontFamily: FIG,
+  fontSize: size,
+  fontWeight: weight,
+  letterSpacing: '-0.04em',
+  lineHeight: 1.04,
+  textWrap: 'balance',
+  color: A.ink,
+  margin: 0,
+});
+
+export const lilacEm = { fontStyle: 'normal', color: A.accentMid };
+
+// Panel title (portfolio .panel h3) and big numeral (portfolio .kpi).
+export const panelTitle = { fontFamily: FIG, fontSize: 12, fontWeight: 600, letterSpacing: '0.02em', color: A.inkBody };
+export const kpi = (size = 30) => ({
+  fontFamily: FIG,
+  fontSize: size,
+  fontWeight: 380,
+  letterSpacing: '-0.04em',
+  lineHeight: 1.1,
+  fontVariantNumeric: 'tabular-nums',
+  color: A.ink,
+});
+
+// Tier color for TEXT. The Limited tier's stone (#5F7774) is a mark color and
+// falls under AA for small text on the plum ground, so tier words use muted
+// ink there instead. Marks (dots, bars) keep tierColor().
+export const tierTextColor = (score) => (score < 30 ? A.inkMuted : tierColor(score));

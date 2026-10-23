@@ -94,7 +94,8 @@ export default function Modal({
   return createPortal(
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 animate-fade-in"
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4 animate-fade-in"
+      style={{ background: 'rgba(5,12,14,0.6)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}
       onMouseDown={(e) => {
         if (closeOnBackdrop && e.target === overlayRef.current) onClose?.();
       }}
@@ -105,13 +106,14 @@ export default function Modal({
         aria-modal="true"
         aria-labelledby={titleId}
         tabIndex={-1}
-        className={`bg-atlas-paper rounded-none border border-atlas-ink w-full ${sizeClass} max-h-[90vh] overflow-y-auto outline-none animate-slide-up`}
+        className={`rounded-md border border-white/12 w-full ${sizeClass} max-h-[90vh] overflow-y-auto outline-none animate-slide-up`}
+        style={{ background: '#13242A', boxShadow: '0 40px 80px rgba(3,10,12,0.45)' }}
       >
         {(title || onClose) && (
-          <div className="flex items-start justify-between px-5 py-4 border-b border-atlas-ink">
+          <div className="flex items-start justify-between gap-4 px-6 pt-5 pb-4 border-b border-white/10">
             <div>
               {title ? (
-                <h2 id={titleId} className="font-display text-lg font-semibold text-atlas-ink m-0">
+                <h2 id={titleId} className="font-display text-2xl font-normal text-atlas-ink m-0 leading-tight">
                   {title}
                 </h2>
               ) : null}
@@ -124,14 +126,14 @@ export default function Modal({
                 type="button"
                 onClick={onClose}
                 aria-label="Close dialog"
-                className="text-atlas-ink-muted hover:text-atlas-ink p-1 -mr-1 rounded-none focus:outline-none focus-visible:ring-2 focus-visible:ring-atlas-accent"
+                className="text-atlas-ink-muted hover:text-atlas-ink hover:bg-white/5 w-11 h-11 -mr-3 -mt-2 flex items-center justify-center rounded-full transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-atlas-accent"
               >
                 <X size={20} />
               </button>
             ) : null}
           </div>
         )}
-        <div className="p-5">{children}</div>
+        <div className="px-6 py-5">{children}</div>
       </div>
     </div>,
     document.body,

@@ -9,10 +9,10 @@
       "issue": "4",
       "pages": "45666",
       "doi": "10.1002/pri.70102",
-      "pmid": "188926807",
+      "pmid": "40886124",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=dc258834-e5f6-37a1-9b94-a893fa44dd31",
       "library_link": "https://libkey.io/libraries/1712/10.1002/pri.70102",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "A. I. AlSadiq; F. A. Abdulla; A. M. Alshami",
@@ -51,7 +51,7 @@
       "issue": "1",
       "pages": "14-29",
       "doi": "10.1080/17518423.2024.2438949",
-      "pmid": "181889015",
+      "pmid": "39673448",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=58d05411-570c-3b95-84a6-689d04a6e729",
       "library_link": "https://libkey.io/libraries/1712/10.1080/17518423.2024.2438949",
       "evidence_type": "rct"
@@ -82,7 +82,7 @@
       "pmid": "39775922",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/39775922",
       "library_link": "https://libkey.io/libraries/1712/10.1002/14651858.CD013834.pub2",
-      "evidence_type": "unknown"
+      "evidence_type": "meta_analysis"
     },
     {
       "authors": "G. De Natale; E. Qorri; J. Todri; O. Lena",
@@ -107,7 +107,7 @@
       "issue": "7",
       "pages": "1435-1446",
       "doi": "10.1080/09593985.2024.2443027",
-      "pmid": "186130348",
+      "pmid": "39700302",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=01cf9313-50b2-3396-904e-9b8f149a7e03",
       "library_link": "https://libkey.io/libraries/1712/10.1080/09593985.2024.2443027",
       "evidence_type": "rct"
@@ -121,7 +121,7 @@
       "issue": "3",
       "pages": "275-280",
       "doi": "10.56984/8ZG7D19NXVI",
-      "pmid": "187296201",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=5f7900ec-ced6-3f59-899c-92239b2a0cfe",
       "library_link": "https://libkey.io/libraries/1712/10.56984/8ZG7D19NXVI",
       "evidence_type": "unknown"
@@ -149,7 +149,7 @@
       "issue": "4",
       "pages": "1044-1055",
       "doi": "10.1080/17483107.2024.2431051",
-      "pmid": "185198485",
+      "pmid": "39570714",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=5b80d054-3b84-3272-a27f-c47283d1ae80",
       "library_link": "https://libkey.io/libraries/1712/10.1080/17483107.2024.2431051",
       "evidence_type": "rct"
@@ -205,7 +205,7 @@
       "issue": "4",
       "pages": "779-787",
       "doi": "10.18502/jimc.v8i4.19545",
-      "pmid": "188163922",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=babec2ef-9db9-3c29-bc8d-251546c508de",
       "library_link": "https://libkey.io/libraries/1712/10.18502/jimc.v8i4.19545",
       "evidence_type": "rct"
@@ -232,10 +232,10 @@
       "volume": "23",
       "issue": "4",
       "pages": "45666",
-      "doi": "",
-      "pmid": "188764661",
+      "doi": "10.46743/1540-580x.2734",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=c3972f6e-ce13-3e35-8cb3-0d1a08d212c8",
-      "library_link": "",
+      "library_link": "https://libkey.io/libraries/1712/10.46743/1540-580x.2734",
       "evidence_type": "case_series"
     },
     {
@@ -247,7 +247,7 @@
       "issue": "6",
       "pages": "45671",
       "doi": "10.5014/ajot.2025.051134",
-      "pmid": "189032072",
+      "pmid": "40990898",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=919a0d5c-d338-3265-a164-efc0fffd6502",
       "library_link": "https://libkey.io/libraries/1712/10.5014/ajot.2025.051134",
       "evidence_type": "rct"
@@ -261,7 +261,7 @@
       "issue": "8",
       "pages": "2949-2959",
       "doi": "10.1080/17483107.2025.2516625",
-      "pmid": "189411290",
+      "pmid": "40497589",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=3519e07d-f2e7-35ff-b820-f4aa65415154",
       "library_link": "https://libkey.io/libraries/1712/10.1080/17483107.2025.2516625",
       "evidence_type": "rct"
@@ -275,7 +275,7 @@
       "issue": "3",
       "pages": "193-202",
       "doi": "10.56984/8ZG7D19QDHS",
-      "pmid": "187296189",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=f0b14d00-b394-3799-8cce-ee17ff222c2f",
       "library_link": "https://libkey.io/libraries/1712/10.56984/8ZG7D19QDHS",
       "evidence_type": "unknown"
@@ -292,7 +292,7 @@
       "pmid": "40537150",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/40537150",
       "library_link": "https://libkey.io/libraries/1712/10.1002/14651858.CD008349.pub5",
-      "evidence_type": "unknown"
+      "evidence_type": "meta_analysis"
     },
     {
       "authors": "H. H. M. Lo; P. Y. H. Fong; B. Wang; C. L.-C. Fung; S. Y.-S. Wong; R. W. S. Sit",
@@ -303,7 +303,7 @@
       "issue": "1",
       "pages": "N.PAG-N.PAG",
       "doi": "10.1016/j.jamda.2024.105344",
-      "pmid": "181866160",
+      "pmid": "39510131",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=cf005873-89a2-396c-89cf-add43d70e1a7",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.jamda.2024.105344",
       "evidence_type": "rct"
@@ -320,7 +320,7 @@
       "pmid": "40886364",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/40886364",
       "library_link": "https://libkey.io/libraries/1712/10.33549/physiolres.935590",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "R. Nartea; D. Poenaru; M. I. Constantinovici; C. G. Potcovaru; D. Cinteza",
@@ -359,7 +359,7 @@
       "issue": "15",
       "pages": "1800",
       "doi": "10.3390/healthcare13151800",
-      "pmid": "187316759",
+      "pmid": "40805833",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=d39df2a6-759c-3e7b-869a-ddb8390ed0ee",
       "library_link": "https://libkey.io/libraries/1712/10.3390/healthcare13151800",
       "evidence_type": "rct"
@@ -373,7 +373,7 @@
       "issue": "3",
       "pages": "283",
       "doi": "10.3390/children12030283",
-      "pmid": "184129866",
+      "pmid": "40150565",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=27544403-e768-3299-80c9-71c029971f18",
       "library_link": "https://libkey.io/libraries/1712/10.3390/children12030283",
       "evidence_type": "rct"
@@ -387,7 +387,7 @@
       "issue": "1",
       "pages": "45668",
       "doi": "10.1186/s43161-025-00265-3",
-      "pmid": "182469607",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=45c7af4f-7205-377d-b357-774e8529b164",
       "library_link": "https://libkey.io/libraries/1712/10.1186/s43161-025-00265-3",
       "evidence_type": "rct"
@@ -401,7 +401,7 @@
       "issue": "",
       "pages": "319-331",
       "doi": "10.1016/j.jbmt.2025.08.028",
-      "pmid": "189518932",
+      "pmid": "41316593",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=4bcbc889-a961-31cb-af41-a70b2c65184b",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.jbmt.2025.08.028",
       "evidence_type": "rct"
@@ -415,7 +415,7 @@
       "issue": "1",
       "pages": "296-301",
       "doi": "10.56984/8ZG007D7OAV",
-      "pmid": "185721902",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=2939263d-1411-320b-b235-853dd7d6ca15",
       "library_link": "https://libkey.io/libraries/1712/10.56984/8ZG007D7OAV",
       "evidence_type": "unknown"
@@ -443,7 +443,7 @@
       "issue": "4",
       "pages": "312-317",
       "doi": "10.1097/PHM.0000000000002590",
-      "pmid": "183911520",
+      "pmid": "38958272",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=ba8276a1-2df1-355d-ac97-e555ac124524",
       "library_link": "https://libkey.io/libraries/1712/10.1097/PHM.0000000000002590",
       "evidence_type": "rct"
@@ -457,7 +457,7 @@
       "issue": "10",
       "pages": "1311-1323",
       "doi": "10.1177/02692155251363417",
-      "pmid": "187779657",
+      "pmid": "40739904",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=5c0a1a57-6ecf-381c-9243-8feba5b4136c",
       "library_link": "https://libkey.io/libraries/1712/10.1177/02692155251363417",
       "evidence_type": "rct"
@@ -485,7 +485,7 @@
       "issue": "2",
       "pages": "N.PAG-N.PAG",
       "doi": "10.1016/j.jamda.2024.105397",
-      "pmid": "182640189",
+      "pmid": "39615543",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=86e4dd01-b977-3ced-9153-c67bc50de7cd",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.jamda.2024.105397",
       "evidence_type": "rct"
@@ -499,7 +499,7 @@
       "issue": "4",
       "pages": "520-529",
       "doi": "10.1177/02692155231217468",
-      "pmid": "175700998",
+      "pmid": "38130064",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=3783a865-68bc-3875-ac3a-ab268c3ac4e2",
       "library_link": "https://libkey.io/libraries/1712/10.1177/02692155231217468",
       "evidence_type": "rct"
@@ -530,7 +530,7 @@
       "pmid": "38801680",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/38801680",
       "library_link": "https://libkey.io/libraries/1712/10.1109/tnsre.2024.3405852",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "A. S. A. E. Azm; Z. M. Emam; S. A. A. E. Ghany",
@@ -541,7 +541,7 @@
       "issue": "4",
       "pages": "77-83",
       "doi": "10.56984/8ZG01A8A7C2",
-      "pmid": "181219059",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=a1b0869f-d207-3497-b4f5-d1e0ce0f7e0d",
       "library_link": "https://libkey.io/libraries/1712/10.56984/8ZG01A8A7C2",
       "evidence_type": "unknown"
@@ -555,7 +555,7 @@
       "issue": "3",
       "pages": "274-289",
       "doi": "10.3390/jal4030020",
-      "pmid": "180069246",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=a2eecd41-ff38-30d9-95ad-644dca44ed56",
       "library_link": "https://libkey.io/libraries/1712/10.3390/jal4030020",
       "evidence_type": "protocol"
@@ -611,7 +611,7 @@
       "issue": "3",
       "pages": "293-302",
       "doi": "10.56984/8ZG020AGXN",
-      "pmid": "179730462",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=c61fb2cc-62fb-3fab-8f2b-35ff90b9a407",
       "library_link": "https://libkey.io/libraries/1712/10.56984/8ZG020AGXN",
       "evidence_type": "rct"
@@ -740,7 +740,7 @@
       "pmid": "39367480",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/39367480",
       "library_link": "https://libkey.io/libraries/1712/10.1186/s42234-024-00150-9",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "M. Krohn; A. Rintala; J. Immonen; T. Sjögren",
@@ -807,7 +807,7 @@
       "issue": "1",
       "pages": "222-228",
       "doi": "10.56984/8ZG2EF8E30",
-      "pmid": "176515990",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=eb525fab-e871-3f51-9058-9bdbd0666395",
       "library_link": "https://libkey.io/libraries/1712/10.56984/8ZG2EF8E30",
       "evidence_type": "rct"
@@ -821,7 +821,7 @@
       "issue": "2",
       "pages": "144-152",
       "doi": "10.4103/ijptr.ijptr_33_24",
-      "pmid": "183257188",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=1e921a7f-5122-3ea1-b837-7c79852fa99a",
       "library_link": "https://libkey.io/libraries/1712/10.4103/ijptr.ijptr_33_24",
       "evidence_type": "rct"
@@ -866,7 +866,7 @@
       "pmid": "38514225",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/38514225",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.pmr.2023.06.026",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "Y. Ren; Q. Wang; H. Liu; G. Wang; A. Lu",
@@ -891,7 +891,7 @@
       "issue": "5",
       "pages": "191-194",
       "doi": "10.56984/8ZG020C8UWP",
-      "pmid": "182919382",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=e020f396-c1aa-3cee-bdda-a22516c439bc",
       "library_link": "https://libkey.io/libraries/1712/10.56984/8ZG020C8UWP",
       "evidence_type": "rct"
@@ -932,10 +932,10 @@
       "volume": "22",
       "issue": "4",
       "pages": "45662",
-      "doi": "",
-      "pmid": "181078411",
+      "doi": "10.46743/1540-580x.2562",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=caab30c9-416a-3529-ba07-855a35f415fb",
-      "library_link": "",
+      "library_link": "https://libkey.io/libraries/1712/10.46743/1540-580x.2562",
       "evidence_type": "unknown"
     },
     {
@@ -947,7 +947,7 @@
       "issue": "4",
       "pages": "470-480",
       "doi": "10.1080/02703181.2024.2332253",
-      "pmid": "180590767",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=5d2f821e-45bd-3367-8816-4673faac7062",
       "library_link": "https://libkey.io/libraries/1712/10.1080/02703181.2024.2332253",
       "evidence_type": "pilot"
@@ -992,7 +992,7 @@
       "pmid": "38519809",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/38519809",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s00296-024-05569-6",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "K. Yuenyongchaiwat; T. Boonkawee; P. Pipatsart; W. Tavonudomgit; N. Sermsinsaithong; P. Songsorn; N. Charususin; S. Harnmanop; P. Namdaeng; C. Kulchanarat; C. Thanawattano",
@@ -1003,7 +1003,7 @@
       "issue": "1",
       "pages": "45666",
       "doi": "10.1002/pri.2066",
-      "pmid": "175072232",
+      "pmid": "38009369",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=8a5c6b71-09ec-374c-bfd8-12adbf15413f",
       "library_link": "https://libkey.io/libraries/1712/10.1002/pri.2066",
       "evidence_type": "rct"
@@ -1017,7 +1017,7 @@
       "issue": "3",
       "pages": "353-368",
       "doi": "10.3233/PRM-220120",
-      "pmid": "182796765",
+      "pmid": "39150837",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=d7bbccd7-0a9a-3120-9fd1-febe09db3697",
       "library_link": "https://libkey.io/libraries/1712/10.3233/PRM-220120",
       "evidence_type": "rct"
@@ -1031,10 +1031,10 @@
       "issue": "3",
       "pages": "446-456",
       "doi": "10.1177/15394492231158375",
-      "pmid": "164615771",
+      "pmid": "36960762",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=86525049-2b19-3a82-84aa-5e07c1ac191e",
       "library_link": "https://libkey.io/libraries/1712/10.1177/15394492231158375",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "N. Aderinto; G. Olatunji; M. O. Abdulbasit; M. Edun; G. Aboderin; E. Egbunu",
@@ -1101,7 +1101,7 @@
       "issue": "8",
       "pages": "1336",
       "doi": "10.3390/children10081336",
-      "pmid": "170738609",
+      "pmid": "37628335",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=662a1b52-6cbb-34db-aea5-9705e84db0a9",
       "library_link": "https://libkey.io/libraries/1712/10.3390/children10081336",
       "evidence_type": "rct"
@@ -1115,7 +1115,7 @@
       "issue": "2",
       "pages": "249-259",
       "doi": "10.1080/02687038.2021.1998882",
-      "pmid": "161226550",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=34b3c543-21af-31ea-8d63-d48065098bb8",
       "library_link": "https://libkey.io/libraries/1712/10.1080/02687038.2021.1998882",
       "evidence_type": "unknown"
@@ -1143,7 +1143,7 @@
       "issue": "1",
       "pages": "64-72",
       "doi": "10.21653/tjpr.1017679",
-      "pmid": "164324442",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=10e0753c-cafc-3cd9-92e7-1e7d5b3e1734",
       "library_link": "https://libkey.io/libraries/1712/10.21653/tjpr.1017679",
       "evidence_type": "rct"
@@ -1216,7 +1216,7 @@
       "pmid": "36443623",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/36443623",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s13760-022-02147-0",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "J. Hao; Z. Chen; A. Remis; Z. He",
@@ -1255,10 +1255,10 @@
       "issue": "",
       "pages": "N.PAG-N.PAG",
       "doi": "10.1016/j.clinbiomech.2023.105944",
-      "pmid": "163228305",
+      "pmid": "36963203",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=a14bcbac-6080-3d0f-8247-bfe7cdb8274a",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.clinbiomech.2023.105944",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "S. H. Kwon; J. K. Park; Y. H. Koh",
@@ -1286,7 +1286,7 @@
       "pmid": "36660485",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/36660485",
       "library_link": "https://libkey.io/libraries/1712/10.1007/s43465-022-00766-6",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "H. Lazem; A. Hall; Y. Gomaa; M. Mansoubi; S. Lamb; H. Dawes",
@@ -1339,7 +1339,7 @@
       "issue": "3",
       "pages": "198-205",
       "doi": "10.1097/PHM.0000000000002060",
-      "pmid": "161934985",
+      "pmid": "35687751",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=72cbb913-6076-3d2f-99ca-0affc34f63fe",
       "library_link": "https://libkey.io/libraries/1712/10.1097/PHM.0000000000002060",
       "evidence_type": "rct"
@@ -1367,7 +1367,7 @@
       "issue": "21",
       "pages": "2846",
       "doi": "10.3390/healthcare11212846",
-      "pmid": "173568077",
+      "pmid": "37957991",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=6597ffbf-ae0f-3648-b144-3dec64c252aa",
       "library_link": "https://libkey.io/libraries/1712/10.3390/healthcare11212846",
       "evidence_type": "rct"
@@ -1395,7 +1395,7 @@
       "issue": "2",
       "pages": "222",
       "doi": "10.3390/children10020222",
-      "pmid": "162115969",
+      "pmid": "36832351",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=d7223d98-933a-3bb1-b70f-8222544967fa",
       "library_link": "https://libkey.io/libraries/1712/10.3390/children10020222",
       "evidence_type": "rct"
@@ -1454,7 +1454,7 @@
       "pmid": "37350487",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/37350487",
       "library_link": "https://libkey.io/libraries/1712/10.1093/eurheartj/ehad352",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "G. Velmurugan; S. Viswanath; J. Andrews Milton",
@@ -1465,7 +1465,7 @@
       "issue": "3",
       "pages": "60-66",
       "doi": "10.37506/ijpot.v17i3.19551",
-      "pmid": "169856113",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=755545e6-8f1e-37bf-ae4e-9211eb238237",
       "library_link": "https://libkey.io/libraries/1712/10.37506/ijpot.v17i3.19551",
       "evidence_type": "rct"
@@ -1507,10 +1507,10 @@
       "issue": "13",
       "pages": "1813",
       "doi": "10.3390/healthcare11131813",
-      "pmid": "164920907",
+      "pmid": "37444646",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=8861e4ff-d022-3a8f-aef5-7952451b0a96",
       "library_link": "https://libkey.io/libraries/1712/10.3390/healthcare11131813",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "J. Yu; J. Wu; J. Lu; X. Wei; K. Zheng; B. Liu; W. Xiao; Q. Shi; L. Xiong; Z. Ren",
@@ -1591,7 +1591,7 @@
       "issue": "6",
       "pages": "504-509",
       "doi": "10.1038/s41393-021-00745-y",
-      "pmid": "157545304",
+      "pmid": "34999726",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=f31e2f7c-8138-3171-a561-b88e473927e1",
       "library_link": "https://libkey.io/libraries/1712/10.1038/s41393-021-00745-y",
       "evidence_type": "rct"
@@ -1622,7 +1622,7 @@
       "pmid": "36346300",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/36346300",
       "library_link": "",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "J. Chen; C. K. Or; T. Chen",
@@ -1661,7 +1661,7 @@
       "issue": "1",
       "pages": "45668",
       "doi": "10.1186/s12883-022-02640-2",
-      "pmid": "155909351",
+      "pmid": "35317736",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=981e0867-1b43-3a76-8ef0-ef02e0d0d317",
       "library_link": "https://libkey.io/libraries/1712/10.1186/s12883-022-02640-2",
       "evidence_type": "rct"
@@ -1717,10 +1717,10 @@
       "issue": "",
       "pages": "N.PAG-N.PAG",
       "doi": "10.1016/j.ctcp.2022.101687",
-      "pmid": "160165684",
+      "pmid": "36347152",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=f39adc50-0a6e-3bd0-8342-00f14759e99a",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.ctcp.2022.101687",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "A. Gazendam; M. Zhu; Y. Chang; S. Phillips; M. Bhandari",
@@ -1759,7 +1759,7 @@
       "issue": "3",
       "pages": "256-263",
       "doi": "10.1080/10400435.2020.1772900",
-      "pmid": "157383956",
+      "pmid": "32543290",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=9c7da2bc-10f6-3655-b0fa-33d6306ade42",
       "library_link": "https://libkey.io/libraries/1712/10.1080/10400435.2020.1772900",
       "evidence_type": "rct"
@@ -1787,7 +1787,7 @@
       "issue": "3",
       "pages": "229-236",
       "doi": "10.1097/PHM.0000000000001779",
-      "pmid": "155334677",
+      "pmid": "33935153",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=21789417-b4ba-3cee-8f82-37a6ec90e4ea",
       "library_link": "https://libkey.io/libraries/1712/10.1097/PHM.0000000000001779",
       "evidence_type": "rct"
@@ -1815,7 +1815,7 @@
       "issue": "6",
       "pages": "335-345",
       "doi": "10.1177/15459683221081430",
-      "pmid": "156994004",
+      "pmid": "35341360",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=18868d79-e0bf-301e-bd90-9fb07dfd0928",
       "library_link": "https://libkey.io/libraries/1712/10.1177/15459683221081430",
       "evidence_type": "rct"
@@ -1871,7 +1871,7 @@
       "issue": "",
       "pages": "28-36",
       "doi": "10.1055/s-0041-1724100",
-      "pmid": "154970976",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=d67b8370-e5cf-34ce-b0bc-0c3ee4f5f1af",
       "library_link": "https://libkey.io/libraries/1712/10.1055/s-0041-1724100",
       "evidence_type": "unknown"
@@ -1899,7 +1899,7 @@
       "issue": "1",
       "pages": "45671",
       "doi": "10.1186/s12877-022-03035-1",
-      "pmid": "156618812",
+      "pmid": "35488213",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=5d1006ba-cd71-306a-bc4c-355fdacdf764",
       "library_link": "https://libkey.io/libraries/1712/10.1186/s12877-022-03035-1",
       "evidence_type": "rct"
@@ -1972,7 +1972,7 @@
       "pmid": "36280946",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/36280946",
       "library_link": "https://libkey.io/libraries/1712/10.47391/jpma.22-90",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "E. Maranesi; E. Casoni; R. Baldoni; I. Barboni; N. Rinaldi; B. Tramontana; G. Amabili; M. Benadduci; F. Barbarossa; R. Luzi; V. Di Donna; P. Scendoni; G. Pelliccioni; F. Lattanzio; G. R. Riccardi; R. Bevilacqua",
@@ -2025,7 +2025,7 @@
       "issue": "",
       "pages": "245-250",
       "doi": "10.4103/0028-3886.360934",
-      "pmid": "160262970",
+      "pmid": "36412376",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=d48fc195-28a1-39bb-b46c-c886fed72e03",
       "library_link": "https://libkey.io/libraries/1712/10.4103/0028-3886.360934",
       "evidence_type": "rct"
@@ -2081,7 +2081,7 @@
       "issue": "7",
       "pages": "898-908",
       "doi": "10.1080/02699052.2022.2096258",
-      "pmid": "158478479",
+      "pmid": "35834738",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=158a32a0-5d7e-3471-943d-c6bb5f36c0d1",
       "library_link": "https://libkey.io/libraries/1712/10.1080/02699052.2022.2096258",
       "evidence_type": "rct"
@@ -2123,7 +2123,7 @@
       "issue": "5",
       "pages": "660-668",
       "doi": "10.1177/02692155221080546",
-      "pmid": "155907176",
+      "pmid": "35166608",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=ace6fe54-4537-33f0-9fed-6251413c3fef",
       "library_link": "https://libkey.io/libraries/1712/10.1177/02692155221080546",
       "evidence_type": "rct"
@@ -2140,7 +2140,7 @@
       "pmid": "33533682",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/33533682",
       "library_link": "https://libkey.io/libraries/1712/10.1089/g4h.2020.0028",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "J. Blasco; C. Igual-Camacho; M. Blasco; V. Antón-Antón; L. Ortiz-Llueca; S. Roig-Casasús",
@@ -2263,7 +2263,7 @@
       "issue": "1",
       "pages": "85-97",
       "doi": "10.1080/09638288.2019.1618400",
-      "pmid": "147858136",
+      "pmid": "31131641",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=4e9b060f-20bc-337c-92e0-921518c758b5",
       "library_link": "https://libkey.io/libraries/1712/10.1080/09638288.2019.1618400",
       "evidence_type": "rct"
@@ -2294,7 +2294,7 @@
       "pmid": "33314016",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/33314016",
       "library_link": "https://libkey.io/libraries/1712/10.5603/PJNNS.a2020.0096",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "C. Hwi-young; S. Eseul; M. Jong-Hoon; H. Suk-Chan",
@@ -2305,7 +2305,7 @@
       "issue": "2",
       "pages": "676-682",
       "doi": "10.37506/mlu.v21i2.2761",
-      "pmid": "152719838",
+      "pmid": "",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=4119e750-28b4-368e-9408-2ef19d015e0e",
       "library_link": "https://libkey.io/libraries/1712/10.37506/mlu.v21i2.2761",
       "evidence_type": "rct"
@@ -2333,7 +2333,7 @@
       "issue": "",
       "pages": "76-81",
       "doi": "10.1016/j.genhosppsych.2021.04.008",
-      "pmid": "151123772",
+      "pmid": "33964789",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=2d26f686-5de1-37b6-b7b4-c1abd7ac996c",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.genhosppsych.2021.04.008",
       "evidence_type": "unknown"
@@ -2361,10 +2361,10 @@
       "issue": "5",
       "pages": "1073-1080",
       "doi": "10.1016/j.jamda.2021.01.076",
-      "pmid": "150104626",
+      "pmid": "33639116",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=ae95e152-2a31-3ca4-a0f2-6442f85a1f63",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.jamda.2021.01.076",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "D. B. Mekbib; D. K. Debeli; L. Zhang; S. Fang; Y. Shao; W. Yang; J. Han; H. Jiang; J. Zhu; Z. Zhao; R. Cheng; X. Ye; J. Zhang; D. Xu",
@@ -2378,7 +2378,7 @@
       "pmid": "33442915",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/33442915",
       "library_link": "https://libkey.io/libraries/1712/10.1111/nyas.14554",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "F. Molhemi; S. Monjezi; M. Mehravar; M.-J. Shaterzadeh-Yazdi; R. Salehi; S. Hesam; E. Mohammadianinejad",
@@ -2389,7 +2389,7 @@
       "issue": "2",
       "pages": "290-299",
       "doi": "10.1016/j.apmr.2020.09.395",
-      "pmid": "148283440",
+      "pmid": "33161005",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=1f73cc71-96a5-34b2-a62a-2754b6bcf5d8",
       "library_link": "https://libkey.io/libraries/1712/10.1016/j.apmr.2020.09.395",
       "evidence_type": "rct"
@@ -2403,10 +2403,10 @@
       "issue": "6",
       "pages": "884-893",
       "doi": "10.1123/jsr.2020-0075",
-      "pmid": "151627282",
+      "pmid": "33596538",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=f29859e1-b452-3f9b-a666-49788e55e09f",
       "library_link": "https://libkey.io/libraries/1712/10.1123/jsr.2020-0075",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "E. Norouzi; M. Gerber; U. Pühse; M. Vaezmosavi; S. Brand",
@@ -2417,10 +2417,10 @@
       "issue": "4",
       "pages": "552-569",
       "doi": "10.1080/09602011.2020.1715231",
-      "pmid": "149806276",
+      "pmid": "31971071",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=a17eb288-3d4b-3ddc-ae01-d2e9c4e12e75",
       "library_link": "https://libkey.io/libraries/1712/10.1080/09602011.2020.1715231",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "G. Palacios-Navarro; N. Hogan",
@@ -2462,7 +2462,7 @@
       "pmid": "33401678",
       "url": "https://www.ncbi.nlm.nih.gov/pubmed/33401678",
       "library_link": "https://libkey.io/libraries/1712/10.3390/brainsci11010041",
-      "evidence_type": "unknown"
+      "evidence_type": "narrative"
     },
     {
       "authors": "H. Sadeghi; D. A. Jehu; A. Daneshjoo; E. Shakoor; M. Razeghi; A. Amani; M. N. Hakim; A. Yusof",
@@ -2487,10 +2487,10 @@
       "issue": "45846",
       "pages": "e777-e783",
       "doi": "10.1093/milmed/usaa483",
-      "pmid": "151237679",
+      "pmid": "33201245",
       "url": "https://research.ebsco.com/linkprocessor/plink?id=17f19271-4b55-3951-bad0-a4b3288f47ce",
       "library_link": "https://libkey.io/libraries/1712/10.1093/milmed/usaa483",
-      "evidence_type": "unknown"
+      "evidence_type": "rct"
     },
     {
       "authors": "A. Voinescu; J. Sui; D. Stanton Fraser",
@@ -2585,10 +2585,10 @@
       "issue": "",
       "pages": "",
       "doi": "10.1089/cyber.2017.29099.gri",
-      "pmid": "30557098",
-      "url": "",
+      "pmid": "30183347",
+      "url": "https://www.ncbi.nlm.nih.gov/pubmed/30183347",
       "library_link": "",
-      "evidence_type": "unknown",
+      "evidence_type": "meta_analysis",
       "source_type": "peer-reviewed",
       "what_it_says": "Establishes medical VR as a distinct industry vertical with defined clinician-developer roles, signaling that VR-credentialed clinicians are positioned for hybrid clinical-industry careers in digital therapeutics.",
       "path": "healthTech"
@@ -2605,7 +2605,7 @@
       "pmid": "30702436",
       "url": "",
       "library_link": "",
-      "evidence_type": "unknown",
+      "evidence_type": "guideline",
       "source_type": "peer-reviewed",
       "what_it_says": "Defines the VR-clinical-trialist role and methodology that industry sponsors hire clinicians into, mapping a direct credential-to-industry pathway for medtech VR developers.",
       "path": "healthTech"
@@ -2656,7 +2656,7 @@
       "pmid": "29376669",
       "url": "",
       "library_link": "",
-      "evidence_type": "unknown",
+      "evidence_type": "narrative",
       "source_type": "peer-reviewed",
       "what_it_says": "Maps the clinical-VR workforce ecosystem (academic labs, USC ICT, startups) and documents how clinician-scientists transition into industry R&D leadership at medical VR companies.",
       "path": "healthTech"
@@ -2670,10 +2670,10 @@
       "issue": "",
       "pages": "",
       "doi": "10.3233/PRM-190635",
-      "pmid": "33935116",
-      "url": "",
+      "pmid": "34151871",
+      "url": "https://www.ncbi.nlm.nih.gov/pubmed/34151871",
       "library_link": "",
-      "evidence_type": "unknown",
+      "evidence_type": "pilot",
       "source_type": "peer-reviewed",
       "what_it_says": "Demonstrates the clinician-industry co-development model in pediatric rehab VR, evidence that VR-credentialed rehab clinicians are recruited as clinical leads by device manufacturers.",
       "path": "healthTech"

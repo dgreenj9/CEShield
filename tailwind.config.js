@@ -42,10 +42,10 @@ const paper = {
 // Atlas evidence-tier scale — the only place color encodes data. Tiers stay
 // within the accent family: petrol → mid-petrol → ochre → stone.
 const evidence = {
-  strong: '#235E6B',   // tier: Strong (70-100)
-  good: '#4E7E8B',     // tier: Good (50-69)
-  moderate: '#C77B2E', // tier: Moderate (30-49)
-  limited: '#B9B4A6',  // tier: Limited (0-29)
+  strong: '#E2C48F',   // tier: Strong (70-100)
+  good: '#9CD1C6',     // tier: Good (50-69)
+  moderate: '#E08E6D', // tier: Moderate (30-49)
+  limited: '#5F7774',  // tier: Limited (0-29)
 };
 
 // "Atlas" design tokens — the ground-up redesign (2026-08). Scientific-atlas
@@ -54,22 +54,22 @@ const evidence = {
 // surfaces. Source of truth: docs/design (Atlas handoff) +
 // src/components/atlas/theme.js (JS mirror for inline-styled components).
 const atlas = {
-  paper: '#FAFAF5',
-  band: '#F2F1E9',
-  notice: '#F6F3E7',
-  ink: '#1B1A17',
-  'ink-body': '#45433C',
-  'ink-muted': '#56544C',
-  'rule-minor': '#D5D3C6',
-  'rule-faint': '#E4E2D6',
-  'rule-faintest': '#EEECDF',
-  accent: '#235E6B',
-  'accent-hover': '#17434E',
-  'accent-mid': '#4E7E8B',
-  'accent-tint': '#D9E4E6',
-  warn: '#C77B2E',
-  dim: '#B9B4A6',
-  'on-accent': '#FAFAF5',
+  paper: '#0F1D22',
+  band: '#142830',
+  notice: '#1A323A',
+  ink: '#EEF2EC',
+  'ink-body': '#C5D2CE',
+  'ink-muted': '#8EA5A0',
+  'rule-minor': '#26414A',
+  'rule-faint': '#1F363E',
+  'rule-faintest': '#1A2F36',
+  accent: '#E2C48F',
+  'accent-hover': '#F3E3C2',
+  'accent-mid': '#9CD1C6',
+  'accent-tint': '#1E3A3F',
+  warn: '#E08E6D',
+  dim: '#5F7774',
+  'on-accent': '#10201F',
 };
 
 module.exports = {
@@ -83,7 +83,7 @@ module.exports = {
         evidence,
         paper,
         atlas,
-        'gray-bg': '#f9fafb',
+        'gray-bg': '#0F1D22',
       },
       borderRadius: {
         none: '0',

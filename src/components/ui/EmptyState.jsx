@@ -4,11 +4,11 @@ import React from 'react';
 // optional icon + CTA. Used by Compliance, Courses, CertificationDetail.
 export default function EmptyState({ icon: Icon, title, description, action, variant = 'plain' }) {
   const baseClasses =
-    'flex flex-col items-center justify-center text-center py-10 px-6 rounded-none';
+    'flex flex-col items-center justify-center text-center py-12 px-6 rounded-md';
   const variantClasses =
     variant === 'dashed'
-      ? 'border border-dashed border-atlas-ink bg-atlas-notice'
-      : 'bg-atlas-paper border border-dashed border-atlas-ink';
+      ? 'border border-dashed border-white/20 bg-white/[0.02]'
+      : 'bg-white/[0.03] border border-white/10';
 
   return (
     <div className={`${baseClasses} ${variantClasses}`}>
@@ -21,7 +21,7 @@ export default function EmptyState({ icon: Icon, title, description, action, var
         />
       ) : null}
       {title ? (
-        <p className="text-base font-semibold text-atlas-ink m-0 mb-1">{title}</p>
+        <p className="text-xl font-normal tracking-tight text-atlas-ink m-0 mb-2">{title}</p>
       ) : null}
       {description ? (
         <p className="text-sm text-atlas-ink-muted m-0 max-w-md leading-relaxed">{description}</p>

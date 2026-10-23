@@ -31,6 +31,7 @@ export default function LearningPlan({courses, state}) {
       <label>License state<br/><select aria-label="Plan state" style={input} value={plan.jurisdiction} onChange={e=>save({...plan,jurisdiction:e.target.value})}><option value="">Choose</option>{US_STATES.map(x=><option key={x}>{x}</option>)}</select></label>
       <button style={button} disabled={!ready} onClick={download}>Export plan</button>
     </div>
+    <p style={{fontSize:13,color:A.inkMuted}}>The course log currently supports PT and OT profiles. All listed professions can save and export a learning plan here.</p>
     <p>{rows.length} planned courses · {total} known provider-listed hours · {rows.filter(x=>x.course?.contactHours==null).length} with hours still to check. These are planning totals, not accepted CE totals.</p>
     {!rows.length&&<p>Select Save to plan on a course card to begin.</p>}
     {rows.map(({courseId,course,targetDate,note})=>{const acceptance=acceptanceFor(course||{}, {profession:plan.profession,jurisdiction:plan.jurisdiction,date:targetDate});return <article key={courseId} style={{padding:20,marginBottom:16,border:`1px solid ${A.ruleMinor}`,background:A.paper}}>
@@ -39,7 +40,7 @@ export default function LearningPlan({courses, state}) {
       <div style={{display:'flex',gap:16,flexWrap:'wrap'}}><label>Planned date<br/><input aria-label={`Planned date for ${course?.title||courseId}`} type="date" style={input} value={targetDate} onChange={e=>change(courseId,{targetDate:e.target.value})}/></label><label style={{flex:'1 1 220px'}}>Notes<br/><textarea aria-label={`Plan notes for ${course?.title||courseId}`} style={{...input,width:'100%'}} maxLength={1000} value={note} onChange={e=>change(courseId,{note:e.target.value})}/></label></div>
       <p>{acceptance.message}{acceptance.sourceUrl&&<> <a href={acceptance.sourceUrl} target="_blank" rel="noopener noreferrer">Acceptance source ↗</a></>}</p>
       {course?.ceClaims?.map(claim=><p key={claim.sourceUrl+claim.authority} style={{fontSize:13}}>Provider reports {claim.units} {claim.authority} CEUs. This is not a state-license acceptance decision. <a href={claim.sourceUrl} target="_blank" rel="noopener noreferrer">Source ↗</a></p>)}
-      <div style={{display:'flex',gap:12,flexWrap:'wrap'}}><button style={button} onClick={()=>save({...plan,items:plan.items.filter(x=>x.courseId!==courseId)})}>Remove from plan</button>{course&&<Link style={{...button,textDecoration:'none'}} href={`/courses?catalogCourse=${encodeURIComponent(course.id)}`}>Log after completion →</Link>}</div>
+      <div style={{display:'flex',gap:12,flexWrap:'wrap'}}><button style={button} onClick={()=>save({...plan,items:plan.items.filter(x=>x.courseId!==courseId)})}>Remove from plan</button>{course&&['','PT','OT'].includes(plan.profession)&&<Link style={{...button,textDecoration:'none'}} href={`/courses?catalogCourse=${encodeURIComponent(course.id)}`}>Log after completion →</Link>}</div>
     </article>;})}
   </section>;
 }

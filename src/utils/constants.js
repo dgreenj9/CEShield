@@ -7,7 +7,7 @@ export const colors = {
   slateDark: '#1e293b',
   slateMedium: '#475569',
   slateLight: '#f1f5f9',
-  grayLight: '#f9fafb',
+  grayLight: '#0F1D22',
   textDark: '#111827',
   textGray: '#6b7280',
   sage: '#2F6B4D',

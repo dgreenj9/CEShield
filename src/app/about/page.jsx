@@ -3,18 +3,20 @@
 // Layout: centered single-column editorial doc. About is short enough that
 // a 1200px-wide layout creates an empty right gutter the content can't
 // honestly fill. So we commit to a ~780px max-width and let the page
-// breathe symmetrically. Atlas: paper ground, 1px ink rules, petrol accent.
+// breathe symmetrically. Plum: open ground under the world light, 6px
+// panels with hairline borders, light display type, peach as the one voice.
 
 import Link from 'next/link';
-import { Shield, FileText, Mail, Compass } from 'lucide-react';
 import PublicNav from '@/components/layout/PublicNav';
-import { A, INS, eyebrow, tabularNums } from '@/components/atlas/theme';
+import PublicFooter from '@/components/layout/PublicFooter';
+import { A, tabularNums, kicker, display, panel, kpi, LINE } from '@/components/atlas/theme';
 import citationMeta from '@/data/citations_meta.json';
+import siteStats from '@/data/siteStats.json';
 
 export const metadata = {
   title: 'About',
   description:
-    'CE Shield scores 143 rehab credentials against 7,000 curated citations and tracks CE compliance for physical and occupational therapists. Built by practicing PTs. No sponsorship.',
+    `CE Shield scores ${siteStats.certCount} rehab credentials against ${siteStats.citationTotal.toLocaleString()} curated citations and tracks CE compliance for physical and occupational therapists. Built by practicing PTs. No sponsorship.`,
   alternates: { canonical: '/about' },
   openGraph: { title: 'About CE Shield', url: '/about' },
 };
@@ -24,28 +26,26 @@ const totalCitations = Object.values(citationMeta).reduce(
 );
 const totalCerts = Object.keys(citationMeta).length;
 
-function AboutCard({ icon: Icon, label, title, children }) {
+function AboutCard({ label, title, children }) {
   return (
     <section
       style={{
-        padding: '1.5rem 1.5rem 1.25rem',
-        background: A.paper,
-        border: `1px solid ${A.ink}`,
-        marginBottom: '1rem',
+        ...panel,
+        padding: '1.6rem 1.75rem 1.5rem',
+        marginBottom: '0.875rem',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.85rem', marginBottom: '0.875rem' }}>
-        {Icon ? <Icon size={20} aria-hidden="true" style={{ color: A.accent, flexShrink: 0, marginTop: 2 }} /> : null}
+      <div style={{ marginBottom: '0.875rem' }}>
         <div style={{ minWidth: 0 }}>
           {label && (
-            <div style={{ ...eyebrow(12), marginBottom: 4 }}>{label}</div>
+            <div style={{ ...kicker(), marginBottom: 10 }}>{label}</div>
           )}
-          <h2 style={{ fontFamily: INS, fontSize: '1.15rem', fontWeight: 600, margin: 0, color: A.ink, letterSpacing: '-0.02em', lineHeight: 1.25 }}>
+          <h2 style={{ ...display('1.45rem', 400), lineHeight: 1.2 }}>
             {title}
           </h2>
         </div>
       </div>
-      <div style={{ color: A.inkBody, lineHeight: 1.65 }}>{children}</div>
+      <div className="atlas-card-prose" style={{ color: A.inkBody, lineHeight: 1.75, fontSize: 15 }}>{children}</div>
     </section>
   );
 }
@@ -54,43 +54,32 @@ function AboutCard({ icon: Icon, label, title, children }) {
 function HeroStat({ value, label }) {
   return (
     <div>
-      <div
-        style={{
-          fontFamily: INS,
-          fontSize: '1.4rem',
-          fontWeight: 600,
-          color: A.ink,
-          lineHeight: 1,
-          letterSpacing: '-0.03em',
-          ...tabularNums,
-        }}
-      >
-        {value}
-      </div>
-      <div style={{ fontSize: '0.8rem', color: A.inkMuted, marginTop: 4, fontWeight: 600 }}>
+      <div style={{ fontSize: 12, color: A.inkMuted, fontWeight: 400 }}>
         {label}
+      </div>
+      <div style={{ ...kpi(30), marginTop: 8, ...tabularNums }}>
+        {value}
       </div>
     </div>
   );
 }
 
-const proseLink = { color: A.accent, textDecoration: 'underline', textUnderlineOffset: 2 };
-const footLink = { color: A.accent, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 5, fontWeight: 600 };
+const proseLink = { color: A.accent, textDecoration: 'underline', textDecorationColor: 'rgba(226,196,143,0.45)', textUnderlineOffset: 3 };
+const footLink = { textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 5, fontWeight: 500, padding: '10px 0' };
 
 export default function AboutPage() {
   return (
     <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink }}>
       <PublicNav />
 
-      <main className="cs-page-pad" style={{ maxWidth: 780, margin: '0 auto', padding: '3rem 1.5rem 6rem' }}>
-        <header style={{ marginBottom: '2rem' }}>
-          <div style={{ ...eyebrow(), marginBottom: 12 }}>About CE Shield</div>
-          <h1 className="cs-h1-clamp" style={{
-            fontFamily: INS, fontSize: '2.5rem', fontWeight: 600, margin: 0, letterSpacing: '-0.03em', lineHeight: 1.05, color: A.ink,
-          }}>
-            Credential decisions, run on evidence.
+      <main id="main" className="atlas-wrap" style={{ maxWidth: 1280, margin: '0 auto', padding: '4.5rem 2rem 6rem' }}>
+        <div style={{ maxWidth: 820 }}>
+        <header className="plum-rise" style={{ marginBottom: '3rem' }}>
+          <div style={{ ...kicker(), marginBottom: 18 }}>About CE Shield</div>
+          <h1 style={display('clamp(2.3rem, 5.4vw, 4.2rem)', 350)}>
+            Credential decisions, <em style={{ fontStyle: 'normal', color: A.accentMid }}>run on evidence.</em>
           </h1>
-          <p style={{ marginTop: '1rem', color: A.inkBody, fontSize: '1.08rem', lineHeight: 1.6 }}>
+          <p style={{ marginTop: '1.5rem', color: A.inkBody, fontSize: 'clamp(15px, 1.25vw, 17.5px)', lineHeight: 1.75, maxWidth: '36em' }}>
             One product for compliance, credential intelligence, and career
             direction, built for physical and occupational therapists
             by physical therapists. Independent. No sponsorship. Free during
@@ -100,21 +89,21 @@ export default function AboutPage() {
           {/* Inline 3-stat strip — flows below the lead in the same column. */}
           <div
             style={{
-              marginTop: '1.5rem',
-              paddingTop: '1.25rem',
-              borderTop: `1px solid ${A.ink}`,
+              marginTop: '2.25rem',
+              paddingTop: '1.5rem',
+              borderTop: `1px solid ${LINE}`,
               display: 'grid',
               gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
               gap: '1rem',
             }}
           >
             <HeroStat value={totalCerts.toString()} label="Credentials scored" />
-            <HeroStat value="5" label="Career-path lenses" />
+            <HeroStat value={String(siteStats.lensCount)} label="Career-path lenses" />
             <HeroStat value={totalCitations.toLocaleString()} label="Curated citations" />
           </div>
         </header>
 
-        <AboutCard icon={Shield} label="The problem" title="CE spending runs on marketing.">
+        <AboutCard label="The problem" title="CE spending runs on marketing.">
           <p>
             Rehabilitation professionals spend thousands of dollars and hundreds
             of hours each renewal cycle on continuing education, and most of
@@ -138,7 +127,7 @@ export default function AboutPage() {
           </p>
         </AboutCard>
 
-        <AboutCard icon={FileText} label="Authors" title="Who built it">
+        <AboutCard label="Authors" title="Who built it">
           <p>
             CE Shield is built by <strong>physical therapists</strong> who
             treat patients and have lived the credential-decision problem
@@ -149,9 +138,9 @@ export default function AboutPage() {
           </p>
         </AboutCard>
 
-        <AboutCard icon={Shield} label="Independence" title="How we make money, and how we don't">
+        <AboutCard label="Independence" title="How we make money, and how we don't">
           <p>
-            <strong style={{ color: A.accent }}>Credential scores are not for sale.</strong>{' '}
+            <strong style={{ color: A.ink, fontWeight: 600 }}>Credential scores are not for sale.</strong>{' '}
             We take no money from certification programs, training vendors, or
             sponsors for rankings, and we don&rsquo;t run display ads. The
             entire product is free during beta.
@@ -160,7 +149,7 @@ export default function AboutPage() {
             Here&rsquo;s the model we&rsquo;re building toward, stated up front
             so you can hold us to it:
           </p>
-          <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0' }}>
+          <ul className="cs-bullet-list" style={{ margin: '0 0 0.9rem' }}>
             <li style={{ marginBottom: 6 }}>
               <strong>Premium tracking</strong> · a paid tier for
               compliance tracking and the document vault, priced under the
@@ -179,13 +168,13 @@ export default function AboutPage() {
             </li>
           </ul>
           <p>
-            <strong>Free for students, always.</strong> If you&rsquo;re in a
+            <strong>Free for students, always.</strong>{' '}If you&rsquo;re in a
             DPT, OTD, or related program, CE Shield&rsquo;s career-path
             intelligence is free for you, not just during beta.
           </p>
         </AboutCard>
 
-        <AboutCard icon={Mail} label="Feedback" title="Get in touch">
+        <AboutCard label="Feedback" title="Get in touch">
           <p>
             Found an error, disagree with a score, or have a certification we
             should add? Scores are revised as the evidence changes, and each
@@ -200,29 +189,23 @@ export default function AboutPage() {
             of a doc, not in a side rail. */}
         <div
           style={{
-            marginTop: '2rem',
+            marginTop: '2.5rem',
             paddingTop: '1.5rem',
-            borderTop: `1px solid ${A.ink}`,
+            borderTop: `1px solid ${LINE}`,
             display: 'flex',
             flexWrap: 'wrap',
             gap: '0.75rem 1.5rem',
             fontSize: '0.88rem',
           }}
         >
-          <Link href="/career-paths" style={footLink}>
-            <Compass size={14} aria-hidden="true" /> Five career paths
-          </Link>
-          <Link href="/credentials" style={footLink}>
-            <Shield size={14} aria-hidden="true" /> Credential library
-          </Link>
-          <Link href="/methodology" style={footLink}>
-            <FileText size={14} aria-hidden="true" /> Methodology
-          </Link>
-          <Link href="/states" style={footLink}>
-            <Shield size={14} aria-hidden="true" /> State CE requirements
-          </Link>
+          <Link href="/career-paths" className="atlas-link" style={footLink}>Five career lenses →</Link>
+          <Link href="/credentials" className="atlas-link" style={footLink}>Dossier library →</Link>
+          <Link href="/methodology" className="atlas-link" style={footLink}>Methodology →</Link>
+          <Link href="/states" className="atlas-link" style={footLink}>State CE requirements →</Link>
+        </div>
         </div>
       </main>
+      <PublicFooter />
     </div>
   );
 }

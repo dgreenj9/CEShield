@@ -4,7 +4,7 @@
 // component). Gives users a reset action instead of Next's unstyled default.
 
 import React from 'react';
-import { A, INS } from '@/components/atlas/theme';
+import { A, kicker, display } from '@/components/atlas/theme';
 
 export default function Error({ error, reset }) {
   // eslint-disable-next-line no-console
@@ -22,13 +22,14 @@ export default function Error({ error, reset }) {
         color: A.ink,
       }}
     >
-      <div style={{ maxWidth: 500, textAlign: 'center' }}>
-        <h1 style={{ fontFamily: INS, fontSize: 29, fontWeight: 600, margin: 0, letterSpacing: '-0.03em' }}>
-          Something went wrong.
+      <div style={{ maxWidth: 540, textAlign: 'center' }}>
+        <div style={kicker()}>Error</div>
+        <h1 style={{ ...display('clamp(2rem, 4.5vw, 3rem)', 350), marginTop: '1.25rem' }}>
+          Something went <em style={{ fontStyle: 'normal', color: A.accentMid }}>wrong.</em>
         </h1>
-        <p style={{ color: A.inkBody, lineHeight: 1.6, marginTop: '0.75rem', fontSize: 15.5 }}>
+        <p style={{ color: A.inkBody, lineHeight: 1.75, marginTop: '1rem', fontSize: 15.5 }}>
           Try reloading. If it persists, email{' '}
-          <a href="mailto:hello@ceshield.com" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>
+          <a href="mailto:hello@ceshield.com" className="atlas-link" style={{ fontWeight: 500, textDecoration: 'none' }}>
             hello@ceshield.com
           </a>.
         </p>
@@ -36,20 +37,15 @@ export default function Error({ error, reset }) {
           <button
             type="button"
             onClick={() => reset()}
-            style={{
-              padding: '12px 20px', background: A.accent, color: A.onAccent,
-              border: 'none', fontWeight: 600, fontSize: 14.5, cursor: 'pointer', fontFamily: 'inherit',
-            }}
+            className="atlas-btn atlas-btn-primary"
+            style={{ fontSize: 14.5, fontFamily: 'inherit', minHeight: 44 }}
           >
             Try again
           </button>
           <a
             href="/"
-            style={{
-              display: 'inline-block', padding: '11px 20px',
-              border: `1px solid ${A.ink}`, color: A.ink,
-              textDecoration: 'none', fontWeight: 600, fontSize: 14.5,
-            }}
+            className="atlas-btn atlas-btn-secondary"
+            style={{ fontSize: 14.5, minHeight: 44 }}
           >
             Back to home
           </a>

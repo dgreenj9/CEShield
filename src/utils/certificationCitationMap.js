@@ -118,7 +118,7 @@ export const CERTIFICATION_TO_CITATION_MAP = {
 export const METHODOLOGY_CONTENT = {
   title: "Evidence-Based Certification Scoring Methodology",
   version: "Version 3.0 · March 2026",
-  overview: "This scoring system evaluates rehabilitation certifications based on their demonstrated impact on patient outcomes, not industry prestige or popularity. Each certification is scored across five dimensions; the weights for each dimension are adjustable via the sliders above and default to the values shown below.",
+  overview: "Credentials are scored on published evidence, not prestige or popularity. Each career lens scores six dimensions from 0 to 100 and combines them as a weighted sum. The clinical lens defaults are below; every weight can be recalibrated in the field.",
 
   scoringComponents: [
     {

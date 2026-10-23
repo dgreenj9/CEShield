@@ -12,8 +12,8 @@
 import React, { useMemo, useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, X, ArrowRight } from 'lucide-react';
-import { PATHS } from '@/utils/careerPaths';
-import { A, FIG, eyebrow, tabularNums } from '@/components/atlas/theme';
+import { PATHS, PATH_ORDER } from '@/utils/careerPaths';
+import { A } from '@/components/atlas/theme';
 
 const DISCIPLINES = ['PT', 'OT', 'SLP', 'AT', 'RN', 'RT', 'EP', 'Audiology'];
 
@@ -24,36 +24,12 @@ const certDisciplineList = (cert) =>
     .map((d) => d.trim())
     .filter(Boolean);
 
-// Atlas filter chip: rectangular, ink fill when active, count inline.
+// Pill filter chip with its count inline.
 function Chip({ active, children, onClick, count }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: 6,
-        padding: '5px 11px',
-        fontFamily: FIG,
-        fontSize: 12,
-        fontWeight: 700,
-        letterSpacing: '0.01em',
-        border: `1px solid ${active ? A.ink : A.ruleMinor}`,
-        background: active ? A.ink : 'transparent',
-        color: active ? A.onAccent : A.inkMuted,
-        cursor: 'pointer',
-        transition: 'all 0.12s ease',
-        whiteSpace: 'nowrap',
-      }}
-    >
+    <button type="button" className="mx-chip" onClick={onClick} aria-pressed={active}>
       {children}
-      {typeof count === 'number' && (
-        <span style={{ fontWeight: 600, opacity: active ? 0.8 : 1, color: active ? A.onAccent : A.inkMuted, ...tabularNums }}>
-          {count}
-        </span>
-      )}
+      {typeof count === 'number' && <span className="mx-n">{count}</span>}
     </button>
   );
 }
@@ -146,256 +122,101 @@ export default function CredentialsBrowser({ rows }) {
 
   return (
     <>
-      {/* Toolbar — search + chip filters. Sticky so it stays in reach as
-          the user scrolls a long results list. Opaque paper so rows scroll
-          away beneath it. */}
-      <div
-        style={{
-          position: 'sticky',
-          top: 61, // height of the page nav + a small gap
-          zIndex: 4,
-          background: A.paper,
-          paddingTop: 12,
-          paddingBottom: 14,
-          marginBottom: 18,
-          borderBottom: `1px solid ${A.ink}`,
-        }}
-      >
-        <div style={{ position: 'relative' }}>
-          <Search
-            size={15}
-            aria-hidden="true"
-            style={{
-              position: 'absolute',
-              left: 2,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              color: A.inkMuted,
-              pointerEvents: 'none',
-            }}
-          />
-          <input
-            ref={inputRef}
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search credentials, types, or disciplines…"
-            aria-label="Search credentials"
-            style={{
-              width: '100%',
-              padding: '8px 2.6rem 8px 26px',
-              border: 'none',
-              borderBottom: `2px solid ${A.ruleMinor}`,
-              background: 'transparent',
-              fontFamily: FIG,
-              fontSize: 'max(16px, 15px)',
-              color: A.ink,
-              outline: 'none',
-              boxSizing: 'border-box',
-            }}
-          />
-          {query && (
-            <button
-              type="button"
-              onClick={() => setQuery('')}
-              aria-label="Clear search"
-              style={{
-                position: 'absolute',
-                right: 36,
-                top: '50%',
-                transform: 'translateY(-50%)',
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                padding: 6,
-                color: A.inkMuted,
-                display: 'flex',
-              }}
-            >
-              <X size={14} aria-hidden="true" />
-            </button>
-          )}
-          <span
-            aria-hidden="true"
-            style={{
-              position: 'absolute',
-              right: 8,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              fontFamily: FIG,
-              fontSize: 11,
-              fontWeight: 600,
-              color: A.inkMuted,
-              padding: '2px 7px',
-              border: `1px solid ${A.ruleMinor}`,
-              pointerEvents: 'none',
-            }}
-          >
-            /
-          </span>
+      {/* Toolbar: search + chip filters. Sticky on wide screens so it stays
+          in reach over a long list; a blurred plum glass so rows read
+          through it as they pass. */}
+      <div className="atlas-filter-sticky mx-toolbar" style={{ zIndex: 4, marginBottom: 14 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px 20px', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div className="mx-search" style={{ maxWidth: 440 }}>
+            <Search size={15} aria-hidden="true" />
+            <input
+              ref={inputRef}
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search credentials, types, or disciplines"
+              aria-label="Search credentials"
+              aria-keyshortcuts="/"
+            />
+            {query && (
+              <button type="button" className="mx-clear" onClick={() => setQuery('')} aria-label="Clear search">
+                <X size={14} aria-hidden="true" />
+              </button>
+            )}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16, fontSize: 12.5, color: A.inkMuted }}>
+            <span className="mx-num" role="status">
+              <strong style={{ color: A.ink, fontWeight: 500 }}>{filtered.length}</strong> of {rows.length} credentials
+            </span>
+            {hasFilter && (
+              <button type="button" className="mx-toggle" onClick={clearAll}>Clear all</button>
+            )}
+          </div>
         </div>
 
-        {/* Filter rows — discipline above, lens below. Compact labels on
-            the left, chips wrap to the right. */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 14 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-            <span style={{ ...eyebrow(12), minWidth: 78 }}>Discipline</span>
+        <div style={{ display: 'grid', gap: 8, marginTop: 14 }}>
+          <div className="mx-chips" role="group" aria-label="Filter by discipline">
+            <span className="mx-lab" aria-hidden="true">Discipline</span>
             {DISCIPLINES.map((d) => (
-              <Chip
-                key={d}
-                active={activeDisciplines.has(d)}
-                count={disciplineCounts[d] || 0}
-                onClick={() => setActiveDisciplines(toggle(activeDisciplines, d))}
-              >
+              <Chip key={d} active={activeDisciplines.has(d)} count={disciplineCounts[d] || 0} onClick={() => setActiveDisciplines(toggle(activeDisciplines, d))}>
                 {d}
               </Chip>
             ))}
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-            <span style={{ ...eyebrow(12), minWidth: 78 }}>Lens</span>
-            {Object.keys(PATHS).map((p) => (
-              <Chip
-                key={p}
-                active={activeLenses.has(p)}
-                count={lensCounts[p] || 0}
-                onClick={() => setActiveLenses(toggle(activeLenses, p))}
-              >
+          <div className="mx-chips" role="group" aria-label="Filter by lens">
+            <span className="mx-lab" aria-hidden="true">Lens</span>
+            {PATH_ORDER.map((p) => (
+              <Chip key={p} active={activeLenses.has(p)} count={lensCounts[p] || 0} onClick={() => setActiveLenses(toggle(activeLenses, p))}>
                 {PATHS[p].label.replace(' & Industry', '')}
               </Chip>
             ))}
           </div>
         </div>
-
-        {/* Result count + clear */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: 12,
-            fontFamily: FIG,
-            fontSize: 12.5,
-            color: A.inkMuted,
-          }}
-        >
-          <span style={tabularNums}>
-            <strong style={{ color: A.ink, fontWeight: 700 }}>{filtered.length}</strong>
-            {' '}of {rows.length} credentials
-          </span>
-          {hasFilter && (
-            <button
-              type="button"
-              onClick={clearAll}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: A.accent,
-                cursor: 'pointer',
-                fontFamily: FIG,
-                fontSize: 12.5,
-                fontWeight: 700,
-                padding: 0,
-                textDecoration: 'underline',
-              }}
-            >
-              Clear all
-            </button>
-          )}
-        </div>
       </div>
 
-      {/* Results list — a survey table drawn with ink rules. */}
+      {/* Results: one panel, hairline rows. The five dots after each name
+          mark the lenses it is scored in, in lens order. */}
       {filtered.length > 0 ? (
-        <ol
-          style={{
-            listStyle: 'none',
-            padding: 0,
-            margin: 0,
-            background: A.paper,
-            border: `1px solid ${A.ink}`,
-          }}
-        >
-          {filtered.map((row, idx) => (
-            <li
-              key={row.slug}
-              style={{
-                borderBottom: idx < filtered.length - 1 ? `1px solid ${A.ruleFaint}` : 'none',
-              }}
-            >
-              <Link
-                href={`/credentials/${row.slug}`}
-                className="card-hover"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 16,
-                  padding: '0.8rem 1.1rem',
-                  textDecoration: 'none',
-                  color: 'inherit',
-                }}
-              >
-                <span
-                  style={{ fontFamily: FIG, fontSize: 11, color: A.inkMuted, minWidth: 28, textAlign: 'right', ...tabularNums }}
-                >
-                  {String(idx + 1).padStart(3, '0')}
-                </span>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 14.5, fontWeight: 600, color: A.ink, letterSpacing: '-0.01em' }}>
-                    {row.cert.name}
-                  </div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center', marginTop: 3 }}>
-                    <span style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted }}>
-                      {row.cert.type} · {certDisciplineList(row.cert).join(' · ')}
+        <div className="mx-panel" style={{ padding: '6px 0' }}>
+          <p className="mx-sub" style={{ margin: 0, padding: '10px 26px 8px', display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+            <span className="mx-lenses" aria-hidden="true"><i className="on" /></span> scored in a lens
+            <span className="mx-lenses" aria-hidden="true" style={{ marginLeft: 8 }}><i /></span> not scored
+            <span style={{ marginLeft: 8 }}>· dots in lens order: {PATH_ORDER.map((p) => PATHS[p].label.replace(' & Industry', '')).join(', ')}</span>
+          </p>
+          <ol className="mx-lib">
+            {filtered.map((row, idx) => (
+              <li key={row.slug}>
+                <Link href={`/credentials/${row.slug}`}>
+                  <span className="mx-num" style={{ fontSize: 11, color: A.inkMuted, textAlign: 'right' }}>{idx + 1}</span>
+                  <span style={{ minWidth: 0 }}>
+                    <span style={{ display: 'block', fontSize: 14, color: A.ink, lineHeight: 1.35 }}>{row.cert.name}</span>
+                    <span style={{ display: 'block', fontSize: 11.5, color: A.inkMuted, marginTop: 3 }}>
+                      {row.cert.type} · {certDisciplineList(row.cert).join(', ')}
                     </span>
-                    <span style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, ...tabularNums }}>
-                      · {row.count} citations
-                    </span>
-                  </div>
-                </div>
-                <span
-                  style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, flexShrink: 0, whiteSpace: 'nowrap', ...tabularNums }}
-                  title={row.lenses.map((p) => PATHS[p]?.label).filter(Boolean).join(' · ')}
-                >
-                  {row.lenses.length} lens{row.lenses.length === 1 ? '' : 'es'}
-                </span>
-                <ArrowRight size={15} aria-hidden="true" style={{ color: A.accent, flexShrink: 0 }} />
-              </Link>
-            </li>
-          ))}
-        </ol>
+                  </span>
+                  <span
+                    className="mx-lenses"
+                    title={`Scored in: ${row.lenses.map((p) => PATHS[p]?.label).filter(Boolean).join(', ')}`}
+                  >
+                    {PATH_ORDER.map((p) => <i key={p} className={row.lenses.includes(p) ? 'on' : undefined} aria-hidden="true" />)}
+                    <span className="mx-sr">Scored in {row.lenses.length} lens{row.lenses.length === 1 ? '' : 'es'}: {row.lenses.map((p) => PATHS[p]?.label).join(', ')}.</span>
+                  </span>
+                  <span className="mx-cites mx-num" style={{ fontSize: 12, color: A.inkBody, minWidth: '6.5em', textAlign: 'right' }}>
+                    {row.count ? `${row.count.toLocaleString()} citations` : ''}
+                  </span>
+                  <ArrowRight size={14} aria-hidden="true" className="mx-go" />
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </div>
       ) : (
-        <div
-          style={{
-            padding: '2.5rem 1.5rem',
-            background: A.notice,
-            border: `1px dashed ${A.ink}`,
-            textAlign: 'center',
-            color: A.inkMuted,
-          }}
-        >
-          <div style={{ fontWeight: 600, color: A.ink, marginBottom: 6 }}>
-            Nothing in the library matches.
-          </div>
-          <div style={{ fontSize: 14 }}>
-            Try removing a chip, or{' '}
-            <button
-              type="button"
-              onClick={clearAll}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: A.accent,
-                cursor: 'pointer',
-                padding: 0,
-                textDecoration: 'underline',
-                font: 'inherit',
-                fontWeight: 700,
-              }}
-            >
-              clear all filters
-            </button>
-            .
-          </div>
+        <div className="mx-panel" style={{ padding: '2.5rem 1.5rem', textAlign: 'center' }}>
+          <p style={{ color: A.ink, margin: '0 0 6px', fontSize: 14 }}>Nothing in the library matches.</p>
+          <p className="mx-sub" style={{ margin: 0 }}>
+            Remove a chip, or{' '}
+            <button type="button" className="mx-toggle" onClick={clearAll}>clear all filters</button>.
+          </p>
         </div>
       )}
     </>

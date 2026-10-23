@@ -34,20 +34,20 @@ export default class ErrorBoundary extends React.Component {
       <div
         role="alert"
         className="m-8 p-6 text-sm"
-        style={{ background: '#F6F3E7', border: '1px dashed #1B1A17' }}
+        style={{ background: 'rgba(224,142,109,0.06)', border: '1px solid rgba(224,142,109,0.35)', borderRadius: 6 }}
       >
-        <h2 className="font-display text-lg font-semibold m-0 mb-2">
+        <h2 className="font-display text-2xl font-normal m-0 mb-2">
           This page failed to render.
         </h2>
-        <p className="mb-4" style={{ color: "#45433C" }}>
+        <p className="mb-4" style={{ color: "#C5D2CE" }}>
           The error is in the page, not your data. Reload to recover. If it
           repeats, email hello@ceshield.com with what you were doing.
         </p>
         <button
           type="button"
           onClick={() => window.location.reload()}
-          className="px-4 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-          style={{ background: '#235E6B', color: '#FAFAF5', fontWeight: 600 }}
+          className="px-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+          style={{ background: '#E2C48F', color: '#10201F', fontWeight: 500, borderRadius: 999, minHeight: 44 }}
         >
           Reload page
         </button>

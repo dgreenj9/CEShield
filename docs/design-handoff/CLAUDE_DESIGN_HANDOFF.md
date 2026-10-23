@@ -13,7 +13,7 @@
 
 The product answers a question the profession never made easy: *which credential is actually worth my time and money?* It does three jobs, layered:
 
-1. **The credential matrix** — 143 rehab credentials scored 0–100 across five career-path lenses, backed by ~7,000 curated citations. Users pick a lens, tune six weight sliders (always sum to 100), and rankings re-sort live. **This is the core product surface and it is deliberately ungated** — visitors reach the tool before ever being asked to sign up.
+1. **The credential matrix** — 143 rehab credentials scored 0–100 across five career-path lenses, backed by ~8,600 curated citations. Users pick a lens, tune six weight sliders (always sum to 100), and rankings re-sort live. **This is the core product surface and it is deliberately ungated** — visitors reach the tool before ever being asked to sign up.
 2. **State CE-compliance tracking** — per-state rule sets (total hours, mandatory categories, format caps), course logging with certificate upload + OCR autofill, renewal countdown, audit-ready exports (HTML report + certificates ZIP).
 3. **The Living Rehab CV** — clinicians claim credentials from the matrix (earned / in progress / planned), add bio/specialties/experience, and opt into a public shareable CV at `/clinicians/<handle>`. This is the wedge toward the endgame: a two-sided marketplace where patients discover credentialed clinicians.
 
@@ -130,7 +130,7 @@ Example dimensions (Clinical): Clinical outcomes 35 · Certification investment 
 **Composite:** weighted sum, 1 decimal. **Tiers:** strong ≥70 (sage) · good 50–69 (blue) · moderate 30–49 (ochre) · limited <30 (slate). **Weight redistribution invariant:** moving one slider proportionally rebalances the other five so the total is always exactly 100 — sliders are not independent controls.
 
 ### Evidence
-- 143 credentials · ~7,000 citations (3,163 RCT/SR/MA) · per-credential citation + justification JSON lazy-loaded on detail view.
+- 143 credentials · ~8,600 citations (4,749 RCT/SR/MA) · per-credential citation + justification JSON lazy-loaded on detail view.
 - Evidence types ranked: meta-analysis 6 → systematic review 5 → RCT/guideline 4 → cohort 3 → … → narrative 1. Per-cert `evidence_mix` + `year_dist` (drives the citation sparkline).
 - Provenance labels: `LIBRARIAN-REVIEWED` (purple pill, 109 certs) vs workflow-generated (34) vs `LEGACY` (amber pill, "deeper review pending").
 - **Honesty mechanic surfaced in UI:** scores mostly reflect evidence for the underlying *intervention*, not the credential itself — stated in methodology and detail footnotes.

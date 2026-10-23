@@ -6,18 +6,19 @@
 // leaves the database. Rendered dynamically (force-dynamic) since profiles are
 // user-generated and change between requests.
 //
-// Atlas: a published dossier — ink-ruled panels on the gridded ground,
-// claims with status marks, self-reported disclosure kept.
+// Plum: a published dossier on the open ground, 6px hairline panels, light
+// display type, claims with status marks, self-reported disclosure kept.
 
 import { createClient } from '@supabase/supabase-js';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import PublicNav from '@/components/layout/PublicNav';
+import PublicFooter from '@/components/layout/PublicFooter';
 import { certifications as certData } from '@/utils/certificationData';
 import { getLibraryMetaForCertification } from '@/utils/citationsLibrary';
 import { PATHS, PATH_ORDER, getPathDefaultWeights } from '@/utils/careerPaths';
 import { computeScore, certScoresForPath } from '@/utils/certScoring';
-import { A, FIG, INS, tierColor, tabularNums } from '@/components/atlas/theme';
+import { A, FIG, tierColor, tierTextColor, tierLabel, tabularNums, panel, hairHead, display, LINE, LINE2, LINE_FAINT } from '@/components/atlas/theme';
 
 export const dynamic = 'force-dynamic';
 
@@ -42,7 +43,7 @@ const bestLensFor = (cert) => {
 const STATUS_LABEL = { earned: 'Earned', in_progress: 'In progress', planned: 'Planned' };
 const STATUS_MARK = { earned: '●', in_progress: '◐', planned: '○' };
 const statusColor = (status) =>
-  status === 'earned' ? A.accent : status === 'in_progress' ? A.warn : A.dim;
+  status === 'earned' ? A.accent : status === 'in_progress' ? A.warn : A.inkMuted;
 
 async function loadProfile(handle) {
   const client = sb();
@@ -107,18 +108,18 @@ export default async function ClinicianPage({ params }) {
     <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink }}>
       <PublicNav />
 
-      <main className="cs-page-pad" style={{ maxWidth: 1080, margin: '0 auto', padding: '3rem 2rem 6rem' }}>
-        <div className="cs-cv-grid">
+      <main id="main" className="atlas-wrap" style={{ maxWidth: 1080, margin: '0 auto', padding: '4.5rem 2rem 6rem' }}>
+        <div className="cs-cv-grid plum-rise">
           {/* LEFT — identity sidebar */}
           <aside className="cs-cv-side">
             <div
               aria-hidden={!profile.avatar_url}
               style={{
-                width: 120, height: 120, borderRadius: '50%', overflow: 'hidden',
+                width: 120, height: 120, overflow: 'hidden', borderRadius: '50%',
                 background: A.accentTint, color: A.accent,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontFamily: INS, fontSize: 34, fontWeight: 600, marginBottom: '1.25rem',
-                border: `1px solid ${A.ink}`,
+                fontFamily: FIG, fontSize: 36, fontWeight: 350, letterSpacing: '-0.03em', marginBottom: '1.5rem',
+                border: `1px solid ${LINE2}`,
               }}
             >
               {profile.avatar_url
@@ -127,7 +128,7 @@ export default async function ClinicianPage({ params }) {
                 : initials}
             </div>
 
-            <h1 style={{ fontFamily: INS, fontSize: 27, fontWeight: 600, margin: 0, letterSpacing: '-0.025em', lineHeight: 1.1 }}>
+            <h1 style={{ ...display('clamp(1.9rem, 3vw, 2.4rem)', 380), lineHeight: 1.1 }}>
               {profile.name || handle}
             </h1>
             {profile.headline && (
@@ -151,12 +152,12 @@ export default async function ClinicianPage({ params }) {
 
             {(profile.specialties || []).length > 0 && (
               <div style={{ marginTop: '1.5rem' }}>
-                <div style={{ fontFamily: FIG, fontSize: 12, color: A.inkMuted, letterSpacing: '0.02em', fontWeight: 700, borderTop: `2px solid ${A.ink}`, paddingTop: 8, marginBottom: 10 }}>
+                <div style={{ ...hairHead, paddingTop: 12, marginBottom: 12 }}>
                   Specialties
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                   {profile.specialties.map((sp) => (
-                    <span key={sp} style={{ fontFamily: FIG, fontSize: 12, padding: '3px 10px', border: `1px solid ${A.ruleMinor}`, color: A.inkBody, fontWeight: 600 }}>
+                    <span key={sp} style={{ fontFamily: FIG, fontSize: 11.5, padding: '4px 11px', borderRadius: 20, border: `1px solid ${LINE2}`, color: A.inkBody, fontWeight: 450 }}>
                       {sp}
                     </span>
                   ))}
@@ -192,27 +193,23 @@ export default async function ClinicianPage({ params }) {
               </section>
             )}
 
-            <div style={{ marginTop: '2.5rem', paddingTop: '1rem', borderTop: `1px solid ${A.ink}`, fontFamily: FIG, fontSize: 12.5, color: A.inkMuted }}>
+            <div style={{ marginTop: '3rem', paddingTop: '1.25rem', borderTop: `1px solid ${LINE}`, fontFamily: FIG, fontSize: 12.5, color: A.inkMuted }}>
               Credentials are self-reported.{' '}
-              <Link href="/credentials" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>
+              <Link href="/credentials" className="atlas-link" style={{ fontWeight: 500, textDecoration: 'none', display: 'inline-block', padding: '10px 0' }}>
                 Explore the evidence behind each →
               </Link>
             </div>
           </div>
         </div>
       </main>
+      <PublicFooter />
     </div>
   );
 }
 
 function SectionLabel({ children }) {
   return (
-    <div
-      style={{
-        fontFamily: FIG, fontSize: 12.5, color: A.inkMuted, letterSpacing: '0.02em',
-        fontWeight: 700, borderTop: `2px solid ${A.ink}`, paddingTop: 10, marginBottom: 14,
-      }}
-    >
+    <div style={{ ...hairHead, marginBottom: 16 }}>
       {children}
     </div>
   );
@@ -220,23 +217,23 @@ function SectionLabel({ children }) {
 
 function CredList({ items, showStatus }) {
   return (
-    <ul style={{ listStyle: 'none', padding: 0, margin: 0, border: `1px solid ${A.ink}`, background: A.paper }}>
+    <ul style={{ listStyle: 'none', padding: 0, margin: 0, ...panel }}>
       {items.map((e, i, arr) => (
         <li
           key={e.cert_name}
           style={{
             display: 'flex', alignItems: 'center', gap: 12,
-            padding: '0.7rem 1rem',
-            borderBottom: i < arr.length - 1 ? `1px solid ${A.ruleFaintest}` : 'none',
+            padding: '0.85rem 1.1rem', minHeight: 56,
+            borderBottom: i < arr.length - 1 ? `1px solid ${LINE_FAINT}` : 'none',
           }}
         >
           <span aria-hidden="true" style={{ color: statusColor(e.status), fontSize: 13, flexShrink: 0 }}>
             {STATUS_MARK[e.status] || '○'}
           </span>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontWeight: 600, fontSize: 14.5, letterSpacing: '-0.01em', color: A.ink, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            <div style={{ fontWeight: 450, fontSize: 14.5, letterSpacing: '-0.01em', color: A.ink, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               {e.slug ? (
-                <Link href={`/credentials/${e.slug}`} style={{ color: A.ink, textDecoration: 'none' }}>{e.cert_name}</Link>
+                <Link href={`/credentials/${e.slug}`} className="atlas-ink-link" style={{ color: A.ink, textDecoration: 'none' }}>{e.cert_name}</Link>
               ) : e.cert_name}
             </div>
             <div style={{ fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, marginTop: 2 }}>
@@ -245,18 +242,20 @@ function CredList({ items, showStatus }) {
             </div>
           </div>
           {e.best && (
-            <div style={{ textAlign: 'right', flexShrink: 0 }} title={`${e.best.score}/100 on the ${e.best.label} lens`}>
-              <div style={{ fontFamily: FIG, fontSize: 16, fontWeight: 700, color: tierColor(e.best.score), lineHeight: 1, ...tabularNums }}>
-                {e.best.score}
+            <div style={{ textAlign: 'right', flexShrink: 0 }} title={`${e.best.score}/100 on the ${e.best.label} lens, ${tierLabel(e.best.score)}`}>
+              <div style={{ fontFamily: FIG, fontSize: 18, fontWeight: 400, letterSpacing: '-0.03em', color: A.ink, lineHeight: 1, ...tabularNums }}>
+                {e.best.score}{' '}
+                <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: 0, color: tierTextColor(e.best.score) }}>{tierLabel(e.best.score)}</span>
               </div>
-              <div style={{ fontFamily: FIG, fontSize: 11, color: A.inkMuted, marginTop: 2 }}>{e.best.label}</div>
+              <div style={{ fontFamily: FIG, fontSize: 11, color: A.inkMuted, marginTop: 3 }}>{e.best.label}</div>
             </div>
           )}
           {e.slug && (
             <Link
               href={`/credentials/${e.slug}`}
               aria-label={`Open ${e.cert_name}`}
-              style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 700, color: A.accent, flexShrink: 0, textDecoration: 'none', whiteSpace: 'nowrap' }}
+              className="atlas-link"
+              style={{ fontFamily: FIG, fontSize: 12, fontWeight: 500, flexShrink: 0, textDecoration: 'none', whiteSpace: 'nowrap', padding: '12px 0' }}
             >
               Dossier →
             </Link>

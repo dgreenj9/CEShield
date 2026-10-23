@@ -2,11 +2,11 @@ import React from 'react';
 import { Loader2, LogOut } from 'lucide-react';
 import { Link, usePath } from '../../router';
 import AtlasLogo from '../atlas/AtlasLogo';
-import { A, FIG } from '../atlas/theme';
+import { A, FIG, LINE, LINE2 } from '../atlas/theme';
 import { useUserData } from '../../contexts/UserDataContext';
 
-// Atlas app chrome: a sticky blurred top bar over a 1px ink rule, with the
-// section links as Figtree tabs (active = petrol fill). Replaces
+// Plum app chrome: a sticky blurred top bar over a hairline, with the
+// section links as quiet pills (active = peach tint and peach text). Replaces
 // the previous sidebar shell. Children render in the main content column;
 // the shell handles the global loading state while user data hydrates.
 
@@ -30,7 +30,6 @@ export default function AppShell({ onSignOut, children }) {
         aria-live="polite"
         aria-label="Loading your data"
         className="min-h-screen flex items-center justify-center"
-        style={{ background: A.paper }}
       >
         <Loader2 size={32} className="animate-spin" style={{ color: A.accent }} aria-hidden="true" />
         <span className="sr-only">Loading…</span>
@@ -47,28 +46,30 @@ export default function AppShell({ onSignOut, children }) {
           position: 'sticky',
           top: 0,
           zIndex: 100,
-          background: 'rgba(250,250,245,0.95)',
-          backdropFilter: 'blur(8px)',
-          borderBottom: `1px solid ${A.ink}`,
+          background: 'rgba(13,27,32,0.72)',
+          backdropFilter: 'blur(16px) saturate(1.2)',
+          WebkitBackdropFilter: 'blur(16px) saturate(1.2)',
+          borderBottom: `1px solid ${LINE}`,
         }}
       >
         <div
+          className="plum-app-bar"
           style={{
             maxWidth: 1360,
             margin: '0 auto',
-            padding: '0.8rem 2rem',
+            padding: '0.7rem 2rem',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '1.5rem',
           }}
         >
-          <Link to="/explore" style={{ textDecoration: 'none' }} aria-label="CE Shield home">
+          <Link to="/explore" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', minHeight: 44 }} aria-label="CE Shield home">
             <AtlasLogo />
           </Link>
           <div
-            className="atlas-nav-links"
-            style={{ gap: 0, fontFamily: FIG, fontSize: 13, fontWeight: 700, letterSpacing: '0.01em' }}
+            className="atlas-nav-links plum-app-tabs"
+            style={{ gap: 2, fontFamily: FIG, fontSize: 13.5, fontWeight: 450 }}
           >
             {NAV_ITEMS.map((item) => {
               const on = path === item.to;
@@ -77,12 +78,17 @@ export default function AppShell({ onSignOut, children }) {
                   key={item.to}
                   to={item.to}
                   aria-current={on ? 'page' : undefined}
+                  className="plum-nav-item"
                   style={{
-                    padding: '8px 16px',
+                    padding: '0 16px',
+                    minHeight: 40,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    borderRadius: 999,
                     textDecoration: 'none',
                     whiteSpace: 'nowrap',
-                    background: on ? A.accent : 'transparent',
-                    color: on ? A.onAccent : A.inkMuted,
+                    background: on ? 'rgba(226,196,143,0.12)' : 'transparent',
+                    color: on ? A.accent : A.inkBody,
                   }}
                 >
                   {item.label}
@@ -101,13 +107,14 @@ export default function AppShell({ onSignOut, children }) {
               whiteSpace: 'nowrap',
             }}
           >
-            <span>
-              <strong style={{ color: A.ink }}>{user?.name || 'Account'}</strong>
+            <span className="plum-app-who">
+              <strong style={{ color: A.ink, fontWeight: 500 }}>{user?.name || 'Account'}</strong>
               {user?.state && user?.licenseType ? ` · ${user.state} ${user.licenseType}` : ''}
             </span>
             <button
               type="button"
               onClick={onSignOut}
+              className="plum-signout"
               title="Sign out"
               aria-label="Sign out"
               style={{
@@ -115,13 +122,14 @@ export default function AppShell({ onSignOut, children }) {
                 alignItems: 'center',
                 gap: 5,
                 background: 'transparent',
-                border: `1px solid ${A.ruleMinor}`,
-                color: A.inkMuted,
+                border: `1px solid ${LINE2}`,
+                borderRadius: 999,
+                color: A.inkBody,
                 fontFamily: FIG,
-                fontSize: 11.5,
-                fontWeight: 700,
-                letterSpacing: '0.01em',
-                padding: '4px 10px',
+                fontSize: 12,
+                fontWeight: 450,
+                padding: '0 14px',
+                minHeight: 36,
                 cursor: 'pointer',
               }}
             >
@@ -131,21 +139,22 @@ export default function AppShell({ onSignOut, children }) {
         </div>
       </nav>
       <main id="main-content" className="flex-1" style={{ width: '100%' }}>
-        <div style={{ maxWidth: 1360, margin: '0 auto', padding: '2.5rem 2rem 5rem' }}>
+        <div className="plum-app-main" style={{ maxWidth: 1360, margin: '0 auto', padding: '3.5rem 2rem 6rem' }}>
           {loadError && (
             <div
               role="alert"
               style={{
                 marginBottom: '1.5rem',
                 padding: '0.85rem 1.4rem',
-                border: `1px dashed ${A.ink}`,
-                background: A.notice,
+                border: '1px solid rgba(224,142,109,0.35)',
+                borderRadius: 6,
+                background: 'rgba(224,142,109,0.06)',
                 color: A.inkBody,
                 fontFamily: FIG,
                 fontSize: 14,
               }}
             >
-              <strong style={{ color: A.warn, fontSize: 12, marginRight: 10 }}>
+              <strong style={{ color: A.warn, fontSize: 10.5, fontWeight: 600, letterSpacing: '0.17em', textTransform: 'uppercase', marginRight: 12 }}>
                 Data error
               </strong>
               {loadError}

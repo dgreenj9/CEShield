@@ -15,7 +15,7 @@ computed hours) does the persuading; copy labels it.
 1. **The artifact carries the argument.** The scores, the citations, and
    the computed hours persuade. If the surface shows it, no sentence
    explains it. Cut copy before improving it.
-2. **Claims are countable and true.** 143 credentials. 7,000 citations.
+2. **Claims are countable and true.** 143 credentials. 8,609 citations.
    Five lenses. Three states. Librarian-reviewed. Nothing the product does
    not verifiably do, no invented cadence, no outcome promises, and no
    claims about competitors we cannot count ("most platforms miss this"

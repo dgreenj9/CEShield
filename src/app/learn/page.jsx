@@ -36,7 +36,7 @@ export default function LearnPage() {
   return (
     <div className="atlas-ground" style={{ minHeight: '100vh', color: A.ink }}>
       <PublicNav currentPath="/learn" />
-      <main className="cs-page-pad" style={{ maxWidth: 1280, margin: '0 auto', padding: '2.5rem 2rem 5rem' }}>
+      <main id="main" className="cs-page-pad" style={{ maxWidth: 1280, margin: '0 auto', padding: '2.5rem 2rem 5rem' }}>
         <header style={{ marginBottom: 28 }}>
           <div style={eyebrow()}>Continuing education · PT / OT / SLP / rehab</div>
           <h1 style={{ fontFamily: INS, fontSize: 'clamp(30px, 5vw, 48px)', letterSpacing: '-0.035em', lineHeight: 1.1, margin: '10px 0 12px' }}>Find your next course.</h1>

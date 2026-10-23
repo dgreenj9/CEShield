@@ -1,49 +1,323 @@
 'use client';
 
-// The Atlas Matrix instrument ("Table 1 — the credential field, ranked").
+// The field: the live scoring engine as a dashboard.
 //
-// One bordered panel: lens tab strip + calibration drawer + filter row +
-// two-pane body (ranked list on the left, the selected credential's plate on
-// the right) + source footer. All numbers come from the real scoring
-// utilities, so the React output matches the design prototype exactly.
+// Lens control, discipline and tier filters, search, six live weight sliders
+// per lens, a beeswarm of composites, a ranked list that reorders with FLIP
+// motion and shows rank change against the lens defaults, the selected
+// credential's dossier (dimension bars, cross-lens composites, evidence depth,
+// its loaded sources), and an evidence-depth vs. score scatter.
+//
+// Every number comes from utils/certScoring (rankCertifications,
+// computeScore) on the real credential data. Sliders hold raw values; the
+// composite uses their shares renormalized to 100.
 //
 // Deep links: ?lens=<pathKey> picks the lens, ?cert=<name> selects a
-// credential — both read once on mount.
+// credential. Both are read on mount and kept in the URL as they change.
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { Search, X } from 'lucide-react';
 import { certifications } from '@/utils/certificationData';
 import { PATHS, PATH_ORDER, PATH_DIMENSIONS, getPathDefaultWeights } from '@/utils/careerPaths';
-import {
-  computeScore, certScoresForPath, rankCertifications, filterRankedCerts,
-  tierCountsFor, redistributeWeights,
-} from '@/utils/certScoring';
-import {
-  EVIDENCE_LABELS, getEvidenceMix, getLibraryMetaForCertification,
-  loadCitations, citationUrl, getTotalCitationsCount,
-} from '@/utils/citationsLibrary';
+import { computeScore, certScoresForPath, rankCertifications, filterRankedCerts } from '@/utils/certScoring';
+import { EVIDENCE_LABELS, loadCitations, citationUrl, getTotalCitationsCount } from '@/utils/citationsLibrary';
 import { splitEvidence } from '@/utils/formatEvidence';
-import { A, FIG, INS, tierColor, tierLabel, eyebrow, ruledHead, tabularNums } from '@/components/atlas/theme';
+import { A, MX, tierColor, tierLabel } from '@/components/atlas/theme';
 import LensTabs, { lensShortLabel } from '@/components/atlas/LensTabs';
 import CredentialLinks from '@/components/education/CredentialLinks';
+import { normalizeWeights, sharesOf, sameWeights, LIBRARY, disciplinesOf, TOP_DISCIPLINES, TIERS } from './_field';
+import { Swarm, Scatter, Tip } from './_charts';
 
-const DISCIPLINES = ['All', 'PT', 'OT', 'SLP', 'AT'];
+const TOP_N = 12;
+const SLIDER_MAX = 50;
 
-const chipStyle = (on) => ({
-  fontFamily: FIG,
-  fontSize: 12,
-  fontWeight: 700,
-  letterSpacing: '0.01em',
-  padding: '5px 11px',
-  background: on ? A.ink : 'transparent',
-  color: on ? A.onAccent : A.inkMuted,
-  border: `1px solid ${on ? A.ink : A.ruleMinor}`,
-  cursor: 'pointer',
-  transition: 'all 0.12s ease',
-  whiteSpace: 'nowrap',
-});
+const reducedMotion = () =>
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+const TierTag = ({ score }) => (
+  <span className="mx-tag">
+    <i style={{ background: tierColor(score) }} aria-hidden="true" />
+    {tierLabel(score)}
+  </span>
+);
+
+// ── Ranked list with FLIP reordering ───────────────────────────────────────
+function RankList({ rows, selectedName, onSelect }) {
+  const els = useRef(new Map());
+  const last = useRef(new Map());
+  const key = rows.map((r) => r.name).join('|');
+
+  useLayoutEffect(() => {
+    const still = reducedMotion();
+    const next = new Map();
+    rows.forEach((r) => {
+      const el = els.current.get(r.name);
+      if (!el) return;
+      const top = el.offsetTop;
+      next.set(r.name, top);
+      if (still) return;
+      const prev = last.current.get(r.name);
+      if (prev == null) {
+        if (last.current.size) {
+          el.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 450, easing: 'cubic-bezier(.2,.7,.2,1)' });
+        }
+        return;
+      }
+      const dy = prev - top;
+      if (Math.abs(dy) > 1) {
+        el.animate([{ transform: `translateY(${dy}px)` }, { transform: 'none' }], { duration: 600, easing: 'cubic-bezier(.2,.7,.2,1)' });
+      }
+    });
+    last.current = next;
+  }, [key]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return (
+    <ol className="mx-rank">
+      {rows.map((r) => {
+        const delta = r.rank0 - r.rank;
+        return (
+          <li key={r.name} ref={(el) => { if (el) els.current.set(r.name, el); else els.current.delete(r.name); }}>
+            <button type="button" aria-current={r.name === selectedName} onClick={() => onSelect(r.name, { scroll: true })}>
+              <span className="mx-r">{r.rank}</span>
+              <span className="mx-nm">{r.name}<small>{r.type} · {r.disciplines.slice(0, 3).join(', ')}</small></span>
+              <span className="mx-sc">{r.v.toFixed(1)}</span>
+              <span
+                className={`mx-dl${delta > 0 ? ' up' : delta < 0 ? ' dn' : ''}`}
+                aria-label={delta === 0 ? 'rank unchanged' : delta > 0 ? `up ${delta}` : `down ${-delta}`}
+              >
+                {delta > 0 ? `↑${delta}` : delta < 0 ? `↓${-delta}` : '·'}
+              </span>
+            </button>
+          </li>
+        );
+      })}
+    </ol>
+  );
+}
+
+function RankTable({ rows, lensLabel }) {
+  return (
+    <div className="mx-tablewrap">
+      <table className="mx-table">
+        <caption className="mx-sr">Ranked credentials, {lensLabel} lens, at the current weights</caption>
+        <thead>
+          <tr><th>Rank</th><th>Credential</th><th>Type</th><th>Composite</th><th>Tier</th><th>Change</th><th>Citations</th></tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => {
+            const d = r.rank0 - r.rank;
+            return (
+              <tr key={r.name}>
+                <td>{r.rank}</td>
+                <td className="mx-n">{r.slug ? <Link href={`/credentials/${r.slug}`}>{r.name}</Link> : r.name}</td>
+                <td>{r.type}</td>
+                <td>{r.v.toFixed(1)}</td>
+                <td>{tierLabel(r.v)}</td>
+                <td>{d > 0 ? `+${d}` : d}</td>
+                <td>{r.count.toLocaleString()}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+// ── Dossier ────────────────────────────────────────────────────────────────
+function Dossier({ row, path, weights, total, setTip }) {
+  const [citations, setCitations] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!row) return undefined;
+    let cancelled = false;
+    setLoading(true);
+    setCitations([]);
+    loadCitations(row.name).then((list) => {
+      if (!cancelled) { setCitations(list || []); setLoading(false); }
+    });
+    return () => { cancelled = true; };
+  }, [row?.name]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (!row) {
+    return (
+      <>
+        <h2>Dossier</h2>
+        <p className="mx-sub">No credential matches these filters.</p>
+      </>
+    );
+  }
+
+  const dims = PATH_DIMENSIONS[path] || {};
+  const shares = sharesOf(weights);
+  const lib = LIBRARY[row.name] || { count: 0, mix: {}, strongShare: 0 };
+  const cross = PATH_ORDER.map((key) => {
+    const subs = certScoresForPath(row.cert, key);
+    return { key, v: subs ? computeScore(subs, getPathDefaultWeights(key)) : null };
+  });
+  const visible = citations.filter((c) => !c.path || c.path === path);
+  const summary = splitEvidence(row.cert.evidence)[0];
+  const evTop = Object.entries(lib.mix || {}).filter(([k]) => k !== 'unknown').sort((a, b) => b[1] - a[1]).slice(0, 3);
+  const custom = Math.abs(row.v - row.v0) > 0.05;
+
+  return (
+    <>
+      <div className="mx-top">
+        <h2>Dossier</h2>
+        <span className="mx-count">Rank {row.rank} of {total} · {lensShortLabel(path)}</span>
+      </div>
+      <h3 className="mx-name">{row.name}</h3>
+      <div className="mx-tags">
+        <span className="mx-tag">{row.type}</span>
+        {row.disciplines.slice(0, 5).map((d) => <span key={d} className="mx-tag">{d}</span>)}
+        {lib.source === 'librarian' && <span className="mx-tag mx-tag-accent">Librarian-reviewed</span>}
+      </div>
+
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px 14px', flexWrap: 'wrap', marginTop: 18 }}>
+        <span className="mx-kpi" style={{ marginTop: 0 }}>{row.v.toFixed(1)}</span>
+        <span className="mx-lbl">composite of 100{custom ? ` at your weights · ${row.v0.toFixed(1)} at lens defaults` : ' at lens defaults'}</span>
+        <TierTag score={row.v} />
+      </div>
+
+      <CredentialLinks slug={row.slug} />
+
+      <div className="mx-dgrid">
+        <div>
+          <h4 className="mx-h5">{lensShortLabel(path)} lens · six dimensions</h4>
+          <div role="list" aria-label="Dimension scores">
+            {Object.keys(dims).map((k) => {
+              const v = row.subs[k] || 0;
+              return (
+                <div
+                  key={k}
+                  role="listitem"
+                  style={{ marginBottom: 9 }}
+                  onPointerMove={(e) => setTip({ title: dims[k].label, lines: [`${v} of 100 · weight ${shares[k] ?? 0}%`, dims[k].description], x: e.clientX, y: e.clientY })}
+                  onPointerLeave={() => setTip(null)}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11.5, color: A.inkBody, marginBottom: 4 }}>
+                    <span>{dims[k].label} <span style={{ color: A.inkMuted }}>· {shares[k] ?? 0}%</span></span>
+                    <span className="mx-num" style={{ color: A.ink }}>{v}</span>
+                  </div>
+                  <div style={{ height: 10, background: '#ffffff0a', borderRadius: 2 }}>
+                    <span style={{ display: 'block', height: '100%', width: `${Math.max(2, v)}%`, background: MX.c2, borderRadius: '0 4px 4px 0', transition: 'width .5s cubic-bezier(.2,.7,.2,1)' }} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div>
+          <h4 className="mx-h5">Composite across lenses</h4>
+          <div role="list" aria-label="Composite in each lens at its default weights" style={{ position: 'relative' }}>
+            {cross.map((c) => (
+              <div key={c.key} role="listitem" style={{ display: 'grid', gridTemplateColumns: '92px 1fr', alignItems: 'center', height: 30 }}>
+                <span style={{ fontSize: 11.5, color: c.key === path ? A.ink : A.inkMuted }}>{lensShortLabel(c.key)}</span>
+                <span style={{ position: 'relative', height: 30, borderLeft: '1px solid #ffffff12' }}>
+                  <span aria-hidden="true" style={{ position: 'absolute', left: 0, right: 0, top: 15, height: 1, background: '#ffffff12' }} />
+                  <span aria-hidden="true" style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 1, background: '#ffffff0d' }} />
+                  <span aria-hidden="true" style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 1, background: '#ffffff0d' }} />
+                  {c.v == null ? (
+                    <span style={{ position: 'absolute', left: 6, top: 8, fontSize: 10.5, color: A.inkMuted }}>not scored</span>
+                  ) : (
+                    <span
+                      onPointerMove={(e) => setTip({ title: `${PATHS[c.key].label} lens`, lines: [`Composite ${c.v.toFixed(1)} at default weights · ${tierLabel(c.v)}`], x: e.clientX, y: e.clientY })}
+                      onPointerLeave={() => setTip(null)}
+                      style={{
+                        position: 'absolute', top: 15, left: `${c.v}%`, transform: 'translate(-50%, -50%)',
+                        width: c.key === path ? 13 : 10, height: c.key === path ? 13 : 10, borderRadius: '50%',
+                        background: c.key === path ? A.accent : MX.c2, boxShadow: `0 0 0 2px ${MX.ring}`,
+                        transition: 'left .5s cubic-bezier(.2,.7,.2,1)',
+                      }}
+                    />
+                  )}
+                  <span className="mx-sr">{c.v == null ? 'not scored' : `composite ${c.v.toFixed(1)}, ${tierLabel(c.v)}`}</span>
+                </span>
+              </div>
+            ))}
+            <div aria-hidden="true" style={{ display: 'grid', gridTemplateColumns: '92px 1fr', fontSize: 10, color: A.inkMuted, marginTop: 4 }}>
+              <span />
+              <span style={{ display: 'flex', justifyContent: 'space-between' }} className="mx-num"><span>0</span><span>50</span><span>100</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-ev">
+        <div>
+          <span className="mx-lbl">Citations in the library</span>
+          <div className="mx-kpi">{lib.count.toLocaleString()}</div>
+        </div>
+        <div>
+          <span className="mx-lbl">Trials, reviews, and meta-analyses</span>
+          <div className="mx-kpi">{lib.strongShare}%</div>
+          <div className="mx-meter" role="img" aria-label={`${lib.strongShare} percent of citations are trials, reviews, or meta-analyses`}><i style={{ width: `${lib.strongShare}%` }} /></div>
+        </div>
+      </div>
+
+      {summary && (
+        <div style={{ marginTop: 20 }}>
+          <h4 className="mx-h5">Evidence summary</h4>
+          <p style={{ fontSize: 13.5, lineHeight: 1.65, color: A.inkBody, margin: 0 }}>{summary}</p>
+        </div>
+      )}
+
+      <div style={{ marginTop: 20 }}>
+        <h4 className="mx-h5">
+          Sources · {loading ? lib.count : (visible.length || lib.count)} {visible.length && visible.length !== lib.count ? `for this lens of ${lib.count} on file` : 'on file'}
+        </h4>
+        {loading && (
+          <div role="status" aria-label="Loading sources" style={{ borderTop: `1px solid ${MX.line}` }}>
+            {[0.92, 0.74, 0.86].map((w) => (
+              <div key={w} style={{ padding: '10px 2px', borderBottom: `1px solid ${MX.line}` }}>
+                <div className="skeleton" style={{ height: 10, width: `${w * 100}%`, borderRadius: 2 }} />
+                <div className="skeleton" style={{ height: 8, width: `${w * 55}%`, marginTop: 8, borderRadius: 2 }} />
+              </div>
+            ))}
+          </div>
+        )}
+        {!loading && visible.length > 0 && (
+          <ol className="mx-sources">
+            {visible.slice(0, 40).map((c, i) => (
+              <li key={`${c.title}-${i}`}>
+                <span className="mx-num" style={{ fontSize: 11, color: A.inkMuted }}>{String(i + 1).padStart(2, '0')}</span>
+                <span style={{ minWidth: 0 }}>
+                  <span style={{ display: 'block', fontSize: 12.5, lineHeight: 1.4, color: A.ink }}>{c.title}</span>
+                  <span style={{ display: 'block', fontSize: 11, color: A.inkMuted, marginTop: 2 }}>
+                    {[c.journal, c.year || 'n.d.', EVIDENCE_LABELS[c.evidence_type] || 'Other'].filter(Boolean).join(' · ')}
+                  </span>
+                </span>
+                {citationUrl(c) ? (
+                  <a href={citationUrl(c)} target="_blank" rel="noopener noreferrer" aria-label={`Open source: ${c.title}`}>
+                    {c.doi ? 'DOI' : 'Source'} ↗
+                  </a>
+                ) : <span />}
+              </li>
+            ))}
+          </ol>
+        )}
+        {!loading && visible.length === 0 && (
+          <p style={{ fontSize: 12.5, color: A.inkBody, margin: 0, lineHeight: 1.6 }}>
+            {lib.count
+              ? `${lib.count} curated sources on file${lib.lastReviewed ? `, last reviewed ${lib.lastReviewed}` : ''}: ${evTop.map(([k, n]) => `${n} ${(EVIDENCE_LABELS[k] || k).toLowerCase()}`).join(', ')}.`
+              : 'No citations on file for this credential yet.'}
+          </p>
+        )}
+      </div>
+
+      {row.slug && (
+        <Link href={`/credentials/${row.slug}`} className="mx-out" style={{ marginTop: 18 }}>
+          Open the full dossier{visible.length > 40 ? ` · all ${visible.length} sources` : ''} →
+        </Link>
+      )}
+    </>
+  );
+}
+
+// ── The field ──────────────────────────────────────────────────────────────
 export default function AtlasMatrix() {
   const searchParams = useSearchParams();
   const initialLens = (() => {
@@ -53,396 +327,268 @@ export default function AtlasMatrix() {
 
   const [path, setPath] = useState(initialLens);
   const [weights, setWeights] = useState(() => getPathDefaultWeights(initialLens));
-  const [showCal, setShowCal] = useState(false);
   const [tier, setTier] = useState('all');
-  const [discipline, setDiscipline] = useState('All');
+  const [discs, setDiscs] = useState(() => new Set());
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedName, setSelectedName] = useState(() => searchParams?.get('cert') || null);
-  const [citations, setCitations] = useState([]);
-  const [citationsLoading, setCitationsLoading] = useState(true);
+  const [showAll, setShowAll] = useState(false);
+  const [asTable, setAsTable] = useState(false);
+  const [tip, setTip] = useState(null);
+  const dossierRef = useRef(null);
 
-  const ranked = useMemo(
-    () => rankCertifications(certifications, weights, path),
-    [weights, path],
-  );
-  const filtered = useMemo(
-    () => filterRankedCerts(ranked, { tier, discipline, type: 'All', searchTerm }),
-    [ranked, tier, discipline, searchTerm],
-  );
-  const tierCounts = useMemo(() => tierCountsFor(ranked, discipline), [ranked, discipline]);
+  const defaults = useMemo(() => getPathDefaultWeights(path), [path]);
+  const isDefault = sameWeights(weights, defaults);
+  const shares = sharesOf(weights);
+  const lensLabel = lensShortLabel(path);
 
-  // Selection falls back to the top-ranked row whenever filters exclude the
-  // current selection.
+  // Rank the whole lens at the current and the default weights.
+  const ranked = useMemo(() => rankCertifications(certifications, normalizeWeights(weights), path), [weights, path]);
+  const rank0 = useMemo(() => {
+    const m = new Map();
+    rankCertifications(certifications, defaults, path).forEach((c) => m.set(c.name, c));
+    return m;
+  }, [defaults, path]);
+
+  const toRow = useCallback((c) => {
+    const lib = LIBRARY[c.name] || { count: 0 };
+    const d0 = rank0.get(c.name);
+    return {
+      name: c.name,
+      type: c.type,
+      disciplines: disciplinesOf(c),
+      v: c.computedScore,
+      v0: d0 ? d0.computedScore : c.computedScore,
+      rank: c.rank,
+      rank0: d0 ? d0.rank : c.rank,
+      subs: c.subScores,
+      count: lib.count,
+      slug: lib.slug,
+      cert: c,
+    };
+  }, [rank0]);
+
+  const byDisc = useMemo(
+    () => (discs.size ? ranked.filter((c) => disciplinesOf(c).some((d) => discs.has(d))) : ranked),
+    [ranked, discs],
+  );
+  const tierCounts = useMemo(() => {
+    const out = { all: byDisc.length };
+    TIERS.forEach((t) => { out[t.key] = byDisc.filter((c) => c.computedScore >= t.lo && c.computedScore < t.hi).length; });
+    return out;
+  }, [byDisc]);
+  const rows = useMemo(
+    () => filterRankedCerts(byDisc, { tier, discipline: 'All', type: 'All', searchTerm }).map(toRow),
+    [byDisc, tier, searchTerm, toRow],
+  );
+
   const selected = useMemo(
-    () => (selectedName && filtered.find((c) => c.name === selectedName)) || filtered[0] || null,
-    [selectedName, filtered],
+    () => (selectedName && rows.find((r) => r.name === selectedName)) || rows[0] || null,
+    [selectedName, rows],
   );
 
-  useEffect(() => {
-    if (!selected) return undefined;
-    let cancelled = false;
-    setCitationsLoading(true);
-    setCitations([]);
-    loadCitations(selected.name).then((list) => {
-      if (!cancelled) {
-        setCitations(list || []);
-        setCitationsLoading(false);
-      }
-    });
-    return () => { cancelled = true; };
-  }, [selected?.name]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const selectLens = (key) => {
-    setPath(key);
-    setWeights(getPathDefaultWeights(key));
+  const syncUrl = (lens, cert) => {
+    if (typeof window === 'undefined') return;
+    const url = new URL(window.location.href);
+    url.searchParams.set('lens', lens);
+    if (cert) url.searchParams.set('cert', cert); else url.searchParams.delete('cert');
+    window.history.replaceState(window.history.state, '', url.pathname + url.search);
   };
 
-  const dims = PATH_DIMENSIONS[path] || {};
-  const weightsTotal = Object.values(weights).reduce((a, b) => a + b, 0);
+  const select = (name, { scroll = false } = {}) => {
+    setSelectedName(name);
+    syncUrl(path, name);
+    if (!scroll || typeof window === 'undefined' || !dossierRef.current) return;
+    if (!window.matchMedia('(max-width: 980px)').matches) return;
+    requestAnimationFrame(() => dossierRef.current?.scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', block: 'start' }));
+  };
 
-  // ── Detail plate values ────────────────────────────────────────────────
-  let det = null;
-  if (selected) {
-    const subs = certScoresForPath(selected, path) || {};
-    const score = Math.round(computeScore(subs, weights) * 10) / 10;
-    const mix = getEvidenceMix(selected.name);
-    const meta = getLibraryMetaForCertification(selected.name);
-    const cross = PATH_ORDER.map((key) => {
-      const ps = certScoresForPath(selected, key);
-      if (!ps) return null;
-      const cScore = Math.round(computeScore(ps, getPathDefaultWeights(key)));
-      return { key, label: lensShortLabel(key), score: cScore, on: key === path, color: tierColor(cScore) };
-    }).filter(Boolean);
-    const visible = citations.filter((c) => !c.path || c.path === path);
-    const evTop = Object.entries(mix)
-      .filter(([k]) => k !== 'unknown')
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 3);
-    det = { subs, score, mix, meta, cross, visible, evTop };
-  }
+  const selectLens = (key) => {
+    setTip(null);
+    setPath(key);
+    setWeights(getPathDefaultWeights(key));
+    const keep = selected && certScoresForPath(selected.cert, key) ? selected.name : null;
+    setSelectedName(keep);
+    syncUrl(key, keep);
+  };
+
+  const toggleDisc = (d) => {
+    setDiscs((prev) => {
+      const next = new Set(prev);
+      if (d === null) return new Set();
+      if (next.has(d)) next.delete(d); else next.add(d);
+      return next;
+    });
+  };
+
+  const clearFilters = () => { setSearchTerm(''); setTier('all'); setDiscs(new Set()); };
+  const listRows = showAll ? rows : rows.slice(0, TOP_N);
+  const lensTotal = ranked.length;
 
   return (
     <>
-      <header style={{ marginBottom: '1.5rem' }}>
-        <h1
-          className="cs-h1-clamp"
-          style={{ fontFamily: INS, fontWeight: 600, fontSize: 40, lineHeight: 1.02, letterSpacing: '-0.025em', margin: 0 }}
-        >
-          Rank by evidence. Calibrate by career.
-        </h1>
-        <div style={{ ...eyebrow(), marginTop: 10, ...tabularNums }}>
-          {filtered.length} of {certifications.length} credentials shown
-        </div>
-      </header>
-
-      <div style={{ border: `1px solid ${A.ink}`, background: A.paper }}>
-        {/* Lens tab strip + calibration toggle */}
-        <LensTabs
-          active={path}
-          onSelect={selectLens}
-          trailing={(
-            <button
-              type="button"
-              aria-expanded={showCal}
-              onClick={() => setShowCal((v) => !v)}
-              style={{
-                fontFamily: FIG,
-                fontSize: 13,
-                fontWeight: 700,
-                letterSpacing: '0.01em',
-                padding: '13px 18px',
-                marginLeft: 'auto',
-                background: showCal ? A.ink : 'transparent',
-                color: showCal ? A.onAccent : A.ink,
-                border: 'none',
-                borderLeft: `1px solid ${A.ink}`,
-                cursor: 'pointer',
-              }}
-            >
-              Calibration {showCal ? '−' : '+'}
-            </button>
-          )}
-        />
-
-        {/* Calibration drawer */}
-        {showCal && (
-          <div style={{ borderBottom: `1px solid ${A.ink}`, padding: '1.25rem 1.5rem', background: A.band }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-              <span style={eyebrow()}>Calibration · Σ = {weightsTotal}</span>
-              <button
-                type="button"
-                onClick={() => setWeights(getPathDefaultWeights(path))}
-                style={{
-                  fontFamily: FIG, fontSize: 12.5, fontWeight: 600, background: 'transparent',
-                  border: `1px solid ${A.ink}`, padding: '5px 12px', cursor: 'pointer', color: A.ink,
-                }}
-              >
-                Reset defaults
-              </button>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.9rem 2rem' }}>
-              {Object.keys(dims).map((key) => (
-                <div key={key}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 4 }}>
-                    <span style={{ fontSize: 13.5, fontWeight: 600 }}>{dims[key].label}</span>
-                    <span style={{ fontFamily: FIG, fontSize: 13, fontWeight: 700, color: A.accent, ...tabularNums }}>
-                      ×{weights[key] || 0}
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={weights[key] || 0}
-                    onChange={(e) => setWeights(redistributeWeights(weights, key, parseInt(e.target.value, 10)))}
-                    aria-label={`${dims[key].label} weight`}
-                    style={{ width: '100%' }}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Filter row */}
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', padding: '0.8rem 1.5rem', borderBottom: `1px solid ${A.ink}`, flexWrap: 'wrap' }}>
+      {/* Controls: lens, search, discipline, evidence tier */}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px 22px', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+        <LensTabs active={path} onSelect={selectLens} full />
+        <div className="mx-search">
+          <Search size={15} aria-hidden="true" />
           <input
             type="search"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search the field…"
+            placeholder="Search the field"
             aria-label="Search credentials"
-            style={{
-              flex: 1, minWidth: 220, fontFamily: FIG, fontSize: 'max(16px, 15px)', padding: '8px 2px',
-              border: 'none', borderBottom: `2px solid ${A.ruleMinor}`, background: 'transparent', color: A.ink,
-            }}
           />
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }} role="group" aria-label="Filter by evidence tier">
-            {[
-              ['all', `All ${tierCounts.all}`],
-              ['strong', `Strong ${tierCounts.strong}`],
-              ['good', `Good ${tierCounts.good}`],
-              ['moderate', `Moderate ${tierCounts.moderate}`],
-              ['limited', `Limited ${tierCounts.limited}`],
-            ].map(([value, label]) => (
-              <button key={value} type="button" aria-pressed={tier === value} onClick={() => setTier(value)} style={chipStyle(tier === value)}>
-                {label}
-              </button>
-            ))}
-          </div>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }} role="group" aria-label="Filter by discipline">
-            {DISCIPLINES.map((d) => (
-              <button key={d} type="button" aria-pressed={discipline === d} onClick={() => setDiscipline(d)} style={chipStyle(discipline === d)}>
-                {d}
-              </button>
-            ))}
-          </div>
+          {searchTerm && (
+            <button type="button" className="mx-clear" onClick={() => setSearchTerm('')} aria-label="Clear search">
+              <X size={14} aria-hidden="true" />
+            </button>
+          )}
         </div>
+      </div>
+      <div style={{ display: 'grid', gap: 10, marginBottom: 20 }}>
+        <div className="mx-chips" role="group" aria-label="Filter by discipline">
+          <span className="mx-lab" aria-hidden="true">Discipline</span>
+          <button type="button" className="mx-chip" aria-pressed={discs.size === 0} onClick={() => toggleDisc(null)}>All</button>
+          {TOP_DISCIPLINES.map((d) => (
+            <button key={d} type="button" className="mx-chip" aria-pressed={discs.has(d)} onClick={() => toggleDisc(d)}>{d}</button>
+          ))}
+        </div>
+        <div className="mx-chips" role="group" aria-label="Filter by evidence tier">
+          <span className="mx-lab" aria-hidden="true">Evidence tier</span>
+          <button type="button" className="mx-chip" aria-pressed={tier === 'all'} onClick={() => setTier('all')}>
+            All <span className="mx-n">{tierCounts.all}</span>
+          </button>
+          {[...TIERS].reverse().map((t) => (
+            <button key={t.key} type="button" className="mx-chip" aria-pressed={tier === t.key} onClick={() => setTier(t.key)}>
+              <i style={{ background: tierColor(t.lo) }} aria-hidden="true" />
+              {t.label} <span className="mx-n">{tierCounts[t.key]}</span>
+            </button>
+          ))}
+        </div>
+      </div>
 
-        {/* Two-pane body */}
-        <div className="atlas-two-pane">
-          <div style={{ borderRight: `1px solid ${A.ink}`, maxHeight: 720, overflowY: 'auto' }}>
-            {filtered.length === 0 && (
-              <div style={{ padding: '2rem', textAlign: 'center', color: A.inkMuted, fontSize: 14 }}>
-                Nothing in the field matches.{' '}
-                <button
-                  type="button"
-                  onClick={() => { setSearchTerm(''); setTier('all'); setDiscipline('All'); }}
-                  style={{ background: 'none', border: 'none', color: A.accent, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', fontSize: 14, textDecoration: 'underline' }}
-                >
-                  Clear filters
-                </button>
+      <div className="mx-grid">
+        {/* Beeswarm */}
+        <section className="mx-panel mx-s8" aria-labelledby="mx-swarm-h" style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className="mx-top">
+            <div>
+              <h2 id="mx-swarm-h">Every credential, by composite score</h2>
+              <p className="mx-sub">{PATHS[path].label} lens · {isDefault ? 'default weights' : 'your weights'} · higher is better</p>
+            </div>
+            <span className="mx-count">{rows.length} of {lensTotal} scored · {certifications.length} in all</span>
+          </div>
+          {rows.length > 0 ? (
+            <>
+              <Swarm rows={rows} selectedName={selected?.name} onSelect={select} setTip={setTip} lensLabel={lensLabel} />
+              <p className="mx-note">Hover or use the arrow keys for details. The ringed dot is the open dossier.</p>
+            </>
+          ) : (
+            <div style={{ flex: 1, display: 'grid', placeItems: 'center', minHeight: 240, textAlign: 'center' }}>
+              <div>
+                <p style={{ margin: 0, color: A.ink, fontSize: 14 }}>Nothing in the field matches.</p>
+                <p className="mx-sub" style={{ marginTop: 6 }}>
+                  {searchTerm ? `No credential name, discipline, or summary contains “${searchTerm}” under these filters.` : 'No credential meets every filter at once.'}
+                </p>
+                <button type="button" className="mx-btn" style={{ marginTop: 14 }} onClick={clearFilters}>Clear filters</button>
               </div>
-            )}
-            {filtered.map((cert) => {
-              const on = selected && selected.name === cert.name;
+            </div>
+          )}
+        </section>
+
+        {/* Weights */}
+        <section className="mx-panel mx-s4" aria-labelledby="mx-w-h">
+          <div className="mx-top">
+            <div>
+              <h2 id="mx-w-h">Lens weights</h2>
+              <p className="mx-sub">Shares renormalize to 100%.</p>
+            </div>
+            <span className="mx-count">{isDefault ? 'Lens defaults' : 'Custom'}</span>
+          </div>
+          <div style={{ marginTop: 14, display: 'grid', gap: 12 }}>
+            {Object.keys(defaults).map((k) => {
+              const id = `w-${k}`;
+              const dim = PATH_DIMENSIONS[path][k];
+              const v = weights[k] || 0;
               return (
-                <button
-                  key={cert.name}
-                  type="button"
-                  aria-pressed={!!on}
-                  onClick={() => setSelectedName(cert.name)}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: 12, width: '100%', padding: '0.7rem 1.1rem',
-                    background: on ? A.band : 'transparent', border: 'none', borderBottom: `1px solid ${A.ruleFaint}`,
-                    borderLeft: `3px solid ${on ? A.accent : 'transparent'}`, cursor: 'pointer', fontFamily: 'inherit',
-                    transition: 'background 0.12s ease', textAlign: 'left',
-                  }}
-                >
-                  <span style={{ fontFamily: FIG, fontSize: 11, color: A.inkMuted, width: 26, textAlign: 'right', flexShrink: 0, ...tabularNums }}>
-                    {String(cert.rank).padStart(3, '0')}
-                  </span>
-                  <span style={{ flex: 1, minWidth: 0 }}>
-                    <span style={{ display: 'block', fontWeight: on ? 700 : 600, fontSize: 14.5, letterSpacing: '-0.01em', color: A.ink, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                      {cert.name}
-                    </span>
-                    <span style={{ display: 'block', fontFamily: FIG, fontSize: 11, color: A.inkMuted, marginTop: 2 }}>
-                      {cert.type} · {(cert.disciplines || [cert.discipline]).join('·')}
-                    </span>
-                  </span>
-                  <span aria-hidden="true" style={{ width: 9, height: 9, borderRadius: '50%', background: tierColor(cert.computedScore), flexShrink: 0 }} />
-                  <span style={{ fontFamily: FIG, fontSize: 16, fontWeight: 700, width: 46, textAlign: 'right', flexShrink: 0, color: A.ink, ...tabularNums }}>
-                    {cert.computedScore.toFixed(1)}
-                  </span>
-                </button>
+                <div key={`${path}-${k}`} className="mx-w">
+                  <label htmlFor={id} title={dim.description}>{dim.label}<span>{shares[k] ?? 0}%</span></label>
+                  <input
+                    id={id}
+                    className="mx-range"
+                    type="range"
+                    min="0"
+                    max={SLIDER_MAX}
+                    step="1"
+                    value={v}
+                    aria-valuetext={`${shares[k] ?? 0} percent of the composite`}
+                    style={{ '--fill': `${(v / SLIDER_MAX) * 100}%` }}
+                    onChange={(e) => setWeights((w) => ({ ...w, [k]: parseInt(e.target.value, 10) }))}
+                  />
+                  <div className="mx-share" aria-hidden="true"><i style={{ width: `${shares[k] ?? 0}%` }} /></div>
+                </div>
               );
             })}
           </div>
+          <button type="button" className="mx-btn" style={{ marginTop: 16 }} disabled={isDefault} onClick={() => setWeights(getPathDefaultWeights(path))}>
+            Reset to lens defaults
+          </button>
+        </section>
 
-          {/* The plate */}
-          <div style={{ padding: '1.75rem 1.75rem 2rem', minHeight: 600 }}>
-            {selected && det && (
-              <>
-                <div style={{ ...eyebrow(12), marginBottom: 10 }}>
-                  {selected.type} · {(selected.disciplines || [selected.discipline]).join(' · ')}
-                </div>
-                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1.5rem' }}>
-                  <h2 style={{ fontFamily: INS, fontWeight: 600, fontSize: 27, lineHeight: 1.08, letterSpacing: '-0.02em', margin: 0, textWrap: 'balance' }}>
-                    {selected.name}
-                  </h2>
-                  <span style={{ textAlign: 'right', flexShrink: 0 }}>
-                    <span style={{ fontFamily: FIG, fontSize: 44, fontWeight: 800, lineHeight: 1, color: tierColor(det.score), letterSpacing: '-0.02em', ...tabularNums }}>
-                      {det.score.toFixed(1)}
-                    </span>
-                    <span style={{ display: 'block', fontFamily: FIG, fontSize: 11.5, letterSpacing: '0.02em', color: A.inkMuted, marginTop: 2 }}>
-                      of 100 · {tierLabel(det.score)}
-                    </span>
-                  </span>
-                </div>
-                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 12 }}>
-                  {det.evTop.map(([k, n]) => (
-                    <span key={k} style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 700, padding: '3px 10px', border: `1px solid ${A.ruleMinor}`, color: A.inkBody }}>
-                      {n} {EVIDENCE_LABELS[k] || k}
-                    </span>
-                  ))}
-                  {det.meta.source === 'librarian' && (
-                    <span style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 700, padding: '3px 10px', background: A.accent, color: A.onAccent }}>
-                      Librarian-reviewed
-                    </span>
-                  )}
-                </div>
-
-                <CredentialLinks slug={det.meta.slug} />
-
-                {/* Fig. A — score anatomy */}
-                <div style={{ marginTop: '1.6rem' }}>
-                  <div style={{ ...ruledHead, marginBottom: 12 }}>
-                    Score anatomy · {lensShortLabel(path)} lens
-                  </div>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem 2rem' }}>
-                    {Object.keys(dims).map((key) => (
-                      <div key={key}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 4 }}>
-                          <span style={{ fontSize: 13, fontWeight: 600 }}>
-                            {dims[key].label}{' '}
-                            <span style={{ fontFamily: FIG, fontSize: 11, color: A.inkMuted, fontWeight: 500 }}>×{weights[key] || 0}</span>
-                          </span>
-                          <span style={{ fontFamily: FIG, fontSize: 13, fontWeight: 700, ...tabularNums }}>{det.subs[key] || 0}</span>
-                        </div>
-                        <div style={{ height: 4, background: A.ruleFaint }}>
-                          <span style={{ display: 'block', height: '100%', width: `${det.subs[key] || 0}%`, background: A.accent }} />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Fig. B — cross-lens comparison */}
-                {det.cross.length > 1 && (
-                  <div style={{ marginTop: '1.6rem' }}>
-                    <div style={{ ...ruledHead, marginBottom: 12 }}>The same credential, every lens</div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
-                      {det.cross.map((cp) => (
-                        <div key={cp.key} style={{ display: 'grid', gridTemplateColumns: '130px 1fr 44px', gap: 12, alignItems: 'center' }}>
-                          <span style={{ fontFamily: FIG, fontSize: 12, fontWeight: cp.on ? 800 : 600, color: cp.on ? A.accent : A.inkMuted, letterSpacing: '0.02em' }}>
-                            {cp.label}
-                          </span>
-                          <span style={{ height: 5, background: A.ruleFaint }}>
-                            <span style={{ display: 'block', height: '100%', width: `${cp.score}%`, background: cp.color }} />
-                          </span>
-                          <span style={{ fontFamily: FIG, fontSize: 13.5, fontWeight: 700, textAlign: 'right', color: A.ink, ...tabularNums }}>
-                            {cp.score}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Notes — evidence summary */}
-                <div style={{ marginTop: '1.6rem' }}>
-                  <div style={{ ...ruledHead, marginBottom: 10 }}>Evidence summary</div>
-                  {splitEvidence(selected.evidence).slice(0, 1).map((text) => (
-                    <p key={text.slice(0, 24)} style={{ fontSize: 14, color: A.inkBody, lineHeight: 1.65, margin: '0 0 0.7rem' }}>
-                      {text}
-                    </p>
-                  ))}
-                </div>
-
-                {/* Sources — citation list */}
-                <div style={{ marginTop: '1.4rem' }}>
-                  <div style={{ ...ruledHead, marginBottom: 10 }}>
-                    Sources · {citationsLoading ? det.meta.count : (det.visible.length || det.meta.count)} on file
-                  </div>
-                  {citationsLoading && (
-                    <p style={{ fontFamily: FIG, fontSize: 12.5, color: A.inkMuted, margin: 0 }}>Loading citations.</p>
-                  )}
-                  {!citationsLoading && det.visible.length > 0 && (
-                    <div style={{ maxHeight: 260, overflowY: 'auto', border: `1px dashed ${A.ink}` }}>
-                      {det.visible.slice(0, 30).map((c, idx, arr) => (
-                        <div
-                          key={`${c.title}-${idx}`}
-                          style={{ display: 'flex', gap: 12, alignItems: 'flex-start', padding: '0.7rem 0.9rem', borderBottom: idx < arr.length - 1 ? `1px solid ${A.ruleFaint}` : 'none' }}
-                        >
-                          <span style={{ fontFamily: FIG, fontSize: 11, color: A.inkMuted, minWidth: 24, ...tabularNums }}>
-                            {String(idx + 1).padStart(2, '0')}
-                          </span>
-                          <span style={{ flex: 1, minWidth: 0 }}>
-                            <span style={{ display: 'block', fontSize: 13.5, fontWeight: 600, lineHeight: 1.4 }}>{c.title}</span>
-                            <span style={{ display: 'block', fontFamily: FIG, fontSize: 11.5, color: A.inkMuted, marginTop: 2 }}>
-                              {[c.authors, c.journal].filter(Boolean).join(' · ')} · {c.year || 'n.d.'} · {EVIDENCE_LABELS[c.evidence_type] || 'Other'}
-                            </span>
-                          </span>
-                          {citationUrl(c) && (
-                            <a
-                              href={citationUrl(c)}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              style={{ fontFamily: FIG, fontSize: 11.5, fontWeight: 700, color: A.accent, textDecoration: 'none', whiteSpace: 'nowrap' }}
-                            >
-                              DOI ↗
-                            </a>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  {!citationsLoading && det.visible.length === 0 && (
-                    <p style={{ fontFamily: FIG, fontSize: 12.5, color: A.inkBody, margin: 0, lineHeight: 1.6 }}>
-                      {det.meta.count
-                        ? `${det.meta.count} curated sources on file${det.meta.last_reviewed ? `, last reviewed ${det.meta.last_reviewed}` : ''}: ${det.evTop.map(([k, n]) => `${n} ${(EVIDENCE_LABELS[k] || k).toLowerCase()}`).join(', ')}.`
-                        : 'No citations on file for this credential yet.'}
-                    </p>
-                  )}
-                </div>
-              </>
-            )}
+        {/* Ranked */}
+        <section className="mx-panel mx-s5" aria-labelledby="mx-rank-h">
+          <div className="mx-top">
+            <div>
+              <h2 id="mx-rank-h">{showAll ? `All ${rows.length}` : `Top ${Math.min(TOP_N, rows.length)}`}</h2>
+              <p className="mx-sub">Change vs. the lens&rsquo;s default weights</p>
+            </div>
+            <button type="button" className="mx-toggle" aria-pressed={asTable} onClick={() => setAsTable((t) => !t)}>
+              {asTable ? 'View as list' : 'View as table'}
+            </button>
           </div>
-        </div>
+          {rows.length === 0 ? (
+            <p className="mx-sub" style={{ marginTop: 14 }}>
+              Nothing to rank under these filters.{' '}
+              <button type="button" className="mx-toggle" onClick={clearFilters}>Clear filters</button>
+            </p>
+          ) : (
+            <div className={showAll ? 'mx-rank-scroll' : undefined}>
+              {asTable
+                ? <RankTable rows={listRows} lensLabel={PATHS[path].label} />
+                : <RankList rows={listRows} selectedName={selected?.name} onSelect={select} />}
+            </div>
+          )}
+          {rows.length > TOP_N && (
+            <button type="button" className="mx-toggle" style={{ marginTop: 12 }} aria-expanded={showAll} onClick={() => setShowAll((s) => !s)}>
+              {showAll ? `Show the top ${TOP_N}` : `Show all ${rows.length}`}
+            </button>
+          )}
+        </section>
 
-        {/* Source footer */}
-        <div
-          style={{
-            borderTop: `1px solid ${A.ink}`, padding: '10px 1.5rem', display: 'flex', justifyContent: 'space-between',
-            gap: '1rem', flexWrap: 'wrap', fontFamily: FIG, fontSize: 12, letterSpacing: '0.02em', color: A.inkMuted,
-          }}
-        >
-          <span>Source: CE Shield evidence library · {getTotalCitationsCount().toLocaleString()} citations</span>
-          <Link href="/methodology" style={{ color: A.accent, fontWeight: 700, textDecoration: 'none' }}>
-            Survey methodology →
-          </Link>
-        </div>
+        {/* Dossier */}
+        <section ref={dossierRef} className="mx-panel mx-s7 mx-dossier" aria-labelledby="mx-dossier-h" style={{ scrollMarginTop: 'calc(var(--atlas-nav-h, 72px) + 12px)' }}>
+          <span id="mx-dossier-h" className="mx-sr" aria-live="polite">Dossier{selected ? `: ${selected.name}` : ''}</span>
+          <Dossier row={selected} path={path} weights={weights} total={lensTotal} setTip={setTip} />
+        </section>
+
+        {/* Evidence depth vs score */}
+        <section className="mx-panel mx-s12" aria-labelledby="mx-sc-h">
+          <div className="mx-top">
+            <div>
+              <h2 id="mx-sc-h">Evidence depth vs. score</h2>
+              <p className="mx-sub">Citations on a log scale. Depth of literature and value are different questions.</p>
+            </div>
+            <span className="mx-count">{rows.length} credentials · {lensLabel} lens</span>
+          </div>
+          {rows.length > 0 && <Scatter rows={rows} selectedName={selected?.name} onSelect={select} setTip={setTip} lensLabel={lensLabel} />}
+        </section>
       </div>
+
+      <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px 20px', marginTop: 16, fontSize: 11.5, color: A.inkMuted }}>
+        <span className="mx-num">Source: CE Shield evidence library · {getTotalCitationsCount().toLocaleString()} citations. Weights you set here are not saved.</span>
+        <Link href="/methodology" className="mx-out" style={{ minHeight: 0, fontSize: 11.5 }}>How scoring works →</Link>
+      </div>
+
+      <Tip tip={tip} />
     </>
   );
 }

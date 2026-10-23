@@ -10,7 +10,7 @@ export default function PageHeader({ icon: Icon, title, subtitle, actions, badge
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 mb-1.5">
             {Icon ? <Icon size={20} aria-hidden="true" className="text-atlas-accent flex-shrink-0" /> : null}
-            <h1 className="font-display text-3xl font-semibold text-atlas-ink m-0 leading-tight tracking-tight">
+            <h1 className="font-display text-4xl text-atlas-ink m-0 leading-tight">
               {title}
             </h1>
             {badge}

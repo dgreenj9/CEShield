@@ -47,3 +47,5 @@ __pycache__/
 
 # Catalog crawl reports and browser verification artifacts
 /artifacts/
+# Citation pipeline HTTP cache (scripts/expand_citations.py)
+/.cache/
