@@ -77,7 +77,8 @@ source URLs. The review must name its subject, reviewer, and review date.
 Incomplete evaluations display no score. Ranking comparisons are restricted to
 the selected subject. Reviewers should also consider audience and objectives;
 the subject filter alone does not make different course depths equivalent.
-The initial release has no published course-quality evaluations.
+The first published evaluations assess public curriculum materials only. They are
+explicitly provisional and do not establish teaching effectiveness or outcomes.
 
 Every published evaluation also states its `reviewBasis` (`public-materials`
 or `course-access`) and `limitations`. These are visible with the evaluation.
@@ -135,7 +136,9 @@ discoveries; absence from a new sitemap does not prove retirement. Availability
 must be checked separately before marking an offering as open or retired.
 
 Network reports stay in ignored `artifacts/catalog/`. Publication here means a
-local dataset update, not deployment. No recurring automation is scheduled.
+local dataset update, not deployment. Weekly recurring discovery and link audits run through the Catalog maintenance
+GitHub Actions workflow. Proposed changes and review reports are saved as artifacts;
+they do not automatically replace the deployed dataset.
 
 `crawl-state.json` preserves successful extraction and attempted URLs between
 runs, including dry runs. Recently attempted pages without useful titles are
@@ -167,7 +170,10 @@ excluded so they cannot replace short course titles.
 OccupationalTherapy.com also registers its public Continued search API through
 `publicCatalogApi`. The adapter uses a fixed read-only GraphQL query, the public
 learning-space identifier observed in the catalog, and no authentication. It
-requests only titles, slugs, published format types, and pagination metadata.
+requests titles, slugs, published format types, duration, instructional level,
+and pagination metadata. Duration, level, and formats are separately stored in
+`providerFacts` with a source and date, displayed as provider-reported, and never
+converted to accepted CE hours.
 The API host has its own robots check, response limit, and rate limiter. Course
 links still pass the original provider host and path checks. Prices, ratings,
 enrollment records, and CE approvals are not requested. `--catalog-pages` also
@@ -216,3 +222,36 @@ curated record prevents applying a draft after its facts or evaluation change.
 Known closed offerings cannot be drafted or published through this workflow.
 No command purchases a course, accesses a private account, or deploys changes.
 Research drafts and queues remain in ignored `artifacts/catalog/reviews/`.
+
+## Learning plans and classifications
+
+The catalog supports reviewed learning goals, clinical settings, populations,
+and instructional levels. Unclassified courses are excluded when a facet is
+selected. A provider-reported level or format is a disclosed fallback, not
+independent fact verification. Video duration does not populate contact hours.
+
+A browser-local plan holds up to 100 courses, dates, notes, profession, and state.
+Exports preserve those details and the current source URLs. Plans do not sync
+between devices or add completed hours. Aliases preserve selections when a
+listing is curated; missing or closed listings remain visible in the plan as
+unavailable instead of silently disappearing.
+
+Acceptance stays unknown unless a dated, verified course-specific record matches
+profession, jurisdiction, delivery format, and planned date. Provider CEUs alone
+never establish state-license acceptance. No state-specific approval records
+have been published in this release. The course-log handoff prefills title and
+provider only; the clinician must enter the completion date and credited hours
+and confirm format and category. Signing in preserves the requested course.
+
+## Scheduled maintenance
+
+`.github/workflows/catalog-maintenance.yml` runs Mondays at 10:17 UTC and can be
+started manually. The full run discovers all registered sources with bounded
+pagination and detail requests, audits every unique credential destination plus
+a rotating sample of 250 course URLs, validates datasets, and generates a
+review queue and maintenance summary. Missing links are reported, not deleted;
+blocked requests are not treated as proof that a course is closed. Review
+artifacts are retained for 30 days, with crawl progress cached across runs.
+The quick manual scope checks AbleNet discovery plus the same link audit and
+validation pipeline. Both scopes have read-only repository permissions. Review
+and an ordinary code release are required to publish proposed data changes.

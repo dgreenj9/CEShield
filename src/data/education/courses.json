@@ -23,7 +23,12 @@
     "sourceUrl": "https://evidenceinmotion.com/course/online-3-week-pain-neuroscience-education/",
     "ceApprovals": [],
     "evaluation": null,
-    "educationType": "course"
+    "educationType": "course",
+    "learningGoals": [
+      "treatment"
+    ],
+    "classificationSourceUrl": "https://evidenceinmotion.com/course/online-3-week-pain-neuroscience-education/",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "eim-geriatric-rehabilitation",
@@ -49,7 +54,16 @@
     "sourceUrl": "https://evidenceinmotion.com/course/introduction-to-geriatric-rehabilitation/",
     "ceApprovals": [],
     "evaluation": null,
-    "educationType": "course"
+    "educationType": "course",
+    "learningGoals": [
+      "assessment",
+      "treatment"
+    ],
+    "classificationSourceUrl": "https://evidenceinmotion.com/course/introduction-to-geriatric-rehabilitation/",
+    "classificationReviewedOn": "2026-10-23",
+    "populations": [
+      "olderAdults"
+    ]
   },
   {
     "id": "eim-concussion-management",
@@ -72,7 +86,13 @@
     "sourceUrl": "https://evidenceinmotion.com/course/concussion-management/",
     "ceApprovals": [],
     "evaluation": null,
-    "educationType": "course"
+    "educationType": "course",
+    "learningGoals": [
+      "assessment",
+      "treatment"
+    ],
+    "classificationSourceUrl": "https://evidenceinmotion.com/course/concussion-management/",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "summit-complex-dizziness",
@@ -100,7 +120,13 @@
     "sourceUrl": "https://portal.summit-education.com/course/GRCDPF.1.2CREDIT/rehab-for-the-high-complexity-dizzy-patient",
     "ceApprovals": [],
     "evaluation": null,
-    "educationType": "course"
+    "educationType": "course",
+    "learningGoals": [
+      "assessment",
+      "treatment"
+    ],
+    "classificationSourceUrl": "https://portal.summit-education.com/course/GRCDPF.1.2CREDIT/rehab-for-the-high-complexity-dizzy-patient",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "summit-pt-ethics",
@@ -124,7 +150,12 @@
     "sourceUrl": "https://portal.summit-education.com/course/PETHAM.1.2CREDIT/ethical-practice-in-physical-therapy",
     "ceApprovals": [],
     "evaluation": null,
-    "educationType": "course"
+    "educationType": "course",
+    "learningGoals": [
+      "professional"
+    ],
+    "classificationSourceUrl": "https://portal.summit-education.com/course/PETHAM.1.2CREDIT/ethical-practice-in-physical-therapy",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "medbridge-dysphagia-dementia",
@@ -147,7 +178,15 @@
     "sourceUrl": "https://www.medbridge.com/educate/courses/essentials-dysphagia-dementia",
     "ceApprovals": [],
     "evaluation": null,
-    "educationType": "course"
+    "educationType": "course",
+    "learningGoals": [
+      "treatment"
+    ],
+    "classificationSourceUrl": "https://www.medbridge.com/educate/courses/essentials-dysphagia-dementia",
+    "classificationReviewedOn": "2026-10-23",
+    "populations": [
+      "olderAdults"
+    ]
   },
   {
     "id": "cdc-steadi-fall-risk",
@@ -169,7 +208,15 @@
     "sourceUrl": "https://www.cdc.gov/steadi/hcp/training/index.html",
     "ceApprovals": [],
     "evaluation": null,
-    "educationType": "course"
+    "educationType": "course",
+    "learningGoals": [
+      "prevention"
+    ],
+    "classificationSourceUrl": "https://www.cdc.gov/steadi/hcp/training/index.html",
+    "classificationReviewedOn": "2026-10-23",
+    "populations": [
+      "olderAdults"
+    ]
   },
   {
     "id": "jbi-systematic-reviews",
@@ -190,7 +237,12 @@
     "sourceUrl": "https://jbi.global/training/systematic-review-training",
     "ceApprovals": [],
     "evaluation": null,
-    "educationType": "course"
+    "educationType": "course",
+    "learningGoals": [
+      "research"
+    ],
+    "classificationSourceUrl": "https://jbi.global/training/systematic-review-training",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "speechtherapypd-discourse-aphasia",
@@ -215,7 +267,12 @@
     "reviewedOn": "2026-10-23",
     "sourceUrl": "https://www.speechtherapypd.com/courses/beyond-single-words",
     "ceApprovals": [],
-    "evaluation": null
+    "evaluation": null,
+    "learningGoals": [
+      "assessment"
+    ],
+    "classificationSourceUrl": "https://www.speechtherapypd.com/courses/beyond-single-words",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "medslped-aac-fundamentals",
@@ -237,7 +294,13 @@
     "reviewedOn": "2026-10-23",
     "sourceUrl": "https://medslped.com/product/fundamentals-of-aac-assessment-and-intervention/",
     "ceApprovals": [],
-    "evaluation": null
+    "evaluation": null,
+    "learningGoals": [
+      "assessment",
+      "accessibility"
+    ],
+    "classificationSourceUrl": "https://medslped.com/product/fundamentals-of-aac-assessment-and-intervention/",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "physiotutors-vestibular-rehabilitation",
@@ -260,7 +323,13 @@
     "reviewedOn": "2026-10-23",
     "sourceUrl": "https://www.physiotutors.com/courses/vestibular-rehabilitation/",
     "ceApprovals": [],
-    "evaluation": null
+    "evaluation": null,
+    "learningGoals": [
+      "assessment",
+      "treatment"
+    ],
+    "classificationSourceUrl": "https://www.physiotutors.com/courses/vestibular-rehabilitation/",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "physicaltherapy-fall-prevention-assessment",
@@ -282,7 +351,16 @@
     "reviewedOn": "2026-10-23",
     "sourceUrl": "https://www.physicaltherapy.com/pt-ceus/course/fall-prevention-with-older-adults-4901",
     "ceApprovals": [],
-    "evaluation": null
+    "evaluation": null,
+    "learningGoals": [
+      "assessment",
+      "prevention"
+    ],
+    "classificationSourceUrl": "https://www.physicaltherapy.com/pt-ceus/course/fall-prevention-with-older-adults-4901",
+    "classificationReviewedOn": "2026-10-23",
+    "populations": [
+      "olderAdults"
+    ]
   },
   {
     "id": "otpotential-stroke-neuro-recovery",
@@ -306,7 +384,12 @@
     "reviewedOn": "2026-10-23",
     "sourceUrl": "https://otpotential.com/continuing-education/course/neuro-recovery-after-stroke",
     "ceApprovals": [],
-    "evaluation": null
+    "evaluation": null,
+    "learningGoals": [
+      "treatment"
+    ],
+    "classificationSourceUrl": "https://otpotential.com/continuing-education/course/neuro-recovery-after-stroke",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "eri-interoception",
@@ -334,7 +417,13 @@
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
     "evaluation": null,
-    "sourceUrl": "https://educationresourcesinc.com/courses/2026-06-18/inside-out-a-deep-dive-into-interoception-on-demand/"
+    "sourceUrl": "https://educationresourcesinc.com/courses/2026-06-18/inside-out-a-deep-dive-into-interoception-on-demand/",
+    "learningGoals": [
+      "assessment",
+      "treatment"
+    ],
+    "classificationSourceUrl": "https://educationresourcesinc.com/courses/2026-06-18/inside-out-a-deep-dive-into-interoception-on-demand/",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "aspireot-cognitive-assessments",
@@ -358,7 +447,12 @@
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
     "evaluation": null,
-    "sourceUrl": "https://www.aspireoted.com/course/ots-and-cognition-limiting-our-scope-of-practice"
+    "sourceUrl": "https://www.aspireoted.com/course/ots-and-cognition-limiting-our-scope-of-practice",
+    "learningGoals": [
+      "assessment"
+    ],
+    "classificationSourceUrl": "https://www.aspireoted.com/course/ots-and-cognition-limiting-our-scope-of-practice",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "bilinguistics-dynamic-assessment",
@@ -382,7 +476,15 @@
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
     "evaluation": null,
-    "sourceUrl": "https://bilinguistics.com/catalog/speech-pathology-continuing-education/evaluations/interactive-bilingual-dynamic-assessment-case-studies/"
+    "sourceUrl": "https://bilinguistics.com/catalog/speech-pathology-continuing-education/evaluations/interactive-bilingual-dynamic-assessment-case-studies/",
+    "learningGoals": [
+      "assessment"
+    ],
+    "classificationSourceUrl": "https://bilinguistics.com/catalog/speech-pathology-continuing-education/evaluations/interactive-bilingual-dynamic-assessment-case-studies/",
+    "classificationReviewedOn": "2026-10-23",
+    "populations": [
+      "children"
+    ]
   },
   {
     "id": "embodia-compassion-pain",
@@ -407,7 +509,12 @@
     "availability": "listed",
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
-    "evaluation": null
+    "evaluation": null,
+    "learningGoals": [
+      "treatment"
+    ],
+    "classificationSourceUrl": "https://home.embodiaapp.com/courses/1164-compassion-in-pain-care-shelly-prosko-neil-pearson-marlysa-sullivan",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "northernspeech-eye-tracking-aac",
@@ -429,7 +536,12 @@
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
     "evaluation": null,
-    "sourceUrl": "https://www.northernspeech.com/aac-augmentative-and-alternative-communication/eye-tracking-for-ipad-and-for-augmentative-and-alternative-communication/"
+    "sourceUrl": "https://www.northernspeech.com/aac-augmentative-and-alternative-communication/eye-tracking-for-ipad-and-for-augmentative-and-alternative-communication/",
+    "learningGoals": [
+      "accessibility"
+    ],
+    "classificationSourceUrl": "https://www.northernspeech.com/aac-augmentative-and-alternative-communication/eye-tracking-for-ipad-and-for-augmentative-and-alternative-communication/",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "naiomt-o957",
@@ -453,7 +565,12 @@
     "availability": "listed",
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
-    "evaluation": null
+    "evaluation": null,
+    "learningGoals": [
+      "assessment"
+    ],
+    "classificationSourceUrl": "https://naiomt.com/courses/asynchronous/",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "naiomt-o963",
@@ -474,7 +591,12 @@
     "availability": "listed",
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
-    "evaluation": null
+    "evaluation": null,
+    "learningGoals": [
+      "assessment"
+    ],
+    "classificationSourceUrl": "https://naiomt.com/courses/asynchronous/",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "naiomt-o956",
@@ -495,7 +617,12 @@
     "availability": "listed",
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
-    "evaluation": null
+    "evaluation": null,
+    "learningGoals": [
+      "assessment"
+    ],
+    "classificationSourceUrl": "https://naiomt.com/courses/asynchronous/",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "ice-persistent-pain-online",
@@ -516,7 +643,13 @@
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
     "evaluation": null,
-    "sourceUrl": "https://ptonice.com/our-courses/persistent-pain-comprehensive-management-online/"
+    "sourceUrl": "https://ptonice.com/our-courses/persistent-pain-comprehensive-management-online/",
+    "learningGoals": [
+      "assessment",
+      "treatment"
+    ],
+    "classificationSourceUrl": "https://ptonice.com/our-courses/persistent-pain-comprehensive-management-online/",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "ciao-dysphagia-bedside",
@@ -543,7 +676,12 @@
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
     "evaluation": null,
-    "sourceUrl": "https://www.ciaoseminars.com/home/courses?ctid=2&evd=1&oid=13923"
+    "sourceUrl": "https://www.ciaoseminars.com/home/courses?ctid=2&evd=1&oid=13923",
+    "learningGoals": [
+      "assessment"
+    ],
+    "classificationSourceUrl": "https://www.ciaoseminars.com/home/courses?ctid=2&evd=1&oid=13923",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "ciao-aac-when-why-how",
@@ -567,7 +705,13 @@
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
     "evaluation": null,
-    "sourceUrl": "https://www.ciaoseminars.com/home/courses?ctid=2&evd=1&oid=13617"
+    "sourceUrl": "https://www.ciaoseminars.com/home/courses?ctid=2&evd=1&oid=13617",
+    "learningGoals": [
+      "assessment",
+      "accessibility"
+    ],
+    "classificationSourceUrl": "https://www.ciaoseminars.com/home/courses?ctid=2&evd=1&oid=13617",
+    "classificationReviewedOn": "2026-10-23"
   },
   {
     "id": "occupationaltherapy-dme-adls",
@@ -591,7 +735,13 @@
     "availability": "listed",
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
-    "evaluation": null
+    "evaluation": null,
+    "learningGoals": [
+      "accessibility"
+    ],
+    "classificationSourceUrl": "https://www.occupationaltherapy.com/courses/clinical-applications-durable-medical-equipment",
+    "classificationReviewedOn": "2026-10-23",
+    "level": "introductory"
   },
   {
     "id": "occupationaltherapy-schools-101",
@@ -616,7 +766,19 @@
     "availability": "listed",
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
-    "evaluation": null
+    "evaluation": null,
+    "learningGoals": [
+      "professional"
+    ],
+    "classificationSourceUrl": "https://www.occupationaltherapy.com/courses/schools-101-otp-starter-guide",
+    "classificationReviewedOn": "2026-10-23",
+    "populations": [
+      "children"
+    ],
+    "clinicalSettings": [
+      "school"
+    ],
+    "level": "introductory"
   },
   {
     "id": "speechpathology-normal-swallow",
@@ -639,7 +801,16 @@
     "availability": "listed",
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
-    "evaluation": null
+    "evaluation": null,
+    "learningGoals": [
+      "assessment"
+    ],
+    "classificationSourceUrl": "https://www.speechpathology.com/slp-ceus/course/normal-swallow-11389",
+    "classificationReviewedOn": "2026-10-23",
+    "level": "intermediate",
+    "populations": [
+      "adults"
+    ]
   },
   {
     "id": "occupationaltherapy-cognitive-foundations",
@@ -663,7 +834,14 @@
     "availability": "listed",
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
-    "evaluation": null
+    "evaluation": null,
+    "learningGoals": [
+      "assessment",
+      "treatment"
+    ],
+    "classificationSourceUrl": "https://www.occupationaltherapy.com/courses/foundations-in-cognitive-rehabilitation-for-occupational-therapy",
+    "classificationReviewedOn": "2026-10-23",
+    "level": "introductory"
   },
   {
     "id": "occupationaltherapy-low-vision-environments",
@@ -688,7 +866,19 @@
     "availability": "listed",
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
-    "evaluation": null
+    "evaluation": null,
+    "learningGoals": [
+      "accessibility"
+    ],
+    "classificationSourceUrl": "https://www.occupationaltherapy.com/courses/vision-environmental-modifications-for-adults",
+    "classificationReviewedOn": "2026-10-23",
+    "populations": [
+      "adults"
+    ],
+    "level": "intermediate",
+    "clinicalSettings": [
+      "home"
+    ]
   },
   {
     "id": "occupationaltherapy-low-vision-smartphones",
@@ -714,6 +904,193 @@
     "availability": "listed",
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
-    "evaluation": null
+    "evaluation": null,
+    "learningGoals": [
+      "accessibility"
+    ],
+    "classificationSourceUrl": "https://www.occupationaltherapy.com/courses/vision-smart-phone-accessibility-and",
+    "classificationReviewedOn": "2026-10-23",
+    "populations": [
+      "adults"
+    ],
+    "level": "intermediate"
+  },
+  {
+    "id": "ablenet-aac-made-simple",
+    "providerId": "ablenet",
+    "title": "AAC Made Simple",
+    "url": "https://ableu.ablenetinc.com/courses/aac-made-simple",
+    "sourceUrl": "https://ableu.ablenetinc.com/courses/aac-made-simple",
+    "subjects": [
+      "aac",
+      "pediatrics"
+    ],
+    "disciplines": [
+      "SLP"
+    ],
+    "contactHours": null,
+    "format": "online",
+    "priceUsd": 0,
+    "summary": "Early-childhood AAC modeling with everyday activities and communication choices. Listed as 30 minutes, but agenda segments total 40 minutes; confirm duration before enrollment.",
+    "educationType": "course",
+    "reviewStatus": "ranked",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "level": "introductory",
+    "populations": [
+      "children"
+    ],
+    "clinicalSettings": [
+      "school"
+    ],
+    "learningGoals": [
+      "accessibility",
+      "treatment"
+    ],
+    "classificationSourceUrl": "https://ableu.ablenetinc.com/courses/aac-made-simple",
+    "classificationReviewedOn": "2026-10-23",
+    "ceClaims": [
+      {
+        "authority": "ASHA",
+        "units": 0.05,
+        "sourceUrl": "https://ableu.ablenetinc.com/courses/aac-made-simple",
+        "checkedOn": "2026-10-23"
+      }
+    ],
+    "evaluation": {
+      "subject": "aac",
+      "reviewer": "Codex \u00b7 automated public-curriculum review",
+      "reviewedOn": "2026-10-23",
+      "reviewBasis": "public-materials",
+      "limitations": "Provisional judgment of published objectives, agenda, disclosures, and assessment conditions. Full recordings and exam questions were not accessed. Scores do not measure teaching effectiveness, patient outcomes, or state CE acceptance.",
+      "dimensions": {
+        "evidenceAlignment": {
+          "score": 75,
+          "rationale": "Published goals align with ASHA guidance on AAC access and aided modeling; the complete evidence presentation was not inspected.",
+          "sources": [
+            "https://ableu.ablenetinc.com/courses/aac-made-simple",
+            "https://www.asha.org/practice-portal/professional-issues/augmentative-and-alternative-communication/"
+          ]
+        },
+        "clinicalApplication": {
+          "score": 80,
+          "rationale": "Concrete activity examples connect modeling to daily routines and honoring communication choices; transfer to practice remains untested.",
+          "sources": [
+            "https://ableu.ablenetinc.com/courses/aac-made-simple"
+          ]
+        },
+        "teachingAndAssessment": {
+          "score": 60,
+          "rationale": "Video examples and an 80% assessment are described; question quality and actual instruction were not inspected.",
+          "sources": [
+            "https://ableu.ablenetinc.com/courses/aac-made-simple"
+          ]
+        },
+        "transparency": {
+          "score": 55,
+          "rationale": "Speaker interests are disclosed, but the 40-minute agenda conflicts with the 30-minute headline.",
+          "sources": [
+            "https://ableu.ablenetinc.com/courses/aac-made-simple"
+          ]
+        },
+        "value": {
+          "score": 70,
+          "rationale": "Free access limits financial cost; inconsistent duration reduces confidence in the advertised time commitment.",
+          "sources": [
+            "https://ableu.ablenetinc.com/courses/aac-made-simple"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "ablenet-peer-power-strategies-for-successful-aac-group-sessions",
+    "providerId": "ablenet",
+    "title": "Peer Power: Strategies for Successful AAC Group Sessions",
+    "url": "https://ableu.ablenetinc.com/courses/peer-power-strategies-for-successful-aac-group-sessions",
+    "sourceUrl": "https://ableu.ablenetinc.com/courses/peer-power-strategies-for-successful-aac-group-sessions",
+    "subjects": [
+      "aac",
+      "pediatrics"
+    ],
+    "disciplines": [
+      "SLP"
+    ],
+    "contactHours": 1,
+    "format": "online",
+    "priceUsd": 0,
+    "summary": "AAC group-session planning, participation, and peer interaction. Free recorded course with a published one-hour agenda and a planning activity.",
+    "educationType": "course",
+    "reviewStatus": "ranked",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "level": "intermediate",
+    "populations": [
+      "children"
+    ],
+    "clinicalSettings": [
+      "school"
+    ],
+    "learningGoals": [
+      "accessibility",
+      "treatment"
+    ],
+    "classificationSourceUrl": "https://ableu.ablenetinc.com/courses/peer-power-strategies-for-successful-aac-group-sessions",
+    "classificationReviewedOn": "2026-10-23",
+    "ceClaims": [
+      {
+        "authority": "ASHA",
+        "units": 0.1,
+        "sourceUrl": "https://ableu.ablenetinc.com/courses/peer-power-strategies-for-successful-aac-group-sessions",
+        "checkedOn": "2026-10-23"
+      }
+    ],
+    "evaluation": {
+      "subject": "aac",
+      "reviewer": "Codex \u00b7 automated public-curriculum review",
+      "reviewedOn": "2026-10-23",
+      "reviewBasis": "public-materials",
+      "limitations": "Provisional judgment of published objectives, agenda, disclosures, and assessment conditions. Full recordings and exam questions were not accessed. Scores do not measure teaching effectiveness, patient outcomes, or state CE acceptance.",
+      "dimensions": {
+        "evidenceAlignment": {
+          "score": 75,
+          "rationale": "Aided modeling and contextual communication goals align with ASHA guidance; this is curriculum alignment, not demonstrated course effectiveness.",
+          "sources": [
+            "https://ableu.ablenetinc.com/courses/peer-power-strategies-for-successful-aac-group-sessions",
+            "https://www.asha.org/practice-portal/professional-issues/augmentative-and-alternative-communication/"
+          ]
+        },
+        "clinicalApplication": {
+          "score": 85,
+          "rationale": "The stated planning task translates group communication goals into a session design; implementation quality was not observed.",
+          "sources": [
+            "https://ableu.ablenetinc.com/courses/peer-power-strategies-for-successful-aac-group-sessions"
+          ]
+        },
+        "teachingAndAssessment": {
+          "score": 65,
+          "rationale": "Agenda includes practice and an 80% assessment; assessment items and learner outcomes were not inspected.",
+          "sources": [
+            "https://ableu.ablenetinc.com/courses/peer-power-strategies-for-successful-aac-group-sessions"
+          ]
+        },
+        "transparency": {
+          "score": 90,
+          "rationale": "Duration, agenda, objectives, presenter interests, availability dates, and assessment conditions are explicit.",
+          "sources": [
+            "https://ableu.ablenetinc.com/courses/peer-power-strategies-for-successful-aac-group-sessions"
+          ]
+        },
+        "value": {
+          "score": 85,
+          "rationale": "Free one-hour access and a focused planning task offer a reasonable entry commitment; learning gains are unverified.",
+          "sources": [
+            "https://ableu.ablenetinc.com/courses/peer-power-strategies-for-successful-aac-group-sessions"
+          ]
+        }
+      }
+    }
   }
 ]

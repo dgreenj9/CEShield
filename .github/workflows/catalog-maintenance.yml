@@ -1,0 +1,67 @@
+name: Catalog maintenance
+on:
+  schedule:
+    - cron: '17 10 * * 1'
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: 'Full refresh or a bounded verification run'
+        type: choice
+        default: full
+        options: [full, quick]
+permissions:
+  contents: read
+concurrency:
+  group: catalog-maintenance
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - uses: actions/cache@v4
+        with:
+          path: artifacts/catalog/crawl-state.json
+          key: catalog-crawl-${{ github.run_id }}
+          restore-keys: catalog-crawl-
+      - name: Refresh public catalogs
+        env:
+          RUN_SCOPE: ${{ inputs.scope }}
+        run: |
+          if [ "$RUN_SCOPE" = "quick" ]; then
+            python3 scripts/catalog/discover.py --provider ablenet --catalog-pages 2 --details 0 --publish
+          else
+            python3 scripts/catalog/discover.py --catalog-pages 200 --details 20 --workers 4 --publish
+          fi
+      - name: Audit credential links and rotating course sample
+        run: python3 scripts/catalog/audit.py --limit 250
+      - name: Validate data and build review queue
+        run: |
+          npm test
+          python3 -m unittest discover -s scripts/catalog -p 'test_*.py'
+          node scripts/catalog/test-review.mjs
+          node scripts/catalog/review.mjs queue --limit 100
+          node scripts/catalog/report.mjs
+      - name: Save proposed catalog updates and review reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-review-${{ github.run_id }}
+          retention-days: 30
+          path: |
+            src/data/education/discoveredCourses.json
+            src/data/education/coverage.json
+            src/data/education/unavailableCourses.json
+            artifacts/catalog/maintenance-summary.json
+            artifacts/catalog/link-audit.json
+            artifacts/catalog/reviews/queue.json
+            artifacts/catalog/discovery.json

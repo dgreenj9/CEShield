@@ -287,13 +287,26 @@ class SourceClient:
 
 CONTINUED_SEARCH_QUERY = '''query CatalogCourses($input: SearchCoursesInput, $page: Int!, $first: Int!) {
   searchCourses(input: $input, page: $page, first: $first) {
-    data { title slug courseFormats(filter: {isPublished: true}) { type } }
+    data { title slug durationHours durationMinutes instructionalLevel courseFormats(filter: {isPublished: true}) { type } }
     paginatorInfo { currentPage hasMorePages total }
   }
 }'''
 
 
-def continued_catalog_pages(provider, max_pages):
+def provider_reported_facts(row, source_url):
+    hours, minutes = row.get('durationHours'), row.get('durationMinutes')
+    duration = None
+    if all(v is None or (type(v) in (int, float) and v >= 0) for v in (hours, minutes)) and (hours is not None or minutes is not None):
+        total = (hours or 0) * 60 + (minutes or 0)
+        if 0 < total <= 60000 and (minutes or 0) < 60:
+            duration = total
+    raw_level = str(row.get('instructionalLevel', '')).lower().replace('_level', '').strip()
+    level = raw_level if raw_level in ('introductory', 'intermediate', 'advanced') else None
+    formats = sorted(set({'VIDEO_RECORDED': 'online', 'TEXT_ORIGINAL': 'online', 'TEXT_TRANSCRIPT': 'online', 'AUDIO': 'online', 'AUDIO_PODCAST': 'online', 'LIVE': 'liveOnline'}[x['type']] for x in row.get('courseFormats', []) if isinstance(x, dict) and x.get('type') in ('VIDEO_RECORDED', 'TEXT_ORIGINAL', 'TEXT_TRANSCRIPT', 'AUDIO', 'AUDIO_PODCAST', 'LIVE')))
+    return {'durationMinutes': duration, 'level': level, 'formats': formats, 'sourceUrl': source_url, 'checkedOn': datetime.now(timezone.utc).date().isoformat()}
+
+
+def continued_catalog_pages(provider, max_pages, facts=None):
     """Read the same unauthenticated search used by the public OT catalog.
 
     Only this fixed read-only query is supported. No account, cookie, API key,
@@ -336,7 +349,10 @@ def continued_catalog_pages(provider, max_pages):
             slug, title = row.get('slug'), row.get('title')
             if not isinstance(slug, str) or not re.fullmatch(r'[a-zA-Z0-9_-]+', slug) or not isinstance(title, str):
                 continue
-            links.append((urljoin(provider['catalogUrl'], '/courses/' + slug), title))
+            course_url = urljoin(provider['catalogUrl'], '/courses/' + slug)
+            links.append((course_url, title))
+            if facts is not None:
+                facts[canonical_url(course_url)] = provider_reported_facts(row, course_url)
         yield number, links, page_info['hasMorePages']
         if not page_info['hasMorePages']:
             break
@@ -402,10 +418,14 @@ def discover(provider, details, max_sitemaps, refresh_titles=False, known=None, 
 
     if provider.get('publicCatalogApi'):
         coverage.update(apiPagesFetched=0, apiPaginationPending=True)
+        reported_facts = {}
         try:
-            for number, links, more in continued_catalog_pages(provider, max_catalog_pages):
+            for number, links, more in continued_catalog_pages(provider, max_catalog_pages, reported_facts):
                 for url, title in links:
                     add(url, title, provider['catalogUrl'])
+                    key = canonical_url(url)
+                    if key in candidates and key in reported_facts:
+                        candidates[key]['providerFacts'] = reported_facts[key]
                 coverage.update(apiPagesFetched=number, apiPaginationPending=more)
             coverage['sources'].append(provider['publicCatalogApi']['url'])
         except (HTTPError, URLError, TimeoutError, ValueError, OSError) as error:

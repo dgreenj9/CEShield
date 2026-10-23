@@ -110,7 +110,6 @@ export default function AppLayout({ children }) {
           onSignOut={handleSignOut}
           onComplete={() => {
             setNeedsSetup(false);
-            router.replace('/explore');
           }}
         />
       </ErrorBoundary>

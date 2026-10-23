@@ -1,3 +1,4 @@
+import { matchesFacets } from './educationFacets.js';
 // Course facts, course evaluation, and regulatory acceptance are separate records.
 // A credential's clinical score must never be inherited by a provider's course.
 export const SUBJECTS = {
@@ -135,15 +136,15 @@ export function courseScore(course) {
   return Math.round(result * 10) / 10;
 }
 
-export function filterCourses(courses, { query = '', subject = '', provider = '', discipline = '', format = '', status = '', type = '' } = {}) {
+export function filterCourses(courses, { query = '', subject = '', provider = '', discipline = '', format = '', status = '', type = '', level = '', setting = '', population = '', goal = '' } = {}) {
   const terms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
   return courses.filter(course => {
     const haystack = [course.title, course.providerName, course.summary, ...(course.subjects || []).map(s => SUBJECTS[s])].filter(Boolean).join(' ').toLowerCase();
-    return terms.every(term => haystack.includes(term)) &&
+    return matchesFacets(course, {level, setting, population, goal}) && terms.every(term => haystack.includes(term)) &&
       (!subject || course.subjects?.includes(subject)) &&
       (!provider || course.providerId === provider) &&
       (!discipline || course.disciplines?.includes(discipline)) &&
-      (!format || course.format === format) &&
+      (!format || (course.format ? course.format === format : course.providerFacts?.formats?.includes(format))) &&
       (!type || (course.educationType || 'unclassified') === type) &&
       (!status || (status === 'ranked' ? courseScore(course) !== null : course.reviewStatus === status));
   });

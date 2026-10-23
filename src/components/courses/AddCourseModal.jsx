@@ -18,10 +18,10 @@ const field = {
   boxSizing: 'border-box',
 };
 
-const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
+const AddCourseModal = ({ editingCourse, initialCourse, onSave, onClose }) => {
   const [course, setCourse] = useState({
-    title: '', provider: '', date: '', hours: '', category: 'general',
-    format: 'live', hasTest: false,
+    title: initialCourse?.title || '', provider: initialCourse?.provider || '', date: '', hours: '', category: initialCourse ? '' : 'general',
+    format: initialCourse ? '' : 'live', hasTest: false,
     // Track three certificate states:
     //   certificateFile     — newly picked File, pending upload (server-side)
     //   certificate_storage — existing Storage descriptor on an edited course
@@ -102,12 +102,20 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
   const handleSubmit = async (e) => {
     e?.preventDefault?.();
 
-    const hoursNum = parseFloat(course.hours);
-    if (isNaN(hoursNum) || hoursNum <= 0) {
+    if (!course.title.trim() || !course.provider.trim() || !/^\d{4}-\d{2}-\d{2}$/.test(course.date) || !Number.isFinite(Date.parse(course.date)) || new Date(course.date).toISOString().slice(0, 10) !== course.date || course.date > new Date().toISOString().slice(0, 10)) {
+      alert('Enter a title, provider, and valid completion date no later than today.');
+      return;
+    }
+    const hoursNum = Number(course.hours);
+    if (!Number.isFinite(hoursNum) || hoursNum <= 0) {
       alert('Hours must be a number above zero.');
       return;
     }
 
+    if (!course.category || !course.format) {
+      alert('Confirm the course category and delivery format before logging completion.');
+      return;
+    }
     if (course.format === 'selfStudy' && !course.hasTest) {
       alert('Self-study courses must include a test to count for CE');
       return;
@@ -137,6 +145,7 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
       </h3>
 
       <div className="space-y-4">
+        {initialCourse && !editingCourse && <p style={{...hint,lineHeight:1.6}}>From your learning plan. Enter the completion date and credited hours from your certificate; confirm category and format. {initialCourse.suggestedHours != null && `The provider listed ${initialCourse.suggestedHours} contact hours.`} <a href={initialCourse.sourceUrl} target="_blank" rel="noopener noreferrer">Course source ↗</a></p>}
         <div>
           <label style={label}>
             Certificate or documentation <span style={hint}>(PDF, JPG, PNG)</span>
@@ -189,11 +198,12 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
 
         {['title', 'provider'].map((f) => (
           <div key={f}>
-            <label style={label}>
+            <label style={label} htmlFor={`course-${f}`}>
               {f === 'title' ? 'Course title' : 'Provider name'} <span aria-hidden="true" style={{ color: A.warn }}>*</span>
             </label>
             <input
               type="text"
+              id={`course-${f}`}
               value={course[f]}
               onChange={(e) => setCourse((prev) => ({ ...prev, [f]: e.target.value }))}
               style={field}
@@ -203,9 +213,10 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
         ))}
 
         <div>
-          <label style={label}>Date completed <span aria-hidden="true" style={{ color: A.warn }}>*</span></label>
+          <label style={label} htmlFor="course-date">Date completed <span aria-hidden="true" style={{ color: A.warn }}>*</span></label>
           <input
             type="date"
+            id="course-date"
             value={course.date}
             onChange={(e) => setCourse((prev) => ({ ...prev, date: e.target.value }))}
             style={field}
@@ -214,13 +225,14 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
         </div>
 
         <div>
-          <label style={label}>
-            Hours <span aria-hidden="true" style={{ color: A.warn }}>*</span> <span style={hint}>(1 hour = 50 minutes)</span>
+          <label style={label} htmlFor="course-hours">
+            Hours <span aria-hidden="true" style={{ color: A.warn }}>*</span> <span style={hint}>(credited hours from your documentation)</span>
           </label>
           <input
             type="number"
-            step="0.5"
-            min="0.5"
+            id="course-hours"
+            step="any"
+            min="0.01"
             value={course.hours}
             onChange={(e) => setCourse((prev) => ({ ...prev, hours: e.target.value }))}
             style={field}
@@ -229,12 +241,14 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
         </div>
 
         <div>
-          <label style={label}>Category <span aria-hidden="true" style={{ color: A.warn }}>*</span></label>
+          <label style={label} htmlFor="course-category">Category <span aria-hidden="true" style={{ color: A.warn }}>*</span></label>
           <select
+            id="course-category"
             value={course.category}
             onChange={(e) => setCourse((prev) => ({ ...prev, category: e.target.value }))}
             style={field}
           >
+            <option value="" disabled>Choose category</option>
             <option value="general">General CE</option>
             <option value="ethics">Ethics</option>
             <option value="sexualHarassment">Sexual harassment prevention</option>
@@ -245,12 +259,14 @@ const AddCourseModal = ({ editingCourse, onSave, onClose }) => {
         </div>
 
         <div>
-          <label style={label}>Format <span aria-hidden="true" style={{ color: A.warn }}>*</span></label>
+          <label style={label} htmlFor="course-format">Format <span aria-hidden="true" style={{ color: A.warn }}>*</span></label>
           <select
+            id="course-format"
             value={course.format}
             onChange={(e) => setCourse((prev) => ({ ...prev, format: e.target.value }))}
             style={field}
           >
+            <option value="" disabled>Choose delivery format</option>
             <option value="live">Live / in person</option>
             <option value="selfStudy">Self-study / online</option>
             <option value="teaching">Teaching</option>

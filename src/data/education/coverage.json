@@ -14,6 +14,22 @@
     "listedCount": 10
   },
   {
+    "providerId": "ablenet",
+    "attemptedAt": "2026-10-23T21:14:35+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://ableu.ablenetinc.com/courses"
+    ],
+    "discoveredCount": 131,
+    "listedCount": 131,
+    "catalogPagesFetched": 1,
+    "catalogPaginationPending": false,
+    "detailPagesFetched": 0,
+    "pendingCount": 0,
+    "unavailableCount": 0
+  },
+  {
     "providerId": "aib",
     "attemptedAt": "2026-10-23T13:55:56+00:00",
     "status": "needs-review",
@@ -738,7 +754,7 @@
   },
   {
     "providerId": "occupationaltherapy",
-    "attemptedAt": "2026-10-23T20:20:21+00:00",
+    "attemptedAt": "2026-10-23T21:17:11+00:00",
     "status": "discovered",
     "errors": [],
     "sources": [
@@ -747,8 +763,8 @@
     ],
     "apiPagesFetched": 35,
     "apiPaginationPending": false,
-    "discoveredCount": 684,
-    "listedCount": 684,
+    "discoveredCount": 685,
+    "listedCount": 685,
     "catalogPagesFetched": 1,
     "catalogPaginationPending": false,
     "detailPagesFetched": 0,

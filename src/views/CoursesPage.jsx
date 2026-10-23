@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useMemo, useState } from 'react';
 import { BookOpen, Plus, Pencil, Trash2, Download } from 'lucide-react';
 import { useUserData } from '../contexts/UserDataContext';
@@ -24,9 +26,10 @@ const iconBtn = (color) => ({
   cursor: 'pointer',
 });
 
-export default function CoursesPage() {
+export default function CoursesPage({ initialCourse = null }) {
   const { courses, saveCourse, deleteCourse } = useUserData();
-  const [showAddCourse, setShowAddCourse] = useState(false);
+  const [showAddCourse, setShowAddCourse] = useState(Boolean(initialCourse));
+  const [catalogDraft, setCatalogDraft] = useState(initialCourse);
   const [editingCourse, setEditingCourse] = useState(null);
   const [courseToDelete, setCourseToDelete] = useState(null);
 
@@ -65,7 +68,7 @@ export default function CoursesPage() {
             The course log.
           </h1>
         </div>
-        <Button size="lg" onClick={() => { setEditingCourse(null); setShowAddCourse(true); }}>
+        <Button size="lg" onClick={() => { setCatalogDraft(null); setEditingCourse(null); setShowAddCourse(true); }}>
           <Plus size={16} aria-hidden="true" /> Add a course
         </Button>
       </header>
@@ -160,9 +163,11 @@ export default function CoursesPage() {
       {showAddCourse && (
         <AddCourseModal
           editingCourse={editingCourse}
+          initialCourse={catalogDraft}
           onSave={saveCourse}
           onClose={() => {
             setShowAddCourse(false);
+            setCatalogDraft(null);
             setEditingCourse(null);
           }}
         />

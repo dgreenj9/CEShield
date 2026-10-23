@@ -22,6 +22,11 @@ jobs:
       - name: Test (scoring logic + dataset integrity)
         run: npm test
 
+      - name: Catalog importer and review workflow tests
+        run: |
+          python3 -m unittest discover -s scripts/catalog -p 'test_*.py'
+          node scripts/catalog/test-review.mjs
+
       # Build with placeholder Supabase env so the static build succeeds in CI
       # without exposing real keys. Runtime keys are injected by Vercel.
       - name: Build

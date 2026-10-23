@@ -652,6 +652,20 @@
       "additionalCatalogUrls": [
         "https://bilinguistics.com/product-category/slp-courses/"
       ]
+    },
+    {
+      "id": "ablenet",
+      "name": "AbleNet ableU",
+      "disciplines": [
+        "SLP",
+        "SLPA",
+        "OT",
+        "OTA"
+      ],
+      "catalogUrl": "https://ableu.ablenetinc.com/courses",
+      "courseUrlPattern": "^/courses/[^/]+$",
+      "sitemapDiscovery": false,
+      "reviewedOn": "2026-10-23"
     }
   ],
   "directories": [

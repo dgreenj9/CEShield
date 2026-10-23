@@ -10,7 +10,7 @@ test('review CLI preserves drafts, previews without mutation, applies complete r
   const root = await mkdtemp(path.join(tmpdir(), 'ce-shield-review-'));
   try {
     for (const dir of ['scripts/catalog', 'src/utils', 'src/data/education']) await mkdir(path.join(root, dir), { recursive: true });
-    for (const file of ['scripts/catalog/review.mjs', 'src/utils/educationCatalog.js', 'src/utils/educationReview.js']) {
+    for (const file of ['scripts/catalog/review.mjs', 'src/utils/educationCatalog.js', 'src/utils/educationFacets.js', 'src/utils/educationReview.js']) {
       await copyFile(new URL('../../' + file, import.meta.url), path.join(root, file));
     }
     await writeFile(path.join(root, 'package.json'), '{"type":"module"}');

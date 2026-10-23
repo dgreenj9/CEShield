@@ -4,10 +4,21 @@ import json
 from unittest.mock import patch
 from urllib.error import URLError
 from datetime import datetime, timezone
-from discover import PageParser, SourceClient, canonical_url, clean_title, publishable, upcoming_session, detail_queue, discover, structured_course_links, continued_catalog_pages
+from discover import PageParser, SourceClient, canonical_url, clean_title, publishable, upcoming_session, detail_queue, discover, structured_course_links, continued_catalog_pages, provider_reported_facts
 
 
 class CatalogExtractionTests(unittest.TestCase):
+    def test_reported_duration_and_level_do_not_become_ce_hours_or_approvals(self):
+        facts = provider_reported_facts({'durationHours': 1, 'durationMinutes': 30, 'instructionalLevel': 'INTERMEDIATE_LEVEL', 'courseFormats': [{'type':'VIDEO_RECORDED'}, {'type':'LIVE'}]}, 'https://example.org/course')
+        self.assertEqual(facts['durationMinutes'], 90)
+        self.assertEqual(facts['level'], 'intermediate')
+        self.assertEqual(facts['formats'], ['liveOnline', 'online'])
+        self.assertNotIn('contactHours', facts)
+        self.assertNotIn('ceApprovals', facts)
+        for hours, minutes in [(True, 0), ('1', 0), (-1, 0), (1, 60), (1001, 0), (None, None)]:
+            self.assertIsNone(provider_reported_facts({'durationHours':hours,'durationMinutes':minutes}, 'https://example.org/course')['durationMinutes'])
+        self.assertIsNone(provider_reported_facts({'instructionalLevel':'expert'}, 'https://example.org/course')['level'])
+
     def test_public_api_follows_bounded_pages_and_imports_only_published_course_links(self):
         provider = {'id': 'ot', 'catalogUrl': 'https://ot.example/courses/all', 'publicCatalogApi': {
             'kind': 'continued-search', 'url': 'https://athena-api-prod.continued.com/', 'learningSpacePath': 'occupational-therapy'}}
