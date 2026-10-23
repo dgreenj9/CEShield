@@ -44,3 +44,6 @@ supabase/.temp/
 # Python
 __pycache__/
 *.pyc
+
+# Catalog crawl reports and browser verification artifacts
+/artifacts/

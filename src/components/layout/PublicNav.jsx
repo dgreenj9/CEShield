@@ -11,6 +11,7 @@ import { A, FIG } from '@/components/atlas/theme';
 const SECONDARY_LINKS = [
   { href: '/matrix', label: 'The field' },
   { href: '/credentials', label: 'Dossiers' },
+  { href: '/learn', label: 'CE catalog' },
   { href: '/career-paths', label: 'Lenses' },
   { href: '/methodology', label: 'Method' },
 ];

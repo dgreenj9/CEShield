@@ -32,6 +32,7 @@ import { citationUrl, EVIDENCE_LABELS } from '@/utils/citationsLibrary';
 import { splitEvidence } from '@/utils/formatEvidence';
 import { A, FIG, INS, eyebrow, ruledHead, tierColor, tierLabel, tabularNums } from '@/components/atlas/theme';
 import LensBreakdownTabs from './_LensBreakdownTabs';
+import CredentialLinks from '@/components/education/CredentialLinks';
 
 // ─── Build-time data ──────────────────────────────────────────────────────
 
@@ -241,6 +242,8 @@ export default async function Page({ params }) {
                 </span>
               )}
             </div>
+
+            <CredentialLinks slug={slug} />
 
             {cert.evidence && splitEvidence(cert.evidence).map((para, i) => (
               <p

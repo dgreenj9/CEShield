@@ -26,6 +26,7 @@ import {
 import { splitEvidence } from '@/utils/formatEvidence';
 import { A, FIG, INS, tierColor, tierLabel, eyebrow, ruledHead, tabularNums } from '@/components/atlas/theme';
 import LensTabs, { lensShortLabel } from '@/components/atlas/LensTabs';
+import CredentialLinks from '@/components/education/CredentialLinks';
 
 const DISCIPLINES = ['All', 'PT', 'OT', 'SLP', 'AT'];
 
@@ -320,6 +321,8 @@ export default function AtlasMatrix() {
                     </span>
                   )}
                 </div>
+
+                <CredentialLinks slug={det.meta.slug} />
 
                 {/* Fig. A — score anatomy */}
                 <div style={{ marginTop: '1.6rem' }}>

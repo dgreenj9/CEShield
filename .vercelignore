@@ -1,0 +1,11 @@
+# Local research, browser artifacts, and agent worktrees are not release inputs.
+artifacts/
+.claude/
+.agents/
+coverage/
+supabase/.temp/
+**/__pycache__/
+**/*.pyc
+.env
+.env.*
+!.env.example

@@ -14,6 +14,11 @@ platform where patients can discover credentialed clinicians.
 
 ## What it does
 
+- **Provider-linked education catalog.** Every ranked credential has an
+  attributed program, directory, or official-resource link. `/learn` discovers
+  education across providers and rehab professions, with subject filters,
+  dated source records, coverage reporting, and separate fact-check and course
+  evaluation statuses. See [catalog architecture and update commands](docs/decisions/0002-education-catalog.md).
 - **Evidence-scored credential matrix.** Every credential is scored 0–100 on
   six dimensions *per lens*, with a weighted-sum model the user can re-weight
   live. The five lenses — Clinical, Business, Academic Clinical, Research, and

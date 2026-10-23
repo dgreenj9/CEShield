@@ -1,0 +1,676 @@
+{
+  "providers": [
+    {
+      "id": "summit",
+      "name": "Summit Professional Education",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "SLP",
+        "AT"
+      ],
+      "catalogUrl": "https://portal.summit-education.com/courses",
+      "courseUrlPattern": "/course/[^/]+/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "eim",
+      "name": "Evidence In Motion",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "AT"
+      ],
+      "catalogUrl": "https://evidenceinmotion.com/continue/",
+      "courseUrlPattern": "/course/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "medbridge",
+      "name": "Medbridge",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "SLP",
+        "AT",
+        "RT",
+        "RN"
+      ],
+      "catalogUrl": "https://www.medbridge.com/educate/courses",
+      "courseUrlPattern": "/educate/courses/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "physicaltherapy",
+      "name": "PhysicalTherapy.com",
+      "disciplines": [
+        "PT",
+        "PTA"
+      ],
+      "catalogUrl": "https://www.physicaltherapy.com/pt-ceus/",
+      "courseUrlPattern": "/pt-ceus/course/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "occupationaltherapy",
+      "name": "OccupationalTherapy.com",
+      "disciplines": [
+        "OT",
+        "OTA"
+      ],
+      "catalogUrl": "https://www.occupationaltherapy.com/courses/all",
+      "courseUrlPattern": "/ot-ceus/course/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "speechpathology",
+      "name": "SpeechPathology.com",
+      "disciplines": [
+        "SLP",
+        "SLPA"
+      ],
+      "catalogUrl": "https://www.speechpathology.com/slp-ceus/",
+      "courseUrlPattern": "/slp-ceus/course/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "audiologyonline",
+      "name": "AudiologyOnline",
+      "disciplines": [
+        "Audiology"
+      ],
+      "catalogUrl": "https://www.audiologyonline.com/audiology-ceus/",
+      "courseUrlPattern": "/audiology-ceus/course/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "eri",
+      "name": "Education Resources Inc.",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "SLP"
+      ],
+      "catalogUrl": "https://educationresourcesinc.com/courses/",
+      "courseUrlPattern": "^/courses/\\d{4}-\\d{2}-\\d{2}/[^/]+/?$",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "rehabed",
+      "name": "Rehab Education",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "AT"
+      ],
+      "catalogUrl": "https://online.rehabed.com/",
+      "courseUrlPattern": "^/product/[^/]+/?$",
+      "reviewedOn": "2026-10-23",
+      "excludeUrlPattern": "gift-card|subscription|membership"
+    },
+    {
+      "id": "alliedhealth",
+      "name": "Allied Health Education",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "SLP",
+        "AT"
+      ],
+      "catalogUrl": "https://alliedhealthed.com/",
+      "courseUrlPattern": "/(?:product|course)/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "homeceu",
+      "name": "HomeCEU",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "SLP",
+        "AT"
+      ],
+      "catalogUrl": "https://homeceuconnection.com/",
+      "courseUrlPattern": "/products/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "pesi",
+      "name": "PESI Rehab",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "SLP",
+        "AT"
+      ],
+      "catalogUrl": "https://www.pesi.com/rehab/",
+      "courseUrlPattern": "/(?:item|products)/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "apta",
+      "name": "APTA Learning Center",
+      "disciplines": [
+        "PT",
+        "PTA"
+      ],
+      "catalogUrl": "https://learningcenter.apta.org/catalog",
+      "courseUrlPattern": "/products/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "aota",
+      "name": "AOTA",
+      "disciplines": [
+        "OT",
+        "OTA"
+      ],
+      "catalogUrl": "https://myaota.aota.org/s/?TYPE=P",
+      "courseUrlPattern": "/products/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "asha",
+      "name": "ASHA",
+      "disciplines": [
+        "SLP",
+        "Audiology"
+      ],
+      "catalogUrl": "https://www.asha.org/professional-development/using-your-asha-learning-pass/",
+      "courseUrlPattern": "^/eweb/OLSDynamicPage\\.aspx\\?.*webcode=olsdetails",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "otpotential",
+      "name": "OT Potential",
+      "disciplines": [
+        "OT",
+        "OTA"
+      ],
+      "catalogUrl": "https://otpotential.com/continuing-education",
+      "courseUrlPattern": "^/continuing-education/course/[^/]+$",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "speechtherapypd",
+      "name": "Speech Therapy PD",
+      "disciplines": [
+        "SLP",
+        "SLPA"
+      ],
+      "catalogUrl": "https://www.speechtherapypd.com/programs",
+      "courseUrlPattern": "/courses/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "northernspeech",
+      "name": "Northern Speech Services",
+      "disciplines": [
+        "SLP",
+        "SLPA"
+      ],
+      "catalogUrl": "https://www.northernspeech.com/online-ceus/",
+      "courseUrlPattern": "^/[^/]+/[^/]+/?$",
+      "reviewedOn": "2026-10-23",
+      "catalogLinkPattern": "#e\\d+\\b",
+      "sitemapDiscovery": false,
+      "maxResponseBytes": 6000000
+    },
+    {
+      "id": "medslped",
+      "name": "Medical SLP Education",
+      "disciplines": [
+        "SLP"
+      ],
+      "catalogUrl": "https://medslped.com/new-courses/",
+      "courseUrlPattern": "/(?:courses|product)/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "informedslp",
+      "name": "The Informed SLP",
+      "disciplines": [
+        "SLP",
+        "SLPA"
+      ],
+      "catalogUrl": "https://www.theinformedslp.com/",
+      "courseUrlPattern": "/review/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "hanen",
+      "name": "The Hanen Centre",
+      "disciplines": [
+        "SLP",
+        "SLPA"
+      ],
+      "catalogUrl": "https://www.hanen.org/workshops",
+      "courseUrlPattern": "/(?:workshops|professional-development)/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "physiopedia",
+      "name": "Physiopedia Plus",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "SLP"
+      ],
+      "catalogUrl": "https://members.physio-pedia.com/learn/",
+      "courseUrlPattern": "/(?:learn|course)/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "physiotutors",
+      "name": "Physiotutors",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "AT"
+      ],
+      "catalogUrl": "https://www.physiotutors.com/courses/",
+      "courseUrlPattern": "/courses/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "physionetwork",
+      "name": "Physio Network",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "AT"
+      ],
+      "catalogUrl": "https://www.physio-network.com/join-masterclass/",
+      "courseUrlPattern": "/(?:masterclass|masterclasses)/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "learnphysio",
+      "name": "Learn.Physio",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "AT"
+      ],
+      "catalogUrl": "https://learnphysio.teachable.com/l/products",
+      "courseUrlPattern": "^/p/[^/]+/?$",
+      "reviewedOn": "2026-10-23",
+      "excludeUrlPattern": "/(?:memberships|terms|privacy|free-resources|unlimited|home|contact|about|masterclass-summaries|learn-physio-frequently-asked-questions)$",
+      "browseUrl": "https://www.learn.physio/",
+      "detailTitleSource": "document"
+    },
+    {
+      "id": "ice",
+      "name": "Institute of Clinical Excellence",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "AT"
+      ],
+      "catalogUrl": "https://ptonice.com/our-courses/online/",
+      "courseUrlPattern": "^/(?:our-courses/(?!online$|live$)[^/]+|courses-events/(?!list$|page$)[^/]+)$",
+      "reviewedOn": "2026-10-23",
+      "sitemapDiscovery": false
+    },
+    {
+      "id": "hermanwallace",
+      "name": "Herman & Wallace",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA"
+      ],
+      "catalogUrl": "https://hermanwallace.com/",
+      "courseUrlPattern": "^/(?:continuing-education-courses/[^/]+|pelvic-floor-level-[^/]+)$",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "naiomt",
+      "name": "NAIOMT",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT"
+      ],
+      "catalogUrl": "https://naiomt.com/courses/asynchronous/",
+      "courseUrlPattern": "/courses/[^/]+/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "iamt",
+      "name": "Institute of Advanced Musculoskeletal Treatments",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "AT"
+      ],
+      "catalogUrl": "https://www.iamt.org/course-category/vcc-vestibular-certification-course/",
+      "courseUrlPattern": "^/courses/(?!.*(?:instructor|template))[^/]+$",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "ciao",
+      "name": "CIAO Seminars",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "SLP"
+      ],
+      "catalogUrl": "https://www.ciaoseminars.com/home/courses/?touring=0",
+      "courseUrlPattern": "^/home/courses/?\\?.*\\boid=\\d+",
+      "reviewedOn": "2026-10-23",
+      "excludeUrlPattern": "[?&]touring=",
+      "sitemapDiscovery": false
+    },
+    {
+      "id": "backschool",
+      "name": "The Back School",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "AT"
+      ],
+      "catalogUrl": "https://thebackschool.net/ceas-i-ergonomics-assessment-certification",
+      "courseUrlPattern": "^/ceas-[^/]+$",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "sos",
+      "name": "SOS Approach to Feeding",
+      "disciplines": [
+        "OT",
+        "OTA",
+        "SLP"
+      ],
+      "catalogUrl": "https://sosapproachtofeeding.com/sos-conference/",
+      "courseUrlPattern": "/(?:course|product|event|advanced-workshops)/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "clasi",
+      "name": "CLASI",
+      "disciplines": [
+        "OT",
+        "PT",
+        "SLP"
+      ],
+      "catalogUrl": "https://www.cl-asi.org/casi",
+      "courseUrlPattern": "/(?:courses|course)/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "aacvpr",
+      "name": "AACVPR",
+      "disciplines": [
+        "PT",
+        "OT",
+        "RT",
+        "RN",
+        "EP"
+      ],
+      "catalogUrl": "https://learningcenter.aacvpr.org/on-demand-education",
+      "courseUrlPattern": "/products/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "cdc",
+      "name": "CDC STEADI",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "RN"
+      ],
+      "catalogUrl": "https://www.cdc.gov/steadi/hcp/training/index.html",
+      "courseUrlPattern": "/steadi/hcp/training/index.html",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "pocus",
+      "name": "POCUS Certification Academy",
+      "disciplines": [
+        "PT",
+        "RT",
+        "RN"
+      ],
+      "catalogUrl": "https://www.pocus.org/lung-pocus-course/",
+      "courseUrlPattern": "^/(?:lung-pocus-course|pocus-fundamentals-certificate)$",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "pwr",
+      "name": "Parkinson Wellness Recovery",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA"
+      ],
+      "catalogUrl": "https://www.pwr4life.org/pwr-workshops/",
+      "courseUrlPattern": "/pwr-workshops/[^/]+/",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "lsvt",
+      "name": "LSVT Global",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "SLP"
+      ],
+      "catalogUrl": "https://resources.lsvtglobal.com/lsvt-online",
+      "courseUrlPattern": "^/(?:lsvt-big|lsvt-loud)[^/]*certification[^/]*$",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "hocoma",
+      "name": "Hocoma",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA"
+      ],
+      "catalogUrl": "https://www.hocoma.com/us/services/product-training/armeo/",
+      "courseUrlPattern": "^/us/services/product-training/(?:armeo|lokomat|andago|erigo)$",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "ekso",
+      "name": "Ekso Bionics",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA"
+      ],
+      "catalogUrl": "https://eksobionics.com/training/",
+      "courseUrlPattern": "/training/",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "ndta",
+      "name": "Neuro-Developmental Treatment Association",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "SLP"
+      ],
+      "catalogUrl": "https://www.ndta.org/site/education-chalkboard",
+      "courseUrlPattern": "/[^?]*[Cc]ourse[^?]*",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "hippotherapy",
+      "name": "American Hippotherapy Association",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "SLP"
+      ],
+      "catalogUrl": "https://www.americanhippotherapyassociation.org/educational-courses",
+      "courseUrlPattern": "/(?:event|course|educational-courses)/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "aptageriatrics",
+      "name": "APTA Geriatrics",
+      "disciplines": [
+        "PT",
+        "PTA"
+      ],
+      "catalogUrl": "https://aptageriatrics.org/ceeaa/",
+      "courseUrlPattern": "/(?:course|product|event)/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "aptapelvic",
+      "name": "APTA Pelvic Health",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA"
+      ],
+      "catalogUrl": "https://www.aptapelvichealth.org/capp-pelvic/",
+      "courseUrlPattern": "^/events/(?!.*(?:202[0-5]|deadlines|free-webinars))[^/]+$",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "aib",
+      "name": "American Institute of Balance",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "Audiology",
+        "AT"
+      ],
+      "catalogUrl": "https://dizzy.com/providers/certification/",
+      "courseUrlPattern": "/(?:product|workshops)/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "jbi",
+      "name": "JBI",
+      "disciplines": [
+        "PT",
+        "OT",
+        "SLP",
+        "RN",
+        "Researcher"
+      ],
+      "catalogUrl": "https://jbi.global/training-and-events",
+      "courseUrlPattern": "/training/[^/]+",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "embodia",
+      "name": "Embodia",
+      "disciplines": [
+        "PT",
+        "PTA",
+        "OT",
+        "OTA",
+        "AT"
+      ],
+      "catalogUrl": "https://embodiaacademy.com/courses",
+      "courseUrlPattern": "^/courses/\\d+-[^/]+/?$",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "aspireot",
+      "name": "Aspire OT",
+      "disciplines": [
+        "OT",
+        "OTA"
+      ],
+      "catalogUrl": "https://www.aspireoted.com/courses",
+      "courseUrlPattern": "^/course/[^/]+/?$",
+      "reviewedOn": "2026-10-23"
+    },
+    {
+      "id": "bilinguistics",
+      "name": "Bilinguistics",
+      "disciplines": [
+        "SLP",
+        "SLPA"
+      ],
+      "catalogUrl": "https://bilinguistics.com/asha-ceus/",
+      "courseUrlPattern": "^/catalog/speech-pathology-continuing-education/.+",
+      "reviewedOn": "2026-10-23",
+      "additionalCatalogUrls": [
+        "https://bilinguistics.com/product-category/slp-courses/"
+      ]
+    }
+  ],
+  "directories": [
+    {
+      "name": "ASHA CEFind",
+      "url": "https://find.asha.org/ce/",
+      "disciplines": [
+        "SLP",
+        "Audiology"
+      ]
+    },
+    {
+      "name": "AOTA Approved Provider Program",
+      "url": "https://www.aota.org/career/continuing-education/approved-providers",
+      "disciplines": [
+        "OT",
+        "OTA"
+      ]
+    },
+    {
+      "name": "APTA courses and events",
+      "url": "https://www.apta.org/your-career/courses-and-events",
+      "disciplines": [
+        "PT",
+        "PTA"
+      ]
+    },
+    {
+      "name": "New York physical therapy CE provider directory",
+      "url": "https://www.op.nysed.gov/professions/physical-therapists/continuing-education/provider-list",
+      "disciplines": [
+        "PT",
+        "PTA"
+      ]
+    }
+  ]
+}

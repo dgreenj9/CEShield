@@ -1,0 +1,572 @@
+[
+  {
+    "id": "eim-pne-online",
+    "providerId": "eim",
+    "title": "Online 3-Week Pain Neuroscience Education",
+    "url": "https://evidenceinmotion.com/course/online-3-week-pain-neuroscience-education/",
+    "subjects": [
+      "pain"
+    ],
+    "disciplines": [
+      "PT",
+      "PTA",
+      "OT",
+      "OTA"
+    ],
+    "contactHours": 16.5,
+    "format": "online",
+    "priceUsd": 499,
+    "summary": "Foundations of pain neuroscience education and its integration into clinical practice.",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "sourceUrl": "https://evidenceinmotion.com/course/online-3-week-pain-neuroscience-education/",
+    "ceApprovals": [],
+    "evaluation": null,
+    "educationType": "course"
+  },
+  {
+    "id": "eim-geriatric-rehabilitation",
+    "providerId": "eim",
+    "title": "Introduction to Geriatric Rehabilitation",
+    "url": "https://evidenceinmotion.com/course/introduction-to-geriatric-rehabilitation/",
+    "subjects": [
+      "geriatrics"
+    ],
+    "disciplines": [
+      "PT",
+      "PTA",
+      "OT",
+      "OTA"
+    ],
+    "contactHours": 18,
+    "format": "online",
+    "priceUsd": 629,
+    "summary": "Aging, geriatric care models, and evidence-informed rehabilitation. Can also contribute to a longer certification pathway.",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "sourceUrl": "https://evidenceinmotion.com/course/introduction-to-geriatric-rehabilitation/",
+    "ceApprovals": [],
+    "evaluation": null,
+    "educationType": "course"
+  },
+  {
+    "id": "eim-concussion-management",
+    "providerId": "eim",
+    "title": "Concussion Management",
+    "url": "https://evidenceinmotion.com/course/concussion-management/",
+    "subjects": [
+      "cognition",
+      "vestibular",
+      "sports"
+    ],
+    "disciplines": [],
+    "contactHours": 24,
+    "format": "hybrid",
+    "priceUsd": null,
+    "summary": "Assessment and management of post-concussive symptoms and return to activity.",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "sourceUrl": "https://evidenceinmotion.com/course/concussion-management/",
+    "ceApprovals": [],
+    "evaluation": null,
+    "educationType": "course"
+  },
+  {
+    "id": "summit-complex-dizziness",
+    "providerId": "summit",
+    "title": "Rehab for the High Complexity Dizzy Patient",
+    "url": "https://portal.summit-education.com/course/GRCDPF.1.2CREDIT/rehab-for-the-high-complexity-dizzy-patient",
+    "subjects": [
+      "vestibular",
+      "neurology"
+    ],
+    "disciplines": [
+      "PT",
+      "PTA",
+      "OT",
+      "OTA",
+      "AT"
+    ],
+    "contactHours": 2,
+    "format": "online",
+    "priceUsd": 99.99,
+    "summary": "Vestibular anatomy, clinical reasoning, and rehabilitation of complex dizziness.",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "sourceUrl": "https://portal.summit-education.com/course/GRCDPF.1.2CREDIT/rehab-for-the-high-complexity-dizzy-patient",
+    "ceApprovals": [],
+    "evaluation": null,
+    "educationType": "course"
+  },
+  {
+    "id": "summit-pt-ethics",
+    "providerId": "summit",
+    "title": "Ethical Practice in Physical Therapy",
+    "url": "https://portal.summit-education.com/course/PETHAM.1.2CREDIT/ethical-practice-in-physical-therapy",
+    "subjects": [
+      "ethics"
+    ],
+    "disciplines": [
+      "PT",
+      "PTA"
+    ],
+    "contactHours": 2,
+    "format": "varies",
+    "priceUsd": 99.99,
+    "summary": "Ethical decision-making and professional responsibilities through clinical scenarios. Confirm the available delivery format.",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "sourceUrl": "https://portal.summit-education.com/course/PETHAM.1.2CREDIT/ethical-practice-in-physical-therapy",
+    "ceApprovals": [],
+    "evaluation": null,
+    "educationType": "course"
+  },
+  {
+    "id": "medbridge-dysphagia-dementia",
+    "providerId": "medbridge",
+    "title": "The Essentials: Dysphagia and Dementia",
+    "url": "https://www.medbridge.com/educate/courses/essentials-dysphagia-dementia",
+    "subjects": [
+      "swallowing",
+      "geriatrics",
+      "cognition"
+    ],
+    "disciplines": [],
+    "contactHours": null,
+    "format": "online",
+    "priceUsd": 29,
+    "summary": "Dementia-related swallowing difficulties and considerations for dysphagia management. Subscription access is also offered.",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "sourceUrl": "https://www.medbridge.com/educate/courses/essentials-dysphagia-dementia",
+    "ceApprovals": [],
+    "evaluation": null,
+    "educationType": "course"
+  },
+  {
+    "id": "cdc-steadi-fall-risk",
+    "providerId": "cdc",
+    "title": "STEADI: Empowering Healthcare Providers to Reduce Fall Risk",
+    "url": "https://www.cdc.gov/steadi/hcp/training/index.html",
+    "subjects": [
+      "geriatrics",
+      "vestibular"
+    ],
+    "disciplines": [],
+    "contactHours": null,
+    "format": "online",
+    "priceUsd": 0,
+    "summary": "CDC fall-prevention training. The provider page links to registration through CDC TRAIN, course WB4895.",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "sourceUrl": "https://www.cdc.gov/steadi/hcp/training/index.html",
+    "ceApprovals": [],
+    "evaluation": null,
+    "educationType": "course"
+  },
+  {
+    "id": "jbi-systematic-reviews",
+    "providerId": "jbi",
+    "title": "Comprehensive Systematic Review Training Program",
+    "url": "https://jbi.global/training/systematic-review-training",
+    "subjects": [
+      "research"
+    ],
+    "disciplines": [],
+    "contactHours": null,
+    "format": "varies",
+    "priceUsd": null,
+    "summary": "Systematic-review methods. One-, three-, and five-day options depend on the selected program.",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "sourceUrl": "https://jbi.global/training/systematic-review-training",
+    "ceApprovals": [],
+    "evaluation": null,
+    "educationType": "course"
+  },
+  {
+    "id": "speechtherapypd-discourse-aphasia",
+    "providerId": "speechtherapypd",
+    "title": "Beyond Single Words: Discourse-Based Assessment and Treatment in Aphasia",
+    "url": "https://www.speechtherapypd.com/courses/beyond-single-words",
+    "subjects": [
+      "language",
+      "neurology"
+    ],
+    "disciplines": [
+      "SLP",
+      "SLPA"
+    ],
+    "contactHours": 2,
+    "format": "varies",
+    "priceUsd": null,
+    "summary": "Discourse tasks and analysis for aphasia assessment, intervention planning, and functional communication outcomes. Confirm the offered format.",
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "sourceUrl": "https://www.speechtherapypd.com/courses/beyond-single-words",
+    "ceApprovals": [],
+    "evaluation": null
+  },
+  {
+    "id": "medslped-aac-fundamentals",
+    "providerId": "medslped",
+    "title": "Fundamentals of AAC Assessment and Intervention",
+    "url": "https://medslped.com/product/fundamentals-of-aac-assessment-and-intervention/",
+    "subjects": [
+      "aac",
+      "adaptive"
+    ],
+    "disciplines": [],
+    "contactHours": null,
+    "format": "online",
+    "priceUsd": 247,
+    "summary": "AAC assessment, communication-system selection, and alternative access methods. The provider lists 0.8 ASHA CEUs; check license-specific acceptance separately.",
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "sourceUrl": "https://medslped.com/product/fundamentals-of-aac-assessment-and-intervention/",
+    "ceApprovals": [],
+    "evaluation": null
+  },
+  {
+    "id": "physiotutors-vestibular-rehabilitation",
+    "providerId": "physiotutors",
+    "title": "Vestibular Rehabilitation",
+    "url": "https://www.physiotutors.com/courses/vestibular-rehabilitation/",
+    "subjects": [
+      "vestibular"
+    ],
+    "disciplines": [
+      "PT"
+    ],
+    "contactHours": 36,
+    "format": "online",
+    "priceUsd": null,
+    "summary": "Vestibular anatomy, assessment, and rehabilitation strategies for dizziness and balance disorders. Provider-listed contact hours vary by jurisdiction.",
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "sourceUrl": "https://www.physiotutors.com/courses/vestibular-rehabilitation/",
+    "ceApprovals": [],
+    "evaluation": null
+  },
+  {
+    "id": "physicaltherapy-fall-prevention-assessment",
+    "providerId": "physicaltherapy",
+    "title": "Fall Prevention with Older Adults: Part 1 - Screening and Assessment",
+    "url": "https://www.physicaltherapy.com/pt-ceus/course/fall-prevention-with-older-adults-4901",
+    "subjects": [
+      "geriatrics",
+      "vestibular"
+    ],
+    "disciplines": [],
+    "contactHours": 2,
+    "format": "varies",
+    "priceUsd": null,
+    "summary": "Fall-risk screening, assessment guidelines, and functional measures for older adults.",
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "sourceUrl": "https://www.physicaltherapy.com/pt-ceus/course/fall-prevention-with-older-adults-4901",
+    "ceApprovals": [],
+    "evaluation": null
+  },
+  {
+    "id": "otpotential-stroke-neuro-recovery",
+    "providerId": "otpotential",
+    "title": "Neuro Recovery After Stroke",
+    "url": "https://otpotential.com/continuing-education/course/neuro-recovery-after-stroke",
+    "subjects": [
+      "neurology"
+    ],
+    "disciplines": [
+      "OT",
+      "OTA"
+    ],
+    "contactHours": 1,
+    "format": "online",
+    "priceUsd": null,
+    "summary": "Discussion of recovery-focused occupational therapy after stroke. Video and audio are available; membership is required for the CE quiz.",
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "sourceUrl": "https://otpotential.com/continuing-education/course/neuro-recovery-after-stroke",
+    "ceApprovals": [],
+    "evaluation": null
+  },
+  {
+    "id": "eri-interoception",
+    "providerId": "eri",
+    "title": "Inside Out: A Deep Dive into Interoception - On-Demand",
+    "url": "https://educationresourcesinc.com/courses/2026-06-18/inside-out-a-deep-dive-into-interoception-on-demand/",
+    "subjects": [
+      "sensory",
+      "mentalHealth"
+    ],
+    "disciplines": [
+      "OT",
+      "OTA",
+      "PT",
+      "PTA",
+      "SLP"
+    ],
+    "contactHours": 9.5,
+    "priceUsd": 299,
+    "summary": "Assessment and intervention planning for interoception, with case discussions. The listed curriculum includes sensory processing, trauma, co-regulation, and Polyvagal Theory.",
+    "format": "online",
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null,
+    "sourceUrl": "https://educationresourcesinc.com/courses/2026-06-18/inside-out-a-deep-dive-into-interoception-on-demand/"
+  },
+  {
+    "id": "aspireot-cognitive-assessments",
+    "providerId": "aspireot",
+    "title": "OT and Cognition: Are We Limiting Our Scope of Practice?",
+    "url": "https://www.aspireoted.com/course/ots-and-cognition-limiting-our-scope-of-practice",
+    "subjects": [
+      "cognition"
+    ],
+    "disciplines": [
+      "OT",
+      "OTA"
+    ],
+    "contactHours": 1,
+    "priceUsd": 15,
+    "summary": "Cognitive assessment use across occupational therapy settings, including barriers to implementation. Created by the Arizona Occupational Therapy Association; completion requires viewing the videos and passing an exam.",
+    "format": "online",
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null,
+    "sourceUrl": "https://www.aspireoted.com/course/ots-and-cognition-limiting-our-scope-of-practice"
+  },
+  {
+    "id": "bilinguistics-dynamic-assessment",
+    "providerId": "bilinguistics",
+    "title": "Interactive Bilingual Dynamic Assessment Case Studies",
+    "url": "https://bilinguistics.com/catalog/speech-pathology-continuing-education/evaluations/interactive-bilingual-dynamic-assessment-case-studies/",
+    "subjects": [
+      "language",
+      "pediatrics"
+    ],
+    "disciplines": [
+      "SLP"
+    ],
+    "contactHours": 1.5,
+    "priceUsd": 22,
+    "summary": "Video cases on dynamic assessment with bilingual children, including selecting targets and interpreting responses. The provider lists 1.5 hours; its displayed agenda totals 60 minutes, so confirm duration before enrolling.",
+    "format": "online",
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null,
+    "sourceUrl": "https://bilinguistics.com/catalog/speech-pathology-continuing-education/evaluations/interactive-bilingual-dynamic-assessment-case-studies/"
+  },
+  {
+    "id": "embodia-compassion-pain",
+    "providerId": "embodia",
+    "title": "Compassion in Pain Care",
+    "url": "https://embodiaacademy.com/courses/1164-compassion-in-pain-care-shelly-prosko-neil-pearson-marlysa-sullivan",
+    "sourceUrl": "https://home.embodiaapp.com/courses/1164-compassion-in-pain-care-shelly-prosko-neil-pearson-marlysa-sullivan",
+    "subjects": [
+      "pain",
+      "mentalHealth"
+    ],
+    "disciplines": [],
+    "contactHours": null,
+    "price": {
+      "amount": 49.99,
+      "currency": "CAD"
+    },
+    "summary": "Compassion and self-compassion in pain care with Shelly Prosko, Neil Pearson, and Marlysa Sullivan. Recorded in October 2021; 1 hour 34 minutes of material and lifetime access are listed. Available individually or within a larger series.",
+    "format": "online",
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null
+  },
+  {
+    "id": "northernspeech-eye-tracking-aac",
+    "providerId": "northernspeech",
+    "title": "Eye Tracking for iPad and for Augmentative and Alternative Communication",
+    "url": "https://www.northernspeech.com/aac-augmentative-and-alternative-communication/eye-tracking-for-ipad-and-for-augmentative-and-alternative-communication/",
+    "subjects": [
+      "aac",
+      "adaptive"
+    ],
+    "disciplines": [],
+    "contactHours": 2,
+    "format": "online",
+    "priceUsd": null,
+    "summary": "Eye-gaze access, iPad accessibility settings, candidacy, positioning, and AAC implementation. Includes demonstrations using Hiru and Oskol 2 hardware. Presented by Megan Brazas and Beth Speaker-Christensen.",
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null,
+    "sourceUrl": "https://www.northernspeech.com/aac-augmentative-and-alternative-communication/eye-tracking-for-ipad-and-for-augmentative-and-alternative-communication/"
+  },
+  {
+    "id": "naiomt-o957",
+    "providerId": "naiomt",
+    "title": "O-957 Reasoning in the Presence of Cardiopulmonary Conditions",
+    "url": "https://naiomt.thinkific.com/enroll/1887452?price_id=2553357",
+    "sourceUrl": "https://naiomt.com/courses/asynchronous/",
+    "subjects": [
+      "cardiopulmonary",
+      "musculoskeletal"
+    ],
+    "disciplines": [
+      "PT"
+    ],
+    "contactHours": 16,
+    "format": "online",
+    "priceUsd": 199,
+    "summary": "Bill Temes covers recognition, referral considerations, and management implications of cardiopulmonary conditions in orthopedic manual physical therapy. Intended for licensed PTs at intermediate to advanced level.",
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null
+  },
+  {
+    "id": "naiomt-o963",
+    "providerId": "naiomt",
+    "title": "O-963 Hip-Spine Syndrome: Unraveling the Mystery",
+    "url": "https://naiomt.thinkific.com/enroll/1760727?price_id=2340611",
+    "sourceUrl": "https://naiomt.com/courses/asynchronous/",
+    "subjects": [
+      "musculoskeletal"
+    ],
+    "disciplines": [],
+    "contactHours": 8,
+    "format": "online",
+    "priceUsd": 99,
+    "summary": "Michael Lucido presents a clinical-reasoning approach to unilateral lumbopelvic symptoms, hip mechanics, and related assessment considerations.",
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null
+  },
+  {
+    "id": "naiomt-o956",
+    "providerId": "naiomt",
+    "title": "O-956 Clinical Reasoning in the Presence of Vertigo",
+    "url": "https://naiomt.thinkific.com/enroll/2017122?price_id=2740610",
+    "sourceUrl": "https://naiomt.com/courses/asynchronous/",
+    "subjects": [
+      "vestibular"
+    ],
+    "disciplines": [],
+    "contactHours": 16,
+    "format": "online",
+    "priceUsd": 199,
+    "summary": "Nick Smith covers vestibular anatomy, oculomotor examination, differential diagnosis, and referral decisions for manual therapists.",
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null
+  },
+  {
+    "id": "ice-persistent-pain-online",
+    "providerId": "ice",
+    "title": "Persistent Pain Comprehensive Management Online",
+    "url": "https://ptonice.com/our-courses/persistent-pain-comprehensive-management-online/",
+    "subjects": [
+      "pain"
+    ],
+    "disciplines": [],
+    "contactHours": null,
+    "format": "blendedOnline",
+    "priceUsd": null,
+    "summary": "An eight-week cohort course on pain physiology, assessment, psychologically informed interventions, and case integration. The provider lists a two-hour weekly commitment, recorded discussion calls, lifetime access, and no prerequisites. Confirm cohort availability.",
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null,
+    "sourceUrl": "https://ptonice.com/our-courses/persistent-pain-comprehensive-management-online/"
+  },
+  {
+    "id": "ciao-dysphagia-bedside",
+    "providerId": "ciao",
+    "title": "Dysphagia in Focus: The Bedside Lens",
+    "url": "https://www.ciaoseminars.com/home/courses?ctid=2&evd=1&oid=13923",
+    "subjects": [
+      "swallowing"
+    ],
+    "disciplines": [
+      "OT",
+      "OTA",
+      "SLP",
+      "SLPA"
+    ],
+    "contactHours": 8,
+    "format": "varies",
+    "priceUsd": null,
+    "summary": "Bedside swallowing evaluation, clinical decision-making, and documentation. May be taken independently within the four-course Dysphagia in Focus series. The provider lists live streaming or studio attendance and limited recording access.",
+    "sessionStart": "2026-12-04T08:00:00-06:00",
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null,
+    "sourceUrl": "https://www.ciaoseminars.com/home/courses?ctid=2&evd=1&oid=13923"
+  },
+  {
+    "id": "ciao-aac-when-why-how",
+    "providerId": "ciao",
+    "title": "AAC: When, Why and How?",
+    "url": "https://www.ciaoseminars.com/home/courses?ctid=2&evd=1&oid=13617",
+    "subjects": [
+      "aac"
+    ],
+    "disciplines": [
+      "SLP",
+      "SLPA"
+    ],
+    "contactHours": 6,
+    "format": "varies",
+    "priceUsd": null,
+    "summary": "Introductory AAC candidacy, assessment, acquisition, report writing, and goal setting. Live delivery by request and streaming options are described; confirm the next available session.",
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null,
+    "sourceUrl": "https://www.ciaoseminars.com/home/courses?ctid=2&evd=1&oid=13617"
+  }
+]

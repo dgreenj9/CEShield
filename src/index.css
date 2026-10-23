@@ -587,3 +587,22 @@ select {
   .atlas-nav-links { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .atlas-nav-links::-webkit-scrollbar { display: none; }
 }
+/* Public education catalog shares Atlas geometry and tokens. */
+.ce-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; border: 1px solid #1B1A17; background: #D5D3C6; }
+.ce-filters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.ce-course-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.ce-comparison-table { min-width: calc(160px + var(--comparison-count) * 250px); }
+.ce-comparison-label { width: 160px; }
+.ce-comparison-hint { display: none; }
+@media (max-width: 1000px) {
+  .ce-course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ce-filters { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .ce-comparison-table { min-width: calc(104px + var(--comparison-count) * 244px); }
+  .ce-comparison-label { width: 104px; }
+  .ce-comparison-hint { display: block; }
+  .ce-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ce-course-grid { grid-template-columns: minmax(0, 1fr); }
+  .ce-filters { grid-template-columns: minmax(0, 1fr); }
+}

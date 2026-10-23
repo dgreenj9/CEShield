@@ -16,6 +16,7 @@ export default function sitemap() {
     { url: SITE + '/about',         priority: 0.6,  changeFrequency: 'yearly' },
     { url: SITE + '/states',        priority: 0.8,  changeFrequency: 'monthly' },
     { url: SITE + '/credentials',   priority: 0.9,  changeFrequency: 'monthly' },
+    { url: SITE + '/learn',         priority: 0.9,  changeFrequency: 'weekly' },
   ].map((r) => ({ ...r, lastModified: now }));
 
   const stateRoutes = allStateLicenseEntries().map((e) => ({

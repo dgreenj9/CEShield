@@ -15,6 +15,7 @@ const NAV_ITEMS = [
   { to: '/matrix', label: 'The field' },
   { to: '/compliance', label: 'Ledger' },
   { to: '/courses', label: 'Courses' },
+  { to: '/learn', label: 'Find CE' },
   { to: '/profile', label: 'Profile' },
 ];
 

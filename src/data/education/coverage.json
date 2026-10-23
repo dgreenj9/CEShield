@@ -1,0 +1,792 @@
+[
+  {
+    "providerId": "aacvpr",
+    "attemptedAt": "2026-10-23T13:55:34+00:00",
+    "status": "discovered",
+    "errors": [
+      "https://learningcenter.aacvpr.org/sitemap.xml: HTTP Error 404: Not Found",
+      "https://learningcenter.aacvpr.org/sitemap_index.xml: HTTP Error 404: Not Found"
+    ],
+    "sources": [
+      "https://learningcenter.aacvpr.org/on-demand-education"
+    ],
+    "discoveredCount": 10,
+    "listedCount": 10
+  },
+  {
+    "providerId": "aib",
+    "attemptedAt": "2026-10-23T13:55:56+00:00",
+    "status": "needs-review",
+    "errors": [],
+    "sources": [
+      "https://dizzy.com/providers/certification/",
+      "https://dizzy.com/sitemap_index.xml",
+      "https://dizzy.com/coursenote-sitemap.xml",
+      "https://dizzy.com/coursenote-sitemap10.xml",
+      "https://dizzy.com/coursenote-sitemap11.xml",
+      "https://dizzy.com/coursenote-sitemap12.xml"
+    ],
+    "discoveredCount": 0,
+    "listedCount": 0
+  },
+  {
+    "providerId": "alliedhealth",
+    "attemptedAt": "2026-10-23T17:40:01+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://alliedhealthed.com/",
+      "https://alliedhealthed.com/sitemap_index.xml",
+      "https://alliedhealthed.com/course_topic-sitemap.xml",
+      "https://alliedhealthed.com/product-sitemap.xml",
+      "https://alliedhealthed.com/product-sitemap2.xml",
+      "https://alliedhealthed.com/product_cat-sitemap.xml",
+      "https://alliedhealthed.com/product_tag-sitemap.xml"
+    ],
+    "discoveredCount": 1433,
+    "listedCount": 67,
+    "detailPagesFetched": 35,
+    "pendingCount": 1366
+  },
+  {
+    "providerId": "aota",
+    "attemptedAt": "2026-10-23T17:40:01+00:00",
+    "status": "needs-review",
+    "errors": [],
+    "sources": [
+      "https://myaota.aota.org/s/?TYPE=P",
+      "https://myaota.aota.org/s/sitemap.xml",
+      "https://myaota.aota.org/s/sitemap-view-1.xml"
+    ],
+    "discoveredCount": 0,
+    "listedCount": 0,
+    "detailPagesFetched": 0,
+    "pendingCount": 0
+  },
+  {
+    "providerId": "apta",
+    "attemptedAt": "2026-10-23T17:40:01+00:00",
+    "status": "discovered",
+    "errors": [
+      "https://learningcenter.apta.org/sitemap.xml: HTTP Error 404: Not Found",
+      "https://learningcenter.apta.org/sitemap_index.xml: HTTP Error 404: Not Found"
+    ],
+    "sources": [
+      "https://learningcenter.apta.org/catalog"
+    ],
+    "discoveredCount": 10,
+    "listedCount": 10,
+    "detailPagesFetched": 0,
+    "pendingCount": 0
+  },
+  {
+    "providerId": "aptageriatrics",
+    "attemptedAt": "2026-10-23T13:55:52+00:00",
+    "status": "needs-review",
+    "errors": [
+      "https://aptageriatrics.org/ceeaa/: HTTP Error 307: Temporary Redirect"
+    ],
+    "sources": [
+      "https://aptageriatrics.org/wp-sitemap.xml",
+      "https://aptageriatrics.org/wp-sitemap-posts-aptag_events-1.xml",
+      "https://aptageriatrics.org/wp-sitemap-posts-article-1.xml",
+      "https://aptageriatrics.org/wp-sitemap-posts-gerinotes-1.xml",
+      "https://aptageriatrics.org/wp-sitemap-posts-news-1.xml"
+    ],
+    "discoveredCount": 0,
+    "listedCount": 0
+  },
+  {
+    "providerId": "aptapelvic",
+    "attemptedAt": "2026-10-23T14:03:59+00:00",
+    "status": "discovered",
+    "errors": [
+      "https://www.aptapelvichealth.org/events/free-webinar--the-dos-and-donts-of-exercise-during-pregnancy: Remote end closed connection without response",
+      "https://www.aptapelvichealth.org/events/diastasis-done-differently-boston-ma: Redirected off-provider; update source registry",
+      "https://www.aptapelvichealth.org/events/diastasis-done-differently-fort-myers-fl: Redirected off-provider; update source registry"
+    ],
+    "sources": [
+      "https://www.aptapelvichealth.org/capp-pelvic/",
+      "https://www.aptapelvichealth.org/sitemap.xml"
+    ],
+    "discoveredCount": 412,
+    "listedCount": 37
+  },
+  {
+    "providerId": "asha",
+    "attemptedAt": "2026-10-23T14:03:52+00:00",
+    "status": "needs-review",
+    "errors": [
+      "https://www.asha.org/sitemap_index.xml: not well-formed (invalid token): line 37, column 226"
+    ],
+    "sources": [
+      "https://www.asha.org/professional-development/using-your-asha-learning-pass/",
+      "https://www.asha.org/sitemap.xml"
+    ],
+    "discoveredCount": 0,
+    "listedCount": 0
+  },
+  {
+    "providerId": "aspireot",
+    "attemptedAt": "2026-10-23T17:40:01+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://www.aspireoted.com/courses",
+      "https://www.aspireoted.com/sitemap.xml",
+      "https://www.aspireoted.com/page-sitemap.xml",
+      "https://www.aspireoted.com/post-sitemap.xml"
+    ],
+    "discoveredCount": 215,
+    "listedCount": 95,
+    "detailPagesFetched": 35,
+    "pendingCount": 120
+  },
+  {
+    "providerId": "audiologyonline",
+    "attemptedAt": "2026-10-23T13:54:38+00:00",
+    "status": "discovered",
+    "errors": [
+      "https://www.audiologyonline.com/audiology-ceus/sitemap.xml: HTTP Error 500: Internal Server Error",
+      "https://www.audiologyonline.com/audiology-jobs/sitemap.xml: not well-formed (invalid token): line 27, column 126",
+      "https://www.audiologyonline.com/articles/sitemap.xml: not well-formed (invalid token): line 10, column 189",
+      "https://www.audiologyonline.com/interviews/sitemap.xml: not well-formed (invalid token): line 10, column 195"
+    ],
+    "sources": [
+      "https://www.audiologyonline.com/audiology-ceus/",
+      "https://www.audiologyonline.com/sitemap.xml"
+    ],
+    "discoveredCount": 1,
+    "listedCount": 1
+  },
+  {
+    "providerId": "backschool",
+    "attemptedAt": "2026-10-23T14:03:52+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://thebackschool.net/ceas-i-ergonomics-assessment-certification",
+      "https://www.thebackschool.net/sitemap.xml"
+    ],
+    "discoveredCount": 9,
+    "listedCount": 9
+  },
+  {
+    "providerId": "bilinguistics",
+    "attemptedAt": "2026-10-23T17:09:28+00:00",
+    "status": "discovered",
+    "errors": [
+      "https://bilinguistics.com/product-category/slp-courses/: HTTP Error 404: Not Found",
+      "https://bilinguistics.com/video-sitemap.xml: HTTP Error 404: Not Found",
+      "https://bilinguistics.com/local-sitemap.xml: HTTP Error 404: Not Found",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/non-standardized-testing: HTTP Error 429: Too Many Requests",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/video/re-envisioning-re-evaluation: HTTP Error 429: Too Many Requests",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/live-events/ethics-and-ai: HTTP Error 429: Too Many Requests",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/language-growth: HTTP Error 429: Too Many Requests",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/diversity-equity-inclusion-dei/working-with-interpreters-for-speech-language-evaluations: HTTP Error 429: Too Many Requests",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/osha-essential: HTTP Error 429: Too Many Requests",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/speech-therapy-for-special-populations/executive-functioning-for-school-age-kids: HTTP Error 429: Too Many Requests",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/receptive-expressive-language/improve-executive-function: HTTP Error 429: Too Many Requests",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/ef-intervention-in-the-classroom: HTTP Error 429: Too Many Requests",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/language-assessment-in-multilingual-contexts: HTTP Error 429: Too Many Requests",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/executive-function/executive-function-101-speech-therapy: HTTP Error 429: Too Many Requests",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/executive-function/increasing-client-motivation: HTTP Error 429: Too Many Requests",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/executive-function/cognitive-processes-and-changes-across-adolescence-executive-function-301: HTTP Error 429: Too Many Requests",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/diversity-equity-inclusion-dei/errors-due-native-language-influence: HTTP Error 429: Too Many Requests",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/evaluations/using-spanish-battelle-developmental-inventory-2-evaluating-young-children: HTTP Error 429: Too Many Requests",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/diversity-equity-inclusion-dei/language-assessment-of-bilingual-children: HTTP Error 429: Too Many Requests",
+      "https://bilinguistics.com/catalog/speech-pathology-continuing-education/evaluations/assessment-with-english-language-learners-a-bilingual-approach: HTTP Error 429: Too Many Requests"
+    ],
+    "sources": [
+      "https://bilinguistics.com/asha-ceus/",
+      "https://bilinguistics.com/sitemap_index.xml",
+      "https://bilinguistics.com/post-sitemap1.xml",
+      "https://bilinguistics.com/post-sitemap2.xml",
+      "https://bilinguistics.com/post-sitemap3.xml",
+      "https://bilinguistics.com/page-sitemap.xml",
+      "https://bilinguistics.com/product-sitemap.xml"
+    ],
+    "discoveredCount": 119,
+    "listedCount": 13,
+    "detailPagesFetched": 30,
+    "pendingCount": 106
+  },
+  {
+    "providerId": "cdc",
+    "attemptedAt": "2026-10-23T13:55:36+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://www.cdc.gov/steadi/hcp/training/index.html",
+      "https://www.cdc.gov/wcms-auto-sitemap-index.xml",
+      "https://www.cdc.gov/cancer-preventing-infections/wcms-auto-sitemap.xml",
+      "https://www.cdc.gov/diabetes-prevention/wcms-auto-sitemap.xml",
+      "https://www.cdc.gov/global-reproductive-health/wcms-auto-sitemap.xml",
+      "https://www.cdc.gov/hepatitis-surveillance-prevention/wcms-auto-sitemap.xml"
+    ],
+    "discoveredCount": 1,
+    "listedCount": 1
+  },
+  {
+    "providerId": "ciao",
+    "attemptedAt": "2026-10-23T18:31:35+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://www.ciaoseminars.com/home/courses/?touring=0"
+    ],
+    "discoveredCount": 100,
+    "listedCount": 43,
+    "detailPagesFetched": 12,
+    "pendingCount": 57,
+    "unavailableCount": 0
+  },
+  {
+    "providerId": "clasi",
+    "attemptedAt": "2026-10-23T13:55:32+00:00",
+    "status": "needs-review",
+    "errors": [],
+    "sources": [
+      "https://www.cl-asi.org/casi",
+      "https://www.cl-asi.org/sitemap.xml"
+    ],
+    "discoveredCount": 0,
+    "listedCount": 0
+  },
+  {
+    "providerId": "eim",
+    "attemptedAt": "2026-10-23T13:54:36+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://evidenceinmotion.com/continue/",
+      "https://evidenceinmotion.com/sitemap_index.xml",
+      "https://evidenceinmotion.com/course-sitemap.xml",
+      "https://evidenceinmotion.com/author-sitemap.xml",
+      "https://evidenceinmotion.com/faq-sitemap.xml",
+      "https://evidenceinmotion.com/page-sitemap.xml"
+    ],
+    "discoveredCount": 229,
+    "listedCount": 172
+  },
+  {
+    "providerId": "ekso",
+    "attemptedAt": "2026-10-23T13:55:46+00:00",
+    "status": "needs-review",
+    "errors": [
+      "https://eksobionics.com/sitemap_index.xml: HTTP Error 404: Not Found"
+    ],
+    "sources": [
+      "https://eksobionics.com/training/",
+      "https://eksobionics.com/sitemap.xml"
+    ],
+    "discoveredCount": 0,
+    "listedCount": 0
+  },
+  {
+    "providerId": "embodia",
+    "attemptedAt": "2026-10-23T17:03:43+00:00",
+    "status": "discovered",
+    "errors": [
+      "https://embodiaapp.com/sitemaps/embodiaapp/sitemap.xml: Off-provider URL requires a registered source"
+    ],
+    "sources": [
+      "https://embodiaacademy.com/courses"
+    ],
+    "discoveredCount": 67,
+    "listedCount": 67,
+    "detailPagesFetched": 0,
+    "pendingCount": 0
+  },
+  {
+    "providerId": "eri",
+    "attemptedAt": "2026-10-23T17:03:43+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://educationresourcesinc.com/courses/",
+      "https://educationresourcesinc.com/sitemap.xml",
+      "https://educationresourcesinc.com/sitemap_index.xml",
+      "https://educationresourcesinc.com/pp_event-sitemap.xml",
+      "https://educationresourcesinc.com/pp_event-sitemap2.xml",
+      "https://educationresourcesinc.com/pp_event-sitemap3.xml",
+      "https://educationresourcesinc.com/pp_event-sitemap4.xml",
+      "https://educationresourcesinc.com/pp_event-sitemap5.xml"
+    ],
+    "discoveredCount": 5015,
+    "listedCount": 203,
+    "detailPagesFetched": 60,
+    "pendingCount": 4812
+  },
+  {
+    "providerId": "hanen",
+    "attemptedAt": "2026-10-23T13:55:06+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://www.hanen.org/workshops",
+      "https://hanen.org/sitemap.xml"
+    ],
+    "discoveredCount": 20,
+    "listedCount": 20
+  },
+  {
+    "providerId": "hermanwallace",
+    "attemptedAt": "2026-10-23T14:03:52+00:00",
+    "status": "discovered",
+    "errors": [
+      "https://hermanwallace.com/sitemap_index.xml: HTTP Error 404: Not Found",
+      "https://hermanwallace.com/pelvic-floor-level-1-seattle-wa-oct-28-29-2023-test: HTTP Error 404: Not Found",
+      "https://hermanwallace.com/pelvic-floor-level-2a-self-hosted-dec-9-10-2023-test: HTTP Error 404: Not Found",
+      "https://hermanwallace.com/pelvic-floor-level-2a-self-hosted-sep-9-10-2023-test: HTTP Error 404: Not Found",
+      "https://hermanwallace.com/continuing-education-courses/pelvic-floor-level-3: HTTP Error 404: Not Found",
+      "https://hermanwallace.com/continuing-education-courses/coccydynia-and-painful-sitting: HTTP Error 404: Not Found"
+    ],
+    "sources": [
+      "https://hermanwallace.com/",
+      "https://hermanwallace.com/sitemap.xml"
+    ],
+    "discoveredCount": 166,
+    "listedCount": 35
+  },
+  {
+    "providerId": "hippotherapy",
+    "attemptedAt": "2026-10-23T13:55:51+00:00",
+    "status": "needs-review",
+    "errors": [],
+    "sources": [
+      "https://www.americanhippotherapyassociation.org/educational-courses",
+      "https://www.americanhippotherapyassociation.org/sitemap.xml"
+    ],
+    "discoveredCount": 0,
+    "listedCount": 0
+  },
+  {
+    "providerId": "hocoma",
+    "attemptedAt": "2026-10-23T14:03:59+00:00",
+    "status": "discovered",
+    "errors": [
+      "https://www.hocoma.com/us/attachment-sitemap3.xml: [Errno 54] Connection reset by peer",
+      "https://www.hocoma.com/us/services/product-training/armeo: The read operation timed out"
+    ],
+    "sources": [
+      "https://www.hocoma.com/us/services/product-training/armeo/",
+      "https://www.hocoma.com/us/sitemap_index.xml",
+      "https://www.hocoma.com/us/lib-products-sitemap.xml",
+      "https://www.hocoma.com/us/attachment-sitemap.xml",
+      "https://www.hocoma.com/us/attachment-sitemap2.xml"
+    ],
+    "discoveredCount": 4,
+    "listedCount": 4
+  },
+  {
+    "providerId": "homeceu",
+    "attemptedAt": "2026-10-23T13:54:46+00:00",
+    "status": "discovered",
+    "errors": [
+      "https://homeceuconnection.com/: HTTP Error 429: Too Many Requests"
+    ],
+    "sources": [
+      "https://homeceuconnection.com/sitemap.xml",
+      "https://homeceuconnection.com/sitemap_products_1.xml?from=9429630845216&to=15478020047136",
+      "https://homeceuconnection.com/sitemap_agentic_discovery.xml",
+      "https://homeceuconnection.com/sitemap_articles_1.xml",
+      "https://homeceuconnection.com/sitemap_blogs_1.xml"
+    ],
+    "discoveredCount": 644,
+    "listedCount": 30
+  },
+  {
+    "providerId": "iamt",
+    "attemptedAt": "2026-10-23T14:03:52+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://www.iamt.org/course-category/vcc-vestibular-certification-course/",
+      "https://www.iamt.org/sitemap_index.xml",
+      "https://www.iamt.org/ld_course_category-sitemap.xml",
+      "https://www.iamt.org/ld_course_tag-sitemap.xml",
+      "https://www.iamt.org/sfwd-courses-sitemap.xml",
+      "https://www.iamt.org/tribe_events-sitemap.xml"
+    ],
+    "discoveredCount": 380,
+    "listedCount": 40
+  },
+  {
+    "providerId": "ice",
+    "attemptedAt": "2026-10-23T18:28:08+00:00",
+    "status": "discovered",
+    "errors": [
+      "https://ptonice.com/courses-events/cmfa-l2-online: HTTP Error 404: Not Found",
+      "https://ptonice.com/courses-events/ice-pelvic-l1-online-3: HTTP Error 404: Not Found",
+      "https://ptonice.com/courses-events/vantage: HTTP Error 404: Not Found"
+    ],
+    "sources": [
+      "https://ptonice.com/our-courses/online/"
+    ],
+    "discoveredCount": 15,
+    "listedCount": 12,
+    "detailPagesFetched": 15,
+    "pendingCount": 3,
+    "unavailableCount": 0
+  },
+  {
+    "providerId": "informedslp",
+    "attemptedAt": "2026-10-23T13:55:01+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://www.theinformedslp.com/",
+      "https://www.theinformedslp.com/sitemap.xml",
+      "https://www.theinformedslp.com/sitemap-reviews.xml",
+      "https://www.theinformedslp.com/sitemap-topics.xml",
+      "https://www.theinformedslp.com/jobs/sitemap.xml",
+      "https://www.theinformedslp.com/sitemap-0.xml"
+    ],
+    "discoveredCount": 2066,
+    "listedCount": 30
+  },
+  {
+    "providerId": "jbi",
+    "attemptedAt": "2026-10-23T13:55:57+00:00",
+    "status": "blocked",
+    "errors": [
+      "HTTP Error 403: Forbidden"
+    ],
+    "sources": [],
+    "discoveredCount": 0,
+    "listedCount": 0
+  },
+  {
+    "providerId": "learnphysio",
+    "attemptedAt": "2026-10-23T17:47:38+00:00",
+    "status": "discovered",
+    "errors": [
+      "https://learnphysio.teachable.com/sitemap.xml: HTTP Error 404: Not Found",
+      "https://learnphysio.teachable.com/sitemap_index.xml: HTTP Error 404: Not Found",
+      "https://learnphysio.teachable.com/p/learn-physio-frequently-asked-questions: No course title extracted; prior availability retained"
+    ],
+    "sources": [
+      "https://learnphysio.teachable.com/l/products"
+    ],
+    "discoveredCount": 48,
+    "listedCount": 33,
+    "detailPagesFetched": 48,
+    "pendingCount": 1,
+    "unavailableCount": 14
+  },
+  {
+    "providerId": "lsvt",
+    "attemptedAt": "2026-10-23T14:03:58+00:00",
+    "status": "needs-review",
+    "errors": [
+      "https://resources.lsvtglobal.com/sitemap_index.xml: HTTP Error 404: Not Found"
+    ],
+    "sources": [
+      "https://resources.lsvtglobal.com/lsvt-online",
+      "https://resources.lsvtglobal.com/sitemap.xml"
+    ],
+    "discoveredCount": 0,
+    "listedCount": 0
+  },
+  {
+    "providerId": "medbridge",
+    "attemptedAt": "2026-10-23T18:28:08+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://www.medbridge.com/educate/courses",
+      "https://www.medbridge.com/sitemap.xml",
+      "https://www.medbridge.com/sitemaps/courses.xml",
+      "https://www.medbridge.com/sitemaps/certificate_programs.xml",
+      "https://www.medbridge.com/sitemaps/instructors.xml",
+      "https://www.medbridge.com/sitemaps/pages.xml"
+    ],
+    "discoveredCount": 3192,
+    "listedCount": 121,
+    "detailPagesFetched": 30,
+    "pendingCount": 3071,
+    "unavailableCount": 0
+  },
+  {
+    "providerId": "medslped",
+    "attemptedAt": "2026-10-23T13:55:00+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://medslped.com/new-courses/",
+      "https://medslped.com/sitemap_index.xml",
+      "https://medslped.com/product-sitemap.xml",
+      "https://medslped.com/page-sitemap.xml"
+    ],
+    "discoveredCount": 30,
+    "listedCount": 30
+  },
+  {
+    "providerId": "naiomt",
+    "attemptedAt": "2026-10-23T13:55:22+00:00",
+    "status": "needs-review",
+    "errors": [],
+    "sources": [
+      "https://naiomt.com/courses/comt/",
+      "https://naiomt.com/sitemaps.xml",
+      "https://naiomt.com/category-sitemap1.xml",
+      "https://naiomt.com/page-sitemap1.xml",
+      "https://naiomt.com/post-sitemap1.xml",
+      "https://naiomt.com/post_tag-sitemap1.xml"
+    ],
+    "discoveredCount": 0,
+    "listedCount": 0
+  },
+  {
+    "providerId": "ndta",
+    "attemptedAt": "2026-10-23T13:55:48+00:00",
+    "status": "needs-review",
+    "errors": [
+      "https://www.ndta.org/sitemap_index.xml: HTTP Error 404: Not Found",
+      "https://www.ndta.org/site/Research-courses: HTTP Error 500: Internal Server Error"
+    ],
+    "sources": [
+      "https://www.ndta.org/site/education-chalkboard",
+      "https://www.ndta.org/sitemap.xml"
+    ],
+    "discoveredCount": 4,
+    "listedCount": 0
+  },
+  {
+    "providerId": "northernspeech",
+    "attemptedAt": "2026-10-23T17:40:01+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://www.northernspeech.com/online-slp-ceus/"
+    ],
+    "discoveredCount": 206,
+    "listedCount": 206,
+    "detailPagesFetched": 0,
+    "pendingCount": 0
+  },
+  {
+    "providerId": "occupationaltherapy",
+    "attemptedAt": "2026-10-23T13:54:36+00:00",
+    "status": "needs-review",
+    "errors": [
+      "https://www.occupationaltherapy.com/sitemap.xml: not well-formed (invalid token): line 4878, column 2913"
+    ],
+    "sources": [
+      "https://ceus.occupationaltherapy.com/flash-sale/"
+    ],
+    "discoveredCount": 0,
+    "listedCount": 0
+  },
+  {
+    "providerId": "otpotential",
+    "attemptedAt": "2026-10-23T14:17:43+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://otpotential.com/continuing-education",
+      "https://otpotential.com/sitemaps/sitemap.xml",
+      "https://otpotential.com/sitemaps/sitemap-courses_1.xml",
+      "https://otpotential.com/sitemaps/sitemap-assessments_1.xml",
+      "https://otpotential.com/sitemaps/sitemap-blog-entries_1.xml",
+      "https://otpotential.com/sitemaps/sitemap-directory_1.xml"
+    ],
+    "discoveredCount": 164,
+    "listedCount": 164
+  },
+  {
+    "providerId": "pesi",
+    "attemptedAt": "2026-10-23T13:54:46+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://www.pesi.com/rehab/",
+      "https://www.pesi.com/sitemap.xml",
+      "https://www.pesi.com/umbraco-sitemap.xml",
+      "https://www.pesi.com/sitemap/product_1.xml",
+      "https://www.pesi.com/sitemap/product_2.xml",
+      "https://www.pesi.com/sitemap/product_3.xml"
+    ],
+    "discoveredCount": 2716,
+    "listedCount": 38
+  },
+  {
+    "providerId": "physicaltherapy",
+    "attemptedAt": "2026-10-23T13:54:36+00:00",
+    "status": "needs-review",
+    "errors": [
+      "https://www.physicaltherapy.com/pt-ceus/sitemap.xml: HTTP Error 500: Internal Server Error",
+      "https://www.physicaltherapy.com/articles/sitemap.xml: not well-formed (invalid token): line 41, column 126",
+      "https://www.physicaltherapy.com/ask-the-experts/sitemap.xml: not well-formed (invalid token): line 9, column 53",
+      "https://www.physicaltherapy.com/events/sitemap.xml: not well-formed (invalid token): line 25, column 126"
+    ],
+    "sources": [
+      "https://www.physicaltherapy.com/pt-ceus/",
+      "https://www.physicaltherapy.com/sitemap.xml"
+    ],
+    "discoveredCount": 0,
+    "listedCount": 0
+  },
+  {
+    "providerId": "physionetwork",
+    "attemptedAt": "2026-10-23T13:55:09+00:00",
+    "status": "blocked",
+    "errors": [
+      "HTTP Error 403: Forbidden"
+    ],
+    "sources": [],
+    "discoveredCount": 0,
+    "listedCount": 0
+  },
+  {
+    "providerId": "physiopedia",
+    "attemptedAt": "2026-10-23T13:55:07+00:00",
+    "status": "blocked",
+    "errors": [
+      "https://members.physio-pedia.com/learn/: HTTP Error 403: Forbidden",
+      "https://members.physio-pedia.com/sitemap.xml: HTTP Error 403: Forbidden",
+      "https://members.physio-pedia.com/sitemap_index.xml: HTTP Error 403: Forbidden"
+    ],
+    "sources": [],
+    "discoveredCount": 0,
+    "listedCount": 0
+  },
+  {
+    "providerId": "physiotutors",
+    "attemptedAt": "2026-10-23T14:03:52+00:00",
+    "status": "discovered",
+    "errors": [
+      "https://www.physiotutors.com/courses/acl-injuries-from-theory-to-practice: The read operation timed out"
+    ],
+    "sources": [
+      "https://www.physiotutors.com/courses/",
+      "https://www.physiotutors.com/sitemap_index.xml",
+      "https://www.physiotutors.com/course-sitemap.xml",
+      "https://www.physiotutors.com/event-type-sitemap.xml",
+      "https://www.physiotutors.com/events-sitemap.xml",
+      "https://www.physiotutors.com/offline-course-sitemap.xml"
+    ],
+    "discoveredCount": 17,
+    "listedCount": 17
+  },
+  {
+    "providerId": "pocus",
+    "attemptedAt": "2026-10-23T14:03:54+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://www.pocus.org/lung-pocus-course/",
+      "https://www.pocus.org/sitemap_index.xml",
+      "https://www.pocus.org/category-sitemap.xml",
+      "https://www.pocus.org/layout_tag-sitemap.xml",
+      "https://www.pocus.org/page-sitemap.xml",
+      "https://www.pocus.org/post-sitemap.xml"
+    ],
+    "discoveredCount": 1,
+    "listedCount": 1
+  },
+  {
+    "providerId": "pwr",
+    "attemptedAt": "2026-10-23T13:55:40+00:00",
+    "status": "blocked",
+    "errors": [
+      "https://www.pwr4life.org/pwr-workshops/: HTTP Error 403: Forbidden",
+      "http://pwr4life.org/index.php/sitemapsindex.xml: HTTP Error 404: Not Found",
+      "http://pwr4life.org/index.php/sitemapindex.xml: HTTP Error 404: Not Found",
+      "http://pwr4life.org/index.php/sitemapimagesindex.xml: HTTP Error 404: Not Found",
+      "http://pwr4life.org/index.php/sitemapmobileindex.xml: HTTP Error 404: Not Found",
+      "http://pwr4life.org/index.php/sitemap90.xml: HTTP Error 404: Not Found"
+    ],
+    "sources": [],
+    "discoveredCount": 0,
+    "listedCount": 0
+  },
+  {
+    "providerId": "rehabed",
+    "attemptedAt": "2026-10-23T17:03:43+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://online.rehabed.com/",
+      "https://online.rehabed.com/sitemap_index.xml",
+      "https://online.rehabed.com/ld_course_category-sitemap.xml",
+      "https://online.rehabed.com/product-sitemap.xml",
+      "https://online.rehabed.com/product_cat-sitemap.xml",
+      "https://online.rehabed.com/product_tag-sitemap.xml",
+      "https://online.rehabed.com/author-sitemap.xml",
+      "https://online.rehabed.com/ld_lesson_category-sitemap.xml"
+    ],
+    "discoveredCount": 27,
+    "listedCount": 27,
+    "detailPagesFetched": 27,
+    "pendingCount": 0
+  },
+  {
+    "providerId": "sos",
+    "attemptedAt": "2026-10-23T13:55:30+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://sosapproachtofeeding.com/sos-conference/",
+      "https://sosapproachtofeeding.com/sitemap_index.xml",
+      "https://sosapproachtofeeding.com/event-sitemap.xml",
+      "https://sosapproachtofeeding.com/event_category-sitemap.xml",
+      "https://sosapproachtofeeding.com/event_country-sitemap.xml",
+      "https://sosapproachtofeeding.com/event_person-sitemap.xml"
+    ],
+    "discoveredCount": 187,
+    "listedCount": 31
+  },
+  {
+    "providerId": "speechpathology",
+    "attemptedAt": "2026-10-23T13:54:36+00:00",
+    "status": "needs-review",
+    "errors": [
+      "https://www.speechpathology.com/slp-ceus/sitemap.xml: HTTP Error 500: Internal Server Error",
+      "https://www.speechpathology.com/slp-jobs/sitemap.xml: not well-formed (invalid token): line 27, column 126",
+      "https://www.speechpathology.com/articles/sitemap.xml: not well-formed (invalid token): line 41, column 126",
+      "https://www.speechpathology.com/ask-the-experts/sitemap.xml: not well-formed (invalid token): line 9, column 53"
+    ],
+    "sources": [
+      "https://www.speechpathology.com/slp-ceus/",
+      "https://www.speechpathology.com/sitemap.xml"
+    ],
+    "discoveredCount": 0,
+    "listedCount": 0
+  },
+  {
+    "providerId": "speechtherapypd",
+    "attemptedAt": "2026-10-23T18:28:08+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://www.speechtherapypd.com/programs",
+      "https://www.speechtherapypd.com/sitemap.xml"
+    ],
+    "discoveredCount": 1626,
+    "listedCount": 119,
+    "detailPagesFetched": 30,
+    "pendingCount": 1507,
+    "unavailableCount": 0
+  },
+  {
+    "providerId": "summit",
+    "attemptedAt": "2026-10-23T17:03:43+00:00",
+    "status": "discovered",
+    "errors": [],
+    "sources": [
+      "https://portal.summit-education.com/courses",
+      "https://portal.summit-education.com/sitemap_index.xml",
+      "https://portal.summit-education.com/sitemap-course.xml",
+      "https://portal.summit-education.com/sitemap-courses.xml",
+      "https://portal.summit-education.com/sitemap-cert-series.xml",
+      "https://portal.summit-education.com/sitemap-instructors.xml",
+      "https://portal.summit-education.com/sitemap-static.xml"
+    ],
+    "discoveredCount": 710,
+    "listedCount": 90,
+    "detailPagesFetched": 60,
+    "pendingCount": 620
+  }
+]
