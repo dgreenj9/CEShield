@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 from urllib.error import URLError
 from datetime import datetime, timezone
-from discover import PageParser, SourceClient, canonical_url, clean_title, publishable, upcoming_session, detail_queue, discover
+from discover import PageParser, SourceClient, canonical_url, clean_title, publishable, upcoming_session, detail_queue, discover, structured_course_links
 
 
 class CatalogExtractionTests(unittest.TestCase):
@@ -23,10 +23,47 @@ class CatalogExtractionTests(unittest.TestCase):
         self.assertEqual(clean_title(page.links[0][1]), 'Adult dysphagia assessment')
 
     def test_navigation_and_block_pages_are_not_courses(self):
-        for title in ['View More Sessions', 'Learn More', 'All Courses', 'Just a moment...', '404 Page Not Found', '(Private) Hand Therapy Workshop']:
+        for title in ['View More Sessions', 'Learn More', 'All Courses', 'Just a moment...', '404 Page Not Found', '(Private) Hand Therapy Workshop', '5 415 415 Reviews']:
             self.assertIsNone(clean_title(title), title)
         self.assertEqual(clean_title('Introduction to Hand Therapy'), 'Introduction to Hand Therapy')
         self.assertEqual(clean_title('OT and AI'), 'OT and AI')
+        self.assertEqual(clean_title('Hearing Aid Selection and Fitting'), 'Hearing Aid Selection and Fitting')
+
+    def test_structured_courses_do_not_import_prices_ratings_or_unregistered_aliases(self):
+        data = {'@type': 'ItemList', 'itemListElement': [
+            {'@type': 'Course', 'name': 'Handwriting strategies', 'url': 'https://parent.example/courses/handwriting', 'offers': {'price': 129}, 'aggregateRating': {'ratingValue': 5}},
+            {'@type': 'CourseInstance', 'name': 'Live session', 'url': 'https://parent.example/session'},
+            {'@type': 'Course', 'name': 'Other host', 'url': 'https://other.example/course'},
+        ]}
+        links = structured_course_links(data, {'https://parent.example': 'https://ot.example'})
+        self.assertEqual(links, [('https://ot.example/courses/handwriting', 'Handwriting strategies'), ('https://other.example/course', 'Other host')])
+        self.assertEqual(structured_course_links(data)[0][0], 'https://parent.example/courses/handwriting')
+
+    def test_pagination_is_bounded_same_host_and_does_not_follow_arbitrary_links(self):
+        provider = {'id': 'example', 'catalogUrl': 'https://example.org/all', 'courseUrlPattern': '/course/',
+                    'catalogPaginationPattern': '/all/page:\\d+', 'sitemapDiscovery': False}
+        class FakeClient:
+            origin, sitemaps = 'https://example.org', []
+            def __init__(self):
+                self.visited = []
+            def allowed_host(self, url):
+                return url.startswith('https://example.org/')
+            def request(self, url):
+                self.visited.append(url)
+                if url.endswith('/all'):
+                    return '<a href="/course/one">Aphasia assessment</a><a href="/course/one#reviews">5 300 Reviews</a><a href="/all/page:2/">Next →</a><a href="https://other.org/all/page:3">Next</a><a href="/account">Next</a>', url
+                return '<a href="/course/two">Swallowing assessment</a><a href="/all/page:2">Next →</a>', url
+        client = FakeClient()
+        with patch('discover.SourceClient', return_value=client):
+            coverage, listings, _, _ = discover(provider, 0, 0, max_catalog_pages=1)
+            self.assertEqual(len(listings), 1)
+            self.assertEqual(listings[0]['title'], 'Aphasia assessment')
+            self.assertTrue(coverage['catalogPaginationPending'])
+            client.visited = []
+            coverage, listings, _, _ = discover(provider, 0, 0, max_catalog_pages=10)
+            self.assertEqual(len(listings), 2)
+            self.assertEqual(client.visited, ['https://example.org/all', 'https://example.org/all/page:2'])
+            self.assertFalse(coverage['catalogPaginationPending'])
 
     def test_course_heading_excludes_card_ratings_instructors_and_approval_badges(self):
         page = PageParser()
@@ -72,6 +109,7 @@ class CatalogExtractionTests(unittest.TestCase):
         self.assertEqual(canonical_url('https://Example.org/course/?utm_source=x&session=2#top'), 'https://example.org/course?session=2')
         self.assertNotEqual(canonical_url('https://example.org/course?session=1'), canonical_url('https://example.org/course?session=2'))
         self.assertIsNone(canonical_url('javascript:alert(1)'))
+        self.assertIsNone(canonical_url('https://example.org/course/one</a>, "another course"'))
 
     def test_expired_and_undated_events_are_not_published_as_course_opportunities(self):
         event = {'title': 'Pediatric feeding workshop', 'url': 'https://example.org/events/feeding'}

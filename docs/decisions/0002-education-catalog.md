@@ -117,6 +117,9 @@ python3 scripts/catalog/discover.py --provider summit --details 60 --publish
 # Retry failed or incomplete extraction immediately instead of after seven days.
 python3 scripts/catalog/discover.py --provider summit --details 60 --retry-after-days 0
 
+# Follow registered public catalog pagination, capped at 200 pages per provider.
+python3 scripts/catalog/discover.py --provider physicaltherapy --provider speechpathology --catalog-pages 200 --details 0 --publish
+
 node scripts/catalog/check-links.mjs
 python3 -m unittest discover -s scripts/catalog -p 'test_*.py'
 node --test scripts/catalog/test-review.mjs
@@ -145,6 +148,21 @@ avoid concurrent writes to shared state and published datasets.
 The provider coverage view dates each source check and distinguishes sources
 that need access review. Candidate URLs, published listings, and checked facts
 remain separate counts. A bounded run is not a complete provider inventory.
+
+Catalog pagination is opt-in through `catalogPaginationPattern`. Only same-host
+Next links matching that path pattern are followed, with canonical URL cycle
+detection and a `--catalog-pages` budget (default one, maximum 200). Coverage
+records the pages attempted and whether pagination remained when the budget
+was exhausted. Existing explicit catalog seeds are always attempted.
+
+JSON-LD Course objects supply names and URLs for catalogs whose links require
+JavaScript. They do not supply checked facts, prices, CE approvals, or scores.
+`structuredUrlOriginAliases` handles an explicitly verified provider quirk:
+OccupationalTherapy.com emits Continued.com URLs in its structured data while
+its rendered course cards link to the same paths on OccupationalTherapy.com.
+Only the registered exact origin is rewritten; all resulting links still pass
+the provider host and course-path checks. Numeric review-count anchors are
+excluded so they cannot replace short course titles.
 
 Imports acquire an exclusive process lock before reading or writing shared
 state. Providers are restricted to their registered hostname (with a `www`

@@ -53,9 +53,11 @@
         "PT",
         "PTA"
       ],
-      "catalogUrl": "https://www.physicaltherapy.com/pt-ceus/",
+      "catalogUrl": "https://www.physicaltherapy.com/pt-ceus/all/",
       "courseUrlPattern": "/pt-ceus/course/[^/]+",
-      "reviewedOn": "2026-10-23"
+      "reviewedOn": "2026-10-23",
+      "catalogPaginationPattern": "/pt-ceus/all/page:\\d+",
+      "sitemapDiscovery": false
     },
     {
       "id": "occupationaltherapy",
@@ -65,8 +67,12 @@
         "OTA"
       ],
       "catalogUrl": "https://www.occupationaltherapy.com/courses/all",
-      "courseUrlPattern": "/ot-ceus/course/[^/]+",
-      "reviewedOn": "2026-10-23"
+      "courseUrlPattern": "^/courses/(?!all$|unlimited-ce-access$|topics(?:/|$))[^/]+$",
+      "reviewedOn": "2026-10-23",
+      "structuredUrlOriginAliases": {
+        "https://www.continued.com": "https://www.occupationaltherapy.com"
+      },
+      "sitemapDiscovery": false
     },
     {
       "id": "speechpathology",
@@ -75,9 +81,11 @@
         "SLP",
         "SLPA"
       ],
-      "catalogUrl": "https://www.speechpathology.com/slp-ceus/",
+      "catalogUrl": "https://www.speechpathology.com/slp-ceus/all/",
       "courseUrlPattern": "/slp-ceus/course/[^/]+",
-      "reviewedOn": "2026-10-23"
+      "reviewedOn": "2026-10-23",
+      "catalogPaginationPattern": "/slp-ceus/all/page:\\d+",
+      "sitemapDiscovery": false
     },
     {
       "id": "audiologyonline",
@@ -85,9 +93,11 @@
       "disciplines": [
         "Audiology"
       ],
-      "catalogUrl": "https://www.audiologyonline.com/audiology-ceus/",
+      "catalogUrl": "https://www.audiologyonline.com/audiology-ceus/all/",
       "courseUrlPattern": "/audiology-ceus/course/[^/]+",
-      "reviewedOn": "2026-10-23"
+      "reviewedOn": "2026-10-23",
+      "catalogPaginationPattern": "/audiology-ceus/all/page:\\d+",
+      "sitemapDiscovery": false
     },
     {
       "id": "eri",

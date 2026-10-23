@@ -568,5 +568,77 @@
     "ceApprovals": [],
     "evaluation": null,
     "sourceUrl": "https://www.ciaoseminars.com/home/courses?ctid=2&evd=1&oid=13617"
+  },
+  {
+    "id": "occupationaltherapy-dme-adls",
+    "providerId": "occupationaltherapy",
+    "title": "Clinical Applications of Durable Medical Equipment for Activities of Daily Living",
+    "url": "https://www.occupationaltherapy.com/courses/clinical-applications-durable-medical-equipment",
+    "subjects": [
+      "adaptive"
+    ],
+    "disciplines": [
+      "OT",
+      "OTA"
+    ],
+    "contactHours": 1,
+    "summary": "Michelle Lange introduces bathing and toileting equipment, patient lifts, and adaptive car seats, with selection considerations for daily activities. The provider lists recorded video and an exam requiring 80% to earn CE hours. Membership access; no standalone course price confirmed.",
+    "sourceUrl": "https://www.occupationaltherapy.com/courses/clinical-applications-durable-medical-equipment",
+    "format": "online",
+    "priceUsd": null,
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null
+  },
+  {
+    "id": "occupationaltherapy-schools-101",
+    "providerId": "occupationaltherapy",
+    "title": "Schools 101: The OTP Starter Guide",
+    "url": "https://www.occupationaltherapy.com/courses/schools-101-otp-starter-guide",
+    "subjects": [
+      "pediatrics",
+      "business"
+    ],
+    "disciplines": [
+      "OT",
+      "OTA"
+    ],
+    "contactHours": 2,
+    "summary": "Aditi Mehra introduces school-based OT roles, educational versus medical service models, workload, documentation, collaboration, and participation-focused service delivery. The provider lists recorded video and an exam requiring 80% to earn CE hours. Membership access; no standalone course price confirmed.",
+    "sourceUrl": "https://www.occupationaltherapy.com/courses/schools-101-otp-starter-guide",
+    "format": "online",
+    "priceUsd": null,
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null
+  },
+  {
+    "id": "speechpathology-normal-swallow",
+    "providerId": "speechpathology",
+    "title": "Normal Swallow",
+    "url": "https://www.speechpathology.com/slp-ceus/course/normal-swallow-11389",
+    "subjects": [
+      "swallowing"
+    ],
+    "disciplines": [
+      "SLP"
+    ],
+    "contactHours": 1,
+    "summary": "Carolyn Abraham covers swallow biomechanics, variation, standardized MBSS measurement tools, interpretation, and communication of findings. The provider lists an intermediate on-demand video course. Membership, full participation, an exam, and a course evaluation are required for credit; no standalone course price confirmed.",
+    "sourceUrl": "https://www.speechpathology.com/slp-ceus/course/normal-swallow-11389",
+    "format": "online",
+    "priceUsd": null,
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null
   }
 ]

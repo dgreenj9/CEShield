@@ -32,7 +32,10 @@ TLS = ssl.create_default_context(cafile='/etc/ssl/cert.pem' if not ssl.get_defau
 
 
 def canonical_url(url):
-    p = urlsplit(unescape(url))
+    url = unescape(url)
+    if re.search(r'[<>"\x00-\x20]', url):
+        return None
+    p = urlsplit(url)
     if p.scheme not in ('http', 'https') or not p.hostname or p.username or p.password:
         return None
     query = [(k, v) for k, v in parse_qsl(p.query, keep_blank_values=True)
@@ -124,6 +127,8 @@ def clean_title(text):
     text = re.sub(r'^(?:View Course|View Details|Learn More)\s*[:\-]?\s*', '', text, flags=re.I)
     if len(text) < 5 or len(text) > 240:
         return None
+    if re.fullmatch(r'[\d\s.,★☆]*\bReviews?', text, re.I):
+        return None
     if re.fullmatch(r'(?:view|read|learn|show|see|browse|register|available|all|more|course|courses|details|now|online|sessions|certificate|certification|\W|\d)+', text, re.I):
         return None
     if re.search(r'just a moment|access denied|page not found|404|captcha|enable javascript|sign in|log\s?in|auto draft|instructor version|start your free trial|purchase a new subscription', text, re.I):
@@ -132,9 +137,39 @@ def clean_title(text):
         return None
     if re.fullmatch(r'(?:Product Training|Continuing Education Courses(?: - .*)?|Upcoming Events|Key Deadlines|ASHA account|American Speech-Language-Hearing Association|APTA Pick Your Package Pass|2-day Live Workshop|ASHA Online Store.*|Online Courses.*)', text, re.I):
         return None
-    if re.search(r'pick your package pass|united states of america|event calendar|election|meet.?[&a-z ]?greet|awards ceremony|membership meeting|application deadline|volunteer opportunities|listening session|reflection .*deadline|short.term appointee|sold out', text, re.I):
+    if re.search(r'pick your package pass|united states of america|event calendar|\belection\b|meet.?[&a-z ]?greet|awards ceremony|membership meeting|application deadline|volunteer opportunities|listening session|reflection .*deadline|short.term appointee|sold out', text, re.I):
         return None
     return text
+
+
+def structured_course_links(data, origin_aliases=None):
+    """Read Course names/URLs only, never turn provider claims into checked facts.
+
+    Some catalogs emit their parent brand's origin in JSON-LD. Aliases must be
+    explicitly registered after checking the rendered links on that catalog.
+    The caller still enforces the provider host and course URL pattern.
+    """
+    found = []
+    def walk(node):
+        if isinstance(node, list):
+            for child in node:
+                walk(child)
+        elif isinstance(node, dict):
+            types = node.get('@type', [])
+            types = [types] if isinstance(types, str) else types
+            if 'Course' in types and isinstance(node.get('url'), str) and isinstance(node.get('name'), str):
+                url = node['url']
+                parts = urlsplit(url)
+                origin = urlunsplit((*parts[:2], '', '', ''))
+                replacement = (origin_aliases or {}).get(origin)
+                if replacement:
+                    url = replacement.rstrip('/') + urlunsplit(('', '', parts.path, parts.query, parts.fragment))
+                found.append((url, node['name']))
+            for child in node.values():
+                if isinstance(child, (list, dict)):
+                    walk(child)
+    walk(data)
+    return found
 
 
 def upcoming_session(data):
@@ -245,7 +280,7 @@ class SourceClient:
             return raw.decode(response.headers.get_content_charset() or 'utf-8', errors='replace'), response.url
 
 
-def discover(provider, details, max_sitemaps, refresh_titles=False, known=None, attempts=None, retry_days=7):
+def discover(provider, details, max_sitemaps, refresh_titles=False, known=None, attempts=None, retry_days=7, max_catalog_pages=1):
     now = datetime.now(timezone.utc).isoformat(timespec='seconds')
     pid = provider['id']
     coverage = {'providerId': pid, 'attemptedAt': now, 'status': 'pending', 'errors': [], 'sources': []}
@@ -274,7 +309,15 @@ def discover(provider, details, max_sitemaps, refresh_titles=False, known=None, 
         coverage.update(status='blocked', errors=[str(error)], discoveredCount=0, listedCount=0)
         return coverage, [], [], []
 
-    for seed in [provider['catalogUrl'], *provider.get('additionalCatalogUrls', [])]:
+    catalog_queue = [provider['catalogUrl'], *provider.get('additionalCatalogUrls', [])]
+    catalog_seen = set()
+    # Explicit seeds always run. Pagination is opt-in, same-provider, and bounded.
+    catalog_limit = len(catalog_queue) + max(0, min(200, max_catalog_pages) - 1)
+    while catalog_queue and len(catalog_seen) < catalog_limit:
+        seed = canonical_url(catalog_queue.pop(0))
+        if not seed or seed in catalog_seen:
+            continue
+        catalog_seen.add(seed)
         try:
             body, final_url = client.request(seed)
             page = PageParser()
@@ -283,6 +326,14 @@ def discover(provider, details, max_sitemaps, refresh_titles=False, known=None, 
             # A seed can itself be a single course.
             add(final_url, ' '.join(page.h1), final_url)
             for href, title in page.links:
+                add(urljoin(final_url, href), title, final_url)
+                next_url = canonical_url(urljoin(final_url, href))
+                pagination_pattern = provider.get('catalogPaginationPattern')
+                if (pagination_pattern and re.match(r'^Next\b', title.strip(), re.I)
+                        and next_url and client.allowed_host(next_url)
+                        and re.fullmatch(pagination_pattern, urlsplit(next_url).path)):
+                    catalog_queue.append(next_url)
+            for href, title in structured_course_links(page.json_ld, provider.get('structuredUrlOriginAliases')):
                 add(urljoin(final_url, href), title, final_url)
         except (HTTPError, URLError, TimeoutError, ValueError, OSError) as error:
             coverage['errors'].append(f'{seed}: {error}')
@@ -346,7 +397,8 @@ def discover(provider, details, max_sitemaps, refresh_titles=False, known=None, 
         else:
             pending.append({'providerId': pid, 'url': entry['url'], 'sourceUrl': entry['sourceUrl']})
     coverage.update(status=('discovered' if listings else 'needs-review') if coverage['sources'] else 'blocked',
-                    discoveredCount=len(candidates), listedCount=len(listings), detailPagesFetched=len(selected), pendingCount=len(pending), unavailableCount=len(unavailable))
+                    discoveredCount=len(candidates), listedCount=len(listings), catalogPagesFetched=len(catalog_seen),
+                    catalogPaginationPending=bool(catalog_queue), detailPagesFetched=len(selected), pendingCount=len(pending), unavailableCount=len(unavailable))
     return coverage, listings, pending, unavailable
 
 
@@ -355,6 +407,7 @@ def main():
     parser.add_argument('--provider', action='append', help='Provider id; repeat to select several')
     parser.add_argument('--details', type=int, default=20, help='Maximum untitled detail pages per provider')
     parser.add_argument('--sitemaps', type=int, default=5)
+    parser.add_argument('--catalog-pages', type=int, default=1, help='Maximum catalog pages per provider, including opt-in Next links (up to 200); explicit seeds always run')
     parser.add_argument('--workers', type=int, default=6)
     parser.add_argument('--publish', action='store_true')
     parser.add_argument('--refresh-titles', action='store_true', help='Read detail pages even when a catalog anchor supplies a title')
@@ -379,7 +432,7 @@ def main():
     old_unavailable = json.loads(unavailable_path.read_text()) if unavailable_path.exists() else []
     known = {p['id']: {canonical_url(x['url']): x for x in old_items + old_unavailable if x['providerId'] == p['id']} for p in providers}
     with ThreadPoolExecutor(max_workers=max(1, min(8, args.workers))) as pool:
-        futures = {pool.submit(discover, p, max(0, args.details), max(0, args.sitemaps), args.refresh_titles, known[p['id']], state.setdefault(p['id'], {}), max(0, args.retry_after_days)): p for p in providers}
+        futures = {pool.submit(discover, p, max(0, args.details), max(0, args.sitemaps), args.refresh_titles, known[p['id']], state.setdefault(p['id'], {}), max(0, args.retry_after_days), args.catalog_pages): p for p in providers}
         for future in as_completed(futures):
             c, items, missing, closed = future.result()
             coverage.append(c)
