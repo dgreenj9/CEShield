@@ -72,7 +72,12 @@
       "structuredUrlOriginAliases": {
         "https://www.continued.com": "https://www.occupationaltherapy.com"
       },
-      "sitemapDiscovery": false
+      "sitemapDiscovery": false,
+      "publicCatalogApi": {
+        "kind": "continued-search",
+        "url": "https://athena-api-prod.continued.com/",
+        "learningSpacePath": "occupational-therapy"
+      }
     },
     {
       "id": "speechpathology",

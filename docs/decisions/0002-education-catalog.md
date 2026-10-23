@@ -164,6 +164,21 @@ Only the registered exact origin is rewritten; all resulting links still pass
 the provider host and course-path checks. Numeric review-count anchors are
 excluded so they cannot replace short course titles.
 
+OccupationalTherapy.com also registers its public Continued search API through
+`publicCatalogApi`. The adapter uses a fixed read-only GraphQL query, the public
+learning-space identifier observed in the catalog, and no authentication. It
+requests only titles, slugs, published format types, and pagination metadata.
+The API host has its own robots check, response limit, and rate limiter. Course
+links still pass the original provider host and path checks. Prices, ratings,
+enrollment records, and CE approvals are not requested. `--catalog-pages` also
+bounds API pagination; coverage records `apiPagesFetched` and
+`apiPaginationPending`. Repeated pages, GraphQL errors, and changed response
+shapes stop the API pass and retain successful earlier findings.
+
+```sh
+python3 scripts/catalog/discover.py --provider occupationaltherapy --catalog-pages 50 --details 0 --publish
+```
+
 Imports acquire an exclusive process lock before reading or writing shared
 state. Providers are restricted to their registered hostname (with a `www`
 alias), not the whole hosting domain. This keeps unrelated Teachable tenants

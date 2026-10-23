@@ -5,7 +5,16 @@ import links from '../../data/education/credentialLinks.json';
 import registry from '../../data/education/providers.json';
 import curated from '../../data/education/courses.json';
 import discovered from '../../data/education/discoveredCourses.json';
-import { canonicalCourseUrl, mergeCourseListings, filterCourses, sortCourses, courseScore, COURSE_DIMENSIONS, SUBJECTS, formatCoursePrice, selectComparisonCourses } from '../educationCatalog';
+import { canonicalCourseUrl, mergeCourseListings, filterCourses, sortCourses, courseScore, COURSE_DIMENSIONS, SUBJECTS, formatCoursePrice, selectComparisonCourses, inferSubjects } from '../educationCatalog';
+
+describe('vision discovery tags', () => {
+  it('finds vision education without matching supervision or revision', () => {
+    expect(inferSubjects('Environmental Modifications for Low Vision')).toContain('vision');
+    expect(inferSubjects('Visual Perceptual Motor Supports')).toContain('vision');
+    expect(inferSubjects('Oculomotor Assessment')).toContain('vision');
+    expect(inferSubjects('Clinical Supervision and Documentation Revision')).not.toContain('vision');
+  });
+});
 
 describe('provider links and catalog integrity', () => {
   it('gives every ranked credential at least one attributed official destination', () => {

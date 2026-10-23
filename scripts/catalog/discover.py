@@ -262,7 +262,7 @@ class SourceClient:
         host = urlsplit(url).hostname or ''
         return host.removeprefix('www.') == self.domain
 
-    def request(self, url, robots=True):
+    def request(self, url, robots=True, json_body=None, headers=None):
         if not self.allowed_host(url):
             raise ValueError('Off-provider URL requires a registered source')
         if robots and not self.robots.can_fetch(AGENT, url):
@@ -270,7 +270,12 @@ class SourceClient:
         delay = max(0.5, (self.robots.crawl_delay(AGENT) or 0) if robots else 0)
         time.sleep(max(0, delay - (time.monotonic() - self.last_request)))
         self.last_request = time.monotonic()
-        req = Request(url, headers={'User-Agent': AGENT, 'Accept': 'text/html,application/xml,text/xml'})
+        request_headers = {'User-Agent': AGENT, 'Accept': 'text/html,application/xml,text/xml', **(headers or {})}
+        data = None
+        if json_body is not None:
+            data = json.dumps(json_body).encode()
+            request_headers.update({'Content-Type': 'application/json', 'Accept': 'application/json'})
+        req = Request(url, data=data, headers=request_headers)
         with urlopen(req, timeout=15, context=TLS) as response:
             if not self.allowed_host(response.url):
                 raise ValueError('Redirected off-provider; update source registry')
@@ -278,6 +283,63 @@ class SourceClient:
             if len(raw) > self.max_response_bytes:
                 raise ValueError(f'Source exceeds {self.max_response_bytes} byte response limit')
             return raw.decode(response.headers.get_content_charset() or 'utf-8', errors='replace'), response.url
+
+
+CONTINUED_SEARCH_QUERY = '''query CatalogCourses($input: SearchCoursesInput, $page: Int!, $first: Int!) {
+  searchCourses(input: $input, page: $page, first: $first) {
+    data { title slug courseFormats(filter: {isPublished: true}) { type } }
+    paginatorInfo { currentPage hasMorePages total }
+  }
+}'''
+
+
+def continued_catalog_pages(provider, max_pages):
+    """Read the same unauthenticated search used by the public OT catalog.
+
+    Only this fixed read-only query is supported. No account, cookie, API key,
+    enrollment, review, or CE-approval fields are requested or retained.
+    """
+    api = provider['publicCatalogApi']
+    if api.get('kind') != 'continued-search' or api.get('url') != 'https://athena-api-prod.continued.com/':
+        raise ValueError('Unrecognized public catalog API')
+    if not re.fullmatch(r'[a-z]+(?:-[a-z]+)*', api.get('learningSpacePath', '')):
+        raise ValueError('Invalid public learning-space path')
+    client = SourceClient(api['url'])
+    seen = set()
+    for number in range(1, max(1, min(200, max_pages)) + 1):
+        body, _ = client.request(api['url'], json_body={
+            'query': CONTINUED_SEARCH_QUERY,
+            'variables': {'page': number, 'first': 20, 'input': {
+                'hideCompletedCourses': False,
+                'courseFormats': ['VIDEO_RECORDED', 'TEXT_ORIGINAL', 'TEXT_TRANSCRIPT', 'LIVE', 'AUDIO', 'AUDIO_PODCAST'],
+            }},
+        }, headers={'X-Learning-Space-Path': api['learningSpacePath']})
+        payload = json.loads(body)
+        if not isinstance(payload, dict) or payload.get('errors'):
+            raise ValueError('Public catalog API returned GraphQL errors')
+        data = payload.get('data')
+        result = data.get('searchCourses') if isinstance(data, dict) else None
+        if not isinstance(result, dict) or not isinstance(result.get('data'), list):
+            raise ValueError('Public catalog API response shape changed')
+        page_info = result.get('paginatorInfo', {})
+        if not isinstance(page_info, dict) or page_info.get('currentPage') != number or not isinstance(page_info.get('hasMorePages'), bool):
+            raise ValueError('Public catalog API pagination is invalid')
+        rows = result['data']
+        signature = tuple(str(row.get('slug', '')) for row in rows if isinstance(row, dict))
+        if signature in seen or (not rows and page_info['hasMorePages']):
+            raise ValueError('Public catalog API repeated or returned an empty page before completion')
+        seen.add(signature)
+        links = []
+        for row in rows:
+            if not isinstance(row, dict) or not isinstance(row.get('courseFormats'), list) or not row['courseFormats']:
+                continue
+            slug, title = row.get('slug'), row.get('title')
+            if not isinstance(slug, str) or not re.fullmatch(r'[a-zA-Z0-9_-]+', slug) or not isinstance(title, str):
+                continue
+            links.append((urljoin(provider['catalogUrl'], '/courses/' + slug), title))
+        yield number, links, page_info['hasMorePages']
+        if not page_info['hasMorePages']:
+            break
 
 
 def discover(provider, details, max_sitemaps, refresh_titles=False, known=None, attempts=None, retry_days=7, max_catalog_pages=1):
@@ -337,6 +399,17 @@ def discover(provider, details, max_sitemaps, refresh_titles=False, known=None, 
                 add(urljoin(final_url, href), title, final_url)
         except (HTTPError, URLError, TimeoutError, ValueError, OSError) as error:
             coverage['errors'].append(f'{seed}: {error}')
+
+    if provider.get('publicCatalogApi'):
+        coverage.update(apiPagesFetched=0, apiPaginationPending=True)
+        try:
+            for number, links, more in continued_catalog_pages(provider, max_catalog_pages):
+                for url, title in links:
+                    add(url, title, provider['catalogUrl'])
+                coverage.update(apiPagesFetched=number, apiPaginationPending=more)
+            coverage['sources'].append(provider['publicCatalogApi']['url'])
+        except (HTTPError, URLError, TimeoutError, ValueError, OSError) as error:
+            coverage['errors'].append(f"Public catalog API: {error}")
 
     queue = (client.sitemaps or [client.origin + '/sitemap.xml', client.origin + '/sitemap_index.xml']) if provider.get('sitemapDiscovery', True) else []
     seen = set()

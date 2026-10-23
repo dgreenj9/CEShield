@@ -640,5 +640,80 @@
     "reviewedOn": "2026-10-23",
     "ceApprovals": [],
     "evaluation": null
+  },
+  {
+    "id": "occupationaltherapy-cognitive-foundations",
+    "title": "Foundations In Cognitive Rehabilitation For Occupational Therapy Practice",
+    "subjects": [
+      "cognition"
+    ],
+    "summary": "Adam Ly introduces cognitive rehabilitation models, assessment approaches, and attention, memory, and executive-function support strategies. The provider lists video and text options for this introductory course, created in March 2026. Membership access; no standalone course price confirmed.",
+    "url": "https://www.occupationaltherapy.com/courses/foundations-in-cognitive-rehabilitation-for-occupational-therapy",
+    "providerId": "occupationaltherapy",
+    "sourceUrl": "https://www.occupationaltherapy.com/courses/foundations-in-cognitive-rehabilitation-for-occupational-therapy",
+    "disciplines": [
+      "OT",
+      "OTA"
+    ],
+    "contactHours": 1,
+    "format": "online",
+    "priceUsd": null,
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null
+  },
+  {
+    "id": "occupationaltherapy-low-vision-environments",
+    "title": "Vision: Environmental Modifications For Adults With Low Vision",
+    "subjects": [
+      "vision",
+      "adaptive"
+    ],
+    "summary": "Monique Chabot covers home assessment, participation barriers, and environmental modifications ranging from low-cost changes to smart technology. The provider lists an intermediate recorded course created in February 2023. Membership access; no standalone course price confirmed.",
+    "url": "https://www.occupationaltherapy.com/courses/vision-environmental-modifications-for-adults",
+    "providerId": "occupationaltherapy",
+    "sourceUrl": "https://www.occupationaltherapy.com/courses/vision-environmental-modifications-for-adults",
+    "disciplines": [
+      "OT",
+      "OTA"
+    ],
+    "contactHours": 1,
+    "format": "online",
+    "priceUsd": null,
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null
+  },
+  {
+    "id": "occupationaltherapy-low-vision-smartphones",
+    "title": "Vision: Smart Phone Accessibility And Applicable Apps For Low Vision",
+    "subjects": [
+      "vision",
+      "adaptive",
+      "technology"
+    ],
+    "summary": "Recorded instruction on smartphone accessibility, apps that support remaining vision, and sight-substitution approaches for daily tasks. The provider lists an intermediate course created in February 2023; current app availability and interfaces have not been checked. Membership access; no standalone course price confirmed.",
+    "url": "https://www.occupationaltherapy.com/courses/vision-smart-phone-accessibility-and",
+    "providerId": "occupationaltherapy",
+    "sourceUrl": "https://www.occupationaltherapy.com/courses/vision-smart-phone-accessibility-and",
+    "disciplines": [
+      "OT",
+      "OTA"
+    ],
+    "contactHours": 1,
+    "format": "online",
+    "priceUsd": null,
+    "educationType": "course",
+    "reviewStatus": "verified",
+    "availability": "listed",
+    "reviewedOn": "2026-10-23",
+    "ceApprovals": [],
+    "evaluation": null
   }
 ]

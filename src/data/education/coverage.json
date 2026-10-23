@@ -738,14 +738,17 @@
   },
   {
     "providerId": "occupationaltherapy",
-    "attemptedAt": "2026-10-23T19:27:33+00:00",
+    "attemptedAt": "2026-10-23T20:20:21+00:00",
     "status": "discovered",
     "errors": [],
     "sources": [
-      "https://www.occupationaltherapy.com/courses/all"
+      "https://www.occupationaltherapy.com/courses/all",
+      "https://athena-api-prod.continued.com/"
     ],
-    "discoveredCount": 20,
-    "listedCount": 20,
+    "apiPagesFetched": 35,
+    "apiPaginationPending": false,
+    "discoveredCount": 684,
+    "listedCount": 684,
     "catalogPagesFetched": 1,
     "catalogPaginationPending": false,
     "detailPagesFetched": 0,

@@ -1,12 +1,73 @@
 """Offline fixtures for provider extraction. Run: python3 -m unittest discover -s scripts/catalog -p 'test_*.py'."""
 import unittest
+import json
 from unittest.mock import patch
 from urllib.error import URLError
 from datetime import datetime, timezone
-from discover import PageParser, SourceClient, canonical_url, clean_title, publishable, upcoming_session, detail_queue, discover, structured_course_links
+from discover import PageParser, SourceClient, canonical_url, clean_title, publishable, upcoming_session, detail_queue, discover, structured_course_links, continued_catalog_pages
 
 
 class CatalogExtractionTests(unittest.TestCase):
+    def test_public_api_follows_bounded_pages_and_imports_only_published_course_links(self):
+        provider = {'id': 'ot', 'catalogUrl': 'https://ot.example/courses/all', 'publicCatalogApi': {
+            'kind': 'continued-search', 'url': 'https://athena-api-prod.continued.com/', 'learningSpacePath': 'occupational-therapy'}}
+        requests = []
+        class FakeClient:
+            def request(self, url, **kwargs):
+                requests.append(kwargs)
+                n = kwargs['json_body']['variables']['page']
+                rows = [{'title': 'School participation', 'slug': f'school-{n}', 'courseFormats': [{'type': 'VIDEO_RECORDED'}]},
+                        {'title': 'Unpublished', 'slug': 'hidden', 'courseFormats': []},
+                        {'title': 'Offsite', 'slug': '//outside.example/course', 'courseFormats': [{}]}]
+                return json.dumps({'data': {'searchCourses': {'data': rows, 'paginatorInfo': {'currentPage': n, 'hasMorePages': n < 2}}}}), url
+        with patch('discover.SourceClient', return_value=FakeClient()):
+            pages = list(continued_catalog_pages(provider, 1))
+            self.assertEqual(pages, [(1, [('https://ot.example/courses/school-1', 'School participation')], True)])
+            self.assertEqual(len(list(continued_catalog_pages(provider, 10))), 2)
+        for request in requests:
+            self.assertEqual(request['headers'], {'X-Learning-Space-Path': 'occupational-therapy'})
+            self.assertNotIn('userEnrollment', request['json_body']['query'])
+            self.assertNotIn('mutation', request['json_body']['query'])
+
+    def test_public_api_rejects_changed_shapes_graphql_errors_and_repeated_pages(self):
+        provider = {'catalogUrl': 'https://ot.example/courses/all', 'publicCatalogApi': {
+            'kind': 'continued-search', 'url': 'https://athena-api-prod.continued.com/', 'learningSpacePath': 'occupational-therapy'}}
+        class FakeClient:
+            payload = None
+            def request(self, url, **kwargs):
+                if self.payload is not None:
+                    return json.dumps(self.payload), url
+                n = kwargs['json_body']['variables']['page']
+                return json.dumps({'data': {'searchCourses': {'data': [{'slug': 'same', 'title': 'Same course', 'courseFormats': [{}]}], 'paginatorInfo': {'currentPage': n, 'hasMorePages': True}}}}), url
+        client = FakeClient()
+        with patch('discover.SourceClient', return_value=client):
+            for payload in [[], {'errors': [{'message': 'denied'}]}, {'data': None}, {'data': {'searchCourses': {'data': [], 'paginatorInfo': None}}}]:
+                client.payload = payload
+                with self.assertRaises(ValueError):
+                    list(continued_catalog_pages(provider, 2))
+            client.payload = None
+            with self.assertRaisesRegex(ValueError, 'repeated'):
+                list(continued_catalog_pages(provider, 2))
+
+    def test_api_failure_keeps_successful_catalog_findings_and_marks_coverage_incomplete(self):
+        provider = {'id': 'ot', 'catalogUrl': 'https://ot.example/catalog', 'courseUrlPattern': '/courses/',
+                    'publicCatalogApi': {'url': 'https://athena-api-prod.continued.com/'}, 'sitemapDiscovery': False}
+        class FakeClient:
+            origin, sitemaps = 'https://ot.example', []
+            def allowed_host(self, url):
+                return url.startswith(self.origin + '/')
+            def request(self, url):
+                return '<a href="/courses/feeding">Pediatric feeding</a>', url
+        def pages(*args):
+            yield 1, [('https://ot.example/courses/school', 'School participation')], True
+            raise URLError('Temporary outage')
+        with patch('discover.SourceClient', return_value=FakeClient()), patch('discover.continued_catalog_pages', side_effect=pages):
+            coverage, listings, _, _ = discover(provider, 0, 0, max_catalog_pages=20)
+        self.assertEqual(len(listings), 2)
+        self.assertTrue(coverage['apiPaginationPending'])
+        self.assertEqual(coverage['apiPagesFetched'], 1)
+        self.assertTrue(coverage['errors'])
+
     def test_provider_host_does_not_include_other_tenants_or_unregistered_subdomains(self):
         client = SourceClient.__new__(SourceClient)
         client.domain = 'learnphysio.teachable.com'
